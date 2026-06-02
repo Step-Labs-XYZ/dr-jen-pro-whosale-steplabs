@@ -722,36 +722,52 @@
         "faq_item_9QefQB": {
           "type": "faq_item",
           "settings": {
-            "question": "Is Dr. Jen's toothpaste safe to use?",
-            "answer": "<p>Dr. Jen's is the #1 dentist-recommended nano-hydroxyapatite toothpaste, trusted by dental professionals nationwide. Dr. Jen has spent six years perfecting these advanced formulations, sourcing the highest-grade nano-hydroxyapatite available.<br/></p><p>Our rod-shaped crystals meet rigorous EU safety standards for synthetic nHAp, and our eggshell nHAp is ISO certified. While other brands have approached us wanting to use our premium sources, we protect the integrity of our supply chain to ensure every tube meets our exacting standards.</p>"
+            "question": "What makes Dr. Jen’s Mouth Rinse different from traditional mouthwash?",
+            "answer": "<p>Mouth Rinse with Wellness Pre-Rinse goes beyond simply masking bad breath. It was formulated to support healthier enamel, healthier gums, and overall oral wellness using science-backed ingredients and soothing botanicals, without harsh ingredients.</p>"
           }
         },
         "faq_item_X9HyFN": {
           "type": "faq_item",
           "settings": {
+            "question": "Does this mouth rinse contain alcohol?",
+            "answer": "<p>No. Mouth Rinse with Wellness Pre-Rinse is completely alcohol-free, making it gentle enough for everyday use without the harsh burn often associated with traditional mouthwashes.</p>"
+          }
+        },
+        "faq_item_DaTcTz": {
+          "type": "faq_item",
+          "settings": {
             "question": "Are the ingredients natural?",
-            "answer": "<p>We use a proprietary blend of natural essential oils, no synthetic flavoring. Our mint paste contains essential oils with coconut oil-based foaming, while our strawberry paste is naturally foam-free. You'll never find sodium lauryl sulfate (SLS) in any Dr. Jen's formula.</p>"
+            "answer": "<p>We use a proprietary blend of essential oils, no synthetic flavoring. Our mint paste contains essential oils with coconut oil-based foaming, while our strawberry paste is naturally foam-free. You'll never find sodium lauryl sulfate (SLS) in any Dr. Jen's formula.</p>"
           }
         },
         "faq_item_HQ84kE": {
           "type": "faq_item",
           "settings": {
-            "question": "What exactly is nano-hydroxyapatite?",
+            "question": "What exactly is Nanohydroxyapatite?",
             "answer": "<p>Nano-hydroxyapatite (nHAp) is composed of calcium and phosphate minerals, the same minerals that make up 97% of your tooth enamel and the mineral portion of your bones. The \"nano\" means the particles are extremely small, measured in nanometers, allowing them to behave like your natural enamel crystals.  </p><p><strong>How it works:</strong></p><ul><li>Absorbs and removes dental plaque</li><li>Replenishes lost calcium and phosphate minerals</li><li>Fills in micro-fissures on tooth surfaces</li><li>Reduces sensitivity by sealing exposed dentinal tubules</li></ul><p>Think of it as giving your teeth the building blocks they need to stay strong.<br/><br/><br/></p>"
+          }
+        },
+        "faq_item_mFfdaE": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does this rinse support enamel health?",
+            "answer": "<p>The formula contains nanohydroxyapatite, a biomimetic mineral naturally found in teeth, designed to help support healthy enamel and provide daily protection from everyday acids.</p>"
           }
         },
         "faq_item_MEG9f3": {
           "type": "faq_item",
           "settings": {
-            "question": "Why does Dr. Jen's cost more than other toothpastes?",
-            "answer": "<p>There's something we want you to know because behind every tube is a story that started long before it reached your bathroom shelf.<br/><br/><strong>It began in a hospital room.</strong><br/><br/>Years ago, Dr. Jen's daughter became dangerously ill with a life-threatening stomach condition. As any parent would, Dr. Jen searched for every way to support her daughter's healing, down to the smallest details, including something as simple as toothpaste.<br/><br/>What she discovered shocked her.<br/><br/>Fluoride-free toothpastes aren't regulated. Brands can claim \"nano-hydroxyapatite\" while using cheap, low-quality versions or including so little that it does almost nothing. Labels didn't tell the full truth, and Dr. Jen couldn't find a single toothpaste that matched what the science said her daughter needed.<br/><br/>In that hospital room, one thing became clear: <strong>if the right toothpaste didn't exist, she would have to create it.</strong><br/><br/><strong>A mother's worry became a mission.</strong><br/><br/>Dr. Jen spent years studying particle size, purity, concentration, safety, and biocompatibility. She rejected anything that didn't meet the highest standard, even when it cost more.<br/><br/>Only true high-grade nano-hydroxyapatite<br/>Only the optimal concentration proven to protect enamel<br/>Only clean, gut-friendly ingredients gentle enough for someone fighting for their health<br/>No shortcuts. No compromises. Just a formula built with the same care she wanted for her own child.<br/><br/><strong>That's why our toothpaste costs more. </strong>Because it was never created to be the cheapest. It was created to be the safest, the purest, and the most effective. Born from fear, love, science, and the determination of a mother who refused to settle.</p>"
+            "question": "Can this help support gum health?",
+            "answer": "<p>Yes. The formula includes soothing ingredients like aloe vera and calendula, selected to help comfort and nourish delicate gum tissues.</p>"
           }
         }
       },
       "block_order": [
         "faq_item_9QefQB",
         "faq_item_X9HyFN",
+        "faq_item_DaTcTz",
         "faq_item_HQ84kE",
+        "faq_item_mFfdaE",
         "faq_item_MEG9f3"
       ],
       "name": "C - FAQ Section",
