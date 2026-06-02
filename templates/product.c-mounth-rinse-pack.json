@@ -314,8 +314,8 @@
       "settings": {
         "bg_color": "#ffffff",
         "gallery_bg": "#f6f4ee",
-        "badge_left": "NEW FORMULA",
-        "badge_right_svg": "shopify://shop_images/Frame_1484580986.png",
+        "badge_left": "",
+        "badge_right_svg": "shopify://shop_images/Group_1000007171.png",
         "badge_right_1": "#1",
         "badge_right_2": "ONLY NATURALLY DERIVED TOOTHPASTE",
         "pad_top_desk": 60,
