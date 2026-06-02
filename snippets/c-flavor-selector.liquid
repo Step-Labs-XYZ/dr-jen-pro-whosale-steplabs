@@ -1,0 +1,162 @@
+{% comment %}
+  Snippet: Flavor Selector using Metaobjects
+  Metaobject type: shopify--flavor
+  Accede a los metaobjetos de flavor a través de las opciones del producto.
+  Cada valor de opción se convierte en handle para buscar el metaobjeto correspondiente.
+  Usage: {% render 'c-flavor-selector', product: product, label: "Flavor" %}
+{% endcomment %}
+
+{%- comment -%} Encuentra el índice de la opción "Flavor" del producto {%- endcomment -%}
+{%- assign flavor_option_index = nil -%}
+{%- for option_name in product.options -%}
+  {%- assign option_lower = option_name | downcase -%}
+  {%- if option_lower == 'flavor' or option_lower == 'flavour' or option_lower == 'taste' or option_lower == 'sabor' -%}
+    {%- assign flavor_option_index = forloop.index0 -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- comment -%} Construye lista de valores únicos del flavor option {%- endcomment -%}
+{%- assign seen_flavors = '' -%}
+
+<div class="c-options-selector">
+  <p class="c-options-selector__label">{{ label | default: 'Flavor' }}</p>
+
+  <div class="c-options-selector__container">
+    {%- for variant in product.variants -%}
+      {%- if flavor_option_index != nil -%}
+        {%- assign flavor_value = variant.options[flavor_option_index] -%}
+      {%- else -%}
+        {%- assign flavor_value = variant.title -%}
+      {%- endif -%}
+
+      {%- assign flavor_handle = flavor_value | handleize -%}
+      {%- unless seen_flavors contains flavor_handle -%}
+        {%- assign seen_flavors = seen_flavors | append: flavor_handle | append: ',' -%}
+
+        {%- comment -%} Busca el metaobjeto del flavor por su handle {%- endcomment -%}
+        {%- assign flavor_meta = metaobjects['shopify--flavor'][flavor_handle] -%}
+
+        {%- assign is_selected = forloop.first -%}
+        {%- assign is_available = variant.available -%}
+
+        <label
+          class="c-option-item {% if is_selected %}is-active{% endif %} {% unless is_available %}is-unavailable{% endunless %}"
+          data-variant-id="{{ variant.id }}"
+          data-flavor-value="{{ flavor_value | escape }}"
+        >
+          <input
+            type="radio"
+            name="variant-flavor"
+            value="{{ variant.id }}"
+            {% if is_selected %}checked{% endif %}
+            class="c-option-radio"
+            style="display: none;"
+          >
+
+          {%- comment -%} Dot de color del metaobjeto si existe {%- endcomment -%}
+          {%- if flavor_meta.color != blank -%}
+            <span class="c-option-color-dot" style="background-color: {{ flavor_meta.color }};"></span>
+          {%- endif -%}
+
+          <span class="c-option-text">
+            {{- flavor_meta.name | default: flavor_value -}}
+          </span>
+        </label>
+      {%- endunless -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .c-options-selector {
+    display: block;
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .c-options-selector__label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .c-options-selector__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .c-option-item {
+    position: relative;
+    padding: 8px 16px;
+    border: 1.5px solid #e2e2e2;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #ffffff;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .c-option-item:hover:not(.is-unavailable) {
+    border-color: #c0c0c0;
+  }
+
+  .c-option-item.is-active {
+    border-color: #0d6efd;
+    background: #eef3fb;
+  }
+
+  .c-option-item.is-unavailable {
+    opacity: 0.45;
+    cursor: not-allowed;
+    text-decoration: line-through;
+  }
+
+  .c-option-color-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .c-option-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1a1a1a;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', function () {
+    var items = document.querySelectorAll('.c-option-item:not(.is-unavailable)');
+    items.forEach(function (item) {
+      item.addEventListener('click', function () {
+        document.querySelectorAll('.c-option-item').forEach(function (i) {
+          i.classList.remove('is-active');
+        });
+        item.classList.add('is-active');
+
+        var radio = item.querySelector('.c-option-radio');
+        if (radio) {
+          radio.checked = true;
+          radio.dispatchEvent(new Event('change', { bubbles: true }));
+
+          var variantInput = document.querySelector('input[name="id"]');
+          if (variantInput) {
+            variantInput.value = item.dataset.variantId;
+            variantInput.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        }
+      });
+    });
+  });
+{% endjavascript %}

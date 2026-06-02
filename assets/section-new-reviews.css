@@ -1,0 +1,130 @@
+.new-reviews {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 738px;
+    width: 100%;
+    padding: 60px 30px;
+    margin: 0 auto;
+}
+
+.new-reviews__top-title {
+    font-family: "Raleway";
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 32px;
+    letter-spacing: 0em;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.new-reviews__title {
+    font-family: "Raleway";
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 48px;
+    letter-spacing: 0em;
+    width: 100%;
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+
+.new-reviews__content-container {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 1px 1px 10px -4px #7487AD33;
+    background-color: #FFF;
+    padding: 24px;
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+    min-height: 450px;
+}
+
+.new-reviews__content-container img {
+    max-width: 216px;
+    border-radius: 8px;
+    border: none;
+}
+
+.new-reivews__content {
+    font-family: "Raleway";
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 31px;
+    letter-spacing: 0em;
+    margin-bottom: 30px;
+}
+
+.new-reviews__author {
+    font-family: "Raleway";
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 31px;
+    letter-spacing: 0em;
+    margin-bottom: 30px;
+}
+
+.new-reviews__reviews {
+    width: 100%;
+}
+
+.new-reviews__reviews ul.slick-dots {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    padding: 0;
+    margin-top: 32px;
+}
+
+.new-reviews__reviews ul.slick-dots li {
+    list-style-type: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #D9D9D9;
+}
+
+.new-reviews__reviews ul.slick-dots li:hover {
+    cursor: pointer;
+}
+
+.new-reviews__reviews ul.slick-dots li button {
+    display: none;
+}
+
+.new-reviews__reviews ul.slick-dots li.slick-active {
+    background-color: #6B6B78;
+}
+
+@media (max-width: 768px) {
+    .new-reviews__top-title {
+        font-size: 18px;
+        line-height: 24px;
+        text-align: left;
+    }
+
+    .new-reviews__title {
+        font-size: 26px;
+        line-height: 32px;
+    }
+
+    .new-reviews__content-container {
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .new-reivews__content, .new-reivews__content {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .new-reviews__content-container img {
+        max-width: 100%;
+    }
+}

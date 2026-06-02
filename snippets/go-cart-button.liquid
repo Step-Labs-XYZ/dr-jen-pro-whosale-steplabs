@@ -1,0 +1,45 @@
+<!--cart button-->
+<div class="go-cart__trigger js-go-cart-trigger">
+
+    {%- render 'icon' with 'header-shopping-cart' -%}
+
+    <span class="js-go-cart-counter header__cart-count header__cart-count--floating bubble-count">{{- cart.item_count -}}</span>
+
+    <!--go cart mini cart-->
+    <div class="go-cart__mini-cart js-go-cart-mini-cart">
+
+        <div class="go-cart-mini-cart">
+
+            <!--go cart mini cart content-->
+            <div class="go-cart-mini-cart__content js-go-cart-mini-cart-content">
+            </div>
+            <!--end go cart mini cart content-->
+
+            <!--go cart mini cart subtotal-->
+            <div class="go-cart-mini-cart__subtotal">
+                <span>Subtotal: </span>
+                <span class="go-cart-mini-cart__subtotal-price js-go-cart-mini-cart-subtotal"></span>
+            </div>
+            <!--end go cart mini cart subtotal-->
+
+            <!--go cart mini cart buttons-->
+            <div class="go-cart-mini-cart__footer js-go-cart-mini-cart-footer">
+
+                <a href="/checkout/" class="go-cart__button">
+                    Proceed to checkout
+                </a>
+
+                <a href="/cart/" class="go-cart__button">
+                    View cart
+                </a>
+
+            </div>
+            <!--end go cart mini cart buttons-->
+
+        </div>
+
+    </div>
+    <!--end go cart mini cart-->
+
+</div>
+<!--end cart button-->

@@ -1,0 +1,68 @@
+{% comment %}
+  Snippet: Price and Stock Display
+  Usage: {% render 'c-price-stock', product: product %}
+{% endcomment %}
+
+<div class="c-price-stock">
+  <div class="c-price-stock__price">
+    {{ product.selected_or_first_available_variant.price | money }}
+  </div>
+  
+  <div class="c-price-stock__status">
+    {% if product.selected_or_first_available_variant.available %}
+      <span class="c-price-stock__dot c-price-stock__dot--in-stock"></span>
+      <span class="c-price-stock__text">In stock - Ready to be shipped</span>
+    {% else %}
+      <span class="c-price-stock__dot c-price-stock__dot--out-stock"></span>
+      <span class="c-price-stock__text">Out of stock</span>
+    {% endif %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .c-price-stock {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-family: 'Raleway', 'Segoe UI', sans-serif;
+    margin: 16px 0 24px;
+  }
+
+  .c-price-stock__price {
+    font-size: 28px;
+    font-weight: 700;
+    color: #002C41;
+    line-height: 1;
+  }
+
+  .c-price-stock__status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .c-price-stock__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  .c-price-stock__dot--in-stock {
+    background-color: #a7f3d0;
+    box-shadow: 0 0 0 5px rgba(167, 243, 208, 0.35);
+  }
+
+  .c-price-stock__dot--out-stock {
+    background-color: #fca5a5;
+    box-shadow: 0 0 0 5px rgba(252, 165, 165, 0.35);
+  }
+
+  .c-price-stock__text {
+    font-size: 14px;
+    font-weight: 400;
+    color: #6b7280;
+    line-height: 1.4;
+  }
+{% endstylesheet %}

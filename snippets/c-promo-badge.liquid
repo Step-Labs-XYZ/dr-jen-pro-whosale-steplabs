@@ -1,0 +1,38 @@
+{% comment %}
+  Snippet: Promotional Badge
+  Usage: {% render 'c-promo-badge', text: "UP TO 28 CENTS A DAY - LESS THAN YOUR MORNING COFFEE" %}
+{% endcomment %}
+
+<div class="c-promo-badge">
+  {{ text | default: "UP TO 28 CENTS A DAY - LESS THAN YOUR MORNING COFFEE" }}
+</div>
+
+{% stylesheet %}
+  .c-promo-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #dbeae6;
+    color: #002C41;
+    font-family: 'Raleway', 'Segoe UI', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px 24px;
+    border-radius: 50px;
+    text-align: center;
+    line-height: 1.2;
+    width: 100%;
+    margin: 0 0 20px;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 480px) {
+    .c-promo-badge {
+      font-size: 11px;
+      padding: 10px 16px;
+      margin: 0 0 16px;
+    }
+  }
+{% endstylesheet %}

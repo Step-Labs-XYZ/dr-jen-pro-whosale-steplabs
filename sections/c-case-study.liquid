@@ -1,0 +1,269 @@
+{%- style -%}
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap');
+
+  #c-case-study-{{ section.id }} {
+    --bg: {{ section.settings.bg_color }};
+    --heading: {{ section.settings.heading_color }};
+    --text: {{ section.settings.text_color }};
+    --label-bg: {{ section.settings.label_bg_color }};
+    --label-text: {{ section.settings.label_text_color }};
+    --radius: {{ section.settings.img_radius }}px;
+
+    background: var(--bg);
+    padding-top: {{ section.settings.pad_top_mob }}px;
+    padding-bottom: {{ section.settings.pad_bot_mob }}px;
+    font-family: 'Raleway', sans-serif;
+  }
+
+  #c-case-study-{{ section.id }} .c-cs__wrapper {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  #c-case-study-{{ section.id }} .c-cs__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  /* LEFT */
+  #c-case-study-{{ section.id }} .c-cs__left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  #c-case-study-{{ section.id }} .c-cs__heading {
+    margin: 0;
+    color: var(--heading);
+    font-size: {{ section.settings.heading_size_mob }}px;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+
+  #c-case-study-{{ section.id }} .c-cs__body-text {
+    margin: 0;
+    color: var(--text);
+    font-size: {{ section.settings.text_size_mob }}px;
+    line-height: 1.7;
+  }
+
+  /* RIGHT */
+  #c-case-study-{{ section.id }} .c-cs__right {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  #c-case-study-{{ section.id }} .c-cs__block-text {
+    margin: 0;
+    color: var(--text);
+    font-size: {{ section.settings.text_size_mob }}px;
+    line-height: 1.7;
+  }
+
+  /* IMAGE GROUP */
+  #c-case-study-{{ section.id }} .c-cs__img-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #c-case-study-{{ section.id }} .c-cs__img-label {
+    display: inline-block;
+    background: var(--label-bg);
+    color: var(--label-text);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    align-self: flex-start;
+  }
+
+  #c-case-study-{{ section.id }} .c-cs__img-cell {
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: #111;
+  }
+
+  #c-case-study-{{ section.id }} .c-cs__img-cell img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* mobile: show mob image, hide desk image */
+  #c-case-study-{{ section.id }} .c-cs__img-desk { display: block; }
+  #c-case-study-{{ section.id }} .c-cs__img-mob  { display: none; }
+
+  @media (max-width: 767px) {
+    #c-case-study-{{ section.id }} .c-cs__img-desk { display: none; }
+    #c-case-study-{{ section.id }} .c-cs__img-mob  { display: block; }
+  }
+
+  /* DESKTOP */
+  @media (min-width: 768px) {
+    #c-case-study-{{ section.id }} {
+      padding-top: {{ section.settings.pad_top_desk }}px;
+      padding-bottom: {{ section.settings.pad_bot_desk }}px;
+    }
+
+    #c-case-study-{{ section.id }} .c-cs__wrapper {
+      padding: 0 48px;
+    }
+
+    #c-case-study-{{ section.id }} .c-cs__grid {
+      flex-direction: row;
+      gap: 60px;
+      align-items: center;
+    }
+
+    #c-case-study-{{ section.id }} .c-cs__left {
+      width: 45%;
+      flex-shrink: 0;
+    }
+
+    #c-case-study-{{ section.id }} .c-cs__right {
+      width: 54%;
+      flex-shrink: 0;
+      min-width: 0;
+    }
+
+    #c-case-study-{{ section.id }} .c-cs__heading {
+      font-size: {{ section.settings.heading_size_desk }}px;
+    }
+
+    #c-case-study-{{ section.id }} .c-cs__body-text,
+    #c-case-study-{{ section.id }} .c-cs__block-text {
+      font-size: {{ section.settings.text_size_desk }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section id="c-case-study-{{ section.id }}" data-sl-id="sl-section-case-study-v1">
+  <div class="c-cs__wrapper">
+    <div class="c-cs__grid">
+
+      <!-- LEFT -->
+      <div class="c-cs__left">
+
+        {% if section.settings.heading != blank %}
+          <h2 class="c-cs__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.text_1 != blank %}
+          <p class="c-cs__body-text">{{ section.settings.text_1 }}</p>
+        {% endif %}
+
+        {% if section.settings.text_2 != blank %}
+          <p class="c-cs__body-text">{{ section.settings.text_2 }}</p>
+        {% endif %}
+
+        {% if section.settings.text_3 != blank %}
+          <p class="c-cs__body-text">{{ section.settings.text_3 }}</p>
+        {% endif %}
+
+      </div>
+
+      <!-- RIGHT -->
+      <div class="c-cs__right">
+
+        {% for block in section.blocks %}
+          {% assign b = block.settings %}
+
+          {% if b.text_above != blank %}
+            <p class="c-cs__block-text">{{ b.text_above }}</p>
+          {% endif %}
+
+          {% if b.image_desk != blank or b.image_mob != blank %}
+            <div class="c-cs__img-group">
+
+              {% if b.label != blank %}
+                <span class="c-cs__img-label">{{ b.label }}</span>
+              {% endif %}
+
+              {% if b.image_desk != blank %}
+                <div class="c-cs__img-cell c-cs__img-desk" style="width: {{ b.width_desk }}%;">
+                  {{ b.image_desk | image_url: width: 1600 | image_tag: loading: 'lazy', alt: b.label }}
+                </div>
+              {% endif %}
+
+              {% if b.image_mob != blank %}
+                <div class="c-cs__img-cell c-cs__img-mob" style="width: {{ b.width_mob }}%;">
+                  {{ b.image_mob | image_url: width: 800 | image_tag: loading: 'lazy', alt: b.label }}
+                </div>
+              {% endif %}
+
+            </div>
+          {% endif %}
+
+        {% endfor %}
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "C - Case Study",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titulo" },
+    { "type": "textarea", "id": "text_1", "label": "Texto 1" },
+    { "type": "textarea", "id": "text_2", "label": "Texto 2" },
+    { "type": "textarea", "id": "text_3", "label": "Texto 3" },
+
+    { "type": "header", "content": "Colores" },
+    { "type": "color", "id": "bg_color", "label": "Fondo", "default": "#FFFFFF" },
+    { "type": "color", "id": "heading_color", "label": "Titulo", "default": "#1B3A4B" },
+    { "type": "color", "id": "text_color", "label": "Texto", "default": "#333333" },
+    { "type": "color", "id": "label_bg_color", "label": "Label fondo", "default": "#333333" },
+    { "type": "color", "id": "label_text_color", "label": "Label texto", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Imagenes" },
+    { "type": "range", "id": "img_radius", "label": "Radio de imagen", "min": 0, "max": 20, "step": 1, "default": 4 },
+
+    { "type": "header", "content": "Tipografia" },
+    { "type": "range", "id": "heading_size_mob", "label": "Titulo mobile", "min": 20, "max": 60, "step": 1, "default": 34 },
+    { "type": "range", "id": "heading_size_desk", "label": "Titulo desktop", "min": 24, "max": 90, "step": 1, "default": 48 },
+    { "type": "range", "id": "text_size_mob", "label": "Texto mobile", "min": 12, "max": 24, "step": 1, "default": 14 },
+    { "type": "range", "id": "text_size_desk", "label": "Texto desktop", "min": 12, "max": 30, "step": 1, "default": 16 },
+
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "pad_top_mob", "label": "Padding top mobile", "min": 0, "max": 160, "step": 4, "default": 48 },
+    { "type": "range", "id": "pad_bot_mob", "label": "Padding bottom mobile", "min": 0, "max": 160, "step": 4, "default": 48 },
+    { "type": "range", "id": "pad_top_desk", "label": "Padding top desktop", "min": 0, "max": 220, "step": 4, "default": 80 },
+    { "type": "range", "id": "pad_bot_desk", "label": "Padding bottom desktop", "min": 0, "max": 220, "step": 4, "default": 80 }
+  ],
+
+  "blocks": [
+    {
+      "type": "image_group",
+      "name": "Grupo de imagenes",
+      "settings": [
+        { "type": "textarea", "id": "text_above", "label": "Texto encima" },
+        { "type": "text", "id": "label", "label": "Etiqueta (ej. SEPT 2025)" },
+        { "type": "image_picker", "id": "image_desk", "label": "Imagen desktop" },
+        { "type": "range", "id": "width_desk", "label": "Ancho desktop (%)", "min": 10, "max": 100, "step": 1, "default": 100 },
+        { "type": "image_picker", "id": "image_mob", "label": "Imagen mobile" },
+        { "type": "range", "id": "width_mob", "label": "Ancho mobile (%)", "min": 10, "max": 100, "step": 1, "default": 100 }
+      ]
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "C - Case Study",
+      "blocks": [
+        { "type": "image_group" },
+        { "type": "image_group" }
+      ]
+    }
+  ]
+}
+{% endschema %}

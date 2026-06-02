@@ -1,0 +1,107 @@
+<div  class="explore_products__container">
+    <img class="image_background_ep" src="{{ section.settings.background_image | image_url: width: master }}" alt="{{ section.settings.signature_image.alt }}">
+    <img class="image_product_ep" src="{{ section.settings.signature_image | image_url: width: 520 }}" alt="{{ section.settings.signature_image.alt }}">
+
+    <div class="text_explore_p_container">
+        <h2>{{ section.settings.title_explore_products }}</h2>
+        <p>{{ section.settings.paragraph }}</p>
+        <a href="{{ section.settings.button_link }}">Explore Products</a>
+    </div>
+</div>
+<style>
+.explore_products__container{
+position: relative;
+display: flex;
+column-gap: 70px;
+padding: 40px 0 60px
+}
+.image_background_ep{
+position: absolute;
+z-index: 0;
+top: 0;
+}
+
+.image_product_ep{
+z-index: 1;
+position: relative;
+padding-left: 40px;
+height: fit-content;
+}
+.text_explore_p_container{
+position: relative;
+z-index: 1;
+padding-right: 120px;
+text-align: center;
+}
+.text_explore_p_container h2{
+color: #2D3852;
+font-size: clamp(26px, 3vw, 40px);
+margin: 0
+}
+.text_explore_p_container p{
+font-size: clamp(16px, 3vw, 18px);
+}
+.text_explore_p_container a{
+background: #F66C02;
+color: #fff;
+font-size: 18px;
+font-weight: 500;
+display: block;
+max-width: 250px;
+padding: 10px;
+margin: 10vw auto 0;
+}
+@media screen and (max-width: 520px) {
+    .explore_products__container{
+        flex-wrap: wrap;
+    }
+    .image_product_ep{
+        padding-left: 0;
+    }
+    .image_background_ep{
+        height: 21vh;
+    }
+    .text_explore_p_container{
+        padding: 20px;
+    }
+}
+</style>
+{% schema %}
+{
+   "name": "Explore products",
+   "settings" : [
+   {
+    "type": "text",
+    "id": "title_explore_products",
+    "label": "Title Page",
+    "default": "Wholesale"
+   },
+   {
+    "type": "text",
+    "id": "paragraph",
+    "label": "Paragraph"
+   },
+   {
+    "type": "image_picker",
+    "id": "signature_image",
+    "label": "Signature"
+   },
+   {
+    "type": "image_picker",
+    "id": "background_image",
+    "label": "Background Image",
+    "info": "recommended: size 1440 x 318"
+   },
+   {
+    "type": "url",
+    "id": "button_link",
+    "label": "ButtonLink"
+  }
+],
+   "presets": [
+    {
+        "name": "Explore products"
+    }
+   ]
+}
+{% endschema %}

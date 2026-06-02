@@ -1,0 +1,591 @@
+{%- style -%}
+  /* IMPORTACIÓN DE FUENTE RALEWAY */
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap');
+
+  .c-clinic-{{ section.id }} {
+    /* --- COLORES --- */
+    --c-bg-section: {{ section.settings.bg_color }};
+    --c-text-dark: #002C41; /* Azul oscuro corporativo */
+    --c-text-body: #4b5563; /* Gris oscuro para lectura */
+    
+    font-family: 'Raleway', sans-serif;
+    background-color: var(--c-bg-section);
+    padding-top: {{ section.settings.pad_top_mob }}px;
+    padding-bottom: {{ section.settings.pad_bot_mob }}px;
+    width: 100%;
+  }
+
+  .c-clinic__wrapper {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  /* =========================================
+     COLUMNA IMÁGENES (MOBILE FIRST)
+     ========================================= */
+  .c-clinic__media-col {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .c-clinic__image-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;
+    height: 180px; 
+  }
+
+  .c-clinic__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .c-clinic__image-label {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(4px);
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #000;
+    text-align: center;
+    white-space: nowrap;
+    line-height: 1.2;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  }
+
+  /* =========================================
+     COLUMNA CONTENIDO
+     ========================================= */
+  .c-clinic__content-col {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .c-clinic__title {
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--c-text-dark);
+    line-height: 1.15;
+    margin: 0 0 16px 0;
+  }
+
+  .c-clinic__desc {
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+    line-height: 1.5;
+    margin: 0 0 30px 0;
+  }
+
+  /* --- GRID DE ESTADÍSTICAS --- */
+  .c-clinic__stats-grid {
+    display: grid;
+    grid-template-columns: 1fr; 
+    gap: 30px; 
+    margin-bottom: 30px;
+  }
+
+  .c-clinic__stat-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .c-clinic__stat-label,
+  .c-clinic__detail-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 12px 0;
+    border-bottom: 1px solid #000;
+    display: block;
+  }
+
+  .c-clinic__stat-value {
+    font-size: 50px;
+    font-weight: 300;
+    color: #000;
+    line-height: 1;
+    margin: 0 0 8px 0;
+  }
+
+  .c-clinic__stat-desc {
+    font-size: 16px;
+    color: #000;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  /* --- DETALLE INFERIOR --- */
+  .c-clinic__detail-block {
+    margin-bottom: 30px;
+  }
+
+  .c-clinic__detail-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #000;
+    margin: 0 0 15px 0;
+  }
+
+  .c-clinic__detail-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+    line-height: 1.4;
+    margin: 0;
+    max-width: auto;
+  }
+
+  /* --- BLOQUE SCCS (NUEVO) --- */
+  .c-clinic__sccs-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+
+  .c-clinic__sccs-logo {
+    max-width: 180px;
+    height: auto;
+    display: block;
+  }
+
+  .c-clinic__sccs-quote {
+    font-size: 15px;
+    font-style: italic;
+    color: #000;
+    line-height: 1.4;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  /* --- BOTÓN --- */
+  .c-clinic__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    border-radius: 50px;
+    border: 2.5px solid var(--c-text-dark);
+    color: var(--c-text-dark);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    align-self: flex-start; 
+    width: 100%; 
+  }
+
+  .c-clinic__btn:hover {
+    background-color: var(--c-text-dark);
+    color: #ffffff;
+  }
+
+  /* =========================================
+     COMPORTAMIENTO DESKTOP
+     ========================================= */
+  @media (min-width: 768px) {
+    .c-clinic-{{ section.id }} {
+      padding-top: {{ section.settings.pad_top_desk }}px;
+      padding-bottom: {{ section.settings.pad_bot_desk }}px;
+    }
+
+    .c-clinic__wrapper {
+      flex-direction: row; 
+      align-items: center;
+      gap: 60px;
+      padding: 0 50px;
+    }
+
+    .c-clinic__media-col {
+      width: 50%;
+      flex-direction: row; 
+      height: 600px;
+    }
+
+    .c-clinic__image-card {
+      width: 50%;
+      height: 100%; 
+    }
+
+    .c-clinic__image-label {
+      bottom: 30px;
+      font-size: 16px;
+    }
+
+    .c-clinic__content-col {
+      width: 50%;
+    }
+
+    .c-clinic__title {
+      font-size: 46px;
+      margin-bottom: 24px;
+    }
+
+    .c-clinic__stat-label,
+    .c-clinic__detail-label {
+      font-size: 14px;
+  }
+
+    .c-clinic__desc {
+      font-size: 16px;
+      margin-bottom: 40px;
+    }
+
+    .c-clinic__stats-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 30px;
+    }
+
+    .c-clinic__stat-value {
+      font-size: 68px;
+      margin-bottom: 15px;
+    }
+
+    .c-clinic__stat-desc {
+      font-size: 16px;
+    }
+
+    .c-clinic__detail-block {
+      margin-bottom: 30px;
+    }
+
+    .c-clinic__detail-title {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .c-clinic__detail-text {
+      font-size: 14px;
+      max-width: 500px;
+    }
+
+    .c-clinic__sccs-block {
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .c-clinic__sccs-logo {
+      max-width: 220px;
+      flex-shrink: 0;
+    }
+
+    .c-clinic__sccs-quote {
+      font-size: 14px;
+      color:#000;
+      max-width: 249px;
+      font-style:italic;
+    }
+
+    .c-clinic__btn {
+      width: auto;
+      padding: 12px 36px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="c-clinic c-clinic-{{ section.id }}">
+  <div class="c-clinic__wrapper">
+    
+    <div class="c-clinic__media-col">
+      <div class="c-clinic__image-card">
+        {% if section.settings.image_1 != blank %}
+          {{ section.settings.image_1 | image_url: width: 600 | image_tag: loading: 'lazy', class: 'c-clinic__img' }}
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'c-clinic__img placeholder-svg' }}
+        {% endif %}
+        
+        {% if section.settings.label_1 != blank %}
+          <div class="c-clinic__image-label">{{ section.settings.label_1 | newline_to_br }}</div>
+        {% endif %}
+      </div>
+
+      <div class="c-clinic__image-card">
+        {% if section.settings.image_2 != blank %}
+          {{ section.settings.image_2 | image_url: width: 600 | image_tag: loading: 'lazy', class: 'c-clinic__img' }}
+        {% else %}
+          {{ 'product-2' | placeholder_svg_tag: 'c-clinic__img placeholder-svg' }}
+        {% endif %}
+        
+        {% if section.settings.label_2 != blank %}
+          <div class="c-clinic__image-label">{{ section.settings.label_2 | newline_to_br }}</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="c-clinic__content-col">
+      
+      {% if section.settings.title != blank %}
+        <h2 class="c-clinic__title">{{ section.settings.title | newline_to_br }}</h2>
+      {% endif %}
+      
+      {% if section.settings.description != blank %}
+        <p class="c-clinic__desc">{{ section.settings.description | newline_to_br }}</p>
+      {% endif %}
+
+      <div class="c-clinic__stats-grid">
+        
+        <div class="c-clinic__stat-item">
+          <span class="c-clinic__stat-label">{{ section.settings.stat1_label }}</span>
+          <p class="c-clinic__stat-value">{{ section.settings.stat1_value }}</p>
+          <p class="c-clinic__stat-desc">{{ section.settings.stat1_desc }}</p>
+        </div>
+
+        <div class="c-clinic__stat-item">
+          <span class="c-clinic__stat-label">{{ section.settings.stat2_label }}</span>
+          <p class="c-clinic__stat-value">{{ section.settings.stat2_value }}</p>
+          <p class="c-clinic__stat-desc">{{ section.settings.stat2_desc }}</p>
+        </div>
+
+      </div>
+
+      <div class="c-clinic__detail-block">
+        <span class="c-clinic__detail-label">{{ section.settings.detail_label }}</span>
+        <p class="c-clinic__detail-title">{{ section.settings.detail_title }}</p>
+        <p class="c-clinic__detail-text">{{ section.settings.detail_text }}</p>
+      </div>
+
+      {%- if section.settings.sccs_logo != blank or section.settings.sccs_quote != blank -%}
+        <div class="c-clinic__sccs-block">
+          {%- if section.settings.sccs_logo != blank -%}
+            {{ section.settings.sccs_logo | image_url: width: 400 | image_tag: loading: 'lazy', class: 'c-clinic__sccs-logo' }}
+          {%- endif -%}
+          {%- if section.settings.sccs_quote != blank -%}
+            <p class="c-clinic__sccs-quote">{{ section.settings.sccs_quote }}</p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {% if section.settings.btn_text != blank %}
+        <a href="{{ section.settings.btn_url }}" class="c-clinic__btn">{{ section.settings.btn_text }}</a>
+      {% endif %}
+
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "C - Clinically Backed",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Color Fondo de Sección",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Columna Izquierda (Imágenes)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Imagen 1 (Low-Grade)"
+    },
+    {
+      "type": "textarea",
+      "id": "label_1",
+      "label": "Etiqueta Imagen 1",
+      "default": "Low-\nGrade nHAp"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Imagen 2 (Premium-Grade)"
+    },
+    {
+      "type": "textarea",
+      "id": "label_2",
+      "label": "Etiqueta Imagen 2",
+      "default": "Premium-\nGrade nHAp"
+    },
+    {
+      "type": "header",
+      "content": "Columna Derecha (Contenido)"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Título Principal",
+      "default": "Clinically Backed\nOral Care"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Descripción General",
+      "default": "Premium-grade Nanohydroxyapatite is clinically proven to support enamel protection and reduce hypersensitivity."
+    },
+    {
+      "type": "header",
+      "content": "Estadística 1"
+    },
+    {
+      "type": "text",
+      "id": "stat1_label",
+      "label": "Super-título (Encima de la línea)",
+      "default": "PROVEN OPTIMAL"
+    },
+    {
+      "type": "text",
+      "id": "stat1_value",
+      "label": "Valor Principal (Número grande)",
+      "default": "10%"
+    },
+    {
+      "type": "text",
+      "id": "stat1_desc",
+      "label": "Descripción Inferior",
+      "default": "Nanohydroxyapatite concentration"
+    },
+    {
+      "type": "header",
+      "content": "Estadística 2"
+    },
+    {
+      "type": "text",
+      "id": "stat2_label",
+      "label": "Super-título (Encima de la línea)",
+      "default": "FULL FORMULA STRENGTH"
+    },
+    {
+      "type": "text",
+      "id": "stat2_value",
+      "label": "Valor Principal (Número grande)",
+      "default": "free"
+    },
+    {
+      "type": "text",
+      "id": "stat2_desc",
+      "label": "Descripción Inferior",
+      "default": "from harsh chemicals"
+    },
+    {
+      "type": "header",
+      "content": "Bloque Detalle Inferior"
+    },
+    {
+      "type": "text",
+      "id": "detail_label",
+      "label": "Super-título (Encima de la línea)",
+      "default": "PREMIUM CRYSTAL QUALITY"
+    },
+    {
+      "type": "text",
+      "id": "detail_title",
+      "label": "Título Medio",
+      "default": "High-Purity nHAp"
+    },
+    {
+      "type": "textarea",
+      "id": "detail_text",
+      "label": "Texto en Negrita Inferior",
+      "default": "Enhanced with botanical extracts including Pimpinella anisum, Carica papaya, Prunus serotina, Mentha spicata, and Mentha piperita."
+    },
+    {
+      "type": "header",
+      "content": "Cita SCCS (Logo y Texto)"
+    },
+    {
+      "type": "image_picker",
+      "id": "sccs_logo",
+      "label": "Logo SCCS"
+    },
+    {
+      "type": "textarea",
+      "id": "sccs_quote",
+      "label": "Texto Cita",
+      "default": "Based on the data provided, the SCCS considers hydroxyapatite (nano) safe when used at concentrations up to 10% in toothpaste — composed of rod-shaped particles."
+    },
+    {
+      "type": "header",
+      "content": "Botón Final"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Texto Botón",
+      "default": "SEE CASE STUDIES"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "URL Botón",
+      "default": "/"
+    },
+    {
+      "type": "header",
+      "content": "Paddings de Sección"
+    },
+    {
+      "type": "range",
+      "id": "pad_top_desk",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top Desktop",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "pad_bot_desk",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom Desktop",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "pad_top_mob",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "pad_bot_mob",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 50
+    }
+  ],
+  "presets": [
+    {
+      "name": "C - Clinically Backed"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,76 @@
+
+<div style="text-align:center; padding-bottom: 40px;">
+    <h1 class="featured-heading-title">{{section.settings.featured_heading}}</h1>
+
+    <div class="featured-products" data-flickity='{"wrapAround" : true, "contain" : true, "imagesLoaded" : true, "cellAlign" : "center", "prevNextButtons" : false}'>
+        {% for product in collections[section.settings.featured_products].products %}
+        {% if customer.tags contains "wholesale-customer" %} 
+            {% if product.title contains '(Wholesale)' %}
+                <div class="featured-product-cell">
+                    <a href="{{ product.url }}">
+                    <img src="{{product.featured_image | img_url: 'master'}}" alt="{{product.title}}" width="400px" height="400px"/>
+                    <p>{{product.title}}</p>
+                    <p>{{product.price | money}}</p>
+                    </a>
+                </div>
+            {% endif %}
+        {% else %}
+            {% unless product.title contains '(Wholesale)' %}
+                <div class="featured-product-cell">
+                    <a href="{{ product.url }}">
+                    <img src="{{product.featured_image | img_url: 'master'}}" alt="{{product.title}}" width="400px" height="400px"/>
+                    <p>{{product.title}}</p>
+                    <p>{{product.price | money}}</p>
+                    </a>
+                </div>
+            {% endunless %}
+        {% endif %}
+        {% endfor %}
+    </div>
+    
+    <a class="featured-button" href="{{collections[section.settings.featured_products].url}}" style="background-color:#df477f;">View All Products</a>
+    
+</div>
+
+{% schema %}
+{
+   "name": "Featured Products",
+   "settings" : [
+       {
+            "type": "collection",
+            "id": "featured_products",
+            "label": "Products to Display"
+       },
+       {
+        "type": "text",
+        "id": "featured_heading",
+        "label": "Heading"
+       }
+    ],
+   "presets": [
+    {
+        "name": "Featured Products"
+    }
+   ]
+}
+{% endschema %}
+
+{% assign productsInCarousel = collections[section.settings.featured_products].products | size %}
+
+{% if productsInCarousel == 4 %}
+
+<style>
+    #shopify-section-{{section.id}} > div > .featured-products .featured-product-cell{
+        width: calc(30% - 60px);
+    }
+</style>
+
+{%- elsif productsInCarousel > 4  -%}
+    
+<style>
+    #shopify-section-{{section.id}} > div > .featured-products .featured-product-cell{
+        width: calc(25% - 60px);
+    }
+</style>
+
+{% endif %}

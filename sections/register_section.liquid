@@ -1,0 +1,129 @@
+<section class="section--wholesale-register">
+    <div class="container">
+      
+    {% if customer %}
+        <div class="text--center">
+            <h2>Welcome, {{ customer.first_name }}!</h2>
+            <h3>You already are our wholesale customer.</h3>
+            <a class="button button--primary imageAbButton" href="/collections/wholesale">Shop Wholesale</a>
+          </div>
+    {% else %}
+    <div class="text--center">
+      <h2>Wholesale registration</h2>
+      <p>If you are already a wholesale customer, <a href="/account/login">login to your account
+      </a></p>
+    </div> 
+      <div class="globo-formbuilder" data-id="MTM3Mg=="></div>
+    {% endif %}
+  
+      </div>
+  </section>
+  <style>
+.section--wholesale-register .text--center h2 {
+    color: #1D2433;
+    font-size: clamp(28px, 3vw, 40px);
+    text-transform: capitalize;
+    margin: 0
+}
+
+.section--wholesale-register .text--center p {
+    color: #1D2433;
+    font-size: clamp(18px, 3vw, 22px);
+    margin: 0;
+}
+
+.section--wholesale-register .text--center a {
+    color: #FF6B00;
+    text-decoration: auto;
+}
+
+.section--wholesale-register .text--center {
+    margin-bottom: 40px
+}
+
+.section--wholesale-register .globo-form-app.boxed-layout {
+    border-radius: 16px;
+}
+
+.section--wholesale-register .description.globo-description {
+    color: #1D2433 !important;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.section--wholesale-register .label-content {
+    color: #1D2433;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.section--wholesale-register .text-danger.text-smaller {
+    color: #FF6B00;
+    font-size: 18px;
+    vertical-align: bottom;
+    display: initial;
+}
+.section--wholesale-register .globo-form-control input{
+  background-color: #F9F9FA !Important;
+  border-radius: 0 !important
+}
+.section--wholesale-register .globo-form-control input::placeholder{
+    font-size: 14px;
+    color: #CFCFD8;
+}
+.section--wholesale-register .checkbox-wrapper{
+  text-align: center !Important;
+  margin-top: 20px
+}
+
+.section--wholesale-register .footer{
+  margin: 0 !important;
+}
+.section--wholesale-register .checkbox-wrapper label{
+  font-size: 18px !important;
+}
+.section--wholesale-register .checkbox-wrapper label span{
+  font-weight: 700
+}
+.globo-form-id-1372 .message.success h4 strong{
+  color: #FF6B00;
+  
+}
+.globo-form-id-1372 .message.success{
+  background-color: transparent;
+  box-shadow: none;
+}
+.globo-form-id-1372 .message.success p{
+  max-width: 445px;
+  margin: 0 auto 15px;
+  
+}
+.globo-form-id-1372 .message.success p a{
+  background: #F9F9FA;
+
+border: 1px solid #F66C02;
+  display: block;
+  padding: 15px;
+  color: #F66C02;
+text-decoration: none;
+  font-weight: 700;
+  max-width: 348px;
+  margin: auto;
+}
+#professional_text{
+  font-size: 18px;
+}
+  </style>
+
+{% schema %}
+{
+    "name": "New Register Wholesale",
+    "settings" : [
+    ],
+    "presets": [
+     {
+         "name": "New Register Wholesale"
+     }
+    ]
+ }
+ {% endschema %}

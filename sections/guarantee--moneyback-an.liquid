@@ -1,0 +1,50 @@
+<div class="container--ss">
+    <div class="row--ss">
+        <div class="col--ss">
+          <div class="visual__wrapper">
+            <img src="{{ section.settings.i_image | img_url: '90x' }}" alt="">
+          </div>
+        </div>
+        <div class="col--ss">
+          <div class="content__wrapper">
+            <h3 class="section__heading text--center">
+              {{ section.settings.i_heading }}
+            </h3>
+            <p class="section__sub-heading text--center">
+              {{ section.settings.i_sub_heading }}
+            </p>
+          </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "Moneyback guarantee",
+  "tag": "section",
+  "class": "section__padding guarantee--moneyback ss--guarantee--moneyback-an",
+  "settings" : [
+      {
+          "type": "image_picker",
+          "id": "i_image",
+          "label": "Icon"
+      },
+      {
+          "type": "text",
+          "id": "i_heading",
+          "label": "Heading"
+      },
+      {
+          "type": "text",
+          "id": "i_sub_heading",
+          "label": "Sub heading"
+      }
+  ],
+  "presets": [
+  {
+      "name": "Moneyback guarantee",
+      "category": "Throught the theme"
+  }
+  ]
+  }
+{% endschema %}

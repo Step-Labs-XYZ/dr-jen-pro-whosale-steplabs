@@ -1,0 +1,316 @@
+{% doc %}
+  @prompt
+    I need a section to display this disclaimer about my products:
+    
+    "Wholesale Program Policy:
+    Dr. Jen’s Wholesale Program is available exclusively to licensed dental professionals and allows them to purchase products at reduced prices for resale to patients within the dental practice.
+    Products purchased through the wholesale program may only be resold in-office and may not be sold online or through any third-party platforms."
+    
+    It should be a simple section, with a layout that's concise with what I have, but it should also be clear to the user that this is an important disclaimer
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-disclaimer-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: 40px 20px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-disclaimer-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.max_width }}px;
+    margin: 0 auto;
+    padding: {{ block.settings.padding }}px;
+    background-color: {{ block.settings.box_background_color }};
+    border-left: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-disclaimer-icon-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .ai-disclaimer-icon-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    color: {{ block.settings.icon_color }};
+    margin-top: 4px;
+  }
+
+  .ai-disclaimer-content-{{ ai_gen_id }} {
+    flex-grow: 1;
+  }
+
+  .ai-disclaimer-heading-{{ ai_gen_id }} {
+    margin: 0 0 12px 0;
+    color: {{ block.settings.heading_color }};
+    font-size: {{ block.settings.heading_size }}px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .ai-disclaimer-text-{{ ai_gen_id }} {
+    margin: 0;
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.text_size }}px;
+    line-height: 1.6;
+  }
+
+  .ai-disclaimer-text-{{ ai_gen_id }} p {
+    margin: 0 0 12px 0;
+  }
+
+  .ai-disclaimer-text-{{ ai_gen_id }} p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-disclaimer-{{ ai_gen_id }} {
+      padding: 30px 16px;
+    }
+
+    .ai-disclaimer-container-{{ ai_gen_id }} {
+      padding: {{ block.settings.padding | times: 0.75 }}px;
+    }
+
+    .ai-disclaimer-icon-wrapper-{{ ai_gen_id }} {
+      gap: 12px;
+    }
+
+    .ai-disclaimer-icon-{{ ai_gen_id }} {
+      width: {{ block.settings.icon_size | times: 0.8 }}px;
+      height: {{ block.settings.icon_size | times: 0.8 }}px;
+    }
+
+    .ai-disclaimer-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.85 }}px;
+    }
+
+    .ai-disclaimer-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.text_size | times: 0.9 }}px;
+    }
+  }
+{% endstyle %}
+
+<disclaimer-block-{{ ai_gen_id }}
+  class="ai-disclaimer-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-disclaimer-container-{{ ai_gen_id }}">
+    <div class="ai-disclaimer-icon-wrapper-{{ ai_gen_id }}">
+      {% if block.settings.show_icon %}
+        <div class="ai-disclaimer-icon-{{ ai_gen_id }}">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+        </div>
+      {% endif %}
+      <div class="ai-disclaimer-content-{{ ai_gen_id }}">
+        {% if block.settings.heading != blank %}
+          <h2 class="ai-disclaimer-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+        {% endif %}
+        {% if block.settings.disclaimer_text != blank %}
+          <div class="ai-disclaimer-text-{{ ai_gen_id }}">
+            {{ block.settings.disclaimer_text }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</disclaimer-block-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class DisclaimerBlock{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+    }
+    customElements.define('disclaimer-block-{{ ai_gen_id }}', DisclaimerBlock{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Wholesale disclaimer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Wholesale Program Policy"
+    },
+    {
+      "type": "richtext",
+      "id": "disclaimer_text",
+      "label": "Disclaimer text",
+      "default": "<p>Dr. Jen's Wholesale Program is available exclusively to licensed dental professionals and allows them to purchase products at reduced prices for resale to patients within the dental practice.</p><p>Products purchased through the wholesale program may only be resold in-office and may not be sold online or through any third-party platforms.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum width",
+      "min": 600,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "default": 900
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Box padding",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "Show icon",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 20,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#1d2433"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "box_background_color",
+      "label": "Box background",
+      "default": "#f7f7f7"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#1d2433"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1d2433"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1d2433"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Wholesale disclaimer"
+    }
+  ]
+}
+{% endschema %}

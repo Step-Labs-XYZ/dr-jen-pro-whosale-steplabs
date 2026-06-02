@@ -1,0 +1,421 @@
+{%- style -%}
+  /* IMPORTACIÓN DE FUENTE RALEWAY */
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+  .c-compare-{{ section.id }} {
+    /* --- COLORES GLOBALES --- */
+    --c-bg-page: {{ section.settings.bg_color }};
+    --c-text-dark: #002C41; 
+    --c-text-light: #6b7280;
+    
+    /* Colores de la Tabla */
+    --c-dark-box: #002C41; 
+    --c-dark-box-text: #ffffff;
+    --c-border-color: #e5e7eb;
+    --c-row-alt: #f9fafb; 
+    
+    /* Colores Iconos */
+    --c-check-bg: #d1e8e2; 
+    --c-check-icon: #002C41;
+    --c-cross-mobile: #002C41;
+    --c-cross-desktop: #9ca3af;
+
+    font-family: 'Raleway', sans-serif;
+    background-color: var(--c-bg-page);
+    padding-top: {{ section.settings.pad_top_mob }}px;
+    padding-bottom: {{ section.settings.pad_bot_mob }}px;
+  }
+
+  .c-compare__wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* =========================================
+     CABECERA DE TEXTOS
+     ========================================= */
+  .c-compare__header {
+    margin-bottom: 40px;
+    text-align: left;
+  }
+
+  .c-compare__pretitle {
+    font-style: italic;
+    font-family: serif;
+    font-size: 22px;
+    color: var(--c-text-dark);
+    margin: 0 0 10px 0;
+  }
+
+  .c-compare__title {
+    font-size: 48px;
+    font-weight:600;
+    font-family: Raleway, sans-serif !important;
+    color: var(--c-text-dark);
+    line-height: 1.2;
+    margin: 0 0 12px 0;
+    max-width: 700px;
+  }
+
+  .c-compare__subtitle {
+    font-size: 20px;
+    color: var(--c-text-light);
+    margin: 0;
+  }
+
+  @media (max-width: 767px) {
+    .c-compare__header { margin-bottom: 30px; }
+    .c-compare__pretitle { font-size: 20px; }
+    .c-compare__title { font-size: 35px;max-width: auto; }
+    .c-compare__subtitle { font-size: 13px; }
+  }
+
+  /* =========================================
+     ESTRUCTURA DE TABLA (GRID MOBILE FIRST)
+     ========================================= */
+  .c-compare__table {
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    background-color: #ffffff;
+    overflow: hidden; 
+  }
+
+  .c-compare__row {
+    display: grid;
+    grid-template-columns: 1fr 110px 80px; 
+    align-items: stretch;
+  }
+
+  .c-compare__col {
+    display: flex;
+    align-items: center;
+  }
+
+  /* --- ESTILOS DE ICONOS --- */
+  .c-compare__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .c-compare__icon--check {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background-color: var(--c-check-bg);
+    color: var(--c-check-icon);
+  }
+
+  .c-compare__icon--cross {
+    color: var(--c-cross-mobile); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* =========================================
+     DISEÑO MOBILE
+     ========================================= */
+  
+  .c-compare__row--header {
+    background-color: var(--c-dark-box);
+    padding: 14px 0;
+  }
+
+  .c-compare__col--head-our,
+  .c-compare__col--head-other {
+    color: var(--c-dark-box-text);
+    font-size: 9px; /* Tamaño reducido para que no se vea pegado */
+    font-weight: 700;
+    text-align: center;
+    justify-content: center;
+    padding: 0 6px;
+    line-height: 1.15;
+    /* Al no tener text-transform, respeta las mayúsculas iniciales que escribas en Shopify */
+  }
+
+  .c-compare__row--data:nth-child(even) {
+    background-color: var(--c-row-alt); 
+  }
+
+  .c-compare__col--label {
+    padding: 16px 10px 16px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--c-text-dark);
+  }
+
+  .c-compare__col--our,
+  .c-compare__col--other {
+    justify-content: center;
+    padding: 16px 0;
+  }
+
+
+  /* =========================================
+     COMPORTAMIENTO DESKTOP
+     ========================================= */
+  @media (min-width: 768px) {
+    .c-compare-{{ section.id }} {
+      padding-top: {{ section.settings.pad_top_desk }}px;
+      padding-bottom: {{ section.settings.pad_bot_desk }}px;
+    }
+
+    .c-compare__wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 50px;
+    }
+
+    .c-compare__table {
+      border-radius: 0;
+      background-color: transparent;
+      overflow: visible;
+    }
+
+    .c-compare__row {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .c-compare__row--header {
+      background-color: transparent;
+      padding: 0;
+      border-bottom: 2px solid #D6ECE6;
+    }
+
+    .c-compare__col--head-our {
+      background-color: var(--c-dark-box);
+      border-radius: 16px 16px 0 0;
+      padding: 30px 20px 20px;
+      font-size: 15px;
+      align-items: flex-end;
+      text-transform: uppercase; /* Aquí forzamos las mayúsculas solo para Desktop */
+    }
+
+    .c-compare__col--head-other {
+      color: var(--c-text-dark);
+      font-size: 13px;
+      padding: 30px 20px 20px;
+      align-items: flex-end;
+      text-transform: uppercase; /* Aquí forzamos las mayúsculas solo para Desktop */
+    }
+
+    .c-compare__row--data:nth-child(even) {
+      background-color: transparent;
+    }
+
+    .c-compare__col--label {
+      padding: 24px 20px 24px 0;
+      font-size: 16px;
+      border-bottom: 1px solid var(--c-border-color);
+    }
+
+    .c-compare__col--our {
+      background-color: var(--c-dark-box);
+      border-bottom: 1px solid rgba(255,255,255,0.05); 
+    }
+
+    .c-compare__col--other {
+      border-bottom: 1px solid var(--c-border-color);
+    }
+
+    .c-compare__row--data:first-of-type .c-compare__col--label,
+    .c-compare__row--data:first-of-type .c-compare__col--our,
+    .c-compare__row--data:first-of-type .c-compare__col--other {
+      border-top: 2px solid #D6ECE6;
+    }
+
+    .c-compare__icon--cross {
+      color: var(--c-cross-desktop); 
+    }
+
+    .c-compare__row--data.is-last .c-compare__col--label,
+    .c-compare__row--data.is-last .c-compare__col--other {
+      border-bottom: 1px solid var(--c-border-color);
+    }
+
+    .c-compare__row--data.is-last .c-compare__col--our {
+      border-radius: 0 0 16px 16px;
+      padding-bottom: 30px; 
+      border-bottom: none;
+    }
+  }
+{%- endstyle -%}
+
+<section class="c-compare c-compare-{{ section.id }}">
+  <div class="c-compare__wrapper">
+    
+    <div class="c-compare__header">
+      {% if section.settings.pre_title != blank %}
+        <p class="c-compare__pretitle">{{ section.settings.pre_title }}</p>
+      {% endif %}
+      
+      {% if section.settings.title != blank %}
+        <h2 class="c-compare__title">{{ section.settings.title | newline_to_br }}</h2>
+      {% endif %}
+      
+      {% if section.settings.subtitle != blank %}
+        <p class="c-compare__subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+    </div>
+
+    <div class="c-compare__table">
+      
+      <div class="c-compare__row c-compare__row--header">
+        <div class="c-compare__col c-compare__col--head-empty"></div>
+        <div class="c-compare__col c-compare__col--head-our">
+          {{ section.settings.our_title | newline_to_br }}
+        </div>
+        <div class="c-compare__col c-compare__col--head-other">
+          {{ section.settings.other_title | newline_to_br }}
+        </div>
+      </div>
+
+      {% for block in section.blocks %}
+        <div class="c-compare__row c-compare__row--data {% if forloop.last %}is-last{% endif %}" {{ block.shopify_attributes }}>
+          
+          <div class="c-compare__col c-compare__col--label">
+            {{ block.settings.title }}
+          </div>
+          
+          <div class="c-compare__col c-compare__col--our">
+            {% if block.settings.our_has %}
+              <div class="c-compare__icon c-compare__icon--check">
+                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" fill="none" viewBox="0 0 10 7">
+                  <path fill="currentColor" d="m0 3.6.755-.776L3.38 5.409 8.81 0l.775.776L3.38 6.96 0 3.6Z"/>
+                </svg>
+              </div>
+            {% else %}
+              <div class="c-compare__icon c-compare__icon--cross">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 15 15" fill="none">
+                  <path d="M14.781 13.7198C14.8507 13.7895 14.906 13.8722 14.9437 13.9632C14.9814 14.0543 15.0008 14.1519 15.0008 14.2504C15.0008 14.349 14.9814 14.4465 14.9437 14.5376C14.906 14.6286 14.8507 14.7114 14.781 14.781C14.7114 14.8507 14.6286 14.906 14.5376 14.9437C14.4465 14.9814 14.349 15.0008 14.2504 15.0008C14.1519 15.0008 14.0543 14.9814 13.9632 14.9437C13.8722 14.906 13.7895 14.8507 13.7198 14.781L7.50042 8.56073L1.28104 14.781C1.14031 14.9218 0.94944 15.0008 0.750417 15.0008C0.551394 15.0008 0.360523 14.9218 0.219792 14.781C0.0790615 14.6403 3.92322e-09 14.4494 0 14.2504C-3.92322e-09 14.0514 0.0790615 13.8605 0.219792 13.7198L6.4401 7.50042L0.219792 1.28104C0.0790615 1.14031 0 0.94944 0 0.750417C0 0.551394 0.0790615 0.360523 0.219792 0.219792C0.360523 0.0790615 0.551394 0 0.750417 0C0.94944 0 1.14031 0.0790615 1.28104 0.219792L7.50042 6.4401L13.7198 0.219792C13.8605 0.0790615 14.0514 -3.92322e-09 14.2504 0C14.4494 3.92322e-09 14.6403 0.0790615 14.781 0.219792C14.9218 0.360523 15.0008 0.551394 15.0008 0.750417C15.0008 0.94944 14.9218 1.14031 14.781 1.28104L8.56073 7.50042L14.781 13.7198Z" fill="currentColor"/>
+                </svg>
+              </div>
+            {% endif %}
+          </div>
+          
+          <div class="c-compare__col c-compare__col--other">
+            {% if block.settings.other_has %}
+              <div class="c-compare__icon c-compare__icon--check" style="background-color: var(--c-dark-box); color: #fff;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" fill="none" viewBox="0 0 10 7">
+                  <path fill="currentColor" d="m0 3.6.755-.776L3.38 5.409 8.81 0l.775.776L3.38 6.96 0 3.6Z"/>
+                </svg>
+              </div>
+            {% else %}
+              <div class="c-compare__icon c-compare__icon--cross">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+                  <path d="M14.781 13.7198C14.8507 13.7895 14.906 13.8722 14.9437 13.9632C14.9814 14.0543 15.0008 14.1519 15.0008 14.2504C15.0008 14.349 14.9814 14.4465 14.9437 14.5376C14.906 14.6286 14.8507 14.7114 14.781 14.781C14.7114 14.8507 14.6286 14.906 14.5376 14.9437C14.4465 14.9814 14.349 15.0008 14.2504 15.0008C14.1519 15.0008 14.0543 14.9814 13.9632 14.9437C13.8722 14.906 13.7895 14.8507 13.7198 14.781L7.50042 8.56073L1.28104 14.781C1.14031 14.9218 0.94944 15.0008 0.750417 15.0008C0.551394 15.0008 0.360523 14.9218 0.219792 14.781C0.0790615 14.6403 3.92322e-09 14.4494 0 14.2504C-3.92322e-09 14.0514 0.0790615 13.8605 0.219792 13.7198L6.4401 7.50042L0.219792 1.28104C0.0790615 1.14031 0 0.94944 0 0.750417C0 0.551394 0.0790615 0.360523 0.219792 0.219792C0.360523 0.0790615 0.551394 0 0.750417 0C0.94944 0 1.14031 0.0790615 1.28104 0.219792L7.50042 6.4401L13.7198 0.219792C13.8605 0.0790615 14.0514 -3.92322e-09 14.2504 0C14.4494 3.92322e-09 14.6403 0.0790615 14.781 0.219792C14.9218 0.360523 15.0008 0.551394 15.0008 0.750417C15.0008 0.94944 14.9218 1.14031 14.781 1.28104L8.56073 7.50042L14.781 13.7198Z" fill="currentColor"/>
+                </svg>
+              </div>
+            {% endif %}
+          </div>
+
+        </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "C - Comparison Table",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Color Fondo de Sección",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Textos Cabecera"
+    },
+    {
+      "type": "text",
+      "id": "pre_title",
+      "label": "Pre-Título (Cursiva)",
+      "default": "formulated with sensitive smiles in mind"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Título Principal",
+      "default": "Everything your smile needs, &\nnothing it doesnt"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Dr. Jen's vs. other nanohydroxyapatite toothpastes"
+    },
+    {
+      "type": "header",
+      "content": "Encabezados de Tabla"
+    },
+    {
+      "type": "textarea",
+      "id": "our_title",
+      "label": "Título 'Nuestro Producto'",
+      "default": "Eggshell 10% Premium\nNanohydroxyapatite Toothpaste"
+    },
+    {
+      "type": "textarea",
+      "id": "other_title",
+      "label": "Título 'Otro Producto'",
+      "default": "Other Toothpaste"
+    },
+    {
+      "type": "header",
+      "content": "Paddings de Sección"
+    },
+    { "type": "range", "id": "pad_top_desk", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Padding Top Desktop", "default": 80 },
+    { "type": "range", "id": "pad_bot_desk", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Padding Bottom Desktop", "default": 80 },
+    { "type": "range", "id": "pad_top_mob", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Padding Top Mobile", "default": 50 },
+    { "type": "range", "id": "pad_bot_mob", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Padding Bottom Mobile", "default": 50 }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Fila de Comparación",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Característica",
+          "default": "Nueva Característica"
+        },
+        {
+          "type": "checkbox",
+          "id": "our_has",
+          "label": "¿Nuestro producto lo tiene/cumple?",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "other_has",
+          "label": "¿El otro producto lo tiene/cumple?",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "C - Comparison Table",
+      "blocks": [
+        { "type": "row", "settings": { "title": "No Sodium Lauryl Sulfate", "our_has": true, "other_has": false } },
+        { "type": "row", "settings": { "title": "No titanium dioxide", "our_has": true, "other_has": false } },
+        { "type": "row", "settings": { "title": "No fillers Added", "our_has": true, "other_has": false } },
+        { "type": "row", "settings": { "title": "No Pain Blockers", "our_has": true, "other_has": false } },
+        { "type": "row", "settings": { "title": "No Artificial Color", "our_has": true, "other_has": false } },
+        { "type": "row", "settings": { "title": "Gluten free", "our_has": true, "other_has": false } },
+        { "type": "row", "settings": { "title": "No Propylene Glycol", "our_has": true, "other_has": false } },
+        { "type": "row", "settings": { "title": "Optimized for PH Balance", "our_has": true, "other_has": false } }
+      ]
+    }
+  ]
+}
+{% endschema %}

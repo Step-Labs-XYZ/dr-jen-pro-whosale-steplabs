@@ -1,0 +1,21 @@
+{% comment %}
+  Snippet: c-trust-badges.liquid
+{% endcomment %}
+
+<div class="c-trust-badges">
+  {% for i in (1..4) %}
+    {%- assign badge_key = 'trust_badge_' | append: i -%}
+    {%- assign badge_img = section.settings[badge_key] -%}
+    {% if badge_img != blank %}
+      <div class="c-trust-badges__item">
+        <img
+          src="{{ badge_img | image_url: width: 120 }}"
+          alt="{{ badge_img.alt | default: 'Trust badge' }}"
+          width="120"
+          height="60"
+          loading="lazy"
+        >
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>

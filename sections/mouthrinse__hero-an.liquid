@@ -1,0 +1,68 @@
+    <div class="hero__banner">
+        <img src="{{ 'mwhero__banner--desktop.png' | asset_img_url: 'master' }}" alt="">
+    </div>
+    <div class="container--ss">
+        <div class="row--ss">
+            <div class="col--ss col--content">
+                <div class="content__wrapper">
+                    <div class="content--mobile hide--desktop">
+                        <h2 class="hero__sub-heading text--uppercase text--center">
+                            Dentist developed and approved
+                        </h2>
+                        <h1 class="hero__heading text--center">
+                            Wellness Begins <br>
+                            With a healthy Mouth.
+                        </h1>
+                        <!-- <div class="hero__banner--mobile">
+                          <img src="{{ 'hero__banner--mobile.jpg' | asset_img_url: 'master' }}" alt="">
+                        </div> -->
+                    </div>
+                    <div class="content--desktop hide--mobile">
+                        <h2 class="hero__sub-heading text--uppercase">
+                            Dentist developed and approved
+                        </h2>
+                        <h1 class="hero__heading">
+                            Wellness Begins <br>
+                            With a healthy Mouth.
+                        </h1>
+                    </div>
+                    <p class="hero__desc">
+                        Dr Jen’s non-toxic natural prebiotic mouth rinse is designed to create fresher
+                        breath while promoting a healthy oral microbiome.
+                    </p>
+                    <div class="cta__wrapper">
+                        <a href="#shopify-section-mouthrinse__product-an"
+                            class="btn--dj btn--mouthrinse is--cranberry is--rounded has--border has--shadow">
+                            Shop Now
+                        </a>
+                        <h5 class="note--moneyback">
+                            30-DAY MONEY BACK GUARANTEE
+                        </h5>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% schema %}
+  {
+    "name": "Mouthrinse hero",
+    "class": "mouthrinse__hero ss--mouthrinse__hero-an",
+    "tag": "section",
+    "settings": [],
+    "presets": [
+      {
+        "name": "Mouthrinse hero",
+        "category": "Hero section"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

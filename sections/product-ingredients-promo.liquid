@@ -1,0 +1,138 @@
+<div class="product-ingredients--background">
+    <div class="product-ingredients--outer">
+        <div class="ingredients--flex">
+            <div class="ingredients--flex-item">
+                <div class="ingredients--image">
+                    <img src="{{ section.settings.section_image | img_url: '900x'}}" />
+                </div>
+            </div>
+            <div class="ingredients--flex-item">
+                <div class="ingredients--text-outer">
+                    <h2 class="ingredients--title">
+                        {{section.settings.section_title_line_1}}
+                    </h2>
+                    <h2 class="ingredients--title">
+                        {{section.settings.section_title_line_2}}
+                    </h2>
+                    <h4 class="ingredients--paragraph">
+                        {{section.settings.section_paragraph}}
+                    </h4>
+                    {% for block in section.blocks %}
+                        <div class="ingredient--outer">
+                            <h4 class="ingredient--title">
+                                {{block.settings.ingredient_title}}
+                            </h4>
+                            <h4 class="ingredient--desc">
+                                {{block.settings.ingredient_desc}}
+                            </h4>
+                        </div>
+                    {% endfor %}  
+
+                    <div class="ingredients--button-outer">
+                        {% if section.settings.Override_Ingredients == true %}
+                            <div onclick="scrollToIngredients()" class="ingredients--button show-desktop" style="cursor:pointer;">
+                                {{section.settings.section_button_text}}
+                            </div>
+                            <div onclick="scrollToIngredients()" class="ingredients--button show-mobile" style="cursor:pointer;">
+                                {{section.settings.section_button_text}} +
+                            </div>
+                        {% else %}
+                        <a href="{{section.settings.section_button_url}}" class="ingredients--button show-desktop">
+                            {{section.settings.section_button_text}}
+                        </a>
+                        <a href="{{section.settings.section_button_url}}" class="ingredients--button show-mobile">
+                            {{section.settings.section_button_text}} +
+                        </a>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function scrollToIngredients(){
+        document.querySelector(`.tab_title`).nextElementSibling.click()
+        document.querySelector(`.image-carousel-heading`).nextElementSibling.scrollIntoView({behavior: 'smooth'})
+    }
+</script>
+
+
+{% schema %}
+    {
+        "name": "Product Ingredients",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Image Settings"
+            },
+            {
+                "type": "image_picker",
+                "id": "section_image",
+                "label": "Image"
+            },
+            {
+                "type": "header",
+                "content": "Image Settings"
+            },
+            {
+                "type": "text",
+                "id": "section_title_line_1",
+                "label": "Section Title Line 1"
+            },
+            {
+                "type": "text",
+                "id": "section_title_line_2",
+                "label": "Section Title Line 2"
+            },
+            {
+                "type": "text",
+                "id": "section_paragraph",
+                "label": "Section Paragraph"
+            },
+            {
+                "type": "text",
+                "id": "section_button_text",
+                "label": "Section Button Text"
+            },
+            {
+                "type": "url",
+                "id": "section_button_link",
+                "label": "Section Button Link"
+            },
+            {
+                "type": "checkbox",
+                "id": "Override_Ingredients",
+                "label": "Override Ingredients Link With Page Ingredients",
+                "default": true
+            }
+        ],
+        "blocks": [
+            {
+                "type": "product_ingredient",
+                "name": "Product Ingredient",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "ingredient_title",
+                        "label": "Ingredient Title"
+                    },
+                    {
+                        "type": "text",
+                        "id": "ingredient_desc",
+                        "label": "Ingredient Description"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "category": "Product Ingredients",
+                "name":"Product Ingredients"
+            }
+        ]
+    }
+{% endschema %}

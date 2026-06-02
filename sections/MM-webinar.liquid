@@ -1,0 +1,385 @@
+<style>
+.product_feature {
+  width: 100%;
+  height: auto;
+}
+.product_feature .conatiner {
+  max-width: 1200px;
+  height: 100%;
+  padding: 0 30px;
+  margin: 0 auto;
+}
+.product_feature h2 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 56px;
+  padding-bottom: 25px;
+  text-align: center;
+  margin: 0;
+}
+.product_feature span {
+  display: block;
+}
+.product_feature p {
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 31px;
+  padding-bottom: 35px;
+  margin: 0;
+}
+.product_feature .feature_inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+.product_feature .feature_inner .feature_card {
+  max-width: 554px;
+  display: flex;
+  gap: 16px;
+  padding: 28px;
+  border-radius: 15px;
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.10);
+}
+.product_feature .feature_card .number {
+  display: flex;
+  width: 35px;
+  height: 24px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 23px;
+  border-radius: 100%;
+  background: #FFF;
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.10);
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+}
+.product_feature .feature_card .feature_content {
+  align-self: center;
+}
+.product_feature .feature_content h3 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 23px;
+  padding-bottom: 10px;
+  margin: 0;
+}
+.product_feature .feature_content .desc {
+  display: block;
+}
+.product_feature .feature_content .desc p{
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  margin: 0;
+  line-height: 23px;
+  text-align: start;
+  margin: 0;
+}
+.product_feature a {
+  width: 221px;
+  height: 50px;
+  border-radius: 5px;
+ font-family: 'Raleway', sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  margin: 50px auto 0;
+}
+#product_feature-{{ section.id }} {
+  background: {{section.settings.bg_color}};
+  padding-top:{{ section.settings.padding_top_desktop }}px;
+  padding-bottom:{{ section.settings.padding_bottom_desktop }}px;
+  margin-top:{{ section.settings.margin_top_desktop }}px;
+  margin-bottom:{{ section.settings.margin_bottom_desktop }}px;
+}
+#product_feature-{{ section.id }} h2{
+color: {{section.settings.text_color}};
+}
+#product_feature-{{ section.id }} h3,
+#product_feature-{{ section.id }} span p,
+#product_feature-{{ section.id }} .desc,
+#product_feature-{{ section.id }} .number {
+  color: {{section.settings.card_text_color}};
+}
+#product_feature-{{ section.id }} .feature_card {
+  background: {{section.settings.card_bg_color}};
+}
+#product_feature-{{ section.id }} .number {
+  background: {{section.settings.number}};
+}
+#product_feature-{{ section.id }} a {
+  background: {{section.settings.btn_bg_color}};
+}
+#product_feature-{{ section.id }} a {
+  color: {{section.settings.btn_text_color}};
+}
+@media screen and (max-width: 1199px){
+  .product_feature .feature_inner {
+    flex-direction: column;
+    align-items: center;
+  }
+  .product_feature p {
+    max-width: 932px;
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: 767px){
+  .product_feature .conatiner {
+    padding: 0 20px;
+  }
+  .product_feature h2 {
+    text-align: center;
+    font-size: 22px;
+    line-height: 35px;
+    padding-bottom: 12px;
+  }
+    .product_feature p {
+      text-align: center;
+      font-size: 14px;
+      line-height: 22px;
+      padding-bottom: 36px;
+      max-width: 390px;
+  }
+  .product_feature .feature_inner .feature_card {
+    flex-direction: column;
+    padding: 32px 28px 27px
+  }
+  .product_feature .feature_card .number {
+    width: 24px;
+  }
+  .product_feature .feature_content h3 {
+    font-size: 15px;
+    line-height: 23px;
+  }
+  .product_feature .feature_content .desc p {
+    font-size: 14px;
+    line-height: 20px;
+    max-width: 390px;
+  }
+  .product_feature a{
+    width: 100%;
+    margin: 42px auto 0;
+  }
+}
+</style>
+<section class="product_feature" id="product_feature-{{ section.id }}">
+  <div class="conatiner">
+    {% if section.settings.top_text != blank %}
+      <h2>{{ section.settings.top_text }}</h2>
+    {% endif %}
+    {% if section.settings.top_desc != blank %}
+      <span>{{ section.settings.top_desc }}</span>
+    {% endif %}
+    <div class="feature_inner">
+      {% for block in section.blocks %}
+        <div class="feature_card">
+            <span class="number"> {{ forloop.index }}</span>
+          <div class="feature_content">
+            {% if block.settings.content_text != blank %}
+              <h3>{{ block.settings.content_text }}</h3>
+            {% endif %}
+            {% if block.settings.content_desc != blank %}
+              <span class="desc">{{ block.settings.content_desc }}</span>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    {% if section.settings.btn_text != blank %}
+      <a href="{{ section.settings.btn_url }}">{{ section.settings.btn_text }}</a>
+    {% endif %}
+  </div>
+</section>
+{% schema %}
+  {
+     "name": "MM Webinar",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background color",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "card_text_color",
+        "label": "Card Text Color",
+        "default": "#1D2433"
+      },
+      {
+        "type": "color",
+        "id": "card_bg_color",
+        "label": "Card BG Color",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "number",
+        "label": "Number BG Color",
+        "default": "#FFF"
+      },
+      {
+        "type": "color",
+        "id": "btn_bg_color",
+        "label": "Button BG Color",
+        "default": "#E04880"
+      },
+      {
+        "type": "color",
+        "id": "btn_text_color",
+        "label": "Button Text Color",
+        "default": "#FFF"
+      },
+      {
+        "type": "range",
+        "id": "padding_top_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Top Desktop",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Bottom Desktop",
+        "default": 0
+       },
+       {
+        "type": "range",
+        "id": "margin_top_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Top Desktop",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Bottom Desktop",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_top_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Top Mobile",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Bottom Mobile",
+        "default": 0
+       },
+       {
+        "type": "range",
+        "id": "margin_top_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Top Mobile",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Bottom Mobile",
+        "default": 0
+      },
+      {
+        "type": "text",
+        "id": "top_text",
+        "label": "Top Headline",
+        "default": "Unveiling the Webinar Agenda"
+      },
+      {
+        "type": "richtext",
+        "id": "top_desc",
+        "label": "Top Description",
+        "default": "<p>We believe in providing a well-structured and informative experience during our dental health webinar. To ensure you make the most of your time with us, we're pleased to unveil the detailed agenda for the event. Here's what you can expect:</p>"
+      },
+      {
+        "type": "text",
+        "id": "btn_text",
+        "label": "Button Text",
+        "default": "Register Now"
+      },
+      {
+        "type": "url",
+        "id": "btn_url",
+        "label": "Button URL"
+      }
+    ],
+    "blocks": [
+       {
+         "name": "Add Card",
+         "type": "add_card",
+         "settings": [
+          {
+            "type": "text",
+            "id": "content_text",
+            "label": "Content Headline",
+            "default": "Introduction & Welcome (5 minutes)"
+          },
+          {
+            "type": "richtext",
+            "id": "content_desc",
+            "label": "Content Description",
+            "default": "<p>We'll start by setting the stage and welcoming all attendees to the webinar.:</p>"
+          }
+         ]
+       }
+    ],
+    "presets":[
+      {
+        "name": "MM Webinar"
+      }
+    ]
+  }
+{% endschema %}

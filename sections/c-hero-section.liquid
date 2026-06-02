@@ -1,0 +1,746 @@
+<style>
+  /* =====================================================
+     C HERO SLIDER 2 — FULLCARD
+     Todos los slides: imagen de fondo 100% + tarjeta contenido
+  ===================================================== */
+
+  /* ---------- SHARED ---------- */
+  .Chero2 {
+    position: relative;
+    overflow: hidden;
+    background: #002c41;
+  }
+
+  /* =====================================================
+     FULLCARD: imagen fondo + tarjeta flotante
+  ===================================================== */
+  .Chero2--fullcard {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: var(--box-align, flex-end);
+    /* Altura controlada desde los settings de la sección */
+    min-height: {{ section.settings.height_desktop }}px;
+    /* ESPACIO LATERAL Y SUPERIOR/INFERIOR PARA QUE LA CAJA FLOTE */
+    padding: 40px 6%; 
+  }
+
+  /* Imagen de fondo full width */
+  .Chero2__bg-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    z-index: 0;
+  }
+  .Chero2__bg-image--mobile { display: none; }
+
+  /* Overlay sobre la imagen de fondo */
+  .Chero2__bg-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Tarjeta contenido */
+  .Chero2__card {
+    position: relative;
+    z-index: 2;
+    backdrop-filter: blur(var(--card-blur, 18px));
+    -webkit-backdrop-filter: blur(var(--card-blur, 18px));
+    border-radius: 8px; /* Ajustado para que se vea como en la foto */
+    padding: 48px; /* Espaciado uniforme e idéntico a la imagen */
+    width: var(--card-w, 50%);
+    max-width: var(--card-mw, 600px);
+    align-self: center; /* Permite que la caja flote en su tamaño real y no se estire a los bordes superior/inferior */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Sombra sutil de la imagen */
+  }
+
+  /* Variante sin caja: contenido flotante sobre la imagen */
+  .Chero2__card--fullbg {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 50px 60px 50px 50px;
+  }
+
+  /* =====================================================
+     ALINEACIÓN DE TEXTO (DESKTOP)
+  ===================================================== */
+  .Chero2__card--ta-left { text-align: left; }
+  .Chero2__card--ta-center { text-align: center; }
+  .Chero2__card--ta-right { text-align: right; }
+
+  .Chero2__card--ta-center .Chero2__rating { justify-content: center; }
+  .Chero2__card--ta-right .Chero2__rating { justify-content: flex-end; }
+
+  .Chero2__card--ta-center .Chero2__heading,
+  .Chero2__card--ta-center .Chero2__subtitle,
+  .Chero2__card--ta-center .Chero2__body,
+  .Chero2__card--ta-center .Chero2__features { margin-left: auto; margin-right: auto; }
+  .Chero2__card--ta-center .Chero2__features { align-items: center; }
+
+  .Chero2__card--ta-right .Chero2__heading,
+  .Chero2__card--ta-right .Chero2__subtitle,
+  .Chero2__card--ta-right .Chero2__body,
+  .Chero2__card--ta-right .Chero2__features { margin-left: auto; margin-right: 0; }
+  .Chero2__card--ta-right .Chero2__features { align-items: flex-end; }
+
+  /* =====================================================
+     CONTENIDO INTERIOR
+  ===================================================== */
+
+  /* Rating pill */
+  .Chero2__rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .Chero2__stars { color: #3d6aff; font-size: 14px; letter-spacing: 1px; }
+  .Chero2__rating-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: var(--ch2-rating-w, 700);
+    color: var(--ch2-color, #002c41);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Heading */
+  .Chero2__heading {
+    font-family: 'Raleway', sans-serif;
+    font-size: var(--hd-size-d, 44px);
+    font-weight: var(--ch2-heading-w, 600);
+    line-height: 1.18;
+    color: var(--ch2-color, #002c41);
+    margin: 0 0 14px;
+  }
+
+  /* Subtitle / body */
+  .Chero2__subtitle {
+    font-family: 'Raleway', sans-serif;
+    font-size: var(--sub-size-d, 18px);
+    font-weight: var(--ch2-subtitle-w, 600);
+    color: var(--ch2-color, #002c41);
+    margin: 0 0 10px;
+    line-height: 1.4;
+  }
+  .Chero2__body {
+    font-family: 'Raleway', sans-serif;
+    font-size: var(--bd-size-d, 15px);
+    font-weight: var(--ch2-body-w, 400);
+    color: var(--ch2-color, #002c41);
+    line-height: 1.6;
+    margin: 0 0 24px;
+  }
+  .Chero2__body p { margin: 0 0 8px; }
+  .Chero2__body p:last-child { margin-bottom: 0; }
+
+  /* Bullets */
+  .Chero2__features {
+    list-style: none;
+    margin: 0 0 20px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .Chero2__feature { display: flex; align-items: flex-start; gap: 10px; }
+  .Chero2__feature-text {
+    font-family: 'Raleway', sans-serif;
+    font-size: var(--bd-size-d, 16px);
+    line-height: 1.4;
+    color: var(--ch2-color, #002c41);
+    font-weight: var(--ch2-body-w, 400);
+  }
+  .Chero2__feature-text strong { font-weight: var(--ch2-heading-w, 600); }
+
+  /* CTA */
+  .Chero2__cta { margin-top: 10px; }
+  .Chero2__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #3d6aff;
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    font-size: 13px;
+    font-weight: var(--ch2-btn-w, 700);
+    text-decoration: none;
+    padding: 14px 48px;
+    border-radius: 100px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border: 0;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .Chero2__button:hover { background: #2952cc; transform: translateY(-2px); }
+  .Chero2__button--secondary { background: transparent; color: #002c41; border: 2px solid #002c41; }
+  .Chero2__button--secondary:hover { background: rgba(0,44,65,0.06); transform: translateY(-2px); }
+
+  /* Icon row */
+  .Chero2__icon-row {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin: 0 0 20px;
+  }
+  .Chero2__icon-item { text-align: center; }
+  .Chero2__icon-item-icon {
+    width: 40px; height: 40px;
+    margin: 0 auto 6px;
+    border-radius: 999px;
+    background: rgba(214,236,230,0.55);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .Chero2__icon-item-icon img { width: 22px; height: 22px; object-fit: contain; }
+  .Chero2__icon-item-text {
+    font-family: 'Raleway', sans-serif;
+    font-size: 11px;
+    line-height: 1.3;
+    color: var(--ch2-color, #002c41);
+  }
+
+  /* =====================================================
+     SLIDER CONTROLS
+  ===================================================== */
+  .CheroSlider2 { position: relative; }
+  .CheroSlider2__viewport { overflow: hidden; }
+  .CheroSlider2__track {
+    display: flex;
+    transition: transform 350ms ease;
+    will-change: transform;
+  }
+  .CheroSlider2__slide { flex: 0 0 100%; min-width: 100%; }
+
+  .CheroSlider2__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 40px; height: 40px;
+    border-radius: 999px;
+    border: 0;
+    background: rgba(255,255,255,0.65);
+    color: #002c41;
+    font-size: 18px;
+    line-height: 0;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+  }
+  .CheroSlider2__arrow:hover {
+    background: rgba(255,255,255,0.9);
+    transform: translateY(-50%) scale(1.1);
+  }
+  .CheroSlider2__arrow--prev { left: 20px; }
+  .CheroSlider2__arrow--next { right: 20px; }
+
+  .CheroSlider2__dots {
+    position: absolute;
+    right: 24px;
+    bottom: 16px;
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+  }
+  .CheroSlider2__dot {
+    width: 28px; height: 6px;
+    border-radius: 999px;
+    border: 0;
+    background: rgba(0,44,65,0.22);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .CheroSlider2__dot.is-active { background: rgba(0,44,65,0.85); }
+
+  /* =====================================================
+     RESPONSIVE
+  ===================================================== */
+  @media (max-width: 1024px) {
+    .Chero2__card { padding: 40px 36px; }
+  }
+
+  @media (max-width: 768px) {
+    /* Dos filas: imagen arriba | info abajo */
+    .Chero2--fullcard {
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      min-height: {{ section.settings.height_mobile }}px;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .Chero2__bg-image--desktop { display: none; }
+
+    /* Imagen mobile: fila superior, en flujo (no absoluta) */
+    .Chero2__bg-image--mobile {
+      display: block;
+      position: relative;
+      inset: auto;
+      width: 100%;
+      height: 55%;
+      flex: 0 0 55%;
+      object-fit: contain;
+      flex-shrink: 0;
+      z-index: 0;
+    }
+
+    /* Overlay oculto en mobile */
+    .Chero2__bg-overlay { display: none; }
+
+    /* Info: altura igualada por JS al slide más alto */
+    .Chero2__card {
+      width: 100%;
+      max-width: none;
+      flex: 1 1 auto;
+      min-height: 0;
+      border-radius: 0;
+      padding: 24px 20px 32px;
+      background: var(--mobile-bg, #e5e5e5) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      box-shadow: none;
+      align-self: stretch;
+      justify-content: center;
+    }
+
+    .Chero2__card--fullbg {
+      background: var(--mobile-bg, #e5e5e5) !important;
+      border-radius: 0 !important;
+    }
+
+    /* Alineación de texto exclusiva para Mobile */
+    .Chero2__card--ta-m-left { text-align: left !important; }
+    .Chero2__card--ta-m-center { text-align: center !important; }
+    .Chero2__card--ta-m-right { text-align: right !important; }
+
+    .Chero2__card--ta-m-left .Chero2__rating { justify-content: flex-start; }
+    .Chero2__card--ta-m-center .Chero2__rating { justify-content: center; }
+    .Chero2__card--ta-m-right .Chero2__rating { justify-content: flex-end; }
+
+    .Chero2__card--ta-m-left .Chero2__heading,
+    .Chero2__card--ta-m-left .Chero2__subtitle,
+    .Chero2__card--ta-m-left .Chero2__body,
+    .Chero2__card--ta-m-left .Chero2__features { margin-left: 0; margin-right: auto; }
+    .Chero2__card--ta-m-left .Chero2__features { align-items: flex-start; }
+
+    .Chero2__card--ta-m-center .Chero2__heading,
+    .Chero2__card--ta-m-center .Chero2__subtitle,
+    .Chero2__card--ta-m-center .Chero2__body,
+    .Chero2__card--ta-m-center .Chero2__features { margin-left: auto; margin-right: auto; }
+    .Chero2__card--ta-m-center .Chero2__features { align-items: center; }
+
+    .Chero2__card--ta-m-right .Chero2__heading,
+    .Chero2__card--ta-m-right .Chero2__subtitle,
+    .Chero2__card--ta-m-right .Chero2__body,
+    .Chero2__card--ta-m-right .Chero2__features { margin-left: auto; margin-right: 0; }
+    .Chero2__card--ta-m-right .Chero2__features { align-items: flex-end; }
+
+    /* Tamaños de texto en Mobile (se aplican las variables móviles) */
+    .Chero2__heading { font-size: var(--hd-size-m, 26px); }
+    .Chero2__subtitle { font-size: var(--sub-size-m, 15px); }
+    .Chero2__body { font-size: var(--bd-size-m, 14px); }
+    .Chero2__feature-text { font-size: var(--bd-size-m, 14px); }
+
+    .Chero2__button {
+      width: 100%;
+      box-sizing: border-box;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .CheroSlider2__dots {
+      right: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 12px;
+    }
+  }
+</style>
+
+<div class="CheroSlider2" data-section-id="{{ section.id }}" data-section-type="CheroSlider2">
+  <div class="CheroSlider2__viewport">
+    <div class="CheroSlider2__track" id="CheroSlider2Track-{{ section.id }}">
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'slide' -%}
+          {%- assign layout = block.settings.content_layout | default: 'subtitle_body' -%}
+          {%- assign slide_type = block.settings.slide_type | default: 'card' -%}
+          {%- assign text_align = block.settings.text_alignment | default: 'left' -%}
+          {%- assign text_align_mobile = block.settings.text_alignment_mobile | default: 'left' -%}
+
+          <div class="CheroSlider2__slide" {{ block.shopify_attributes }}>
+            <div class="Chero2 Chero2--fullcard" style="--box-align: {{ block.settings.box_alignment | default: 'flex-end' }};">
+
+              {%- comment -%} Imagen de fondo desktop {%- endcomment -%}
+              {%- if block.settings.product_image != blank -%}
+                <img
+                  src="{{ block.settings.product_image | image_url: width: 1800 }}"
+                  alt="{{ block.settings.heading | escape }}"
+                  class="Chero2__bg-image Chero2__bg-image--desktop"
+                  loading="eager"
+                />
+              {%- endif -%}
+
+              {%- comment -%} Imagen de fondo mobile {%- endcomment -%}
+              {%- if block.settings.product_image_mobile != blank -%}
+                <img
+                  src="{{ block.settings.product_image_mobile | image_url: width: 900 }}"
+                  alt="{{ block.settings.heading | escape }}"
+                  class="Chero2__bg-image Chero2__bg-image--mobile"
+                  loading="eager"
+                />
+              {%- endif -%}
+
+              {%- comment -%} Overlay opcional {%- endcomment -%}
+              {%- if block.settings.overlay_opacity > 0 -%}
+                <div
+                  class="Chero2__bg-overlay"
+                  style="background: {{ block.settings.overlay_color | default: '#000000' }}; opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};"
+                  aria-hidden="true"
+                ></div>
+              {%- endif -%}
+
+              {%- comment -%} Tarjeta contenido {%- endcomment -%}
+              {%- assign card_w = block.settings.card_width_pct | default: 50 -%}
+              {%- assign card_mw = block.settings.card_max_width | default: 600 -%}
+              {%- assign card_opacity = block.settings.card_bg_opacity | default: 80 | divided_by: 100.0 -%}
+              <div class="Chero2__card Chero2__card--ta-{{ text_align }} Chero2__card--ta-m-{{ text_align_mobile }}{% if slide_type == 'fullbg' %} Chero2__card--fullbg{% endif %}"
+                style="--card-w: {{ card_w }}%; --card-mw: {{ card_mw }}px; --card-blur: {{ block.settings.card_blur | default: 8 }}px; --ch2-color: {{ block.settings.content_text_color | default: '#002c41' }}; --ch2-heading-w: {{ block.settings.heading_font_weight | default: 600 }}; --ch2-subtitle-w: {{ block.settings.subtitle_font_weight | default: 600 }}; --ch2-body-w: {{ block.settings.body_font_weight | default: 400 }}; --ch2-rating-w: {{ block.settings.rating_font_weight | default: 700 }}; --ch2-btn-w: {{ block.settings.btn_font_weight | default: 700 }}; --mobile-bg: {{ block.settings.mobile_bg_color | default: '#e5e5e5' }}; --hd-size-d: {{ block.settings.heading_size_desk | default: 44 }}px; --hd-size-m: {{ block.settings.heading_size_mob | default: 26 }}px; --sub-size-d: {{ block.settings.subtitle_size_desk | default: 18 }}px; --sub-size-m: {{ block.settings.subtitle_size_mob | default: 15 }}px; --bd-size-d: {{ block.settings.body_size_desk | default: 15 }}px; --bd-size-m: {{ block.settings.body_size_mob | default: 14 }}px;{% unless slide_type == 'fullbg' %} background: {{ block.settings.card_bg_color | default: '#f5f5f3' | color_modify: 'alpha', card_opacity }};{% endunless %}">
+
+                {%- if block.settings.show_rating -%}
+                  <div class="Chero2__rating">
+                    <span class="Chero2__stars">★★★★★</span>
+                    <span class="Chero2__rating-text">{{ block.settings.rating_text | default: 'Rated 4.9 by 360,000+ Happy Customers' }}</span>
+                  </div>
+                {%- endif -%}
+
+                {%- if block.settings.heading != blank -%}
+                  <h2 class="Chero2__heading" style="max-width: {{ block.settings.heading_max_width | default: 560 }}px;">{{ block.settings.heading }}</h2>
+                {%- endif -%}
+
+                {%- if layout == 'subtitle_body' -%}
+                  {%- if block.settings.subtitle != blank -%}
+                    <div class="Chero2__subtitle" style="max-width: {{ block.settings.body_max_width | default: 480 }}px;">{{ block.settings.subtitle }}</div>
+                  {%- endif -%}
+                  {%- assign body_stripped = block.settings.body_richtext | strip_html | strip -%}
+                  {%- if body_stripped != blank and body_stripped != '.' -%}
+                    <div class="Chero2__body" style="max-width: {{ block.settings.body_max_width | default: 480 }}px;">{{ block.settings.body_richtext }}</div>
+                  {%- endif -%}
+
+                {%- elsif layout == 'bullets' -%}
+                  <ul class="Chero2__features">
+                    {%- for i in (1..6) -%}
+                      {%- assign key = 'bullet_' | append: i -%}
+                      {%- assign bullet = block.settings[key] | strip -%}
+                      {%- if bullet != blank and bullet != '.' -%}
+                        <li class="Chero2__feature">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" style="flex-shrink:0;margin-top:2px">
+                            <path d="M14.1996 5.60312C14.3812 5.36437 14.7282 5.31345 14.9747 5.48934C15.2208 5.66522 15.2734 6.00101 15.0921 6.23967L9.72682 13.2953L9.72628 13.2948C9.6143 13.4423 9.47302 13.5668 9.31007 13.6597C9.18776 13.7294 9.05537 13.7803 8.91767 13.8112L8.77857 13.8354C8.59351 13.8582 8.40563 13.8448 8.22597 13.796C8.04627 13.7473 7.87829 13.6644 7.73236 13.5517L7.73182 13.5512L4.20837 10.8219C3.9693 10.6368 3.93008 10.2985 4.12123 10.0669C4.31234 9.83536 4.66102 9.79795 4.90007 9.98298L8.42352 12.7117L8.47169 12.7421C8.48858 12.7504 8.50638 12.757 8.52473 12.762C8.56167 12.772 8.60034 12.7746 8.63839 12.7699H8.63893C8.67745 12.7651 8.71479 12.7528 8.74826 12.7337C8.78168 12.7146 8.81081 12.689 8.83378 12.6587L8.83432 12.6582L14.1996 5.60312Z" fill="#002C41"/>
+                            <path d="M18.916 9.99973C18.9159 7.63518 17.9763 5.36765 16.3044 3.69565C14.6323 2.02358 12.3644 1.08403 9.99973 1.08403C7.63516 1.08409 5.36765 2.02364 3.69565 3.69565C2.02364 5.36765 1.08409 7.63516 1.08403 9.99973C1.08403 12.3644 2.02358 14.6323 3.69565 16.3044C5.36765 17.9763 7.63518 18.9159 9.99973 18.916C12.3644 18.916 14.6323 17.9764 16.3044 16.3044C17.9764 14.6323 18.916 12.3644 18.916 9.99973ZM20 9.99973C20 12.6519 18.9462 15.1954 17.0708 17.0708C15.1954 18.9462 12.6519 20 9.99973 20C7.34766 19.9999 4.80398 18.9461 2.92868 17.0708C1.05346 15.1955 0 12.6518 0 9.99973C6.20803e-05 7.34766 1.05337 4.80398 2.92868 2.92868C4.80398 1.05337 7.34766 6.20796e-05 9.99973 0C12.6518 0 15.1955 1.05346 17.0708 2.92868C18.9461 4.80398 19.9999 7.34766 20 9.99973Z" fill="#002C41"/>
+                          </svg>
+                          <span class="Chero2__feature-text">{{ bullet }}</span>
+                        </li>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </ul>
+
+                {%- elsif layout == 'icon_row' -%}
+                  <div class="Chero2__icon-row">
+                    {%- for i in (1..4) -%}
+                      {%- assign icon_key = 'icon' | append: i -%}
+                      {%- assign text_key = 'icon' | append: i | append: '_text' -%}
+                      {%- assign icon = block.settings[icon_key] -%}
+                      {%- assign itext = block.settings[text_key] | strip -%}
+                      {%- if icon != blank or itext != blank -%}
+                        <div class="Chero2__icon-item">
+                          <div class="Chero2__icon-item-icon">
+                            {%- if icon != blank -%}<img src="{{ icon | image_url: width: 120 }}" alt="" loading="lazy" />{%- endif -%}
+                          </div>
+                          {%- if itext != blank -%}<div class="Chero2__icon-item-text">{{ itext }}</div>{%- endif -%}
+                        </div>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+
+                {%- if block.settings.button_text != blank -%}
+                  <div class="Chero2__cta">
+                    <a
+                      href="{{ block.settings.button_url }}"
+                      class="Chero2__button Chero2__button--{{ block.settings.button_style | default: 'primary' }}"
+                      style="background: {{ block.settings.btn_bg | default: '#3d6aff' }}; color: {{ block.settings.btn_text | default: '#ffffff' }};"
+                    >{{ block.settings.button_text }}</a>
+                  </div>
+                {%- endif -%}
+
+              </div>
+            </div>
+          </div>
+
+        {%- endif -%}
+      {%- endfor -%}
+
+    </div>
+  </div>
+
+  {%- if section.settings.show_arrows -%}
+    <button class="CheroSlider2__arrow CheroSlider2__arrow--prev" type="button" aria-label="Previous" data-prev>&#8249;</button>
+    <button class="CheroSlider2__arrow CheroSlider2__arrow--next" type="button" aria-label="Next" data-next>&#8250;</button>
+  {%- endif -%}
+
+  {%- if section.settings.show_dots -%}
+    <div class="CheroSlider2__dots" data-dots></div>
+  {%- endif -%}
+</div>
+
+<script>
+  (function() {
+    var root = document.querySelector('[data-section-id="{{ section.id }}"][data-section-type="CheroSlider2"]');
+    if (!root) return;
+
+    var track = root.querySelector('.CheroSlider2__track');
+    var slides = Array.prototype.slice.call(root.querySelectorAll('.CheroSlider2__slide'));
+    if (!track || slides.length === 0) return;
+
+    var index = 0;
+
+    function goTo(i) {
+      index = (i + slides.length) % slides.length;
+      track.style.transform = 'translateX(' + (-100 * index) + '%)';
+      updateDots();
+    }
+
+    var dotsWrap = root.querySelector('[data-dots]');
+    var dots = [];
+    if (dotsWrap) {
+      dotsWrap.innerHTML = '';
+      slides.forEach(function(_, i) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'CheroSlider2__dot';
+        b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        b.addEventListener('click', function() { goTo(i); stopAutoplay(); });
+        dotsWrap.appendChild(b);
+        dots.push(b);
+      });
+    }
+
+    function updateDots() {
+      if (!dots.length) return;
+      dots.forEach(function(d, i) {
+        d.classList.toggle('is-active', i === index);
+      });
+    }
+
+    var prev = root.querySelector('[data-prev]');
+    var next = root.querySelector('[data-next]');
+    if (prev) prev.addEventListener('click', function() { goTo(index - 1); stopAutoplay(); });
+    if (next) next.addEventListener('click', function() { goTo(index + 1); stopAutoplay(); });
+
+    var autoplay = {{ section.settings.autoplay | json }};
+    var intervalMs = {{ section.settings.autoplay_speed | times: 1000 | json }};
+    var timer = null;
+
+    function startAutoplay() {
+      if (!autoplay || slides.length <= 1) return;
+      stopAutoplay();
+      timer = setInterval(function() { goTo(index + 1); }, intervalMs || 4000);
+    }
+    function stopAutoplay() {
+      if (timer) { clearInterval(timer); timer = null; }
+    }
+
+    goTo(0);
+    startAutoplay();
+    root.addEventListener('mouseenter', stopAutoplay);
+    root.addEventListener('mouseleave', startAutoplay);
+
+    // Equaliza la altura de todas las cards al alto de la más grande (solo mobile)
+    function equalizeCards() {
+      var cards = Array.prototype.slice.call(root.querySelectorAll('.Chero2__card'));
+      cards.forEach(function(c) { c.style.height = ''; }); // reset
+      if (window.innerWidth > 768) return;
+      var maxH = 0;
+      cards.forEach(function(c) { maxH = Math.max(maxH, c.scrollHeight); });
+      cards.forEach(function(c) { c.style.height = maxH + 'px'; });
+    }
+    equalizeCards();
+    window.addEventListener('resize', equalizeCards);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "C Hero Slider 2",
+  "class": "section-CheroSlider2",
+  "settings": [
+    { "type": "header", "content": "Dimensiones del Slider" },
+    { "type": "range", "id": "height_desktop", "min": 300, "max": 1000, "step": 10, "unit": "px", "label": "Altura Desktop", "default": 600 },
+    { "type": "range", "id": "height_mobile", "min": 200, "max": 800, "step": 10, "unit": "px", "label": "Altura Mobile", "default": 500 },
+    { "type": "header", "content": "Controles" },
+    { "type": "checkbox", "id": "show_arrows", "label": "Mostrar flechas", "default": true },
+    { "type": "checkbox", "id": "show_dots",   "label": "Mostrar puntos (dots)", "default": true },
+    { "type": "checkbox", "id": "autoplay",    "label": "Autoplay", "default": false },
+    { "type": "range", "id": "autoplay_speed", "min": 2, "max": 10, "step": 1, "unit": "s", "label": "Velocidad Autoplay", "default": 4 }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "select",
+          "id": "slide_type",
+          "label": "Tipo de slide",
+          "default": "card",
+          "options": [
+            { "value": "fullbg", "label": "Full BG (sin caja)" },
+            { "value": "card",   "label": "Card (con caja)" }
+          ]
+        },
+        { "type": "header", "content": "Alineación y Fondos" },
+        {
+          "type": "select",
+          "id": "box_alignment",
+          "label": "Posición del bloque (Desktop)",
+          "default": "flex-end",
+          "options": [
+            { "value": "flex-start", "label": "Izquierda" },
+            { "value": "center", "label": "Centro" },
+            { "value": "flex-end", "label": "Derecha" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_alignment",
+          "label": "Alineación texto (Desktop)",
+          "default": "left",
+          "options": [
+            { "value": "left", "label": "Izquierda" },
+            { "value": "center", "label": "Centro" },
+            { "value": "right", "label": "Derecha" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_alignment_mobile",
+          "label": "Alineación texto (Mobile)",
+          "default": "left",
+          "options": [
+            { "value": "left", "label": "Izquierda" },
+            { "value": "center", "label": "Centro" },
+            { "value": "right", "label": "Derecha" }
+          ]
+        },
+        {
+          "type": "color",
+          "id": "mobile_bg_color",
+          "label": "Fondo sólido Mobile",
+          "default": "#e5e5e5"
+        },
+        { "type": "header", "content": "Imágenes" },
+        { "type": "image_picker", "id": "product_image", "label": "Imagen Desktop" },
+        { "type": "image_picker", "id": "product_image_mobile", "label": "Imagen Mobile" },
+        { "type": "header", "content": "Textos" },
+        { "type": "checkbox", "id": "show_rating", "label": "Mostrar rating", "default": true },
+        { "type": "text", "id": "rating_text", "label": "Texto rating", "default": "Rated 4.9 by 360,000+ Happy Customers" },
+        { "type": "text", "id": "heading", "label": "Título", "default": "Offer Your Patients Elevated Oral Care" },
+        { "type": "text", "id": "subtitle", "label": "Subtítulo", "default": "Clinically Proven Ingredients Backed By Science" },
+        {
+          "type": "select",
+          "id": "content_layout",
+          "label": "Tipo de contenido",
+          "default": "subtitle_body",
+          "options": [
+            { "value": "subtitle_body", "label": "Subtítulo + cuerpo" },
+            { "value": "bullets",       "label": "Bullets con check" },
+            { "value": "icon_row",      "label": "Fila de iconos (4)" }
+          ]
+        },
+        { "type": "richtext", "id": "body_richtext", "label": "Cuerpo", "default": "<p></p>" },
+        { "type": "header", "content": "Bullets (si layout = Bullets)" },
+        { "type": "html", "id": "bullet_1", "label": "Bullet 1", "default": "Clinically proven to outperform fluoride-alone toothpastes" },
+        { "type": "html", "id": "bullet_2", "label": "Bullet 2", "default": "Independent, third-party validated research" },
+        { "type": "html", "id": "bullet_3", "label": "Bullet 3", "default": "Request your free samples with registration" },
+        { "type": "html", "id": "bullet_4", "label": "Bullet 4" },
+        { "type": "html", "id": "bullet_5", "label": "Bullet 5" },
+        { "type": "html", "id": "bullet_6", "label": "Bullet 6" },
+        { "type": "header", "content": "Icon row (si layout = Fila de iconos)" },
+        { "type": "image_picker", "id": "icon1", "label": "Icono 1" },
+        { "type": "text", "id": "icon1_text", "label": "Texto icono 1" },
+        { "type": "image_picker", "id": "icon2", "label": "Icono 2" },
+        { "type": "text", "id": "icon2_text", "label": "Texto icono 2" },
+        { "type": "image_picker", "id": "icon3", "label": "Icono 3" },
+        { "type": "text", "id": "icon3_text", "label": "Texto icono 3" },
+        { "type": "image_picker", "id": "icon4", "label": "Icono 4" },
+        { "type": "text", "id": "icon4_text", "label": "Texto icono 4" },
+        { "type": "header", "content": "Botón" },
+        { "type": "text", "id": "button_text", "label": "Texto botón", "default": "SHOP NOW" },
+        { "type": "url", "id": "button_url", "label": "Link botón" },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Estilo del botón",
+          "default": "primary",
+          "options": [
+            { "value": "primary",   "label": "Primary (relleno)" },
+            { "value": "secondary", "label": "Secondary (outline)" }
+          ]
+        },
+        { "type": "color", "id": "btn_bg", "label": "Fondo botón", "default": "#3d6aff" },
+        { "type": "color", "id": "btn_text", "label": "Texto botón", "default": "#ffffff" },
+        { "type": "header", "content": "Tamaños Desktop" },
+        { "type": "range", "id": "heading_size_desk", "min": 20, "max": 80, "step": 1, "unit": "px", "label": "Título", "default": 44 },
+        { "type": "range", "id": "subtitle_size_desk", "min": 12, "max": 40, "step": 1, "unit": "px", "label": "Subtítulo", "default": 18 },
+        { "type": "range", "id": "body_size_desk", "min": 12, "max": 30, "step": 1, "unit": "px", "label": "Cuerpo", "default": 15 },
+        { "type": "header", "content": "Tamaños Mobile" },
+        { "type": "range", "id": "heading_size_mob", "min": 16, "max": 60, "step": 1, "unit": "px", "label": "Título", "default": 26 },
+        { "type": "range", "id": "subtitle_size_mob", "min": 12, "max": 30, "step": 1, "unit": "px", "label": "Subtítulo", "default": 15 },
+        { "type": "range", "id": "body_size_mob", "min": 10, "max": 24, "step": 1, "unit": "px", "label": "Cuerpo", "default": 14 },
+        { "type": "header", "content": "Pesos y Colores" },
+        { "type": "range", "id": "heading_font_weight", "min": 300, "max": 900, "step": 100, "label": "Peso Título", "default": 600 },
+        { "type": "range", "id": "subtitle_font_weight", "min": 300, "max": 900, "step": 100, "label": "Peso Subtítulo", "default": 600 },
+        { "type": "range", "id": "body_font_weight", "min": 300, "max": 900, "step": 100, "label": "Peso Cuerpo", "default": 400 },
+        { "type": "range", "id": "rating_font_weight", "min": 300, "max": 900, "step": 100, "label": "Peso Rating", "default": 700 },
+        { "type": "range", "id": "btn_font_weight", "min": 300, "max": 900, "step": 100, "label": "Peso Botón", "default": 700 },
+        { "type": "color", "id": "content_text_color", "label": "Color texto", "default": "#002c41" },
+        { "type": "color", "id": "card_bg_color", "label": "Fondo tarjeta", "default": "#f5f5f3" },
+        { "type": "range", "id": "card_bg_opacity", "min": 5, "max": 100, "step": 5, "unit": "%", "label": "Opacidad tarjeta", "default": 80 },
+        { "type": "range", "id": "card_blur", "min": 0, "max": 40, "step": 1, "unit": "px", "label": "Blur tarjeta", "default": 8 },
+        { "type": "range", "id": "overlay_opacity", "min": 0, "max": 70, "step": 5, "unit": "%", "label": "Opacidad Overlay", "default": 0 },
+        { "type": "color", "id": "overlay_color", "label": "Color Overlay", "default": "#000000" },
+        { "type": "header", "content": "Anchos Máximos" },
+        { "type": "range", "id": "card_width_pct", "min": 20, "max": 80, "step": 1, "unit": "%", "label": "Ancho tarjeta (%)", "default": 50 },
+        { "type": "range", "id": "card_max_width", "min": 300, "max": 900, "step": 10, "unit": "px", "label": "Ancho máx tarjeta", "default": 600 },
+        { "type": "range", "id": "heading_max_width", "min": 200, "max": 700, "step": 10, "unit": "px", "label": "Ancho máx título", "default": 560 },
+        { "type": "range", "id": "body_max_width", "min": 200, "max": 700, "step": 10, "unit": "px", "label": "Ancho máx cuerpo", "default": 480 }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "C Hero Slider 2",
+      "blocks": [
+        { "type": "slide", "settings": { "content_layout": "subtitle_body" } },
+        { "type": "slide", "settings": { "content_layout": "subtitle_body" } },
+        { "type": "slide", "settings": { "content_layout": "subtitle_body" } },
+        { "type": "slide", "settings": { "content_layout": "bullets"       } }
+      ]
+    }
+  ]
+}
+{% endschema %}

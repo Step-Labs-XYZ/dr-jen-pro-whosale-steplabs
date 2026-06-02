@@ -1,0 +1,55 @@
+{% comment %}
+    Cart Freebies Installation Instructions
+
+    Required File Locations:
+    sections/cf_cart-freebies.liquid // May need to reinstall BB app if used after copying file over
+    assets/axios.min.js
+    snippets/
+        cf_ajaxMultiBuy.1.4.liquid # or latest version
+        cf_Session.1.0.liquid # or latest version
+        cf_CartFreebiesRemover.1.1.liquid # or latest version
+        cf_CartFreebiesInstallationInstructions.liquid # or latest version
+
+    In theme.liquid add the following code
+    ```
+      <link href="preload" href="{{ 'cf_source-tracking.js' | asset_url }}" as="script">
+      <script src="{{ 'cf_source-tracking.js' | asset_url }}" type="module"></script>
+    ```
+
+    In /templates/cart.liquid add the following code
+    ``` {% section 'cf_cart-freebies' %} ```
+
+    In /sections/cart-template.liquid update the following:
+        /*
+        * Add to the remove/delete button:
+        *
+        * A class of: cf_cart__remove-button
+        * A data attribute of: data-cf-cart-variant-id
+        * Data attribute must be set to the liquid: item.variant.id
+        *
+        * eg.
+        ```
+            <a href="{{ routes.cart_url }}/change?line={{ forloop.index }}&amp;quantity=0"
+                class="cart__remove cf_cart__remove-button" data-cf-cart-variant-id="{{item.variant.id}}">
+                <small>{{ 'cart.general.remove' | t }}</small>
+            </a>
+        ```
+        */
+
+        /*
+        * Add to the Quantity input changer
+        * Should have attribute: name="updates[]"
+        *
+        * A class of: cf_cart__quantity-input
+        * A data attribute of: data-cf-cart-variant-id
+        * Data attribute must be set to the liquid: item.variant.id
+        *
+        * eg.
+        ```
+            <input type="number" name="updates[]" id="updates_{{ item.id }}"
+                value="{{ item.quantity }}" min="0" class="cf_cart__quantity-input"
+                data-cf-cart-variant-id="{{item.variant.id}}">
+        ```
+        */
+
+{% endcomment %}}

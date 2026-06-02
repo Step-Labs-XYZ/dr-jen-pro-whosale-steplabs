@@ -1,0 +1,400 @@
+{% comment %} INSTALL instructions in snippets/cf_cartFreebiesInstallationInstructions.liquid {% endcomment %}
+{% include 'cf_ajaxMultiBuy.1.4' %}
+{% include 'cf_Session.1.0' %}
+{% include 'cf_CartFreebiesRemover.1.1' %}
+<script>
+    const ENABLE_DEBUG = false;
+    function consoleLog() {
+        if (! ENABLE_DEBUG) {
+            return;
+        }
+        console.log('jeshua', ...arguments);
+    }
+</script>
+
+{%- liquid
+    assign cart_total_price = cart.total_price
+    assign line_items = cart.items
+    if checkout
+        assign cart_total_price = checkout.total_price
+        assign line_items = checkout.line_items
+    endif
+%}
+
+{% comment %} Variant Popup Selector {% endcomment %}
+{%- liquid
+    assign inCartProductIds = cart.items | map: 'product_id'
+    for block in section.blocks
+        assign freebieProductId = all_products[block.settings.free_product].id
+        assign is_available = all_products[block.settings.free_product].available
+
+        if block.settings.show_popup_selector
+            assign reason = 'skip: we handle adding this in the above Variant Popup Selector'
+
+            assign freebieThreshold = block.settings.free_product_threshold
+            assign showPopupSelector = true
+
+            if inCartProductIds contains freebieProductId
+              assign dontShowPopupReason = 'inCartProductIds contains freebieProductId'
+            endif
+            if block.settings.third_party_will_add
+                assign dontShowPopupReason = '3rd party app responsible for adding freebie'
+            endif
+            if is_available == false
+              assign dontShowPopupReason = 'freebie sold out'
+            endif
+
+            assign inclusion_collection = block.settings.inclusion_collection | downcase
+            assign cart_subtotal_minus_exclusion_products = cart_total_price
+            if inclusion_collection != blank
+                assign cart_subtotal_minus_exclusion_products = 0
+                for line_item in line_items
+                    for collection in line_item.product.collections
+                        assign current_collection = collection.handle | downcase
+                        if inclusion_collection == current_collection
+                            comment
+                              <script>consoleLog("Inclusion 2: '{{inclusion_collection}}' Current: '{{current_collection}}'");</script>
+                            endcomment
+                            assign line_item_price = line_item.final_line_price
+                            assign cart_subtotal_minus_exclusion_products = cart_subtotal_minus_exclusion_products | plus: line_item_price
+                            break
+                        endif
+                    endfor
+                endfor
+            endif
+
+
+            comment
+              Dont include price of products in exclusion_collection
+            endcomment
+            assign exclusion_collection = block.settings.exclusion_collection | downcase
+            for line_item in line_items
+                if exclusion_collection != blank
+                    for collection in line_item.product.collections
+                        assign current_collection = collection.handle | downcase
+
+                        if exclusion_collection == current_collection
+                            if block.settings.always_remove_if_exclusion_present
+                                assign dontShowPopupReason = 'Always remove when exclusion products present is selected and exclusion product is present'
+                            endif
+                            assign line_item_price = line_item.final_line_price
+                            assign cart_subtotal_minus_exclusion_products = cart_subtotal_minus_exclusion_products | minus: line_item_price
+                            break
+                        endif
+                    endfor
+                endif
+            endfor
+
+            if cart_subtotal_minus_exclusion_products < freebieThreshold
+              assign dontShowPopupReason = 'cart_total_price < freebieThreshold'
+            endif
+
+            if dontShowPopupReason
+              assign showPopupSelector = false
+              echo '<script>console.log("CF: Skipping Variant Popup Selector because: {dontShowPopupReason}")</script>' | replace: '{dontShowPopupReason}', dontShowPopupReason
+            endif
+
+            if showPopupSelector
+                assign jod_css_library_source = 'jod-css-library.css' | asset_url
+                echo '<link href="preload" href="{jod-css-library}" as="stylesheet">' | replace: '{jod-css-library}', jod_css_library_source
+                echo 'jod-css-library.css' | asset_url | stylesheet_tag
+                echo '<script type="module">'
+                    render 'cf_popup-selector.js', productUrl: all_products[block.settings.free_product].url, freebie_threshold: block.settings.free_product_threshold, only_with_referral_code: block.settings.only_with_referral_code
+                echo '</script>'
+            endif
+
+        endif
+    endfor
+-%}
+
+{% comment %} Capture the variant ids from the blocks {% endcomment %}
+{%- liquid
+  assign ADD_VARIANT_IDS = '' | split: ','
+  assign REMOVE_VARIANT_IDS = ',' | split: ','
+-%}
+{% for block in section.blocks %}
+    {% assign free_product_variant_to_add = all_products[block.settings.free_product].variants[0].id %}
+    {% assign free_product_variants_to_remove = all_products[block.settings.free_product].variants | map: 'id' %}
+    {% assign cart_subtotal_minus_exclusion_products = cart_total_price %}
+    {% assign third_party_will_add = block.settings.third_party_will_add %}
+
+    <!-- Initial Check (so we don't run this unnecessarily ) -->
+    {% if cart_subtotal_minus_exclusion_products >= block.settings.free_product_threshold %}
+        {% comment %}
+        <h1>Free Product: {{ all_products[block.settings.free_product].variants[0].id }}</h1>
+        <h1>Product threshold: {{ block.settings.free_product_threshold }} </h1>
+        {% endcomment %}
+        {%- liquid
+            assign freebieProductId = all_products[block.settings.free_product].id
+            assign add_free_product_variant = true
+            if inCartProductIds contains freebieProductId
+                assign add_free_product_variant = false
+                assign reason = 'skip: already in cart'
+            endif
+        -%}
+
+
+        {% comment %} Reset cart total to include products only in inclusion collection {% endcomment %}
+        {% assign inclusion_collection = block.settings.inclusion_collection | downcase %}
+        {% if inclusion_collection != blank %}
+            {% assign cart_subtotal_minus_exclusion_products = 0 %}
+            {% for line_item in line_items %}
+                {% for collection in line_item.product.collections %}
+                    {% assign current_collection = collection.handle | downcase %}
+                    {% if inclusion_collection == current_collection %}
+                        <script>consoleLog("Inclusion 2: '{{inclusion_collection}}' Current: '{{current_collection}}'");</script>
+                        {% assign line_item_price = line_item.final_line_price %}
+                        {% assign cart_subtotal_minus_exclusion_products = cart_subtotal_minus_exclusion_products | plus: line_item_price %}
+                        {% break %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            <script>
+            consoleLog('cf cart inclusive subtotal', '{{cart_subtotal_minus_exclusion_products}}');
+            </script>
+        {% endif %}
+
+
+        <script>
+        consoleLog('cf cart subtotal {% if inclusion_collection != blank %}using inclusion rules{%endif%}', '{{cart_subtotal_minus_exclusion_products}}')
+        </script>
+
+        {% comment %} Dont include price of products in exclusion_collection {% endcomment %}
+        {% assign exclusion_collection = block.settings.exclusion_collection | downcase %}
+        {% for line_item in line_items %}
+            {% if exclusion_collection != blank %}
+                {% for collection in line_item.product.collections %}
+                    {% assign current_collection = collection.handle | downcase %}
+
+                    {% if exclusion_collection == current_collection %}
+                        {% if block.settings.always_remove_if_exclusion_present %}
+                            {% assign add_free_product_variant = false %}
+                            {% assign reason = 'Always remove when exclusion products present is selected.' %}
+                        {% endif %}
+                        {% assign line_item_price = line_item.final_line_price %}
+                        {% assign cart_subtotal_minus_exclusion_products = cart_subtotal_minus_exclusion_products | minus: line_item_price %}
+                        {% comment %} <h1>Is in exclusion</h1>
+                        <h1>Line item price: {{line_item_price}}</h1> {% endcomment %}
+                        {% break %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            {% comment %}
+                Dont add product if already in cart
+            {% endcomment %}
+            {% if line_item.variant_id == free_product_variant_to_add %}
+                {% assign add_free_product_variant = false %}
+                {% assign reason = 'free product already in cart' %}
+            {% endif %}
+
+            {% comment %}
+                Dont add product if 3rd party app will add
+            {% endcomment %}
+            {% if third_party_will_add %}
+                {% assign add_free_product_variant = false %}
+                {% assign reason = '3rd party app responsible for adding freebie' %}
+            {% endif %}
+        {% endfor %}
+
+        <script>
+            consoleLog('Cart total : ', '{{ cart_total_price }}');
+            consoleLog('Cart minus exclusions: ', '{{ cart_subtotal_minus_exclusion_products }}');
+            consoleLog('threshold : ', '{{ block.settings.free_product_threshold }}');
+        </script>
+
+        <!-- Second check after inclusion and exclusion logic has run  -->
+        {% if cart_subtotal_minus_exclusion_products >= block.settings.free_product_threshold %}
+            {% if add_free_product_variant != false %}
+                {%- liquid
+                  unless reason
+                    assign will_add = free_product_variant_to_add | split: ','
+                    assign ADD_VARIANT_IDS = ADD_VARIANT_IDS | concat: will_add
+                  else
+                    echo '<script>consoleLog("Reason: {reason}");</script>' | replace: '{reason}', reason
+                  endunless
+                -%}
+            {% else %}
+                <script>
+                    consoleLog('Product {{ free_product_variant_to_add }} not added: {{ reason }}');
+                </script>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+
+    <!-- Handle when below freebie threshold (whether or not exclusion logic ran)  -->
+    {% if cart_subtotal_minus_exclusion_products < block.settings.free_product_threshold %}
+        {% assign reason = "cart total minus exclusion products prices not meet threshold." %}
+        <script>
+            consoleLog('Product {{ free_product_variant_to_add }} not added: {{ reason }}');
+        </script>
+
+        {% if block.settings.free_product_autoremove != blank %}
+            {%- liquid
+                echo '<script>consoleLog("looking for variants to remove", Array.from(free_product_variants_to_remove))</script>' | replace: 'free_product_variants_to_remove', free_product_variants_to_remove
+
+                for line_item in line_items
+                    for to_remove_variant_id in free_product_variants_to_remove
+                        if line_item.variant_id == to_remove_variant_id
+                            echo '<script>consoleLog("Found below threshold freebie to remove", to_remove_variant_id)</script>' | replace: 'to_remove_variant_id', to_remove_variant_id
+                            comment
+                                'Note: concat only works when both items are arrays...'
+                                "So we first turn will_remove into an array with | split: ','"
+                            endcomment
+                            assign will_remove = to_remove_variant_id | split: ','
+                            assign REMOVE_VARIANT_IDS = REMOVE_VARIANT_IDS | concat: will_remove
+                        endif
+                    endfor
+                endfor
+            -%}
+        {% endif %}
+    {% endif %}
+
+    <!-- Handle when ALWAYS_REMOVE_IF_EXCLUSION_COLLECTION_PRESENT -->
+    {%- liquid
+        if block.settings.always_remove_if_exclusion_present and block.settings.exclusion_collection != blank
+            assign codeComment = "Check if cart has an exclusion item"
+            assign exclusion_collection = block.settings.exclusion_collection | downcase
+            assign item_from_exclusion_collection_title = blank
+            echo '<script>consoleLog("always remove exclusion is on... looking for excl. collection", "{exclusion_collection}")</script>' | replace: '{exclusion_collection}', exclusion_collection
+            for line_item in line_items
+                for collection in line_item.product.collections
+                    assign current_collection = collection.handle | downcase
+                    if exclusion_collection == current_collection
+                        echo '<script>consoleLog("line item from excl. collection found")</script>'
+                        assign item_from_exclusion_collection_title = line_item.title
+                        break
+                    endif
+                endfor
+            endfor
+            assign codeComment = "If exclusion item in cart..."
+            if item_from_exclusion_collection_title != blank
+                for line_item in line_items
+                    for to_remove_variant_id in free_product_variants_to_remove
+                        if line_item.variant_id == to_remove_variant_id
+                            echo '<script>alert("Removing free promotional item freebie_title because cannot be purchased with exclusion_item")</script>' | replace: 'freebie_title', line_item.title | replace: 'exclusion_item', item_from_exclusion_collection_title
+                            echo '<script>consoleLog("Remove free variant because exclusion item in cart", to_remove_variant_id)</script>' | replace: 'to_remove_variant_id', to_remove_variant_id
+                            comment
+                                'Note: concat only works when both items are arrays...'
+                                "So we first turn will_remove into an array with | split: ','"
+                            endcomment
+                            assign will_remove = to_remove_variant_id | split: ','
+                            assign REMOVE_VARIANT_IDS = REMOVE_VARIANT_IDS | concat: will_remove
+                        endif
+                    endfor
+                endfor
+            endif
+        endif
+    -%}
+
+{% endfor %}
+
+<script>
+
+    // app script
+    (async () => {
+        var add_variant_ids = String("{{ ADD_VARIANT_IDS | join: ',' }}").split(',').filter(id => Number(id)); // output e.g. [5495746753,6404592577,6872949825,10372164673];
+        add_variant_ids = cf_CartFreebiesRemover.stripFreebiesUserRemoved(add_variant_ids);
+        var remove_variant_ids = String("{{ REMOVE_VARIANT_IDS | join: ',' }}").split(',').filter(id => Number(id)); // output e.g. [5495746753,6404592577,6872949825,10372164673];
+        /* testing that will not break with a bad product id */
+        //add_variant_ids.unshift('12312312312')
+        /* end testing that will not break with a bad product id */
+
+        consoleLog('freebies to remove:', remove_variant_ids, remove_variant_ids.length);
+        consoleLog('freebies to add:', add_variant_ids, add_variant_ids.length);
+        await MultiBuy.addAndRemove(add_variant_ids, remove_variant_ids);
+
+        // let the user remove freebies if they want by watching the remove button
+        cf_CartFreebiesRemover.initateWatchers();
+    })();
+</script>
+
+{% if request.path contains 'checkout' %}
+<script type="application/javascript">
+  {% render 'cf_checkout-freebie-enforcer.js' %}
+</script>
+{% endif %}
+
+
+{% schema %}
+{
+    "name": "Cart Freebies",
+    "class": "cart-freebies",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Cart Freebies"
+        }, {
+            "type": "paragraph",
+            "content": "Automatically adds products to cart."
+        }, {
+            "type": "paragraph",
+            "content": "Products will NOT be added if the variant is already in the cart."
+        }, {
+            "type": "paragraph",
+            "content": "Consider applying discount to make free."
+        }
+    ],
+    "blocks": [
+        {
+            "type": "cart_freebie",
+            "name": "Freebie",
+            "settings": [
+                {
+                    "type": "number",
+                    "id": "free_product_threshold",
+                    "label": "Subtotal threshold (in cents): (ex. $50 = 5000)"
+                }, {
+                    "type": "checkbox",
+                    "id": "third_party_will_add",
+                    "default": false,
+                    "label": "Third party app will add freebie",
+                    "info": "AKA: Do not automatically add the freebie"
+                }, {
+                    "type": "checkbox",
+                    "id": "show_popup_selector",
+                    "default": false,
+                    "label": "Show variant selector popup"
+                }, {
+                    "type": "checkbox",
+                    "id": "free_product_autoremove",
+                    "default": false,
+                    "label": "Auto remove this product when cart total is below threshold?",
+                    "info": "The user will not be able to manually add this item either"
+                }, {
+                    "type": "checkbox",
+                    "id": "always_remove_if_exclusion_present",
+                    "default": false,
+                    "label": "Always remove this product when exclusion product present?",
+                    "info": "The user will not be able to manually add this item either"
+                }, {
+                    "type": "text",
+                    "id": "only_with_referral_code",
+                    "label": "Only add when referral code is",
+                    "info": "Checks for the url param `cf_source=<referral code>`"
+                }, {
+                    "id": "free_product",
+                    "type": "product",
+                    "label": "Cart Freebie"
+                }, {
+                    "type": "collection",
+                    "id": "exclusion_collection",
+                    "label": "Exclusion Collection",
+                    "info": "Products from this collection will be excluded from the subtotal threshold. (optional) "
+                }, {
+                    "type": "collection",
+                    "id": "inclusion_collection",
+                    "label": "Inclusion Collection",
+                    "info": "Products from this collection only will be included in the subtotal threshold. (optional) "
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "category": "custom",
+            "name": "Cart Freebie"
+        }
+    ]
+}
+{% endschema %}

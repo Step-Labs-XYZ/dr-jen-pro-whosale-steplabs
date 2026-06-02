@@ -1,0 +1,401 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "wrapper": "div#product_packs_new.product_packs_news",
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "selector_mode": "block",
+            "color_mode": "dropdown",
+            "size_chart_page": ""
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "atc_button_background": "rgba(0,0,0,0)",
+            "atc_button_text_color": "rgba(0,0,0,0)",
+            "buy_now_button_background": "rgba(0,0,0,0)",
+            "buy_now_button_text_color": "rgba(0,0,0,0)"
+          }
+        },
+        "bdca51c9-fba6-4839-9aa1-4202fd3afff8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Click <a href=\"/pages/science\" title=\"Science Behind Dr. Jen's Toothpaste\">here</a> to learn more about Nano-Hydroxyapatite.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "bdca51c9-fba6-4839-9aa1-4202fd3afff8"
+      ],
+      "settings": {
+        "show_vendor": true,
+        "show_sku": false,
+        "show_taxes_included": false,
+        "show_product_rating": true,
+        "show_sticky_add_to_cart": true,
+        "show_share_buttons": true,
+        "help_page": "",
+        "enable_video_autoplay": true,
+        "enable_video_looping": false,
+        "enable_image_zoom": true,
+        "show_thumbnails_on_mobile": false,
+        "desktop_thumbnails_position": "left",
+        "transition_effect": "slide"
+      }
+    },
+    "64478480-99d6-4946-adde-ce1b9f45e43b": {
+      "type": "value_props_pdp",
+      "blocks": {
+        "171f6978-ad60-4374-b420-b58b295bbd66": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/icons-desktop.png",
+            "text_vp_id": "Clinically Proven Protection",
+            "color_vp_id": "#eefdff"
+          }
+        },
+        "e3606ecc-87c4-48ec-abc6-f07381f9668e": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/icons-desktop_1.png",
+            "text_vp_id": "Dentist Developed & Approved",
+            "color_vp_id": "#eefdff"
+          }
+        },
+        "95441e4d-2873-44ab-8dcd-a0fb7ff73aef": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/icons-desktop_2.png",
+            "text_vp_id": "Over 360.000 Stronger Smiles",
+            "color_vp_id": "#eefdff"
+          }
+        },
+        "f1782096-6236-4e76-ba8d-f2316b0ac04e": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/icons-desktop_3.png",
+            "text_vp_id": "100% Safe & Natural Ingredients",
+            "color_vp_id": "#eefdff"
+          }
+        },
+        "6b8f6b33-f9c5-44e2-a9cc-89b9c7c5645e": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/5.png",
+            "text_vp_id": "Made In USA",
+            "color_vp_id": "#eefdff"
+          }
+        }
+      },
+      "block_order": [
+        "171f6978-ad60-4374-b420-b58b295bbd66",
+        "e3606ecc-87c4-48ec-abc6-f07381f9668e",
+        "95441e4d-2873-44ab-8dcd-a0fb7ff73aef",
+        "f1782096-6236-4e76-ba8d-f2316b0ac04e",
+        "6b8f6b33-f9c5-44e2-a9cc-89b9c7c5645e"
+      ],
+      "settings": {
+        "title": ""
+      }
+    },
+    "dea5f31e-1182-4659-ba8b-6e8f405015e9": {
+      "type": "featured-images",
+      "disabled": true,
+      "blocks": {
+        "9a2639ae-bacc-4e27-8be5-ec239a489931": {
+          "type": "Image",
+          "settings": {}
+        },
+        "5b4199a2-93e0-45ba-b55d-20adb1061ef6": {
+          "type": "Image",
+          "settings": {}
+        },
+        "e0aa1146-7321-46ed-bbf9-4f1580c43daa": {
+          "type": "Image",
+          "settings": {}
+        },
+        "1f31e73e-93e4-4483-ab02-e82ead72446f": {
+          "type": "Image",
+          "settings": {}
+        },
+        "cce1f6a7-131f-42b6-ab7c-27b3521f2584": {
+          "type": "Image",
+          "settings": {}
+        },
+        "441e12ab-9d1e-4d6c-abe0-abfaa7c17907": {
+          "type": "Image",
+          "settings": {}
+        },
+        "2403f3df-69a1-4512-8261-4c46892e80c6": {
+          "type": "Image",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "9a2639ae-bacc-4e27-8be5-ec239a489931",
+        "5b4199a2-93e0-45ba-b55d-20adb1061ef6",
+        "e0aa1146-7321-46ed-bbf9-4f1580c43daa",
+        "1f31e73e-93e4-4483-ab02-e82ead72446f",
+        "cce1f6a7-131f-42b6-ab7c-27b3521f2584",
+        "441e12ab-9d1e-4d6c-abe0-abfaa7c17907",
+        "2403f3df-69a1-4512-8261-4c46892e80c6"
+      ],
+      "settings": {
+        "heading": ""
+      }
+    },
+    "7635f2b7-8d11-4d82-874f-83039547a2cd": {
+      "type": "features_ingredientes_wholesale",
+      "settings": {
+        "title_collection_wholesale": "Wholesale",
+        "text_collection_wholesale": "Wholesale",
+        "button_link": ""
+      }
+    },
+    "b4db938f-d071-43bb-87c1-af2d9d783ac7": {
+      "type": "dr_reviews_wholesale",
+      "blocks": {
+        "31daaef4-c403-4e12-8f4e-071e0b5b25d0": {
+          "type": "Review",
+          "settings": {
+            "image_dr_reviews": "shopify://shop_images/Screen_Shot_2023-02-17_at_4.11_3.webp",
+            "name_dr": "Dr. Chris Stansburry Orthodontist",
+            "review_dr": "\"When I normally went for my 6-month checkup, my dentist usually found a few areas of inflammation regardless of how much I brushed and flossed.  It was so frustrating.  Since I started using Dr Jen's toothpaste, there has been not trace of inflammation! Dr Jen's toothpaste is only made with the high quality natural ingredients and formulated by dental healthcare professionals. I highly recommend Dr Jen's toothpaste.\"",
+            "star_color": "#8bd1cf",
+            "star_rating": 5
+          }
+        },
+        "56a1eff0-8a1c-45d5-a9ae-47571b43157a": {
+          "type": "Review",
+          "settings": {
+            "image_dr_reviews": "shopify://shop_images/Screen_Shot_2023-02-17_at_4.11_1.jpg",
+            "name_dr": "Dr. Tonya Volk",
+            "review_dr": "\"Dr Jen's toothpaste and floss are the only way to go. They are made with only healthy ingredients (check the ingredients on other labels to compare) by a world-known orthodontist. Thank you for making products we can use and feel good about , Dr Jen!\"",
+            "star_color": "#8bd1cf",
+            "star_rating": 5
+          }
+        },
+        "9e68473b-1809-4342-9e75-ed8c1ecd4f74": {
+          "type": "Review",
+          "settings": {
+            "image_dr_reviews": "shopify://shop_images/Dr_Peters_320x_conv_3df44d73-fb26-4f5b-9816-1bfb0dc5fc4f.webp",
+            "name_dr": "Dr Nicole Peters",
+            "review_dr": "\"Dr Jen's Natural toothpaste uses clinically proven remineralizing ingredients to help stop tooth decay. Tastes great and freshens breath. I highly recommend it.\"",
+            "star_color": "#8bd1cf",
+            "star_rating": 5
+          }
+        },
+        "dc5606e4-c756-4d16-a1cb-25dff99dfb21": {
+          "type": "Review",
+          "settings": {
+            "image_dr_reviews": "shopify://shop_images/Screen_Shot_2023-02-17_at_4.11_2.jpg",
+            "name_dr": "Jay Brimhall, DDS",
+            "review_dr": "\"Seriously, my kids LOVE this stuff. I used to fight them to brush their teeth but now they run to do it. Amazing piece of mind that they are brushing with such a high quality product as well that I know is doing good for them.\"",
+            "star_color": "#8bd1cf",
+            "star_rating": 5
+          }
+        },
+        "3206ef0a-1a79-4a20-b273-ab511e59f371": {
+          "type": "Review",
+          "settings": {
+            "image_dr_reviews": "shopify://shop_images/IMG-4256.jpg",
+            "name_dr": "Dr. Samatha Nelson, DDS",
+            "review_dr": "\"Dr Jen's Super Paste is made by a real dentist using two proven ingredients to remineralize tooth enamel.  It is natural, tastes great, and is gentle on teeth and gums.\"",
+            "star_color": "#8bd1cf",
+            "star_rating": 5
+          }
+        }
+      },
+      "block_order": [
+        "31daaef4-c403-4e12-8f4e-071e0b5b25d0",
+        "56a1eff0-8a1c-45d5-a9ae-47571b43157a",
+        "9e68473b-1809-4342-9e75-ed8c1ecd4f74",
+        "dc5606e4-c756-4d16-a1cb-25dff99dfb21",
+        "3206ef0a-1a79-4a20-b273-ab511e59f371"
+      ],
+      "settings": {
+        "title_reviews_wholesale": "Real dental professionals.<br><span> Real reviews.</span>",
+        "background_id": ""
+      }
+    },
+    "1e48490e-7cc1-41f6-acc9-5556eaf53965": {
+      "type": "totthpaste_section_wholesale",
+      "blocks": {
+        "bcf56544-5de1-4cf1-a58d-dc7343678f84": {
+          "type": "List-Text",
+          "settings": {
+            "title": "Less plaque build-up",
+            "info": "Nano-Hydroxyapatite bonds to plaque during brushing for\neasier plaque removal."
+          }
+        },
+        "a0c7b878-c1e9-4aee-bcfd-170d60e931a8": {
+          "type": "List-Text",
+          "settings": {
+            "title": "Reduction of decalcification area",
+            "info": "Nano-Hydroxyapatite physically bonds to enamel reducing white spots."
+          }
+        },
+        "8a9a325f-d26a-49ca-af63-96ad96913909": {
+          "type": "List-Text",
+          "settings": {
+            "title": "Glossier and whiter teeth",
+            "info": "Nano-Hydroxyapatite fills microlesions and pores on the surface\n enamel, creating a glossier, white appearance in the enamel."
+          }
+        },
+        "7d632fb0-5ac4-45bd-b117-f2fb32c800fd": {
+          "type": "List-Text",
+          "settings": {
+            "title": "Sensitivity protection",
+            "info": "Unlike most toothpastes using potassium nitrate as a pain\n blocker, nano-Hydroxyapatite coats and protects weak enamel\n and exposed dentin, reducing sensitivity."
+          }
+        },
+        "86c55774-2002-4951-992b-f291d83edb85": {
+          "type": "List-Text",
+          "settings": {
+            "title": "Safe if swallowed",
+            "info": "Nano-Hydroxyapatite is both non-toxic and biocompatible and\n can be used by patients of all ages."
+          }
+        }
+      },
+      "block_order": [
+        "bcf56544-5de1-4cf1-a58d-dc7343678f84",
+        "a0c7b878-c1e9-4aee-bcfd-170d60e931a8",
+        "8a9a325f-d26a-49ca-af63-96ad96913909",
+        "7d632fb0-5ac4-45bd-b117-f2fb32c800fd",
+        "86c55774-2002-4951-992b-f291d83edb85"
+      ],
+      "settings": {
+        "title_remineralizing_wholesale": "Remineralizing Toothpaste",
+        "paragraph_1": "<p>The natural toothpaste alternative for remineralizing enamel using 10% nano Hydroxyapatite. Unlike prescription toothpastes using excessively high levels of fluoride and toxic petroleum-based ingredients, <strong>Dr Jen’s Natural toothpaste</strong> contains non-toxic and clinically proven nano-Hydroxyapatite to remineralize enamel.<br/><br/>For patients with weak enamel and decalcification issues, <strong>Dr Jen’s Super Paste </strong>contains double the remineralizing ingredients using both 10% nano Hydroxyapatite and fluoride</p>",
+        "tothpaste_image": "shopify://shop_images/Frame_374.png",
+        "tothpaste_image_2": "shopify://shop_images/Frame_2159.png",
+        "paragraph_2": "<p>In a <strong>10% concentration</strong>, nano-Hydroxyapatite has been clinically proven to provide the same level of cavity protection as fluoride. It also provides the following benefits:</p>"
+      }
+    },
+    "d4aa8360-8288-43c0-9b00-669a9c0f3640": {
+      "type": "homepage1x4",
+      "disabled": true,
+      "blocks": {
+        "3a95cbba-42e8-4a4f-9637-57c10c6c7742": {
+          "type": "Icon-Block",
+          "settings": {
+            "title": "Clinically-Proven",
+            "info": ""
+          }
+        },
+        "9c903012-7c20-47bb-ab63-614bc99046d5": {
+          "type": "Icon-Block",
+          "settings": {
+            "title": "Dentist Developed & Approved",
+            "info": ""
+          }
+        },
+        "a0f8f1f9-99b9-48ba-a4c5-6e817cf66def": {
+          "type": "Icon-Block",
+          "settings": {
+            "title": "Made With 100% Safe & Natural Ingredients",
+            "info": ""
+          }
+        },
+        "23e3d0a0-34ba-4b93-90af-81404211eb4f": {
+          "type": "Icon-Block",
+          "settings": {
+            "title": "Over 360,000 Stronger Smiles",
+            "info": ""
+          }
+        }
+      },
+      "block_order": [
+        "3a95cbba-42e8-4a4f-9637-57c10c6c7742",
+        "9c903012-7c20-47bb-ab63-614bc99046d5",
+        "a0f8f1f9-99b9-48ba-a4c5-6e817cf66def",
+        "23e3d0a0-34ba-4b93-90af-81404211eb4f"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "override_css": ""
+      }
+    },
+    "8e60d03d-313e-4536-935a-0e405a801df4": {
+      "type": "product_recomendation_wholesale",
+      "settings": {
+        "featured_products": "wholesale",
+        "featured_heading": "You May also Love"
+      }
+    },
+    "product-content": {
+      "type": "product-content",
+      "disabled": true,
+      "settings": {}
+    },
+    "c3d21ab1-48a5-45f4-bc67-87ec9a5f8941": {
+      "type": "information_pdp_wholesale",
+      "blocks": {
+        "4ae006bf-f047-4acd-bd53-8946e14a5ec2": {
+          "type": "List-Text",
+          "settings": {
+            "image_icon": "shopify://shop_images/icon-environment-friendly.png",
+            "info": "Environmentally Friendly"
+          }
+        },
+        "856d1241-321e-45eb-b230-83b7e434b6d2": {
+          "type": "List-Text",
+          "settings": {
+            "image_icon": "shopify://shop_images/icon-no-animal-testing.png",
+            "info": "No animal testing"
+          }
+        }
+      },
+      "block_order": [
+        "4ae006bf-f047-4acd-bd53-8946e14a5ec2",
+        "856d1241-321e-45eb-b230-83b7e434b6d2"
+      ],
+      "settings": {
+        "paragraph_1": "<p>Dr.Jen´s products are good for you body & good for the earth. Our toothpastes are earthfriendly, made from all biodegradable materials, vegan friendly, an never tested on animals.</p>"
+      }
+    },
+    "1659632928e379313e": {
+      "type": "apps",
+      "settings": {
+        "include_horizontal_margins": true,
+        "include_vertical_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "64478480-99d6-4946-adde-ce1b9f45e43b",
+    "dea5f31e-1182-4659-ba8b-6e8f405015e9",
+    "7635f2b7-8d11-4d82-874f-83039547a2cd",
+    "b4db938f-d071-43bb-87c1-af2d9d783ac7",
+    "1e48490e-7cc1-41f6-acc9-5556eaf53965",
+    "d4aa8360-8288-43c0-9b00-669a9c0f3640",
+    "8e60d03d-313e-4536-935a-0e405a801df4",
+    "product-content",
+    "c3d21ab1-48a5-45f4-bc67-87ec9a5f8941",
+    "1659632928e379313e"
+  ]
+}

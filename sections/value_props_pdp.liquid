@@ -1,0 +1,126 @@
+<div class="value_props_pdp_container">
+  {% for block in section.blocks %}
+      <div style="background-color: {{ block.settings.color_vp_id }};" class="value_prop_item">
+        <div class="content_vp">
+          <img src="{{ block.settings.image | image_url: width: 66}}" alt="{{ block.settings.image.alt }}">
+          <p>{{ block.settings.text_vp_id }}</p>
+        </div>
+      </div>
+  {% endfor %}
+</div>
+{% unless product.tags contains 'content-down' %}
+      <div class="contetn_form_wholesale">
+        {{ product.content }}
+      </div>
+    {% endunless %}
+<style>
+  .value_props_pdp_container{
+    display: flex;
+    gap: 45px;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 30px;
+  }
+
+  .value_prop_item{
+    border-radius: 74px;
+    padding: 20px 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .value_prop_item p{
+    max-width: 118px;
+    min-width: 118px;
+    margin: auto;
+    width: 100%;
+    font-weight: 700;
+    font-size: 12px;
+  }
+ @media screen and (max-width: 1080px) {
+.value_props_pdp_container{
+      gap: 20px;
+}
+
+}
+ @media screen and (max-width: 990px) {
+  .value_props_pdp_container{
+    flex-wrap: wrap;
+  }
+}
+  @media screen and (max-width: 520px) {
+    .template-mouth-rinse-pdp .value_props_pdp_container{
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    .template-wholesale_product .value_props_pdp_container{
+      flex-wrap: wrap;
+      gap: 5px;
+      padding: 0 2px;
+    }
+    .template-floss-wholesale .value_props_pdp_container{
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 0 20px;
+    }
+    .value_prop_item{
+      max-width: 120px;
+      width: 100%;
+    }
+    .content_vp img{
+      max-width: 42px;
+      margin: auto;
+    }
+    .value_prop_item p{
+      font-size: 10px;
+      min-height: 36px;
+    }
+.value_prop_item {
+    padding: 10px 5px;
+}
+  }
+</style>
+{% schema %}
+{
+    "name": "Valueprops PDP",
+    "tag": "section",
+    "class": "valueprops_product_page",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      }
+    ],
+    "max_blocks": 6,
+    "blocks": [
+       {
+         "name": "Value Props",
+         "type": "Icons",
+         "settings": [
+           {
+             "type": "image_picker",
+             "id": "image",
+             "label": "Image"
+           },
+           {
+            "type": "text",
+            "id": "text_vp_id",
+            "label": "Value Prop text"
+           },
+           {
+            "type": "color",
+            "id": "color_vp_id",
+            "label": "Background color"
+           }
+         ]
+       }
+    ],
+    "presets": [
+      {
+        "name": "Value props PDP"
+      }
+    ]
+  }
+{% endschema %}

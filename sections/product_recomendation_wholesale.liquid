@@ -1,0 +1,166 @@
+
+<div class="product_recomendation_wholesale" style="text-align:center; padding-bottom: 40px;">
+    <h1 class="featured-heading-title">{{section.settings.featured_heading}}</h1>
+
+    <div class="featured-products" data-flickity='{ "cellAlign": "left", "contain": true, "wrapAround": true}'>
+            {% assign product_handle = product.title %}
+            {% for product in collections[section.settings.featured_products].products  %}
+                
+                {% unless product.title == product_handle  %}
+                        <div class="featured-product-cell">
+                            <a href="{{ product.url }}">
+                            <img src="{{product.featured_image | img_url: 'master'}}" alt="{{product.title}}" width="400px" height="400px"/>
+                            <div class="info_card_recomendation">
+                                <p>{{product.title}}</p>
+                                <!-- <p>{{product.price | money}}</p> -->
+                                {% if product.metafields.custom.ph_wholesale != blank %}
+                                <p class="ph_wholesale">{{ product.metafields.custom.ph_wholesale }}</p>
+                                 {% endif %}
+                                 <div class="retail_text_wholesale_contain">
+                                     {% if product.metafields.custom.price_per_use_2 != blank %}
+                                        {% assign text_retail = product.metafields.custom.price_per_use_2 | split: '|' %}
+        
+                                         <p class="retail_text_recomendation">{{ text_retail[0] }} <span>{{ text_retail[1] }}</span></p> 
+                                    {% endif %}
+                                 </div>
+                            </div>
+                         
+                            </a>
+                        </div>
+                    {% endunless %}
+                
+            {% endfor %}
+        </div>
+        <a class="featured-button" href="{{collections[section.settings.featured_products].url}}" style="background-color:#8CD3CF;">EXPLORE PRODUCTS</a>
+    </div>
+    
+   
+    
+</div>
+
+<style>
+.product_recomendation_wholesale{
+background: #F9F9F9;
+padding: 50px 60px 60px;
+}
+.product_recomendation_wholesale .swiper-wrapper{
+    padding: 0 60px;
+}
+.product_recomendation_wholesale  .flickity-button-icon{
+    fill: #5AC8D4 !important;
+    width: 80% !important;
+    height: 80% !important;
+}
+.product_recomendation_wholesale .featured-heading-title{
+margin-bottom: -10px;
+}
+.retail_text_recomendation{
+    font-weight: 400 !important;
+}
+.product_recomendation_wholesale .featured-product-cell p{
+margin: 0 auto 10px;
+font-weight: 700;
+color: #2D3852;
+font-size: 14px;
+max-width: 215px !important;
+margin: auto;
+}
+.product_recomendation_wholesale .featured-product-cell .ph_wholesale, .product_recomendation_wholesale .featured-product-cell .retail_text_wholesale_contain{
+    font-weight: 400 !important;
+}
+.product_recomendation_wholesale .featured-product-cell {
+background-color: #fff;
+border-radius: 16px;
+padding: 25px 0;
+min-height: 390px;
+justify-content: center;
+}
+.info_card_recomendation{
+min-height: 128px;
+}
+.product_recomendation_wholesale .featured-button{
+background-color: #8CD3CF !important;
+color: #fff !important;
+display: inline-block;
+text-decoration: none !important;
+margin-bottom: 0;
+margin-top: -10px;
+}
+.product_recomendation_wholesale .featured-products{
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+margin: auto;
+padding-left: 40px;
+}
+
+@media screen and (max-width: 1000px) {
+    .product_recomendation_wholesale{
+        padding: 25px 45px;
+    }
+    .product_recomendation_wholesale .featured-product-cell{
+        width: 100% !important;
+    }
+    .product_recomendation_wholesale .featured-products{
+        margin-left: 0 !important;
+    }
+    .product_recomendation_wholesale .featured-product-cell p{
+        font-size: 14px !important;
+    }
+    .product_recomendation_wholesale .featured-heading-title{
+        font-size: 26px;
+        margin-bottom: 15px;
+    }
+    .product_recomendation_wholesale .featured-products{
+        padding-left: 0;
+    }
+    .product_recomendation_wholesale .flickity-prev-next-button.next{
+        right: -36px  !important;
+    }
+    .product_recomendation_wholesale .flickity-prev-next-button.previous{
+        left: -45px !important;
+    }
+}
+</style>
+{% schema %}
+{
+   "name": "Featured Products",
+   "settings" : [
+       {
+            "type": "collection",
+            "id": "featured_products",
+            "label": "Products to Display"
+       },
+       {
+        "type": "text",
+        "id": "featured_heading",
+        "label": "Heading"
+       }
+    ],
+   "presets": [
+    {
+        "name": "Product Recomendation WS"
+    }
+   ]
+}
+{% endschema %}
+
+{% assign productsInCarousel = collections[section.settings.featured_products].products | size %}
+
+{% if productsInCarousel == 2 %}
+
+<style>
+    #shopify-section-{{section.id}} > div > .featured-products .featured-product-cell{
+        width: calc(30% - 60px);
+    }
+</style>
+
+{%- elsif productsInCarousel > 4  -%}
+    
+<style>
+    #shopify-section-{{section.id}} > div > .featured-products .featured-product-cell{
+        width: calc(25% - 60px);
+    }
+</style>
+
+{% endif %}

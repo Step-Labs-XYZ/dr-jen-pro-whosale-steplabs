@@ -1,0 +1,131 @@
+{{ 'section-new-banner-1.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .section-{{ section.id }} {
+      padding: 45px 110px 0;
+      background-color: {{ section.settings.bg_color }};
+  }
+  @media (max-width: 912px) {
+    .section-{{ section.id }} {
+      padding-top: 58px; 
+    }
+  }
+  @media (max-width: 768px) {
+    .section-{{ section.id }} {
+        padding: 58px 16px 0;
+    }
+  }
+  @media (max-width: 740px) {
+    .section-{{ section.id }} {
+      padding-top: 22px;
+    }
+  }
+</style>
+
+<div class="section-{{ section.id }}">
+  <div class="new-banner-1__container">
+    <div class="new-banner-1__content-wrapper">
+      {% if section.settings.top_title != blank %}
+        <p class="new-banner-1__top-title">{{ section.settings.top_title }}</p>
+      {% endif %}
+      {% if section.settings.bottom_title != blank %}
+        <p class="new-banner-1__bottom-title">{{ section.settings.bottom_title }}</p>
+      {% endif %}
+      {% if section.settings.small_title != blank %}
+        <p class="new-banner-1__small-title">{{ section.settings.small_title }}</p>
+      {% endif %}
+      {% if section.settings.content != blank %}
+        <p class="new-banner-1__content">{{ section.settings.content }}</p>
+      {% endif %}
+    <div class="buttons-two">
+      {% if section.settings.button_text != blank %}
+        <a
+          class="new-banner-1__button"
+          href="{% if section.settings.button_link != blank %}{{ section.settings.button_link }}{% else %}#new-register-section{% endif %}"
+        >
+          {{- section.settings.button_text -}}
+        </a>
+      {% endif %}
+      {% if section.settings.button_text2 != blank %}
+        <a
+          class="new-banner-1__button secbuttonsite"
+          href="{% if section.settings.button_link2 != blank %}{{ section.settings.button_link2 }}{% else %}#new-register-section{% endif %}"
+        >
+          {{- section.settings.button_text2 -}}
+        </a>
+      {% endif %}
+      </div>
+    </div>
+    {% if section.settings.image != blank %}
+      <div class="new-banner-1__image-wrapper">
+        <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.image.alt }}">
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "New banner 1",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#8AE4E1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "top_title",
+      "label": "Top title"
+    },
+    {
+      "type": "text",
+      "id": "bottom_title",
+      "label": "Bottom title"
+    },
+    {
+      "type": "text",
+      "id": "small_title",
+      "label": "Small title"
+    },
+    {
+      "type": "text",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "CLAIM YOUR FREE SAMPLES"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "button_text2",
+      "label": "Button text",
+      "default": "CLAIM YOUR FREE SAMPLES"
+    },
+    {
+      "type": "url",
+      "id": "button_link2",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "New banner 1"
+    }
+  ]
+}
+{% endschema %}

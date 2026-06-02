@@ -1,0 +1,385 @@
+<!-- Shopify Section Liquid Code -->
+
+
+<style>
+#rev-compare.custom-section {
+  position: relative;
+  background: linear-gradient(to right, {{ section.settings.background_color_left }} 50%, {{ section.settings.background_color_right }} 50%);
+}
+#rev-compare.custom-section .container{
+  display: flex;
+  justify-content: space-between;
+  gap: 100px;
+}
+#rev-compare .custom-block {
+  width: 48%;
+  padding: 25px 0px;
+      display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+ #rev-compare .vs-text {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: {{ section.settings.vs_bg_color }};
+  border: 2px solid {{ section.settings.vs_border_color }};
+  padding: 10px 20px;
+  font-size: 36px;
+  font-weight: 400;
+  text-align: center;
+  color: {{ section.settings.vs_text_color }};
+  border-radius: 100%;
+}
+#rev-compare .custom-block .heading-wrapper img {
+  max-width: 100%;
+}
+#rev-compare .heading-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  margin-bottom: 30px;
+}
+#rev-compare .heading-wrapper.overlap{
+  margin-top:-12%;
+}
+#rev-compare .custom-block-heading {
+  font-size: 32px;
+  width:60%;
+  text-transform:uppercase;
+}
+#rev-compare .custom-richtext {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  height: 55px;
+}
+#rev-compare .custom-richtext p{
+      font-size: 18px;
+    font-weight: 400;
+    line-height: 23px;
+}
+#rev-compare .custom-richtext img {
+  margin-right: 10px;
+}
+#rev-compare .custom-richtext-border {
+  margin-bottom: 10px;
+}
+@media (max-width: 1200px) {
+  #rev-compare .custom-block-heading {
+    font-size: 30px;
+    line-height: 42px;
+}
+}
+ @media (max-width: 1080px)  {
+  #rev-compare .custom-block-heading{
+    width:65%;
+  }
+   #rev-compare .custom-richtext p {
+    font-size: 16px;
+    line-height: 21px;
+}
+}
+ @media (max-width: 1024px)  {
+  #rev-compare .custom-block-heading{
+    width:70%;
+  }
+   #rev-compare .heading-wrapper.overlap {
+    margin-top: -15%;
+}
+ }
+ @media (max-width: 990px)  {
+  #rev-compare .custom-block-heading {
+    width: 100%;
+    font-size: 24px;
+    line-height: 32px;
+  }
+   #rev-compare .heading-wrapper {
+    margin-bottom: 15px;
+  }
+
+    #rev-compare .custom-richtext p {
+        font-size: 13px;
+        line-height: 17px;
+    }
+#rev-compare .custom-richtext {
+    height: 40px;
+}
+ }
+@media (max-width: 768px) {
+  #rev-compare .custom-section {
+    flex-direction: column;
+  }
+  #rev-compare .custom-block {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  #rev-compare .heading-wrapper.overlap img{
+        height: 70%;
+  }
+  #rev-compare .custom-block-heading {
+      font-size: 22px;
+      line-height: 26px;
+  }
+}
+@media (max-width: 600px) {
+  #rev-compare .custom-block .heading-wrapper img {
+    max-width: 100%;
+    height: 100px;
+}
+      #rev-compare .custom-block-heading {
+        font-size: 16px;
+        line-height: 21px;
+    }
+  #rev-compare .vs-text {
+    top: 3%;
+    padding: 8px 13px;
+    font-size: 20px;
+}
+  #rev-compare .custom-richtext img {
+    width: 20px;
+    margin-right: 5px;
+}
+  #rev-compare.custom-section .container {
+    gap: 10%;
+}
+  #rev-compare .custom-richtext {
+    align-items: flex-start;
+  }
+}
+@media (max-width: 480px) {
+      #rev-compare.custom-section .container {
+        gap: 3%;
+        padding: 0 5px;
+    }
+      #rev-compare .vs-text {
+        top: 1%;
+        padding: 6px 9px;
+        font-size: 10px;
+    }
+      #rev-compare .custom-richtext p {
+        font-size: 12px;
+        line-height: 17px;
+    }
+      #rev-compare .custom-richtext {
+        height: 60px;
+    }
+}
+@media (max-width: 425px) {
+  #rev-compare .custom-block .heading-wrapper img{
+    height: 70px;
+  }
+}
+@media (max-width: 390px) {
+    #rev-compare .custom-block-heading {
+        font-size: 14px;
+        line-height: 21px;
+    }
+      #rev-compare .custom-richtext img {
+        width: 15px;
+        margin-right: 5px;
+    }
+      #rev-compare .custom-richtext p {
+        font-size: 11px;
+        line-height: 15px;
+    }
+      #rev-compare .custom-block {
+        width: 100%;
+        margin-bottom: 0px;
+    }
+}
+  @media (max-width: 340px) {
+    #rev-compare .custom-block-heading {
+        font-size: 12px;
+        line-height: 16px;
+    }
+        #rev-compare .custom-block .heading-wrapper img {
+        height: 55px;
+    }
+        #rev-compare .custom-richtext p {
+        font-size: 10px;
+        line-height: 13px;
+    }
+}
+</style>
+
+<div class="custom-section" id="rev-compare">
+<div class="container">
+  {% for block in section.blocks %}
+  <div class="custom-block" >
+    <div class="heading-wrapper {% if block.settings.show_overlap %} overlap {% endif %}" >
+      {% if block.settings.block_image %}
+      <img src="{{ block.settings.block_image | img_url: 'medium' }}" alt="Block Image">
+      {% endif %}
+      <h2 class="custom-block-heading" style="  color: {{ block.settings.block_heading_color }};">{{ block.settings.block_heading }}</h2>
+    </div>
+    <div class="custom-richtext-border" style=" border: 1px solid {{ block.settings.block_border_color }};"></div>
+    <div class="custom-richtext" style="color: {{ block.settings.block_text_color }};">
+      {% if block.settings.icon_1 %}
+      <img src="{{ block.settings.icon_1 | img_url: 'small' }}" alt="Icon 1">
+      {% endif %}
+      {{ block.settings.rich_text_1 }}
+    </div>
+
+    <div class="custom-richtext-border" style=" border: 1px solid {{ block.settings.block_border_color }};"></div>
+    <div class="custom-richtext"  style="color: {{ block.settings.block_text_color }};">
+      {% if block.settings.icon_2 %}
+      <img src="{{ block.settings.icon_2 | img_url: 'small' }}" alt="Icon 2">
+      {% endif %}
+      {{ block.settings.rich_text_2 }}
+    </div>
+    <div class="custom-richtext-border" style=" border: 1px solid {{ block.settings.block_border_color }};"></div>
+    <div class="custom-richtext" style="color: {{ block.settings.block_text_color }};">
+      {% if block.settings.icon_3 %}
+      <img src="{{ block.settings.icon_3 | img_url: 'small' }}" alt="Icon 3">
+      {% endif %}
+      {{ block.settings.rich_text_3 }}
+    </div>
+
+  <div class="custom-richtext-border" style=" border: 1px solid {{ block.settings.block_border_color }};"></div>
+    <div class="custom-richtext"  style="color: {{ block.settings.block_text_color }};">
+      {% if block.settings.icon_4 %}
+      <img src="{{ block.settings.icon_4 | img_url: 'small' }}" alt="Icon 4">
+      {% endif %}
+      {{ block.settings.rich_text_4 }}
+    </div>
+  </div>
+  {% endfor %}
+  
+  <div class="vs-text">{{ section.settings.vs_text }}</div>
+</div>
+</div>
+
+{% schema %}
+{
+  "name": "Rev Compare Section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color_left",
+      "label": "Left background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "background_color_right",
+      "label": "Right background color",
+      "default": "#f1f1f1"
+    },
+    {
+      "type": "text",
+      "id": "vs_text",
+      "label": "Middle VS Text",
+      "default": "VS"
+    },
+    {
+      "type": "color",
+      "id": "vs_text_color",
+      "label": "VS Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "vs_bg_color",
+      "label": "VS Background Color",
+      "default": "#f1f1f1"
+    },
+    {
+      "type": "color",
+      "id": "vs_border_color",
+      "label": "VS Border Color",
+      "default": "#000000"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "block_image",
+          "label": "Block Image"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_overlap",
+          "label": "top overlap",
+          "default":false
+        },
+        {
+          "type": "text",
+          "id": "block_heading",
+          "label": "Block Heading",
+          "default": "Heading"
+        },
+        {
+          "type": "color",
+          "id": "block_heading_color",
+          "label": "Block Heading Color",
+          "default": "#000000"
+        },
+        {
+          "type": "richtext",
+          "id": "rich_text_1",
+          "label": "Rich Text 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_1",
+          "label": "Icon for Rich Text 1"
+        },
+        {
+          "type": "richtext",
+          "id": "rich_text_2",
+          "label": "Rich Text 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_2",
+          "label": "Icon for Rich Text 2"
+        },
+        {
+          "type": "richtext",
+          "id": "rich_text_3",
+          "label": "Rich Text 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_3",
+          "label": "Icon for Rich Text 3"
+        },
+        {
+          "type": "richtext",
+          "id": "rich_text_4",
+          "label": "Rich Text 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_4",
+          "label": "Icon for Rich Text 4"
+        },
+        {
+          "type": "color",
+          "id": "block_border_color",
+          "label": "Border Line Color",
+          "default": "#cccccc"
+        },
+        {
+          "type": "color",
+          "id": "block_text_color",
+          "label": "Text Color",
+          "default": "#000000"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rev Compare Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

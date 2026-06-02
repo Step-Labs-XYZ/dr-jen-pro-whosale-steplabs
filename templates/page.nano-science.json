@@ -1,0 +1,669 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "a9602c44-24b8-41c4-a003-cc84102a1a17": {
+      "type": "MM-banner",
+      "custom_css": [
+        ".banner_main {background: linear-gradient( 180deg, #ddf4f6 61.4%, rgba(221, 244, 246, 0) 127.38% ); margin-bottom: 30px;}"
+      ],
+      "settings": {
+        "bg_color": "#e6f5f7",
+        "icon_image": "shopify://shop_images/image_2__6_-removebg-preview.png",
+        "image": "shopify://shop_images/DRJEN-REVISED-IMAGE-01_copy_2_600x_1.png",
+        "sub_headline": "",
+        "headline": "The Next Generation of Preventive Oral Care Products",
+        "text": "<ul><li>Clean Ingredients</li><li>Backed by Science</li><li>10% Nano-Hydroxyapatite</li></ul>",
+        "btn_text": "Shop Now",
+        "btn_link": "shopify://collections/wholesale"
+      }
+    },
+    "a8343d5c-b46c-46b8-b7cf-d65f635199dc": {
+      "type": "MM-image-text",
+      "settings": {
+        "direction": "row",
+        "bg_color": "#ffffff",
+        "subhead_healine_color": "#5dc7d1",
+        "healine_color": "#000000",
+        "padding_top_desktop": 50,
+        "padding_bottom_desktop": 50,
+        "margin_top_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_top_mobile": 15,
+        "padding_bottom_mobile": 40,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "top_text": "Clinically Proven Remineralizing Ingredients",
+        "main_headline": "Introducing Dr.Jen’s 10% nano Hydroxyapatite Toothpaste using clean ingredients and 10% nano-hydroxyapatite.",
+        "dekstop_image": "shopify://shop_images/image_8_2.png",
+        "img_card_link": "",
+        "card_top_text": "",
+        "card_headline": "",
+        "card_desc": "<p>Since the introduction of nHAp into oral care products in 1980, there have been numerous peer-group clinical studies supporting nHAp as an effective remineralizing ingredient for toothpaste. Not only is nHAp efficient at remineralizing enamel, attaches to the plaque for easier removal during the brushing process,  manages hypersensitivity. In this side chart, the below study shows nHAp’s effect on enamel microhardness to be as effective as fluoride when applied to the enamel under cyclical conditions of pH, by a microhardness test, on cross sections (CSMH) and on surfaces through polarized light microscopy (PLM).</p>",
+        "mobile_image": "shopify://shop_images/image_8_2.png",
+        "card_link": "<p><a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4252862/\" title=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4252862/\">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4252862/</a></p>",
+        "card_bottom_text": ""
+      }
+    },
+    "5d314609-c144-493c-a743-61138e2f2aa0": {
+      "type": "MM-image-text",
+      "custom_css": [
+        ".as_image_with_text {background: linear-gradient( 180deg, #ddf4f6 61.4%, rgba(221, 244, 246, 0) 127.38% );}"
+      ],
+      "settings": {
+        "direction": "row-reverse",
+        "bg_color": "#ddf4f6",
+        "subhead_healine_color": "#5dc7d1",
+        "healine_color": "#000000",
+        "padding_top_desktop": 70,
+        "padding_bottom_desktop": 70,
+        "margin_top_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 55,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "top_text": "",
+        "main_headline": "",
+        "dekstop_image": "shopify://shop_images/image_9_2.png",
+        "img_card_link": "",
+        "card_top_text": "The Dr. Jen Difference",
+        "card_headline": "10% Nano-Hydroxyapatite",
+        "card_desc": "<p>10% Nano-hydroxyapatite has been clinically proven to remineralize tooth enamel at the same level as fluoride when used at the correct concentration, 10%, and the correct particle size. While other brands may include nHap, <strong>Dr. Jen’s includes the full 10% for optimal results.</strong></p>",
+        "mobile_image": "shopify://shop_images/image_9_2.png",
+        "card_link": "<p><a href=\"https://pubmed.ncbi.nlm.nih.gov/19498220/\" title=\"https://pubmed.ncbi.nlm.nih.gov/19498220/\">https://pubmed.ncbi.nlm.nih.gov/19498220/</a></p>",
+        "card_bottom_text": "<p>Shows optimal concentration is at 10%</p>"
+      }
+    },
+    "900af958-aa2e-4a25-b764-68e48b78f4aa": {
+      "type": "MM-image-text",
+      "custom_css": [
+        "@media (max-width: 991px) {.image_with_text_inner {flex-direction: column-reverse; }}"
+      ],
+      "settings": {
+        "direction": "row",
+        "bg_color": "#ffffff",
+        "subhead_healine_color": "#5dc7d1",
+        "healine_color": "#000000",
+        "padding_top_desktop": 65,
+        "padding_bottom_desktop": 65,
+        "margin_top_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_top_mobile": 55,
+        "padding_bottom_mobile": 30,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "top_text": "",
+        "main_headline": "",
+        "dekstop_image": "shopify://shop_images/image_10_2.png",
+        "img_card_link": "<p><a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/ PMC5390120/pdf/joddd-11-14.pdf\" title=\"https://www.ncbi.nlm.nih.gov/pmc/articles/ PMC5390120/pdf/joddd-11-14.pdf\">https://www.ncbi.nlm.nih.gov/pmc/articles/ PMC5390120/pdf/joddd-11-14.pdf</a><br/><a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/ PMC5390120/\" title=\"https://www.ncbi.nlm.nih.gov/pmc/articles/ PMC5390120/\">https://www.ncbi.nlm.nih.gov/pmc/articles/ PMC5390120/ </a></p>",
+        "card_top_text": "Double the Proven Remineralizing Ingredients",
+        "card_headline": "Nano-hydroxyapatite + Fluoride",
+        "card_desc": "<p>Dr. Jen’s Super Paste with Triple the clinically proven remineralizing ingredients using 10% nHAp with Fluoride and Xylitol. Clinically proven ingredients to outperform fluoride-alone toothpaste. Recommended for patients suffering from xerostomia, weak enamel, and hypersensitivity. Higher levels of remineralizing without the need for a prescription and enough to use twice a day.<br/><br/><strong>NHA toothpaste:</strong> 7% NHA + NaF<br/><strong>F toothpaste:</strong> contains only NaF</p>",
+        "mobile_image": "shopify://shop_images/image_10_2.png",
+        "card_link": "",
+        "card_bottom_text": ""
+      }
+    },
+    "fa506eed-cfde-4942-9413-ea7379202ccd": {
+      "type": "MM-image-text",
+      "custom_css": [
+        ".carc_link {display: none;}",
+        "@media (max-width: 991px) {.image_with_text_inner {flex-direction: column-reverse; } .carc_link {display: block; } .image_link {display: none; }}"
+      ],
+      "settings": {
+        "direction": "row-reverse",
+        "bg_color": "#ddf4f6",
+        "subhead_healine_color": "#5dc7d1",
+        "healine_color": "#000000",
+        "padding_top_desktop": 65,
+        "padding_bottom_desktop": 50,
+        "margin_top_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 35,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "top_text": "",
+        "main_headline": "",
+        "dekstop_image": "shopify://shop_images/image_11_1.png",
+        "img_card_link": "<p><a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8233401/ \" title=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8233401/ \">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8233401/ </a></p>",
+        "card_top_text": "",
+        "card_headline": "Nano-hydroxyapatite +  Air sensitivity relief",
+        "card_desc": "<p>The objective of this study was to investigate and compare the effectiveness of several toothpastes containing nano hydroxyapatite nHAP to relieve dentin hypersensitivity (DHS) with that of a commercial desensitizing dentifrice containing calcium sodium phosphosilicate (CSPS). Within the limits of this study, it can be concluded that toothpaste containing nano-HAP alone (10 or 15% nano-HAP) or supplemented with KNO3 (10%nano-HAKN) was effective in relieving DHS symptoms when used at least twice daily.</p>",
+        "mobile_image": "shopify://shop_images/image_11_1.png",
+        "card_link": "<p><a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8233401/ \" title=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8233401/ \">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8233401/ </a></p>",
+        "card_bottom_text": "<p>Clinical efficacy of nanohydroxyapatite-containing toothpaste at relieving dentin hypersensitivity: an 8 weeks randomized control trial</p>"
+      }
+    },
+    "5e291600-999e-446b-bbf7-184663d7b06f": {
+      "type": "MM-image-text",
+      "custom_css": [
+        ".carc_link {display: none;}",
+        "@media (max-width: 991px) {.image_with_text_inner {flex-direction: column-reverse; } .carc_link {display: block; } .image_link {display: none; }}"
+      ],
+      "settings": {
+        "direction": "row",
+        "bg_color": "#ddf4f6",
+        "subhead_healine_color": "#5dc7d1",
+        "healine_color": "#000000",
+        "padding_top_desktop": 30,
+        "padding_bottom_desktop": 100,
+        "margin_top_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_top_mobile": 35,
+        "padding_bottom_mobile": 60,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "top_text": "",
+        "main_headline": "",
+        "dekstop_image": "shopify://shop_images/image_13.png",
+        "img_card_link": "<p><a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4232036/\" title=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4232036/\">https://www.ncbi.nlm.nih.gov/pmc/articles/ PMC4232036/</a></p>",
+        "card_top_text": "",
+        "card_headline": "Xylitol‐ containing products for preventing dental caries in children and adults",
+        "card_desc": "<p>Xylitol is a natural sweetener that can prevent dental caries in both children and adults. It inhibits the growth of harmful bacteria in the mouth, reduces plaque formation, and promotes the remineralization of tooth enamel, thus preventing cavities. Xylitol, a natural sweetener found in fruits and vegetables, has been shown to prevent tooth decay by inhibiting harmful bacteria growth, reducing plaque formation, and promoting remineralization of tooth enamel. Toothpastes containing xylitol are better at preventing cavities due to their ability to maintain a neutral pH level in the mouth and inhibit acid production. Regular use of xylitol toothpaste can lead to a significant reduction in dental caries in both children and adults.</p>",
+        "mobile_image": "shopify://shop_images/image_13.png",
+        "card_link": "<p><a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4232036/\" title=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4232036/\">https://www.ncbi.nlm.nih.gov/pmc/articles/ PMC4232036/</a></p>",
+        "card_bottom_text": "<p>In addition to using proper levels of nHAp for remineralizing, Dr. Jen’s toothpaste contains proper levels of xylitol to improve the oral micro-biome.</p>"
+      }
+    },
+    "a0cd637a-4c33-425c-8c3b-9285b0dc8e36": {
+      "type": "MM-image-text",
+      "custom_css": [
+        ".carc_link {display: none;}",
+        "@media (max-width: 991px) {.image_with_text_inner {flex-direction: column-reverse; } .carc_link {display: block; } .image_link {display: none; }}"
+      ],
+      "settings": {
+        "direction": "row-reverse",
+        "bg_color": "#ffffff",
+        "subhead_healine_color": "#5dc7d1",
+        "healine_color": "#000000",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 40,
+        "margin_top_desktop": 60,
+        "margin_bottom_desktop": 95,
+        "padding_top_mobile": 60,
+        "padding_bottom_mobile": 55,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "top_text": "",
+        "main_headline": "",
+        "dekstop_image": "shopify://shop_images/image_14_1.png",
+        "img_card_link": "<p><a href=\"https://pubmed.ncbi.nlm.nih.gov/24966732/#:~:text=Conclusion%3A%20 Peppermint%2C%20tea%20tree%20and,antiseptic%20solution%20against%20 oral%20pathogensinhibit acid production.\" title=\"https://pubmed.ncbi.nlm.nih.gov/24966732/#:~:text=Conclusion%3A%20 Peppermint%2C%20tea%20tree%20and,antiseptic%20solution%20against%20 oral%20pathogensinhibit acid production.\">https://pubmed.ncbi.nlm.nih.gov/24966732/#:~:text=Conclusion%3A%20 Peppermint%2C%20tea%20tree%20and,antiseptic%20solution%20against%20 oral%20pathogensinhibit acid production.</a></p>",
+        "card_top_text": "",
+        "card_headline": "Peppermint Oil",
+        "card_desc": "<p>Replacing petroleum-based synthetic “Flavor” found in “Big Box” brands, Dr. Jen’s selected clinically proven essential oils to help manage halitosis and fight gingivitis. Dr. Jen’s proprietary blend of essential oils which include Peppermint, Spearmint, Black Cherry, and Papaya not only tastes great, but they also offer oral health benefits. Peppermint oil can act as an effective antiseptic solution against oral pathogens.<br/><br/>In some studies, peppermint oil reduced cavities better than some mouthwash chemicals like chlorhexidine. Peppermint oil makes the mouth feel fresh and of course, makes the formula taste good. Peppermint oil can also increase salivation.</p>",
+        "mobile_image": "shopify://shop_images/image_14_1.png",
+        "card_link": "<p><a href=\"https://pubmed.ncbi.nlm.nih.gov/24966732/#:~:text=Conclusion%3A%20 Peppermint%2C%20tea%20tree%20and,antiseptic%20solution%20against%20 oral%20pathogensinhibit acid production.\" title=\"https://pubmed.ncbi.nlm.nih.gov/24966732/#:~:text=Conclusion%3A%20 Peppermint%2C%20tea%20tree%20and,antiseptic%20solution%20against%20 oral%20pathogensinhibit acid production.\">https://pubmed.ncbi.nlm.nih.gov/24966732/#:~:text=Conclusion%3A%20 Peppermint%2C%20tea%20tree%20and,antiseptic%20solution%20against%20 oral%20pathogensinhibit acid production.</a></p>",
+        "card_bottom_text": "<p>Black Cherry and Papaya extracts contain antioxidants and anti-inflammatory benefits</p>"
+      }
+    },
+    "931897a8-c89f-4957-8f30-144c1104c76b": {
+      "type": "MM-feature-detail",
+      "blocks": {
+        "24f3bd85-9d13-4a8e-b13f-076ec631e5ab": {
+          "type": "add_tile",
+          "settings": {
+            "svg_img": "shopify://shop_images/image_15_2.png",
+            "card_text": "10% Nano-Hydroxyapatite"
+          }
+        },
+        "70b9eff9-42cb-467e-9129-ec4a810dd316": {
+          "type": "add_tile",
+          "settings": {
+            "svg_img": "shopify://shop_images/image_17_3.png",
+            "card_text": "Clean Ingredients"
+          }
+        },
+        "cb8e7f62-6240-460c-a2fa-beae348d9f05": {
+          "type": "add_tile",
+          "settings": {
+            "svg_img": "shopify://shop_images/image_16_1.png",
+            "card_text": "Made with Xylitol"
+          }
+        }
+      },
+      "block_order": [
+        "24f3bd85-9d13-4a8e-b13f-076ec631e5ab",
+        "70b9eff9-42cb-467e-9129-ec4a810dd316",
+        "cb8e7f62-6240-460c-a2fa-beae348d9f05"
+      ],
+      "settings": {
+        "bg_color": "#3ab1d9",
+        "text_color": "#ffffff",
+        "card_bg_color": "#1d2433",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "margin_top_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_top_mobile": 50,
+        "padding_bottom_mobile": 50,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "card_img": "shopify://shop_images/349066345_988694898808037_8746249752868638634_n_1_1.png",
+        "card_headline": "Power Your Smile Three Ways"
+      }
+    },
+    "938c931c-0d7d-44a8-a315-9ea11cb07cc8": {
+      "type": "MM-scrolling-text",
+      "blocks": {
+        "ce188d3c-0c7d-4410-832a-109e2ff791b8": {
+          "type": "Scrolling_Text",
+          "settings": {
+            "text": "No Sodium Lauryl Sulfate  •"
+          }
+        },
+        "f074a9f9-1bc0-4863-a594-f73e22639851": {
+          "type": "Scrolling_Text",
+          "settings": {
+            "text": "No Titanium Dioxide  •"
+          }
+        },
+        "046420df-ef95-4f10-8826-2f4b07891cb1": {
+          "type": "Scrolling_Text",
+          "settings": {
+            "text": "No Propylene Glycol  •"
+          }
+        },
+        "a1a02ec0-7d59-4fba-98a0-d256134c0612": {
+          "type": "Scrolling_Text",
+          "settings": {
+            "text": "No Artificial Colors  •"
+          }
+        }
+      },
+      "block_order": [
+        "ce188d3c-0c7d-4410-832a-109e2ff791b8",
+        "f074a9f9-1bc0-4863-a594-f73e22639851",
+        "046420df-ef95-4f10-8826-2f4b07891cb1",
+        "a1a02ec0-7d59-4fba-98a0-d256134c0612"
+      ],
+      "settings": {
+        "bg_color": "#1f8eb4",
+        "border_color": "#1f8eb4",
+        "text_color": "#ffffff"
+      }
+    },
+    "1d2217b9-6881-45f0-a41c-a5a6d7c0fc9d": {
+      "type": "MM-how-to-use",
+      "blocks": {
+        "c5c98778-ac7f-4ec9-868a-c937797070a0": {
+          "type": "add_tile",
+          "settings": {
+            "top_headline": "At the Dental Office:",
+            "col_headline": "Custom Tray Application",
+            "numbers": "1",
+            "desc": "<p>Fill a tray with Dr. Jen’s Toothpaste.</p>"
+          }
+        },
+        "3fce1682-acb0-4715-b2b6-16f7ec68a5bf": {
+          "type": "add_tile",
+          "settings": {
+            "top_headline": "At the Dental Office:",
+            "col_headline": "Custom Tray Application",
+            "numbers": "2",
+            "desc": "<p>Place in patients mouth. Leave undisturbed for a minimum of 3 minutes.</p>"
+          }
+        },
+        "ff8f5721-ec6b-4eec-b288-31da3866f9d8": {
+          "type": "add_tile",
+          "settings": {
+            "top_headline": "At the Dental Office:",
+            "col_headline": "Custom Tray Application",
+            "numbers": "3",
+            "desc": "<p>Remove tray and spread remaining toothpaste over tooth surfaces with a gloved finger.</p>"
+          }
+        },
+        "4e5f948d-a523-479c-9a4a-f00f078a75ca": {
+          "type": "add_tile",
+          "settings": {
+            "top_headline": "At the Dental Office:",
+            "col_headline": "Custom Tray Application",
+            "numbers": "4",
+            "desc": "<p>Have your patient expectorate but not rinse, leave the excess to slowly dissolve.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "c5c98778-ac7f-4ec9-868a-c937797070a0",
+        "3fce1682-acb0-4715-b2b6-16f7ec68a5bf",
+        "ff8f5721-ec6b-4eec-b288-31da3866f9d8",
+        "4e5f948d-a523-479c-9a4a-f00f078a75ca"
+      ],
+      "settings": {
+        "bg_color": "#ffffff",
+        "main_headline_color": "#5dc7d1",
+        "text_color": "#000000",
+        "number_color": "#ffffff",
+        "number_bg_color": "#1d2433",
+        "text_color2": "#1d2433",
+        "padding_top_desktop": 35,
+        "padding_bottom_desktop": 0,
+        "margin_top_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_top_mobile": 25,
+        "padding_bottom_mobile": 25,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "main_headline": "How to use",
+        "top_headline": "At the Dental Office:",
+        "col_headline": "Custom Tray Application",
+        "svg": "shopify://shop_images/jaw_1.png"
+      }
+    },
+    "f85ac56f-26bf-4068-887e-79f9b771f3fb": {
+      "type": "MM-how-to-use",
+      "blocks": {
+        "4e946d91-678c-479c-8803-3b8eca8f9ea7": {
+          "type": "add_tile",
+          "settings": {
+            "top_headline": "At the Dental Office:",
+            "col_headline": "Custom Tray Application",
+            "numbers": "1",
+            "desc": "<p>Apply a pea-sized amount of toothpaste to your patient’s tooth surface using a cotton swab or gloved finger</p>"
+          }
+        },
+        "cb7b8094-d796-4636-9a68-985b77173b8e": {
+          "type": "add_tile",
+          "settings": {
+            "top_headline": "At the Dental Office:",
+            "col_headline": "Custom Tray Application",
+            "numbers": "2",
+            "desc": "<p>Leave undisturbed for a minimum of 3 minutes</p>"
+          }
+        },
+        "873fcb6f-5f27-402a-9176-07500c26536d": {
+          "type": "add_tile",
+          "settings": {
+            "top_headline": "At the Dental Office:",
+            "col_headline": "Custom Tray Application",
+            "numbers": "3",
+            "desc": "<p>Have your patient expectorate but do not rinse, leave the excess to slowly dissolve.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "4e946d91-678c-479c-8803-3b8eca8f9ea7",
+        "cb7b8094-d796-4636-9a68-985b77173b8e",
+        "873fcb6f-5f27-402a-9176-07500c26536d"
+      ],
+      "settings": {
+        "bg_color": "#ffffff",
+        "main_headline_color": "#5dc7d1",
+        "text_color": "#000000",
+        "number_color": "#ffffff",
+        "number_bg_color": "#1d2433",
+        "text_color2": "#1d2433",
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_top_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_top_mobile": 25,
+        "padding_bottom_mobile": 25,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "main_headline": "",
+        "top_headline": "",
+        "col_headline": "Non-Tray application",
+        "svg": "shopify://shop_images/toothbrush_2.png"
+      }
+    },
+    "760a8b4a-bf9f-4323-beb4-c3e965e81aa3": {
+      "type": "MM-how-to-use",
+      "blocks": {
+        "230bf671-ea8e-47b5-9cfd-9b29f73eda51": {
+          "type": "add_tile",
+          "settings": {
+            "top_headline": "At the Dental Office:",
+            "col_headline": "Custom Tray Application",
+            "col_image": "shopify://shop_images/image_19_1.png",
+            "numbers": "1",
+            "desc": "<p>Squeeze a pea-sized amount on a cotton swab or fingertip.</p>"
+          }
+        },
+        "a59d04ab-844b-48fd-b94f-07f11760b015": {
+          "type": "add_tile",
+          "settings": {
+            "top_headline": "At the Dental Office:",
+            "col_headline": "Custom Tray Application",
+            "col_image": "shopify://shop_images/image_22_1.png",
+            "numbers": "2",
+            "desc": "<p>Apply to teeth and use the tongue to spread evenly.</p>"
+          }
+        },
+        "d79378dc-f69f-4c14-b745-6e1b811956d1": {
+          "type": "add_tile",
+          "settings": {
+            "top_headline": "At the Dental Office:",
+            "col_headline": "Custom Tray Application",
+            "col_image": "shopify://shop_images/image_23_2.png",
+            "numbers": "3",
+            "desc": "<p>Leave undisturbed for 3 minutes, then expectorate, but do not rinse. Let the excess dissolve slowly.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "230bf671-ea8e-47b5-9cfd-9b29f73eda51",
+        "a59d04ab-844b-48fd-b94f-07f11760b015",
+        "d79378dc-f69f-4c14-b745-6e1b811956d1"
+      ],
+      "settings": {
+        "bg_color": "#ffffff",
+        "main_headline_color": "#5dc7d1",
+        "text_color": "#000000",
+        "number_color": "#ffffff",
+        "number_bg_color": "#1d2433",
+        "text_color2": "#1d2433",
+        "padding_top_desktop": 30,
+        "padding_bottom_desktop": 0,
+        "margin_top_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "main_headline": "",
+        "top_headline": "At Home:",
+        "col_headline": "(after regular brushing & flossing)"
+      }
+    },
+    "7743a02a-3f32-4683-9d09-84d954d49e4d": {
+      "type": "MM-how-to-use",
+      "blocks": {
+        "2d8f9d61-8280-42bc-9997-a12adf22350b": {
+          "type": "add_tile",
+          "settings": {
+            "top_headline": "At the Dental Office:",
+            "col_headline": "Custom Tray Application",
+            "col_image": "shopify://shop_images/image_24.png",
+            "numbers": "1",
+            "desc": "<p>Brush teeth with <br/>Dr. Jen’s toothpaste <br/>for 2 minutes.</p>"
+          }
+        },
+        "94e3ce85-0fd0-4792-a95b-2f3b090b9bfd": {
+          "type": "add_tile",
+          "settings": {
+            "top_headline": "At the Dental Office:",
+            "col_headline": "Custom Tray Application",
+            "col_image": "shopify://shop_images/image_25_2.png",
+            "numbers": "2",
+            "desc": "<p>Expectorate, but <br/>do not rinse</p>"
+          }
+        },
+        "9e35d134-f0bb-4073-8f1c-866bee881848": {
+          "type": "add_tile",
+          "settings": {
+            "top_headline": "At the Dental Office:",
+            "col_headline": "Custom Tray Application",
+            "col_image": "shopify://shop_images/image_23_2.png",
+            "numbers": "3",
+            "desc": "<p>Refrain from eating for 30 minutes</p>"
+          }
+        }
+      },
+      "block_order": [
+        "2d8f9d61-8280-42bc-9997-a12adf22350b",
+        "94e3ce85-0fd0-4792-a95b-2f3b090b9bfd",
+        "9e35d134-f0bb-4073-8f1c-866bee881848"
+      ],
+      "settings": {
+        "bg_color": "#ffffff",
+        "main_headline_color": "#5dc7d1",
+        "text_color": "#000000",
+        "number_color": "#ffffff",
+        "number_bg_color": "#1d2433",
+        "text_color2": "#1d2433",
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "margin_top_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_top_mobile": 25,
+        "padding_bottom_mobile": 25,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "main_headline": "",
+        "top_headline": "",
+        "col_headline": ""
+      }
+    },
+    "c2d16bd6-245d-4f8d-bf56-22c8bb020536": {
+      "type": "MM-product-detail",
+      "blocks": {
+        "4b6e8a08-2de6-439f-a486-221946726a3c": {
+          "type": "card",
+          "settings": {
+            "card_top_text": "Dr. Jen’s",
+            "card_headline": "Strawberry Toothpaste",
+            "card_subhead": "Fluorde Free Double Caries Protection with 10% nHAp and Xylitol",
+            "card_link": "<ul><li>Good for all ages</li><li>Double the cavity protection with 10% nHAp and Xylitol</li><li>Manages Hypersensitivity</li><li>pH Balancing</li><li>Low Abrasivity</li><li>Backed by Science</li></ul>",
+            "card_img": "shopify://shop_images/image_18_5.png"
+          }
+        },
+        "b7fce9a8-3b4b-4abd-9210-2a2d474bc652": {
+          "type": "card",
+          "settings": {
+            "card_top_text": "Dr. Jen’s",
+            "card_headline": "Cool Mint Toothpaste",
+            "card_subhead": "Fluorde Free Double Caries Protection with 10% nHAp and Xylitol",
+            "card_link": "<ul><li>Recommended for ages 6 and up</li><li>Double the cavity protection with 10% nHAp and Xylitol</li><li>Manages Hypersensitivity</li><li>Contains Dr. Jen’s proprietary blend of essential oils designed to manage halitosis and fight gingivitis.</li><li>Backed by Science</li></ul>",
+            "card_img": "shopify://shop_images/image_18_6.png"
+          }
+        }
+      },
+      "block_order": [
+        "4b6e8a08-2de6-439f-a486-221946726a3c",
+        "b7fce9a8-3b4b-4abd-9210-2a2d474bc652"
+      ],
+      "settings": {
+        "bg_color": "#ffffff",
+        "top_color": "#5dc7d1",
+        "card_text_color": "#000000",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "margin_top_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 30,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "main_headline": "Which Product is Right for Your Patients?"
+      }
+    },
+    "29b3f607-1724-497b-a27c-889ee95b9945": {
+      "type": "MM-banner-text",
+      "custom_css": [
+        ".banner_text_main {padding-top: 100px;}",
+        ".banner_text_content {padding-top: 100px;}",
+        ".banner_text_image {display: none;}",
+        "@media (max-width: 999px) {.banner_text_main {background-image: unset; background-color: #e6f5f7; padding-top: 0; } .banner_text_inner {padding: 0; } .banner_text_image {display: block; }}"
+      ],
+      "settings": {
+        "bg_color": "#ffffff",
+        "image": "shopify://shop_images/Group_271.png",
+        "cover_image": "shopify://shop_images/Group_243.png",
+        "sub_headline": "",
+        "headline": "Dr. Jen’s Super Paste",
+        "text": "<p>with Triple Caries Protection with 10% nHAp, Fluoride and Xylitol</p><ul><li>Triple the clinically proven remineralizing ingredients with over the counter levels of fluoride, 10% nHAp and Xylitol.</li><li>Effective for patients with high caries due to xerostomia and weak enamel.</li><li>Manages Hypersensitivity.</li><li>Recommended for ages 6 and up.</li><li>Backed by science</li></ul>",
+        "btn_text": "",
+        "btn_link": ""
+      }
+    },
+    "dfc61d44-e810-4e8c-b6ef-f182b73c921e": {
+      "type": "MM-banner-text",
+      "custom_css": [
+        ".banner_text_content {max-width: 645px;}",
+        "@media (max-width: 999px) {.banner_text_inner {flex-direction: column-reverse; } .banner_text_content {max-width: 100%; }}"
+      ],
+      "settings": {
+        "bg_color": "#ffffff",
+        "image": "shopify://shop_images/image_7_3.png",
+        "sub_headline": "BACKED BY OVER 25 YEARS OF DENTAL EXPERIENCE",
+        "headline": "Dr. Jen’s is the authentic choice",
+        "text": "<p>Once you try Dr. Jen’s oral care products, you will notice the difference.<br/><br/>Not only is Dr. Jen a practicing dentist, she is an engineer, mother, and was a part-time faculty member at the University of Minnesota Dental School focusing the last 25 years on advancing dental care. No other toothpaste founder has committed more time, training, and development to improve our oral care products.<br/><br/>Her peers call her toothpaste the ethical choice because not only are the ingredients healthy, but the paste will strengthen enamel. All of Dr. Jen’s oral care products were developed using uncompromising  and clinically proven ingredients with her patient’s and customers’ oral care as the priority of her mission. She is one-of-a-kind in the oral care space.</p>",
+        "btn_text": "",
+        "btn_link": ""
+      }
+    },
+    "875ccc88-f00c-4513-a91b-c135f2259445": {
+      "type": "MM-banner-text",
+      "custom_css": [
+        ".banner_text_inner {padding: 0;}",
+        ".banner_text_image {max-width: 630px;}",
+        "@media (max-width: 767px) {.banner_text_inner {flex-direction: column-reverse; } .banner_text_inner {padding: 30px 0; } .banner_text_main h2 {text-align: center; } .primary_btn {width: 100%; }}"
+      ],
+      "settings": {
+        "bg_color": "#8ae4e1",
+        "image": "shopify://shop_images/Fluoride-Free-Starter-Kit-2_01bef19b-f914-4f36-b170-e1b6a36f9c69_700x_1.png",
+        "sub_headline": "",
+        "headline": "Discover the Science of Nature!",
+        "text": "<p>Dive into the world of backed by science modern preventive oral products and understand how they can enhance your your patients oral health.</p>",
+        "btn_text": "Shop Now",
+        "btn_link": "shopify://collections/wholesale"
+      }
+    },
+    "a6f8a645-0d4c-44bb-b1e6-5c63fa4978e8": {
+      "type": "custom-liquid",
+      "settings": {
+        "subheading": "",
+        "title": "",
+        "liquid": "<style>\n.shopify-section.shopify-section--popup{\ndisplay:none;\n}\n</style>",
+        "add_vertical_spacing": false,
+        "background_type": "full_width",
+        "background": "rgba(0,0,0,0)",
+        "text_color": "rgba(0,0,0,0)"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "a9602c44-24b8-41c4-a003-cc84102a1a17",
+    "a8343d5c-b46c-46b8-b7cf-d65f635199dc",
+    "5d314609-c144-493c-a743-61138e2f2aa0",
+    "900af958-aa2e-4a25-b764-68e48b78f4aa",
+    "fa506eed-cfde-4942-9413-ea7379202ccd",
+    "5e291600-999e-446b-bbf7-184663d7b06f",
+    "a0cd637a-4c33-425c-8c3b-9285b0dc8e36",
+    "931897a8-c89f-4957-8f30-144c1104c76b",
+    "938c931c-0d7d-44a8-a315-9ea11cb07cc8",
+    "1d2217b9-6881-45f0-a41c-a5a6d7c0fc9d",
+    "f85ac56f-26bf-4068-887e-79f9b771f3fb",
+    "760a8b4a-bf9f-4323-beb4-c3e965e81aa3",
+    "7743a02a-3f32-4683-9d09-84d954d49e4d",
+    "c2d16bd6-245d-4f8d-bf56-22c8bb020536",
+    "29b3f607-1724-497b-a27c-889ee95b9945",
+    "dfc61d44-e810-4e8c-b6ef-f182b73c921e",
+    "875ccc88-f00c-4513-a91b-c135f2259445",
+    "a6f8a645-0d4c-44bb-b1e6-5c63fa4978e8"
+  ]
+}

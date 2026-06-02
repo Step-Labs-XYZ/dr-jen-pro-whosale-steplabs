@@ -1,0 +1,65 @@
+{% comment %}
+  Snippet: c-product-variants.liquid
+  Selector de variantes estilo pill/botón con colores configurables
+{% endcomment %}
+
+{%- assign variant_option_names = product.options_with_values -%}
+
+<div class="c-variants" data-variants>
+  {% for option in variant_option_names %}
+    <div class="c-variants__group" data-option-index="{{ forloop.index0 }}">
+      <div class="c-variants__label">
+        <span class="c-variants__option-name">{{ option.name }}:</span>
+        <span class="c-variants__selected-value" data-selected-value="{{ forloop.index0 }}">
+          {{ option.selected_value }}
+        </span>
+      </div>
+      <div class="c-variants__options" role="list">
+        {% for value in option.values %}
+          {%- assign is_selected = false -%}
+          {%- if value == option.selected_value -%}
+            {%- assign is_selected = true -%}
+          {%- endif -%}
+
+          {%- comment -%} Detectar si es opción de color / sabor para mostrar swatch {%- endcomment -%}
+          {%- assign option_name_lower = option.name | downcase -%}
+          {%- assign is_color_swatch = false -%}
+          {%- if option_name_lower contains 'color' or option_name_lower contains 'colour' or option_name_lower contains 'flavor' or option_name_lower contains 'sabor' or option_name_lower contains 'scent' -%}
+            {%- assign is_color_swatch = true -%}
+          {%- endif -%}
+
+          <button
+            class="c-variants__option {% if is_color_swatch %}c-variants__option--swatch{% else %}c-variants__option--pill{% endif %} {% if is_selected %}is-selected{% endif %}"
+            data-option-value="{{ value | escape }}"
+            data-option-index="{{ forloop.parentloop.index0 }}"
+            aria-label="{{ option.name }}: {{ value }}"
+            aria-pressed="{{ is_selected }}"
+            role="listitem"
+          >
+            {% if is_color_swatch %}
+              {%- assign swatch_image = value | handle | append: '.png' -%}
+              {%- assign swatch_color = value | handle | replace: '-', '' -%}
+              <span class="c-variants__swatch-dot" style="background-color: var(--c-swatch-{{ value | handle | replace: '-', '_' }}, {{ swatch_color }});" aria-hidden="true"></span>
+              <span class="c-variants__swatch-label">{{ value }}</span>
+            {% else %}
+              {{ value }}
+            {% endif %}
+          </button>
+        {% endfor %}
+      </div>
+
+      {%- comment -%} Descripción de la variante seleccionada (desde metafields) {%- endcomment -%}
+      {% if product.metafields.custom["variant_description_{{ option.name | handle }}"] != blank %}
+        <p class="c-variants__description" data-variant-description>
+          {{ product.metafields.custom["variant_description_{{ option.name | handle }}"] }}
+        </p>
+      {% endif %}
+    </div>
+  {% endfor %}
+
+  {%- comment -%} Input hidden para variante seleccionada {%- endcomment -%}
+  <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-id>
+  <script type="application/json" data-product-json>
+    {{ product | json }}
+  </script>
+</div>

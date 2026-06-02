@@ -1,0 +1,142 @@
+{% comment %}
+  Snippet: Quantity Selector with Images
+  Usage: {% render 'c-quantity-selector', product: product %}
+{% endcomment %}
+
+<div class="c-quantity-selector">
+  <p class="c-quantity-selector__title">Quantity</p>
+
+  <div class="c-quantity-selector__grid">
+    {% for variant in product.variants %}
+      {% assign badge = variant.metafields.custom.badge.value %}
+      {% assign is_selected = false %}
+      {% if forloop.first %}{% assign is_selected = true %}{% endif %}
+
+      <label class="c-quantity-card {% if is_selected %}is-selected{% endif %}" data-variant-id="{{ variant.id }}">
+        <input type="radio" name="variant-qty" value="{{ variant.id }}" {% if is_selected %}checked{% endif %} class="c-qty-radio" style="display: none;">
+        
+        {% if badge != blank %}
+          <span class="c-quantity-card__badge">{{ badge }}</span>
+        {% endif %}
+
+        <div class="c-quantity-card__image">
+          {% if variant.featured_image %}
+            <img src="{{ variant.featured_image | image_url: width: 140 }}" alt="{{ variant.title }}" loading="lazy">
+          {% elsif product.featured_image %}
+            <img src="{{ product.featured_image | image_url: width: 140 }}" alt="{{ variant.title }}" loading="lazy">
+          {% endif %}
+        </div>
+
+        <span class="c-quantity-card__label">{{ variant.title }}</span>
+      </label>
+    {% endfor %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .c-quantity-selector {
+    display: block;
+    width: 100%;
+    margin: 24px 0;
+  }
+
+  .c-quantity-selector__title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 12px;
+  }
+
+  .c-quantity-selector__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .c-quantity-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 12px 10px;
+    border: 1.5px solid #e2e2e2;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #ffffff;
+    transition: all 0.2s ease;
+    min-height: 160px;
+  }
+
+  .c-quantity-card:hover {
+    border-color: #c0c0c0;
+  }
+
+  .c-quantity-card.is-selected {
+    border-color: #0d6efd;
+    border-width: 2px;
+    background: #eef3fb;
+  }
+
+  .c-quantity-card__badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0d6efd;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+  }
+
+  .c-quantity-card__image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 80px;
+    min-height: 60px;
+  }
+
+  .c-quantity-card__image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .c-quantity-card__label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #1a1a1a;
+    text-align: center;
+    line-height: 1.3;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', function () {
+    var cards = document.querySelectorAll('.c-quantity-card');
+    cards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        cards.forEach(function (c) { c.classList.remove('is-selected'); });
+        card.classList.add('is-selected');
+        
+        var radio = card.querySelector('.c-qty-radio');
+        if (radio) {
+          radio.checked = true;
+          radio.dispatchEvent(new Event('change', { bubbles: true }));
+          
+          var variantInput = document.querySelector('input[name="id"]');
+          if (variantInput) {
+            variantInput.value = card.dataset.variantId;
+            variantInput.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        }
+      });
+    });
+  });
+{% endjavascript %}

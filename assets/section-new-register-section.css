@@ -1,0 +1,228 @@
+.section--wholesale-register .text--center h2 {
+    color: #1d2433;
+    font-size: clamp(28px, 3vw, 40px);
+    text-transform: capitalize;
+    margin: 0;
+}
+
+.section--wholesale-register .text--center p {
+    color: #1d2433;
+    font-size: clamp(18px, 3vw, 22px);
+    margin: 0;
+}
+
+.section--wholesale-register .text--center a {
+    color: #ff6b00;
+    text-decoration: auto;
+}
+
+.section--wholesale-register .text--center {
+    margin-bottom: 32px;
+}
+
+.section--wholesale-register .globo-form-app.boxed-layout {
+    border-radius: 16px;
+}
+
+.section--wholesale-register .description.globo-description {
+    color: #1d2433 !important;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.section--wholesale-register .label-content {
+    color: #1d2433;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.section--wholesale-register .text-danger.text-smaller {
+    color: #ff6b00;
+    font-size: 18px;
+    vertical-align: bottom;
+    display: initial;
+}
+
+.section--wholesale-register .globo-form-control input {
+    background-color: #f9f9fa !important;
+    border-radius: 6px !important;
+    border: 1px solid #E7E7E7;
+}
+
+.section--wholesale-register .globo-form-control input::placeholder {
+    font-size: 14px;
+    color: #cfcfd8;
+}
+
+.section--wholesale-register .footer {
+    margin: 0 !important;
+}
+
+.section--wholesale-register .checkbox-wrapper label {
+    font-size: 18px !important;
+}
+
+.section--wholesale-register .checkbox-wrapper label span {
+    font-weight: 700;
+}
+
+.globo-form-id-1372 .message.success h4 strong {
+    color: #ff6b00;
+}
+
+.globo-form-id-1372 .message.success {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.globo-form-id-1372 .message.success p {
+    max-width: 445px;
+    margin: 0 auto 15px;
+}
+
+.globo-form-id-1372 .message.success p a {
+    background: #f9f9fa;
+
+    border: 1px solid #f66c02;
+    display: block;
+    padding: 15px;
+    color: #f66c02;
+    text-decoration: none;
+    font-weight: 700;
+    max-width: 348px;
+    margin: auto;
+}
+
+#professional_text {
+    font-size: 18px;
+}
+
+.section--wholesale-register .globo-form-app .header {
+    display: none;
+}
+
+.new-register-section__container {
+    max-width: 860px;
+    margin: 0 auto;
+    border-radius: 16px;
+    box-shadow: 2px 2px 10px 0px #7487AD33;
+    padding: 32px;
+    padding-bottom: 2px;
+}
+
+.new-register-section__step {
+    display: flex;
+    flex-direction: row;
+    gap: 48px;
+    align-items: center;
+    margin-bottom: 48px;
+}
+
+.new-register-section__each-step {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+}
+
+p.new-register-section__step-number {
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    background: #9898A6;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    font-family: "Raleway";
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 32px;
+    letter-spacing: 0em;
+    padding-bottom: 3px;
+}
+
+.new-register-section__each-step:nth-of-type(3) .new-register-section__step-number {
+    padding-bottom: 5px;
+}
+
+.new-register-section__each-step:first-child .new-register-section__step-number {
+    background: #E04880;
+}
+
+p.new-register-section__step-name {
+    font-family: "Raleway";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0px;
+    color: #9898A6;
+    margin: 0;
+}
+
+.new-register-section__each-step:first-child  .new-register-section__step-name {
+    color: #1D2433;
+}
+
+.new-register-section__container .globo-form-app .wizard__header {
+    display: none;
+}
+
+.new-register-section__container .globo-form-app .panel.movingIn {
+    padding: 0;
+}
+
+.new-register-section__container .wizard__footer {
+    justify-content: space-between;
+}
+
+.new-register-section__container .wizard__footer button.previous {
+    color: #FF6B00;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+.new-register-section__container .wizard__footer button.next {
+    color: #FFF;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+.new-register-section__container .globo-form-app .flex-wrap {
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.new-register-section__container .globo-form-control {
+    margin-bottom: 32px !important;
+}
+
+@media (max-width: 768px) {
+    .new-register-section__step {
+        gap: 26px;
+    }
+    
+    .new-register-section__each-step {
+        gap: 12px;
+    }
+    
+    p.new-register-section__step-number {
+        width: 24px;
+        height: 24px;
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    p.new-register-section__step-name {
+        font-size: 14px;
+        line-height: 14px;
+        display: none;
+    }
+
+    .new-register-section__each-step:first-child  .new-register-section__step-name {
+        color: #1D2433;
+        display: block;
+    }
+}

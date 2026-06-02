@@ -1,0 +1,237 @@
+<style>
+ .banner_text_main{
+   position:relative;
+ } 
+.banner_text_main .container{
+  max-width: 1198px;
+  margin: 0 auto;
+  padding: 0 30px;
+  height: 100%;
+}
+.banner_text_main .banner_text_inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:90px 0;
+  gap:20px;
+}
+
+.banner_text_main h2{
+  color: #000;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 56px;
+  margin: 0;
+  padding-bottom:15px;
+}
+.banner_text_main h3{
+  color: #1D2433;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  margin: 0;
+}
+.banner_text_main p,
+.banner_text_main ul li{
+  color: #000;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 31px;
+}
+  
+.banner_text_main .banner_text_content {
+    max-width: 500px;
+}
+.banner_text_main .banner_text_content span ul {
+  margin: 0;
+  padding-left: 0;
+}
+.banner_text_main .banner_text_content span li {
+  display: flex;
+  gap: 16px;
+  padding-top: 5px;
+}
+.banner_text_main .banner_text_content span li::before {
+  content:'';
+  background-image: url(https://cdn.shopify.com/s/files/1/0747/1769/2180/files/Group_238.png?v=1703279049);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 19px;
+  height: 19px;
+  display: block;
+  flex: none;
+  margin-top:5px;
+}
+.banner_text_main .banner_text_image {
+    max-width: 460px;
+    width: 100%;
+    flex:1;
+}
+.banner_text_main .banner_text_image img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.banner_text_main .primary_btn{
+    width: fit-content;
+    padding: 10px 30px;
+    border-radius: 5px;
+    background: #E04880;
+    color: #FFF;
+    font-family: Raleway;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+}
+  #banner_text_main_{{ section.id }}{
+    background-color:{{section.settings.bg_color}};
+  }
+      
+{% if section.settings.cover_image != blank %}
+  #banner_text_main_{{ section.id }}{
+    background-image:url({{section.settings.cover_image | img_url:'master'}});
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+{% endif %}
+@media (max-width:999px) {
+   .banner_text_main .banner_text_inner{
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+  }
+  .banner_text_main .banner_text_content{
+    max-width:100%;
+    padding:20px 0;
+  }
+}
+@media (max-width:767px) {
+   .banner_text_main .container{
+     padding:0 18px;
+   }
+  .banner_text_main .banner_text_inner{
+    padding:30px 0;
+  }
+  .banner_text_main .banner_text_content{
+    max-width:100%;
+    padding:0;
+  }
+  .banner_text_main .banner_text_image{
+    max-width:400px;
+    margin:auto;
+  }
+  .banner_text_main h2{
+    font-size: 25px;
+    line-height: 35px;
+  }
+  .banner_text_main p,
+  .banner_text_main ul li {
+    font-size: 16px;
+    line-height: 24px;
+   }
+  .banner_text_main .banner_text_content span li::before {
+    margin-top:5px;
+  }
+}
+</style>
+
+<div class="banner_text_main" id="banner_text_main_{{ section.id }}">
+ <div class="container">
+  <div class="banner_text_inner">
+    <div class="banner_text_content">
+        {% if section.settings.sub_headline != blank %}
+          <h3>{{ section.settings.sub_headline }}</h3>
+        {% endif %}
+        {% if section.settings.headline != blank %}
+          <h2>{{ section.settings.headline }}</h2>
+        {% endif %}
+        {% if section.settings.text != blank %}
+          <span>{{ section.settings.text }}</span>
+        {% endif %}
+        {% if section.settings.btn_text != blank %}
+          <a class="primary_btn" href="{{ section.settings.btn_link }}">{{ section.settings.btn_text }}</a>
+        {% endif %}
+    </div>
+    <div class="banner_text_image">
+      {% if section.settings.image != blank %}
+        {{ section.settings.image | image_url: width: section.settings.image.width | image_tag: loading: 'lazy' }}
+      {% endif %}
+    </div>
+  </div>
+
+
+ </div> 
+</div>
+
+
+{% schema %}
+  {
+    "name": "MM Banner Text",
+    "settings": [
+      {
+        "type":"color",
+        "id":"bg_color",
+        "label":"Background Color",
+        "default":"#E6F5F7"
+      },
+      {
+        "type":"image_picker",
+        "id":"image",
+        "label":"Image"
+      },
+      {
+        "type":"image_picker",
+        "id":"cover_image",
+        "label":"Cover Image"
+      },
+      {
+        "type": "text",
+        "id": "sub_headline",
+        "label": "Sub Headline",
+        "default": "BACKED BY OVER 25 YEARS OF DENTAL EXPERIENCE"
+      },
+      {
+        "type": "text",
+        "id": "headline",
+        "label": "Headline",
+        "default": "Dr Jen’s Super Paste"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>with both 10% nHAp and fluoirde</p>"
+      },
+      {
+        "type": "text",
+        "id": "btn_text",
+        "label": "Button Text",
+        "default": "Shop Now"
+      },
+      {
+        "type": "url",
+        "id": "btn_link",
+        "label": "Button Link"
+      }
+    ],
+    "presets":[
+      {
+        "name":"MM Banner Text"
+      }
+    ]
+  }
+{% endschema %}
+

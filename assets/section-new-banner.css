@@ -1,0 +1,59 @@
+.new-banner__title {
+    font-family: "Raleway";
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 40px;
+    letter-spacing: 0em;
+    margin-bottom: 24px;
+}
+
+.new-banner__content {
+    font-family: "Raleway";
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 31px;
+    letter-spacing: 0em;
+    max-width: 350px;
+    padding-bottom: 24px;
+    margin-bottom: 15px;
+}
+
+.new-banner__button {
+    background: #E04880;
+    color: #fff;
+    font-family: "Raleway";
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 29px;
+    letter-spacing: 0.02em;
+    padding: 19px 41px;
+    border-radius: 6px;
+    border: none;
+    margin-top: 24px;
+}
+
+.new-banner__image {
+    max-width: 460px;
+}
+
+@media (max-width: 1000px) {
+    .new-banner__title {
+        font-size: 24px;
+        line-height: 30px;
+    }
+    
+    .new-banner__content {
+        font-size: 16px;
+        line-height: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .new-banner__content-wrapper {
+        order: 2;
+    }
+
+    .new-banner__content {
+        max-width: 100%;
+    }
+  }

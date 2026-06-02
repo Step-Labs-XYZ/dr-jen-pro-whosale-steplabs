@@ -1,0 +1,92 @@
+#main:has([id*="wpd"]) {
+  padding-block: 60px;
+  padding-inline: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  /*   align-items: center; */
+  min-height: 650px;
+}
+
+#main #wpd-create-customer-msg,
+#main #wpd-create-customer {
+  width: 100%;
+}
+
+#wpd-create-customer-msg {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  align-items: center;
+}
+
+#wpd-create-customer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 32px;
+  max-width: 960px;
+}
+
+#create_customer .wpd_full_with {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: space-between;
+}
+#create_customer .wpd_half {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 20px;
+}
+#create_customer input,
+#create_customer select {
+  border-radius: 0;
+  width: 100%;
+  padding: 12px 18px;
+  font-size: 16px;
+  border: 1px solid rgba(29, 26, 51, 0.15);
+}
+
+@media (max-width: 767px) {
+  #create_customer .wpd_half {
+    width: 100% !important;
+  }
+}
+@media (min-width: 768px) {
+  #create_customer .wpd_half {
+    width: calc(50% - 32px) !important;
+  }
+}
+
+.section--wholesale-register {
+  min-height: 650px;
+}
+.text--center {
+  text-align: center;
+}
+.link--primary {
+  color: #5ac9d3;
+}
+@media (max-width: 1023px) {
+  .section--wholesale-register,
+  .section--wholesale-message {
+    padding-block: 32px;
+  }
+}
+@media (min-width: 1024px) {
+  .section--wholesale-register,
+  .section--wholesale-message {
+    padding-block: 72px;
+  }
+}
+.suggested_retail_price {
+  color: rgb(var(--product-on-sale-accent));
+  line-height: 1;
+  font-weight: bold;
+  margin-block: 0;
+}

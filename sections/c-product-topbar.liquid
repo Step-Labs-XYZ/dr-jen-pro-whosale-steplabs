@@ -1,0 +1,110 @@
+{%- style -%}
+  #c-prod-topbar-{{ section.id }} {
+    background: {{ section.settings.bg_color }};
+    color: {{ section.settings.text_color }};
+    text-align: center;
+    font-weight: {{ section.settings.font_weight }};
+    font-size: {{ section.settings.font_size_desktop }}px;
+    line-height: 1.3;
+    padding: {{ section.settings.pad_y_desktop }}px 16px;
+    overflow-wrap: anywhere;
+  }
+
+  @media (max-width: 899px) {
+    #c-prod-topbar-{{ section.id }} {
+      font-size: {{ section.settings.font_size_mobile }}px;
+      line-height: 1.25;
+      padding: {{ section.settings.pad_y_mobile }}px 12px;
+    }
+  }
+{%- endstyle -%}
+
+<div id="c-prod-topbar-{{ section.id }}" class="c-prod-topbar">
+  {%- if section.settings.custom_text != blank -%}
+    {{ section.settings.custom_text }}
+  {%- elsif product != blank -%}
+    {{ product.title }}
+  {%- else -%}
+    {{ shop.name }}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "C - Product Top Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "custom_text",
+      "label": "Texto personalizado",
+      "info": "Si queda vacio, usa el titulo del producto en paginas de producto."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Fondo",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color de texto",
+      "default": "#002C41"
+    },
+    {
+      "type": "range",
+      "id": "font_weight",
+      "label": "Peso de fuente",
+      "min": 400,
+      "max": 800,
+      "step": 100,
+      "default": 700
+    },
+    {
+      "type": "range",
+      "id": "font_size_desktop",
+      "label": "Tamano desktop",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "font_size_mobile",
+      "label": "Tamano mobile",
+      "min": 9,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "pad_y_desktop",
+      "label": "Padding vertical desktop",
+      "min": 4,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "pad_y_mobile",
+      "label": "Padding vertical mobile",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "C - Product Top Bar"
+    }
+  ]
+}
+{% endschema %}

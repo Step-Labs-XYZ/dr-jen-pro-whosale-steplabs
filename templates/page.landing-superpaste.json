@@ -1,0 +1,567 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {}
+    },
+    "1658221340cacc560e": {
+      "type": "Homepage-Banner-Alternative",
+      "settings": {
+        "heading": "Double Down on Strengthening  Your Teeth",
+        "heading_size": "5.5vw",
+        "subheading": "Dr.Jen’s all-natural toothpaste combines clinically proven Nano-Hydroxyapatite & fluoride designed to restore oral health and strengthen your smile and reduce teeth sensitivity.",
+        "button_link": "#featuredProductsSaving",
+        "button_text": "Add to Cart",
+        "button_color": "#df477f",
+        "desktop_image": "shopify://shop_images/splandingherodesktop_37267d87-a711-425f-893d-64315609af52.jpg",
+        "mobile_image": "shopify://shop_images/splandingheromobile_e2a81313-7f03-4dd2-802c-a38af4412e20.jpg",
+        "height_selector": "small"
+      }
+    },
+    "1661468418f00096a9": {
+      "type": "Superpaste-hero",
+      "disabled": true,
+      "settings": {
+        "heading": "Double <br>Down on Strengthening  Your Teeth",
+        "heading_size": "6vw",
+        "subheading": "Dr. Jen’s all-natural toothpaste combines clinically proven Nano-Hydroxyapatite & fluoride designed to restore oral health and strengthen your smile and reduce teeth sensitivity.",
+        "button_link": "#featuredProductsSaving",
+        "button_text": "Add to Cart",
+        "button_color": "#df477f",
+        "desktop_image": "shopify://shop_images/splandingherodesktop_37267d87-a711-425f-893d-64315609af52.jpg",
+        "mobile_image": "shopify://shop_images/splandingheromobile_e2a81313-7f03-4dd2-802c-a38af4412e20.jpg",
+        "height_selector": "small"
+      }
+    },
+    "1658221719e1787a3f": {
+      "type": "homepage1x4",
+      "blocks": {
+        "385b0a81-eacc-4cff-9c9b-cda367c56aad": {
+          "type": "Icon-Block",
+          "settings": {
+            "image": "shopify://shop_images/clinically-proven_png_f654af63-05d3-45a7-8507-02f7d15118be.png",
+            "title": "Clinically Proven Protection",
+            "info": ""
+          }
+        },
+        "81e65a53-ced7-4e7d-b871-8f599bf58a4b": {
+          "type": "Icon-Block",
+          "settings": {
+            "image": "shopify://shop_images/dentist-developed_png_fe920905-4577-4720-8f55-8f7b3f7d1a51.png",
+            "title": "Dentist Developed & Approved",
+            "info": ""
+          }
+        },
+        "b416cadd-0bf6-467a-8d4c-25a21826eb3b": {
+          "type": "Icon-Block",
+          "settings": {
+            "image": "shopify://shop_images/safe.png",
+            "title": "All-Natural Ingredients to Safely Whiten teeth",
+            "info": ""
+          }
+        }
+      },
+      "block_order": [
+        "385b0a81-eacc-4cff-9c9b-cda367c56aad",
+        "81e65a53-ced7-4e7d-b871-8f599bf58a4b",
+        "b416cadd-0bf6-467a-8d4c-25a21826eb3b"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "override_css": "[SectionID] + div{\nmargin-bottom: 80px;\n}"
+      }
+    },
+    "16594489360a1f2e22": {
+      "type": "featured-images",
+      "blocks": {
+        "1b9684e0-439f-4cae-8eb3-4ca66150fc30": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/UGC-1_copy_9886e6cd-5b10-420a-9fe0-837b9492a543.jpg"
+          }
+        },
+        "864c8491-cfc5-49c6-b8da-3c5fe49c397e": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/UGC-2.jpg"
+          }
+        },
+        "72469d9f-effb-482b-8cdb-426e3054f7b8": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/UGC-3.jpg"
+          }
+        },
+        "42449b3c-d3e0-4437-be1a-7334b8673f80": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/UGC-4.jpg"
+          }
+        },
+        "259b49c1-0a8b-4ad2-bc6d-29fb366695c0": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/UGC-5.jpg"
+          }
+        },
+        "ddcaaaff-7ceb-49fa-924a-3b0bb6922499": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/UGC-6.jpg"
+          }
+        },
+        "5f64fc38-8e7f-4c77-83b8-59e050c5678e": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/UGC-7.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "1b9684e0-439f-4cae-8eb3-4ca66150fc30",
+        "864c8491-cfc5-49c6-b8da-3c5fe49c397e",
+        "72469d9f-effb-482b-8cdb-426e3054f7b8",
+        "42449b3c-d3e0-4437-be1a-7334b8673f80",
+        "259b49c1-0a8b-4ad2-bc6d-29fb366695c0",
+        "ddcaaaff-7ceb-49fa-924a-3b0bb6922499",
+        "5f64fc38-8e7f-4c77-83b8-59e050c5678e"
+      ],
+      "settings": {
+        "heading": "Over 360,000 Healthier & Stronger Smiles"
+      }
+    },
+    "1658221842286d2dd8": {
+      "type": "Image-w-text-AB",
+      "settings": {
+        "section_image": "shopify://shop_images/splanding5050left.png",
+        "section_title": "Dr.Jens Super Paste with  Nano-Hydroxyapatite  & Flouride",
+        "section_text": "<p>• Made with all-natural ingredients<br/>• Paraben-free, vegan & cruelty-free<br/>• No harsh foaming agents: SLS & sulfate-free<br/>• Double remineralizing to strengthen and restore tooth enamel<br/>• Naturally whitening and ideal for sensitive teeth<br/>• Natural oils to restore mouth microbiome</p>",
+        "main_container_background": "#e7f8f8",
+        "section_second_text": "<p>• No Sodium Lauryl Sulfate<br/>• No Titanium Dioxide<br/>• No Propylene Glycol<br/>• No\tArtificial Color<br/>• Parabens Free</p>",
+        "second_text_font_color": "#ffffff",
+        "second_text_background": "#fc7157",
+        "bottom_container_title": "Ingredients:",
+        "bottom_container_text": "<p>Active Ingredient: 0.22% Sodium Fluoride. Inactive Ingredients: Aqua, Glycerin (soothes and moisturizes, derived from coconut), Silica (polishes teeth), Calcium Carbonate (helps whiten teeth), Xylitol (reduces the risk of dental decay), Nano-Hydroxyapatite (strengthens enamel), Cellulose Gum (thickens paste), Potassium Cocoate (foams paste from coconut oil), Peppermint Oil, Spearmint Oil, Citric Acid (preserves naturally), Black Cherry (provides powerful antioxidants and reduces inflammation), Papaya (provides powerful antioxidants), Glycyrrhiza Glabra (flavors with licorice root), Spirulina (provides powerful antioxidants and coloring)</p>",
+        "url": "#featuredProductsSaving",
+        "button_text": "Add to Cart",
+        "bottom_container_background": "#ffffff"
+      }
+    },
+    "165822189116e7879e": {
+      "type": "homepage1x4",
+      "blocks": {
+        "132b644d-80b6-44d8-a8f5-b5e179cc1677": {
+          "type": "Icon-Block",
+          "settings": {
+            "image": "shopify://shop_images/30-day.png",
+            "title": "",
+            "info": ""
+          }
+        },
+        "e4ffc29e-5da3-4a32-bbc9-b8358348e2bf": {
+          "type": "Icon-Block",
+          "settings": {
+            "image": "shopify://shop_images/secure-checkout.png",
+            "title": "",
+            "info": ""
+          }
+        },
+        "e86eeeba-a0eb-4fd0-a664-a5e805d3fbe2": {
+          "type": "Icon-Block",
+          "settings": {
+            "image": "shopify://shop_images/360k.png",
+            "title": "",
+            "info": ""
+          }
+        }
+      },
+      "block_order": [
+        "132b644d-80b6-44d8-a8f5-b5e179cc1677",
+        "e4ffc29e-5da3-4a32-bbc9-b8358348e2bf",
+        "e86eeeba-a0eb-4fd0-a664-a5e805d3fbe2"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "override_css": "[SectionID] > .homepage-1x4{\n    background: #E7F8F8;\n    padding-top: 0;\n    margin-top: 0 !important;\n}\n\n[SectionID] > .homepage-1x4 > .homepage-1x4-icons > .icon {\n    width: max-content !important;\n}\n\n[SectionID] > .homepage-1x4 > .homepage-1x4-icons > .icon > img {\n    max-width: 100px;\n    max-height: 100px;\n    height: 100px;\n}\n\n@media(max-width:768px){\n[SectionID] > .homepage-1x4{\n    background: #f4fefe;\n    padding-top: 40px;\n    margin-top: 0 !important;\n}\n}"
+      }
+    },
+    "1658222061ec572af7": {
+      "type": "image-with-text-altered",
+      "blocks": {
+        "16582220619f3f48bf-0": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/splanding5050right.png",
+            "tab_label": "Item",
+            "subheading": "",
+            "title": "All the good stuff. None of the bad.",
+            "content": "<p><em><strong>(Now that's refreshing!)</strong></em><strong><br/></strong>Our toothpaste is not only effective at remineralizing teeth, but also tastes delicious.  <br/><br/>Dr.Jen’s proprietary blend is the perfect balance of all-natural ingredients to help fight mouth microbiome for fresh breath and whiter teeth. . . naturally.</p>",
+            "button_text": "Add to Cart",
+            "button_link": "#featuredProductsSaving"
+          }
+        }
+      },
+      "block_order": [
+        "16582220619f3f48bf-0"
+      ],
+      "settings": {
+        "reveal_on_scroll": true,
+        "padding_top": true,
+        "background_type": "full_width",
+        "background_overlap": "image",
+        "hide_mobile_color_overlap": false,
+        "offset_color_overlap_desktop": false,
+        "image_position": "right",
+        "text_alignment": "left",
+        "cycle_speed": 8,
+        "accent_background": "rgba(0,0,0,0)",
+        "text_color": "rgba(0,0,0,0)",
+        "button_background": "#fb7056",
+        "button_text_color": "rgba(0,0,0,0)",
+        "background_color": "#fef9fb"
+      }
+    },
+    "165822247917338808": {
+      "type": "Homepage-Doctor-Testomonials",
+      "blocks": {
+        "ba21bf85-37dc-40ba-b5fc-ef5c833dbce9": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Dr_Peters_320x_conv_320x_600e721e-5d47-43a2-ab5a-950dda41d960.jpg",
+            "star_rating": 5,
+            "name": "Morgan. Licensed Dental Assistant",
+            "description": "\"As a Licensed Dental Assistant, I have tried many different kinds of toothpaste and Dr Jen's Super Paste has provided my teeth with the best results.  My teeth feel cleaner, and whiter with no sensitivity issues.  I highly recommend using Dr Jen's Super Paste\"",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "bdf3cdcc-6d68-4a92-a136-f27a168211de": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Dr_Peters_320x_conv.jpg",
+            "star_rating": 5,
+            "name": "Dr Peters",
+            "description": "\"I love the benefits of Dr Jen's Super Paste having double the remineralizing ingredients.  This is important to me and my patients.  Plus Dr Jen's was developed by a Dentist and a mother\"",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "dcb25167-adfc-4fcf-b2dc-2530846e5e8c": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/drjenalexandradentist.jpg",
+            "star_rating": 5,
+            "name": "Alexandra. Dental Hygienist",
+            "description": "\"I love Dr Jen's Super Paste!  Formulated by a real dentist using all-natural ingredients.  I can't remember the last time my teeth felt so clean using toothpaste as a Dental Hygienist, and as a Hygienist, I have tried a lot of different kinds of toothpaste.\"",
+            "star_color": "#8bd1cf"
+          }
+        }
+      },
+      "block_order": [
+        "ba21bf85-37dc-40ba-b5fc-ef5c833dbce9",
+        "bdf3cdcc-6d68-4a92-a136-f27a168211de",
+        "dcb25167-adfc-4fcf-b2dc-2530846e5e8c"
+      ],
+      "settings": {
+        "small_heading": "",
+        "large_heading": "Real dental professionals. Real reviews.",
+        "stack_content": true,
+        "round_image": false,
+        "bg_color": "#ffffff",
+        "text_color": "#1d2333",
+        "mobile_padding": 80
+      }
+    },
+    "1658222972a240ed56": {
+      "type": "text-w-image",
+      "disabled": true,
+      "settings": {
+        "heading": "The Dr. Jen Difference",
+        "subheading": "You'd think that all natural floss products would be good for your teeth, but they are not. Dr. Jen’s floss brings together all-natural ingredients, sustainable and biodegradable materials, as well as a proven remineralizer so it tastes good, \u0003feels good and fights decay without harming the planet.",
+        "section_image": "shopify://shop_images/comparison.png",
+        "button_url": "#featuredProductsSaving",
+        "button_text": "Add to Cart",
+        "button_color": "#df477f",
+        "Background_Color": "#fef6f2"
+      }
+    },
+    "166144295034f5fb59": {
+      "type": "text-with-image-compare",
+      "settings": {
+        "heading": "The Dr. Jen Super Paste Difference",
+        "subheading": "Proven to be the best all-natural toothpaste on the market for strengthening your smile, Dr. Jen’s Super Paste brings together Nano-Hydroxyapatite combined with a safe & efficatious dose of flouride to maximize remineralization.",
+        "section_image": "shopify://shop_images/spcomparison.png",
+        "additional_text": "",
+        "first_icon_text": "",
+        "second_icon_text": "",
+        "button_url": "#featuredProductsSaving",
+        "button_text": "Add to Cart",
+        "button_color": "#df477f",
+        "Background_Color": "#edfafa"
+      }
+    },
+    "1658224180b5a18ed7": {
+      "type": "MC-Testimonials",
+      "blocks": {
+        "c0fc9b10-e5c8-48a5-a1b5-4183ccc6a77e": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": 5,
+            "description": "\"Before using Dr Jen's Super Paste, my dentist had on a high prescription fluoride toothpaste.  After switching to Dr Jen's Super Paste, my dentist noticed an improvement with my enamel.  Not only are my teeth healthier using Dr Jen's Super Paste, I also feel better about using toothpaste with all-natural ingredients.  I would highly recommend Dr Jen's Super Paste\"",
+            "buyer_name": "Amada O",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "d6f48ad6-0629-47d9-ac1f-00e6c0f0d470": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": 5,
+            "description": "\"After Using Dr Jen's Super Paste I have noticed less sensitivity and whiter teeth.  Also, I have little or no morning breath. Dr Jen's real peppermint and spearmint oil not only taste great but do a great job freshening my breath\"",
+            "buyer_name": "Peter A",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "a65492ad-fa6b-4923-a2b1-8d01e880f1d9": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": 5,
+            "description": "\"After struggling with chronic dental issues, I switched to Dr Jen's Super Paste.  At my last dental exam, my dentist said I had less inflammation and no new decay.  He even asked what I was doing differently.  Thank you Dr Jen!\"",
+            "buyer_name": "Emily B",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "1c05c6c3-db33-419d-ad74-156a2c587b1c": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": 5,
+            "description": "\"Due to weak enamel and sensitivity with my teeth, I had been using Sensodyne Pronamel for years.  After learning about Dr Jen's Super Paste I decide to give it a try and right away noticed no sensitivity.  My teeth also feel cleaner and whiter\"",
+            "buyer_name": "Kevin P",
+            "star_color": "#8bd1cf"
+          }
+        }
+      },
+      "block_order": [
+        "c0fc9b10-e5c8-48a5-a1b5-4183ccc6a77e",
+        "d6f48ad6-0629-47d9-ac1f-00e6c0f0d470",
+        "a65492ad-fa6b-4923-a2b1-8d01e880f1d9",
+        "1c05c6c3-db33-419d-ad74-156a2c587b1c"
+      ],
+      "settings": {
+        "testimonials_heading": "Customer Reviews",
+        "bg_color": "#ffffff",
+        "text_color": "#1d2433"
+      }
+    },
+    "1659013508d465d7ed": {
+      "type": "Featured-Saving-Products",
+      "blocks": {
+        "1f7b4fd8-ea88-41ea-b54f-63e337239436": {
+          "type": "Product-Saving",
+          "settings": {
+            "product_selling": "dr-jen-super-paste-with-nano-hydroxyapatite-fluoride",
+            "offer_text": "One time Purchase",
+            "discount_percentage": 0,
+            "product_quantity": 1,
+            "saving_color": "#f37d45",
+            "product_image": "shopify://shop_images/spsingle.png"
+          }
+        },
+        "de28f186-cbc2-4f42-8b71-781ccafb2bf0": {
+          "type": "Product-Saving",
+          "settings": {
+            "product_selling": "dr-jen-super-paste-with-nano-hydroxyapatite-fluoride",
+            "offer_text": "Buy 2 tubes - Save 15%",
+            "discount_percentage": 15,
+            "product_quantity": 2,
+            "saving_color": "#df477f",
+            "product_image": "shopify://shop_images/sp15.png"
+          }
+        },
+        "619ec7a3-4d6a-4e02-81f8-e20bafaa5ab2": {
+          "type": "Product-Saving",
+          "settings": {
+            "product_selling": "dr-jen-super-paste-with-nano-hydroxyapatite-fluoride",
+            "offer_text": "Buy 3 tubes  - Save 20%",
+            "discount_percentage": 20,
+            "product_quantity": 3,
+            "saving_color": "#8bd3cf",
+            "product_image": "shopify://shop_images/sp20_45df870c-0817-4ea6-b86b-72edae574726.png"
+          }
+        }
+      },
+      "block_order": [
+        "1f7b4fd8-ea88-41ea-b54f-63e337239436",
+        "de28f186-cbc2-4f42-8b71-781ccafb2bf0",
+        "619ec7a3-4d6a-4e02-81f8-e20bafaa5ab2"
+      ],
+      "settings": {}
+    },
+    "1658224292daf91134": {
+      "type": "Homepage-Icon-w-text",
+      "settings": {
+        "image": "shopify://shop_images/smile-icon.png",
+        "heading": "Dr. Jen’s 30 Day Smile Guarantee",
+        "subheading": "<p>If your teeth are not happy, we’re not happy and your toothpaste is on us!</p>"
+      }
+    },
+    "1659634107cc0bcc0f": {
+      "type": "video",
+      "settings": {
+        "subheading": "",
+        "title": "Backed by over 25 years of Dental Experience",
+        "video_url": "https://www.youtube.com/watch?v=oKiFSgmNs9A&ab_channel=Dr.JenNatural",
+        "image": "shopify://shop_images/thumbnail.png",
+        "background_type": "boxed",
+        "video_size": "auto",
+        "autoplay": false,
+        "background": "rgba(0,0,0,0)",
+        "text_color": "rgba(0,0,0,0)"
+      }
+    },
+    "1661459487b2577c92": {
+      "type": "image-with-text",
+      "disabled": true,
+      "blocks": {
+        "16614594874c86eab8-0": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/drjennasa.png",
+            "tab_label": "Item",
+            "subheading": "",
+            "title": "The Science Behind Our Super Paste",
+            "content": "<p>The key remineralizing ingredient found in Dr.Jen’s toothpaste was originally discovered by NASA. Clinically proven effective in remineralizing and repairing bones and teeth, <br/><br/>Nano-Hydroxyapatite can be found in Dr. Jen’s Super Paste for stronger and healthier, out of this world smiles.</p>",
+            "button_text": "Add To Cart",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "16614594874c86eab8-0"
+      ],
+      "settings": {
+        "reveal_on_scroll": true,
+        "padding_top": true,
+        "background_type": "full_width",
+        "background_overlap": "image",
+        "image_position": "right",
+        "text_alignment": "left",
+        "cycle_speed": 8,
+        "accent_background": "rgba(0,0,0,0)",
+        "text_color": "#2e394f",
+        "button_background": "#df477f",
+        "button_text_color": "#ffffff",
+        "background_color": "#edfafa"
+      }
+    },
+    "166172593849d8eb02": {
+      "type": "image-with-text-NASA",
+      "blocks": {
+        "16617259384363f8fb-0": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/drjennasa.png",
+            "tab_label": "Item",
+            "subheading": "",
+            "title": "The Science Behind Our Super Paste",
+            "content": "<p>The key remineralizing ingredient found in Dr.Jen’s toothpaste was originally discovered by NASA. Clinically proven effective in remineralizing and repairing bones and teeth,<br/><br/>Nano-Hydroxyapatite can be found in Dr. Jen’s Super Paste for stronger and healthier, out of this world smiles.</p>",
+            "button_text": "Add to Cart",
+            "button_link": "#featuredProductsSaving"
+          }
+        }
+      },
+      "block_order": [
+        "16617259384363f8fb-0"
+      ],
+      "settings": {
+        "reveal_on_scroll": true,
+        "padding_top": true,
+        "background_type": "full_width",
+        "background_overlap": "image",
+        "image_position": "right",
+        "text_alignment": "left",
+        "cycle_speed": 8,
+        "accent_background": "rgba(0,0,0,0)",
+        "text_color": "#2e394f",
+        "button_background": "#df477f",
+        "button_text_color": "#ffffff",
+        "background_color": "#edfafa"
+      }
+    },
+    "165901374621e001f0": {
+      "type": "Featured-Products",
+      "settings": {
+        "featured_products": "all-products",
+        "featured_heading": "Dr. Jen’s Toothpastes"
+      }
+    },
+    "1659013797c9904ba4": {
+      "type": "homepage1x4",
+      "blocks": {
+        "1a1f8c54-266f-44ab-a6c5-79568dc8e66d": {
+          "type": "Icon-Block",
+          "settings": {
+            "image": "shopify://shop_images/environmentally-friendly.png",
+            "title": "Environmentally Friendly",
+            "info": ""
+          }
+        },
+        "c0ddfb5f-9e4a-4275-8f57-0953ce1c071c": {
+          "type": "Icon-Block",
+          "settings": {
+            "image": "shopify://shop_images/no-animal-testing.png",
+            "title": "No Animal Testing",
+            "info": ""
+          }
+        }
+      },
+      "block_order": [
+        "1a1f8c54-266f-44ab-a6c5-79568dc8e66d",
+        "c0ddfb5f-9e4a-4275-8f57-0953ce1c071c"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "<p><strong>Dr.Jen’s products are good for your body & good for the earth. Our toothpastes are earthfriendly, made from all biodegradeable materials, vegan friendly, and never tested on animals.</strong></p>",
+        "override_css": "[SectionID]> .homepage-1x4 > p { \nfont-size: 27px;\n}\n\n[SectionID] > .homepage-1x4 > .homepage-1x4-icons > .icon {\nwidth: max-content;\n}\n\n@media(max-width:768px){\n\n[SectionID] > .homepage-1x4 > p {\n    font-size: 15px;\n    padding: 15px;\n}\n}"
+      }
+    },
+    "16599035620d98e26e": {
+      "type": "apps",
+      "settings": {
+        "include_horizontal_margins": true,
+        "include_vertical_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1658221340cacc560e",
+    "1661468418f00096a9",
+    "1658221719e1787a3f",
+    "16594489360a1f2e22",
+    "1658221842286d2dd8",
+    "165822189116e7879e",
+    "1658222061ec572af7",
+    "165822247917338808",
+    "1658222972a240ed56",
+    "166144295034f5fb59",
+    "1658224180b5a18ed7",
+    "1659013508d465d7ed",
+    "1658224292daf91134",
+    "1659634107cc0bcc0f",
+    "1661459487b2577c92",
+    "166172593849d8eb02",
+    "165901374621e001f0",
+    "1659013797c9904ba4",
+    "16599035620d98e26e"
+  ]
+}

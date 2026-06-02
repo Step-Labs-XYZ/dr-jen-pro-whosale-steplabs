@@ -1,0 +1,125 @@
+{{ 'section-new-banner.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  .section-{{ section.id }} {
+      background-color: {{ section.settings.bg_color }};
+      display: flex;
+      flex-direction: row;
+      padding: 30px 60px;
+      align-items: center;
+      justify-content: center;
+      gap: 120px;
+  }
+  .section-{{ section.id }} .new-banner__title {
+      color: {{ section.settings.title_color }};
+  }
+  .section-{{ section.id }} .new-banner__content {
+      color: {{ section.settings.content_color }};
+  }
+  @media (max-width: 1150px) {
+    .section-{{ section.id }} {
+      gap: 30px;
+    }
+  }
+  @media (max-width: 912px) {
+    .section-{{ section.id }} {
+      padding-top: 80px; 
+    }
+  }
+  @media (max-width: 768px) {
+    .section-{{ section.id }} {
+      flex-direction: column;
+      padding: 80px 30px 70px;
+      gap: 10px;
+    }
+  }
+  @media (max-width: 740px) {
+    .section-{{ section.id }} {
+      padding-top: 50px;
+    }
+  }
+  @media (max-width: 512px) {
+    #main {
+        margin-top: 99px !important;
+    }
+    .section-{{ section.id }} {
+      padding-top: 20px;
+    }
+  }
+{% endstyle %}
+
+<div class="section-{{ section.id }}">
+  <div class="new-banner__content-wrapper">
+    {% if section.settings.title %}
+      <p class="new-banner__title">{{ section.settings.title }}</p>
+    {% endif %}
+    {% if section.settings.content %}
+      <div class="new-banner__content">{{ section.settings.content }}</div>
+    {% endif %}
+    {% if section.settings.button_text %}
+      <a class="new-banner__button" href="{% if section.settings.button_link != blank %}{{ section.settings.button_link }}{% else %}#new-register-section{% endif %}">{{ section.settings.button_text }}</a>
+    {% endif %}
+  </div>
+  <div class="new-banner__image-wrapper">
+    <div class="new-banner__image">
+      <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.image.alt }}">
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "New banner",
+  "class": "new-banner",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#FB9CA6"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "html",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "color",
+      "id": "content_color",
+      "label": "Content color",
+      "default": "#1D2433"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "New banner"
+    }
+  ]
+}
+{% endschema %}

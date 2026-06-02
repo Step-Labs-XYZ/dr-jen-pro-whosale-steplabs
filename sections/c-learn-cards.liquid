@@ -1,0 +1,595 @@
+<div id="c-learn-cards-{{ section.id }}" class="c-learn-cards" data-section-id="{{ section.id }}">
+  <div class="c-learn-cards__container">
+
+    <div class="c-learn-cards__header">
+      <div class="c-learn-cards__header-left">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="c-learn-cards__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.view_all_text != blank and section.settings.view_all_url != blank -%}
+        <a href="{{ section.settings.view_all_url }}" class="c-learn-cards__shop-all">
+          {{ section.settings.view_all_text }}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: 4px; vertical-align: middle;">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="c-learn-cards__grid" id="learn-cards-grid-{{ section.id }}">
+      {%- for block in section.blocks -%}
+        <div class="c-learn-cards__card" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <div class="c-learn-cards__image-wrap">
+              <a href="{{ block.settings.link_url | default: '#' }}" class="c-learn-cards__image-link">
+                <img
+                  src="{{ block.settings.image | image_url: width: 900 }}"
+                  alt="{{ block.settings.title | escape }}"
+                  width="450"
+                  height="338"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+          {%- endif -%}
+          <div class="c-learn-cards__body">
+            {%- if block.settings.title != blank -%}
+              <p class="c-learn-cards__title">{{ block.settings.title }}</p>
+            {%- endif -%}
+            {%- if block.settings.link_url != blank -%}
+              <a href="{{ block.settings.link_url }}" class="c-learn-cards__learn-btn">
+                {{ block.settings.btn_label | default: section.settings.default_btn_label | default: 'LEARN MORE' }}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="c-learn-cards__scrollbar-container">
+      <div class="c-learn-cards__scrollbar-track">
+        <div class="c-learn-cards__scrollbar-thumb" id="learn-cards-thumb-{{ section.id }}"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&display=swap');
+
+/* ── Contenedor principal ── */
+#c-learn-cards-{{ section.id }} {
+  background-color: {{ section.settings.bg_color }};
+  padding-top: {{ section.settings.padding_top_desktop }}px;
+  padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+}
+
+#c-learn-cards-{{ section.id }} .c-learn-cards__container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ── Header ── */
+#c-learn-cards-{{ section.id }} .c-learn-cards__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+  gap: 20px;
+}
+
+#c-learn-cards-{{ section.id }} .c-learn-cards__header-left {
+  flex: 1;
+  min-width: 0;
+}
+
+#c-learn-cards-{{ section.id }} .c-learn-cards__heading {
+  font-family: 'Raleway', sans-serif;
+  font-size: {{ section.settings.heading_size_desktop }}px;
+  font-weight: 600;
+  color: {{ section.settings.heading_color }};
+  margin: 0;
+  line-height: 1.2;
+  max-width: {{ section.settings.heading_max_width_desktop }}px;
+}
+
+#c-learn-cards-{{ section.id }} .c-learn-cards__shop-all {
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: {{ section.settings.heading_color }};
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+#c-learn-cards-{{ section.id }} .c-learn-cards__shop-all:hover {
+  opacity: 0.7;
+}
+
+/* ── Grid Desktop ── */
+#c-learn-cards-{{ section.id }} .c-learn-cards__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: {{ section.settings.grid_gap_desktop }}px;
+}
+
+/* ── Card ── */
+#c-learn-cards-{{ section.id }} .c-learn-cards__card {
+  position: relative;
+  height: {{ section.settings.card_height_desktop }}px;
+  border-radius: {{ section.settings.card_radius }}px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+#c-learn-cards-{{ section.id }} .c-learn-cards__card:hover {
+  transform: translateY(-4px);
+}
+
+/* ── Image ── */
+#c-learn-cards-{{ section.id }} .c-learn-cards__image-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#c-learn-cards-{{ section.id }} .c-learn-cards__image-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#c-learn-cards-{{ section.id }} .c-learn-cards__image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+#c-learn-cards-{{ section.id }} .c-learn-cards__card:hover .c-learn-cards__image-wrap img {
+  transform: scale(1.03);
+}
+
+/* ── Body ── */
+#c-learn-cards-{{ section.id }} .c-learn-cards__body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 12px;
+  padding: {{ section.settings.card_pad_desktop }}px;
+  background: rgba(255, 255, 255, 0.64);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+#c-learn-cards-{{ section.id }} .c-learn-cards__title {
+  font-family: 'Raleway', sans-serif;
+  font-size: {{ section.settings.title_size_desktop }}px;
+  font-weight: 700;
+  color: {{ section.settings.text_color }};
+  margin: 0;
+  line-height: 1.2;
+  text-align: left;
+  width: 100%;
+}
+
+/* ── LEARN MORE button ── */
+#c-learn-cards-{{ section.id }} .c-learn-cards__learn-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: flex-start;
+  padding: 12px 24px;
+  border-radius: 44px;
+  width:100%;
+  border: 2px solid {{ section.settings.btn_border_color }};
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: {{ section.settings.btn_text_color }};
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 0.2s ease, color 0.2s ease;
+  margin-top: auto;
+}
+
+#c-learn-cards-{{ section.id }} .c-learn-cards__learn-btn:hover {
+  background: {{ section.settings.btn_border_color }};
+  color: #ffffff;
+}
+
+/* ── Scrollbar (oculto en desktop) ── */
+#c-learn-cards-{{ section.id }} .c-learn-cards__scrollbar-container {
+  display: none;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 978px) {
+  #c-learn-cards-{{ section.id }} .c-learn-cards__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  #c-learn-cards-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  #c-learn-cards-{{ section.id }} .c-learn-cards__container {
+    padding: 0;
+  }
+
+  #c-learn-cards-{{ section.id }} .c-learn-cards__header {
+    padding: 0 20px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    margin-bottom: 30px;
+  }
+
+  #c-learn-cards-{{ section.id }} .c-learn-cards__header-left {
+    flex: 1;
+    min-width: 0;
+  }
+
+  #c-learn-cards-{{ section.id }} .c-learn-cards__heading {
+    font-size: {{ section.settings.heading_size_mobile }}px;
+    max-width: {{ section.settings.heading_max_width_mobile }}px;
+  }
+
+  /* Carrusel horizontal en mobile */
+  #c-learn-cards-{{ section.id }} .c-learn-cards__grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 20px;
+    gap: {{ section.settings.grid_gap_mobile }}px;
+    padding: 0 0 20px 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  #c-learn-cards-{{ section.id }} .c-learn-cards__card:first-child {
+    margin-left: 20px;
+  }
+
+  #c-learn-cards-{{ section.id }} .c-learn-cards__card:last-child {
+    margin-right: 20px;
+  }
+
+  #c-learn-cards-{{ section.id }} .c-learn-cards__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  #c-learn-cards-{{ section.id }} .c-learn-cards__card {
+    flex: 0 0 {{ section.settings.card_width_mobile }}%;
+    height: {{ section.settings.card_height_mobile }}px;
+    scroll-snap-align: start;
+  }
+
+  #c-learn-cards-{{ section.id }} .c-learn-cards__body {
+    padding: {{ section.settings.card_pad_mobile }}px;
+    gap: 12px;
+  }
+
+  #c-learn-cards-{{ section.id }} .c-learn-cards__title {
+    font-size: {{ section.settings.title_size_mobile }}px;
+  }
+
+  /* Scrollbar móvil */
+  #c-learn-cards-{{ section.id }} .c-learn-cards__scrollbar-container {
+    display: block;
+    padding: 0 20px;
+    margin-top: 12px;
+  }
+
+  #c-learn-cards-{{ section.id }} .c-learn-cards__scrollbar-track {
+    width: 100%;
+    height: 4px;
+    background-color: #E2E8F0;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #c-learn-cards-{{ section.id }} .c-learn-cards__scrollbar-thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: {{ section.settings.heading_color }};
+    border-radius: 4px;
+    width: 33%;
+    transition: left 0.1s ease-out;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const track = document.getElementById('learn-cards-grid-{{ section.id }}');
+  const thumb = document.getElementById('learn-cards-thumb-{{ section.id }}');
+
+  if (track && thumb) {
+    const updateScrollbar = () => {
+      const scrollRatio = track.clientWidth / track.scrollWidth;
+      const thumbWidthPercent = Math.max(scrollRatio * 100, 15);
+      thumb.style.width = `${thumbWidthPercent}%`;
+
+      const maxScrollLeft = track.scrollWidth - track.clientWidth;
+      if (maxScrollLeft > 0) {
+        const scrollPercent = track.scrollLeft / maxScrollLeft;
+        const maxThumbLeft = 100 - thumbWidthPercent;
+        thumb.style.left = `${scrollPercent * maxThumbLeft}%`;
+      } else {
+        thumb.style.left = '0%';
+      }
+    };
+
+    track.addEventListener('scroll', updateScrollbar);
+    window.addEventListener('resize', updateScrollbar);
+    setTimeout(updateScrollbar, 100);
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "C Learn Cards",
+  "class": "section-c-learn-cards",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading & Link Color",
+      "default": "#002C41"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Card Title Color",
+      "default": "#1F2023"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "btn_border_color",
+      "label": "Button Border Color",
+      "default": "#002C41"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Button Text Color",
+      "default": "#002C41"
+    },
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Learn more about 10% nHAp"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "Shop All Text",
+      "default": "SHOP ALL"
+    },
+    {
+      "type": "url",
+      "id": "view_all_url",
+      "label": "Shop All URL"
+    },
+    {
+      "type": "text",
+      "id": "default_btn_label",
+      "label": "Default Button Label",
+      "default": "LEARN MORE"
+    },
+    {
+      "type": "header",
+      "content": "Card Style"
+    },
+    {
+      "type": "range",
+      "id": "card_height_desktop",
+      "min": 200, "max": 700, "step": 5, "unit": "px",
+      "label": "Card Height (Desktop)",
+      "default": 435
+    },
+    {
+      "type": "range",
+      "id": "card_height_mobile",
+      "min": 200, "max": 600, "step": 5, "unit": "px",
+      "label": "Card Height (Mobile)",
+      "default": 380
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0, "max": 24, "step": 1, "unit": "px",
+      "label": "Card Border Radius",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "card_shadow_opacity",
+      "min": 0, "max": 20, "step": 1, "unit": "%",
+      "label": "Card Shadow Opacity",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "min": 20, "max": 60, "step": 1, "unit": "px",
+      "label": "Heading Size",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "heading_max_width_desktop",
+      "min": 100, "max": 900, "step": 10, "unit": "px",
+      "label": "Heading Max Width",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "title_size_desktop",
+      "min": 12, "max": 24, "step": 1, "unit": "px",
+      "label": "Card Title Size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "card_pad_desktop",
+      "min": 12, "max": 48, "step": 2, "unit": "px",
+      "label": "Card Body Padding",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "grid_gap_desktop",
+      "min": 8, "max": 60, "step": 2, "unit": "px",
+      "label": "Gap Between Cards",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0, "max": 120, "step": 5, "unit": "px",
+      "label": "Padding Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0, "max": 120, "step": 5, "unit": "px",
+      "label": "Padding Bottom",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 16, "max": 40, "step": 1, "unit": "px",
+      "label": "Heading Size",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "heading_max_width_mobile",
+      "min": 100, "max": 600, "step": 10, "unit": "px",
+      "label": "Heading Max Width",
+      "default": 240
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "min": 12, "max": 20, "step": 1, "unit": "px",
+      "label": "Card Title Size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "card_pad_mobile",
+      "min": 8, "max": 32, "step": 2, "unit": "px",
+      "label": "Card Body Padding",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "grid_gap_mobile",
+      "min": 8, "max": 32, "step": 2, "unit": "px",
+      "label": "Gap Between Cards",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "card_width_mobile",
+      "min": 50, "max": 98, "step": 1, "unit": "%",
+      "label": "Card Width (Peek Control)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0, "max": 100, "step": 5, "unit": "px",
+      "label": "Padding Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0, "max": 100, "step": 5, "unit": "px",
+      "label": "Padding Bottom",
+      "default": 50
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Introducing Dr.Jen's 10% nanohydroxyapatite Toothpaste" },
+        { "type": "url", "id": "link_url", "label": "Link URL" },
+        { "type": "text", "id": "btn_label", "label": "Button Label (leave blank for default)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "C Learn Cards",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

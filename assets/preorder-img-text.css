@@ -1,0 +1,34 @@
+.text-img-box{
+      display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 20px;
+margin-bottom:3%;
+}
+
+@media only screen and (max-width: 769px) {
+  .text-img-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    row-gap: 20px;
+    flex-direction: column;
+}
+h3.custom-size.h2 {
+    font-size: 24px;
+    line-height: 34px;
+    margin-bottom: 5px;
+}
+}
+@media only screen and (max-width: 430px) {
+h3.custom-size.h2 {
+    font-size: 20px;
+   line-height: 24px;
+}
+}
+@media only screen and (max-width: 380px) {
+h3.custom-size.h2 {
+    font-size: 18px;
+   line-height: 24px;
+}
+}

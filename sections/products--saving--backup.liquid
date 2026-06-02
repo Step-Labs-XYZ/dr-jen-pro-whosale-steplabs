@@ -1,0 +1,483 @@
+<style>
+  .cell__wrapper{
+    border:3px solid transparent;
+  }
+  .featured-products-saving {
+  margin-top: 125px;
+  gap: 5px;
+  }
+    flavor-wrapper h4 {
+      margin-bottom: 0 !important;
+    }
+    .flavor-name-placeholder {
+      text-transform: uppercase;
+      font-size: 12px;
+      margin-bottom: 0.5rem;
+    }
+    .flavor-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+    .flavor-option {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        /* margin-right: 20px; */
+        /* padding: 0px 10px; */
+        margin: 0px 10px;
+    }
+    .flavor-wrapper input[type="radio"] {
+        display: none;
+    }
+    .flavor-wrapper input[type="radio"]:checked + label {
+        border: 2px solid grey;
+    }
+    div.buy-now-product-saving {
+        margin: auto;
+        cursor: pointer;
+    }
+@media screen and (max-width: 1309px){
+  .featured-products-saving {
+  margin-top: 100px;
+  gap: 100px 5px;
+  }
+  .product-saving-cell:nth-child(2) {
+    margin-block:0;
+  }
+}
+</style>
+
+<div class="container">
+<div class="featured-products-saving product_{{ product.handle }}" id="featuredProductsSaving">
+    {% for block in section.blocks %}
+        {% if block.type == "Product-Saving" %}
+            {%- assign product_form_id = 'product-form-' | append: block.id | append: '-' | append: all_products[block.settings.product_selling].id -%}
+            <div class="product-saving-cell   product-saving-{{ product.id }}-{{ forloop.index }}" style="border: 3px solid {{block.settings.saving_color}};">
+                <div class="cell__wrapper">
+                <div class="product-saving-cell-image">
+                    <img src="{{ block.settings.product_image | img_url: 'master' }}" alt="{{ block.title }}">                     
+                </div>
+                </div>
+                <div class="txt-box">
+                    <div class="product-saving-cell-title">
+                        <h3>{{ all_products[block.settings.product_selling].title }}</h3>
+                    </div>
+                    {% assign product = all_products[block.settings.product_selling] %}
+                    <div class="product-falvor-swatches">
+                        <div class="product-flavor-swatch">
+                            {% if block.settings.color_header1 != "" %}
+                            <flavor-wrapper>
+                                <h4>{{block.settings.color_header1}}</h4>
+                                <div class="flavor-name-placeholder"></div>
+                                <div class="flavor-wrapper">
+                                    {% assign first_flag = false %}
+                                    {% for color_block in section.blocks %}
+                                        {% if color_block.type == "Product-Color" %}
+                                            {% for variant in product.variants %}
+                                                {% if color_block.settings.color_name == variant.title %}
+                                                    {% assign variant_id = variant.id %}
+                                                    {% assign flavor_name = color_block.settings.color_name %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            <input data-flavor-name="{{ flavor_name }}" data-variant-id="{{variant_id}}" type="radio" name="{{block.id}}_color1" id = "{{block.id}}_{{color_block.id}}_color1" {% if first_flag == false %} {% assign first_flag = true %} checked {% endif %}>
+                                            <label for="{{block.id}}_{{color_block.id}}_color1" class="flavor-option" style="background-color:{{color_block.settings.color_pick}}"></label>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                              </flavor-wrapper>
+                            {% endif %}
+
+                            {% if block.settings.color_header2 != "" %}
+                              <flavor-wrapper>
+                                <h4>{{block.settings.color_header2}}</h4>
+                                <div class="flavor-name-placeholder"></div>
+                                <div class="flavor-wrapper">
+                                    {% assign first_flag = false %}
+                                    {% for color_block in section.blocks %}
+                                        {% if color_block.type == "Product-Color" %}
+                                            {% for variant in product.variants %}
+                                                {% if color_block.settings.color_name == variant.title %}
+                                                    {% assign variant_id = variant.id %}
+                                                    {% assign flavor_name = color_block.settings.color_name %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            <input data-flavor-name="{{ flavor_name }}" data-variant-id="{{variant_id}}" type="radio" name="{{block.id}}_color2" id = "{{block.id}}_{{color_block.id}}_color2" {% if first_flag == false %} {% assign first_flag = true %} checked {% endif %}>
+                                            <label for="{{block.id}}_{{color_block.id}}_color2" class="flavor-option" style="background-color:{{color_block.settings.color_pick}}"></label>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                              </flavor-wrapper>
+                            {% endif %}
+
+                            {% if block.settings.color_header3 != "" %}
+                              <flavor-wrapper>
+                                <h4>{{block.settings.color_header3}}</h4>
+                                <div class="flavor-name-placeholder"></div>
+                                <div class="flavor-wrapper">
+                                    {% assign first_flag = false %}
+                                    {% for color_block in section.blocks %}
+                                        {% if color_block.type == "Product-Color" %}
+                                            {% for variant in product.variants %}
+                                                {% if color_block.settings.color_name == variant.title %}
+                                                    {% assign variant_id = variant.id %}
+                                                    {% assign flavor_name = color_block.settings.color_name %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            <input data-flavor-name="{{ flavor_name }}" data-variant-id="{{variant_id}}" type="radio" name="{{block.id}}_color3" id = "{{block.id}}_{{color_block.id}}_color3" {% if first_flag == false %} {% assign first_flag = true %} checked {% endif %}>
+                                            <label for="{{block.id}}_{{color_block.id}}_color3" class="flavor-option" style="background-color:{{color_block.settings.color_pick}}"></label>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                              </flavor-wrapper>
+                            {% endif %}
+                            {% if block.settings.color_header4 != "" %}
+                              <flavor-wrapper>
+                                <h4>{{block.settings.color_header4}}</h4>
+                                <div class="flavor-name-placeholder"></div>
+                                <div class="flavor-wrapper">
+                                    {% assign first_flag = false %}
+                                    {% for color_block in section.blocks %}
+                                        {% if color_block.type == "Product-Color" %}
+                                            {% for variant in product.variants %}
+                                                {% if color_block.settings.color_name == variant.title %}
+                                                    {% assign variant_id = variant.id %}
+                                                    {% assign flavor_name = color_block.settings.color_name %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            <input data-flavor-name="{{ flavor_name }}" data-variant-id="{{variant_id}}" type="radio" name="{{block.id}}_color4" id = "{{block.id}}_{{color_block.id}}_color4" {% if first_flag == false %} {% assign first_flag = true %} checked {% endif %}>
+                                            <label for="{{block.id}}_{{color_block.id}}_color4" class="flavor-option" style="background-color:{{color_block.settings.color_pick}}"></label>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                              </flavor-wrapper>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="product-saving-cell-offer">
+                        <p>{{block.settings.offer_text}}</p>
+                    </div>
+
+                    <div class="product-saving-cell-price">
+                        {% assign originalValue = all_products[block.settings.product_selling].price | times: block.settings.product_quantity %}
+                        {% assign dv = block.settings.discount_percentage %}
+                        {% assign discountValue = all_products[block.settings.product_selling].price | times: dv  %}
+                        {% assign finalDiscount = discountValue  | divided_by: 100 | times:  block.settings.product_quantity %}
+                        {% if block.settings.product_quantity > 1 %}
+                            <span class="price-old" style="text-decoration: line-through;">{{  originalValue | money}}</span> 
+                        {% endif %}
+                        <span class="price-new">{{ originalValue  | minus: finalDiscount | money }}</span>
+                    </div>
+                </div>
+
+                <div data-product-add="{{ all_products[block.settings.product_selling].selected_or_first_available_variant.id }}" data-quantity="{{ block.settings.product_quantity }}" data-selling-plan="{{ block.settings.selling_plan }}" class="product-saving-cell-button">
+          {% comment %}
+                    {%- form 'product',  all_products[block.settings.product_selling], is: 'product-form', id: product_form_id -%}
+                    <input type="hidden" disabled name="id" value="{{  all_products[block.settings.product_selling].selected_or_first_available_variant.id }}">
+                    <input type="hidden" form="{{product_form_id}}" is="input-number" class="quantity-selector__input" inputmode="numeric" name="quantity" autocomplete="off" min="1" value="{{ block.settings.product_quantity }}" size="2" aria-label="Quantity">
+
+                    <div class="buy-now-product-saving" style="background-color: {{block.settings.saving_color}};">Buy Now</div>
+                {%- endform -%}
+          {% endcomment %}
+<!--           jod add start here -->
+              {% if block.settings.color_header3 != '' or block.settings.color_header2 != '' or block.settings.color_header1 != '' or block.settings.color_header4 != '' %}
+                
+<!--                   floss product -->
+                  
+                  <div class="buy-now-product-saving buy-now-product-saving-with-flavors" style="background-color: {{block.settings.saving_color}};">Buy Now</div>
+
+                   </a>
+                   <div class="{% if product.tags contains 'select_flavors' %}btn_with_subscribe{% endif %}">
+                
+                     <div class="buy-now-product-saving" style="background-color: {{block.settings.saving_color}}; margin-top:10px;">
+                Subscribe Now
+                <div class="discount_text">{{ block.settings.text_subs_percent }}</div> <div style="font-size:14px">(Delivery every {{ block.settings.subscription_duration }} months)</div>
+                </div>
+            </div>
+                {% else %}
+              
+<!--                 non floss product -->
+                  
+                    {% if product.id == 7081172074664 or product.id == 7081180889256 %}
+                    <div class="atc_with_gift" style="background-color: {{block.settings.saving_color}};">Buy Now
+
+                    </div>
+
+                   
+                    <div class="atc_with_gift_subs" style="background-color: {{block.settings.saving_color}}; margin-top:10px;">
+                          Subscribe Now
+
+                        <div class="discount_text">{{ block.settings.text_subs_percent }}</div>  
+                        <div style="font-size:14px">(Delivery every {{ block.settings.subscription_duration }} months)</div>
+                    </div>
+                    
+
+                    {% else %}
+                        <a href="/cart/add?id={{ all_products[block.settings.product_selling].selected_or_first_available_variant.id }}&quantity={{ block.settings.product_quantity }}">
+                        <div class="buy-now-product-saving" style="background-color: {{block.settings.saving_color}};">Buy Now</div>
+                        </a>
+
+                        <a class="{% if forloop.index >= 3 %}btn_with_splan{% endif %}" href="/cart/add?id={{ all_products[block.settings.product_selling].selected_or_first_available_variant.id }}&quantity={{ block.settings.product_quantity }}&selling_plan={{ block.settings.selling_plan }}">
+                
+                            <div class="buy-now-product-saving" style="background-color: {{block.settings.saving_color}}; margin-top:10px;">
+                              Subscribe Now
+                               
+                              <div style="font-size:14px"><div style="font-size:14px">(Delivery every {{ block.settings.subscription_duration }} months)</div>
+                          </div>
+                         </a>
+                    {% endif %}
+
+                 
+                   
+              {% endif %}
+<!--                   jod stop here -->
+                </div>
+<afterpay-placement 
+    data-locale="en_US"
+    data-currency="USD" 
+    data-amount="{{ originalValue  | minus: finalDiscount | money_without_currency }}"
+  data-size="sm"
+ ></afterpay-placement>
+                <a class="garuntee">30 Day Money Back Guarantee</a>
+
+
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+                          </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  $('.buy-now-product-saving-with-flavors').click(function(e) {
+        e.preventDefault();
+        var checked_radios = e.target.closest('.product-saving-cell').querySelectorAll('input[type="radio"]:checked');
+        console.log("click", checked_radios);
+        for(var i=0; i < checked_radios.length; i++) {
+            console.log($(checked_radios[i]).data("variant-id"));
+        }
+
+        function makeRequest(i) {
+
+            var id = $(checked_radios[i]).data("variant-id");
+            $.ajax({
+                type: 'POST',
+                url: '/cart/add.js',
+                dataType: 'json',
+                data: {
+                    "id" : id,
+                    "quantity" : 1
+                },
+                success: function(e) {
+                    if(i < checked_radios.length - 1) {
+                        makeRequest(i + 1);
+                    }
+                    else {
+                        location.href="/cart";
+                    }
+                }
+            });
+        }
+        makeRequest(0);
+    });
+  $('.btn_with_subscribe').click(function(e) {
+        let flavornumber = 0;  
+        let selling_p;
+        e.preventDefault();
+        var checked_radios = e.target.closest('.product-saving-cell').querySelectorAll('input[type="radio"]:checked');
+        console.log("click", checked_radios);
+        for(var i=0; i < checked_radios.length; i++) {
+            console.log($(checked_radios[i]).data("variant-id"));
+            flavornumber = flavornumber + i;
+        }
+        if(flavornumber == 0){
+            selling_p = 921075880; 
+        }else if(flavornumber == 1){
+            selling_p = 921239720;
+        }else if(flavornumber == 3){
+            selling_p = 921206952;
+        }else{
+            return;
+        }
+
+
+        function makeRequest(i) {
+
+            var id = $(checked_radios[i]).data("variant-id");
+            $.ajax({
+                type: 'POST',
+                url: '/cart/add.js',
+                dataType: 'json',
+                data: {
+                    "id" : id,
+                    "quantity" : 1,
+                    "selling_plan" : selling_p
+                },
+                success: function(e) {
+                    if(i < checked_radios.length - 1) {
+                        makeRequest(i + 1);
+                    }
+                    else {
+                        location.href="/cart";
+                    }
+                }
+            });
+        }
+        makeRequest(0);
+    });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    class FavorWrapper extends HTMLElement {
+      constructor() {
+        super();
+
+        const selectedFlavorElement = this.querySelector('input');
+        this.setSelectedFlavorName(selectedFlavorElement.dataset.flavorName)
+        this.watchSelectedFlavor();
+      }
+      setSelectedFlavorName(flavorName) {
+        this.querySelector('.flavor-name-placeholder').innerHTML = flavorName;
+      }
+      watchSelectedFlavor() {
+        this.querySelectorAll('input').forEach((input) => {
+          input.addEventListener('change', (event) => {
+            if (event.target.value == 'on') {
+              this.setSelectedFlavorName(event.target.dataset.flavorName);
+            }
+          });
+        });
+      }
+    }
+    customElements.define('flavor-wrapper', FavorWrapper);
+  });
+</script>
+
+{% schema %}
+{
+   "name": "Products saving backup",
+  "tag": "section",
+  "class": "section__padding ss--products--saving",
+   "settings" : [
+   ],
+   "presets": [
+    {
+        "name": "Products saving"
+    }
+   ],
+   "blocks" : [
+    {
+        "type": "Product-Saving",
+        "name": "Product Saving",
+        "limit": 4,
+        "settings": [
+            {
+                "type": "product",
+                "id": "product_selling",
+                "label": "Product"
+            },
+            {
+                "type": "text",
+                "id": "offer_text",
+                "label": "Offer Text"
+            },
+            {
+                "type": "text",
+                "id": "text_subs_percent",
+                "label": "Discount Subscribe"
+            },
+            {
+                "type": "range",
+                "id": "discount_percentage",
+                "label": "Discount Percentage",
+                "unit": "%",
+                "min": 0,
+                "max": 100,
+                "step": 1,
+                "default": 15
+            },
+            {
+                "type": "range",
+                "id": "product_quantity",
+                "label": "Product Quantity",
+                "unit": ".",
+                "min": 1,
+                "max": 6,
+                "step": 1,
+                "default": 1
+            },
+            {
+                "type": "header",
+                "content": "Color Settings"
+            },
+            {
+                "type": "color",
+                "id": "saving_color",
+                "label": "Border Color and Button Color",
+                "default": "#f37d45"
+            },
+            {
+                "type": "header",
+                "content": "Image Settings"
+            },
+            {
+                "type": "image_picker",
+                "id": "product_image",
+                "label": "Image"
+            },
+            {
+                "type": "text",
+                "id": "color_header1",
+                "label": "Color Header1"
+            },
+            {
+                "type": "text",
+                "id": "color_header2",
+                "label": "Color Header2"
+            },
+            {
+                "type": "text",
+                "id": "color_header3",
+                "label": "Color Header3"
+            },
+            {
+                "type": "text",
+                "id": "color_header4",
+                "label": "Color Header4"
+            },
+            {
+                "type": "text",
+                "id": "selling_plan",
+                "label": "Selling Plan"
+            },
+          {
+                "type": "text",
+                "id": "subscription_duration",
+                "label": "subscription duration"
+            }
+
+        ]
+    }
+    ,
+    {
+        "type": "Product-Color",
+        "name": "Product Color",
+        "limit": 6,
+        "settings": [
+            {
+                "type": "color",
+                "id": "color_pick",
+                "label": "Flavor Color"
+            },
+            {
+                "type": "text",
+                "id": "color_name",
+                "label": "Color Variant Name"
+            }
+
+        ]
+    }
+   ]
+}
+{% endschema %}

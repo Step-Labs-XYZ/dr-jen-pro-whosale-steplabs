@@ -1,0 +1,6 @@
+.rating {
+  flex-direction: column;
+}
+.rating .rating__caption {
+  margin-left: 0;
+}

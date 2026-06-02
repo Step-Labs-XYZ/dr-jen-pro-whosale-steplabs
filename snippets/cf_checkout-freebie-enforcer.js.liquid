@@ -1,0 +1,350 @@
+// @ts-check
+// This is actually a js file even though its a .js.liquid snippet as it is rendered in script tags
+
+/** @typedef { { productTitle: string; variants: CFVariant[]; productImageUrl: string } } CFVariants */
+/** @typedef { { variantId: string; title: string; variant_image_url: string, compareAtPrice: string } } CFVariant */
+/** @typedef { {variantId: number, threshold: number, removeOnly: boolean | undefined } } freebieInfo */
+
+/**
+ * Stores the cart freebies variant ids and thresholds
+ */
+/** @type {freebieInfo[]} */
+let CART_FREEBIES = [];
+
+/**
+ * How long to wait after remove/adding a variant ID
+ * before trying again. This is to prevent page load loops
+ *
+ * Currently set to 10 seconds in milliseconds
+ */
+const AJAX_ATTEMPT_THRESHOLD = 10000;
+
+(async () => {
+  const getCartFreebies = useGetFreebies();
+  // todo move findDiscontButton to a separate function inside useWatchAddRemoveDiscounts
+  // const watchAddRemoveDiscounts = useWatchAddRemoveDiscounts();
+
+  CART_FREEBIES = await getCartFreebies();
+
+  findDiscountButton();
+  enforceFreebies();
+})();
+
+async function useProductLookup(productUrl) {
+  const productUrlJson = `${productUrl}.json`
+
+  const product = await fetch(productUrlJson).then(response => {
+    return response.json();
+  }).then(data => {
+    return data.product;
+  });
+
+  /** @type {CFVariant[]} */
+  const variantsForCF = product.variants.reduce((prev, current) => {
+    prev.push({
+      variantId: current.id,
+      title: current.title,
+      compareAtPrice: current.compare_at_price,
+      variant_image_url: current.image_id
+        ? product.images.find(img_obj => img_obj.id === current.image_id).src
+        : product.image.src,
+    })
+    return prev;
+  }, []);
+
+  return { productTitle: product.title, productImageUrl: product.image.src, variants: variantsForCF };
+}
+
+function findDiscountButton() {
+  const findDiscountButtonInterval = setInterval(() => {
+    if (!document.querySelector("div:not(.tags-list) button > span.visually-hidden")) {
+      return;
+    }
+
+    const discountButton = document.querySelector("div:not(.tags-list) button > span.visually-hidden").closest("button");
+    if (discountButton) {
+      console.log("found add discount button");
+      clearTimeout(findDiscountButtonTimeout);
+      clearInterval(findDiscountButtonInterval);
+      addDiscountUpdateListener(discountButton);
+    }
+  }, 100);
+  const findRemoveDiscountButtonInterval = setInterval(() => {
+    if (!document.querySelector("div.tags-list button > span.visually-hidden")) {
+      return;
+    }
+
+    const removeDiscountButton = document.querySelector("div.tags-list button > span.visually-hidden").closest("button");
+    if (removeDiscountButton) {
+      console.log("found remove discount button");
+      clearTimeout(findRemoveDiscountButtonTimeout);
+      clearInterval(findRemoveDiscountButtonInterval);
+      addRemoveDiscountUpdateListener(removeDiscountButton);
+    }
+  }, 100)
+  const findDiscountButtonTimeout = setTimeout(() => {
+    clearInterval(findDiscountButtonInterval);
+  }, 12000)
+  const findRemoveDiscountButtonTimeout = setTimeout(() => {
+    clearInterval(findRemoveDiscountButtonInterval);
+  }, 12000)
+}
+
+function addRemoveDiscountUpdateListener(removeDiscountButton) {
+  removeDiscountButton.addEventListener("click", (event) => {
+    console.log("discount code removed")
+
+    const checkForButtonToDisappearInterval = setInterval(() => {
+      const stillHasRemovalCode = document.querySelector("[data-checkout-discount-amount-target]");
+      if (stillHasRemovalCode) {
+        return;
+      }
+      console.log("discount removed from page");
+      clearInterval(checkForButtonToDisappearInterval);
+      clearTimeout(cancelCheckForButtonToDisappearInterval);
+      setTimeout(findDiscountButton, 1500);
+      enforceFreebies();
+    }, 500)
+    // stop checking after 12 seconds
+    const cancelCheckForButtonToDisappearInterval = setTimeout(() => {
+      console.log("remove discount tag button not found");
+      clearInterval(checkForButtonToDisappearInterval)
+    }, 12000);
+  });
+}
+
+function addDiscountUpdateListener(discountButton) {
+  discountButton.addEventListener("click", (event) => {
+    console.log("discount code entered")
+
+    const checkForAppliedDiscountInterval = setInterval(() => {
+      if (!document.querySelector("div:not(.tags-list) button > span.visually-hidden")) {
+        return;
+      }
+      const button = /** @type HTMLElement */
+        document.querySelector("div:not(.tags-list) button > span.visually-hidden").closest("button");
+
+      // see the rendered discount on the page
+      const doneLoading = button.classList.contains("btn--loading") === false;
+      const hasResolved = document.querySelector("[data-checkout-discount-amount-target]") || button.closest("form").querySelector("p.field__message--error");
+      if (doneLoading && !!hasResolved) {
+        if (button.closest("form").querySelector("p.field__message--error")) {
+          clearAndReset();
+          // invalid code path
+          console.log("invalid discount code entered")
+          return;
+        } else if (document.querySelector("[data-checkout-discount-amount-target]")) {
+          clearAndReset();
+          // valid discount code
+          console.log("valid discount code entered")
+          enforceFreebies();
+        }
+        function clearAndReset() {
+          clearInterval(checkForAppliedDiscountInterval);
+          clearTimeout(cancelCheckForAppliedDiscountInterval);
+          setTimeout(findDiscountButton, 1500);
+        }
+      }
+    }, 500)
+    // stop checking after 12 seconds
+    const cancelCheckForAppliedDiscountInterval = setTimeout(() => {
+      console.log("neither valid nor invalid code found");
+      clearInterval(checkForAppliedDiscountInterval)
+    }, 12000);
+  });
+}
+
+async function enforceFreebies() {
+  // window.location.reload();
+  // @todo fetch cart price for checkout total
+  let checkoutTotal = await getCartTotal();
+  let ajaxAdjustedCart = false;
+  for (const cf of CART_FREEBIES) {
+    console.log("checkoutTotal", checkoutTotal, "cf.threshold", cf.threshold, "cf.inCart", inCart(cf.variantId));
+    console.log(
+      "last remove > 30 seconds",
+      lastAjaxAttempt(cf.variantId) >= AJAX_ATTEMPT_THRESHOLD
+        ? true
+        : false,
+      lastAjaxAttempt(cf.variantId),
+    );
+    const willRemove = checkoutTotal < cf.threshold && inCart(cf.variantId) && lastAjaxAttempt(cf.variantId) >= AJAX_ATTEMPT_THRESHOLD;
+    const willAdd = !cf.removeOnly && checkoutTotal >= cf.threshold && !inCart(cf.variantId) && lastAjaxAttempt(cf.variantId) >= AJAX_ATTEMPT_THRESHOLD;
+    console.log(`will ${willRemove
+      ? "remove"
+      : willAdd
+        ? "add"
+        : "do nothing"
+      } cf`,
+      cf);
+    if (willRemove || willAdd) {
+      setLastAjaxAttempt(
+        cf.variantId,
+        willAdd
+          ? "add"
+          : "remove"
+      );
+      const response = willRemove
+        ? await updateCf(cf.variantId, 0)
+        : await updateCf(cf.variantId, 1)
+      if (response.ok) {
+        console.log("ajax change ok", response.ok);
+        ajaxAdjustedCart = true;
+        const data = await response.json();
+        checkoutTotal = data.total_price - getAppliedDiscount();
+      } else {
+        console.warn("CF: something went wrong when adding");
+      }
+    }
+  }
+
+  console.log("will reload:", ajaxAdjustedCart);
+  if (ajaxAdjustedCart) {
+    window.location.reload();
+  }
+}
+
+/** @returns {Promise<number>} */
+async function getCartTotal() {
+
+  const response = await fetch("/cart.js");
+  const data = await response.json();
+  const totalPrice = data.total_price;
+  const totalDiscount = data.total_discount;
+  return data.total_price - getAppliedDiscount();
+}
+
+function getAppliedDiscount() {
+  let appliedDiscount = 0;
+  const appliedDiscountDiv = document.querySelector("[data-checkout-discount-amount-target]");
+  if (appliedDiscountDiv) {
+    appliedDiscount = document
+      .querySelector("[data-checkout-discount-amount-target]")
+      .dataset
+      .checkoutDiscountAmountTarget;
+  }
+  return appliedDiscount;
+}
+
+/**
+  * @param {number} variantId
+  * @returns fetch
+  * */
+async function updateCf(variantId, quantity) {
+  let data = {
+    updates: {}
+  };
+  data.updates[variantId] = quantity;
+  console.log("updating cart with", data);
+  return await fetch("/cart/update.js", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+}
+
+/** @param {number} variantId */
+function inCart(variantId) {
+  {% liquid
+    assign checkoutItemIds = checkout.line_items | map: 'variant_id' | join: ','
+    assign checkoutItemIds = checkoutItemIds %}
+  const checkoutItemIds = "{{ checkoutItemIds }}".split(",");
+  // console.log("checkoutItemIds", checkoutItemIds);
+  return !!checkoutItemIds.find(id => id == String(variantId));
+}
+
+/** @param {'add' | 'remove'} addOrRemove */
+function setLastAjaxAttempt(variantId, addOrRemove) {
+  sessionStorage.setItem(`${addOrRemove}-${variantId}-attempt`, String(Date.now()));
+}
+/**
+  * @param {number} variantId
+  * @returns {number}
+  * */
+function lastAjaxAttempt(variantId) {
+  const lastAttempt = sessionStorage.getItem(`remove-${variantId}-attempt`);
+  if (!lastAttempt) {
+    return AJAX_ATTEMPT_THRESHOLD;
+  }
+  return Date.now() - Number(lastAttempt);
+}
+
+// Utils
+// ------
+
+function useGetFreebies() {
+  /**
+   * Gets the cart freebies as freebieInfo objects
+   *
+   * Checkout does not recognize all_products global shopify array so we need to
+   * get them asynchronously with calls to the product json endpoints
+   * @returns {Promise<freebieInfo[]>}
+   */
+  async function getCartFreebies() {
+    /** @type {freebieInfo[]} */
+    const cartFreebies = [];
+
+    const freebiesBaseInfo = getProductInfoFromLiquid();
+
+    for (let freebieBaseInfo of freebiesBaseInfo) {
+      // initially we get the variant ids
+      const variantIds = await getFreebieVariants(freebieBaseInfo.productUrl);
+      // then we use them and the freebieBaseInfo to build a freebieInfo Object for each variant
+      variantIds.map(variantId => {
+        const freebieInfo = {
+          variantId: Number(variantId),
+          threshold: freebieBaseInfo.threshold,
+          removeOnly: freebieBaseInfo.removeOnly
+        }
+        cartFreebies.push(freebieInfo);
+        return freebieInfo;
+      })
+    };
+    return cartFreebies;
+  }
+
+  /**
+   * Loop through the liquid cart freebies and return them as an array of objects
+   */
+  function getProductInfoFromLiquid() {
+    /** @type { {productUrl: string; threshold: number; removeOnly: boolean}[] } */
+    let cartFreebieProductBase = [];
+    {% for block in section.blocks %}
+    cartFreebieProductBase.push({
+      productUrl: '/products/{{block.settings.free_product}}',
+      threshold: Number('{{ block.settings.free_product_threshold}}'),
+      removeOnly: true,
+    });
+    {% endfor %}
+    return cartFreebieProductBase;
+  }
+
+  /**
+ * Given a product url, returns an array of all its variant ids
+ * @param {string} productUrl
+ * @returns {Promise<CFVariant['variantId'][]>}
+ */
+  async function getFreebieVariants(productUrl) {
+    const product = await useProductLookup(productUrl)
+    return product.variants.map(variant => variant.variantId)
+  }
+
+  return getCartFreebies;
+}
+
+
+// /** @type {freebieInfo[]} */
+// let freebieVariants = [{{ free_product_variants_to_remove | join: ',' }}].map(variantId => {
+//   /** @type {freebieInfo} */
+//   const freebieInfo = {
+//     variantId,
+//     threshold: Number('{{ block.settings.free_product_threshold }}'),
+//     removeOnly: true,
+//   }
+//   return freebieInfo;
+// });
+// console.log('freebieVariants', freebieVariants);
+// CART_FREEBIES.push(...freebieVariants);
+// console.log('CART_FREEBIES', CART_FREEBIES);

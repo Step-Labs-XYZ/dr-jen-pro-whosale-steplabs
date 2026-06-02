@@ -1,0 +1,798 @@
+{% doc %}
+  Renders the "Why Your Patients Deserve Fluoride-Free" PDP pitch section.
+  Two-column layout on desktop (content + product image), single column on mobile
+  with the product image stacked on top. Includes a heading, body paragraph,
+  before/after microscopic comparison image with two overlaid pill labels, and a
+  three-item accordion of feature highlights.
+
+  sl-id: sl-section-fluoride-free-pitch-v1
+  Figma desktop: https://www.figma.com/design/KKzN3aGPr2Uzohtt77IFDj/Dr.-Jen?node-id=1377-3168
+  Figma mobile:  https://www.figma.com/design/KKzN3aGPr2Uzohtt77IFDj/Dr.-Jen?node-id=1377-4515
+
+  @param section.settings.sl_anchor_id - Optional HTML id for anchor links.
+  @param section.settings.bg_color - Section background. Defaults to Figma Grey #f7f7f7.
+  @param section.settings.heading_color - Heading color. Defaults to Dark Green #002c41.
+  @param section.settings.body_color - Body / accordion text color. Defaults to #000.
+  @param section.settings.divider_color - Accordion divider color. Defaults to rgba(61,68,30,0.2).
+  @param section.settings.heading - The H2 headline (supports a forced line break via newline).
+  @param section.settings.body - The intro paragraph (richtext).
+  @param section.settings.comparison_label - The "See the Difference at the Microscopic Level:" label.
+  @param section.settings.comparison_image - Single before/after composite image.
+  @param section.settings.comparison_image_alt - Alt text for the comparison image.
+  @param section.settings.before_label - Text inside the left pill ("Before").
+  @param section.settings.after_label - Text inside the right pill ("After").
+  @param section.settings.product_image - Product photography (right column on desktop).
+  @param section.settings.product_image_alt - Alt text for the product image.
+  @param section.settings.collapse_others - When enabled, opening one accordion item closes the others.
+
+  Block type "feature":
+  @param block.settings.title - Feature title (visible in the accordion header).
+  @param block.settings.body - Feature description (richtext, shown when expanded).
+  @param block.settings.open_by_default - Whether the item is expanded on page load.
+
+  @example
+  Used via theme editor. Drop into a product template (typically `templates/product.json`)
+  and configure copy + images per product. No template changes are made by this file.
+{% enddoc %}
+
+{%- comment -%} ===== Styles ===== {%- endcomment -%}
+{%- style -%}
+  /* Local font import — keeps the section portable if the theme has not yet loaded Raleway */
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap');
+
+  #c-ffp-{{ section.id }} {
+    /* ---------- Color tokens ---------- */
+    --sl-c-ffp-color-bg: {{ section.settings.bg_color }};
+    --sl-c-ffp-color-heading: {{ section.settings.heading_color }};
+    --sl-c-ffp-color-text: {{ section.settings.body_color }};
+    --sl-c-ffp-color-pill-bg: #ffffff;
+    --sl-c-ffp-color-pill-border: {{ section.settings.heading_color }};
+    /* Figma renders this divider at rgba(61,68,30,0.2). We accept a solid color from the
+       theme editor and blend it to 20% opacity at runtime. Falls back to the raw rgba on
+       browsers that don't support color-mix(). */
+    --sl-c-ffp-color-divider: rgba(61, 68, 30, 0.2);
+    --sl-c-ffp-color-divider: color-mix(in srgb, {{ section.settings.divider_color }} 20%, transparent);
+
+    /* ---------- Typography tokens (mobile-first values) ---------- */
+    --sl-c-ffp-font-family: 'Raleway', sans-serif;
+    --sl-c-ffp-line-height: 1.2;
+    --sl-c-ffp-font-heading-size: 32px; /* Figma mobile Heading 2 */
+    --sl-c-ffp-font-body-size: 16px;    /* Figma mobile Text Medium */
+    --sl-c-ffp-font-comparison-size: 18px; /* Figma "See the Difference" — same value across breakpoints */
+    --sl-c-ffp-font-pill-size: 12px;    /* Figma mobile tagline */
+    --sl-c-ffp-font-question-size: 16px;
+    --sl-c-ffp-font-answer-size: 12px;  /* Figma mobile Text Small */
+
+    /* ---------- Spacing tokens ---------- */
+    --sl-c-ffp-gap-section: 32px;
+    --sl-c-ffp-gap-tight: 12px;
+    --sl-c-ffp-pad-outer: 22px;          /* Figma mobile outer padding */
+    --sl-c-ffp-accordion-pad-x: 24px;
+    --sl-c-ffp-accordion-pad-y: 16px;
+
+    /* ---------- Misc tokens ---------- */
+    --sl-c-ffp-pill-radius: 20px;
+    --sl-c-ffp-pill-pad-x: 32px;
+    --sl-c-ffp-pill-pad-y: 6px;
+    --sl-c-ffp-divider-width: 1px;
+    --sl-c-ffp-comparison-aspect: 412 / 195; /* Figma mobile comparison frame */
+    --sl-c-ffp-product-aspect: 412 / 195;    /* Figma mobile product frame */
+    --sl-c-ffp-icon-size: 24px;
+    --sl-c-ffp-transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.25s ease;
+
+    background-color: var(--sl-c-ffp-color-bg);
+    color: var(--sl-c-ffp-color-text);
+    font-family: var(--sl-c-ffp-font-family);
+    line-height: var(--sl-c-ffp-line-height);
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* Reset for elements rendered inside richtext settings */
+  #c-ffp-{{ section.id }} *,
+  #c-ffp-{{ section.id }} *::before,
+  #c-ffp-{{ section.id }} *::after {
+    box-sizing: border-box;
+  }
+
+  /* ---------- Layout ---------- */
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sl-c-ffp-gap-section);
+    padding: 0 var(--sl-c-ffp-pad-outer) var(--sl-c-ffp-pad-outer);
+  }
+
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__media {
+    width: 100%;
+    aspect-ratio: var(--sl-c-ffp-product-aspect);
+    background-color: #d9d9d9; /* matches Figma media placeholder */
+    overflow: hidden;
+  }
+
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__media-img,
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__media-svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sl-c-ffp-gap-section);
+  }
+
+  /* ---------- Heading + body ---------- */
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__heading {
+    font-size: var(--sl-c-ffp-font-heading-size);
+    font-weight: 600;
+    color: var(--sl-c-ffp-color-heading);
+    line-height: var(--sl-c-ffp-line-height);
+    margin: 0;
+    text-transform: capitalize; /* Figma mobile node has `capitalize` */
+  }
+
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__body {
+    font-size: var(--sl-c-ffp-font-body-size);
+    font-weight: 400;
+    color: var(--sl-c-ffp-color-text);
+    line-height: var(--sl-c-ffp-line-height);
+    margin: 0;
+  }
+
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__body p {
+    margin: 0 0 0.75em 0;
+  }
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__body p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ---------- Microscopic comparison ---------- */
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__comparison {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sl-c-ffp-gap-section);
+    width: 100%;
+  }
+
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__comparison-label {
+    font-size: var(--sl-c-ffp-font-comparison-size);
+    font-weight: 700;
+    color: var(--sl-c-ffp-color-text);
+    line-height: var(--sl-c-ffp-line-height);
+    margin: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__compare-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--sl-c-ffp-comparison-aspect);
+    overflow: hidden;
+    background-color: #d9d9d9;
+  }
+
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__compare-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__compare-pills {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 18px 49px 0; /* Figma mobile: pt=18, px=49 */
+    pointer-events: none;
+  }
+
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--sl-c-ffp-color-pill-bg);
+    border: 1px solid var(--sl-c-ffp-color-pill-border);
+    border-radius: var(--sl-c-ffp-pill-radius);
+    padding: var(--sl-c-ffp-pill-pad-y) var(--sl-c-ffp-pill-pad-x);
+    color: var(--sl-c-ffp-color-heading);
+    font-family: var(--sl-c-ffp-font-family);
+    font-weight: 700;
+    font-size: var(--sl-c-ffp-font-pill-size);
+    line-height: var(--sl-c-ffp-line-height);
+    text-transform: uppercase;
+    white-space: nowrap;
+    pointer-events: auto;
+  }
+
+  /* ---------- Accordion ---------- */
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__accordion {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__item {
+    border-bottom: var(--sl-c-ffp-divider-width) solid var(--sl-c-ffp-color-divider);
+    padding: 0 var(--sl-c-ffp-accordion-pad-x);
+  }
+
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: var(--sl-c-ffp-gap-tight);
+    padding: var(--sl-c-ffp-accordion-pad-y) 0;
+    background: transparent;
+    border: 0;
+    margin: 0;
+    cursor: pointer;
+    text-align: left;
+    color: var(--sl-c-ffp-color-text);
+    font-family: var(--sl-c-ffp-font-family);
+    font-weight: 700;
+    font-size: var(--sl-c-ffp-font-question-size);
+    line-height: var(--sl-c-ffp-line-height);
+  }
+
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__question-text {
+    flex: 1 0 0;
+    min-width: 0;
+  }
+
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__question:focus-visible {
+    outline: 2px solid var(--sl-c-ffp-color-heading);
+    outline-offset: 2px;
+  }
+
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__icon {
+    flex-shrink: 0;
+    width: var(--sl-c-ffp-icon-size);
+    height: var(--sl-c-ffp-icon-size);
+    color: var(--sl-c-ffp-color-text);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__item.is-open .c-fluoride-free-pitch__icon {
+    transform: rotate(180deg);
+  }
+
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__answer-wrapper {
+    max-height: 0;
+    overflow: hidden;
+    transition: var(--sl-c-ffp-transition);
+  }
+
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__answer {
+    padding-bottom: var(--sl-c-ffp-accordion-pad-y);
+    color: var(--sl-c-ffp-color-text);
+    font-family: var(--sl-c-ffp-font-family);
+    font-weight: 400;
+    font-size: var(--sl-c-ffp-font-answer-size);
+    line-height: var(--sl-c-ffp-line-height);
+  }
+
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__answer p {
+    margin: 0 0 0.5em 0;
+  }
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__answer p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ============================================================
+     TABLET (≥ 768px) — gentle scale-up; layout still single column
+     ============================================================ */
+  @media (width >= 768px) {
+    #c-ffp-{{ section.id }} {
+      --sl-c-ffp-pad-outer: 32px;
+      --sl-c-ffp-font-heading-size: 36px;
+      --sl-c-ffp-font-body-size: 17px;
+      --sl-c-ffp-font-pill-size: 13px;
+      --sl-c-ffp-font-answer-size: 13px;
+    }
+  }
+
+  /* ============================================================
+     LAPTOP (≥ 978px) — begin two-column layout (content + image)
+     Figma desktop frame is 1295px wide; we engage the desktop
+     composition early so it lands cleanly at 1200+.
+     ============================================================ */
+  @media (width >= 978px) {
+    #c-ffp-{{ section.id }} {
+      --sl-c-ffp-pad-outer: 48px;
+      --sl-c-ffp-font-heading-size: 40px;
+      --sl-c-ffp-font-body-size: 18px;
+      --sl-c-ffp-font-pill-size: 14px;
+      --sl-c-ffp-font-answer-size: 14px;
+    }
+
+    #c-ffp-{{ section.id }} .c-fluoride-free-pitch__container {
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 5%;
+      padding: 0 0 0 var(--sl-c-ffp-pad-outer);
+    }
+
+    #c-ffp-{{ section.id }} .c-fluoride-free-pitch__content-col {
+      flex: 1 1 auto;
+      min-width: 0;
+      max-width: 775px; /* Figma desktop content column */
+      padding: 32px 0;  /* Figma desktop py=32 */
+      display: flex;
+      flex-direction: column;
+      gap: var(--sl-c-ffp-gap-section);
+    }
+
+    #c-ffp-{{ section.id }} .c-fluoride-free-pitch__media {
+      flex: 0 0 auto;
+      align-self: stretch;
+      width: 40%;
+      max-width: 520px; /* Figma desktop media column */
+      aspect-ratio: auto;
+      height: auto;
+    }
+
+    #c-ffp-{{ section.id }} .c-fluoride-free-pitch__heading {
+      text-transform: none; /* Figma desktop H3 is not capitalized — only the mobile node is */
+    }
+
+    /* Comparison: heading aligns left, frame becomes a stretched band */
+    #c-ffp-{{ section.id }} .c-fluoride-free-pitch__comparison {
+      align-items: flex-start;
+      gap: var(--sl-c-ffp-gap-tight); /* Figma desktop: 12px between subhead and frame */
+    }
+
+    #c-ffp-{{ section.id }} .c-fluoride-free-pitch__comparison-label {
+      text-align: left;
+    }
+
+    #c-ffp-{{ section.id }} .c-fluoride-free-pitch__compare-frame {
+      aspect-ratio: 775 / 187; /* Figma desktop ratio */
+    }
+
+    #c-ffp-{{ section.id }} .c-fluoride-free-pitch__compare-pills {
+      padding: 33px 208px 0 24px; /* Figma desktop: pt=33, pl=24, pr=208 */
+    }
+  }
+
+  /* ============================================================
+     DESKTOP (≥ 1200px) — final Figma desktop spec values
+     ============================================================ */
+  @media (width >= 1200px) {
+    #c-ffp-{{ section.id }} {
+      --sl-c-ffp-pad-outer: 64px; /* Figma desktop pl=64 */
+    }
+  }
+
+  /* ============================================================
+     TV (≥ 1980px) — keep proportions, prevent over-stretch
+     ============================================================ */
+  @media (width >= 1980px) {
+    #c-ffp-{{ section.id }} .c-fluoride-free-pitch__container {
+      max-width: 1980px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+{%- endstyle -%}
+
+{%- comment -%} ===== HTML ===== {%- endcomment -%}
+{%- liquid
+  assign heading = section.settings.heading
+  assign comparison_image = section.settings.comparison_image
+  assign comparison_alt = section.settings.comparison_image_alt | default: ''
+  assign product_image = section.settings.product_image
+  assign product_alt = section.settings.product_image_alt | default: ''
+  assign before_label = section.settings.before_label
+  assign after_label = section.settings.after_label
+  assign comparison_label = section.settings.comparison_label
+-%}
+
+<section
+  {% if section.settings.sl_anchor_id != blank %}id="{{ section.settings.sl_anchor_id }}"{% endif %}
+  class="c-section c-fluoride-free-pitch"
+  data-sl-id="sl-section-fluoride-free-pitch-v1"
+  data-section-id="{{ section.id }}"
+>
+  <div id="c-ffp-{{ section.id }}">
+    <div class="c-fluoride-free-pitch__container">
+
+      {%- comment -%} Content column (text, comparison, accordion) {%- endcomment -%}
+      <div class="c-fluoride-free-pitch__content-col">
+
+        {%- if heading != blank -%}
+          <h2 class="c-fluoride-free-pitch__heading">{{ heading | escape | newline_to_br }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.body != blank -%}
+          <div class="c-fluoride-free-pitch__body">{{ section.settings.body }}</div>
+        {%- endif -%}
+
+        {%- comment -%} Microscopic comparison {%- endcomment -%}
+        {%- if comparison_image != blank or comparison_label != blank -%}
+          <div class="c-fluoride-free-pitch__comparison">
+            {%- if comparison_label != blank -%}
+              <p class="c-fluoride-free-pitch__comparison-label">{{ comparison_label | escape }}</p>
+            {%- endif -%}
+            {%- if comparison_image != blank -%}
+              <div class="c-fluoride-free-pitch__compare-frame">
+                {{
+                  comparison_image
+                  | image_url: width: 1600
+                  | image_tag:
+                    loading: 'lazy',
+                    sizes: '(min-width: 978px) 60vw, 100vw',
+                    widths: '375, 600, 800, 1100, 1400, 1600',
+                    class: 'c-fluoride-free-pitch__compare-img',
+                    alt: comparison_alt
+                }}
+                <div class="c-fluoride-free-pitch__compare-pills" aria-hidden="true">
+                  {%- if before_label != blank -%}
+                    <span class="c-fluoride-free-pitch__pill c-fluoride-free-pitch__pill--before">{{ before_label | escape }}</span>
+                  {%- endif -%}
+                  {%- if after_label != blank -%}
+                    <span class="c-fluoride-free-pitch__pill c-fluoride-free-pitch__pill--after">{{ after_label | escape }}</span>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Accordion {%- endcomment -%}
+        {%- if section.blocks.size > 0 -%}
+          <div
+            class="c-fluoride-free-pitch__accordion"
+            data-collapse-others="{% if section.settings.collapse_others %}true{% else %}false{% endif %}"
+          >
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'feature' -%}
+                {%- assign panel_id = 'c-ffp-panel-' | append: section.id | append: '-' | append: forloop.index -%}
+                {%- assign btn_id = 'c-ffp-btn-' | append: section.id | append: '-' | append: forloop.index -%}
+                <div
+                  class="c-fluoride-free-pitch__item{% if block.settings.open_by_default %} is-open{% endif %}"
+                  {{ block.shopify_attributes }}
+                >
+                  <button
+                    type="button"
+                    id="{{ btn_id }}"
+                    class="c-fluoride-free-pitch__question"
+                    aria-expanded="{% if block.settings.open_by_default %}true{% else %}false{% endif %}"
+                    aria-controls="{{ panel_id }}"
+                  >
+                    <span class="c-fluoride-free-pitch__question-text">{{ block.settings.title | escape }}</span>
+                    <svg
+                      class="c-fluoride-free-pitch__icon"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+                  <div
+                    id="{{ panel_id }}"
+                    class="c-fluoride-free-pitch__answer-wrapper"
+                    role="region"
+                    aria-labelledby="{{ btn_id }}"
+                    {% unless block.settings.open_by_default %}hidden{% endunless %}
+                  >
+                    <div class="c-fluoride-free-pitch__answer">
+                      {{ block.settings.body }}
+                    </div>
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+      </div>
+
+      {%- comment -%} Media column — product photography. Stacks on top on mobile via source order. {%- endcomment -%}
+      {%- if product_image != blank -%}
+        <div class="c-fluoride-free-pitch__media">
+          {{
+            product_image
+            | image_url: width: 1200
+            | image_tag:
+              loading: 'lazy',
+              sizes: '(min-width: 978px) 40vw, 100vw',
+              widths: '375, 600, 800, 1040, 1200',
+              class: 'c-fluoride-free-pitch__media-img',
+              alt: product_alt
+          }}
+        </div>
+      {%- endif -%}
+
+    </div>
+  </div>
+</section>
+
+{%- comment -%}
+  Move the media column above the content column on mobile via DOM order swap-in-CSS:
+  Source order is content -> media (semantic & desktop-correct). Mobile flips with `order`.
+{%- endcomment -%}
+<style>
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__media { order: 0; }
+  #c-ffp-{{ section.id }} .c-fluoride-free-pitch__content-col { order: 1; }
+  @media (width >= 978px) {
+    #c-ffp-{{ section.id }} .c-fluoride-free-pitch__media { order: 1; }
+    #c-ffp-{{ section.id }} .c-fluoride-free-pitch__content-col { order: 0; }
+  }
+</style>
+
+{%- comment -%} ===== JavaScript ===== {%- endcomment -%}
+<script>
+  (function () {
+    var sectionId = {{ section.id | json }};
+    var root = document.getElementById('c-ffp-' + sectionId);
+    if (!root) return;
+
+    var accordion = root.querySelector('.c-fluoride-free-pitch__accordion');
+    if (!accordion) return;
+    var collapseOthers = accordion.getAttribute('data-collapse-others') === 'true';
+
+    var items = accordion.querySelectorAll('.c-fluoride-free-pitch__item');
+    if (!items.length) return;
+
+    function setExpanded(item, expanded) {
+      var btn = item.querySelector('.c-fluoride-free-pitch__question');
+      var panel = item.querySelector('.c-fluoride-free-pitch__answer-wrapper');
+      if (!btn || !panel) return;
+
+      if (expanded) {
+        item.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+        panel.removeAttribute('hidden');
+        // Use scrollHeight for a content-sized animation
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+      } else {
+        item.classList.remove('is-open');
+        btn.setAttribute('aria-expanded', 'false');
+        panel.style.maxHeight = '0px';
+        // Hide after transition for screen readers
+        var onEnd = function () {
+          if (!item.classList.contains('is-open')) {
+            panel.setAttribute('hidden', '');
+          }
+          panel.removeEventListener('transitionend', onEnd);
+        };
+        panel.addEventListener('transitionend', onEnd);
+      }
+    }
+
+    // Initialise: items marked open_by_default need their max-height seeded
+    items.forEach(function (item) {
+      if (item.classList.contains('is-open')) {
+        var panel = item.querySelector('.c-fluoride-free-pitch__answer-wrapper');
+        if (panel) {
+          panel.removeAttribute('hidden');
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+        }
+      }
+    });
+
+    items.forEach(function (item) {
+      var btn = item.querySelector('.c-fluoride-free-pitch__question');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var isOpen = item.classList.contains('is-open');
+        if (collapseOthers && !isOpen) {
+          items.forEach(function (other) {
+            if (other !== item) setExpanded(other, false);
+          });
+        }
+        setExpanded(item, !isOpen);
+      });
+    });
+
+    // Recalculate open panel heights on resize (covers font reflow + breakpoint changes)
+    var resizeRaf = null;
+    window.addEventListener('resize', function () {
+      if (resizeRaf) cancelAnimationFrame(resizeRaf);
+      resizeRaf = requestAnimationFrame(function () {
+        items.forEach(function (item) {
+          if (item.classList.contains('is-open')) {
+            var panel = item.querySelector('.c-fluoride-free-pitch__answer-wrapper');
+            if (panel) panel.style.maxHeight = panel.scrollHeight + 'px';
+          }
+        });
+      });
+    });
+  })();
+</script>
+
+{%- comment -%} ===== Schema ===== {%- endcomment -%}
+{% schema %}
+{
+  "name": "C - Fluoride-Free Pitch",
+  "tag": "section",
+  "class": "c-fluoride-free-pitch-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "sl_anchor_id",
+      "label": "Anchor ID",
+      "info": "Optional. Sets an HTML id on the section for anchor links."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#f7f7f7"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading & accent",
+      "default": "#002c41"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Accordion divider",
+      "default": "#3d441e",
+      "info": "Rendered at 20% opacity per Figma — choose the solid color and we'll handle the alpha."
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Use a line break in the editor to control where the headline wraps.",
+      "default": "Why Your Patients\nDeserve Fluoride-Free"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Intro paragraph",
+      "default": "<p>The cleaner toothpaste alternative for patients who prefer fluoride-free care, built on 10% premium Nanohydroxyapatite and a proprietary essential oil complex. Unlike conventional toothpastes that rely on fluoride and petroleum-based ingredients, Dr. Jen's Fluoride-Free delivers clinically proven cavity protection and deep enamel remineralization with cleaner ingredients you can trust.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Microscopic comparison"
+    },
+    {
+      "type": "text",
+      "id": "comparison_label",
+      "label": "Section label",
+      "default": "See the Difference at the Microscopic Level:"
+    },
+    {
+      "type": "image_picker",
+      "id": "comparison_image",
+      "label": "Before / After image",
+      "info": "Single composite image showing both the before and after states side by side."
+    },
+    {
+      "type": "text",
+      "id": "comparison_image_alt",
+      "label": "Comparison image alt text",
+      "info": "Describe what the comparison shows for screen readers. Required when an image is set.",
+      "default": "Microscopic before-and-after comparison of enamel surface treated with Dr. Jen's Fluoride-Free toothpaste"
+    },
+    {
+      "type": "text",
+      "id": "before_label",
+      "label": "Left pill label",
+      "default": "Before"
+    },
+    {
+      "type": "text",
+      "id": "after_label",
+      "label": "Right pill label",
+      "default": "After"
+    },
+    {
+      "type": "header",
+      "content": "Product image"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product photograph",
+      "info": "Shown above the content on mobile, on the right on desktop."
+    },
+    {
+      "type": "text",
+      "id": "product_image_alt",
+      "label": "Product image alt text",
+      "default": "Dr. Jen's Fluoride-Free toothpaste tube"
+    },
+    {
+      "type": "header",
+      "content": "Behaviour"
+    },
+    {
+      "type": "checkbox",
+      "id": "collapse_others",
+      "label": "Close other items when one is opened",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Fluoride-Free Formula"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Description",
+          "default": "<p>Advanced oral health without fluoride, naturally derived Nanohydroxyapatite at 10% premium concentration.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "label": "Open by default",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "C - Fluoride-Free Pitch",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Fluoride-Free Formula",
+            "body": "<p>Advanced oral health without fluoride, naturally derived Nanohydroxyapatite at 10% premium concentration.</p>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Naturally Derived",
+            "body": "<p>No synthetic compromises and no SLS.</p>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Trusted by Professionals",
+            "body": "<p>Recommended and used by 500+ dentists across 6 continents.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

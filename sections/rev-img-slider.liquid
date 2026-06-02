@@ -1,0 +1,109 @@
+
+
+{% style %}
+#image-slider-section {
+  padding: 20px 0;
+  overflow:hidden;
+}
+#image-slider-section .swiper-horizontal{
+  overflow:hidden;
+}
+#image-slider-section .section-heading {
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 20px;
+  text-transform:uppercase;
+}
+
+#image-slider-section  .swiper-slide img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 18px;
+}
+ #image-slider-section  .slick-wrapper .slick-slide {
+    margin-right: 30px; /* Add gap to the right of each slide */
+}
+
+/* Optional: Adjust the margin on the last slide to prevent extra space */
+#image-slider-section  .slick-wrapper .slick-slide:last-child {
+    margin-right: 0;
+}
+
+/* Optional: Adjust the margin on the first slide to prevent extra space */
+#image-slider-section  .slick-wrapper .slick-slide:first-child {
+    margin-left: 0;
+}
+  @media (max-width: 768px) {
+     #image-slider-section  .slick-wrapper .slick-slide {
+      margin-right: 20px; /* Add gap to the right of each slide */
+    }
+  }
+    @media (max-width: 480px) {
+     #image-slider-section  .slick-wrapper .slick-slide {
+      margin-right: 10px; /* Add gap to the right of each slide */
+    }
+  }
+{% endstyle %}
+
+<div id="image-slider-section" style="background-color:{{ section.settings.bg_section }}">
+  {% if section.settings.section_heading != blank %}
+    <h2 class="section-heading" style="color: {{ section.settings.text_color }}">{{ section.settings.section_heading }}</h2>
+  {% endif %}
+
+  <div class="container">
+    <div class="slick-wrapper">
+      {% for block in section.blocks %}
+        <div class="swiper-slide">
+          <img src="{{ block.settings.block_image | img_url: '320x320' }}" alt="Slide Image">
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Rev Image Slider Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Section Heading",
+      "default": "text"
+    },
+    {
+      "type": "color",
+      "id": "bg_section",
+      "label": "section Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "section heading Color",
+      "default": "#ffffff"
+    }
+
+  ],
+  "blocks": [
+    {
+      "type": "image_block",
+      "name": "Image Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "block_image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rev Image Slider Section",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,65 @@
+<script>
+  /*
+   * Allow user to remove cart freebies
+   */
+  function cf_CartFreebiesRemover() {}cf_CartFreebiesRemover.initateWatchers = function () {
+    window.addEventListener("load", (event) => {
+      cf_CartFreebiesRemover.watchRemoveButtons();
+      cf_CartFreebiesRemover.watchQuantityInputChanges();
+    });
+  };
+
+  /*
+   * Catch when user hits a freebie's remove/delete button
+   *
+   * Looks for button with class of: cf_cart__remove-button
+   * Button must have data attribute of: data-cf-cart-variant-id
+   * Data attrubute must be set to the liquid: item.variant.id
+   */
+  cf_CartFreebiesRemover.watchRemoveButtons = function () {
+    document.querySelectorAll(".cf_cart__remove-button").forEach(function (rmvBtn) {
+      rmvBtn.addEventListener("click", function () {
+        cf_Session.addTo("USER_REMOVED", rmvBtn.dataset.cfCartVariantId);
+      });
+    });
+  };
+
+  /*
+   * Catch when a user sets a freebie's Quantity to 0
+   *
+   * Looks for input with class of: cf_cart__quantity-input
+   * Button must have data attribute of: data-cf-cart-variant-id
+   * Data attribute must be set to the liquid: item.variant.id
+   */
+  cf_CartFreebiesRemover.watchQuantityInputChanges = function () {
+    document.querySelectorAll(".cf_cart__quantity-input").forEach(function (quantityBtn) {
+      quantityBtn.addEventListener("change", function () {
+        if (quantityBtn.value == 0) {
+          cf_Session.addTo("USER_REMOVED", quantityBtn.dataset.cfCartVariantId);
+        }
+      });
+    });
+    // use jquery triggers in case theme uses jquery jquery may disable default behavior of eventListener
+    if (jQuery) {
+      jQuery(".cf_cart__quantity-input").on("change", function () {
+        if (this.value == 0) {
+          cf_Session.addTo("USER_REMOVED", this.dataset.cfCartVariantId);
+        }
+      });
+    }
+  };
+
+  /*
+   * Subset of freebies IDs not including ones that user manually removed from cart
+   * return Array of IDS
+   */
+  cf_CartFreebiesRemover.stripFreebiesUserRemoved = function (variant_ids) {
+    return variant_ids.filter(function (id) {
+      if (cf_Session.getCurrent("USER_REMOVED").includes(String(id))) {
+        console.log("User opted out of freebie ", id);
+        return false;
+      }
+      return true;
+    });
+  };
+</script>

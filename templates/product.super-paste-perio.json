@@ -1,0 +1,604 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "wrapper": "div#product_packs_new.product_packs_news",
+  "sections": {
+    "main": {
+      "type": "main-product-preorder",
+      "blocks": {
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "selector_mode": "block",
+            "color_mode": "dropdown",
+            "size_chart_page": ""
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "recharge_subscriptions_subscription_widget_v2_cAQFwP": {
+          "type": "shopify://apps/recharge-subscriptions/blocks/subscription-widget-v2/371eed76-0b44-4869-9813-730372ea378e",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "atc_button_background": "rgba(0,0,0,0)",
+            "atc_button_text_color": "rgba(0,0,0,0)",
+            "buy_now_button_background": "rgba(0,0,0,0)",
+            "buy_now_button_text_color": "rgba(0,0,0,0)"
+          }
+        },
+        "preorder_7YREy3": {
+          "type": "Preorder",
+          "disabled": true,
+          "settings": {
+            "text-heading": "Next Batch of pre-orders",
+            "sub-head-1": "{{ product.title }}",
+            "sub-head-2": "Orders will be shipped on or around {{ product.metafields.custom.date_for_shipped_on_or_around_.value }}",
+            "first-text": "{{ product.title }}",
+            "percentage-text": "{{ product.metafields.custom.percenter_reserved_product.value }}",
+            "video-button-text": "Watch why we are out of stock",
+            "link-video": "https://cdn.shopify.com/videos/c/o/v/5b888553a9894320a06dc9f21f65d462.mp4",
+            "show_signup": true,
+            "sign-up-text": "Signup for Email"
+          }
+        },
+        "bdca51c9-fba6-4839-9aa1-4202fd3afff8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Click <a href=\"/pages/science\" title=\"Science Behind Dr. Jen's Toothpaste\">here</a> to learn more about Nano-Hydroxyapatite.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "variant_picker",
+        "quantity_selector",
+        "recharge_subscriptions_subscription_widget_v2_cAQFwP",
+        "buy_buttons",
+        "preorder_7YREy3",
+        "bdca51c9-fba6-4839-9aa1-4202fd3afff8"
+      ],
+      "settings": {
+        "show_vendor": true,
+        "show_sku": false,
+        "show_taxes_included": false,
+        "show_product_rating": true,
+        "show_sticky_add_to_cart": true,
+        "show_share_buttons": true,
+        "help_page": "",
+        "enable_video_autoplay": true,
+        "enable_video_looping": false,
+        "enable_image_zoom": true,
+        "show_thumbnails_on_mobile": false,
+        "desktop_thumbnails_position": "left",
+        "transition_effect": "slide"
+      }
+    },
+    "rev_es_pdp_img_text_cta_UNRDEN": {
+      "type": "rev-es-pdp-img-text-cta",
+      "name": "Rev egg Img Txt CTA",
+      "settings": {
+        "background_color": "#003e52",
+        "heading": "The Most Advanced Daily Toothpaste for Patients With Periodontal Disease",
+        "richtext": "<p>Dr. Jen’s Super Paste Perio is scientifically designed for patients managing periodontal disease and seeking the most advanced at-home protection for enamel, dentin, and gum tissue. This premium Cool Mint formula combines a powerful trifecta of proven ingredients—safer over-the-counter fluoride, 10% premium nano-hydroxyapatite, and xylitol—to deliver maximum remineralization, reduced sensitivity, and superior protection against pathogenic oral bacteria.</p>",
+        "text_color": "#ffffff",
+        "full_width_image": "shopify://shop_images/0.jpg",
+        "mob_full_width_image": "shopify://shop_images/0.jpg",
+        "block_BGcolor": "#73e0c1",
+        "button_url": "#",
+        "button_bg_color": "#73e0c1",
+        "button_text_color": "#003e52"
+      }
+    },
+    "image_wd_text_XmpFya": {
+      "type": "image-wd-text",
+      "blocks": {
+        "item_UNA3jR": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_10.png",
+            "tab_label": "",
+            "subheading": "What do your patients really want in a fluoride free toothpaste?",
+            "title": "The answer is easy: They want optimal cavity protection and remineralization.",
+            "content": "<p><strong>The 10% Difference</strong><br/><strong>Dr. Jen’s Premium 10% Nano-Hydroxyapatite: The Gold Standard in Patient Care</strong><br/>Formulated with a clinically proven 10% concentration of premium nano-hydroxyapatite, Dr. Jen’s oral care solutions optimize calcium and phosphate uptake while effectively managing dental hypersensitivity, and naturally enhancing whitening—delivering unmatched benefits for your patients.</p>",
+            "button_text": "",
+            "button_link": "",
+            "sub_color": "#5cc6d0"
+          }
+        }
+      },
+      "block_order": [
+        "item_UNA3jR"
+      ],
+      "settings": {
+        "reveal_on_scroll": true,
+        "padding_top": false,
+        "background_type": "full_width",
+        "background_overlap": "image",
+        "image_position": "right",
+        "text_alignment": "left",
+        "cycle_speed": 20,
+        "accent_background": "rgba(0,0,0,0)",
+        "text_color": "rgba(0,0,0,0)",
+        "button_background": "rgba(0,0,0,0)",
+        "button_text_color": "rgba(0,0,0,0)",
+        "background_color": ""
+      }
+    },
+    "value_props_pdp_7yJMeL": {
+      "type": "value_props_pdp",
+      "blocks": {
+        "icons_kgmNn4": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/dr-jen-icons-2-1.png",
+            "text_vp_id": "pH Neutralization",
+            "color_vp_id": ""
+          }
+        },
+        "icons_mVBKMe": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/dr-jen-icons-2-4_2.png",
+            "text_vp_id": "10% Nano-Hydroxyapatite",
+            "color_vp_id": ""
+          }
+        },
+        "icons_HHXtVx": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/dr-jen-icons-2-3.png",
+            "text_vp_id": "Low Abrasive",
+            "color_vp_id": ""
+          }
+        },
+        "icons_njWHXr": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/dr-jen-icons-2-4_1.png",
+            "text_vp_id": "Fluoride-free",
+            "color_vp_id": ""
+          }
+        },
+        "icons_QJNX9F": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/dr-jen-icons-2-4_2.png",
+            "text_vp_id": "Essential Oils",
+            "color_vp_id": ""
+          }
+        },
+        "icons_3Qe6Ue": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/dr-jen-icons-2-6.png",
+            "text_vp_id": "Xylitol",
+            "color_vp_id": ""
+          }
+        }
+      },
+      "block_order": [
+        "icons_kgmNn4",
+        "icons_mVBKMe",
+        "icons_HHXtVx",
+        "icons_njWHXr",
+        "icons_QJNX9F",
+        "icons_3Qe6Ue"
+      ],
+      "settings": {
+        "title": ""
+      }
+    },
+    "custom_rich_text_fYLYdw": {
+      "type": "custom-rich-text",
+      "settings": {
+        "subheading": "",
+        "title": "Also important is particle size and shape",
+        "content": "<p><strong>Dr. Jen uses the correct \"nano\" size particles and also follows the guidelines of the Scientific Committee on Consumer Saftey SCCS using approved rod-shaped crystals.</strong></p>",
+        "button_text": "",
+        "button_link": "",
+        "background_type": "full_width",
+        "text_width": "large",
+        "text_position": "center",
+        "text_alignment": "center",
+        "background": "rgba(0,0,0,0)",
+        "heading_text_color": "#5cc6d0",
+        "text_color": "#000000",
+        "button_background": "rgba(0,0,0,0)",
+        "button_text_color": "rgba(0,0,0,0)"
+      }
+    },
+    "home_imgboxes_RcnPta": {
+      "type": "home-imgboxes",
+      "settings": {
+        "image_with_text_image_left": "shopify://shop_images/Group_1484580642_1.png",
+        "image_with_text_image_right": "shopify://shop_images/Frame_2.png"
+      }
+    },
+    "rev_copare_bocks_FzHVWJ": {
+      "type": "rev-copare-bocks-custom",
+      "blocks": {
+        "block_AXzL8e": {
+          "type": "block",
+          "settings": {
+            "show_overlap": false,
+            "block_heading": "Natural Eggshell nHAp",
+            "block_heading_color": "#ffffff",
+            "rich_text_1": "<p>Naturally contains supporting minerals</p>",
+            "rich_text_2": "<p>Higher bioavailability</p>",
+            "rich_text_3": "<p>Biomimetic crystal structure</p>",
+            "rich_text_4": "",
+            "block_border_color": "#ffffff",
+            "block_text_color": "#ffffff"
+          }
+        },
+        "block_z9Dc8L": {
+          "type": "block",
+          "settings": {
+            "show_overlap": false,
+            "block_heading": "Synthetic nHAp",
+            "block_heading_color": "#003e52",
+            "rich_text_1": "<p>No supporting minerals</p>",
+            "rich_text_2": "<p>Requires formulation support</p>",
+            "rich_text_3": "<p>Man made crystal structure</p>",
+            "rich_text_4": "",
+            "block_border_color": "#cecece",
+            "block_text_color": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "block_AXzL8e",
+        "block_z9Dc8L"
+      ],
+      "settings": {
+        "background_color_left": "#003e52",
+        "background_color_right": "#d8f6ee",
+        "vs_text": "VS",
+        "vs_text_color": "#003e52",
+        "vs_bg_color": "#ffffff",
+        "vs_border_color": "#73e0c1"
+      }
+    },
+    "64478480-99d6-4946-adde-ce1b9f45e43b": {
+      "type": "value_props_pdp",
+      "blocks": {
+        "171f6978-ad60-4374-b420-b58b295bbd66": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/icons-desktop.png",
+            "text_vp_id": "Clinically Proven Protection",
+            "color_vp_id": "#eefdff"
+          }
+        },
+        "e3606ecc-87c4-48ec-abc6-f07381f9668e": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/icons-desktop_1.png",
+            "text_vp_id": "Dentist Developed & Approved",
+            "color_vp_id": "#eefdff"
+          }
+        },
+        "95441e4d-2873-44ab-8dcd-a0fb7ff73aef": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/icons-desktop_2.png",
+            "text_vp_id": "Over 360.000 Stronger Smiles",
+            "color_vp_id": "#eefdff"
+          }
+        },
+        "f1782096-6236-4e76-ba8d-f2316b0ac04e": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/icons-desktop_3.png",
+            "text_vp_id": "100% Proven Ingredients",
+            "color_vp_id": "#eefdff"
+          }
+        },
+        "6b8f6b33-f9c5-44e2-a9cc-89b9c7c5645e": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/5.png",
+            "text_vp_id": "Made In USA",
+            "color_vp_id": "#eefdff"
+          }
+        }
+      },
+      "block_order": [
+        "171f6978-ad60-4374-b420-b58b295bbd66",
+        "e3606ecc-87c4-48ec-abc6-f07381f9668e",
+        "95441e4d-2873-44ab-8dcd-a0fb7ff73aef",
+        "f1782096-6236-4e76-ba8d-f2316b0ac04e",
+        "6b8f6b33-f9c5-44e2-a9cc-89b9c7c5645e"
+      ],
+      "custom_css": [
+        ".value_props_pdp_container {flex-wrap: wrap;}"
+      ],
+      "settings": {
+        "title": ""
+      }
+    },
+
+    "7635f2b7-8d11-4d82-874f-83039547a2cd": {
+      "type": "features_ingredientes_wholesale",
+      "settings": {
+        "title_collection_wholesale": "Wholesale",
+        "text_collection_wholesale": "Wholesale",
+        "button_link": ""
+      }
+    },
+    "b4db938f-d071-43bb-87c1-af2d9d783ac7": {
+      "type": "dr_reviews_wholesale",
+      "blocks": {
+        "31daaef4-c403-4e12-8f4e-071e0b5b25d0": {
+          "type": "Review",
+          "settings": {
+            "image_dr_reviews": "shopify://shop_images/Screen_Shot_2023-02-17_at_4.11_3.webp",
+            "name_dr": "Dr. Chris Stansburry Orthodontist",
+            "review_dr": "\"When I normally went for my 6-month checkup, my dentist usually found a few areas of inflammation regardless of how much I brushed and flossed.  It was so frustrating.  Since I started using Dr Jen's toothpaste, there has been not trace of inflammation! Dr Jen's toothpaste is only made with the high quality natural ingredients and formulated by dental healthcare professionals. I highly recommend Dr Jen's toothpaste.\"",
+            "star_color": "#8bd1cf",
+            "star_rating": 5
+          }
+        },
+        "56a1eff0-8a1c-45d5-a9ae-47571b43157a": {
+          "type": "Review",
+          "settings": {
+            "image_dr_reviews": "shopify://shop_images/Screen_Shot_2023-02-17_at_4.11_1.jpg",
+            "name_dr": "Dr. Tonya Volk",
+            "review_dr": "\"Dr Jen's toothpaste and floss are the only way to go. They are made with only healthy ingredients (check the ingredients on other labels to compare) by a world-known orthodontist. Thank you for making products we can use and feel good about , Dr Jen!\"",
+            "star_color": "#8bd1cf",
+            "star_rating": 5
+          }
+        },
+        "9e68473b-1809-4342-9e75-ed8c1ecd4f74": {
+          "type": "Review",
+          "settings": {
+            "image_dr_reviews": "shopify://shop_images/Dr_Peters_320x_conv_3df44d73-fb26-4f5b-9816-1bfb0dc5fc4f.webp",
+            "name_dr": "Dr Nicole Peters",
+            "review_dr": "\"Dr Jen's Natural toothpaste uses clinically proven remineralizing ingredients to help stop tooth decay. Tastes great and freshens breath. I highly recommend it.\"",
+            "star_color": "#8bd1cf",
+            "star_rating": 5
+          }
+        },
+        "dc5606e4-c756-4d16-a1cb-25dff99dfb21": {
+          "type": "Review",
+          "settings": {
+            "image_dr_reviews": "shopify://shop_images/Screen_Shot_2023-02-17_at_4.11_2.jpg",
+            "name_dr": "Jay Brimhall, DDS",
+            "review_dr": "\"Seriously, my kids LOVE this stuff. I used to fight them to brush their teeth but now they run to do it. Amazing piece of mind that they are brushing with such a high quality product as well that I know is doing good for them.\"",
+            "star_color": "#8bd1cf",
+            "star_rating": 5
+          }
+        },
+        "3206ef0a-1a79-4a20-b273-ab511e59f371": {
+          "type": "Review",
+          "settings": {
+            "image_dr_reviews": "shopify://shop_images/IMG-4256.jpg",
+            "name_dr": "Dr. Samatha Nelson, DDS",
+            "review_dr": "\"Dr Jen's Super Paste is made by a real dentist using two proven ingredients to remineralize tooth enamel.  It is natural, tastes great, and is gentle on teeth and gums.\"",
+            "star_color": "#8bd1cf",
+            "star_rating": 5
+          }
+        }
+      },
+      "block_order": [
+        "31daaef4-c403-4e12-8f4e-071e0b5b25d0",
+        "56a1eff0-8a1c-45d5-a9ae-47571b43157a",
+        "9e68473b-1809-4342-9e75-ed8c1ecd4f74",
+        "dc5606e4-c756-4d16-a1cb-25dff99dfb21",
+        "3206ef0a-1a79-4a20-b273-ab511e59f371"
+      ],
+      "settings": {
+        "title_reviews_wholesale": "Real dental professionals. Real reviews.",
+        "background_id": ""
+      }
+    },
+    "rev_review_carousel_KmjTw8": {
+      "type": "rev-review-carousel",
+      "disabled": true,
+      "blocks": {
+        "review_jqJier": {
+          "type": "review",
+          "settings": {
+            "star_icon": "shopify://shop_images/Frame_1484580938.svg",
+            "review_heading": "Love It!",
+            "review_text": "\"Very pleased with Dr. Jen toothpaste. My teeth feel great and super clean. Feels good knowing that I’m taking great care of my teeth. Love that minty taste is not overpowering too!\" ",
+            "reviewer_name": "Lynette T.",
+            "button_text": "verified customer",
+            "button_link": ""
+          }
+        },
+        "review_VyTjY8": {
+          "type": "review",
+          "settings": {
+            "star_icon": "shopify://shop_images/Frame_1484580938.svg",
+            "review_heading": "It Works! Love It!!",
+            "review_text": "\"After using this tooth paste for 2 weeks now, twice a day, my tooth sensitivity is gone and my teeth are definitely whiter looking. I’ve tried another brand before for months and it was “okay” but Jen’s Toothpaste is far superior!\"",
+            "reviewer_name": "Sherrie S.",
+            "button_text": "verified customer",
+            "button_link": ""
+          }
+        },
+        "review_6dtBqr": {
+          "type": "review",
+          "settings": {
+            "star_icon": "shopify://shop_images/Frame_1484580938.svg",
+            "review_heading": "Best Choice I’ve Made…",
+            "review_text": "\"After a week of using this product, I can clearly see the surface of my enamel changing in color. So far, the surface stains are disappearing and can’t wait to see the final results. Excellent product and worth the price!\"",
+            "reviewer_name": "Rob L.",
+            "button_text": "verified customer",
+            "button_link": ""
+          }
+        },
+        "review_W78z6p": {
+          "type": "review",
+          "settings": {
+            "star_icon": "shopify://shop_images/Frame_1484580938.svg",
+            "review_heading": "1 Week In",
+            "review_text": "\"I have been using this toothpaste for a week now. So far I like the taste and the way my teeth feel. Not sure I’ve seen any difference in the whiteness of my teeth or other benefits but time will tell.\"",
+            "reviewer_name": "Nick A.",
+            "button_text": "verified customer",
+            "button_link": ""
+          }
+        },
+        "review_C6wWNx": {
+          "type": "review",
+          "settings": {
+            "star_icon": "shopify://shop_images/Frame_1484580938.svg",
+            "review_heading": "5 Stars",
+            "review_text": "\"I’ve only been using it for a short time but I already feel like it's starting to help with my sensitivity. My teeth also feel cleaner throughout the day longer than when I was using my Sensodyne Pronamel toothpaste. Very pleased with it so far and hopefully the benefits keep on going the longer I use it!\"",
+            "reviewer_name": "Jaylon",
+            "button_text": "verified customer",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_jqJier",
+        "review_VyTjY8",
+        "review_6dtBqr",
+        "review_W78z6p",
+        "review_C6wWNx"
+      ],
+      "settings": {
+        "heading": "Trusted by +360,00 Smiles",
+        "text_color": "#ffffff",
+        "body_color": "#1d2433",
+        "background": "linear-gradient(180deg, rgba(0, 62, 82, 1), rgba(0, 62, 82, 1) 100%)",
+        "button_bg_color": "#73e0c1",
+        "button_text_color": "#003e52",
+        "active_dot_color": "#00ff00"
+      }
+    },
+    "1e48490e-7cc1-41f6-acc9-5556eaf53965": {
+      "type": "totthpaste_section_wholesale",
+      "blocks": {
+        "bcf56544-5de1-4cf1-a58d-dc7343678f84": {
+          "type": "List-Text",
+          "settings": {
+            "title": "Less plaque build-up",
+            "info": "Nano-Hydroxyapatite bonds to plaque during brushing for\neasier plaque removal."
+          }
+        },
+        "a0c7b878-c1e9-4aee-bcfd-170d60e931a8": {
+          "type": "List-Text",
+          "settings": {
+            "title": "Reduction of decalcification area",
+            "info": "Nano-Hydroxyapatite physically bonds to enamel reducing white spots."
+          }
+        },
+        "8a9a325f-d26a-49ca-af63-96ad96913909": {
+          "type": "List-Text",
+          "settings": {
+            "title": "Glossier and whiter teeth",
+            "info": "Nano-Hydroxyapatite fills microlesions and pores on the surface\n enamel, creating a glossier, white appearance in the enamel."
+          }
+        },
+        "7d632fb0-5ac4-45bd-b117-f2fb32c800fd": {
+          "type": "List-Text",
+          "settings": {
+            "title": "Sensitivity protection",
+            "info": "Unlike most toothpastes using potassium nitrate as a pain\n blocker, nano-Hydroxyapatite coats and protects weak enamel\n and exposed dentin, reducing sensitivity."
+          }
+        },
+        "86c55774-2002-4951-992b-f291d83edb85": {
+          "type": "List-Text",
+          "settings": {
+            "title": "Do Not Swallow",
+            "info": "Nano-Hydroxyapatite is both non-toxic and biocompatible and\ncan be used by patients of all ages."
+          }
+        }
+      },
+      "block_order": [
+        "bcf56544-5de1-4cf1-a58d-dc7343678f84",
+        "a0c7b878-c1e9-4aee-bcfd-170d60e931a8",
+        "8a9a325f-d26a-49ca-af63-96ad96913909",
+        "7d632fb0-5ac4-45bd-b117-f2fb32c800fd",
+        "86c55774-2002-4951-992b-f291d83edb85"
+      ],
+      "settings": {
+        "title_remineralizing_wholesale": "Why Nano-Hydroxyapatite in Dr. Jen’s Toothpaste?",
+        "paragraph_1": "<p><strong>✔ Clinically Proven Remineralization</strong> – 10% nano-hydroxyapatite help to restore enamel by replenishing lost minerals for stronger, healthier teeth.</p><p><strong>✔ Superior Calcium & Phosphate Uptake</strong> – Nano-sized particles penetrate enamel microdefects, promoting deeper deliver and long-term enamel protection.</p><p><strong>✔ Effective Sensitivity Relief</strong> – Forms a protective layer over exposed dentin and tubules, reducing tooth sensitivity without added pain-blocking ingredients.</p><p><strong>✔ Supports a Healthy Oral Microbiome</strong> – Nano-hydroxyapatite protects and balances beneficial oral bacteria while preventing harmful biofilm buildup.</p><p><strong>✔ Naturally Whitens & Polishes</strong> – Gently removes surface stains while smoothing enamel for a brighter, healthier smile—without harsh abrasives.</p>",
+        "tothpaste_image": "shopify://shop_images/before-after-perio.png",
+        "tothpaste_image_2": "shopify://shop_images/comparison-table-perio.png",
+        "paragraph_2": "<p>In a <strong>10% concentration</strong>, Premium Nano Hydroxyapatite is proven to help reduce acid causing bacteria, strengthen enamel, manage hypersensitivity and whiten teeth. See study: <a href=\"https://pubmed.ncbi.nlm.nih.gov/35565022/\">https://pubmed.ncbi.nlm.nih.gov/35565022/</a><a>. It also provides the following benefits:</a></p>"
+      }
+    },
+    "8e60d03d-313e-4536-935a-0e405a801df4": {
+      "type": "product_recomendation_wholesale",
+      "settings": {
+        "featured_products": "wholesale",
+        "featured_heading": "You May also Love"
+      }
+    },
+    "rev_pdp_overlapp_img_UMrR69": {
+      "type": "rev-egg-overlap-image",
+      "blocks": {
+        "text_jQPqdx": {
+          "type": "text",
+          "settings": {
+            "heading": "Dr. Jen’s Super Paste Perio",
+            "content": "<p><strong>Flavor:</strong> Cool Mint (a refreshing, clean taste without harsh foaming&nbsp;agents).<br><br><strong>Directions for use:</strong> brush thoroughly twice per day using a pea-sized amount; Spit out excess without rinsing to allow active ingredients to continue working; avoid food or beverages for 30 minutes for maximum benefit.</p>"
+          }
+        },
+        "image_6w6hKX": {
+          "type": "image",
+          "settings": {
+            "column_image": "shopify://shop_images/0_2.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "text_jQPqdx",
+        "image_6w6hKX"
+      ],
+      "settings": {
+        "section_bg_color": "#003e52",
+        "section_txt_color": "#ffffff",
+        "mid_center": "shopify://shop_images/iPhone_14_15_Pro_-_27_1.png"
+      }
+    },
+    "product-content": {
+      "type": "product-content",
+      "disabled": true,
+      "settings": {}
+    },
+    "1659632928e379313e": {
+      "type": "apps",
+      "settings": {
+        "include_horizontal_margins": true,
+        "include_vertical_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rev_es_pdp_img_text_cta_UNRDEN",
+    "image_wd_text_XmpFya",
+    "value_props_pdp_7yJMeL",
+    "custom_rich_text_fYLYdw",
+    "home_imgboxes_RcnPta",
+    "rev_copare_bocks_FzHVWJ",
+    "64478480-99d6-4946-adde-ce1b9f45e43b",
+    "7635f2b7-8d11-4d82-874f-83039547a2cd",
+    "b4db938f-d071-43bb-87c1-af2d9d783ac7",
+    "rev_review_carousel_KmjTw8",
+    "1e48490e-7cc1-41f6-acc9-5556eaf53965",
+    "8e60d03d-313e-4536-935a-0e405a801df4",
+    "rev_pdp_overlapp_img_UMrR69",
+    "product-content",
+    "1659632928e379313e"
+  ]
+}

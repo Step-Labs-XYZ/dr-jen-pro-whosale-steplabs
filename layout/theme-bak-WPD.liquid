@@ -1,0 +1,439 @@
+{%- comment -%}
+
+------------------------------------------------------------------------------------------------------------------------
+
+NOTE TO DEVELOPERS: welcome to Focal theme! We hope that you will enjoy editing this theme as much as we did for
+
+  developing it. We have put a lot of work to make this theme as developer friendly as possible by offering you
+
+  hooks to integrate into critical parts of the theme. You will find the complete technical documentation (including
+
+  all events, dependencies...) in the "custom.js" file, located in the Assets folder.
+
+------------------------------------------------------------------------------------------------------------------------
+
+{%- endcomment -%}
+
+
+
+<!doctype html>
+
+
+
+{%- assign direction = 'ltr' -%}
+
+{%- case request.locale.iso_code -%}
+
+  {%- when 'ar' or 'arc' or 'dv' or 'fa' or 'ha' or 'he' or 'kwh' or 'ks' or 'ku' or 'ps' or 'ur' or 'yi' -%}
+
+    {%- assign direction = 'rtl' -%}
+
+{%- endcase -%}
+
+
+
+<html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ direction }}">
+
+  <head>
+<link rel='preconnect dns-prefetch' href='https://triplewhale-pixel.web.app/' crossorigin />
+<link rel='preconnect dns-prefetch' href='https://api.config-security.com/' crossorigin />
+<script>
+/* >> TriplePixel :: start*/
+~function(W,H,A,L,E,_,B,N){function O(U,T,H,R){void 0===R&&(R=!1),H=new XMLHttpRequest,H.open("GET",U,!0),H.send(null),H.onreadystatechange=function(){4===H.readyState&&200===H.status?(R=H.responseText,U.includes(".txt")?eval(R):N[B]=R):(299<H.status||H.status<200)&&T&&!R&&(R=!0,O(U,T-1))}}if(N=window,!N[H+"sn"]){N[H+"sn"]=1;try{A.setItem(H,1+(0|A.getItem(H)||0)),(E=JSON.parse(A.getItem(H+"U")||"[]")).push(location.href),A.setItem(H+"U",JSON.stringify(E))}catch(e){}A.getItem('"!nC`')||(A=N,A[H]||(L=function(){return Date.now().toString(36)+"_"+Math.random().toString(36)},E=A[H]=function(t,e){return W=L(),(E._q=E._q||[]).push([W,t,e]),W},E.ch=W,B="configSecurityConfModel",N[B]=1,O("//conf.config-security.com/model",0),O("//triplewhale-pixel.web.app/triplefw.txt?",5)))}}("","TriplePixel",localStorage);
+/* << TriplePixel :: end*/
+</script>
+
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-54GQKXZ');</script>
+<!-- End Google Tag Manager -->
+    <script src="https://www.googleoptimize.com/optimize.js?id=OPT-PHC7M6Z"></script>
+{% include 'blotout-theme' %}{% render 'pagefly-head' %}
+     
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, maximum-scale=1.0">
+
+    <meta name="theme-color" content="{{ settings.header_background }}">
+
+    <style>
+      #__next  iframe {
+        height: 70vh !important;
+      }
+      #prive-subs-account-link {
+        display: flex;
+        justify-content: center;
+        padding-top: 10px;
+      }
+    </style>
+
+    <title>{% if page_title == blank %}{{ shop.name }}{% else %}{{ page_title }}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% endif %}</title>
+
+
+
+    {%- if page_description -%}
+
+      <meta name="description" content="{{ page_description | escape }}">
+
+    {%- endif -%}
+
+
+
+    <link rel="canonical" href="{{ canonical_url }}">
+
+
+
+    {%- if settings.favicon -%}
+
+      <link rel="shortcut icon" href="{{ settings.favicon | img_url: '96x96' }}" type="image/png">
+
+    {%- endif -%}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    {%- comment -%}Few prefech to increase performance on commonly used third-parties{%- endcomment -%}
+
+    <link rel="preconnect" href="https://cdn.shopify.com">
+
+    <link rel="dns-prefetch" href="https://productreviews.shopifycdn.com">
+
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+
+
+
+    {%- unless settings.heading_font.system? and settings.text_font.system? -%}
+
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+
+    {%- endunless -%}
+
+
+
+    {%- comment -%}Preload important resources{%- endcomment -%}
+
+    <link rel="preload" as="style" href="{{ 'theme.css' | asset_url }}">
+
+    <link rel="preload" as="script" href="{{ 'vendor.js' | asset_url }}">
+
+    <link rel="preload" as="script" href="{{ 'theme.js' | asset_url }}">
+
+
+
+    {%- comment -%}
+
+      IMPLEMENTATION NOTE: for improving performance, Focal tries to preload images on known pages (such as blog page,
+
+      product or collection pages). In order to keep a main JS file size minimal, the theme also lazyloads non-essential
+
+      libraries (such as PhotoSwipe or Flickity) and only loads them on demand.
+
+    {%- endcomment -%}
+
+    {%- if request.page_type == 'product' -%}
+
+      {%- assign selected_media = product.selected_variant.featured_media | default: product.featured_media -%}
+
+
+
+      <link rel="preload" as="fetch" href="{{ product.url }}.js" crossorigin>
+
+      <link rel="preload" as="image" imagesizes="(max-width: 999px) calc(100vw - 48px), 640px" imagesrcset="{% render 'image-attributes', image: selected_media, sizes: '400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800', sizes_only: true %}">
+
+
+
+      {%- if product.media.size > 1 -%}
+
+        <link rel="preload" as="script" href="{{ 'flickity.js' | asset_url }}">
+
+      {%- endif -%}
+
+    {%- elsif request.page_type == 'collection' and collection.image -%}
+
+      <link rel="preload" as="image" media="(max-width: 740px)" imagesizes="100vw" imagesrcset="{% render 'image-attributes', image: collection.image, sizes: '400,500,600,700,800,900,1000', height_constraint: 600, crop: 'center', sizes_only: true %}">
+
+      <link rel="preload" as="image" media="(min-width: 741px)" imagesizes="100vw" imagesrcset="{% render 'image-attributes', image: collection.image, sizes: '600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600', sizes_only: true %}">
+
+    {%- endif -%}
+
+    
+
+
+
+    {% render 'social-meta-tags' %}
+
+    {% render 'microdata-schema' %}
+
+    {% render 'css-variables', direction: direction %}
+
+    {% render 'js-variables', direction: direction %}
+
+    {% if template == 'index' %}
+		{% capture actual %}{{ "now" | date: "%s" }}{% endcapture %}
+		{% capture start %}{{ '20-12-2022 10:00' | date: "%s" }}{% endcapture%}
+		{% capture finish %}{{ '03-01-2023 23:59' | date: "%s" }}{% endcapture%}
+
+		{% assign actual = actual | plus: 0 %}
+		{% assign start = start | plus: 0 %}
+		{% assign finish = finish | plus: 0 %}
+
+		
+		{% if actual > start and finish > actual %}
+			<style>
+        .home-page-banner-original{
+          display: none;
+        }
+      </style>
+           
+		{% else %}
+
+    <style>
+    .home-page-banner-original{
+      display: block;
+    }
+    .home-page-cybermonday{
+      display: none;
+    }
+    </style>
+          
+		{% endif %}
+	{% endif %}
+
+    <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
+
+
+
+    <script src="{{ 'vendor.js' | asset_url }}" defer></script>
+
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+
+    <script src="{{ 'custom.js' | asset_url }}" defer></script>
+
+
+
+    <link rel="stylesheet" href="{{'homepage.css' | asset_url}}">
+
+
+
+    {{ content_for_header }}
+
+    <!-- CF THEME ADDON -->
+    <link href="preload" href="{{ 'cf_source-tracking.js' | asset_url }}" as="script">
+    <script src="{{ 'cf_source-tracking.js' | asset_url }}" type="module"></script>
+    {{ 'jod-css-library.css' | asset_url | stylesheet_tag }}
+    <!-- END CF THEME ADDON -->
+
+
+
+{% if content_for_header contains 'fastbundle.co' %}
+
+    {% render 'fast_bundle_service' %}
+
+{% endif %}
+
+{% include 'MonsterUpsell-shopify-prod-head' %}  {% if template == 'cart' %}{% include "revy-bundle-script" %}{% endif %}
+
+  {% render 'shogun-head' %}
+</head>
+{%- assign feature_classes = '' -%}
+
+
+
+  {%- if settings.show_image_zoom -%}
+
+    {% assign feature_classes = feature_classes | append: ' features--image-zoom' %}
+
+  {%- endif -%}
+
+
+
+  <body class="no-focus-outline {{ feature_classes }} template-{{ template.name }}" data-instant-allow-query-string>
+
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-54GQKXZ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+    {%- comment -%}Common SVG definitions that we are re-using in several places{%- endcomment -%}
+
+    <svg class="visually-hidden">
+
+      <linearGradient id="rating-star-gradient-half">
+
+        <stop offset="50%" stop-color="rgb(var(--product-star-rating))" />
+
+        <stop offset="50%" stop-color="rgb(var(--product-star-rating))" stop-opacity="0.4" />
+
+      </linearGradient>
+
+    </svg>
+
+
+
+    <a href="#main" class="visually-hidden skip-to-content">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
+    <loading-bar class="loading-bar"></loading-bar>
+
+
+
+    {%- if request.page_type != 'gift_card' and request.page_type != 'password' -%}
+
+      {%- section 'announcement-bar' -%}
+
+      {%- section 'popup' -%}
+
+      {%- section 'header' -%}
+
+
+
+      {%- unless settings.cart_type == 'page' or request.page_type == 'cart' -%}
+
+        {%- section 'mini-cart' -%}
+
+      {%- endunless -%}
+
+    {%- endif -%}
+
+
+
+    <div id="main" role="main" class="anchor">
+
+      {%- comment -%}
+
+      IMPLEMENTATION NOTE: on collection and search page, the theme was designed to show on mobile the filter bar and/or sort
+
+        by at the very top of the page. However, due to the fact that sections are isolated, I had to move the code
+
+        here. Then, the collection section, based on the selected settings, will eventually hide those elements in CSS
+
+      {%- endcomment -%}
+
+      {%- if request.page_type == 'collection' or request.page_type == 'search' -%}
+
+        {%- assign active_filters_count = 0 -%}
+
+
+
+        {%- if request.page_type == 'collection' -%}
+
+          {%- assign filters = collection.filters -%}
+
+        {%- else -%}
+
+          {%- assign filters = search.filters -%}
+
+        {%- endif -%}
+
+
+
+        {%- for filter in filters -%}
+
+          {%- if filter.type == 'list' -%}
+
+            {%- assign active_filters_count = active_filters_count | plus: filter.active_values.size -%}
+
+          {%- elsif filter.type == 'price_range' and filter.min_value.value or filter.max_value.value -%}
+
+            {%- assign active_filters_count = active_filters_count | plus: 1 -%}
+
+          {%- endif -%}
+
+        {%- endfor -%}
+
+
+
+        {%- assign is_toolbar_collapsed = false -%}
+
+
+
+        {%- if request.page_type == 'search' and search.results.first.object_type != 'product' and search.results_count > 0 -%}
+
+          {%- assign is_toolbar_collapsed = true -%}
+
+        {%- endif -%}
+
+
+
+        <div id="mobile-facet-toolbar" class="mobile-toolbar {% if is_toolbar_collapsed %}is-collapsed{% endif %} hidden-lap-and-up">
+
+          <button is="toggle-button" class="mobile-toolbar__item mobile-toolbar__item--filters {% if active_filters_count > 0 %}has-filters{% endif %}" aria-expanded="false" aria-controls="facet-filters" style="display: none">
+
+            {%- render 'icon' with 'filters' -%}
+
+            <span class="mobile-toolbar__item-label">{{- 'collection.general.filters' | t -}}</span>
+
+          </button>
+
+
+
+          <button is="toggle-button" class="mobile-toolbar__item mobile-toolbar__item--sort" aria-expanded="false" aria-controls="sort-by-popover" style="display: none">
+
+            <span class="mobile-toolbar__item-label">{{- 'collection.general.sort_by' | t -}}</span>
+
+            {%- render 'icon' with 'chevron' -%}
+
+          </button>
+
+        </div>
+
+      {%- endif -%}
+
+
+
+      {{ content_for_layout }}
+
+
+
+      {%- unless request.page_type == 'index' or request.page_type == 'password' or request.page_type == 'gift_card' -%}
+
+        {%- section 'static-text-with-icons' -%}
+
+        {%- section 'static-newsletter' -%}
+
+      {%- endunless -%}
+
+    </div>
+
+
+
+    {%- if request.page_type != 'gift_card' and request.page_type != 'password' -%}
+
+      {%- section 'footer' -%}
+
+    {%- endif -%}
+
+  {% include 'revy-bundle-script' %}
+
+{% include 'MonsterUpsell-shopify-prod-body' %}  {% include 'revy-discounts-script' %}
+
+<!-- Smooth Scrolling to any anchor -->
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+              behavior: 'smooth'
+          });
+      });
+  });
+</script>
+
+{% include 'appikon-discounts' %}
+{% include 'afterpay' %}
+</body>
+</html>

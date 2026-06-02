@@ -1,0 +1,788 @@
+{%- liquid
+  assign social_check = section.settings.facebook_url | append: section.settings.instagram_url | append: section.settings.tiktok_url | append: section.settings.twitter_url | append: section.settings.linkedin_url | append: section.settings.youtube_url
+  assign has_social = false
+  if social_check != blank
+    assign has_social = true
+  endif
+  assign nav_blocks = section.blocks | where: 'type', 'nav_link'
+-%}
+
+<footer
+  id="c-footer-{{ section.id }}"
+  class="c-footer"
+  data-sl-id="sl-section-footer-v1"
+  data-section-id="{{ section.id }}"
+>
+  <div class="c-footer__container">
+
+    <!-- ── Main Columns ── -->
+    <div class="c-footer__main">
+
+      <!-- Brand / Logo -->
+      <div class="c-footer__col c-footer__col--brand">
+        <a href="{{ routes.root_url }}" class="c-footer__logo" aria-label="{{ shop.name }}">
+          {%- if section.settings.logo_image != blank -%}
+            <img
+              src="{{ section.settings.logo_image | image_url: width: 600 }}"
+              alt="{{ shop.name }}"
+              loading="lazy"
+              class="c-footer__logo-img"
+            />
+          {%- elsif section.settings.logo_text != blank -%}
+            <span class="c-footer__logo-text">{{ section.settings.logo_text }}</span>
+          {%- else -%}
+            <span class="c-footer__logo-text">{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+      </div>
+
+      <!-- About -->
+      {%- if section.settings.about_heading != blank or section.settings.about_text != blank -%}
+        <div class="c-footer__col c-footer__col--about">
+          {%- if section.settings.about_heading != blank -%}
+            <h3 class="c-footer__heading">{{ section.settings.about_heading }}</h3>
+          {%- endif -%}
+          {%- if section.settings.about_text != blank -%}
+            <p class="c-footer__body-text">{{ section.settings.about_text }}</p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <!-- Navigate -->
+      {%- if nav_blocks.size > 0 -%}
+        <div class="c-footer__col c-footer__col--nav">
+          {%- if section.settings.nav_heading != blank -%}
+            <h3 class="c-footer__heading">{{ section.settings.nav_heading }}</h3>
+          {%- endif -%}
+          <ul class="c-footer__nav-list">
+            {%- for block in nav_blocks -%}
+              <li {{ block.shopify_attributes }}>
+                <a href="{{ block.settings.url }}" class="c-footer__nav-link">
+                  {{ block.settings.label }}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+
+      <!-- Subscribe -->
+      <div class="c-footer__col c-footer__col--subscribe">
+        {%- if section.settings.subscribe_heading != blank -%}
+          <h3 class="c-footer__heading">{{ section.settings.subscribe_heading }}</h3>
+        {%- endif -%}
+        {%- if section.settings.subscribe_description != blank -%}
+          <p class="c-footer__body-text c-footer__subscribe-desc">{{ section.settings.subscribe_description }}</p>
+        {%- endif -%}
+
+        {%- form 'customer', class: 'c-footer__form' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="c-footer__form-success">{{ section.settings.subscribe_success_msg }}</p>
+          {%- else -%}
+            {%- if form.errors -%}
+              <p class="c-footer__form-error">{{ form.errors | default_errors }}</p>
+            {%- endif -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="c-footer__form-row">
+              <input
+                type="email"
+                name="contact[email]"
+                class="c-footer__input"
+                placeholder="{{ section.settings.subscribe_placeholder }}"
+                required
+                autocomplete="email"
+                aria-label="{{ section.settings.subscribe_placeholder }}"
+                value="{% if form.email %}{{ form.email }}{% endif %}"
+              >
+              <button type="submit" class="c-footer__subscribe-btn">
+                {{ section.settings.subscribe_btn_text }}
+              </button>
+            </div>
+          {%- endif -%}
+        {%- endform -%}
+
+        {%- if section.settings.subscribe_disclaimer != blank -%}
+          <p class="c-footer__disclaimer">{{ section.settings.subscribe_disclaimer }}</p>
+        {%- endif -%}
+      </div>
+
+    </div><!-- /.c-footer__main -->
+
+    <!-- ── Divider ── -->
+    <hr class="c-footer__divider">
+
+    <!-- ── Bottom Bar ── -->
+    <div class="c-footer__bottom">
+
+      <!-- Social (first in DOM → top on mobile, right on desktop via order) -->
+      {%- if has_social -%}
+        <div class="c-footer__social">
+          {%- if section.settings.facebook_url != blank -%}
+            <a href="{{ section.settings.facebook_url }}" class="c-footer__social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M18 2H15C13.6739 2 12.4021 2.52678 11.4645 3.46447C10.5268 4.40215 10 5.67392 10 7V10H7V14H10V22H14V14H17L18 10H14V7C14 6.73478 14.1054 6.48043 14.2929 6.29289C14.4804 6.10536 14.7348 6 15 6H18V2Z"/>
+              </svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.instagram_url != blank -%}
+            <a href="{{ section.settings.instagram_url }}" class="c-footer__social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+              </svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.tiktok_url != blank -%}
+            <a href="{{ section.settings.tiktok_url }}" class="c-footer__social-link" aria-label="TikTok" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.31 6.31 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.12 8.12 0 0 0 4.76 1.52V6.76a4.84 4.84 0 0 1-.99-.07z"/>
+              </svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.twitter_url != blank -%}
+            <a href="{{ section.settings.twitter_url }}" class="c-footer__social-link" aria-label="X (Twitter)" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L2.25 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.linkedin_url != blank -%}
+            <a href="{{ section.settings.linkedin_url }}" class="c-footer__social-link" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect x="2" y="9" width="4" height="12"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.youtube_url != blank -%}
+            <a href="{{ section.settings.youtube_url }}" class="c-footer__social-link" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+                <path d="M9.75 15.02L15.5 12 9.75 8.98v6.04z" fill="{{ section.settings.bg_color }}"/>
+              </svg>
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <!-- Copyright + Policy Links -->
+      <div class="c-footer__bottom-meta">
+        {%- if section.settings.show_privacy_policy and shop.privacy_policy != nil -%}
+          <a href="{{ shop.privacy_policy.url }}" class="c-footer__policy-link">
+            {{ shop.privacy_policy.title }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.show_terms_of_service and shop.terms_of_service != nil -%}
+          <a href="{{ shop.terms_of_service.url }}" class="c-footer__policy-link">
+            {{ shop.terms_of_service.title }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.show_cookies_settings -%}
+          <button
+            type="button"
+            class="c-footer__policy-link c-footer__cookies-btn"
+            onclick="if(typeof Optanon!=='undefined'){Optanon.ToggleInfoDisplay()}"
+          >
+            {{ section.settings.cookies_settings_label }}
+          </button>
+        {%- endif -%}
+        {%- if section.settings.copyright_text != blank -%}
+          <span class="c-footer__copyright">{{ section.settings.copyright_text }}</span>
+        {%- endif -%}
+      </div>
+
+    </div><!-- /.c-footer__bottom -->
+
+  </div><!-- /.c-footer__container -->
+</footer>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&display=swap');
+
+/* ── Base ── */
+#c-footer-{{ section.id }} {
+  background-color: {{ section.settings.bg_color }};
+  color: {{ section.settings.text_color }};
+  font-family: 'Raleway', sans-serif;
+}
+
+#c-footer-{{ section.id }} .c-footer__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 56px {{ section.settings.padding_x_mobile }}px 40px;
+}
+
+/* ── Main grid — mobile: single column ── */
+#c-footer-{{ section.id }} .c-footer__main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  margin-bottom: 40px;
+}
+
+/* ── Column headings ── */
+#c-footer-{{ section.id }} .c-footer__heading {
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: {{ section.settings.heading_color }};
+  margin: 0 0 16px 0;
+  letter-spacing: 0.2px;
+}
+
+/* ── Body text ── */
+#c-footer-{{ section.id }} .c-footer__body-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: {{ section.settings.text_color }};
+  margin: 0;
+  opacity: 0.85;
+}
+
+/* ── Logo ── */
+#c-footer-{{ section.id }} .c-footer__logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  margin-bottom: 4px;
+}
+
+#c-footer-{{ section.id }} .c-footer__logo-img {
+  width: {{ section.settings.logo_width_mobile }}px;
+  height: auto;
+  display: block;
+}
+
+#c-footer-{{ section.id }} .c-footer__logo-text {
+  font-family: 'Raleway', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: {{ section.settings.heading_color }};
+  letter-spacing: -0.5px;
+}
+
+/* ── Nav list ── */
+#c-footer-{{ section.id }} .c-footer__nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#c-footer-{{ section.id }} .c-footer__nav-link {
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: {{ section.settings.link_color }};
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  display: inline-block;
+}
+
+#c-footer-{{ section.id }} .c-footer__nav-link:hover {
+  opacity: 0.7;
+}
+
+/* ── Subscribe description ── */
+#c-footer-{{ section.id }} .c-footer__subscribe-desc {
+  margin-bottom: 20px;
+}
+
+/* ── Newsletter Form ── */
+#c-footer-{{ section.id }} .c-footer__form {
+  margin-bottom: 16px;
+}
+
+#c-footer-{{ section.id }} .c-footer__form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#c-footer-{{ section.id }} .c-footer__input {
+  width: 100%;
+  padding: 14px 18px;
+  background: transparent;
+  border: 1.5px solid {{ section.settings.input_border_color }};
+  border-radius: 40px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  color: {{ section.settings.text_color }};
+  outline: none;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+#c-footer-{{ section.id }} .c-footer__input::placeholder {
+  color: {{ section.settings.text_color }};
+  opacity: 0.5;
+}
+
+#c-footer-{{ section.id }} .c-footer__input:focus {
+  border-color: {{ section.settings.btn_bg_color }};
+}
+
+#c-footer-{{ section.id }} .c-footer__subscribe-btn {
+  width: 100%;
+  padding: 14px 24px;
+  background: {{ section.settings.btn_bg_color }};
+  text-align:center;
+  color: {{ section.settings.btn_text_color }};
+  border: none;
+  border-radius: 40px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+#c-footer-{{ section.id }} .c-footer__subscribe-btn:hover {
+  opacity: 0.88;
+}
+
+/* ── Disclaimer ── */
+#c-footer-{{ section.id }} .c-footer__disclaimer {
+  font-size: 12px;
+  line-height: 1.5;
+  color: {{ section.settings.text_color }};
+  opacity: 0.6;
+  margin: 0;
+}
+
+/* ── Form feedback ── */
+#c-footer-{{ section.id }} .c-footer__form-success {
+  font-size: 14px;
+  font-weight: 600;
+  color: #4ade80;
+  margin: 0 0 8px 0;
+}
+
+#c-footer-{{ section.id }} .c-footer__form-error {
+  font-size: 13px;
+  color: #f87171;
+  margin: 0 0 8px 0;
+}
+
+/* ── Divider ── */
+#c-footer-{{ section.id }} .c-footer__divider {
+  border: none;
+  border-top: 1px solid {{ section.settings.divider_color }};
+  margin: 0 0 28px 0;
+}
+
+/* ── Bottom bar — mobile: column, social on top ── */
+#c-footer-{{ section.id }} .c-footer__bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+#c-footer-{{ section.id }} .c-footer__social {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  order: 1;
+}
+
+#c-footer-{{ section.id }} .c-footer__social-link {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid {{ section.settings.divider_color }};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: {{ section.settings.text_color }};
+  text-decoration: none;
+  transition: border-color 0.2s ease, opacity 0.2s ease;
+  flex-shrink: 0;
+}
+
+#c-footer-{{ section.id }} .c-footer__social-link:hover {
+  opacity: 0.7;
+  border-color: {{ section.settings.text_color }};
+}
+
+#c-footer-{{ section.id }} .c-footer__bottom-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  order: 2;
+}
+
+#c-footer-{{ section.id }} .c-footer__copyright {
+  font-size: 13px;
+  color: {{ section.settings.text_color }};
+  opacity: 0.75;
+  white-space: nowrap;
+}
+
+#c-footer-{{ section.id }} .c-footer__policy-link {
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: {{ section.settings.link_color }};
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+#c-footer-{{ section.id }} .c-footer__policy-link:hover {
+  opacity: 0.7;
+}
+
+/* ── 768px: horizontal bottom bar + form row ── */
+@media (min-width: 768px) {
+  #c-footer-{{ section.id }} .c-footer__form-row {
+    flex-direction: row;
+  }
+
+  #c-footer-{{ section.id }} .c-footer__subscribe-btn {
+    width: auto;
+    flex-shrink: 0;
+  }
+
+  #c-footer-{{ section.id }} .c-footer__bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #c-footer-{{ section.id }} .c-footer__social {
+    order: 2;
+  }
+
+  #c-footer-{{ section.id }} .c-footer__bottom-meta {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+    order: 1;
+    align-items: center;
+  }
+}
+
+/* ── 1200px: 3-column main grid ── */
+@media (min-width: 1200px) {
+  #c-footer-{{ section.id }} .c-footer__container {
+    padding: 64px {{ section.settings.padding_x_desktop }}px 40px;
+  }
+
+  #c-footer-{{ section.id }} .c-footer__main {
+    grid-template-columns: auto 1fr 1fr 1.4fr;
+    gap: 40px;
+  }
+
+  #c-footer-{{ section.id }} .c-footer__logo-img {
+    width: {{ section.settings.logo_width_desktop }}px;
+  }
+}
+
+/* ── Brand column: shrink to logo width ── */
+#c-footer-{{ section.id }} .c-footer__col--brand {
+  min-width: 0;
+}
+
+/* ── About body text: bold ── */
+#c-footer-{{ section.id }} .c-footer__col--about .c-footer__body-text {
+  font-weight: 700;
+  opacity: 1;
+}
+</style>
+
+{% schema %}
+{
+  "name": "C Footer",
+  "class": "section-c-footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#002C41"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Headings & Logo",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Links",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Email Input Border",
+      "default": "#4a7a8a"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_color",
+      "label": "Subscribe Button Background",
+      "default": "#2563EB"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Subscribe Button Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider & Social Icon Border",
+      "default": "#1e4a5f"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "padding_x_desktop",
+      "min": 16,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Side Padding (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_x_mobile",
+      "min": 12,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Side Padding (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo Image"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo Text (fallback if no image)",
+      "default": "DR. JEN"
+    },
+    {
+      "type": "range",
+      "id": "logo_width_desktop",
+      "min": 60,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Logo Width (Desktop)",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "logo_width_mobile",
+      "min": 40,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Logo Width (Mobile)",
+      "default": 90
+    },
+    {
+      "type": "header",
+      "content": "About Column"
+    },
+    {
+      "type": "text",
+      "id": "about_heading",
+      "label": "Heading",
+      "default": "About"
+    },
+    {
+      "type": "textarea",
+      "id": "about_text",
+      "label": "Description",
+      "default": "Backed by over 25 years of Dental Experience"
+    },
+    {
+      "type": "header",
+      "content": "Navigate Column"
+    },
+    {
+      "type": "text",
+      "id": "nav_heading",
+      "label": "Heading",
+      "default": "Navigate"
+    },
+    {
+      "type": "header",
+      "content": "Subscribe Column"
+    },
+    {
+      "type": "text",
+      "id": "subscribe_heading",
+      "label": "Heading",
+      "default": "Subscribe"
+    },
+    {
+      "type": "textarea",
+      "id": "subscribe_description",
+      "label": "Description",
+      "default": "Subscribe to our newsletter to access exclusive drops & discounts"
+    },
+    {
+      "type": "text",
+      "id": "subscribe_placeholder",
+      "label": "Input Placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "subscribe_btn_text",
+      "label": "Button Text",
+      "default": "SUBSCRIBE"
+    },
+    {
+      "type": "textarea",
+      "id": "subscribe_disclaimer",
+      "label": "Disclaimer",
+      "default": "By subscribing you agree to with our Privacy Policy and provide consent to receive updates from our company."
+    },
+    {
+      "type": "text",
+      "id": "subscribe_success_msg",
+      "label": "Success Message",
+      "default": "Thanks for subscribing!"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Bar"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright Text",
+      "default": "© 2026, Dr Jen Oral Care."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_privacy_policy",
+      "label": "Show Privacy Policy Link",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_terms_of_service",
+      "label": "Show Terms of Service Link",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cookies_settings",
+      "label": "Show Cookies Settings Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cookies_settings_label",
+      "label": "Cookies Settings Label",
+      "default": "Cookies Settings"
+    },
+    {
+      "type": "header",
+      "content": "Social Media"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "tiktok_url",
+      "label": "TikTok URL"
+    },
+    {
+      "type": "url",
+      "id": "twitter_url",
+      "label": "X (Twitter) URL"
+    },
+    {
+      "type": "url",
+      "id": "linkedin_url",
+      "label": "LinkedIn URL"
+    },
+    {
+      "type": "url",
+      "id": "youtube_url",
+      "label": "YouTube URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "nav_link",
+      "name": "Nav Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Link"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "C Footer",
+      "blocks": [
+        { "type": "nav_link", "settings": { "label": "Search", "url": "/search" } },
+        { "type": "nav_link", "settings": { "label": "Privacy Policy", "url": "/policies/privacy-policy" } },
+        { "type": "nav_link", "settings": { "label": "Wholesale registration", "url": "/pages/wholesale" } },
+        { "type": "nav_link", "settings": { "label": "Refund Policy", "url": "/policies/refund-policy" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

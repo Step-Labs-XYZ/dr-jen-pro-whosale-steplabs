@@ -1,0 +1,116 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "collection-banner": {
+      "type": "collection-banner",
+      "settings": {
+        "show_collection_image": false,
+        "show_collection_title": true,
+        "show_collection_description": true,
+        "section_height": "small",
+        "text_width": "medium",
+        "image_text_color": "#ffffff",
+        "image_overlay_color": "#000000",
+        "image_overlay_opacity": 13,
+        "quick_links": ""
+      }
+    },
+    "7d7cb204-e6ca-4fce-bf38-a27eb4734a85": {
+      "type": "valueprops_collection",
+      "blocks": {
+        "652581f0-0606-4f75-88c7-a086d9475f42": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/Frame_335.png"
+          }
+        },
+        "ddc71955-fc14-413a-9448-abe221f07038": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/Frame_335_1.png"
+          }
+        },
+        "7da259de-4beb-460e-9840-7e7ec79cefd5": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/Frame_335_2.png"
+          }
+        },
+        "0cde3269-9510-472d-8d9a-ae30524096d1": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/Frame_335_3.png"
+          }
+        },
+        "04513724-3d70-4d85-ab01-25df03cbfdf2": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/Frame_336.png"
+          }
+        },
+        "2ca4762d-b0e5-4b47-ab45-b239eb8f79ae": {
+          "type": "Icons",
+          "settings": {
+            "image": "shopify://shop_images/Frame_335_4.png"
+          }
+        }
+      },
+      "block_order": [
+        "652581f0-0606-4f75-88c7-a086d9475f42",
+        "ddc71955-fc14-413a-9448-abe221f07038",
+        "7da259de-4beb-460e-9840-7e7ec79cefd5",
+        "0cde3269-9510-472d-8d9a-ae30524096d1",
+        "04513724-3d70-4d85-ab01-25df03cbfdf2",
+        "2ca4762d-b0e5-4b47-ab45-b239eb8f79ae"
+      ],
+      "settings": {
+        "title": ""
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "show_sort_by": true,
+        "products_per_page": 24,
+        "mobile_products_per_row": "2",
+        "desktop_products_per_row": 3,
+        "show_filters": false,
+        "show_filter_group_name": false,
+        "show_color_swatch": true,
+        "open_first_filter_group": false,
+        "filter_position": "always_visible",
+        "promotion_position": "top",
+        "promotion_height": "medium"
+      }
+    },
+    "1659903519998b6b30": {
+      "type": "apps",
+      "settings": {
+        "include_horizontal_margins": true,
+        "include_vertical_margins": true
+      }
+    },
+    "16766554811e820a75": {
+      "type": "apps",
+      "settings": {
+        "include_horizontal_margins": true,
+        "include_vertical_margins": true
+      }
+    }
+  },
+  "order": [
+    "collection-banner",
+    "7d7cb204-e6ca-4fce-bf38-a27eb4734a85",
+    "main",
+    "1659903519998b6b30",
+    "16766554811e820a75"
+  ]
+}

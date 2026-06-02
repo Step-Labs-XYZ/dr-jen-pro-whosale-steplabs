@@ -1,0 +1,45 @@
+
+{{ 'section-new-register-section.css' | asset_url | stylesheet_tag }}
+
+<section class="section--wholesale-register" id="new-register-section">
+  <div class="container">
+    {% if customer %}
+      <div class="text--center">
+        <h2>Welcome, {{ customer.first_name }}!</h2>
+        <h3>You already are our wholesale customer.</h3>
+        <a class="button button--primary imageAbButton" href="/collections/wholesale">Shop Wholesale</a>
+      </div>
+    {% else %}
+      <div class="text--center">
+        <h2>Sign up for your Dr. Jen</h2>
+        <p>Get <a href="">FREE samples </a>and <a href="https://www.dentalceacademy.com/nano-hydroxyapatite-dental-ce-academy">CE Credits</a>. <br/> <i>Free samples are only for dental offices</i></p>
+      </div>
+      <div class="new-register-section__container">
+        <div class="new-register-section__step">
+          {% assign steps = 'Personal Info, Location, FREE Samples' | split: ',' %}
+          {% for step in steps %}
+            <div class="new-register-section__each-step step-{{ forloop.index }}">
+              <p class="new-register-section__step-number">{{ forloop.index }}</p>
+              <p class="new-register-section__step-name">{{ step }}</p>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="globo-formbuilder" data-id="MTYzNjk="></div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<script src="{{ 'section-new-register-section.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "New Register Section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "New Register Section"
+    }
+  ]
+}
+{% endschema %}

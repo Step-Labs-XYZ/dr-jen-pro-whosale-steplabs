@@ -1,0 +1,544 @@
+{%- comment -%}
+  Section: Premium-Grade NHAp
+  Description: Two-column layout — left: question heading, body text, two comparison
+               tooth images with labels; right: main heading, rich text, certification
+               logo + quote block.
+  sl-id: sl-section-premium-nhap-v1
+  Figma: (figma url)
+{%- endcomment -%}
+
+{%- comment -%} ===== Styles ===== {%- endcomment -%}
+{%- style -%}
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap');
+
+  /* ================================================
+     ROOT VARIABLES
+     ================================================ */
+  #c-nhap-{{ section.id }} {
+    --c-nhap-bg:          {{ section.settings.bg_color }};
+    --c-nhap-left-bg:     {{ section.settings.left_bg_color }};
+    --c-nhap-text-dark:   {{ section.settings.text_color }};
+    --c-nhap-text-body:   {{ section.settings.body_color }};
+    --c-nhap-border:      #e5e7eb;
+    --c-nhap-label-color: {{ section.settings.label_color }};
+
+    font-family: 'Raleway', sans-serif;
+    background-color: var(--c-nhap-bg);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ================================================
+     LEFT COLUMN — Mobile first
+     ================================================ */
+  #c-nhap-{{ section.id }} .c-nhap__left {
+    width: 100%;
+    background-color: var(--c-nhap-bg);
+    padding: {{ section.settings.pad_top_mob }}px 28px {{ section.settings.pad_bot_mob }}px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    order: 2;
+  }
+
+  /* Question heading */
+  #c-nhap-{{ section.id }} .c-nhap__question {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--c-nhap-text-dark);
+    line-height: 1.25;
+    margin: 0 0 14px 0;
+    text-align: center;
+  }
+
+  /* Sub-body under question */
+  #c-nhap-{{ section.id }} .c-nhap__sub-body {
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+    max-width:500px;
+    line-height: 1.65;
+    margin: 0 0 32px 0;
+    text-align: center;
+  }
+
+  /* ── Tooth comparison grid ── */
+  #c-nhap-{{ section.id }} .c-nhap__teeth {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  #c-nhap-{{ section.id }} .c-nhap__tooth {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  #c-nhap-{{ section.id }} .c-nhap__tooth-img-wrap {
+    width: 100%;
+    aspect-ratio: 8 / 4;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #c-nhap-{{ section.id }} .c-nhap__tooth-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  #c-nhap-{{ section.id }} .c-nhap__tooth-label {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--c-nhap-label-color);
+    text-align: center;
+    line-height: 1.35;
+  }
+
+  /* ================================================
+     RIGHT COLUMN — Mobile first
+     ================================================ */
+  #c-nhap-{{ section.id }} .c-nhap__right {
+    width: 100%;
+    padding: {{ section.settings.pad_top_mob }}px 28px {{ section.settings.pad_bot_mob }}px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    order: 1;
+  }
+
+  /* Main heading */
+  #c-nhap-{{ section.id }} .c-nhap__title {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--c-nhap-text-dark);
+    line-height: 1.15;
+    margin: 0 0 20px 0;
+  }
+
+  /* Rich body text */
+  #c-nhap-{{ section.id }} .c-nhap__body {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--c-nhap-text-body);
+    line-height: 1.75;
+    margin: 0 0 20px 0;
+  }
+
+  #c-nhap-{{ section.id }} .c-nhap__body p {
+    margin: 0 0 12px 0;
+  }
+
+  #c-nhap-{{ section.id }} .c-nhap__body p:last-child {
+    margin-bottom: 0;
+  }
+
+  #c-nhap-{{ section.id }} .c-nhap__body strong {
+    font-weight: 700;
+    color: var(--c-nhap-text-dark);
+  }
+
+  /* ── Certification block ── */
+  #c-nhap-{{ section.id }} .c-nhap__cert {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  #c-nhap-{{ section.id }} .c-nhap__cert-logo {
+    flex-shrink: 0;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  #c-nhap-{{ section.id }} .c-nhap__cert-quote {
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--c-nhap-text-body);
+    line-height: 120%;
+    margin: 0;
+  }
+
+  /* ================================================
+     BREAKPOINT: 768px — side-by-side
+     ================================================ */
+  @media (width >= 768px) {
+    #c-nhap-{{ section.id }} {
+      flex-direction: row;
+      min-height: 480px;
+    }
+
+    #c-nhap-{{ section.id }} .c-nhap__left {
+      width: 50%;
+      flex-shrink: 0;
+      padding: {{ section.settings.pad_top_desk }}px 40px {{ section.settings.pad_bot_desk }}px 40px;
+      order: 0;
+    }
+
+    #c-nhap-{{ section.id }} .c-nhap__right {
+      width: 50%;
+      padding: {{ section.settings.pad_top_desk }}px 48px {{ section.settings.pad_bot_desk }}px 48px;
+      order: 0;
+    }
+
+    #c-nhap-{{ section.id }} .c-nhap__question {
+      font-size: 20px;
+    }
+
+
+    #c-nhap-{{ section.id }} .c-nhap__title {
+      font-size: 32px;
+    }
+  }
+
+  /* ================================================
+     BREAKPOINT: 978px
+     ================================================ */
+  @media (width >= 978px) {
+    #c-nhap-{{ section.id }} .c-nhap__left {
+      width: 50%;
+      padding: {{ section.settings.pad_top_desk }}px 48px {{ section.settings.pad_bot_desk }}px 56px;
+    }
+
+    #c-nhap-{{ section.id }} .c-nhap__right {
+      width: 50%;
+      padding: {{ section.settings.pad_top_desk }}px 56px {{ section.settings.pad_bot_desk }}px 56px;
+    }
+
+    #c-nhap-{{ section.id }} .c-nhap__question {
+      font-size: 28px;
+    }
+
+    #c-nhap-{{ section.id }} .c-nhap__left{
+      align-items: center;
+    }
+
+    #c-nhap-{{ section.id }} .c-nhap__title {
+      font-size: 36px;
+    }
+
+    #c-nhap-{{ section.id }} .c-nhap__body {
+      font-size: 18px;
+    }
+  }
+
+  /* ================================================
+     BREAKPOINT: 1200px
+     ================================================ */
+  @media (width >= 1200px) {
+    #c-nhap-{{ section.id }} .c-nhap__left {
+      padding: {{ section.settings.pad_top_desk }}px 56px {{ section.settings.pad_bot_desk }}px 72px;
+    }
+
+    #c-nhap-{{ section.id }} .c-nhap__right {
+      padding: {{ section.settings.pad_top_desk }}px 80px {{ section.settings.pad_bot_desk }}px 64px;
+    }
+
+    #c-nhap-{{ section.id }} .c-nhap__title {
+      font-size: 40px;
+    }
+
+    #c-nhap-{{ section.id }} .c-nhap__cert {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    #c-nhap-{{ section.id }} .c-nhap__cert-logo {
+      width: 250px;
+    }
+
+    #c-nhap-{{ section.id }} .c-nhap__cert-quote {
+      font-size: 16px;
+      max-width:400px;
+    }
+  }
+
+  /* ================================================
+     BREAKPOINT: 1980px
+     ================================================ */
+  @media (width >= 1980px) {
+    #c-nhap-{{ section.id }} .c-nhap__title {
+      font-size: 48px;
+    }
+
+    #c-nhap-{{ section.id }} .c-nhap__left {
+      padding: {{ section.settings.pad_top_desk }}px 72px {{ section.settings.pad_bot_desk }}px 100px;
+    }
+
+    #c-nhap-{{ section.id }} .c-nhap__right {
+      padding: {{ section.settings.pad_top_desk }}px 100px {{ section.settings.pad_bot_desk }}px 72px;
+    }
+  }
+{%- endstyle -%}
+
+{%- comment -%} ===== HTML ===== {%- endcomment -%}
+<section
+  {% if section.settings.sl_anchor_id != blank %}id="{{ section.settings.sl_anchor_id }}"{% endif %}
+  class="c-section c-premium-nhap"
+  data-sl-id="sl-section-premium-nhap-v1"
+  data-section-id="{{ section.id }}"
+  style="font-family: 'Raleway', sans-serif;"
+>
+  <div id="c-nhap-{{ section.id }}">
+
+    {%- comment -%} ─── LEFT COLUMN ─── {%- endcomment -%}
+    <div class="c-nhap__left">
+
+      {%- if section.settings.question != blank -%}
+        <h2 class="c-nhap__question">{{ section.settings.question }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.sub_body != blank -%}
+        <p class="c-nhap__sub-body">{{ section.settings.sub_body }}</p>
+      {%- endif -%}
+
+      {%- comment -%} Tooth comparison ─ up to 2 tooth blocks {%- endcomment -%}
+      {%- assign tooth_blocks = false -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'tooth' -%}{%- assign tooth_blocks = true -%}{%- break -%}{%- endif -%}
+      {%- endfor -%}
+      {%- if tooth_blocks -%}
+        <div class="c-nhap__teeth">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'tooth' -%}
+              <div class="c-nhap__tooth" {{ block.shopify_attributes }}>
+                <div class="c-nhap__tooth-img-wrap">
+                  {%- if block.settings.image != blank -%}
+                    {{
+                      block.settings.image
+                      | image_url: width: 400
+                      | image_tag:
+                        loading: 'lazy',
+                        class: 'c-nhap__tooth-img',
+                        alt: block.settings.label | default: ''
+                    }}
+                  {%- else -%}
+                    {{ 'image' | placeholder_svg_tag: 'c-nhap__tooth-img placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+                {%- if block.settings.label != blank -%}
+                  <span class="c-nhap__tooth-label">{{ block.settings.label }}</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+    </div>
+
+    {%- comment -%} ─── RIGHT COLUMN ─── {%- endcomment -%}
+    <div class="c-nhap__right">
+
+      {%- if section.settings.title != blank -%}
+        <h2 class="c-nhap__title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.body_text != blank -%}
+        <div class="c-nhap__body">{{ section.settings.body_text }}</div>
+      {%- endif -%}
+
+      {%- comment -%} Certification block {%- endcomment -%}
+      {%- if section.settings.cert_logo != blank or section.settings.cert_quote != blank -%}
+        <div class="c-nhap__cert">
+          {%- if section.settings.cert_logo != blank -%}
+            {{
+              section.settings.cert_logo
+              | image_url: width: 240
+              | image_tag:
+                loading: 'lazy',
+                class: 'c-nhap__cert-logo',
+                alt: section.settings.cert_logo.alt | default: 'Certification'
+            }}
+          {%- endif -%}
+          {%- if section.settings.cert_quote != blank -%}
+            <p class="c-nhap__cert-quote">{{ section.settings.cert_quote }}</p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+    </div>
+
+  </div>
+</section>
+
+{%- comment -%} ===== Schema ===== {%- endcomment -%}
+{% schema %}
+{
+  "name": "C - Premium-Grade NHAp",
+  "tag": "section",
+  "class": "c-premium-nhap-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "sl_anchor_id",
+      "label": "Anchor ID",
+      "info": "Optional. Sets an HTML id for anchor links."
+    },
+    {
+      "type": "header",
+      "content": "Left Column"
+    },
+    {
+      "type": "text",
+      "id": "question",
+      "label": "Question Heading",
+      "default": "Does quality of the crystal matter?"
+    },
+    {
+      "type": "textarea",
+      "id": "sub_body",
+      "label": "Sub-body Text",
+      "default": "Crystals have to be 'Nano' in size to be able to penetrate the enamel surface pores and dentin tubules."
+    },
+    {
+      "type": "header",
+      "content": "Right Column"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Main Heading",
+      "default": "Premium-Grade NHAp"
+    },
+    {
+      "type": "richtext",
+      "id": "body_text",
+      "label": "Body Text",
+      "default": "<p>Premium-grade Nanohydroxyapatite is proven to deliver optimal levels of protection, reduction in acid-causing bacteria, and hypersensitivity management when used at concentrations of 10%.</p><p><strong>While cheaper formulations source lower grade Nanohydroxyapatite, Dr. Jen's sources premium grade Nanohydroxyapatite for higher performance.</strong></p><p>That's the exact specification the Scientific Committee on Consumer Safety (SCCS) has officially recognized as safe.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Certification Block"
+    },
+    {
+      "type": "image_picker",
+      "id": "cert_logo",
+      "label": "Certification Logo"
+    },
+    {
+      "type": "textarea",
+      "id": "cert_quote",
+      "label": "Certification Quote",
+      "default": "\"Based on the data provided, the SCCS considers hydroxyapatite (nano) safe when used at concentrations up to 10% in toothpaste — composed of rod-shaped particles\""
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "left_bg_color",
+      "label": "Left Column Background",
+      "default": "#f4f7f9"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading Text Color",
+      "default": "#002C41"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body / Quote Text Color",
+      "default": "#4b5563"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Tooth Label Color",
+      "default": "#002C41"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "pad_top_desk",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top — Desktop",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "pad_bot_desk",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom — Desktop",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "pad_top_mob",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top — Mobile",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "pad_bot_mob",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom — Mobile",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tooth",
+      "name": "Tooth Comparison Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Tooth Image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label (shown below image)",
+          "default": "Low-Grade nHAp"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "C - Premium-Grade NHAp",
+      "blocks": [
+        { "type": "tooth", "settings": { "label": "Low-Grade\nnHAp" } },
+        { "type": "tooth", "settings": { "label": "Premium\nGrade nHAp" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

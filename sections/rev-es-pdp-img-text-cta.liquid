@@ -1,0 +1,389 @@
+<!-- Section Liquid File: sections/two-column-section.liquid -->
+<section id="mob-bg" class="{{ section.settings.custom_css_class }}">
+<div  class="container" >
+<div id="rev-es-pdp-img-text-cta" class="two-column-section" style="background-color: {{ section.settings.background_color }}"> 
+    <div class="row">
+      <div class="col-lg-6 col-md-12 column-1">
+        {% if section.settings.heading != blank %}
+          <h2 class="heading" style="color:{{ section.settings.text_color }}">{{ section.settings.heading }}</h2>
+        {% endif %}
+        {% if section.settings.richtext != blank %}
+          <div class="richtext" style="color:{{ section.settings.text_color }}">
+            {{ section.settings.richtext }}
+          </div>
+        {% endif %}
+        {% if section.settings.button_text != blank %}
+          <a href="{{ section.settings.button_url }}" class="rev-carousel-button">
+            {{ section.settings.button_text }}
+          </a>
+        {% endif %}
+      </div>
+      <div class="col-lg-6 col-md-12 column-2">
+        {% if section.settings.full_width_image != blank %}
+          <img src="{{ section.settings.full_width_image | img_url: 'master' }}" alt="Full Width Image" class="full-width-image">
+          <img src="{{ section.settings.mob_full_width_image | img_url: 'master' }}" alt="Full Width Image" class="mob-full-width-image">
+        {% endif %}
+      </div>
+    </div>
+    {% if section.settings.bottom_left_image != blank %}
+      <img src="{{ section.settings.bottom_left_image | img_url: 'medium' }}" alt="Bottom Left Image" class="bottom-left-image">
+    {% endif %}
+    {% unless section.blocks.size == 0 %}
+      <div class="icon-text-grid" style="background-color:{{ section.settings.block_BGcolor }}" >
+        {% for block in section.blocks %}
+        <div class="icon-text-block">
+          {% if block.settings.block_icon != blank %}
+          <img src="{{ block.settings.block_icon | image_url }}" alt="Icon" class="icon-text-icon" />
+          {% endif %}
+          <p class="icon-text-content" style="color:{{ section.settings.body_text }};">{{ block.settings.block_text }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    {% endunless %}
+ </div>
+</div>
+</section>
+
+<!-- CSS -->
+<style>
+#mob-bg #rev-es-pdp-img-text-cta .icon-text-grid {
+  border-radius: 20px 0 0 0;
+}
+#rev-es-pdp-img-text-cta {
+  position: relative;
+  padding:0px;
+  border-radius: 33px;
+  overflow: hidden;
+}
+#rev-es-pdp-img-text-cta .row {
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#rev-es-pdp-img-text-cta .column-2 {
+  padding:0px;
+  width: 50%;
+}
+
+#rev-es-pdp-img-text-cta .column-1 {
+  padding: 20px 20px 20px 60px;
+  width: 50%;
+}
+#rev-es-pdp-img-text-cta .column-1 h2.heading {
+  font-size: 30px;
+  line-height: 46px;
+  margin-bottom: 30px;
+  text-transform:uppercase;
+}
+#rev-es-pdp-img-text-cta .column-2 .full-width-image {
+  width: 100%;
+  height: auto;
+  max-height: 900px;
+  object-fit: cover;
+}
+  #rev-es-pdp-img-text-cta .column-2 img.mob-full-width-image {
+    display:none;
+  }
+#rev-es-pdp-img-text-cta .bottom-left-image {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 110px; /* Adjust the size as needed */
+  height: auto;
+}
+#rev-es-pdp-img-text-cta .column-1 .richtext {
+  font-size:18px;
+  line-height:28px;
+}
+#rev-es-pdp-img-text-cta .column-1 .richtext p {
+  margin-bottom:15px;
+  font-size:18px;
+  line-height:130%;
+  width:90%;
+}
+#rev-es-pdp-img-text-cta .icon-text-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  padding:10px 40px;
+  justify-content: space-between;
+}
+
+#rev-es-pdp-img-text-cta .icon-text-block {
+  flex: 1 1 calc(25% - 20px);
+  text-align: left;
+  padding: 20px 5px;
+  display: flex;
+  align-items: center;
+   gap: 20px;
+}
+
+#rev-es-pdp-img-text-cta .icon-text-icon {
+  max-width: 60px;
+}
+
+#rev-es-pdp-img-text-cta .icon-text-content {
+  font-size: 17.5px;
+  line-height:22px;
+}
+  #rev-es-pdp-img-text-cta .rev-carousel-button {
+    background-color: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_text_color }};
+    padding: 10px 50px;
+    text-decoration: underline;
+    font-size:15px;
+    line-height:26px;
+    font-weight:800;
+    border-radius:60px;
+    margin-top:30px;
+    display:inline-block;
+  }
+@media (max-width: 1220px) {
+  #rev-es-pdp-img-text-cta .column-1 h2.heading {
+    font-size: 28px;
+    line-height: 40px;
+    margin-bottom: 20px;
+}
+  #rev-es-pdp-img-text-cta .column-1 .richtext {
+    font-size: 18px;
+    line-height: 24px;
+}
+}
+  @media (max-width: 1080px) {
+      #rev-es-pdp-img-text-cta .column-1 h2.heading {
+    font-size: 22px;
+        line-height:36px;
+    margin-bottom: 15px;
+}
+    #rev-es-pdp-img-text-cta .column-1 .richtext {
+        font-size: 16px;
+        line-height: 20px;
+    }
+    #rev-es-pdp-img-text-cta .column-1 .richtext p {
+    margin-bottom: 10px;
+}
+#rev-es-pdp-img-text-cta .icon-text-block{
+      padding: 14px 5px;
+      gap: 10px;
+}
+#mob-bg #rev-es-pdp-img-text-cta .icon-text-grid{
+  gap: 10px;
+    padding: 10px 20px;
+}
+#rev-es-pdp-img-text-cta .icon-text-icon {
+    max-width: 40px;
+}
+  }
+@media (max-width: 900px) {
+  #rev-es-pdp-img-text-cta .row {
+   flex-direction: column-reverse;
+            padding: 40px 0px;
+    gap:30px;
+  }
+   #rev-es-pdp-img-text-cta .icon-text-grid {
+  flex-wrap: wrap;
+  }
+#rev-es-pdp-img-text-cta .column-2  img.full-width-image {
+  display:none;
+}
+  #rev-es-pdp-img-text-cta .column-2 img.mob-full-width-image {
+  display:block;
+    margin:auto;
+    border-radius: 10px;
+}
+  #rev-es-pdp-img-text-cta{
+    border-radius:0px;
+  }
+  #mob-bg{
+    background-color: {{ section.settings.background_color }};
+    margin-top:50px;
+    margin-top: 50px;
+        padding-bottom: 0px;
+  }
+  #rev-es-pdp-img-text-cta  .column-1, #rev-es-pdp-img-text-cta .column-2 {
+    padding: 0px;
+    width: 100%;
+  }
+  #rev-es-pdp-img-text-cta .bottom-left-image{
+    display:none;
+  }
+  #rev-es-pdp-img-text-cta .icon-text-block {
+    flex: 1 1 calc(50% - 20px);
+  }
+#mob-bg #rev-es-pdp-img-text-cta .icon-text-grid{
+  border-radius:10px;
+}
+    #rev-es-pdp-img-text-cta .rev-carousel-button {
+      margin-top: 25px;
+      text-align: center;
+    }
+}
+@media (max-width: 600px) {
+      #rev-es-pdp-img-text-cta .column-1 h2.heading {
+        font-size: 18px;
+        line-height: 32px;
+        margin-bottom: 15px;
+        text-align: left;
+    }
+
+#rev-es-pdp-img-text-cta .column-1 .richtext p{
+  font-size:16px;
+  line-height:22px;
+  width:100%;
+  text-align:left;
+}
+   #rev-es-pdp-img-text-cta .icon-text-content {
+    font-size: 14px;
+    line-height: 19px;
+}
+   #rev-es-pdp-img-text-cta .icon-text-icon {
+    max-width: 35px;
+}
+ #rev-es-pdp-img-text-cta  .icon-text-block {
+   width:48%;
+    padding: 12px 3px;
+    gap: 10px;
+  }
+#rev-es-pdp-img-text-cta .column-1 .richtext{
+  text-align:center;
+}
+  #rev-es-pdp-img-text-cta .icon-text-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 15px 0px;
+  }
+}
+@media (max-width: 400px) {
+    #rev-es-pdp-img-text-cta .column-1 h2.heading {
+      font-size: 18px;
+      line-height: 30px;
+      margin-bottom: 10px;
+  }
+  #rev-es-pdp-img-text-cta .icon-text-block {
+      width: 50%;
+      padding: 10px 3px;
+      gap: 4px;
+  }
+  #rev-es-pdp-img-text-cta .column-1 .richtext{
+    text-align:left;
+    font-size:15px;
+    line-height:17px;
+  }
+
+  #rev-es-pdp-img-text-cta .column-1 .richtext li:not(:last-child) {
+    margin-bottom: 10px;
+  }
+    #rev-es-pdp-img-text-cta .icon-text-icon {
+        max-width: 30px;
+    }
+    #rev-es-pdp-img-text-cta .icon-text-content {
+        font-size: 13px;
+        line-height: 18px;
+    }
+}
+</style>
+
+<!-- Section Settings -->
+{% schema %}
+{
+  "name": "Rev Egg Img Txt CTA",
+  "settings": [
+    {
+      "type": "text",
+      "id": "custom_css_class",
+      "label": "Custom CSS Class"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "richtext",
+      "label": "Rich Text Content"
+    },
+     {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "image_picker",
+      "id": "full_width_image",
+      "label": "Full Width Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mob_full_width_image",
+      "label": "mobile Full Width Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_left_image",
+      "label": "Bottom Left Image"
+    },
+    {
+      "type": "color",
+      "id": "block_BGcolor",
+      "label": "Block BG Color",
+      "default": "#73e0c1"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    }
+  ],
+    "blocks": [
+    {
+      "type": "icon_text_block",
+      "name": "Icon Text Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "block_icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "block_text",
+          "label": "Text",
+          "default": "Lorem ipsum dolor sit amet."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rev egg Img Txt CTA",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}

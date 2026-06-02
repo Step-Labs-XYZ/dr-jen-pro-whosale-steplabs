@@ -1,0 +1,798 @@
+<div id="Cproduct-tabs-{{ section.id }}" class="Cproduct-tabs" data-section-id="{{ section.id }}" data-section-type="Cproduct-tabs">
+  <div class="Cproduct-tabs__container">
+    <div class="Cproduct-tabs__header-wrap">
+      <div class="Cproduct-tabs__header-left">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="Cproduct-tabs__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        
+        {%- if section.settings.subheading != blank -%}
+          <p class="Cproduct-tabs__subheading">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="Cproduct-tabs__nav-wrapper">
+        <div class="Cproduct-tabs__nav">
+          {%- for block in section.blocks -%}
+            <button 
+              class="Cproduct-tabs__tab{% if forloop.first %} Cproduct-tabs__tab--active{% endif %}"
+              data-tab-button="Ctab-{{ block.id }}"
+              type="button"
+              {{ block.shopify_attributes }}
+            >
+              {{ block.settings.tab_label }}
+            </button>
+          {%- endfor -%}
+        </div>
+
+        {%- if section.settings.view_all_text != blank and section.settings.view_all_url != blank -%}
+          <a href="{{ section.settings.view_all_url }}" class="Cproduct-tabs__shop-all Cproduct-tabs__shop-all--desktop">
+            {{ section.settings.view_all_text }}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: 4px; vertical-align: middle;">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        {%- endif -%}
+      </div>
+
+      <div class="Cproduct-tabs__content">
+        {%- for block in section.blocks -%}
+          <div 
+            class="Cproduct-tabs__panel{% if forloop.first %} Cproduct-tabs__panel--active{% endif %}"
+            data-tab-content="Ctab-{{ block.id }}"
+          >
+            <div class="Cproduct-tabs__grid">
+              {%- assign products_to_show = block.settings.products_to_show | default: 4 -%}
+              {%- assign max_slots = 6 -%}
+              {%- if products_to_show > max_slots -%}
+                {%- assign products_to_show = max_slots -%}
+              {%- endif -%}
+
+              {%- assign shown_products = 0 -%}
+              {%- for i in (1..max_slots) -%}
+                {%- if shown_products >= products_to_show -%}
+                  {% break %}
+                {%- endif -%}
+
+                {%- assign prefix = 'product_' | append: i | append: '_' -%}
+
+                {%- assign img_key = prefix | append: 'image' -%}
+                {%- assign title_key = prefix | append: 'title' -%}
+                {%- assign price_key = prefix | append: 'price' -%}
+                {%- assign desc_key = prefix | append: 'description' -%}
+                {%- assign features_key = prefix | append: 'features' -%}
+                {%- assign button_url_key = prefix | append: 'button_url' -%}
+                {%- assign button_text_key = prefix | append: 'button_text' -%}
+                {%- assign learn_more_key = prefix | append: 'learn_more_url' -%}
+                {%- assign variant_key = prefix | append: 'variant_id' -%}
+                {%- assign badge1_key = prefix | append: 'badge_1' -%}
+                {%- assign badge2_key = prefix | append: 'badge_2' -%}
+                {%- assign badge3_key = prefix | append: 'badge_3' -%}
+                {%- assign badge4_key = prefix | append: 'badge_4' -%}
+
+                {%- assign img = block.settings[img_key] -%}
+                {%- assign title = block.settings[title_key] -%}
+                {%- assign price = block.settings[price_key] -%}
+                {%- assign desc_raw = block.settings[desc_key] -%}
+                {%- assign features_raw = block.settings[features_key] -%}
+                {%- assign add_url = block.settings[button_url_key] -%}
+                {%- assign button_text = block.settings[button_text_key] -%}
+                {%- assign add_text = button_text | default: section.settings.add_to_cart_text | default: 'ADD TO CART' -%}
+                {%- assign learn_url = block.settings[learn_more_key] -%}
+                {%- assign variant_id = block.settings[variant_key] -%}
+                {%- assign badge1 = block.settings[badge1_key] -%}
+                {%- assign badge2 = block.settings[badge2_key] -%}
+                {%- assign badge3 = block.settings[badge3_key] -%}
+                {%- assign badge4 = block.settings[badge4_key] -%}
+
+                {%- assign desc_trim = desc_raw | default: '' | strip -%}
+                {%- assign features_trim = features_raw | default: '' | strip -%}
+
+                {%- assign filled = 0 -%}
+                {%- if img != blank or title != blank or price != blank or desc_trim != blank or features_trim != blank or add_url != blank or variant_id != blank -%}
+                  {%- assign filled = 1 -%}
+                {%- endif -%}
+
+                {%- if filled == 1 -%}
+                  <div class="Cproduct-tabs__product-card">
+                    
+                    <div class="Cproduct-tabs__image-box">
+                      {%- if badge1 != blank or badge2 != blank or badge3 != blank or badge4 != blank -%}
+                        <div class="Cproduct-tabs__badges-top Cproduct-tabs__badges-top--{{ section.settings.badge_alignment }}">
+                          {%- if badge1 != blank -%}<span>{{ badge1 }}</span>{%- endif -%}
+                          {%- if badge2 != blank -%}<span>{{ badge2 }}</span>{%- endif -%}
+                          {%- if badge3 != blank -%}<span>{{ badge3 }}</span>{%- endif -%}
+                          {%- if badge4 != blank -%}<span class="special">{{ badge4 }}</span>{%- endif -%}
+                        </div>
+                      {%- endif -%}
+
+                      {%- if img != blank -%}
+                        <a href="{{ learn_url | default: '#' }}" class="Cproduct-tabs__image-link">
+                          <img 
+                            src="{{ img | image_url: width: 600 }}" 
+                            alt="{{ title | escape }}"
+                            width="300"
+                            height="300"
+                            loading="lazy"
+                          />
+                        </a>
+                      {%- endif -%}
+
+                      {%- if section.settings.show_subscribe_save -%}
+                        <div class="Cproduct-tabs__subscribe-pill">
+                          Subscribe & Save up to 15% OFF
+                        </div>
+                      {%- endif -%}
+                    </div>
+
+                    <div class="Cproduct-tabs__product-info">
+                      {%- if title != blank -%}
+                        <a href="{{ learn_url | default: '#' }}" class="Cproduct-tabs__product-link">
+                          <h3 class="Cproduct-tabs__product-title">{{ title }}</h3>
+                        </a>
+                      {%- endif -%}
+
+                      {%- if desc_trim != blank -%}
+                        {%- assign desc_lines = desc_trim | replace: '<br />', '\n' | replace: '<br/>', '\n' | replace: '<br>', '\n' | split: '\n' -%}
+                        {%- if desc_lines.size < 2 -%}
+                          {%- assign desc_lines = desc_trim | split: '.' -%}
+                        {%- endif -%}
+                        <ul class="Cproduct-tabs__product-description">
+                          {%- assign shown = 0 -%}
+                          {%- for line in desc_lines -%}
+                            {%- assign trimmed_line = line | strip -%}
+                            {%- if trimmed_line != blank -%}
+                              <li>{{ trimmed_line }}</li>
+                              {%- assign shown = shown | plus: 1 -%}
+                              {%- if shown >= 4 -%}{% break %}{%- endif -%}
+                            {%- endif -%}
+                          {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
+
+                      {%- if features_trim != blank -%}
+                        <ul class="Cproduct-tabs__product-features">
+                          {%- assign features = features_trim | split: '|' -%}
+                          {%- for feature in features limit: 4 -%}
+                            <li>{{ feature }}</li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
+
+                      <div class="Cproduct-tabs__product-price">
+                        {%- if price != blank -%}
+                          <span class="Cproduct-tabs__price">{{ price }}</span>
+                        {%- endif -%}
+                      </div>
+
+                      <div class="Cproduct-tabs__actions">
+                        {%- if add_url != blank -%}
+                          <button
+                            class="Cproduct-tabs__add-btn"
+                            type="button"
+                            data-variant-id="{{ variant_id }}"
+                            data-product-url="{{ add_url }}"
+                            data-add-text="{{ add_text | escape }}"
+                          >
+                            {{ add_text }}
+                          </button>
+                        {%- endif -%}
+
+                        {%- if learn_url != blank -%}
+                          <a href="{{ learn_url }}" class="Cproduct-tabs__learn-more">
+                            LEARN MORE 
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#002C41" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                          </a>
+                        {%- endif -%}
+                      </div>
+                    </div>
+                  </div>
+
+                  {%- assign shown_products = shown_products | plus: 1 -%}
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- if section.settings.view_all_text != blank and section.settings.view_all_url != blank -%}
+        <div class="Cproduct-tabs__shop-all-wrapper Cproduct-tabs__shop-all-wrapper--mobile">
+          <a href="{{ section.settings.view_all_url }}" class="Cproduct-tabs__shop-all Cproduct-tabs__shop-all--mobile">
+            {{ section.settings.view_all_text }}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: 4px; vertical-align: middle;">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+#Cproduct-tabs-{{ section.id }} {
+  background: #fff;
+  padding: 80px 0;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__heading {
+  font-family: 'Raleway', sans-serif;
+  font-size: 38px;
+  font-weight: 600;
+  color: #002c41;
+  text-align: left;
+  margin: 0 0 8px;
+  line-height: 1.2;
+  max-width: {{ section.settings.heading_max_width }}px;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__subheading {
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #666666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__nav-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  margin-top: 20px;
+  gap: 24px;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__nav {
+  display: inline-flex;
+  gap: 0;
+  background: #d6ece6;
+  border-radius: 40px;
+  padding: 4px;
+  flex-shrink: 0;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__tab {
+  padding: 12px 32px;
+  background: transparent;
+  border: none;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #002c41;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 36px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__tab:hover {
+  background: #002c41;
+  color: #D6ECE6;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__tab--active {
+  background: #002c41;
+  color: #D6ECE6;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__shop-all {
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #002c41;
+  text-decoration: underline;
+  transition: opacity 0.2s ease;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__shop-all:hover {
+  opacity: 0.7;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__shop-all--mobile,
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__shop-all-wrapper--mobile {
+  display: none;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__content {
+  position: relative;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__panel {
+  display: none;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__panel--active {
+  display: block;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Grid layout */
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+/* Card Container */
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__product-card {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  transition: transform 0.3s ease;
+  height: 100%;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__product-card:hover {
+  transform: translateY(-4px);
+}
+
+/* --- IMAGE BOX (Exactly as capture) --- */
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__image-box {
+  position: relative;
+  background: #F7F7F7;
+  border: 1.5px solid #002C41;
+  border-radius: 12px;
+  padding: 40px 20px;
+  margin-bottom: 12px; /* Extra margin so Subscribe pill doesn't overlap text */
+  margin-top: 18px; /* Room for top badges */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 320px;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__image-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__image-link img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* --- TOP BADGES --- */
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__badges-top {
+  position: absolute;
+  top: 0;
+  display: flex;
+  gap: 8px;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+/* Alignment modifiers controlled by schema */
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__badges-top--left { left: 20px; transform: translateY(-50%); }
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__badges-top--center { left: 50%; transform: translate(-50%, -50%); }
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__badges-top--right { right: 20px; left: auto; transform: translateY(-50%); }
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__badges-top span {
+  background: #F7F7F7;
+  border: 1.5px solid #002C41;
+  color: #002C41;
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  line-height: 1;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__badges-top span.special {
+  background: #D6ECE6;
+}
+
+/* --- BOTTOM SUBSCRIBE PILL --- */
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__subscribe-pill {
+  position: absolute;
+  bottom: 29px;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  background: #ffffff;
+  color: #1F2023;
+  font-family: 'Raleway', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  font-style: italic;
+  padding: 6px 24px;
+  border-radius: 40px;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Sombra para resaltar */
+  width: max-content;
+  max-width: 90%;
+  z-index: 2;
+}
+
+/* --- TEXT INFO & PRICING --- */
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__product-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap:12px;
+  padding:12px;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__product-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__product-title {
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #002C41;
+  margin: 0 0 12px;
+  line-height: 1.3;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__product-link:hover .Cproduct-tabs__product-title {
+  text-decoration: underline;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__product-description,
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__product-features {
+  list-style: none;
+  padding: 0;
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #4A4A4A;
+  line-height: 1.5;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__product-description li,
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__product-features li {
+  padding: 2px 0 2px 14px;
+  position: relative;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__product-description li::before,
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__product-features li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #4A4A4A;
+}
+
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__price {
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1F2023;
+}
+
+/* --- BUTTONS --- */
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__add-btn {
+  width: 100%;
+  padding: 14px;
+  background: #1164E8; /* Exact bright blue from image */
+  color: #ffffff;
+  border: none;
+  border-radius: 40px; /* Full pill shape */
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  text-align:center;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__add-btn:hover {
+  background: #0D50B8;
+  transform: translateY(-2px);
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__add-btn[disabled] {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__learn-more {
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: #002C41;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: opacity 0.2s ease;
+}
+
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__learn-more:hover {
+  opacity: 0.7;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1100px) {
+  #Cproduct-tabs-{{ section.id }} .Cproduct-tabs__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  #Cproduct-tabs-{{ section.id }} {
+    padding: 50px 0;
+  }
+  
+  #Cproduct-tabs-{{ section.id }} .Cproduct-tabs__container {
+    padding: 0 {{ section.settings.mobile_padding }}px;
+  }
+
+  #Cproduct-tabs-{{ section.id }} .Cproduct-tabs__header-wrap {
+    text-align: left;
+  }
+
+  #Cproduct-tabs-{{ section.id }} .Cproduct-tabs__heading {
+    font-size: 28px;
+    max-width: {{ section.settings.heading_max_width_mobile }}px;
+  }
+
+  #Cproduct-tabs-{{ section.id }} .Cproduct-tabs__nav-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+
+  #Cproduct-tabs-{{ section.id }} .Cproduct-tabs__nav {
+    width: 100%;
+    display: flex;
+  }
+
+  #Cproduct-tabs-{{ section.id }} .Cproduct-tabs__tab {
+    flex: 1;
+    text-align: center;
+    padding: 8px 6px;
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #Cproduct-tabs-{{ section.id }} .Cproduct-tabs__shop-all--desktop {
+    display: inline-flex;
+    align-self: flex-end;
+    margin-top: 8px;
+    text-decoration: underline;
+  }
+
+  #Cproduct-tabs-{{ section.id }} .Cproduct-tabs__shop-all-wrapper--mobile {
+    display: none;
+  }
+
+  #Cproduct-tabs-{{ section.id }} .Cproduct-tabs__content {
+    padding: 0 30px;
+  }
+
+  #Cproduct-tabs-{{ section.id }} .Cproduct-tabs__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  #Cproduct-tabs-{{ section.id }} .Cproduct-tabs__image-box {
+    height: 350px; 
+  }
+
+  #Cproduct-tabs-{{ section.id }} .Cproduct-tabs__subscribe-pill {
+    width: 90%;
+    font-size: 12px;
+  }
+}
+</style>
+
+<script>
+if (typeof CproductTabsInit === 'undefined') {
+  window.CproductTabsInit = true;
+  document.addEventListener('DOMContentLoaded', function() {
+    const tabButtons = document.querySelectorAll('[data-tab-button]');
+    tabButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const targetId = this.getAttribute('data-tab-button');
+        const section = this.closest('.Cproduct-tabs');
+        section.querySelectorAll('[data-tab-content]').forEach(panel => panel.classList.remove('Cproduct-tabs__panel--active'));
+        section.querySelectorAll('[data-tab-button]').forEach(tab => tab.classList.remove('Cproduct-tabs__tab--active'));
+        this.classList.add('Cproduct-tabs__tab--active');
+        const targetPanel = section.querySelector(`[data-tab-content="${targetId}"]`);
+        if (targetPanel) targetPanel.classList.add('Cproduct-tabs__panel--active');
+      });
+    });
+
+    document.querySelectorAll('.Cproduct-tabs__add-btn').forEach(btn => {
+      btn.addEventListener('click', async function () {
+        const variantId = this.getAttribute('data-variant-id');
+        const productUrl = this.getAttribute('data-product-url');
+        const addText = this.getAttribute('data-add-text') || 'ADD TO CART';
+        if ((!variantId || variantId == '') && productUrl) { window.location.href = productUrl; return; }
+        if (!variantId) return;
+        this.disabled = true;
+        this.textContent = 'ADDING...';
+        try {
+          const res = await fetch('/cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ id: Number(variantId), quantity: 1 })
+          });
+          if (!res.ok) { const errText = await res.text(); throw new Error(errText || 'Add to cart failed'); }
+          window.location.href = productUrl || '/cart';
+        } catch (e) {
+          console.error('C Product Tabs add to cart error:', e);
+          this.textContent = 'ERROR';
+          setTimeout(() => { this.textContent = addText; this.disabled = false; }, 1200);
+        }
+      });
+    });
+  });
+}
+</script>
+
+{% schema %}
+{
+  "name": "C Product Tabs",
+  "class": "section-Cproduct-tabs",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Section Heading", "default": "A Product for Every Patient Need" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "info": "Optional text below the heading" },
+    { "type": "text", "id": "view_all_text", "label": "View All Text", "default": "SHOP ALL", "info": "Text for the shop all link next to tabs" },
+    { "type": "url", "id": "view_all_url", "label": "View All URL" },
+    { "type": "checkbox", "id": "show_subscribe_save", "label": "Show Subscribe & Save pill", "default": true, "info": "Display subscribe floating message on image" },
+    { 
+      "type": "select", 
+      "id": "badge_alignment", 
+      "label": "Top Badges Alignment", 
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    { "type": "text", "id": "add_to_cart_text", "label": "Add to Cart Button Text", "default": "ADD TO CART" },
+    { "type": "range", "id": "heading_max_width", "label": "Heading Max Width", "min": 200, "max": 900, "step": 20, "default": 600, "unit": "px" },
+    { "type": "range", "id": "heading_max_width_mobile", "label": "Heading Max Width (Mobile)", "min": 100, "max": 600, "step": 10, "default": 280, "unit": "px" },
+    { "type": "range", "id": "mobile_padding", "label": "Mobile Lateral Padding", "min": 0, "max": 40, "step": 2, "default": 16, "unit": "px", "info": "Padding lateral en mobile (px)" }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Product Tab",
+      "settings": [
+        { "type": "text", "id": "tab_label", "label": "Tab Label", "default": "BEST SELLERS" },
+        { "type": "range", "id": "products_to_show", "label": "Products to Show (per tab)", "min": 1, "max": 6, "step": 1, "default": 4 },
+
+        { "type": "header", "content": "Product 1" },
+        { "type": "image_picker", "id": "product_1_image", "label": "Product 1 Image" },
+        { "type": "text", "id": "product_1_title", "label": "Product 1 Title" },
+        { "type": "text", "id": "product_1_price", "label": "Product 1 Price" },
+        { "type": "textarea", "id": "product_1_description", "label": "Product 1 Description (each line -> bullet)" },
+        { "type": "text", "id": "product_1_features", "label": "Product 1 Features (pipe '|' separated)" },
+        { "type": "text", "id": "product_1_badge_1", "label": "Product 1 Top Badge 1" },
+        { "type": "text", "id": "product_1_badge_2", "label": "Product 1 Top Badge 2" },
+        { "type": "text", "id": "product_1_badge_3", "label": "Product 1 Top Badge 3" },
+        { "type": "text", "id": "product_1_badge_4", "label": "Product 1 Top Badge 4 (Special)" },
+        { "type": "url", "id": "product_1_button_url", "label": "Product 1 Add Button URL" },
+        { "type": "text", "id": "product_1_button_text", "label": "Product 1 Add Button Text" },
+        { "type": "url", "id": "product_1_learn_more_url", "label": "Product 1 Learn More URL" },
+        { "type": "text", "id": "product_1_variant_id", "label": "Product 1 Variant ID" },
+
+        { "type": "header", "content": "Product 2" },
+        { "type": "image_picker", "id": "product_2_image", "label": "Product 2 Image" },
+        { "type": "text", "id": "product_2_title", "label": "Product 2 Title" },
+        { "type": "text", "id": "product_2_price", "label": "Product 2 Price" },
+        { "type": "textarea", "id": "product_2_description", "label": "Product 2 Description" },
+        { "type": "text", "id": "product_2_features", "label": "Product 2 Features (pipe '|' separated)" },
+        { "type": "text", "id": "product_2_badge_1", "label": "Product 2 Top Badge 1" },
+        { "type": "text", "id": "product_2_badge_2", "label": "Product 2 Top Badge 2" },
+        { "type": "text", "id": "product_2_badge_3", "label": "Product 2 Top Badge 3" },
+        { "type": "text", "id": "product_2_badge_4", "label": "Product 2 Top Badge 4 (Special)" },
+        { "type": "url", "id": "product_2_button_url", "label": "Product 2 Add Button URL" },
+        { "type": "text", "id": "product_2_button_text", "label": "Product 2 Add Button Text" },
+        { "type": "url", "id": "product_2_learn_more_url", "label": "Product 2 Learn More URL" },
+        { "type": "text", "id": "product_2_variant_id", "label": "Product 2 Variant ID" },
+
+        { "type": "header", "content": "Product 3" },
+        { "type": "image_picker", "id": "product_3_image", "label": "Product 3 Image" },
+        { "type": "text", "id": "product_3_title", "label": "Product 3 Title" },
+        { "type": "text", "id": "product_3_price", "label": "Product 3 Price" },
+        { "type": "textarea", "id": "product_3_description", "label": "Product 3 Description" },
+        { "type": "text", "id": "product_3_features", "label": "Product 3 Features (pipe '|' separated)" },
+        { "type": "text", "id": "product_3_badge_1", "label": "Product 3 Top Badge 1" },
+        { "type": "text", "id": "product_3_badge_2", "label": "Product 3 Top Badge 2" },
+        { "type": "text", "id": "product_3_badge_3", "label": "Product 3 Top Badge 3" },
+        { "type": "text", "id": "product_3_badge_4", "label": "Product 3 Top Badge 4 (Special)" },
+        { "type": "url", "id": "product_3_button_url", "label": "Product 3 Add Button URL" },
+        { "type": "text", "id": "product_3_button_text", "label": "Product 3 Add Button Text" },
+        { "type": "url", "id": "product_3_learn_more_url", "label": "Product 3 Learn More URL" },
+        { "type": "text", "id": "product_3_variant_id", "label": "Product 3 Variant ID" },
+
+        { "type": "header", "content": "Product 4" },
+        { "type": "image_picker", "id": "product_4_image", "label": "Product 4 Image" },
+        { "type": "text", "id": "product_4_title", "label": "Product 4 Title" },
+        { "type": "text", "id": "product_4_price", "label": "Product 4 Price" },
+        { "type": "textarea", "id": "product_4_description", "label": "Product 4 Description" },
+        { "type": "text", "id": "product_4_features", "label": "Product 4 Features (pipe '|' separated)" },
+        { "type": "text", "id": "product_4_badge_1", "label": "Product 4 Top Badge 1" },
+        { "type": "text", "id": "product_4_badge_2", "label": "Product 4 Top Badge 2" },
+        { "type": "text", "id": "product_4_badge_3", "label": "Product 4 Top Badge 3" },
+        { "type": "text", "id": "product_4_badge_4", "label": "Product 4 Top Badge 4 (Special)" },
+        { "type": "url", "id": "product_4_button_url", "label": "Product 4 Add Button URL" },
+        { "type": "text", "id": "product_4_button_text", "label": "Product 4 Add Button Text" },
+        { "type": "url", "id": "product_4_learn_more_url", "label": "Product 4 Learn More URL" },
+        { "type": "text", "id": "product_4_variant_id", "label": "Product 4 Variant ID" },
+
+        { "type": "header", "content": "Product 5" },
+        { "type": "image_picker", "id": "product_5_image", "label": "Product 5 Image" },
+        { "type": "text", "id": "product_5_title", "label": "Product 5 Title" },
+        { "type": "text", "id": "product_5_price", "label": "Product 5 Price" },
+        { "type": "textarea", "id": "product_5_description", "label": "Product 5 Description" },
+        { "type": "text", "id": "product_5_features", "label": "Product 5 Features (pipe '|' separated)" },
+        { "type": "text", "id": "product_5_badge_1", "label": "Product 5 Top Badge 1" },
+        { "type": "text", "id": "product_5_badge_2", "label": "Product 5 Top Badge 2" },
+        { "type": "text", "id": "product_5_badge_3", "label": "Product 5 Top Badge 3" },
+        { "type": "text", "id": "product_5_badge_4", "label": "Product 5 Top Badge 4 (Special)" },
+        { "type": "url", "id": "product_5_button_url", "label": "Product 5 Add Button URL" },
+        { "type": "text", "id": "product_5_button_text", "label": "Product 5 Add Button Text" },
+        { "type": "url", "id": "product_5_learn_more_url", "label": "Product 5 Learn More URL" },
+        { "type": "text", "id": "product_5_variant_id", "label": "Product 5 Variant ID" },
+
+        { "type": "header", "content": "Product 6" },
+        { "type": "image_picker", "id": "product_6_image", "label": "Product 6 Image" },
+        { "type": "text", "id": "product_6_title", "label": "Product 6 Title" },
+        { "type": "text", "id": "product_6_price", "label": "Product 6 Price" },
+        { "type": "textarea", "id": "product_6_description", "label": "Product 6 Description" },
+        { "type": "text", "id": "product_6_features", "label": "Product 6 Features (pipe '|' separated)" },
+        { "type": "text", "id": "product_6_badge_1", "label": "Product 6 Top Badge 1" },
+        { "type": "text", "id": "product_6_badge_2", "label": "Product 6 Top Badge 2" },
+        { "type": "text", "id": "product_6_badge_3", "label": "Product 6 Top Badge 3" },
+        { "type": "text", "id": "product_6_badge_4", "label": "Product 6 Top Badge 4 (Special)" },
+        { "type": "url", "id": "product_6_button_url", "label": "Product 6 Add Button URL" },
+        { "type": "text", "id": "product_6_button_text", "label": "Product 6 Add Button Text" },
+        { "type": "url", "id": "product_6_learn_more_url", "label": "Product 6 Learn More URL" },
+        { "type": "text", "id": "product_6_variant_id", "label": "Product 6 Variant ID" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "C Product Tabs", "blocks": [ { "type": "tab", "settings": { "tab_label": "BEST SELLERS" } }, { "type": "tab", "settings": { "tab_label": "FLUORIDE" } }, { "type": "tab", "settings": { "tab_label": "FLUORIDE-FREE" } } ] }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="{{ 'prduct-alterations.css' | asset_url }}">
+
+<section class="container">
+  <div class="product-tabs">
+    {% if  product.metafields.product_info.Ingredients.value != blank %}
+      <span class="tab_title active" onclick="showTab(0)">Ingredients</span>
+  {% endif %}
+    {% if  product.metafields.product_info.Description.value != blank %}
+      <span class="tab_title " onclick="showTab(1)">Description</span>
+    {% endif %}
+    
+  </div>
+  {% if  product.metafields.product_info.Ingredients.value != blank %}
+    <div class="product-tabs-content active">
+      {{product.metafields.product_info.Ingredients.value | newline_to_br }}
+    </div>
+  {% endif %}
+
+  {% if  product.metafields.product_info.Description.value != blank %}
+    <div class="product-tabs-content ">
+      {{product.metafields.product_info.Description.value | newline_to_br }}
+    </div>
+  {% endif %}
+  
+  
+</section>
+
+<script src="{{'product-tabs.js' | asset_url }}"></script>
+
+
+<!-- Product specific sections go here -->
+
+{% schema %}
+{
+  "name": "Product content",
+  "class": "shopify-section--product-content"
+}
+{% endschema %}

@@ -1,0 +1,83 @@
+<div style="background-color: {{ section.settings.background_color_id }};" class="information_pdp_container">
+    <h3>{{ section.settings.paragraph_1 }}</h3>
+    <div class="icon_contain">
+        {% for block in section.blocks %}
+            <div>
+                <img src="{{ block.settings.image_icon | image_url: width: 80 }}" alt="">
+                <p>{{ block.settings.info }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<style>
+    .information_pdp_container{
+  text-align: center;
+  padding: 60px 450px; 
+}
+.information_pdp_container .icon_contain{
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+    margin-top: 50px;
+}
+.information_pdp_container .icon_contain img{
+  width: fit-content;
+  height: 100%;
+}
+.information_pdp_container .icon_contain p{
+    font-weight: 700;
+}
+.information_pdp_container .icon_contain div{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  text-align: center;
+      align-items: center;
+}
+@media screen and (max-width: 1000px) {
+    .information_pdp_container{
+        padding: 35px;
+    }
+}
+</style>
+{% schema %}
+{
+   "name": "information Wholesale",
+   "settings" : [
+   {
+    "type": "richtext",
+    "id": "paragraph_1",
+    "label": "Paragraph 1"
+   },
+   {
+       "type": "color",
+       "id": "background_color_id",
+       "label": "Background color" 
+   }
+   
+],
+"blocks" : [
+{
+    "name": "list text",
+    "type": "List-Text",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "image_icon",
+            "label": "Image"
+        },
+        {
+            "type": "textarea",
+            "id": "info",
+            "label": "Information"
+        }
+    ]
+}
+],
+   "presets": [
+    {
+        "name": "Information Wholesale"
+    }
+   ]
+}
+{% endschema %}

@@ -1,0 +1,364 @@
+{%- style -%}
+  /* IMPORTACIÓN DE FUENTE RALEWAY */
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+  /* =========================================
+     AISLAMIENTO TOTAL POR SECCIÓN
+     ========================================= */
+  #c-ing-v2-{{ section.id }} {
+    /* --- COLORES GLOBALES --- */
+    --c-bg-section: {{ section.settings.bg_color }};
+    --c-bg-card: {{ section.settings.card_bg }};
+    --c-text-dark: #002C41; 
+    --c-text-light: #6b7280;
+    
+    font-family: 'Raleway', sans-serif;
+    background-color: var(--c-bg-section);
+    width: 100%;
+    display: flex;
+    /* ORDEN MOBILE: Imagen arriba, contenido abajo */
+    flex-direction: column-reverse; 
+  }
+
+  /* =========================================
+     COLUMNA CONTENIDO (Mobile First)
+     ========================================= */
+  #c-ing-v2-{{ section.id }} .c-ing__content-col {
+    width: 100%;
+    padding: {{ section.settings.pad_top_mob }}px 20px {{ section.settings.pad_bot_mob }}px;
+    display: flex;
+    justify-content: center;
+  }
+
+  #c-ing-v2-{{ section.id }} .c-ing__inner {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  #c-ing-v2-{{ section.id }} .c-ing__pretitle {
+    font-style: italic;
+    font-family: serif !important;
+    font-size: 14px;
+    color: var(--c-text-dark);
+    margin: 0 0 8px 0;
+  }
+
+  #c-ing-v2-{{ section.id }} .c-ing__title {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--c-text-dark);
+    line-height: 1.2;
+    margin: 0 0 30px 0;
+  }
+
+  #c-ing-v2-{{ section.id }} .c-ing__cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+
+  #c-ing-v2-{{ section.id }} .c-ing__card {
+    background-color: var(--c-bg-card);
+    border-radius: 24px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+  }
+
+  #c-ing-v2-{{ section.id }} .c-ing__card-text {
+    text-align: left; 
+    width: 100%;
+  }
+
+  #c-ing-v2-{{ section.id }} .c-ing__card-title {
+    font-size: 15px;
+    font-family: Raleway, sans-serif !important;
+    font-weight: 700;
+    color: var(--c-text-dark);
+    margin: 0 0 8px 0;
+  }
+
+  #c-ing-v2-{{ section.id }} .c-ing__card-desc {
+    font-size: 13px;
+    color: var(--c-text-dark);
+    line-height: 1.4;
+    font-family: Raleway, sans-serif !important;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  #c-ing-v2-{{ section.id }} .c-ing__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 50px;
+    border: 1px solid var(--c-text-dark);
+    color: var(--c-text-dark);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    background-color: transparent;
+  }
+
+  #c-ing-v2-{{ section.id }} .c-ing__btn:hover {
+    background-color: var(--c-text-dark);
+    color: #ffffff;
+  }
+
+  /* =========================================
+     COLUMNA IMAGEN PRINCIPAL (Mobile)
+     ========================================= */
+  #c-ing-v2-{{ section.id }} .c-ing__image-col {
+    width: 100%;
+    height: 350px; 
+    position: relative;
+  }
+
+  #c-ing-v2-{{ section.id }} .c-ing__main-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* =========================================
+     COMPORTAMIENTO DESKTOP PERFECTO
+     ========================================= */
+  @media (min-width: 768px) {
+    #c-ing-v2-{{ section.id }} {
+      flex-direction: row; 
+      align-items: stretch; /* Ambas columnas misma altura */
+    }
+
+    /* Columna Texto: 55% del ancho de la pantalla */
+    #c-ing-v2-{{ section.id }} .c-ing__content-col {
+      width: 65%;
+      padding-top: {{ section.settings.pad_top_desk }}px;
+      padding-bottom: {{ section.settings.pad_bot_desk }}px;
+      /* Padding izquierdo dinámico para respetar el ancho del sitio, padding derecho para separarlo de la foto */
+      padding-left: max(20px, calc((100vw - 1300px) / 2));
+      padding-right: 20px;
+      display: flex;
+      align-items: center; 
+      justify-content: flex-start; /* Empuja el contenedor interno hacia la derecha (hacia la foto) */
+    }
+
+    #c-ing-v2-{{ section.id }} .c-ing__inner {
+      max-width: 700px;
+      width: 100%;
+      margin: 0;
+    }
+
+    #c-ing-v2-{{ section.id }} .c-ing__pretitle { 
+      font-size: 24px; 
+      font-family: serif !important;
+    }
+    
+    #c-ing-v2-{{ section.id }} .c-ing__title { 
+      font-size: 37px; 
+      font-family: Raleway, sans-serif !important;
+      margin-bottom: 40px; 
+    }
+
+    /* Tarjetas sin imagen */
+    #c-ing-v2-{{ section.id }} .c-ing__cards {
+      gap: 32px;
+      margin-bottom: 40px;
+      max-width: 800px;
+    }
+
+    #c-ing-v2-{{ section.id }} .c-ing__card {
+      justify-content: center;
+      border-radius: 45px;
+      padding: 20px 40px;
+    }
+
+    #c-ing-v2-{{ section.id }} .c-ing__card-title { 
+      font-size: 22px; 
+      margin-bottom: 4px;
+    }
+    
+    #c-ing-v2-{{ section.id }} .c-ing__card-desc { 
+      font-size: 16px; 
+    }
+
+    #c-ing-v2-{{ section.id }} .c-ing__btn {
+      padding: 14px 36px;
+      font-size: 12px;
+      border-width: 2.5px;
+    }
+
+    /* Columna Imagen: 45% del ancho (Full Bleed a la derecha) */
+    #c-ing-v2-{{ section.id }} .c-ing__image-col {
+      width: 45%;
+      position: relative; 
+      min-height: 1000px; /* Evita que la sección se haga muy pequeña si hay poco texto */
+    }
+    
+    #c-ing-v2-{{ section.id }} .c-ing__main-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+{%- endstyle -%}
+
+<section id="c-ing-v2-{{ section.id }}" class="c-ing">
+  
+  <div class="c-ing__content-col">
+    <div class="c-ing__inner">
+      
+      {% if section.settings.pre_title != blank %}
+        <p class="c-ing__pretitle">{{ section.settings.pre_title }}</p>
+      {% endif %}
+      
+      {% if section.settings.title != blank %}
+        <h2 class="c-ing__title">{{ section.settings.title | newline_to_br }}</h2>
+      {% endif %}
+
+      <div class="c-ing__cards">
+        {% for block in section.blocks %}
+          <div class="c-ing__card" {{ block.shopify_attributes }}>
+            <div class="c-ing__card-text">
+              <h3 class="c-ing__card-title">{{ block.settings.title }}</h3>
+              <p class="c-ing__card-desc">{{ block.settings.description | newline_to_br }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if section.settings.btn_text != blank %}
+        <button type="button" class="c-ing__btn" data-open-ingredients-modal>{{ section.settings.btn_text }}</button>
+      {% endif %}
+
+    </div>
+  </div>
+
+  <div class="c-ing__image-col">
+    {% if section.settings.main_image != blank %}
+      {{ section.settings.main_image | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'c-ing__main-img' }}
+    {% else %}
+      {{ 'collection-1' | placeholder_svg_tag: 'c-ing__main-img placeholder-svg' }}
+    {% endif %}
+  </div>
+
+</section>
+
+<script>
+  (function () {
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('[data-open-ingredients-modal]')) return;
+      e.preventDefault();
+      var modal = document.querySelector('[data-ingredients-modal]');
+      if (!modal) return;
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "C - Ingredients v2",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Color Fondo de Sección",
+      "default": "#f5f6f6"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Color Fondo de Tarjetas",
+      "default": "#ffffff"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Imagen Principal (Derecha en Desktop / Arriba en Mobile)"
+    },
+    {
+      "type": "header",
+      "content": "Textos Cabecera"
+    },
+    {
+      "type": "text",
+      "id": "pre_title",
+      "label": "Pre-Título (Cursiva)",
+      "default": "The World's First"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Título Principal",
+      "default": "Naturally Derived nHAp From Eggshells"
+    },
+    {
+      "type": "header",
+      "content": "Botón Inferior"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Texto del Botón",
+      "default": "VIEW ALL INGREDIENTS"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Link del Botón",
+      "default": "/"
+    },
+    {
+      "type": "header",
+      "content": "Paddings de Sección"
+    },
+    { "type": "range", "id": "pad_top_desk", "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Padding Top Desktop", "default": 80 },
+    { "type": "range", "id": "pad_bot_desk", "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Padding Bottom Desktop", "default": 80 },
+    { "type": "range", "id": "pad_top_mob", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Padding Top Mobile", "default": 50 },
+    { "type": "range", "id": "pad_bot_mob", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Padding Bottom Mobile", "default": 50 }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingrediente",
+      "limit": 7,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Nombre del Ingrediente",
+          "default": "Premium Nanohydroxyapatite"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Descripción",
+          "default": "Highest quality clinically effective nHAp at 10% concentration. Low-abrasion & enamel-safe cleaning"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "C - Ingredients v2",
+      "blocks": [
+        { "type": "ingredient", "settings": { "title": "Premium Nanohydroxyapatite", "description": "Highest quality clinically effective nHAp at 10% concentration. Low-abrasion & enamel-safe cleaning" } },
+        { "type": "ingredient", "settings": { "title": "Naturally derived nHAp", "description": "First and only naturally derived Nanohydroxyapatite (from eggshells)" } },
+        { "type": "ingredient", "settings": { "title": "Xylitol", "description": "supports oral microbiome balance" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

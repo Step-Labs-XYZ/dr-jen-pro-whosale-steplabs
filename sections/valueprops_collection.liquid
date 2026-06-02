@@ -1,0 +1,50 @@
+<div class="value_props_contains">
+    {% for block in section.blocks %}
+        <img src="{{ block.settings.image | image_url: width: 140 }}" alt="{{ block.settings.image.alt }}">
+    {% endfor %}
+</div>
+
+{% if customer.tags contains "wholesale-customer" %}
+<style>
+.valueprops-collection{
+  display: none;
+}
+.ss--main-collection--wholesale{
+  padding-block: 0 !important;
+}
+</style>
+
+{% endif %}
+{% schema %}
+{
+    "name": "Valueprops collection",
+    "tag": "section",
+    "class": "valueprops-collection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Slideshow"
+      }
+    ],
+    "max_blocks": 6,
+    "blocks": [
+       {
+         "name": "Value Props",
+         "type": "Icons",
+         "settings": [
+           {
+             "type": "image_picker",
+             "id": "image",
+             "label": "Image"
+           }
+         ]
+       }
+    ],
+    "presets": [
+      {
+        "name": "Vale props collection"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,302 @@
+<div class="Cbadges-bar" style="background-color: {{ section.settings.background_color | default: '#002c41' }};">
+  <div class="Cbadges-bar__container">
+    {%- if section.blocks.size > 0 -%}
+
+      {%- if section.settings.layout_mode == 'carousel' -%}
+        <div class="Cbadges-bar__marquee" data-pause-on-hover="{{ section.settings.carousel_pause_on_hover }}">
+          <div class="Cbadges-bar__marquee-track">
+            {%- comment -%}
+              Renderizamos 2 veces los mismos badges para lograr scroll infinito.
+            {%- endcomment -%}
+            {%- for i in (1..2) -%}
+              <div class="Cbadges-bar__marquee-group" aria-hidden="{% if i == 2 %}true{% else %}false{% endif %}">
+                {%- for block in section.blocks -%}
+                  <div class="Cbadges-bar__item" {{ block.shopify_attributes }}>
+                    {%- if block.settings.icon != blank -%}
+                      <div class="Cbadges-bar__icon">
+                        <img
+                          src="{{ block.settings.icon | image_url: width: 80 }}"
+                          alt="{{ block.settings.text | escape }}"
+                          width="40"
+                          height="40"
+                          loading="lazy"
+                        />
+                      </div>
+                    {%- else -%}
+                      <div class="Cbadges-bar__icon Cbadges-bar__icon--default">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </div>
+                    {%- endif -%}
+
+                    <div class="Cbadges-bar__text">
+                      {{ block.settings.text }}
+                    </div>
+                  </div>
+                {%- endfor -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+
+      {%- else -%}
+        <div class="Cbadges-bar__grid">
+          {%- for block in section.blocks -%}
+            <div class="Cbadges-bar__item" {{ block.shopify_attributes }}>
+              {%- if block.settings.icon != blank -%}
+                <div class="Cbadges-bar__icon">
+                  <img
+                    src="{{ block.settings.icon | image_url: width: 80 }}"
+                    alt="{{ block.settings.text | escape }}"
+                    width="40"
+                    height="40"
+                    loading="lazy"
+                  />
+                </div>
+              {%- else -%}
+                <div class="Cbadges-bar__icon Cbadges-bar__icon--default">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              {%- endif -%}
+
+              <div class="Cbadges-bar__text">
+                {{ block.settings.text }}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+.Cbadges-bar {
+  width: 100%;
+  padding: 16px 20px;
+}
+
+.Cbadges-bar__container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* === FIXED GRID MODE === */
+.Cbadges-bar__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 32px;
+  align-items: center;
+  justify-items: center;
+}
+
+/* === SHARED ITEM STYLES === */
+.Cbadges-bar__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.Cbadges-bar__icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+}
+
+.Cbadges-bar__icon img {
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.Cbadges-bar__icon--default {
+  color: #ffffff;
+}
+
+.Cbadges-bar__text {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: {{ section.settings.text_color | default: '#ffffff' }};
+  text-align: left;
+}
+
+/* === CAROUSEL (MARQUEE) MODE === */
+.Cbadges-bar__marquee {
+  overflow: hidden;
+}
+
+.Cbadges-bar__marquee-track {
+  display: flex;
+  width: 100%;
+  will-change: transform;
+  animation: CbadgesBarMarquee linear infinite;
+  animation-duration: {{ section.settings.carousel_speed | default: 18 }}s;
+}
+
+.Cbadges-bar__marquee-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 32px;
+  padding-right: 32px; /* separador entre loops */
+}
+
+.Cbadges-bar__marquee-group .Cbadges-bar__item {
+  justify-content: flex-start;
+}
+
+/* Pausar al hover (si está activado) */
+{% if section.settings.carousel_pause_on_hover %}
+.Cbadges-bar__marquee:hover .Cbadges-bar__marquee-track {
+  animation-play-state: paused;
+}
+{% endif %}
+
+/* Animación: recorre exactamente 50% porque duplicamos el contenido */
+@keyframes CbadgesBarMarquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Accesibilidad: si el usuario prefiere menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .Cbadges-bar__marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .Cbadges-bar__grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .Cbadges-bar {
+    padding: 12px 16px;
+  }
+
+  /* En modo fijo: 1 columna */
+  .Cbadges-bar__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    justify-items: flex-start;
+  }
+
+  .Cbadges-bar__item {
+    gap: 10px;
+  }
+
+  .Cbadges-bar__icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .Cbadges-bar__icon img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .Cbadges-bar__text {
+    font-size: 13px;
+  }
+
+  /* En carrusel, reducimos gap para que fluya mejor en mobile */
+  .Cbadges-bar__marquee-group {
+    gap: 20px;
+    padding-right: 20px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "C Badges Bar",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#002c41"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "layout_mode",
+      "label": "Layout mode",
+      "default": "fixed",
+      "options": [
+        { "value": "fixed", "label": "Fixed (grid)" },
+        { "value": "carousel", "label": "Carousel (continuous)" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "carousel_speed",
+      "label": "Carousel speed (seconds per loop)",
+      "min": 8,
+      "max": 40,
+      "step": 1,
+      "default": 18
+    },
+    {
+      "type": "checkbox",
+      "id": "carousel_pause_on_hover",
+      "label": "Pause on hover (carousel)",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Badge",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon (optional)",
+          "info": "Leave empty to use default checkmark icon"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Badge text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "C Badges Bar",
+      "blocks": [
+        { "type": "badge", "settings": { "text": "Developed And Owned By A Dentist" } },
+        { "type": "badge", "settings": { "text": "Clinically Studied Ingredients" } },
+        { "type": "badge", "settings": { "text": "The Highest Quality Sourced nHAp Crystals" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

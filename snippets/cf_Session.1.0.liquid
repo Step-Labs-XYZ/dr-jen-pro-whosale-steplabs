@@ -1,0 +1,48 @@
+<script>
+  function cf_Session() {}
+  cf_Session.KEYS = {
+    USER_REMOVED: "cf_userRemovedProducts",
+    ASYNC_PRODUCTS: "cf_productsInAsyncStatus",
+    ERROR_PRODUCTS: "cf_ErrorWhenAddingProducts",
+    ERROR_PRODUCTS_REASONS: "cf_ErrorWhenAddingProducts",
+    ERROR_REMOVE_PRODUCTS: "cf_ErrorWhenRemovingProducts",
+  };
+
+  cf_Session.getCurrent = function (key, default_val = []) {
+    var val = sessionStorage.getItem(cf_Session.KEYS[key]);
+    if (val) {
+      // get an array if contains ','s
+      return (
+        val
+          .split(",")
+          // make sure no empty values
+          .filter(function (id) {
+            return id.trim();
+          })
+          // trim whitespace
+          .map(function (id) {
+            return String(id.trim());
+          })
+      );
+    }
+    // otherwise return default object
+    return default_val;
+  };
+
+  cf_Session.addTo = function (key, value) {
+    sessionStorage.setItem(
+      cf_Session.KEYS[key],
+      cf_Session.getCurrent(key).concat(value)
+    );
+  };
+
+  cf_Session.removeFrom = function (key, search_item) {
+    var current_values = cf_Session.getCurrent(key);
+    sessionStorage.setItem(
+      cf_Session.KEYS[key],
+      current_values.filter(function (storedValue) {
+        return storedValue != search_item;
+      })
+    );
+  };
+</script>

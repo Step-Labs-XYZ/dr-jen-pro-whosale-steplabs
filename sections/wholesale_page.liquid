@@ -1,0 +1,127 @@
+<div class="Wholesale_page_contain">
+    <div class="contain_wholesale_info">
+        <h2 class="title_wholesale">{{ section.settings.heading}}</h2>
+        <p class="text_wholesale">{{ section.settings.subheading }}</p>
+        <div class="buttons_wholesale_contain">
+            <a class="btn_apply_now" href="{{ section.settings.button_link1 }}">APPLY NOW</a>
+            <a class="btn_login_w" href="{{ section.settings.button_link2 }}">LOG IN</a>
+        </div>
+        <p class="other_text_wholesale">{{ section.settings.subheading2 }}</p>
+    </div>
+</div>
+
+<style>
+#shopify-section-template--16149103378600__main{
+display: none !important
+}
+.Wholesale_page_contain{
+background-image: url('{{ section.settings.section_image_desktop | image_url: width: master}}');
+padding: 94px 120px;
+background-size: cover;
+}
+.Wholesale_page_contain .title_wholesale{
+font-size: clamp(32px, 4vw, 48px);
+color: #2D3852;
+margin: 0;
+font-weight: 700; 
+}
+.Wholesale_page_contain .text_wholesale{
+letter-spacing: 0.01em;
+font-size: clamp(20px, 3vw, 28px);
+color: #2D3852;
+margin: 15px 0;
+}
+.btn_apply_now{
+background: #FF6020;
+color: #fff;
+font-weight: 600;
+padding: 16px;
+display: block;
+width: 100%;
+text-align: center;
+}
+.btn_login_w{
+background: #E04880;
+color: #fff;
+font-weight: 600;
+padding: 16px;
+display: block;
+width: 100%;
+text-align: center;
+}
+.buttons_wholesale_contain{
+display: flex;
+gap: 26px;
+max-width: 350px;
+justify-content: center;
+margin: 25px auto;
+}
+.other_text_wholesale{
+font-size: clamp(14px, 3vw, 16px );
+color: #000000;  
+}
+.contain_wholesale_info{
+max-width: 515px;
+width: 100%;
+text-align: center;
+}
+@media screen and (max-width: 590px ) {
+    .Wholesale_page_contain{
+        padding: 45px 40px;
+        background-image: url('{{ section.settings.section_image_mobile | image_url: width: master }}');
+        background-position: center;
+    }
+    .buttons_wholesale_contain{
+        flex-flow: column;
+        gap: 15px;
+    }
+}
+</style>
+{% schema %}
+{
+   "name": "Wholesale page",
+    "settings": [
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+        },
+        {
+            "type": "text",
+            "id": "subheading",
+            "label": "Subheading"
+        },
+        {
+            "type": "text",
+            "id": "subheading2",
+            "label": "other text"
+        },
+        {
+            "type": "image_picker",
+            "id": "section_image_desktop",
+            "label": "Image Desktop"
+        },
+        {
+            "type": "image_picker",
+            "id": "section_image_mobile",
+            "label": "Image mobile"
+        },
+        {
+            "type": "url",
+            "id": "button_link1",
+            "label": "Button link 1"
+        },
+        {
+            "type": "url",
+            "id": "button_link2",
+            "label": "Button link 2"
+        }
+    ],
+   "presets": [
+    {
+        "category": "Wholesale-page",
+        "name":"Wholesale"
+    }
+   ]
+}
+{% endschema %}

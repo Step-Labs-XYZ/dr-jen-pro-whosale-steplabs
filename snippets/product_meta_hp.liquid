@@ -1,0 +1,173 @@
+<div class="product-item-meta">
+    {%- if settings.show_vendor -%}
+      {%- assign vendor_handle = product.vendor | handle -%}
+      {%- assign collection_for_vendor = collections[vendor_handle] -%}
+
+      {%- unless collection_for_vendor.empty? -%}
+        <a class="product-item-meta__vendor heading heading--xsmall" href="{{ collection_for_vendor.url }}">{{ product.vendor }}</a>
+      {%- else -%}
+        <a class="product-item-meta__vendor heading heading--xsmall" href="{{ product.vendor | url_for_vendor }}">{{ product.vendor }}</a>
+      {%- endunless -%}
+    {%- endif -%}
+
+    <a href="{{ product.url }}" class="product-item-meta__title">{{ product.title }}</a>
+
+    <div>
+      {{product.metafields.custom.attribute_1.value}} {% if product.metafields.custom.attribute_2.value %} • {{ product.metafields.custom.attribute_2.value }} {% endif %}
+    </div>
+    <div class="product-item-meta__price-list-container">
+      <div class="price-list price-list--centered">
+        {%- if product.price_varies and product.compare_at_price -%}
+          {%- assign cheapest_variant = product.variants | sort: 'price' | first -%}
+
+          {%- capture price_min -%}
+            {%- if settings.currency_code_enabled -%}
+              {{- cheapest_variant.price | money_with_currency -}}
+            {%- else -%}
+              {{- cheapest_variant.price | money -}}
+            {%- endif -%}
+          {%- endcapture -%}
+
+          {%- if cheapest_variant.price < cheapest_variant.compare_at_price -%}
+            <span class="price price--highlight">
+              <span class="visually-hidden">{{ 'product.general.sale_price' | t }}</span>
+              {{- 'collection.product.from_price_html' | t: price_min: price_min -}}
+            </span>
+
+            <span class="price price--compare">
+              <span class="visually-hidden">{{ 'product.general.regular_price' | t }}</span>
+
+              {%- if settings.currency_code_enabled -%}
+                {{- cheapest_variant.compare_at_price | money_with_currency -}}
+              {%- else -%}
+                {{- cheapest_variant.compare_at_price | money -}}
+              {%- endif -%}
+            </span>
+          {%- else -%}
+            <span class="price">
+              <span class="visually-hidden">{{ 'product.general.sale_price' | t }}</span>
+              {{- 'collection.product.from_price_html' | t: price_min: price_min -}}
+            </span>
+          {%- endif -%}
+        {%- elsif product.price < product.compare_at_price -%}
+          <span class="price price--highlight">
+            <span class="visually-hidden">{{ 'product.general.sale_price' | t }}</span>
+
+            {%- if settings.currency_code_enabled -%}
+              {{- product.price | money_with_currency -}}
+            {%- else -%}
+              {{- product.price | money -}}
+            {%- endif -%}
+          </span>
+
+          <span class="price price--compare">
+            <span class="visually-hidden">{{ 'product.general.regular_price' | t }}</span>
+            {%- if settings.currency_code_enabled -%}
+              {{- product.compare_at_price | money_with_currency -}}
+            {%- else -%}
+              {{- product.compare_at_price | money -}}
+            {%- endif -%}
+          </span>
+        {%- elsif product.price_varies -%}
+          {%- capture price_min -%}
+            {%- if settings.currency_code_enabled -%}
+              {{ product.price_min | money_with_currency }}
+            {%- else -%}
+              {{ product.price_min | money }}
+            {%- endif -%}
+          {%- endcapture -%}
+
+          {%- capture price_max -%}
+            {%- if settings.currency_code_enabled -%}
+              {{- product.price_max | money_with_currency -}}
+            {%- else -%}
+              {{- product.price_max | money -}}
+            {%- endif -%}
+          {%- endcapture -%}
+
+          <span class="price">
+            <span class="visually-hidden">{{ 'product.general.sale_price' | t }}</span>
+            {{- 'collection.product.from_price_html' | t: price_min: price_min, price_max: price_max -}}
+          </span>
+        {%- else -%}
+          <span class="price">
+            <span class="visually-hidden">{{ 'product.general.sale_price' | t }}</span>
+
+            {%- if settings.currency_code_enabled -%}
+              {{- product.price | money_with_currency -}}
+            {%- else -%}
+              {{- product.price | money -}}
+            {%- endif -%}
+          </span>
+        {%- endif -%}
+
+        {%- if product.selected_or_first_available_variant.unit_price_measurement -%}
+          <div class="price price--block text--xsmall text--subdued">
+            <div class="unit-price-measurement">
+              <span class="unit-price-measurement__price">{{ product.selected_or_first_available_variant.unit_price | money }}</span>
+              <span class="unit-price-measurement__separator">/</span>
+
+              {%- if product.selected_or_first_available_variant.unit_price_measurement.reference_value != 1 -%}
+                <span class="unit-price-measurement__reference-value">{{ product.selected_or_first_available_variant.unit_price_measurement.reference_value }}</span>
+              {%- endif -%}
+
+              <span class="unit-price-measurement__reference-unit">{{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}</span>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if settings.show_product_rating and reduced_content != true -%}
+      <!-- JOD asked to hide reviews for product bundles  -->
+      {%- liquid
+        assign collectionTitles = product.collections | map: 'title'
+        if collectionTitles contains 'Bundle & Save'
+          assign isBundle = true
+        else
+          assign isBundle = false
+        endif
+      -%}
+      {% unless isBundle %}
+      <a class="product-item-meta__reviews-badge text--small" href="{{ product.url }}">
+        {%- render 'product-rating', product: product -%}
+      </a>
+      {% endunless %}
+    {%- endif -%}
+
+    {%- if settings.product_color_display != 'hide' and reduced_content != true -%}
+      {%- for color_label in color_label_list -%}
+        {%- if product.options_by_name[color_label] != blank -%}
+          {%- assign product_option = product.options_by_name[color_label] -%}
+
+          {%- case settings.product_color_display -%}
+            {%- when 'count' -%}
+              <p class="product-item-meta__color-count text--small text--subdued">{{- 'collection.product.available_colors_count' | t: count: product_option.values.size -}}</p>
+
+            {%- when 'swatch' -%}
+              <div class="product-item-meta__swatch-list color-swatch-list color-swatch-list--mini">
+                {%- assign variant_option = 'option' | append: product_option.position -%}
+                {%- assign color_swatch_config = settings.color_swatch_config | newline_to_br | split: '<br />' -%}
+
+                {%- capture color_name -%}{{ section.id }}-{{ block.id }}-{{ product.id }}{%- endcapture -%}
+
+                {%- for value in product_option.values -%}
+                  {%- capture color_id -%}{{ color_name }}-{{ forloop.index }}{%- endcapture -%}
+                  {%- assign color_value_downcase = value | downcase -%}
+                  {%- assign variant_for_value = product.variants | where: variant_option, value | first -%}
+
+                  <div class="color-swatch {% if color_white_label == color_value_downcase %}color-swatch--white{% endif %}">
+                    <input class="color-swatch__radio visually-hidden" type="radio" name="{{ color_name }}" id="{{ color_id }}" value="{{ value | escape }}" {% if product_option.selected_value == value %}checked="checked"{% endif %} data-variant-id="{{ variant_for_value.id }}" {% if variant_for_value.featured_media %}data-variant-featured-media="{{ variant_for_value.featured_media.id }}"{% endif %}>
+                    <label class="color-swatch__item" for="{{ color_id }}" style="{% render 'color-swatch-style', color_swatch_config: color_swatch_config, value: value %}">
+                      <span class="visually-hidden">{{ value }}</span>
+                    </label>
+                  </div>
+                {%- endfor -%}
+              </div>
+          {%- endcase -%}
+
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </div>

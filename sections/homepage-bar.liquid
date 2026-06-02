@@ -1,0 +1,42 @@
+<div class="Homepage-bar">
+    <p>{{section.settings.text}}</p>
+</div>
+
+
+<style>
+    .Homepage-bar {
+        background-color: {{section.settings.bar_color}};
+        color: {{section.settings.text_color}};
+    }
+</style>
+{% schema %}
+{
+   "name": "Homepage-Bar",
+   "settings" : [
+    {
+        "type": "text",
+        "id": "text",
+        "label": "Bar Text"
+    },
+    {
+        "type": "header",
+        "content": "Homepage Color Settings"
+    },
+    {
+        "type": "color",
+        "id": "bar_color",
+        "label": "Bar Color"
+    },
+    {
+        "type": "color",
+        "id": "text_color",
+        "label": "Bar Text Color"
+    }
+   ],
+   "presets": [
+    {
+        "name": "Homepage-Bar"
+    }
+   ]
+}
+{% endschema %}

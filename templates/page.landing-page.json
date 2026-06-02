@@ -1,0 +1,175 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "mm_banner_z38WKE": {
+      "type": "MM-banner",
+      "custom_css": [
+        "h3 {font-size: 20px; letter-spacing: 1px; text-transform: uppercase;}",
+        "h2 {font-size: 45px; line-height: 50px; padding-top: 15px;}",
+        ".banner_image {margin-bottom: 0;}",
+        ".banner_main {background: linear-gradient( 180deg, #ddf4f6 61.4%, rgba(221, 244, 246, 0) 127.38% ); padding: 40px 0 20px 0;}",
+        "@media (max-width: 999px) {h3 {font-size: 14px; text-align: center; } h2 {font-size: 25px; line-height: 33px; } p {text-align: center; } .banner_image_mobile {display: none; } .banner_image {display: block; } .banner_main {padding: 20px 0; }}"
+      ],
+      "settings": {
+        "bg_color": "#e6f5f7",
+        "image": "shopify://shop_images/drjen4.png",
+        "sub_headline": "The Next Generation of Oral Care Product",
+        "headline": "Discover why Dr. Jen's Super Paste is 6x More Effective than 5000 ppm Fluoride Toothpaste",
+        "text": "<p>Schedule your free CE event today to learn about the modern science behind Nano Hydroxyapatite as a safe and effective ingredient to help strengthen enamel.</p>",
+        "btn_text": "",
+        "btn_link": ""
+      }
+    },
+    "image_wd_text_VwAHfG": {
+      "type": "image-wd-text",
+      "blocks": {
+        "item_HNFT9i": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_10.png",
+            "tab_label": "",
+            "subheading": "What do your patients really want in a fluoride free toothpaste?",
+            "title": "The answer is easy: They want optimal cavity protection and remineralixation.",
+            "content": "",
+            "button_text": "",
+            "button_link": "",
+            "sub_color": "#5cc6d0"
+          }
+        }
+      },
+      "block_order": [
+        "item_HNFT9i"
+      ],
+      "custom_css": [
+        ".image-with-text {margin-top: 50px;}"
+      ],
+      "settings": {
+        "reveal_on_scroll": true,
+        "padding_top": false,
+        "background_type": "full_width",
+        "background_overlap": "image",
+        "image_position": "right",
+        "text_alignment": "left",
+        "cycle_speed": 20,
+        "accent_background": "rgba(0,0,0,0)",
+        "text_color": "rgba(0,0,0,0)",
+        "button_background": "rgba(0,0,0,0)",
+        "button_text_color": "rgba(0,0,0,0)",
+        "background_color": ""
+      }
+    },
+    "home_imgboxes_ce9YQK": {
+      "type": "home-imgboxes",
+      "settings": {
+        "image_with_text_image_left": "shopify://shop_images/Group_1484580642_1.png",
+        "image_with_text_image_right": "shopify://shop_images/Frame_2.png"
+      }
+    },
+    "mm_banner_text_bRUixf": {
+      "type": "MM-banner-text",
+      "settings": {
+        "bg_color": "#ffffff",
+        "image": "shopify://shop_images/Group_11_1.png",
+        "sub_headline": "",
+        "headline": "Key Benefits",
+        "text": "<p>Learn  about the history of nano Hydroxyapatite  along with clinical studies supporting nano Hydroxyapatite as an effective preventive ingredients in modern toothpaste.</p><ul><li>Learn how nHAp is effective at helping to remove plaque.</li><li>Discover how nHAp is clinically proven to remineralize enamel.</li><li>Understand how nHAp is effective at managing hypersensitivity.</li><li>Learn how combining fluoride with 10% nHAp outperforms <br/>fluoride alone toothpaste.</li></ul>",
+        "btn_text": "",
+        "btn_link": ""
+      }
+    },
+    "mm_meet_gt3UBz": {
+      "type": "MM-meet",
+      "custom_css": [
+        ".image_with_text {padding-bottom: 0;}"
+      ],
+      "settings": {
+        "bg_color": "#ddf4f6",
+        "coment_bg_color": "#ffffff",
+        "text_color": "#000000",
+        "description_color": "#1d2433",
+        "padding_top_desktop": 35,
+        "padding_bottom_desktop": 30,
+        "margin_top_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 30,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "card_image": "shopify://shop_images/DSC05863_1.png",
+        "top_text": "Meet Your Expert Guide",
+        "desc": "<p>As a practicing dental professional, Dr. Jen has spent the last 25 years committed to advancing oral care.  Her dedication to advancing oral care products using modern and advanced clinically proven ingredients.</p>",
+        "coment": "<p>Her knowledge and passion to advancing preventive oral products is unparalleled</p>",
+        "auther_name": "- Happy Attendee"
+      }
+    },
+    "rich_text_jRKQ3W": {
+      "type": "rich-text",
+      "custom_css": [
+        ".section__color-wrapper {padding: 40px 0;}",
+        ".heading {font-size: 35px; line-height: 48px; max-width: 1018px; margin: auto;}",
+        ".button--primary {padding: 2px 30px; text-transform: capitalize; background-color: #e04880; border-radius: 7px; color: #fff; font-size: 18px; font-weight: 700; line-height: 56px;}",
+        "@media (max-width: 999px) {.heading {font-size: 25px; line-height: 35px; } .button--primary {width: 100%; }}"
+      ],
+      "settings": {
+        "subheading": "",
+        "title": "Don't miss the opportunity to become an expert in understanding the science behind nHAp to help guide your patients in choosing a product with efficacy.",
+        "content": "",
+        "button_text": "Register Now",
+        "button_link": "#register-section",
+        "background_type": "full_width",
+        "text_width": "fill",
+        "text_position": "center",
+        "text_alignment": "center",
+        "background": "#8ae4e1",
+        "text_color": "#1d2433",
+        "button_background": "#e04880",
+        "button_text_color": "rgba(0,0,0,0)"
+      }
+    },
+    "rich_text_GEFEEm": {
+      "type": "rich-text",
+      "custom_css": [
+        ".section__color-wrapper {background: #1d2433; padding: 20px 0;}",
+        "section {margin: 0;}",
+        ".heading.heading--small {color: #fff; text-align: center; font-family: Raleway; font-size: 14px; font-style: normal; font-weight: 500; line-height: 25px;}"
+      ],
+      "settings": {
+        "subheading": "Copyright © 2025 Dr. Jen. All rights reserved.",
+        "title": "",
+        "content": "",
+        "button_text": "",
+        "button_link": "",
+        "background_type": "full_width",
+        "text_width": "medium",
+        "text_position": "center",
+        "text_alignment": "center",
+        "background": "rgba(0,0,0,0)",
+        "text_color": "rgba(0,0,0,0)",
+        "button_background": "rgba(0,0,0,0)",
+        "button_text_color": "rgba(0,0,0,0)"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "mm_banner_z38WKE",
+    "image_wd_text_VwAHfG",
+    "home_imgboxes_ce9YQK",
+    "mm_banner_text_bRUixf",
+    "mm_meet_gt3UBz",
+    "rich_text_jRKQ3W",
+    "rich_text_GEFEEm"
+  ]
+}

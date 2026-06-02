@@ -1,0 +1,738 @@
+<div id="c-story-{{ section.id }}" class="c-story" data-section-id="{{ section.id }}">
+  <div class="c-story__container">
+    
+    <div class="c-story__left">
+      {%- if section.settings.subheading != blank -%}
+        <div class="c-story__subheading">{{ section.settings.subheading }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="c-story__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <div class="c-story__description">
+          {{ section.settings.description }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.signature_image != blank -%}
+        <div class="c-story__signature">
+          <img src="{{ section.settings.signature_image | image_url: width: 400 }}" alt="Signature" loading="lazy">
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.link_text != blank -%}
+        <a href="{{ section.settings.link_url | default: '#' }}" class="c-story__link">
+          {{ section.settings.link_text }}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="c-story__right">
+      <div class="c-story__cards-wrapper">
+        
+        <div class="c-story__card c-story__card--primary">
+          <div class="c-story__card-header">
+            {%- if section.settings.card1_logo != blank -%}
+              <img src="{{ section.settings.card1_logo | image_url: width: 300 }}" alt="Dr Jen Logo" loading="lazy" class="c-story__card-logo">
+            {%- endif -%}
+          </div>
+          <ul class="c-story__card-list">
+            {%- if section.settings.card1_item1 != blank -%}<li>{{ section.settings.card1_item1 }}</li>{%- endif -%}
+            {%- if section.settings.card1_item2 != blank -%}<li>{{ section.settings.card1_item2 }}</li>{%- endif -%}
+            {%- if section.settings.card1_item3 != blank -%}<li>{{ section.settings.card1_item3 }}</li>{%- endif -%}
+            {%- if section.settings.card1_item4 != blank -%}<li>{{ section.settings.card1_item4 }}</li>{%- endif -%}
+          </ul>
+        </div>
+
+        <div class="c-story__card c-story__card--secondary">
+          <div class="c-story__card-header">
+            {%- if section.settings.card2_title != blank -%}
+              <h3 class="c-story__card-title">{{ section.settings.card2_title | newline_to_br }}</h3>
+            {%- endif -%}
+          </div>
+          <ul class="c-story__card-list">
+            {%- if section.settings.card2_item1 != blank -%}<li>{{ section.settings.card2_item1 }}</li>{%- endif -%}
+            {%- if section.settings.card2_item2 != blank -%}<li>{{ section.settings.card2_item2 }}</li>{%- endif -%}
+            {%- if section.settings.card2_item3 != blank -%}<li>{{ section.settings.card2_item3 }}</li>{%- endif -%}
+            {%- if section.settings.card2_item4 != blank -%}<li>{{ section.settings.card2_item4 }}</li>{%- endif -%}
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@1,400;1,500&display=swap');
+
+  #c-story-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding-top: {{ section.settings.padding_top_desktop }}px;
+    padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    font-family: 'Raleway', sans-serif;
+    overflow: hidden;
+  }
+
+  #c-story-{{ section.id }} .c-story__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  /* --- COLUMNA IZQUIERDA --- */
+  #c-story-{{ section.id }} .c-story__left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #c-story-{{ section.id }} .c-story__subheading {
+    color: {{ section.settings.subheading_color }};
+    font-size: {{ section.settings.subheading_size_desktop }}px;
+    margin-bottom: 8px;
+    font-weight: 400;
+    font-family: 'Playfair Display', Georgia, serif !important;
+  }
+
+  #c-story-{{ section.id }} .c-story__subheading em,
+  #c-story-{{ section.id }} .c-story__subheading i {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: {{ section.settings.subheading_em_color }};
+  }
+
+  #c-story-{{ section.id }} .c-story__heading {
+    color: {{ section.settings.heading_color }};
+    font-size: {{ section.settings.heading_size_desktop }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    max-width: {{ section.settings.heading_max_desktop }}%;
+    margin: 0 0 24px 0;
+    line-height: 1.2;
+  }
+
+  #c-story-{{ section.id }} .c-story__description {
+    color: {{ section.settings.text_color }};
+    font-size: {{ section.settings.text_size_desktop }}px;
+    max-width: {{ section.settings.text_max_desktop }}%;
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+
+  #c-story-{{ section.id }} .c-story__description p {
+    margin: 0 0 16px 0;
+  }
+  #c-story-{{ section.id }} .c-story__description p:last-child {
+    margin-bottom: 0;
+  }
+
+  #c-story-{{ section.id }} .c-story__signature {
+    margin-bottom: 30px;
+    max-width: {{ section.settings.signature_max_desktop }}px;
+  }
+
+  #c-story-{{ section.id }} .c-story__signature img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  #c-story-{{ section.id }} .c-story__link {
+    color: {{ section.settings.link_color }};
+    font-size: {{ section.settings.link_size_desktop }}px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: 20%;
+    border-bottom: 1px solid #002C41;
+    transition: opacity 0.3s ease;
+  }
+  
+  #c-story-{{ section.id }} .c-story__link:hover {
+    opacity: 0.7;
+  }
+
+  /* --- COLUMNA DERECHA (TARJETAS) --- */
+  #c-story-{{ section.id }} .c-story__cards-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  #c-story-{{ section.id }} .c-story__card {
+    border-radius: {{ section.settings.card_radius }}px;
+    padding: 30px 24px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #c-story-{{ section.id }} .c-story__card-header {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60px;
+  }
+
+  #c-story-{{ section.id }} .c-story__card-logo {
+    max-width: 140px;
+    height: auto;
+  }
+
+  #c-story-{{ section.id }} .c-story__card-title {
+    margin: 0;
+    font-size: {{ section.settings.card_title_size_desktop }}px;
+    text-align: center;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+
+  #c-story-{{ section.id }} .c-story__card-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #c-story-{{ section.id }} .c-story__card-list li {
+    padding: 20px 0;
+    font-size: {{ section.settings.card_text_size_desktop }}px;
+    line-height: 1.4;
+  }
+
+  /* Estilos específicos Tarjeta 1 (Primaria) */
+  #c-story-{{ section.id }} .c-story__card--primary {
+    background-color: {{ section.settings.card1_bg }};
+  }
+  #c-story-{{ section.id }} .c-story__card--primary .c-story__card-header {
+    border-bottom: 1px solid {{ section.settings.card1_line }};
+  }
+  #c-story-{{ section.id }} .c-story__card--primary .c-story__card-list li {
+    color: {{ section.settings.card1_text }};
+    font-weight: 700;
+    border-bottom: 1px solid {{ section.settings.card1_line }};
+  }
+  #c-story-{{ section.id }} .c-story__card--primary .c-story__card-list li:last-child {
+    border-bottom: 1px solid {{ section.settings.card1_line }};
+  }
+
+  /* Estilos específicos Tarjeta 2 (Secundaria) */
+  #c-story-{{ section.id }} .c-story__card--secondary {
+    background-color: {{ section.settings.card2_bg }};
+  }
+  #c-story-{{ section.id }} .c-story__card--secondary .c-story__card-title {
+    color: {{ section.settings.card2_text }};
+  }
+  #c-story-{{ section.id }} .c-story__card--secondary .c-story__card-header {
+    border-bottom: 1px solid {{ section.settings.card2_line }};
+  }
+  #c-story-{{ section.id }} .c-story__card--secondary .c-story__card-list li {
+    color: {{ section.settings.card2_text }};
+    font-weight: 400;
+    border-bottom: 1px solid {{ section.settings.card2_line }};
+  }
+  #c-story-{{ section.id }} .c-story__card--secondary .c-story__card-list li:last-child {
+    border-bottom: 1px solid {{ section.settings.card2_line }};
+  }
+
+  /* --- RESPONSIVO --- */
+  @media screen and (max-width: 991px) {
+    #c-story-{{ section.id }} .c-story__container {
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+    
+    /* Configuración Dinámica de Alineación (Móvil & Tablet) */
+    #c-story-{{ section.id }} .c-story__left {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: {{ section.settings.mobile_alignment }};
+      align-items: {% if section.settings.mobile_alignment == 'center' %}center{% elsif section.settings.mobile_alignment == 'right' %}flex-end{% else %}flex-start{% endif %};
+    }
+    
+    #c-story-{{ section.id }} .c-story__description p {
+      text-align: {{ section.settings.mobile_alignment }};
+    }
+
+    #c-story-{{ section.id }} .c-story__heading,
+    #c-story-{{ section.id }} .c-story__description,
+    #c-story-{{ section.id }} .c-story__signature {
+      {% if section.settings.mobile_alignment == 'center' %}
+        margin-left: auto;
+        margin-right: auto;
+      {% elsif section.settings.mobile_alignment == 'right' %}
+        margin-left: auto;
+        margin-right: 0;
+      {% else %}
+        margin-left: 0;
+        margin-right: auto;
+      {% endif %}
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #c-story-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+
+    #c-story-{{ section.id }} .c-story__container {
+      padding: 0 20px;
+      gap: 40px;
+    }
+
+    /* Tipografía Móvil */
+    #c-story-{{ section.id }} .c-story__subheading {
+      font-size: {{ section.settings.subheading_size_mobile }}px;
+    }
+
+    #c-story-{{ section.id }} .c-story__heading {
+      font-size: {{ section.settings.heading_size_mobile }}px;
+      max-width: {{ section.settings.heading_max_mobile }}%;
+      margin-bottom: 44px;
+    }
+
+    #c-story-{{ section.id }} .c-story__description {
+      font-size: {{ section.settings.text_size_mobile }}px;
+      max-width: {{ section.settings.text_max_mobile }}%;
+    }
+
+    #c-story-{{ section.id }} .c-story__signature {
+      max-width: {{ section.settings.signature_max_mobile }}px;
+    }
+
+    #c-story-{{ section.id }} .c-story__link {
+      font-size: {{ section.settings.link_size_mobile }}px;
+      width: auto;
+    }
+
+    /* Tarjetas Móvil (Apiladas verticalmente) */
+    #c-story-{{ section.id }} .c-story__cards-wrapper {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    #c-story-{{ section.id }} .c-story__card {
+      border-radius: 0;
+    }
+
+    #c-story-{{ section.id }} .c-story__card:first-child {
+      border-top-left-radius: {{ section.settings.card_radius }}px;
+      border-top-right-radius: {{ section.settings.card_radius }}px;
+      border-bottom-left-radius: {{ section.settings.card_radius }}px;
+      border-bottom-right-radius: {{ section.settings.card_radius }}px;
+    }
+
+    #c-story-{{ section.id }} .c-story__card:last-child {
+      border-bottom-left-radius: {{ section.settings.card_radius }}px;
+      border-bottom-right-radius: {{ section.settings.card_radius }}px;
+      border-top-left-radius: {{ section.settings.card_radius }}px;
+      border-top-right-radius: {{ section.settings.card_radius }}px;
+    }
+
+    #c-story-{{ section.id }} .c-story__card-title {
+      font-size: {{ section.settings.card_title_size_mobile }}px;
+    }
+
+    #c-story-{{ section.id }} .c-story__card-list li {
+      font-size: {{ section.settings.card_text_size_mobile }}px;
+      padding: 16px 0;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "C Story Comparison",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Left Content: Text & Info"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading (HTML Allowed)",
+      "default": "Born From Love, <em>Backed By Science</em>",
+      "info": "Wrap text in <em> tags to make it italic and serif."
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#002C41"
+    },
+    {
+      "type": "color",
+      "id": "subheading_em_color",
+      "label": "Subheading Italic (em) Color",
+      "default": "#3E6A7A"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "The Dr. Jen Story"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#002C41"
+    },
+    {
+      "type": "range",
+      "id": "heading_weight",
+      "min": 300, "max": 900, "step": 100,
+      "label": "Heading Font Weight",
+      "default": 600
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>When Dr. Jen discovered toxic ingredients...</p>"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Description Color",
+      "default": "#4A4A4A"
+    },
+    {
+      "type": "image_picker",
+      "id": "signature_image",
+      "label": "Signature Image"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link Text",
+      "default": "LEARN MORE"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link Color",
+      "default": "#002C41"
+    },
+    {
+      "type": "header",
+      "content": "Right Content: Card 1 (Primary/Green)"
+    },
+    {
+      "type": "color",
+      "id": "card1_bg",
+      "label": "Card 1 Background",
+      "default": "#D6ECE6"
+    },
+    {
+      "type": "color",
+      "id": "card1_text",
+      "label": "Card 1 Text Color",
+      "default": "#002C41"
+    },
+    {
+      "type": "color",
+      "id": "card1_line",
+      "label": "Card 1 Divider Line Color",
+      "default": "#A8D4C8"
+    },
+    {
+      "type": "image_picker",
+      "id": "card1_logo",
+      "label": "Card 1 Header Logo"
+    },
+    {
+      "type": "text",
+      "id": "card1_item1",
+      "label": "Item 1",
+      "default": "Developed from a mother's love for an ill child"
+    },
+    {
+      "type": "text",
+      "id": "card1_item2",
+      "label": "Item 2",
+      "default": "Premium Nanohydroxyapatite at optimal concentrations."
+    },
+    {
+      "type": "text",
+      "id": "card1_item3",
+      "label": "Item 3",
+      "default": "Backed by science, independent validated studies"
+    },
+    {
+      "type": "text",
+      "id": "card1_item4",
+      "label": "Item 4",
+      "default": "Dentist developed and owned"
+    },
+    {
+      "type": "header",
+      "content": "Right Content: Card 2 (Secondary/Gray)"
+    },
+    {
+      "type": "color",
+      "id": "card2_bg",
+      "label": "Card 2 Background",
+      "default": "#F8F8F8"
+    },
+    {
+      "type": "color",
+      "id": "card2_text",
+      "label": "Card 2 Text Color",
+      "default": "#4A4A4A"
+    },
+    {
+      "type": "color",
+      "id": "card2_line",
+      "label": "Card 2 Divider Line Color",
+      "default": "#E5E5E5"
+    },
+    {
+      "type": "textarea",
+      "id": "card2_title",
+      "label": "Card 2 Title",
+      "default": "Industry Standard Venture\nCapitalist brands"
+    },
+    {
+      "type": "text",
+      "id": "card2_item1",
+      "label": "Item 1",
+      "default": "Built for profits"
+    },
+    {
+      "type": "text",
+      "id": "card2_item2",
+      "label": "Item 2",
+      "default": "Lack of transparency with sourcing or quality"
+    },
+    {
+      "type": "text",
+      "id": "card2_item3",
+      "label": "Item 3",
+      "default": "Marketing-first formula"
+    },
+    {
+      "type": "text",
+      "id": "card2_item4",
+      "label": "Item 4",
+      "default": "Cheaper Ingredient Formulations"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Sizing & Configuration"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_desktop",
+      "min": 12, "max": 30, "step": 1, "unit": "px",
+      "label": "Subheading Size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "min": 20, "max": 80, "step": 1, "unit": "px",
+      "label": "Heading Size",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "heading_max_desktop",
+      "min": 10, "max": 100, "step": 5, "unit": "%",
+      "label": "Heading Max Width",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "text_size_desktop",
+      "min": 12, "max": 24, "step": 1, "unit": "px",
+      "label": "Description Size",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "text_max_desktop",
+      "min": 10, "max": 100, "step": 5, "unit": "%",
+      "label": "Description Max Width",
+      "default": 95
+    },
+    {
+      "type": "range",
+      "id": "signature_max_desktop",
+      "min": 100, "max": 500, "step": 10, "unit": "px",
+      "label": "Signature Image Max Width",
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "link_size_desktop",
+      "min": 10, "max": 24, "step": 1, "unit": "px",
+      "label": "Link Text Size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "card_title_size_desktop",
+      "min": 12, "max": 30, "step": 1, "unit": "px",
+      "label": "Card 2 Title Size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_text_size_desktop",
+      "min": 10, "max": 24, "step": 1, "unit": "px",
+      "label": "Card List Items Size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0, "max": 40, "step": 2, "unit": "px",
+      "label": "Cards Border Radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0, "max": 120, "step": 5, "unit": "px",
+      "label": "Padding Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0, "max": 120, "step": 5, "unit": "px",
+      "label": "Padding Bottom",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Mobile Sizing & Configuration"
+    },
+    {
+      "type": "select",
+      "id": "mobile_alignment",
+      "label": "Text Alignment (Mobile)",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_mobile",
+      "min": 12, "max": 24, "step": 1, "unit": "px",
+      "label": "Subheading Size (Mobile)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 20, "max": 60, "step": 1, "unit": "px",
+      "label": "Heading Size (Mobile)",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "heading_max_mobile",
+      "min": 10, "max": 100, "step": 5, "unit": "%",
+      "label": "Heading Max Width (Mobile)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "min": 12, "max": 20, "step": 1, "unit": "px",
+      "label": "Description Size (Mobile)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "text_max_mobile",
+      "min": 10, "max": 100, "step": 5, "unit": "%",
+      "label": "Description Max Width (Mobile)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "signature_max_mobile",
+      "min": 100, "max": 400, "step": 10, "unit": "px",
+      "label": "Signature Max Width (Mobile)",
+      "default": 150
+    },
+    {
+      "type": "range",
+      "id": "link_size_mobile",
+      "min": 10, "max": 20, "step": 1, "unit": "px",
+      "label": "Link Text Size (Mobile)",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "card_title_size_mobile",
+      "min": 12, "max": 24, "step": 1, "unit": "px",
+      "label": "Card 2 Title Size (Mobile)",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "card_text_size_mobile",
+      "min": 10, "max": 20, "step": 1, "unit": "px",
+      "label": "Card List Items Size (Mobile)",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0, "max": 100, "step": 5, "unit": "px",
+      "label": "Padding Top (Mobile)",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0, "max": 100, "step": 5, "unit": "px",
+      "label": "Padding Bottom (Mobile)",
+      "default": 50
+    }
+  ],
+  "presets": [
+    {
+      "name": "C Story Comparison"
+    }
+  ]
+}
+{% endschema %}

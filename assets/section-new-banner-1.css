@@ -1,0 +1,132 @@
+.new-banner-1__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.new-banner-1__content-wrapper {
+    width: 65%;
+    margin: 30px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.new-banner-1__top-title,
+.new-banner-1__bottom-title {
+    font-family: "Raleway";
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 56px;
+    letter-spacing: 0em;
+    margin: 0;
+    margin-bottom: 8px;
+    color: #1D2433;
+}
+
+.new-banner-1__top-title {
+    color: #5DC7D1;
+    margin: 0;
+}
+
+.new-banner-1__small-title {
+    font-family: "Raleway";
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    color: #000;
+    margin: 0;
+    margin-bottom: 24px;
+}
+
+.new-banner-1__content {
+    font-family: "Raleway";
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 31px;
+    letter-spacing: 0em;
+    color: #1D2433;
+    margin: 0;
+    margin-bottom: 24px;
+}
+
+.new-banner-1__button {
+    padding: 12px;
+    background-color: #e04880;
+    text-transform: uppercase;
+    max-width: 276px;
+    color: #fff;
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 700;
+    border-radius: 6px;
+    border: 1px solid #e04880;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.new-banner-1__button:hover {
+    color: #E04880;
+    background-color: transparent;
+}
+
+.new-banner-1__image-wrapper {
+    width: 35%;
+    padding-top: 35px;
+}
+
+@media (max-width: 1300px) {
+
+    .new-banner-1__container {
+        align-items: flex-end;
+    }
+
+    .new-banner-1__content-wrapper {
+        width: 55%;
+    }
+
+    .new-banner-1__image-wrapper {
+        width: 45%;
+    }
+}
+
+@media (max-width: 768px) {
+    .new-banner-1__container {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .new-banner-1__content-wrapper {
+        width: 100%;
+        align-items: center;
+        order: 1;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 24px;
+    }
+    
+    .new-banner-1__top-title,
+    .new-banner-1__bottom-title {
+        font-size: 24px;
+        line-height: 32px;
+    }
+    
+    .new-banner-1__small-title {
+        margin-bottom: 16px;
+    }
+    
+    .new-banner-1__content {
+        font-size: 14px;
+        line-height: 24px;
+        margin-bottom: 16px;
+    }
+    
+    .new-banner-1__image-wrapper {
+        width: 100%;
+        padding-top: 0px;
+    }
+}

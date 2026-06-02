@@ -1,0 +1,393 @@
+<style>
+.how_to_use {
+  width: 100%;
+  height: auto;
+}
+.how_to_use .container {
+  max-width: 1198px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 30px;
+}
+.how_to_use h2 {
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 70px;
+  text-align: center;
+  margin: 0;
+  padding-bottom:50px;
+}
+.how_to_use .blocks_inner h3 {
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 45px;
+  margin: 0;
+  padding-bottom:29px;
+}
+.how_to_use .block_col {
+  border-radius: 30px;
+  border: 1px solid #5DC7D1;
+  background: linear-gradient(180deg, #EFFAFB 0%, rgba(255, 255, 255, 0.00) 100%);
+  box-shadow: 0px 0px 40px 0px rgba(99, 136, 192, 0.20);
+  padding: 40px;
+}
+.how_to_use .block_col .top_text {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  padding-bottom:35px;
+}
+.how_to_use .top_text h6{
+  max-width: 59px;
+  margin:0;
+}
+.how_to_use .top_text h4{
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 45px;
+  margin:0;
+}
+.how_to_use .image_with_content{
+  display: flex;
+  justify-content: space-between;
+  align-items:flex-start;
+  gap: 40px;
+}
+.how_to_use .image_with_content_inner {
+  width: auto;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex:1;
+}
+.how_to_use .image_with_content_inner .image_col {
+  width: 68px;
+  height:70px;
+  flex:none;
+  align-self: self-start;
+}
+.how_to_use .image_with_content_inner .image_col img {
+  width:100%;
+  height: 100%;
+  object-fit: contain;
+}
+.how_to_use .content_col .content_numbers {
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  width: 28px;
+  height: 28px;
+  text-align: center;
+  border-radius: 50%;
+  display:block;
+}
+.how_to_use .content_col .desc {
+  padding-top: 13px;
+  display: block;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+}
+.how_to_use .content_col .desc p{
+  margin: 0;
+}
+#how_to_use-{{ section.id }} {
+  background: {{section.settings.bg_color}};
+  padding-top:{{ section.settings.padding_top_desktop }}px;
+  padding-bottom:{{ section.settings.padding_bottom_desktop }}px;
+  margin-top:{{ section.settings.margin_top_desktop }}px;
+  margin-bottom:{{ section.settings.margin_bottom_desktop }}px;
+}
+#how_to_use-{{ section.id }} h2 {
+  color: {{section.settings.main_headline_color}};
+}
+#how_to_use-{{ section.id }} h3 {
+  color: {{section.settings.text_color}};
+}
+#how_to_use-{{ section.id }} .content_numbers {
+  color: {{section.settings.number_color}};
+}
+#how_to_use-{{ section.id }} .content_numbers {
+  background-color: {{section.settings.number_bg_color}};
+}
+#how_to_use-{{ section.id }} h4, 
+#how_to_use-{{ section.id }} p {
+  color: {{section.settings.text_color2}};
+}
+
+@media screen and (max-width: 1199px) {
+  .how_to_use .content_col .desc {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 991px) {
+  #how_to_use-{{ section.id }} {
+    padding-top:{{ section.settings.padding_top_mobile }}px;
+    padding-bottom:{{ section.settings.padding_bottom_mobile }}px;
+    margin-top:{{ section.settings.margin_top_mobile }}px;
+    margin-bottom:{{ section.settings.margin_bottom_mobile }}px;
+  }
+  .how_to_use .container {
+    padding: 0 18px;
+  }
+  .how_to_use h2 {
+    font-size: 40px;
+    line-height: 70px;
+    padding-bottom:30px;
+  }
+  .how_to_use .blocks_inner h3 {
+    font-size: 20px;
+    padding-bottom:20px;
+  }
+  .how_to_use .block_col {
+    padding: 25px;
+  }
+  .how_to_use .top_text h4 {
+    font-size: 18px;
+    line-height: 25px;
+  }
+  .how_to_use .image_with_content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 29px;
+  }
+  .how_to_use .image_with_content_inner {
+    gap: 39px;
+  }
+}
+</style>
+<section class="how_to_use" id="how_to_use-{{ section.id }}">
+  <div class="container">
+    {% if section.settings.main_headline != blank %}
+      <h2>{{ section.settings.main_headline }}</h2>
+    {% endif %}
+      <div class="blocks_inner">
+        {% if section.settings.top_headline != blank %}
+          <h3>{{ section.settings.top_headline }}</h3>
+        {% endif %}
+        <div class="block_col">
+        {% if section.settings.col_headline !=blank %}
+          <div class="top_text">
+            {% if section.settings.svg != blank %}
+                {{ section.settings.svg | image_url:width:section.settings.svg.width | image_tag:loading:'lazy' }}
+            {% endif %}
+            <h4>{{ section.settings.col_headline }}</h4>
+          </div>
+        {% endif %}
+        <div class="image_with_content">
+          {% for block in section.blocks %}
+            <div class="image_with_content_inner">
+              {% if block.settings.col_image!=blank %}
+                <div class="image_col">
+                    {{ block.settings.col_image| image_url: width: block.settings.col_image.width | image_tag: loading: 'lazy' }}
+                </div>
+              {% endif %}
+              <div class="content_col">
+                {% if block.settings.numbers !=blank%}
+                  <span class="content_numbers">{{ block.settings.numbers }}</span>
+                {% endif %}
+                {% if block.settings.desc != blank%}
+                  <span class="desc">{{ block.settings.desc }}</span>
+                {% endif %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "MM How to Use",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "BG Color",
+        "default": "#FFF"
+      },
+      {
+        "type": "color",
+        "id": "main_headline_color",
+        "label": "Main Headline Color",
+        "default": "#5DC7D1"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Top Headlines Color",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "number_color",
+        "label": "Number Color",
+        "default": "#FFF"
+      },
+      {
+        "type": "color",
+        "id": "number_bg_color",
+        "label": "Number Background Color",
+        "default": "#1D2433"
+      },
+      {
+        "type": "color",
+        "id": "text_color2",
+        "label": "Text Color",
+        "default": "#1D2433"
+      },
+            {
+        "type": "range",
+        "id": "padding_top_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Top Desktop",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Bottom Desktop",
+        "default": 0
+       },
+       {
+        "type": "range",
+        "id": "margin_top_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Top Desktop",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Bottom Desktop",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_top_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Top Mobile",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Bottom Mobile",
+        "default": 0
+       },
+       {
+        "type": "range",
+        "id": "margin_top_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Top Mobile",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Bottom Mobile",
+        "default": 0
+      },
+      {
+        "type": "text",
+        "id": "main_headline",
+        "label": "Main Headline",
+        "default": "How to use"
+      },
+      {
+        "type": "text",
+        "id": "top_headline",
+        "label": "Top Headline",
+        "default": "At the Dental Office:"
+      },
+      {
+        "type": "text",
+        "id": "col_headline",
+        "label": "Top Col Headline",
+        "default": "Custom Tray Application"
+      },
+      {
+        "type": "image_picker",
+        "id": "svg",
+        "label": "SVG"
+      }
+    ],
+      "blocks": [
+     {
+       "name": "ADD Tile",
+       "type": "add_tile",
+       "settings": [
+        {
+          "type": "text",
+          "id": "top_headline",
+          "label": "Headline",
+          "default": "At the Dental Office:"
+        },
+        {
+          "type": "text",
+          "id": "col_headline",
+          "label": "Headline",
+          "default": "Custom Tray Application"
+        },
+        {
+          "type": "image_picker",
+          "id": "col_image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "numbers",
+          "label": "Numbers",
+          "default": "1"
+        },
+        {
+          "type": "richtext",
+          "id": "desc",
+          "label": "Description",
+          "default": "<p>Fill a tray with Dr.Jen’s remineralizing toothpaste.</p>"
+        }
+       ]
+     }
+  ],
+    "presets": [
+      {
+        "name": "MM How to Use"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,274 @@
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+<div class="our-products">
+    <h1>{{section.settings.collection_name}}</h1>
+    <a href="{{section.settings.url}}">Shop All</a>
+    <div class="our-products-items" data-flickity='{"wrapAround" : true, "cellAlign" : "center", "imagesLoaded": true, "pageDots": false, "prevNextButtons": true }'>
+        {% for product in collections[section.settings.upsell_collection].products %}
+          {% if customer.tags contains "wholesale-customer" %} 
+              {% if product.title contains '(Wholesale)' %}
+              <a href="{{product.url}}" style="display: flex; flex-direction: column; flex-wrap: wrap; text-decoration: none; align-items: center">
+                  
+                <img class="our-products-img" src="{{product.featured_image | img_url: '500x'}}"/>
+                <span class="product-item-meta__title">{{ product.title }}</span>
+                <div class="product_description_our_hp">
+                  {{product.metafields.custom.attribute_1.value}} {% if product.metafields.custom.attribute_2.value %} • {{ product.metafields.custom.attribute_2.value }} {% endif %}
+                </div>
+                <div class="product-item-meta__price-list-container">
+                  <div class="price-list price-list--centered">
+                    {%- if product.price_varies and product.compare_at_price -%}
+                      {%- assign cheapest_variant = product.variants | sort: 'price' | first -%}
+            
+                      {%- capture price_min -%}
+                        {%- if settings.currency_code_enabled -%}
+                          {{- cheapest_variant.price | money_with_currency -}}
+                        {%- else -%}
+                          {{- cheapest_variant.price | money -}}
+                        {%- endif -%}
+                      {%- endcapture -%}
+            
+                      {%- if cheapest_variant.price < cheapest_variant.compare_at_price -%}
+                        <span class="price price--highlight">
+                          <span class="visually-hidden">{{ 'product.general.sale_price' | t }}</span>
+                          {{- 'collection.product.from_price_html' | t: price_min: price_min -}}
+                        </span>
+            
+                        <span class="price price--compare">
+                          <span class="visually-hidden">{{ 'product.general.regular_price' | t }}</span>
+            
+                          {%- if settings.currency_code_enabled -%}
+                            {{- cheapest_variant.compare_at_price | money_with_currency -}}
+                          {%- else -%}
+                            {{- cheapest_variant.compare_at_price | money -}}
+                          {%- endif -%}
+                        </span>
+                      {%- else -%}
+                        <span class="price">
+                          <span class="visually-hidden">{{ 'product.general.sale_price' | t }}</span>
+                          {{- 'collection.product.from_price_html' | t: price_min: price_min -}}
+                        </span>
+                      {%- endif -%}
+                    {%- elsif product.price < product.compare_at_price -%}
+                      <span class="price price--highlight">
+                        <span class="visually-hidden">{{ 'product.general.sale_price' | t }}</span>
+            
+                        {%- if settings.currency_code_enabled -%}
+                          {{- product.price | money_with_currency -}}
+                        {%- else -%}
+                          {{- product.price | money -}}
+                        {%- endif -%}
+                      </span>
+            
+                      <span class="price price--compare">
+                        <span class="visually-hidden">{{ 'product.general.regular_price' | t }}</span>
+                        {%- if settings.currency_code_enabled -%}
+                          {{- product.compare_at_price | money_with_currency -}}
+                        {%- else -%}
+                          {{- product.compare_at_price | money -}}
+                        {%- endif -%}
+                      </span>
+                    {%- elsif product.price_varies -%}
+                      {%- capture price_min -%}
+                        {%- if settings.currency_code_enabled -%}
+                          {{ product.price_min | money_with_currency }}
+                        {%- else -%}
+                          {{ product.price_min | money }}
+                        {%- endif -%}
+                      {%- endcapture -%}
+            
+                      {%- capture price_max -%}
+                        {%- if settings.currency_code_enabled -%}
+                          {{- product.price_max | money_with_currency -}}
+                        {%- else -%}
+                          {{- product.price_max | money -}}
+                        {%- endif -%}
+                      {%- endcapture -%}
+            
+                      <span class="price">
+                        <span class="visually-hidden">{{ 'product.general.sale_price' | t }}</span>
+                        {{- 'collection.product.from_price_html' | t: price_min: price_min, price_max: price_max -}}
+                      </span>
+                    {%- else -%}
+                      <span class="price">
+                        <span class="visually-hidden">{{ 'product.general.sale_price' | t }}</span>
+            
+                        {%- if settings.currency_code_enabled -%}
+                          {{- product.price | money_with_currency -}}
+                        {%- else -%}
+                          {{- product.price | money -}}
+                        {%- endif -%}
+                      </span>
+                    {%- endif -%}
+            
+                    {%- if product.selected_or_first_available_variant.unit_price_measurement -%}
+                      <div class="price price--block text--xsmall text--subdued">
+                        <div class="unit-price-measurement">
+                          <span class="unit-price-measurement__price">{{ product.selected_or_first_available_variant.unit_price | money }}</span>
+                          <span class="unit-price-measurement__separator">/</span>
+            
+                          {%- if product.selected_or_first_available_variant.unit_price_measurement.reference_value != 1 -%}
+                            <span class="unit-price-measurement__reference-value">{{ product.selected_or_first_available_variant.unit_price_measurement.reference_value }}</span>
+                          {%- endif -%}
+            
+                          <span class="unit-price-measurement__reference-unit">{{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}</span>
+                        </div>
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+                
+                  
+              
+              </a>
+              {% endif %}
+                       
+          {% else %}
+            {% unless product.title contains '(Wholesale)' %}
+              <a href="{{product.url}}" style="display: flex; flex-direction: column; flex-wrap: wrap; text-decoration: none; align-items: center">
+                  
+                <img class="our-products-img" src="{{product.featured_image | img_url: '500x'}}"/>
+                <span class="product-item-meta__title">{{ product.title }}</span>
+                <div class="product_description_our_hp">
+                  {{product.metafields.custom.attribute_1.value}} {% if product.metafields.custom.attribute_2.value %} • {{ product.metafields.custom.attribute_2.value }} {% endif %}
+                </div>
+                <div class="product-item-meta__price-list-container">
+                  <div class="price-list price-list--centered">
+                    {%- if product.price_varies and product.compare_at_price -%}
+                      {%- assign cheapest_variant = product.variants | sort: 'price' | first -%}
+            
+                      {%- capture price_min -%}
+                        {%- if settings.currency_code_enabled -%}
+                          {{- cheapest_variant.price | money_with_currency -}}
+                        {%- else -%}
+                          {{- cheapest_variant.price | money -}}
+                        {%- endif -%}
+                      {%- endcapture -%}
+            
+                      {%- if cheapest_variant.price < cheapest_variant.compare_at_price -%}
+                        <span class="price price--highlight">
+                          <span class="visually-hidden">{{ 'product.general.sale_price' | t }}</span>
+                          {{- 'collection.product.from_price_html' | t: price_min: price_min -}}
+                        </span>
+            
+                        <span class="price price--compare">
+                          <span class="visually-hidden">{{ 'product.general.regular_price' | t }}</span>
+            
+                          {%- if settings.currency_code_enabled -%}
+                            {{- cheapest_variant.compare_at_price | money_with_currency -}}
+                          {%- else -%}
+                            {{- cheapest_variant.compare_at_price | money -}}
+                          {%- endif -%}
+                        </span>
+                      {%- else -%}
+                        <span class="price">
+                          <span class="visually-hidden">{{ 'product.general.sale_price' | t }}</span>
+                          {{- 'collection.product.from_price_html' | t: price_min: price_min -}}
+                        </span>
+                      {%- endif -%}
+                    {%- elsif product.price < product.compare_at_price -%}
+                      <span class="price price--highlight">
+                        <span class="visually-hidden">{{ 'product.general.sale_price' | t }}</span>
+            
+                        {%- if settings.currency_code_enabled -%}
+                          {{- product.price | money_with_currency -}}
+                        {%- else -%}
+                          {{- product.price | money -}}
+                        {%- endif -%}
+                      </span>
+            
+                      <span class="price price--compare">
+                        <span class="visually-hidden">{{ 'product.general.regular_price' | t }}</span>
+                        {%- if settings.currency_code_enabled -%}
+                          {{- product.compare_at_price | money_with_currency -}}
+                        {%- else -%}
+                          {{- product.compare_at_price | money -}}
+                        {%- endif -%}
+                      </span>
+                    {%- elsif product.price_varies -%}
+                      {%- capture price_min -%}
+                        {%- if settings.currency_code_enabled -%}
+                          {{ product.price_min | money_with_currency }}
+                        {%- else -%}
+                          {{ product.price_min | money }}
+                        {%- endif -%}
+                      {%- endcapture -%}
+            
+                      {%- capture price_max -%}
+                        {%- if settings.currency_code_enabled -%}
+                          {{- product.price_max | money_with_currency -}}
+                        {%- else -%}
+                          {{- product.price_max | money -}}
+                        {%- endif -%}
+                      {%- endcapture -%}
+            
+                      <span class="price">
+                        <span class="visually-hidden">{{ 'product.general.sale_price' | t }}</span>
+                        {{- 'collection.product.from_price_html' | t: price_min: price_min, price_max: price_max -}}
+                      </span>
+                    {%- else -%}
+                      <span class="price">
+                        <span class="visually-hidden">{{ 'product.general.sale_price' | t }}</span>
+            
+                        {%- if settings.currency_code_enabled -%}
+                          {{- product.price | money_with_currency -}}
+                        {%- else -%}
+                          {{- product.price | money -}}
+                        {%- endif -%}
+                      </span>
+                    {%- endif -%}
+            
+                    {%- if product.selected_or_first_available_variant.unit_price_measurement -%}
+                      <div class="price price--block text--xsmall text--subdued">
+                        <div class="unit-price-measurement">
+                          <span class="unit-price-measurement__price">{{ product.selected_or_first_available_variant.unit_price | money }}</span>
+                          <span class="unit-price-measurement__separator">/</span>
+            
+                          {%- if product.selected_or_first_available_variant.unit_price_measurement.reference_value != 1 -%}
+                            <span class="unit-price-measurement__reference-value">{{ product.selected_or_first_available_variant.unit_price_measurement.reference_value }}</span>
+                          {%- endif -%}
+            
+                          <span class="unit-price-measurement__reference-unit">{{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}</span>
+                        </div>
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+                
+              </a>
+            {% endunless %}
+          {% endif %}
+            
+            
+        {% endfor %}
+    </div>
+
+</div>
+
+{% schema %}
+{
+   "name": "Homepage Our Products",
+   "settings" : [
+    {
+        "type": "text",
+        "id": "collection_name",
+        "label": "Collection Name"
+    },
+    {
+        "type": "collection",
+        "id": "upsell_collection",
+        "label": "Our Products Collection"
+    },
+    {
+        "type": "url",
+        "id": "url",
+        "label": "Our Products URL"
+    }
+   ],
+   "presets": [
+    {
+        "name": "Homepage-Our-Products"
+    }
+   ]
+}
+{% endschema %}

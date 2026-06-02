@@ -1,0 +1,675 @@
+{%- comment -%}
+  Section: Why Ortho Patients Need More
+  Description: Two-column layout — left: heading, body text, before/after comparison
+               image + expandable accordion rows; right: product image(s).
+  sl-id: sl-section-why-ortho-patients-v1
+  Figma: (figma url)
+{%- endcomment -%}
+
+{%- comment -%} ===== Styles ===== {%- endcomment -%}
+{%- style -%}
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap');
+
+  /* ================================================
+     ROOT VARIABLES
+     ================================================ */
+  #c-ortho-{{ section.id }} {
+    --c-ortho-bg:         {{ section.settings.bg_color }};
+    --c-ortho-img-bg:     {{ section.settings.img_bg_color }};
+    --c-ortho-text-dark:  {{ section.settings.text_color }};
+    --c-ortho-text-body:  {{ section.settings.body_color }};
+    --c-ortho-border:     #e5e7eb;
+    --c-ortho-badge-bg:   {{ section.settings.badge_bg }};
+    --c-ortho-badge-text: {{ section.settings.badge_text_color }};
+
+    font-family: 'Raleway', sans-serif;
+    background-color: var(--c-ortho-bg);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ================================================
+     LEFT CONTENT COLUMN — Mobile first
+     ================================================ */
+  #c-ortho-{{ section.id }} .c-ortho__content-col {
+    width: 100%;
+    padding: {{ section.settings.pad_top_mob }}px 24px {{ section.settings.pad_bot_mob }}px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #c-ortho-{{ section.id }} .c-ortho__inner {
+    width: 100%;
+    max-width: 700px;
+  }
+
+  /* --- Heading --- */
+  #c-ortho-{{ section.id }} .c-ortho__title {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--c-ortho-text-dark);
+    line-height: 1.15;
+    margin: 0 0 18px 0;
+  }
+
+  /* --- Body text --- */
+  #c-ortho-{{ section.id }} .c-ortho__body {
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+    line-height: 120%;
+    margin: 0 0 28px 0;
+  }
+
+  #c-ortho-{{ section.id }} .c-ortho__body p {
+    margin: 0 0 10px 0;
+  }
+
+  #c-ortho-{{ section.id }} .c-ortho__body p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ================================================
+     BEFORE / AFTER COMPARISON
+     ================================================ */
+  #c-ortho-{{ section.id }} .c-ortho__comparison-label {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--c-ortho-text-dark);
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+  }
+
+  #c-ortho-{{ section.id }} .c-ortho__comparison-wrap {
+    position: relative;
+    margin-bottom: 32px;
+    overflow: hidden;
+    margin-left: -24px;
+    margin-right: -24px;
+  }
+
+  #c-ortho-{{ section.id }} .c-ortho__comparison-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: fill;
+  }
+
+  /* Ocultar la de desktop en móviles por defecto */
+  #c-ortho-{{ section.id }} .c-ortho__comparison-img.c-ortho__comparison-img--desktop {
+    display: none;
+  }
+  #c-ortho-{{ section.id }} .c-ortho__comparison-img.c-ortho__comparison-img--mobile {
+    display: block;
+  }
+
+  /* Badge circle (top-right corner of comparison) */
+  #c-ortho-{{ section.id }} .c-ortho__badge {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--c-ortho-badge-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--c-ortho-badge-text);
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    flex-shrink: 0;
+  }
+
+  /* ================================================
+     ACCORDION — FAQ rows
+     ================================================ */
+  #c-ortho-{{ section.id }} .c-ortho__accordion {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--c-ortho-border);
+  }
+
+  #c-ortho-{{ section.id }} .c-ortho__item {
+    border-bottom: 1px solid var(--c-ortho-border);
+  }
+
+  #c-ortho-{{ section.id }} .c-ortho__question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 18px 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    text-align: left;
+    cursor: pointer;
+    gap: 12px;
+  }
+
+  #c-ortho-{{ section.id }} .c-ortho__question-text {
+    flex: 1;
+  }
+
+  #c-ortho-{{ section.id }} .c-ortho__icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: #000;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  #c-ortho-{{ section.id }} .c-ortho__item.is-open .c-ortho__icon {
+    transform: rotate(180deg);
+  }
+
+  #c-ortho-{{ section.id }} .c-ortho__answer-wrapper {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  #c-ortho-{{ section.id }} .c-ortho__answer {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--c-ortho-text-body);
+    line-height: 1.7;
+    padding-bottom: 18px;
+  }
+
+  #c-ortho-{{ section.id }} .c-ortho__answer p {
+    margin: 0 0 8px 0;
+  }
+
+  #c-ortho-{{ section.id }} .c-ortho__answer p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ================================================
+     RIGHT IMAGE COLUMN — Mobile first
+     ================================================ */
+  #c-ortho-{{ section.id }} .c-ortho__image-col {
+    width: 100%;
+    background-color: var(--c-ortho-img-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    min-height: 280px;
+    order: -1; /* Image on top in mobile */
+  }
+
+  #c-ortho-{{ section.id }} .c-ortho__product-img {
+    width: 100%;
+    max-width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+  }
+
+
+  @media (max-width: 899px) {
+    #c-ortho-{{ section.id }} .c-ortho__comparison-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--c-ortho-text-dark);
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+  }
+  }
+
+
+  /* ================================================
+     BREAKPOINT: 768px — side-by-side
+     ================================================ */
+  @media (width >= 768px) {
+    #c-ortho-{{ section.id }} {
+      flex-direction: row;
+      min-height: 580px;
+    }
+
+    #c-ortho-{{ section.id }} .c-ortho__content-col {
+      width: 58%;
+      flex-shrink: 0;
+      padding: {{ section.settings.pad_top_desk }}px 40px {{ section.settings.pad_bot_desk }}px 48px;
+      order: 0;
+    }
+
+    #c-ortho-{{ section.id }} .c-ortho__image-col {
+      width: 42%;
+      min-height: 100%;
+      order: 0;
+    }
+
+    #c-ortho-{{ section.id }} .c-ortho__product-img {
+      height: 1050px;
+    }
+
+    #c-ortho-{{ section.id }} .c-ortho__title {
+      font-size: 34px;
+    }
+
+    #c-ortho-{{ section.id }} .c-ortho__comparison-wrap {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    #c-ortho-{{ section.id }} .c-ortho__comparison-img {
+      height: 250px;
+    }
+
+    /* Mostrar desktop y ocultar mobile en pantallas grandes */
+    #c-ortho-{{ section.id }} .c-ortho__comparison-img.c-ortho__comparison-img--desktop {
+      display: block;
+    }
+    #c-ortho-{{ section.id }} .c-ortho__comparison-img.c-ortho__comparison-img--mobile {
+      display: none;
+    }
+
+    #c-ortho-{{ section.id }} .c-ortho__question {
+      font-size: 14px;
+    }
+  }
+
+  /* ================================================
+     BREAKPOINT: 978px
+     ================================================ */
+  @media (width >= 978px) {
+    #c-ortho-{{ section.id }} .c-ortho__title {
+      font-size: 38px;
+    }
+
+    #c-ortho-{{ section.id }} .c-ortho__content-col {
+      padding: {{ section.settings.pad_top_desk }}px 48px {{ section.settings.pad_bot_desk }}px 56px;
+    }
+
+    #c-ortho-{{ section.id }} .c-ortho__body {
+      font-size: 15px;
+    }
+
+    #c-ortho-{{ section.id }} .c-ortho__question {
+      font-size: 15px;
+      padding: 20px 0;
+    }
+
+    #c-ortho-{{ section.id }} .c-ortho__comparison-img {
+      height: 200px;
+    }
+  }
+
+  /* ================================================
+     BREAKPOINT: 1200px
+     ================================================ */
+  @media (width >= 1200px) {
+    #c-ortho-{{ section.id }} .c-ortho__content-col {
+      width: 60%;
+      padding: {{ section.settings.pad_top_desk }}px 64px {{ section.settings.pad_bot_desk }}px 72px;
+    }
+
+    #c-ortho-{{ section.id }} .c-ortho__image-col {
+      width: 40%;
+    }
+
+    #c-ortho-{{ section.id }} .c-ortho__title {
+      font-size: 42px;
+    }
+
+    #c-ortho-{{ section.id }} .c-ortho__body {
+      font-size: 15px;
+    }
+
+    #c-ortho-{{ section.id }} .c-ortho__comparison-img {
+      height: 220px;
+    }
+  }
+
+  /* ================================================
+     BREAKPOINT: 1980px
+     ================================================ */
+  @media (width >= 1980px) {
+    #c-ortho-{{ section.id }} .c-ortho__content-col {
+      padding: {{ section.settings.pad_top_desk }}px 80px {{ section.settings.pad_bot_desk }}px 100px;
+    }
+
+    #c-ortho-{{ section.id }} .c-ortho__title {
+      font-size: 52px;
+    }
+  }
+{%- endstyle -%}
+
+{%- comment -%} ===== HTML ===== {%- endcomment -%}
+<section
+  {% if section.settings.sl_anchor_id != blank %}id="{{ section.settings.sl_anchor_id }}"{% endif %}
+  class="c-section c-why-ortho-patients"
+  data-sl-id="sl-section-why-ortho-patients-v1"
+  data-section-id="{{ section.id }}"
+  style="font-family: 'Raleway', sans-serif;"
+>
+  <div id="c-ortho-{{ section.id }}">
+
+    {%- comment -%} ─── LEFT: CONTENT COLUMN ─── {%- endcomment -%}
+    <div class="c-ortho__content-col">
+      <div class="c-ortho__inner">
+
+        {%- comment -%} Heading {%- endcomment -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="c-ortho__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+
+        {%- comment -%} Body text {%- endcomment -%}
+        {%- if section.settings.body_text != blank -%}
+          <div class="c-ortho__body">{{ section.settings.body_text }}</div>
+        {%- endif -%}
+
+        {%- comment -%} Before / After comparison {%- endcomment -%}
+        {%- if section.settings.comparison_image != blank or section.settings.comparison_image_mobile != blank -%}
+          {%- if section.settings.comparison_label != blank -%}
+            <p class="c-ortho__comparison-label">{{ section.settings.comparison_label }}</p>
+          {%- endif -%}
+          
+          <div class="c-ortho__comparison-wrap">
+            {%- if section.settings.comparison_image_mobile != blank -%}
+              {%- comment -%} Imagen Mobile {%- endcomment -%}
+              {{
+                section.settings.comparison_image_mobile
+                | image_url: width: 800
+                | image_tag:
+                  loading: 'lazy',
+                  class: 'c-ortho__comparison-img c-ortho__comparison-img--mobile',
+                  alt: section.settings.comparison_image_mobile.alt | default: section.settings.comparison_label
+              }}
+              {%- comment -%} Imagen Desktop {%- endcomment -%}
+              {{
+                section.settings.comparison_image
+                | image_url: width: 1200
+                | image_tag:
+                  loading: 'lazy',
+                  class: 'c-ortho__comparison-img c-ortho__comparison-img--desktop',
+                  alt: section.settings.comparison_image.alt | default: section.settings.comparison_label
+              }}
+            {%- else -%}
+              {%- comment -%} Si no hay móvil, usa una sola imagen para todo {%- endcomment -%}
+              {{
+                section.settings.comparison_image
+                | image_url: width: 1200
+                | image_tag:
+                  loading: 'lazy',
+                  class: 'c-ortho__comparison-img',
+                  alt: section.settings.comparison_image.alt | default: section.settings.comparison_label
+              }}
+            {%- endif -%}
+
+            {%- if section.settings.badge_text != blank -%}
+              <div class="c-ortho__badge">{{ section.settings.badge_text }}</div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Accordion {%- endcomment -%}
+        {%- if section.blocks.size > 0 -%}
+          <div class="c-ortho__accordion js-ortho-accordion-{{ section.id }}">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'faq_item' -%}
+                <div class="c-ortho__item js-ortho-item" {{ block.shopify_attributes }}>
+                  <button
+                    class="c-ortho__question js-ortho-btn"
+                    aria-expanded="false"
+                    type="button"
+                  >
+                    <span class="c-ortho__question-text">{{ block.settings.question }}</span>
+                    <svg class="c-ortho__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M11.6023 8.86784C11.822 8.64817 12.1781 8.64817 12.3978 8.86784L18.1326 14.6027C18.3523 14.8224 18.3523 15.1785 18.1326 15.3982L17.8674 15.6634C17.6478 15.883 17.2916 15.883 17.0719 15.6634L12 10.5914L6.92808 15.6634C6.7084 15.883 6.3523 15.883 6.13263 15.6634L5.86743 15.3982C5.64775 15.1785 5.64775 14.8224 5.86743 14.6027L11.6023 8.86784Z" fill="currentColor"/>
+                    </svg>
+                  </button>
+                  <div class="c-ortho__answer-wrapper js-ortho-wrapper">
+                    {%- if block.settings.answer != blank -%}
+                      <div class="c-ortho__answer">{{ block.settings.answer }}</div>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+      </div>
+    </div>
+
+    {%- comment -%} ─── RIGHT: IMAGE COLUMN ─── {%- endcomment -%}
+    <div class="c-ortho__image-col">
+      {%- if section.settings.product_image != blank -%}
+        {{
+          section.settings.product_image
+          | image_url: width: 1000
+          | image_tag:
+            loading: 'lazy',
+            class: 'c-ortho__product-img',
+            alt: section.settings.product_image.alt | default: section.settings.title
+        }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'c-ortho__product-img placeholder-svg' }}
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+{%- comment -%} ===== JavaScript ===== {%- endcomment -%}
+<script>
+  (function () {
+    var accordion = document.querySelector('.js-ortho-accordion-{{ section.id }}');
+    if (!accordion) return;
+
+    accordion.querySelectorAll('.js-ortho-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var item    = btn.closest('.js-ortho-item');
+        var wrapper = item.querySelector('.js-ortho-wrapper');
+        var isOpen  = item.classList.contains('is-open');
+
+        if (isOpen) {
+          item.classList.remove('is-open');
+          wrapper.style.maxHeight = '0';
+          btn.setAttribute('aria-expanded', 'false');
+        } else {
+          item.classList.add('is-open');
+          wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  })();
+</script>
+
+{%- comment -%} ===== Schema ===== {%- endcomment -%}
+{% schema %}
+{
+  "name": "C - Why Ortho Patients",
+  "tag": "section",
+  "class": "c-why-ortho-patients-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "sl_anchor_id",
+      "label": "Anchor ID",
+      "info": "Optional. Sets an HTML id for anchor links."
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Why Ortho Patients Need More"
+    },
+    {
+      "type": "richtext",
+      "id": "body_text",
+      "label": "Body Text",
+      "default": "<p>The natural toothpaste alternative for ortho patients, built on a triple-protection formula of fluoride, 10% premium Nanohydroxyapatite, and xylitol. Unlike prescription toothpastes that rely on excessively high fluoride levels and petroleum-based ingredients, Dr. Jen's Super Paste ORTHO combines clinically proven 10% premium Nanohydroxyapatite with botanicals chosen specifically for the demands of orthodontic treatment.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Before / After Comparison"
+    },
+    {
+      "type": "text",
+      "id": "comparison_label",
+      "label": "Comparison Label",
+      "default": "See the Difference at the Microscopic Level:"
+    },
+    {
+      "type": "image_picker",
+      "id": "comparison_image",
+      "label": "Comparison Image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "comparison_image_mobile",
+      "label": "Comparison Image (Mobile)",
+      "info": "Si se deja en blanco, se usará la imagen de Desktop en todos los dispositivos."
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "V",
+      "info": "Text or symbol inside the round badge on the comparison."
+    },
+    {
+      "type": "color",
+      "id": "badge_bg",
+      "label": "Badge Background",
+      "default": "#4caf7d"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Product Image (Right Column)"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product Image"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "img_bg_color",
+      "label": "Image Column Background",
+      "default": "#e0eff5"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading / Accordion Text Color",
+      "default": "#002C41"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body / Answer Text Color",
+      "default": "#4b5563"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "pad_top_desk",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top — Desktop",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "pad_bot_desk",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom — Desktop",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "pad_top_mob",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top — Mobile",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "pad_bot_mob",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom — Mobile",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "Accordion Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Title / Question",
+          "default": "Helps Prevent White Spot Lesions (decalcification)"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer / Body (optional)",
+          "info": "Leave blank for a label-only row with no expandable content."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "C - Why Ortho Patients",
+      "blocks": [
+        { "type": "faq_item", "settings": { "question": "Helps Prevent White Spot Lesions (decalcification)" } },
+        { "type": "faq_item", "settings": { "question": "Remineralize & Strengthens Enamel" } },
+        { "type": "faq_item", "settings": { "question": "Reduces Tissue and Gum Inflammation" } },
+        { "type": "faq_item", "settings": { "question": "Balances the Oral Microbiome" } },
+        { "type": "faq_item", "settings": { "question": "Cleaner, Non-Toxic Formula" } },
+        { "type": "faq_item", "settings": { "question": "Reduce Aligner Breath" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

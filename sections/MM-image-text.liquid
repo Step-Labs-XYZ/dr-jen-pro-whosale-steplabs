@@ -1,0 +1,428 @@
+<style>
+.as_image_with_text {
+  width: 100%;
+  height: auto;
+}
+.as_image_with_text .container{
+  max-width: 1198px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 30px;
+}
+.as_image_with_text .top_text {
+  display: block;
+  text-align: center;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 45px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0 auto;
+  max-width: 965px;
+}
+.as_image_with_text h2 {
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 45px;
+  margin: 0 auto;
+  max-width: 965px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.as_image_with_text .image_with_text_inner {
+  display: flex;
+  gap: 60px;
+  justify-content: center;
+}
+.as_image_with_text .image_card {
+  max-width:475px;
+  align-self: flex-start;
+}
+.as_image_with_text .image_card.dekstop_img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  padding-bottom: 29px;
+}
+.as_image_with_text a{
+  text-decoration:none !important;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px;
+  display: block;
+  text-decoration: none;
+  word-break: break-all;
+  padding-bottom:8px;
+}
+.as_image_with_text .text_card {
+  align-self: flex-start;
+  width: 47%;
+}
+.as_image_with_text h5 {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  margin: 0;
+}
+.as_image_with_text h4 {
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 35px;
+  padding-bottom: 20px;
+  margin: 0;
+}
+.as_image_with_text .text_card .text_desc {
+  display: block;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px;
+  text-align: start;
+  padding-bottom: 30px;
+}
+.as_image_with_text .text_card .mobile_img{
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.as_image_with_text p{
+  margin: 0;
+}
+.as_image_with_text strong{
+  font-weight: 800;
+}
+.as_image_with_text .card_link {
+  display: block;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 31px;
+}
+.as_image_with_text .text_card h3 {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px;
+  margin: 0;
+}
+#as_image_with_text-{{ section.id }} {
+  background: {{section.settings.bg_color}};
+  padding-top:{{ section.settings.padding_top_desktop }}px;
+  padding-bottom:{{ section.settings.padding_bottom_desktop }}px;
+  margin-top:{{ section.settings.margin_top_desktop }}px;
+  margin-bottom:{{ section.settings.margin_bottom_desktop }}px;
+}
+#as_image_with_text-{{ section.id }} .top_text,
+#as_image_with_text-{{ section.id }} h5,
+#as_image_with_text-{{ section.id }} a {
+  color: {{section.settings.subhead_healine_color}};
+}
+#as_image_with_text-{{ section.id }} h2,
+#as_image_with_text-{{ section.id }} h3,
+#as_image_with_text-{{ section.id }} h4,
+#as_image_with_text-{{ section.id }} .text_desc {
+  color: {{section.settings.healine_color}};
+}
+@media screen and (min-width: 991px) {
+  #as_image_with_text-{{ section.id }} .image_with_text_inner {
+    flex-direction:{{section.settings.direction}}
+  }
+}
+@media screen and (max-width: 1199px) {
+  .as_image_with_text .text_card .text_desc {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .as_image_with_text h2 {
+    font-size: 30px;
+    line-height: 39px;
+  }
+}
+@media screen and (max-width: 991px) {
+  .as_image_with_text .container{
+    padding: 0 20px;
+  }
+  .as_image_with_text .image_with_text_inner{
+    flex-direction: column;
+    gap:0;
+  }
+  .as_image_with_text .top_text {
+    font-size: 13px;
+    line-height: 20px;
+  }
+  .as_image_with_text h2 {
+    font-size: 25px;
+    line-height: 35px;
+  }
+  .as_image_with_text .image_card.dekstop_img img{ 
+    display: none;
+  }
+  .as_image_with_text .text_card .mobile_img{ 
+    display: block;
+    padding-bottom:25px;
+    max-width:400px;
+    margin:auto;
+  }
+  
+  .as_image_with_text a{
+    font-size: 14px;
+  }
+  .as_image_with_text .image_card {
+    width: 100%;
+  }
+  .as_image_with_text .text_card {
+    width: 100%;
+  }
+  .as_image_with_text a {
+    text-align: center;
+  }
+  .as_image_with_text .text_card h3 {
+    text-align: center;
+  }
+  .as_image_with_text h4 {
+    font-size: 20px;
+    line-height: 27px;
+    padding-bottom: 23px;
+  }
+  .as_image_with_text h5 {
+    font-size: 16px;
+    line-height: 22px;
+    padding-bottom: 10px;
+  }
+  #as_image_with_text-{{ section.id }} {
+    padding-top:{{ section.settings.padding_top_mobile }}px;
+    padding-bottom:{{ section.settings.padding_bottom_mobile }}px;
+    margin-top:{{ section.settings.margin_top_mobile }}px;
+    margin-bottom:{{ section.settings.margin_bottom_mobile }}px;
+  }
+}
+</style>
+<section class="as_image_with_text" id="as_image_with_text-{{ section.id }}">
+  <div class="container">
+    {% if section.settings.top_text != blank %}
+      <span class="top_text">{{ section.settings.top_text }}</span>
+    {% endif %}
+    {% if section.settings.main_headline != blank %}
+      <h2>{{ section.settings.main_headline }}</h2>
+    {% endif %}
+    <div class="image_with_text_inner">
+      <div class="image_card dekstop_img">
+        {% if section.settings.dekstop_image !=blank %}
+          {{ section.settings.dekstop_image | image_url:width:section.settings.dekstop_image.width | image_tag:loading:'lazy'}}
+        {% endif %}
+        {% if section.settings.img_card_link != blank %}
+          <span class="image_link">{{ section.settings.img_card_link }}</span>
+        {% endif %}
+      </div>
+      <div class="text_card">
+        {% if section.settings.card_top_text !=blank %}
+          <h5>{{ section.settings.card_top_text }}</h5>
+        {% endif %}
+        {% if section.settings.card_headline !=blank %}
+          <h4>{{ section.settings.card_headline }}</h4>
+        {% endif %}
+        {% if section.settings.card_desc !=blank%}
+          <span class="text_desc">{{ section.settings.card_desc }}</span>
+        {% endif %}
+        {% if section.settings.mobile_image !=blank %}
+          {{ section.settings.mobile_image | image_url:width:section.settings.mobile_image.width | image_tag:class: 'mobile_img',loading:'lazy'}}
+        {% endif %}
+        {% if section.settings.card_link !=blank %}
+          <span class="carc_link">{{ section.settings.card_link }}</span>
+        {% endif %}
+        {% if section.settings.card_bottom_text !=blank  %}
+          <h3>{{ section.settings.card_bottom_text }}</h3>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "MM Image With Text",
+    "settings": [
+            {
+        "type": "select",
+        "id": "direction",
+        "label": "Image Direction",
+        "options": [
+          {
+            "value": "row",
+            "label": "Left"
+          },
+          {
+            "value": "row-reverse",
+            "label": "Right"
+          }
+        ],
+        "default": "row"
+      },
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background color",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "subhead_healine_color",
+        "label": "Text color",
+        "default": "#5DC7D1"
+      },
+      {
+        "type": "color",
+        "id": "healine_color",
+        "label": "Headline",
+        "default": "#000"
+      },
+      {
+        "type": "range",
+        "id": "padding_top_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Top Desktop",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Bottom Desktop",
+        "default": 0
+       },
+       {
+        "type": "range",
+        "id": "margin_top_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Top Desktop",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Bottom Desktop",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_top_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Top Mobile",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Bottom Mobile",
+        "default": 0
+       },
+       {
+        "type": "range",
+        "id": "margin_top_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Top Mobile",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Bottom Mobile",
+        "default": 0
+      },
+      {
+        "type": "text",
+        "id": "top_text",
+        "label": "Top Text",
+        "default": "Clinically Proven Remineralization"
+      },
+      {
+        "type": "text",
+        "id": "main_headline",
+        "label": "Main Headline",
+        "default": "Introducing Dr.Jen’s remineralizing toothpaste using clean ingredients and 10% nano-hydroxyapatite."
+      },
+      {
+        "type": "image_picker",
+        "id": "dekstop_image",
+        "label": "Dekstop Image"
+      },
+      {
+        "type": "richtext",
+        "id": "img_card_link",
+        "label": "Image Bottom Link"
+      },
+      {
+        "type": "text",
+        "id": "card_top_text",
+        "label": "Card Top Text",
+        "default": "Double the Remineralization"
+      },
+      {
+        "type": "text",
+        "id": "card_headline",
+        "label": "Card Headline",
+        "default": "Nano-hydroxyapatite + Fluoride"
+      },
+      {
+        "type": "richtext",
+        "id": "card_desc",
+        "label": "Card Desc"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobile_image",
+        "label": "Mobile Image"
+      },
+      {
+        "type": "richtext",
+        "id": "card_link",
+        "label": "Text Card link"
+      },
+      {
+        "type": "richtext",
+        "id": "card_bottom_text",
+        "label": "Text Card Bottom Text"
+      }
+    ],
+    "presets":[
+      {
+        "name": "MM Image With Text"
+      }
+    ]
+  }
+{% endschema %}

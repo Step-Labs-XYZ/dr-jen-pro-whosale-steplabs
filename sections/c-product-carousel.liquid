@@ -1,0 +1,788 @@
+<div id="c-prod-carousel-{{ section.id }}" class="c-prod-carousel" data-section-id="{{ section.id }}">
+  <div class="c-prod-carousel__container">
+    
+    <div class="c-prod-carousel__header">
+      <div class="c-prod-carousel__header-left">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="c-prod-carousel__heading">{{ section.settings.heading | newline_to_br }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="c-prod-carousel__subheading">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.view_all_text != blank and section.settings.view_all_url != blank -%}
+        <a href="{{ section.settings.view_all_url }}" class="c-prod-carousel__shop-all">
+          {{ section.settings.view_all_text }}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: 4px; vertical-align: middle;">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="c-prod-carousel__grid" id="carousel-grid-{{ section.id }}">
+      {%- for block in section.blocks -%}
+        {%- assign img = block.settings.image -%}
+        {%- assign title = block.settings.title -%}
+        {%- assign price = block.settings.price -%}
+        {%- assign desc_raw = block.settings.description -%}
+        {%- assign features_raw = block.settings.features -%}
+        {%- assign add_url = block.settings.button_url -%}
+        {%- assign add_text = block.settings.button_text | default: section.settings.add_to_cart_text | default: 'ADD TO CART' -%}
+        {%- assign learn_url = block.settings.learn_more_url -%}
+        {%- assign variant_id = block.settings.variant_id -%}
+        {%- assign badge1 = block.settings.badge_1 -%}
+        {%- assign badge2 = block.settings.badge_2 -%}
+        {%- assign badge3 = block.settings.badge_3 -%}
+        {%- assign badge4 = block.settings.badge_4 -%}
+
+        {%- assign desc_trim = desc_raw | default: '' | strip -%}
+        {%- assign features_trim = features_raw | default: '' | strip -%}
+
+        <div class="c-prod-carousel__product-card" {{ block.shopify_attributes }}>
+          
+          <div class="c-prod-carousel__image-box">
+            {%- if badge1 != blank or badge2 != blank or badge3 != blank or badge4 != blank -%}
+              <div class="c-prod-carousel__badges-top c-prod-carousel__badges-top--{{ section.settings.badge_alignment }}">
+                {%- if badge1 != blank -%}<span>{{ badge1 }}</span>{%- endif -%}
+                {%- if badge2 != blank -%}<span>{{ badge2 }}</span>{%- endif -%}
+                {%- if badge3 != blank -%}<span>{{ badge3 }}</span>{%- endif -%}
+                {%- if badge4 != blank -%}<span class="special">{{ badge4 }}</span>{%- endif -%}
+              </div>
+            {%- endif -%}
+
+            {%- if img != blank -%}
+              <a href="{{ learn_url | default: '#' }}" class="c-prod-carousel__image-link">
+                <img 
+                  src="{{ img | image_url: width: 600 }}" 
+                  alt="{{ title | escape }}"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+              </a>
+            {%- endif -%}
+
+            {%- if section.settings.show_subscribe_save -%}
+              <div class="c-prod-carousel__subscribe-pill">
+                Subscribe & Save up to 15% OFF
+              </div>
+            {%- endif -%}
+          </div>
+
+          <div class="c-prod-carousel__product-info">
+            {%- if title != blank -%}
+              <a href="{{ learn_url | default: '#' }}" class="c-prod-carousel__product-link">
+                <h3 class="c-prod-carousel__product-title">{{ title }}</h3>
+              </a>
+            {%- endif -%}
+
+            {%- if desc_trim != blank -%}
+              {%- assign desc_lines = desc_trim | replace: '<br />', '\n' | replace: '<br/>', '\n' | replace: '<br>', '\n' | split: '\n' -%}
+              {%- if desc_lines.size < 2 -%}
+                {%- assign desc_lines = desc_trim | split: '.' -%}
+              {%- endif -%}
+              <ul class="c-prod-carousel__product-description">
+                {%- assign shown = 0 -%}
+                {%- for line in desc_lines -%}
+                  {%- assign trimmed_line = line | strip -%}
+                  {%- if trimmed_line != blank -%}
+                    <li>{{ trimmed_line }}</li>
+                    {%- assign shown = shown | plus: 1 -%}
+                    {%- if shown >= 4 -%}{% break %}{%- endif -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+
+            {%- if features_trim != blank -%}
+              <ul class="c-prod-carousel__product-features">
+                {%- assign features = features_trim | split: '|' -%}
+                {%- for feature in features limit: 4 -%}
+                  <li>{{ feature }}</li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+
+            <div class="c-prod-carousel__product-price">
+              {%- if price != blank -%}
+                <span class="c-prod-carousel__price">{{ price }}</span>
+              {%- endif -%}
+            </div>
+
+            <div class="c-prod-carousel__actions">
+              {%- if add_url != blank -%}
+                <button
+                  class="c-prod-carousel__add-btn"
+                  type="button"
+                  data-variant-id="{{ variant_id }}"
+                  data-product-url="{{ add_url }}"
+                  data-add-text="{{ add_text | escape }}"
+                >
+                  {{ add_text }}
+                </button>
+              {%- endif -%}
+
+              {%- if learn_url != blank -%}
+                <a href="{{ learn_url }}" class="c-prod-carousel__learn-more">
+                  LEARN MORE 
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="{{ section.settings.link_color }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="c-prod-carousel__scrollbar-container">
+      <div class="c-prod-carousel__scrollbar-track">
+        <div class="c-prod-carousel__scrollbar-thumb" id="scrollbar-thumb-{{ section.id }}"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+/* Variables y contenedor principal */
+#c-prod-carousel-{{ section.id }} {
+  background-color: {{ section.settings.bg_color }};
+  padding-top: {{ section.settings.padding_top_desktop }}px;
+  padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Header */
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+  gap: 20px;
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__heading {
+  font-family: 'Raleway', sans-serif;
+  font-size: {{ section.settings.heading_size_desktop }}px;
+  font-weight: 600;
+  color: {{ section.settings.heading_color }};
+  margin: 0;
+  line-height: 1.2;
+  max-width: {{ section.settings.heading_max_width_desktop }}px;
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__subheading {
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  color: {{ section.settings.text_color }};
+  margin: 8px 0 0 0;
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__shop-all {
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: {{ section.settings.heading_color }};
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__shop-all:hover {
+  opacity: 0.7;
+}
+
+/* Grid / Carrusel */
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__grid {
+  display: grid;
+  /* El número de columnas se basa en una variable para adaptarse si pones más/menos, pero por defecto 4 */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+/* Card Design */
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__product-card {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  transition: transform 0.3s ease;
+  height: 100%;
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__product-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Image Box */
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__image-box {
+  position: relative;
+  background: #F7F7F7;
+  border: 1.5px solid #002C41;
+  border-radius: 12px;
+  padding: 40px 20px;
+  margin-bottom: 12px;
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 320px;
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__image-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__image-link img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Top Badges */
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__badges-top {
+  position: absolute;
+  top: 0;
+  display: flex;
+  gap: 8px;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__badges-top--left { left: 20px; transform: translateY(-50%); }
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__badges-top--center { left: 50%; transform: translate(-50%, -50%); }
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__badges-top--right { right: 20px; left: auto; transform: translateY(-50%); }
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__badges-top span {
+  background: #fff;
+  border: 1.5px solid #002C41;
+  color: #002C41;
+  font-family: 'Raleway', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  line-height: 1;
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__badges-top span.special {
+  background: #D6ECE6;
+}
+
+/* Bottom Subscribe Pill */
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__subscribe-pill {
+  position: absolute;
+  bottom: 29px;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  background: #ffffff;
+  color: #1F2023;
+  font-family: 'Raleway', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  font-style: italic;
+  padding: 6px 24px;
+  border-radius: 40px;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  width: max-content;
+  max-width: 90%;
+  z-index: 2;
+}
+
+/* Text Info & Pricing */
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__product-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 12px;
+  padding: 12px;
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__product-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__product-title {
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: {{ section.settings.heading_color }};
+  margin: 0;
+  line-height: 1.3;
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__product-link:hover .c-prod-carousel__product-title {
+  text-decoration: underline;
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__product-description,
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__product-features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: {{ section.settings.text_color }};
+  line-height: 1.5;
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__product-description li,
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__product-features li {
+  padding: 2px 0 2px 14px;
+  position: relative;
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__product-description li::before,
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__product-features li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: {{ section.settings.text_color }};
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__product-price {
+  margin-top: auto;
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__price {
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1F2023;
+}
+
+/* Buttons */
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__add-btn {
+  width: 100%;
+  padding: 14px;
+  background: {{ section.settings.btn_bg_color }};
+  color: {{ section.settings.btn_text_color }};
+  border: none;
+  text-align:center;
+  border-radius: 40px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__add-btn:hover {
+  background: {{ section.settings.btn_bg_hover }};
+  transform: translateY(-2px);
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__add-btn[disabled] {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__learn-more {
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: {{ section.settings.link_color }};
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: opacity 0.2s ease;
+}
+
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__learn-more:hover {
+  opacity: 0.7;
+}
+
+/* Scrollbar (Oculto en Desktop) */
+#c-prod-carousel-{{ section.id }} .c-prod-carousel__scrollbar-container {
+  display: none;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1100px) {
+  #c-prod-carousel-{{ section.id }} .c-prod-carousel__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  #c-prod-carousel-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+  
+  #c-prod-carousel-{{ section.id }} .c-prod-carousel__container {
+    padding-left: 20px; /* Quitamos padding para que el carrusel llegue al borde */
+    padding-right:0;
+  }
+
+  #c-prod-carousel-{{ section.id }} .c-prod-carousel__header {
+    padding-right:10px;
+    padding-left:0px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    margin-bottom: 30px;
+  }
+
+  #c-prod-carousel-{{ section.id }} .c-prod-carousel__header-left {
+    flex: 1;
+    min-width: 0;
+  }
+
+  #c-prod-carousel-{{ section.id }} .c-prod-carousel__heading {
+    font-size: {{ section.settings.heading_size_mobile }}px;
+    max-width: {{ section.settings.heading_max_width_mobile }}px;
+  }
+
+  /* Transformación a Carrusel Horizontal */
+  #c-prod-carousel-{{ section.id }} .c-prod-carousel__grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding: 0 20px 20px 0;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE */
+  }
+
+  #c-prod-carousel-{{ section.id }} .c-prod-carousel__grid::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+
+  #c-prod-carousel-{{ section.id }} .c-prod-carousel__product-card {
+    flex: 0 0 {{ section.settings.card_width_mobile }}%;
+    scroll-snap-align: start;
+  }
+
+  #c-prod-carousel-{{ section.id }} .c-prod-carousel__image-box {
+    height: 350px;
+    margin-bottom: 12px;
+  }
+
+  #c-prod-carousel-{{ section.id }} .c-prod-carousel__subscribe-pill {
+    width: 90%;
+    font-size: 10px;
+    padding: 6px 20px;
+  }
+
+  /* Mostrar Barra de Scroll (Scrollbar) en Móvil */
+  #c-prod-carousel-{{ section.id }} .c-prod-carousel__scrollbar-container {
+    display: block;
+    padding: 0 20px;
+    margin-top: 10px;
+  }
+
+  #c-prod-carousel-{{ section.id }} .c-prod-carousel__scrollbar-track {
+    width: 100%;
+    height: 4px;
+    background-color: #E2E8F0;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #c-prod-carousel-{{ section.id }} .c-prod-carousel__scrollbar-thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: {{ section.settings.heading_color }};
+    border-radius: 4px;
+    width: 20%; /* Modificado por JS */
+    transition: left 0.1s ease-out;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Lógica para Add to Cart AJAX
+  document.querySelectorAll('#c-prod-carousel-{{ section.id }} .c-prod-carousel__add-btn').forEach(btn => {
+    btn.addEventListener('click', async function () {
+      const variantId = this.getAttribute('data-variant-id');
+      const productUrl = this.getAttribute('data-product-url');
+      const addText = this.getAttribute('data-add-text') || 'ADD TO CART';
+      if ((!variantId || variantId == '') && productUrl) { window.location.href = productUrl; return; }
+      if (!variantId) return;
+      
+      this.disabled = true;
+      this.textContent = 'ADDING...';
+      
+      try {
+        const res = await fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ id: Number(variantId), quantity: 1 })
+        });
+        if (!res.ok) { const errText = await res.text(); throw new Error(errText || 'Add to cart failed'); }
+        window.location.href = productUrl || '/cart';
+      } catch (e) {
+        console.error('Add to cart error:', e);
+        this.textContent = 'ERROR';
+        setTimeout(() => { this.textContent = addText; this.disabled = false; }, 1200);
+      }
+    });
+  });
+
+  // Lógica para la barra de progreso (Scrollbar) en móvil
+  const track = document.getElementById('carousel-grid-{{ section.id }}');
+  const thumb = document.getElementById('scrollbar-thumb-{{ section.id }}');
+
+  if (track && thumb) {
+    const updateScrollbar = () => {
+      // Calcular el ancho visible
+      const scrollRatio = track.clientWidth / track.scrollWidth;
+      // Ancho mínimo del thumb para que no se vea muy pequeño
+      const thumbWidthPercent = Math.max(scrollRatio * 100, 15); 
+      thumb.style.width = `${thumbWidthPercent}%`;
+
+      // Calcular posición
+      const maxScrollLeft = track.scrollWidth - track.clientWidth;
+      if (maxScrollLeft > 0) {
+        const scrollPercent = track.scrollLeft / maxScrollLeft;
+        const maxThumbLeft = 100 - thumbWidthPercent;
+        thumb.style.left = `${scrollPercent * maxThumbLeft}%`;
+      } else {
+        thumb.style.left = `0%`;
+      }
+    };
+
+    track.addEventListener('scroll', updateScrollbar);
+    window.addEventListener('resize', updateScrollbar);
+    
+    // Inicializar
+    setTimeout(updateScrollbar, 100); 
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "C Product Carousel",
+  "class": "section-Cproduct-carousel",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading & Thumb Color",
+      "default": "#002C41"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#4A4A4A"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Learn More Link Color",
+      "default": "#002C41"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_color",
+      "label": "Button Background Color",
+      "default": "#1164E8"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Button Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_hover",
+      "label": "Button Hover Background",
+      "default": "#0D50B8"
+    },
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Professional also\nviewed"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "Shop All Text",
+      "default": "SHOP ALL"
+    },
+    {
+      "type": "url",
+      "id": "view_all_url",
+      "label": "Shop All URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_subscribe_save",
+      "label": "Show Subscribe & Save pill",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "badge_alignment",
+      "label": "Top Badges Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_text",
+      "label": "Add to Cart Button Text",
+      "default": "ADD TO CART"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "min": 20, "max": 60, "step": 1, "unit": "px",
+      "label": "Heading Size",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "heading_max_width_desktop",
+      "min": 100, "max": 800, "step": 10, "unit": "px",
+      "label": "Heading Max Width",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0, "max": 120, "step": 5, "unit": "px",
+      "label": "Padding Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0, "max": 120, "step": 5, "unit": "px",
+      "label": "Padding Bottom",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 16, "max": 50, "step": 1, "unit": "px",
+      "label": "Heading Size",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "heading_max_width_mobile",
+      "min": 100, "max": 600, "step": 10, "unit": "px",
+      "label": "Heading Max Width",
+      "default": 280
+    },
+    {
+      "type": "range",
+      "id": "card_width_mobile",
+      "min": 50, "max": 98, "step": 1, "unit": "%",
+      "label": "Card Width (Peek Control)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0, "max": 100, "step": 5, "unit": "px",
+      "label": "Padding Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0, "max": 100, "step": 5, "unit": "px",
+      "label": "Padding Bottom",
+      "default": 50
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_card",
+      "name": "Product Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Product Image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Super Paste" },
+        { "type": "text", "id": "price", "label": "Price", "default": "$26.00" },
+        { "type": "textarea", "id": "description", "label": "Description (each line -> bullet)", "default": "Fluoride + 10% premium nHAp\nProven enamel remineralization" },
+        { "type": "text", "id": "features", "label": "Features (pipe '|' separated)" },
+        { "type": "text", "id": "badge_1", "label": "Top Badge 1" },
+        { "type": "text", "id": "badge_2", "label": "Top Badge 2" },
+        { "type": "text", "id": "badge_3", "label": "Top Badge 3" },
+        { "type": "text", "id": "badge_4", "label": "Top Badge 4 (Special style)" },
+        { "type": "url", "id": "button_url", "label": "Add Button URL (or Product URL)" },
+        { "type": "text", "id": "button_text", "label": "Add Button Text", "default": "ADD TO CART" },
+        { "type": "url", "id": "learn_more_url", "label": "Learn More URL" },
+        { "type": "text", "id": "variant_id", "label": "Variant ID (For direct Add to Cart)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "C Product Carousel",
+      "blocks": [
+        { "type": "product_card" },
+        { "type": "product_card" },
+        { "type": "product_card" },
+        { "type": "product_card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

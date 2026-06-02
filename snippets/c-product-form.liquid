@@ -1,0 +1,40 @@
+{% comment %}
+  Snippet: c-product-form.liquid
+  Formulario de producto con botón Add to Cart
+{% endcomment %}
+
+{%- assign atc_text = section.settings.add_to_cart_text | default: 'ADD TO CART' -%}
+{%- assign sold_out_text = section.settings.sold_out_button_text | default: 'SOLD OUT' -%}
+
+{% form 'product', product, id: 'c-product-form', class: 'c-product-form', data-product-form: '' %}
+
+  <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-id-input>
+
+  {% unless section.settings.show_quantity_bundles %}
+    <input type="hidden" name="quantity" value="1">
+  {% endunless %}
+
+  <div class="c-product-form__actions">
+    <button
+      type="submit"
+      name="add"
+      class="c-product-form__atc-btn {% unless current_variant.available %}c-product-form__atc-btn--sold-out{% endunless %}"
+      {% unless current_variant.available %}disabled{% endunless %}
+      data-atc-btn
+    >
+      <span class="c-product-form__atc-btn-text" data-atc-text>
+        {% if current_variant.available %}
+          {{ atc_text }}
+        {% else %}
+          {{ sold_out_text }}
+        {% endif %}
+      </span>
+      <span class="c-product-form__atc-btn-arrow" aria-hidden="true">→</span>
+      <span class="c-product-form__atc-btn-loading" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  {%- comment -%} Errores del carrito {%- endcomment -%}
+  <div class="c-product-form__errors" role="alert" aria-live="polite" data-form-errors></div>
+
+{% endform %}

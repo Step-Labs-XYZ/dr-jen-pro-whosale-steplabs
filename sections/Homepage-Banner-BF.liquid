@@ -1,0 +1,199 @@
+<div class="Herobanner-container" style="background-image: url('{{ section.settings.desktop_image | img_url: 'master' }}');">
+
+    <div class="hero-content-bf">
+        <h1 class="hero-title" style="font-size: {{section.settings.heading_size}}">{{section.settings.heading}}</h1>
+        <div class="bottom-container">
+            
+            <div class="sub-heding-contain">{{section.settings.subheading}}</div>
+            <a href="{{section.settings.button_link}}" class="hero-button" style="background-color: {{section.settings.button_color}};">{{section.settings.button_text}}</a>
+    
+        </div>
+    </div>
+    <div class="image_container_banner">
+        <img src="{{section.settings.image_banner | image_url: width: 590}}"  class="hero_image" />
+    </div>
+
+</div>
+
+<style>
+.home-page-bf .Herobanner-container{
+    background-size: cover;
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    padding: 42px 70px;
+    align-items: center;
+    }
+.home-page-bf .hero-content h1{
+  padding-left: 0;
+  font-size: 88px !important
+    }
+.home-page-bf .sub-heding-contain p{
+    font-size: 48px;
+    }
+.home-page-bf .hero-button{
+    margin-left: 0;
+    margin-top: 32px;
+    display: inline-block;
+    }
+.hero-content-bf .hero-title{
+    max-width: 570px;
+    line-height: 100px;
+    margin: 0;
+    color: #fff;
+}
+@media screen and (max-width: 820px) {
+    .hero-content-bf .hero-title{
+        text-align: center;
+        font-size: 9vw !important;
+        line-height: 75px;
+    }
+    .home-page-bf .Herobanner-container{
+        flex-flow: column-reverse;
+        padding: 30px 0;
+    }
+    .hero-content-bf{
+        text-align: center;
+    }
+    .home-page-bf .sub-heding-contain p{
+        font-size: 26px;
+        line-height: 34px;
+    }
+    .home-page-bf .hero-button{
+        margin-top: 15px;
+        border-radius: 0;
+        padding: 15px 30px !important;
+    }
+    .home-page-bf .image_container_banner{
+        padding: 0 20px;
+    }
+    
+}
+</style>
+
+{% schema %}
+{
+   "name": "Homepage Banner Alt",
+   "class": "home-page-bf",
+   "settings" : [
+    {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+    },
+    {
+        "type": "select",
+        "id": "heading_size",
+        "label": "Heading Font Size",
+        "options": [
+            {
+            "value": "5vw",
+            "label": "5vw"
+            },
+            {
+            "value": "5.5vw",
+            "label": "5.5vw"
+            },            
+            {
+            "value": "6vw",
+            "label": "6vw"
+            },
+            {
+            "value": "6.5vw",
+            "label": "6.5vw"
+            },            
+            {
+            "value": "7vw",
+            "label": "7vw"
+            },
+            {
+            "value": "7.5vw",
+            "label": "7.5vw"
+            },            
+            {
+            "value": "8vw",
+            "label": "8vw"
+            },
+            {
+            "value": "8.5vw",
+            "label": "8.5vw"
+            },            
+            {
+            "value": "9vw",
+            "label": "9vw"
+            },
+            {
+            "value": "9.5vw",
+            "label": "9.5vw"
+            },            
+            {
+            "value": "10vw",
+            "label": "10vw"
+            }                          
+        ],
+        "default": "6vw"
+
+    },
+    {
+        "type": "richtext",
+        "id": "subheading",
+        "label": "Sub Heading"
+    },
+    {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button Link"
+    },
+    {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text"
+    },
+    {
+        "type": "color",
+        "id": "button_color",
+        "label": "Button Color",
+        "default": "#df477f"
+    },
+    {
+        "type": "header",
+        "content": "Homepage Banner Images"
+    },
+    {
+        "type": "image_picker",
+        "id": "desktop_image",
+        "label": "Desktop Image"
+    },
+    {
+        "type": "image_picker",
+        "id": "mobile_image",
+        "label": "Mobile Image"
+    },
+    {
+        "type": "image_picker",
+        "id": "image_banner",
+        "label": "Image"
+    },
+    {
+        "type": "select",
+        "id": "height_selector",
+        "label": "Mobile Image Height",
+        "options": [
+          {
+            "value": "small",
+            "label": "Small 612px"
+          },
+          {
+            "value": "large",
+            "label": "Large 812px"
+          }
+        ]
+    }
+   ],
+   "presets": [
+    {
+        "name": "Homepage Banner BF"
+    }
+   ]
+}
+{% endschema %}

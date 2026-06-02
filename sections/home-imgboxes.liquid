@@ -1,0 +1,48 @@
+{{ 'preorder-img-text.css' | asset_url | stylesheet_tag }}
+<div class="text-img-box container">
+  <div class="imagebox-right">
+    <div class="img-wrap">
+      <img src="{{ section.settings.image_with_text_image_left | img_url: 'master' }}" alt="Selected Image" class="nano-img">
+    </div>
+  </div>
+  <div class="imagebox-left">
+    <div class="img-wrap">
+      <img src="{{ section.settings.image_with_text_image_right | img_url: 'master' }}" alt="Selected Image">
+    </div>
+  </div>
+</div>
+
+{% style %}
+.imagebox-right {
+  flex: 1;
+}
+.imagebox-left {
+  flex: 1;
+}
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "home image section",
+        "class": "preorder-section-imgtext",
+        "settings": [
+{
+  "type": "image_picker",
+  "id": "image_with_text_image_left",
+  "label": "Image left"
+},
+{
+  "type": "image_picker",
+  "id": "image_with_text_image_right",
+  "label": "Image right"
+}
+        ],
+
+        "presets":[
+            {
+                "name": "home image section"
+            }
+        ]
+
+    }
+{% endschema %}

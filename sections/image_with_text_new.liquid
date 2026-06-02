@@ -1,0 +1,158 @@
+<div style="background-color: {{ section.settings.main_container_background }};" class="text_image_container {% if section.settings.select_position_id == 'left' %}
+ image_left {% endif %}">
+    <div class="text_section_contain">
+        <h2>{{ section.settings.section_title }}</h3>
+        <h4>{{ section.settings.section_subtext }}</h4>
+        <p>{{ section.settings.section_text }}</p>
+        <a style="background-color: {{ section.settings.button_color_id }};" href="{{ section.settings.button_id }}">{{ section.settings.text_buttonid }}</a>
+    </div>
+    <div class="image_section_contain">
+        <img src="{{ section.settings.section_image | image_url: width: 600 }}" alt="{{ section.settings.section_image.alt }}">
+    </div>
+</div>
+
+<style>
+    .template-floss-new-pdp .text_image_container{
+        padding: 60px 100px;
+    }
+    .template-floss-new-pdp .image_section_contain img{
+        max-width: 561px;
+    }
+    .template-floss-new-pdp .text-w-image img{
+        max-width: 876px;
+    }
+    .text_image_container{
+        gap: 70px;
+        display: flex;
+        padding: 60px 0 60px 100px;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .text_image_container.image_left{
+        flex-direction: row-reverse;
+    }
+    .text_image_container h2{
+        font-size: clamp(26px, 3vw, 40px);
+        line-height: normal;
+        max-width: 596px;
+    }
+    .text_image_container h4{
+        font-size: clamp(24px, 3vw, 32px);
+        line-height: normal;
+        margin: 0;
+        
+    }
+    .text_image_container p{
+        font-size: clamp(18px, 3vw, 22px);
+        line-height: normal;
+        max-width: 566px;
+        margin: 5px 0 30px;
+        line-height: 32px;
+
+    }
+    .text_image_container a{
+        display: block;
+        text-align: center;
+        max-width: 335px;
+        padding: 10px;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 700;
+        border-radius: 6px;
+        margin-top: 15px;
+    }
+
+    @media screen and (max-width: 768px ) {
+        .text_image_container{
+            flex-flow: column-reverse;
+            padding: 60px 24px;
+            gap: 30px;
+        }    
+        .template-floss-new-pdp .text_image_container{
+            padding: 60px 40px;
+        }
+        .template-floss-new-pdp .text_image_container .image_section_contain img{
+            max-width: 325px;
+        }
+        .text_image_container.image_left{
+            flex-direction: column-reverse;
+        }
+        .text_image_container a{
+            padding: 5px;
+        }
+        .text_image_container p{
+            line-height: 24px;
+        }
+    }
+</style>
+{% schema %}
+{
+   "name": "text width image",
+  "tag": "section",
+  "class": "text__with_image_new",
+   "settings" : [
+        {
+            "type": "select",
+            "id": "select_position_id",
+            "label": "Position Image",
+            "options": [
+                {
+                    "value": "right",
+                    "label": "right"
+                },
+                {
+                    "value": "left",
+                    "label": "left"
+                }
+            ]
+        },
+        {
+            "type": "image_picker",
+            "id": "section_image",
+            "label": "Image"
+        },
+        {
+            "type": "text",
+            "id": "section_title",
+            "label": "Title"
+        },
+        {
+            "type": "text",
+            "id": "section_subtext",
+            "label": "Subheading Text"
+        },
+        {
+            "type": "textarea",
+            "id": "section_text",
+            "label": "Section Text"
+        },
+        {
+            "type": "color",
+            "id": "main_container_background",
+            "label": "Main Container Background Color",
+            "default": "#f4fefe"
+        },
+        {
+            "type": "url",
+            "id": "button_id",
+            "label": "Button link"
+        },
+        {
+            "type": "color",
+            "id": "button_color_id",
+            "label": "Button color"
+        },
+        {
+            "type": "text",
+            "id": "text_buttonid",
+            "label": "Text button"
+        }
+   ],
+  "presets": [
+    {
+        "category": "Image with text PDP",
+        "name":"Image with text PDP"
+    }
+  ]
+}
+{% endschema %}

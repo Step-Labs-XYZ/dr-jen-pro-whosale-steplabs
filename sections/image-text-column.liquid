@@ -1,0 +1,164 @@
+<link rel="stylesheet" href="{{ 'imgtext-col.css' | asset_url }}">
+
+{% javascript %}
+{% endjavascript %}
+
+<div
+  class="custom-two-column {% if section.settings.show_mobile_img %} hide-section{% endif %}"
+  id="custom-two-column" 
+  style="background-image: url({{ section.settings.desktop_bg_image | img_url: 'master' }}); background-size: cover; background-position: bottom left;"
+>
+
+  <div class="content">
+    {% for block in section.blocks %}
+      {% if block.type == 'text' %}
+        <div class="text-block">
+          <h2 style="background-color: {{ block.settings.bg_color }} ; color: {{ block.settings.heading_color }};">{{ block.settings.heading }}</h2>
+          <div class="hide-desktop">
+            <img src="{{ block.settings.image_mobile | img_url: 'master' }}" alt="img">
+          </div>
+          <p>{{ block.settings.content }}</p>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="image">
+    {% for block in section.blocks %}
+      {% if block.type == 'text' %}
+        <div class="hide-mobile">
+          <img src="{{ block.settings.image | img_url: 'master' }}" alt="img">
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+
+</div>
+
+<div
+  class="custom-two-column {% if section.settings.show_mobile_img %} show-mob{% endif %}"
+  id="custom-two-column" 
+  style="background-image: url({{ section.settings.mobile_bg_image | img_url: 'master' }}); background-size: cover; background-position: center center;"
+>
+
+  <div class="content">
+    {% for block in section.blocks %}
+      {% if block.type == 'text' %}
+        <div class="text-block">
+          <h2 style="background-color: {{ block.settings.bg_color }} ; color: {{ block.settings.heading_color }};">{{ block.settings.heading }}</h2>
+          <div class="hide-desktop">
+            <img src="{{ block.settings.image_mobile | img_url: 'master' }}" alt="img">
+          </div>
+          <p>{{ block.settings.content }}</p>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="image">
+    {% for block in section.blocks %}
+      {% if block.type == 'text' %}
+        <div class="hide-mobile">
+          <img src="{{ block.settings.image | img_url: 'master' }}" alt="img">
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+
+
+
+{% stylesheet %}
+ #custom-two-column.custom-two-column {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  @media screen and (max-width: 790px) {
+
+  #custom-two-column.custom-two-column {
+      flex-direction: column;
+    
+  }
+  }
+{% endstylesheet %}
+
+{% comment %}
+  Section: Custom Two Column with Image
+  Description: Custom section with two columns for desktop and stacked columns for mobile
+{% endcomment %}
+
+{% schema %}
+{
+  "name": "Image Text Column",
+  "class": "shopify-section--image-with-text",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "desktop_bg_image",
+      "label": "Desktop Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_bg_image",
+      "label": "Mobile Background Image"
+    },
+    {
+  "type": "checkbox",
+  "id": "show_mobile_img",
+  "label": "Show mobile bg",
+  "default": true
+}
+
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text and Image Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+         {
+          "type": "color",
+          "id": "heading_color",
+          "label": "heading text Color"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+         {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Image Mobile "
+        }
+      ]
+    }
+  ],
+    "presets": [
+    {
+      "name": "Image Text Column",
+      "settings": {},
+      "blocks": [
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

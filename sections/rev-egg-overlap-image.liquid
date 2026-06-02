@@ -1,0 +1,267 @@
+{% style %}
+#rev-egg-custom-two-column-section {
+  background-color: {{ section.settings.section_bg_color }};
+  padding: 50px 0;
+  position: relative;
+}
+
+#rev-egg-custom-two-column-section .content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#rev-egg-custom-two-column-section .text-column {
+  flex: 1;
+  padding: 20px 20px 20px 50px;
+  z-index:2;
+}
+
+#rev-egg-custom-two-column-section .image-column {
+  flex: 1;
+  padding: 20px;
+  position: relative;
+}
+
+#rev-egg-custom-two-column-section .center-left-image {
+    position: absolute;
+    left: 0px;
+    top: auto;
+    transform: translateY(0%);
+    display: none;
+    bottom: 0px;
+  width:13%:
+}
+
+#rev-egg-custom-two-column-section .bottom-right-image {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+}
+#rev-egg-custom-two-column-section .text-column h2{
+  font-size:37px;
+  line-height:46px;
+  text-transform:uppercase;
+  margin-bottom: 30px;
+  width: 95%;
+}
+#rev-egg-custom-two-column-section .text-column .rich-text-content{
+  display:flex;
+  gap:15px;
+  flex-direction: column;
+}
+#rev-egg-custom-two-column-section .mid-center-image{
+  display:none;
+}
+
+#rev-egg-custom-two-column-section .text-column .rich-text-content p{
+  font-size:18px;
+  line-height:26px;
+}
+
+
+@media screen and (min-width: 769px) {
+  #rev-egg-custom-two-column-section .center-left-image {
+    display: block;
+  }
+
+}
+
+@media screen and (max-width: 1380px) {
+   #rev-egg-custom-two-column-section img.center-left-image {
+        width: 11%;
+  }
+
+    #rev-egg-custom-two-column-section .bottom-right-image {
+    display: block;
+    height:66%;
+  }
+}
+@media screen and (max-width: 1080px) {
+  #rev-egg-custom-two-column-section .text-column h2 {
+    font-size: 32px;
+    line-height: 38px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    width: 100%;
+}
+  #rev-egg-custom-two-column-section .text-column .rich-text-content p {
+    font-size: 16px;
+    line-height: 21px;
+    margin-bottom:10px;
+}
+  #rev-egg-custom-two-column-section .bottom-right-image {
+        display: block;
+        height: 55%;
+    }
+}
+.mid-center-image{
+  display:none;
+}
+
+@media screen and (max-width: 768px) {
+  #rev-egg-custom-two-column-section .content-wrapper {
+    flex-direction: column-reverse;
+  }
+#rev-egg-custom-two-column-section .bottom-right-image.hide-mobile{
+  display:none;
+}
+  #rev-egg-custom-two-column-section .image-column {
+    order: 2;
+    padding:0px;
+  z-index:2;
+  }
+#rev-egg-custom-two-column-section .bottom-right-image{
+  z-index:0;
+}
+  #rev-egg-custom-two-column-section .text-column {
+    order: 1;
+  }
+  #rev-egg-custom-two-column-section .text-column {
+    padding: 20px 0px;
+}
+#rev-egg-custom-two-column-section .mid-center-image{
+  display:block;
+    position: absolute;
+        right: 0px;
+        bottom: 0px;
+        top: 0%;
+        left: 0%;
+  transform: scale(1);
+  z-index:1;
+}
+#rev-egg-custom-two-column-section{
+  overflow:hidden;
+}
+}
+@media screen and (max-width: 600px) {
+  #rev-egg-custom-two-column-section .mid-center-image{
+
+  }
+  #rev-egg-custom-two-column-section .text-column {
+    padding: 30px 0px 20px 0px;
+  }
+  #rev-egg-custom-two-column-section .text-column h2 {
+    font-size: 24px;
+    line-height: 32px;
+    text-align:center;
+  }
+  #rev-egg-custom-two-column-section .text-column .rich-text-content{
+    gap: 10px;
+    text-align:center;
+  }
+}
+@media screen and (max-width: 400px) {
+  #rev-egg-custom-two-column-section .mid-center-image{
+           transform: none;
+  }
+}
+{% endstyle %}
+
+<section id="rev-egg-custom-two-column-section">
+  {% if section.settings.center_left_image != blank %}
+    <img src="{{ section.settings.center_left_image | image_url }}" class="center-left-image" alt="Center Left Image">
+  {% endif %}
+<div class="container">
+  <div class="content-wrapper">
+    <div class="text-column">
+      {% for block in section.blocks %}
+        {% if block.type == 'text' %}
+          <h2 style="color:{{ section.settings.section_txt_color }}"> {{ block.settings.heading }} </h2>
+          <div class="rich-text-content" style="color:{{ section.settings.section_txt_color }}">
+            {{ block.settings.content }}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    
+    <div class="image-column">
+      {% for block in section.blocks %}
+        {% if block.type == 'image' %}
+          <img src="{{ block.settings.column_image | image_url }}" alt="Column Image">
+        {% endif %}
+      {% endfor %}
+      
+      
+    </div>
+  </div>
+  {% if section.settings.bottom_right_image != blank %}
+        <img src="{{ section.settings.bottom_right_image | image_url }}" class="bottom-right-image {% if section.settings.mid_center != blank %} hide-mobile{% endif %}" alt="Bottom Right Image">
+      {% endif %}
+    {% if section.settings.mid_center != blank %}
+        <img src="{{ section.settings.mid_center| image_url }}" class="mid-center-image" alt="Bottom Right Image">
+      {% endif %}
+</div>
+</section>
+{% schema %}
+{
+  "name": "Rev egg overlap img",
+  "settings": [
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section Background Color",
+      "default": "#ffffff"
+    },
+     {
+      "type": "color",
+      "id": "section_txt_color",
+      "label": "Section text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "image_picker",
+      "id": "center_left_image",
+      "label": "Center Left Image",
+      "info": "Optional image, positioned center left"
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_right_image",
+      "label": "Bottom Right Overlapping Image",
+      "info": "Optional image, positioned bottom right overlapping the column image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mid_center",
+      "label": "mobile mid center Overlapping Image",
+      "info": "Optional image, positioned mid center mobile overlapping the column image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text Content",
+      "settings": [
+         {
+          "type": "text",
+          "id": "heading",
+          "label": "heading"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "column_image",
+          "label": "Column Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rev egg overlap img",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}

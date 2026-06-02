@@ -1,0 +1,425 @@
+{% capture init %}
+<script>
+  !function(u){window.edgetag=window.edgetag||function(){(edgetag.stubs=edgetag.stubs||[]).push(arguments)};const t=document.createElement("script");t.type="text/javascript",t.src=u,t.async=!0;const e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}('https://duviq.drjennatural.com/load');
+
+      const url = new URL(window.location.href);
+      const params = new URLSearchParams(url.search);
+      const userId = params.get('et_u_id') || '';
+
+    edgetag('init', {
+      edgeURL: 'https://duviq.drjennatural.com',
+      disableConsentCheck: true,
+      userId
+    });
+
+    
+  
+</script>
+{% endcapture %}
+{{ init | strip_newlines  | replace: '  ', '' | replace: '  ', '' }}
+
+
+{% capture code %}
+<script>
+!function() {
+  const generateUUID = () => {
+    let d = new Date().getTime();
+    let d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now()*1000)) || 0;
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      let r = Math.random() * 16;
+      if(d > 0){
+        r = (d + r)%16 | 0;
+        d = Math.floor(d/16);
+      } else {
+        r = (d2 + r)%16 | 0;
+        d2 = Math.floor(d2/16);
+      }
+      return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+  };
+
+  const sendEvent = ({name, payload = {}, fbPayload, beacon = false, eventId}) => {
+    if (!eventId) {
+      eventId = generateUUID();
+    }
+
+    let options = {};
+    if (beacon) {
+      options = { method: 'beacon' };
+    }
+    edgetag('tag', name, {
+        ...payload,
+        eventId
+      }, {}, options);
+
+    
+
+    
+  };
+
+  const addToCart = (form) => {
+    if (!form) {
+      return
+    }
+
+    let quantity = 1;
+    let id = '';
+    let options = [];
+
+    Array.from(form.elements).forEach((item) => {
+      if (item.type === 'radio' && item.checked) {
+        options.push(item.value);
+      }
+
+      if (item.name === 'quantity') {
+        quantity = parseInt(item.value, 10);
+        return
+      }
+
+      if (item.name === 'id') {
+        id = item.value;
+      }
+    });
+
+     const obj = {
+      id,
+      quantity,
+    };
+
+    let totalPrice = 0;
+    {% if product %}
+     const variants = [];
+     {% for item in product.variants %}
+      variants.push({{item | json}});
+     {% endfor %}
+
+      const currentId = parseInt(obj.id, 10);
+      const variant = variants.find(variant => currentId === variant.id);
+      if (variant) {
+        obj.id = variant.id;
+        obj.item_price = parseFloat(variant.price) / 100;
+        obj.title = variant.title;
+        obj.category = '{{product.type | escape_once}}';
+        obj.image = '{{product | image_url | prepend: 'https:' }}';
+        obj.url = '{{product.url | prepend: request.origin }}?variant=' + variant.id;
+        totalPrice = quantity * obj.item_price;
+      }
+    {% endif %}
+
+    sendEvent({
+      name: 'AddToCart',
+      payload: {
+        name: '{{product.title | escape_once}}',
+        currency: '{{shop.currency | downcase}}',
+        value: totalPrice,
+        type: 'product',
+        contents: [
+          obj
+        ]
+      },
+      fbPayload: {
+        content_name: '{{product.title | escape_once}}',
+        currency: '{{shop.currency | downcase}}',
+        value: totalPrice,
+        content_type: 'product',
+        contents: [
+          {
+            content_ids: [obj.id],
+            num_items: quantity,
+          }
+        ]
+      }
+    });
+  };
+
+  sendEvent({
+    name: 'PageView'
+  });
+
+  {% if product %}
+    sendEvent({
+      name: 'ViewContent',
+      payload: {
+        name: '{{product.title | escape_once}}',
+        currency: '{{shop.currency | downcase}}',
+        type: 'product',
+        category: '{{product.type | escape_once}}',
+        contents: [{
+          id: '{{product.id}}',
+          quantity: 1,
+          item_price: {{product.price | money_without_currency | replace: ',', '.'}},
+          title: '{{product.title | escape_once}}',
+          category: '{{product.type | escape_once}}',
+          image: '{{product | image_url | prepend: 'https:' }}',
+          url: '{{product.url | prepend: request.origin }}'
+        }],
+        value: {{product.price | money_without_currency | replace: ',', '.'}}
+      },
+      fbPayload: {
+        content_name: '{{product.title | escape_once}}',
+        currency: '{{shop.currency | downcase}}',
+        content_type: 'product',
+        content_category: '{{product.type | escape_once}}',
+        contents: [{
+          content_ids: ['{{product.id}}'],
+          num_items: 1,
+          value: {{product.price | money_without_currency | replace: ',', '.'}},
+          content_name: '{{product.title | escape_once}}',
+          content_category: '{{product.type | escape_once}}'
+        }],
+        value: {{product.price | money_without_currency | replace: ',', '.'}},
+      }
+    });
+  {% endif %}
+
+  const sendUser = (user) => {
+    if (!Object.keys(user).length) {
+      return
+    }
+
+    edgetag('data', user);
+
+    
+  };
+
+  const getUser = (form, selectors) => {
+    const user = {};
+    if (!selectors) {
+      return user;
+    }
+
+    Object.entries(selectors).forEach(([userKey, selector]) => {
+      if (!selector || selector.length === 0) {
+        return;
+      }
+
+      const selectorArray = Array.isArray(selector) ? selector : [selector];
+      for (const selector of selectorArray) {
+        if (!selector) {
+          continue;
+        }
+
+        const inputUserValue = form.querySelector(selector);
+        const userValue = (inputUserValue && inputUserValue.value) || '';
+        if (userValue) {
+          user[userKey] = userValue;
+          break;
+        }
+      }
+    });
+
+    return user;
+  };
+
+  const actions = [
+     
+      {
+        selectors: ['[type="submit"]', 'form[action^="/cart/add"]'],
+        length: 2,
+        fun: (ele) => {
+          addToCart(ele);
+        },
+        current: 0
+      },
+      {
+        selectors: ['[class^="shopify-payment-button"]', 'form[action^="/cart/add"]'],
+        length: 2,
+        fun: (ele) => {
+          addToCart(ele);
+          sendEvent({
+            name: 'InitiateCheckout',
+            beacon: true
+          });
+        },
+        current: 0
+      },
+      
+    {
+      selectors: ['button', 'form[action="/cart"]'],
+      length: 2,
+      fun: (ele) => {
+        sendEvent({
+          name: 'InitiateCheckout',
+          beacon: true
+        });
+      },
+      current: 0
+    },
+    {
+      selectors: ['a[href="/checkout"]'],
+      length: 1,
+      fun: (ele) => {
+        sendEvent({
+          name: 'InitiateCheckout',
+          beacon: true
+        });
+      },
+      current: 0
+    },
+    {
+      selectors: ['[form="cart"]'],
+      length: 1,
+      fun: (ele) => {
+        sendEvent({
+          name: 'InitiateCheckout',
+          beacon: true
+        });
+      },
+      current: 0
+    },
+    {
+      selectors: ['[type="submit"]', 'form[action="/account/login"]'],
+      length: 2,
+      fun: (ele) => {
+        
+
+        const user = getUser(ele, {
+          email: 'input[type="email"]'
+        });
+
+        sendUser(user);
+      },
+      current: 0
+    },
+    {
+      selectors: ['[type="submit"]', 'form[action="/account"]'],
+      length: 2,
+      fun: (ele) => {
+        let user = getUser(ele, {
+          email: 'input[type="email"]',
+          phone: 'input[type="tel"]',
+          firstName: 'input[name*="first" i]',
+          lastName: 'input[name*="last" i]'
+        });
+
+        if (!user.firstName && !user.lastName) {
+          user = {
+            ...user,
+            ...getUser(ele, { firstName: 'input[name*="name" i]' })
+          };
+        }
+
+        sendUser(user);
+        sendEvent({
+          name: 'CompleteRegistration'
+        });
+      },
+      current: 0
+    },
+     {
+        selectors: ['[type="submit"]', '#ContactFooter'],
+          length: 2,
+          fun: (ele) => {
+            const user = getUser(ele, {
+              email: ['input[type="email"]', 'input[name*="email" i]'],
+              phone: ['input[type="tel"]', 'input[name*="phone" i]'],
+              firstName: 'input[name*="name" i]',
+              dateOfBirth: 'input[name*="birthday" i]'
+            });
+            sendUser(user);
+            sendEvent({
+              name: 'Subscribe'
+            });
+          },
+          current: 0
+        },
+     {
+        selectors: ['button', '#ContactFooter'],
+          length: 2,
+          fun: (ele) => {
+            const user = getUser(ele, {
+              email: ['input[type="email"]', 'input[name*="email" i]'],
+              phone: ['input[type="tel"]', 'input[name*="phone" i]'],
+              firstName: 'input[name*="name" i]',
+              dateOfBirth: 'input[name*="birthday" i]'
+            });
+            sendUser(user);
+            sendEvent({
+              name: 'Subscribe'
+            });
+          },
+          current: 0
+        },
+    {
+      selectors: ['[type="submit"]', 'form[action^="/contact"]'],
+      length: 2,
+      fun: (ele) => {
+        const user = getUser(ele, {
+          email: ['input[type="email"]', 'input[name*="email" i]'],
+          phone: ['input[type="tel"]', 'input[name*="phone" i]'],
+          firstName: ['input[name*="first" i]', 'input[name*="name" i]', 'input[name*="nom" i]'],
+          lastName: 'input[id*="last" i]'
+        });
+
+        sendUser(user);
+        sendEvent({
+          name: 'Contact'
+        });
+      },
+      current: 0
+    }
+  ];
+
+  const actionsLength = actions.length;
+
+  const resetActions = () => {
+    for (let i = 0; i < actionsLength; i++) {
+      actions[i].current = 0;
+    }
+  };
+
+  const checkElement = (element) => {
+    if (!element || element.nodeName === 'BODY') {
+      resetActions();
+      return
+    }
+
+    if (element.nodeName !== 'DIV' && element.nodeName !== 'INPUT' && element.nodeName !== 'A' && element.nodeName !== 'BUTTON' && element.nodeName !== 'FORM') {
+      checkElement(element.parentElement);
+      return
+    }
+
+    for (let i = 0; i < actionsLength; ++i) {
+      if (element.matches(actions[i].selectors[actions[i].current])) {
+        ++actions[i].current;
+        if (actions[i].length === actions[i].current) {
+          actions[i].fun(element);
+          resetActions();
+          return
+        }
+      }
+    }
+
+    checkElement(element.parentElement);
+  };
+
+  window.addEventListener('load', () => {
+    document.addEventListener('click', (e) => {
+      checkElement(e.target);
+    });
+  });
+
+  if (
+    window.location.pathname.startsWith('/search') ||
+    window.location.pathname.startsWith('/pages/search-results-page')
+  ) {
+    const searchParams = new URLSearchParams(window.location.search);
+    const search = searchParams.get('q');
+    if (search) {
+      sendEvent({
+        name: 'Search',
+        payload: {
+          search
+        },
+        fbPayload: {
+          search_string: search
+        }
+      });
+    }
+  }
+
+  
+}();
+</script>
+{% endcapture %}
+{{ code | strip_newlines  | replace: '  ', '' | replace: '  ', '' }}

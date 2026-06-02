@@ -1,0 +1,23 @@
+{% comment %}
+  Snippet: Subscription Terms Disclaimer
+  Usage: {% render 'c-subscription-terms' %}
+{% endcomment %}
+
+<div class="c-subscription-terms">
+  <p class="c-subscription-terms__text">
+    This item is a recurring or deferred purchase. By continuing, I agree to the cancellation policy and authorize you to charge my payment method at the prices, frequency and dates listed on this page until my order is fulfilled or I cancel, if permitted.
+  </p>
+</div>
+
+{% stylesheet %}
+  .c-subscription-terms {
+    margin: 16px 0;
+  }
+
+  .c-subscription-terms__text {
+    font-size: 12px;
+    color: #666666;
+    line-height: 1.6;
+    margin: 0;
+  }
+{% endstylesheet %}

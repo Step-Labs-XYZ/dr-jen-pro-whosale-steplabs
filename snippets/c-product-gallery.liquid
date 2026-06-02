@@ -1,0 +1,81 @@
+{% comment %}
+  Snippet: c-product-gallery.liquid
+  Galería de producto con miniaturas, zoom y badges
+{% endcomment %}
+
+{%- assign images = product.images -%}
+{%- assign main_image = featured_image | default: product.featured_image -%}
+
+<div class="c-gallery" data-gallery>
+
+  {%- comment -%} Badge "New Formula" {%- endcomment -%}
+  {% if section.settings.show_new_formula_badge %}
+    <div class="c-gallery__badge-new">
+      {{ section.settings.new_formula_badge_text }}
+    </div>
+  {% endif %}
+
+  {%- comment -%} Badge "#1" circular {%- endcomment -%}
+  {% if section.settings.show_number_one_badge %}
+    <div class="c-gallery__badge-number-one">
+      <span class="c-gallery__badge-number-one-num">{{ section.settings.number_one_badge_line1 }}</span>
+      <span class="c-gallery__badge-number-one-text">{{ section.settings.number_one_badge_line2 }}</span>
+    </div>
+  {% endif %}
+
+  {%- comment -%} Imagen principal {%- endcomment -%}
+  <div class="c-gallery__main" data-gallery-main>
+    {% for image in images %}
+      <div class="c-gallery__slide {% if forloop.first %}is-active{% endif %}" data-gallery-slide="{{ forloop.index0 }}">
+        {% if section.settings.enable_zoom %}
+          <a href="{{ image | image_url: width: 1200 }}" class="c-gallery__zoom-link" data-zoom>
+        {% endif %}
+          <img
+            src="{{ image | image_url: width: 800 }}"
+            srcset="{{ image | image_url: width: 400 }} 400w, {{ image | image_url: width: 700 }} 700w, {{ image | image_url: width: 1000 }} 1000w"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            alt="{{ image.alt | escape | default: product.title }}"
+            class="c-gallery__main-img"
+            width="{{ image.width }}"
+            height="{{ image.height }}"
+            {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}
+          >
+        {% if section.settings.enable_zoom %}
+          </a>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+  {%- comment -%} Miniaturas {%- endcomment -%}
+  {% if section.settings.show_thumbnails and images.size > 1 %}
+    <div class="c-gallery__thumbs c-gallery__thumbs--{{ section.settings.thumbnail_position }}" data-gallery-thumbs role="list">
+      {% for image in images %}
+        <button
+          class="c-gallery__thumb {% if forloop.first %}is-active{% endif %}"
+          data-gallery-thumb="{{ forloop.index0 }}"
+          aria-label="{{ image.alt | default: product.title }} {{ forloop.index }}"
+          role="listitem"
+        >
+          <img
+            src="{{ image | image_url: width: 120 }}"
+            alt="{{ image.alt | escape | default: product.title }}"
+            width="120"
+            height="120"
+            loading="lazy"
+          >
+        </button>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {%- comment -%} Dots móvil {%- endcomment -%}
+  {% if images.size > 1 %}
+    <div class="c-gallery__dots" data-gallery-dots aria-hidden="true">
+      {% for image in images %}
+        <span class="c-gallery__dot {% if forloop.first %}is-active{% endif %}" data-gallery-dot="{{ forloop.index0 }}"></span>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+</div>

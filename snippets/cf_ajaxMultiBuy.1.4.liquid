@@ -1,0 +1,256 @@
+{{ "axios.min.js" | asset_url | script_tag }}
+<script>
+  /*
+   * Allow adding multiple products behind the scenes
+   * and then redirecting to the cart page
+   *
+   * Example Usage:
+   * productIDs=[5495746753,6404592577,6872949825,10372164673];
+   * MultiBuy.ajaxAdd(productIDs);
+   * MultiBuy.ajaxRemove(productIDs);
+   * MultiBuy.addAndRemove(productIDs);
+   */
+
+  window.addEventListener("load", (event) => {
+    setTimeout(function () {
+      console.log("removing asyncing products from storage");
+      sessionStorage.removeItem(cf_Session.KEYS.ASYNC_PRODUCTS);
+    }, 3000);
+  });
+
+  /* Class/Namespace for MultiBuy */
+  function MultiBuy() {}
+
+  /*
+   * Sends one at a time so that if one product fails to add, the others will still be added
+   * Shopify requires if products are being added one at a time, they be in a queue
+   * eg. each request must finish before sending another one
+   */
+  MultiBuy.addProductsToCart = async function (productIDs) {
+    product = productIDs.shift();
+    if (!product) {
+      return;
+    }
+    console.log("Adding " + product + "...");
+
+    // add variant id to list in session
+    sessionStorage.setItem(
+      cf_Session.KEYS.ASYNC_PRODUCTS,
+      cf_Session.getCurrent("ASYNC_PRODUCTS").concat(product)
+    );
+
+    if (productIDs.length) {
+      console.log("Remaining products to add: ", productIDs);
+    }
+    // ensure the quantity of this variant id is exactly 1
+    var data = {
+      items: [{ id: product, quantity: 1 }],
+    };
+    var response = await axios
+      .post("/cart/add.js", data)
+      .then(async function (response) {
+        cf_Session.removeFrom("ASYNC_PRODUCTS", product);
+        if (productIDs.length) {
+          await MultiBuy.addProductsToCart(productIDs);
+        }
+        return response;
+      })
+      .catch(async function (error) {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
+        //console.log(error.config);
+
+        console.log(`Did NOT successfully add product ${product}`);
+
+        //add variant id to error list in session
+        cf_Session.addTo("ERROR_PRODUCTS", product);
+        cf_Session.removeFrom("ASYNC_PRODUCTS", product);
+
+        if (error.response.data.description) {
+          cf_Session.addTo(
+            "ERROR_PRODUCTS_REASONS",
+            `${product} - ${error.response.data.description}`
+          );
+          console.log(
+            `Did NOT successfully add product ${product} because ${error.response.data.description}`
+          );
+        }
+
+        // try to add the remaining products
+        console.log("Trying to add remaining products: ", productIDs);
+        if (productIDs.length) {
+          await MultiBuy.addProductsToCart(productIDs);
+        }
+        return error;
+      });
+
+    console.log("Finished adding product to cart ... (at bottom)", product);
+    return response;
+  };
+
+  MultiBuy.removeProductsFromCart = async function (productIDs) {
+    // POST /cart/update.js
+    // https://shopify.dev/docs/themes/ajax-api/reference/cart#post-cart-update-js
+    // data = {
+    //     updates : {
+    //         [PRODUCT_ID]: [QUANTITY],
+    //         [PRODUCT_ID]: [QUANTITY]
+    //     }
+    // }
+
+    sessionStorage.setItem(
+      cf_Session.KEYS.ASYNC_PRODUCTS,
+      cf_Session.getCurrent("ASYNC_PRODUCTS").concat(productIDs)
+    );
+
+    var data = { updates: {} };
+    for (var productID of productIDs) {
+      data.updates[productID] = 0;
+    }
+    console.log("remove object", data);
+    var response = await axios
+      .post("/cart/update.js", data)
+      .then(async function (response) {
+        console.log("jeshua remove response", response);
+        cf_Session.removeFrom("ASYNC_PRODUCTS", productIDs);
+        return true;
+      })
+      .catch(async function (error) {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
+        console.log(`Did NOT successfully remove products ${productIDs}`);
+        //add variant id to error list in session
+        cf_Session.addTo("ERROR_REMOVE_PRODUCTS", productIDs);
+        cf_Session.removeFrom("ASYNC_PRODUCTS", productIDs);
+        return false;
+      });
+
+    console.log(
+      "Finished removing product to cart ... (at bottom)",
+      productIDs
+    );
+    return response;
+  };
+
+  MultiBuy.stripPotentialErrorProductIDs = function (variant_ids) {
+    return variant_ids.filter(function (id) {
+      /*
+       * Prevent reloading loops if a product can not add due to some error
+       * Subset of items not including items that threw error when adding the first time
+       * return Array
+       */
+      if (cf_Session.getCurrent("ERROR_PRODUCTS").includes(id)) {
+        console.log(
+          "Not adding/removing product: Detected previous errors when attempting to add",
+          id
+        );
+        return false;
+      }
+      /*
+       * Prevent adding items more than once if async load is interrupted
+       * for example by another script that caused a reload
+       * Subset of items not including items in session as asynchronously adding
+       * return Array
+       */
+      if (cf_Session.getCurrent("ASYNC_PRODUCTS").includes(String(id))) {
+        console.log(
+          "Not adding/removing product: Is still pending asynchronous response",
+          id
+        );
+        return false;
+      }
+
+      return true;
+    });
+  };
+
+  MultiBuy.addAndRemove = async function (add_variant_ids, remove_variant_ids) {
+    var hadRemovals = await MultiBuy.ajaxRemove(remove_variant_ids);
+    var hadAdditions = await MultiBuy.ajaxAdd(add_variant_ids);
+    console.log("removals", hadRemovals);
+    console.log("hadAdditions", hadAdditions);
+    if (hadRemovals || hadAdditions) {
+      console.log("reloading after cart updates");
+      MultiBuy.reloadPage();
+    }
+  };
+
+  MultiBuy.reloadPage = function () {
+    window.location.replace("/cart");
+  };
+
+  /**
+   * return boolean if items have been added
+   */
+  MultiBuy.ajaxAdd = async function (variant_ids) {
+    if (!variant_ids.length) {
+      console.log("no items to add");
+      return false;
+    }
+    var t0 = performance.now();
+
+    // clean up list by removing variants that have errored in past,
+    // or that have started to be added but not finshed
+    var variant_id_subset = MultiBuy.stripPotentialErrorProductIDs(variant_ids);
+
+    if (!variant_id_subset.length) {
+      return false;
+    }
+
+    await MultiBuy.addProductsToCart(variant_id_subset);
+    console.log("All items added");
+
+    var t1 = performance.now();
+    console.log(`Async cart additions took ${t1 - t0}  milliseconds to run`);
+    return true;
+  };
+
+  /**
+   * return boolean if items have been removed
+   */
+  MultiBuy.ajaxRemove = async function (variant_ids) {
+    var t0 = performance.now();
+
+    // clean up list by removing variants that have errored in past,
+    // or that have started to be added but not finished
+    var variant_id_subset = MultiBuy.stripPotentialErrorProductIDs(variant_ids);
+    console.log("CF: filtered variant_IDS", variant_id_subset);
+    if (!variant_id_subset.length) {
+      console.log("no items to remove");
+      return false;
+    }
+
+    var response = await MultiBuy.removeProductsFromCart(variant_id_subset);
+    console.log("All items removed");
+
+    var t1 = performance.now();
+    console.log(`Async cart removals took ${t1 - t0}  milliseconds to run`);
+    return response;
+  };
+</script>

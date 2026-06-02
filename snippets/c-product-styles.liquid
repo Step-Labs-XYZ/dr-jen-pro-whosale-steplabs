@@ -1,0 +1,36 @@
+{% comment %}
+  Snippet: c-product-styles.liquid
+  Inyecta CSS variables dinámicas desde los settings de la sección
+  y enlaza el stylesheet. Incluir una vez al inicio de c-product-page.liquid
+{% endcomment %}
+
+{{ 'c-product-page.css' | asset_url | stylesheet_tag }}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --c-bg: {{ section.settings.bg_color }};
+    --c-gallery-bg: {{ section.settings.gallery_bg_color }};
+    --c-title-color: {{ section.settings.title_color }};
+    --c-price-color: {{ section.settings.price_color }};
+    --c-text-color: {{ section.settings.text_color }};
+    --c-accent: {{ section.settings.accent_color }};
+    --c-promo-bg: {{ section.settings.promo_badge_bg }};
+    --c-promo-text: {{ section.settings.promo_badge_text_color }};
+    --c-atc-bg: {{ section.settings.atc_bg_color }};
+    --c-atc-text: {{ section.settings.atc_text_color }};
+    --c-atc-hover-bg: {{ section.settings.atc_hover_bg }};
+    --c-bundle-badge-bg: {{ section.settings.bundle_badge_bg }};
+    --c-bundle-badge-text: {{ section.settings.bundle_badge_text }};
+    --c-bundle-selected-border: {{ section.settings.bundle_selected_border }};
+    --c-bundle-hover-border: {{ section.settings.bundle_hover_border }};
+    --c-in-stock-color: {{ section.settings.in_stock_color }};
+    --c-sold-out-color: {{ section.settings.sold_out_color }};
+    --c-badge-new-border: {{ section.settings.new_formula_badge_border }};
+    --c-badge-new-text: {{ section.settings.new_formula_badge_text_color }};
+    --c-badge-num-bg: {{ section.settings.number_one_badge_bg }};
+    --c-badge-num-text: {{ section.settings.number_one_badge_text_color }};
+    --c-max-width: {{ section.settings.content_max_width }}px;
+    --c-pt: {{ section.settings.section_padding_top }}px;
+    --c-pb: {{ section.settings.section_padding_bottom }}px;
+  }
+</style>

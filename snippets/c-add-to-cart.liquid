@@ -1,0 +1,87 @@
+{% comment %}
+  Snippet: Add to Cart Button
+  Usage: {% render 'c-add-to-cart', product: product %}
+{% endcomment %}
+
+<div class="c-atc-wrapper">
+  {%- form 'product', product, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+    
+    <button 
+      type="submit" 
+      name="add" 
+      class="c-atc-button"
+      {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+    >
+      <span>
+        {%- if product.selected_or_first_available_variant.available -%}
+          ADD TO CART
+        {%- else -%}
+          SOLD OUT
+        {%- endif -%}
+      </span>
+      {% if product.selected_or_first_available_variant.available %}
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      {% endif %}
+    </button>
+
+    <button type="button" class="c-more-options">More payment options</button>
+  {%- endform -%}
+</div>
+
+{% stylesheet %}
+  .c-atc-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 24px 0;
+  }
+
+  .c-atc-button {
+    background-color: #0d6efd;
+    color: #ffffff;
+    border: none;
+    border-radius: 30px;
+    padding: 16px 24px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  .c-atc-button:hover:not(:disabled) {
+    background-color: #0b5ed7;
+  }
+
+  .c-atc-button:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+  }
+
+  .c-more-options {
+    color: #777777;
+    text-decoration: underline;
+    font-size: 13px;
+    font-weight: 500;
+    background: none;
+    border: none;
+    padding: 8px 0;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  .c-more-options:hover {
+    color: #444444;
+  }
+{% endstylesheet %}

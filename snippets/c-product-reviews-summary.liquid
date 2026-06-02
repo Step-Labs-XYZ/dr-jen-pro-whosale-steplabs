@@ -1,0 +1,28 @@
+{% comment %}
+  Snippet: c-product-reviews-summary.liquid
+  Rating stars + contador de reseñas
+{% endcomment %}
+
+{%- assign rating = section.settings.demo_star_rating | default: 5 -%}
+{%- assign count = section.settings.demo_reviews_count | default: '29' -%}
+{%- assign reviews_url = section.settings.reviews_link_url | default: '#reviews' -%}
+{%- assign reviews_text = section.settings.reviews_link_text | default: 'view all reviews' -%}
+
+<div class="c-reviews-summary" itemscope itemtype="https://schema.org/AggregateRating">
+  <div class="c-reviews-summary__stars" aria-label="{{ rating }} out of 5 stars">
+    {% for i in (1..5) %}
+      {%- assign star_val = forloop.index | times: 1.0 -%}
+      {% if star_val <= rating %}
+        <span class="c-reviews-summary__star c-reviews-summary__star--full" aria-hidden="true">★</span>
+      {% elsif star_val <= rating | plus: 0.5 %}
+        <span class="c-reviews-summary__star c-reviews-summary__star--half" aria-hidden="true">★</span>
+      {% else %}
+        <span class="c-reviews-summary__star c-reviews-summary__star--empty" aria-hidden="true">☆</span>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <span class="c-reviews-summary__count" itemprop="reviewCount">({{ count }})</span>
+  <a href="{{ reviews_url }}" class="c-reviews-summary__link" itemprop="ratingValue" content="{{ rating }}">
+    {{ reviews_text }}
+  </a>
+</div>

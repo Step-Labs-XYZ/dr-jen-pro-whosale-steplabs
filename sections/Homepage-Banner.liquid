@@ -1,0 +1,62 @@
+
+<div class="Herobanner-container">
+
+    <img src="{{section.settings.desktop_image | img_url:'master'}}"  class="Herobanner-image hero-desktop" />
+    <img src="{{section.settings.mobile_image | img_url:'master'}}"  class="Herobanner-image hero-mobile" />
+
+    <div class="hero-content">
+        <h1 class="hero-title">{{section.settings.heading}}</h1>
+        <p class="hero-text">{{section.settings.subheading}}</p>
+        <a href="{{section.settings.button_link}}" class="hero-button">{{section.settings.button_text}}</a>
+    </div>
+
+</div>
+
+
+{% schema %}
+{
+   "name": "Homepage-Banner",
+   "class": "home-page-banner-original",
+   "settings" : [
+    {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+    },
+    {
+        "type": "textarea",
+        "id": "subheading",
+        "label": "Sub Heading"
+    },
+    {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button Link"
+    },
+    {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text"
+    },
+    {
+        "type": "header",
+        "content": "Homepage Banner Images"
+    },
+    {
+        "type": "image_picker",
+        "id": "desktop_image",
+        "label": "Desktop Image"
+    },
+    {
+        "type": "image_picker",
+        "id": "mobile_image",
+        "label": "Mobile Image"
+    }
+   ],
+   "presets": [
+    {
+        "name": "Homepage-Banner"
+    }
+   ]
+}
+{% endschema %}

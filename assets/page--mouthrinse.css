@@ -1,0 +1,834 @@
+/*
+#Index
+reset
+common
+spacing
+typography
+component
+*/
+/* reset css start */
+* {
+  box-sizing: border-box;
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+}
+
+img,
+svg {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* reset css end*/
+/* common css start */
+.container--ss {
+  padding-inline: 16px;
+  max-width: 1600px;
+  margin-inline: auto;
+}
+
+.container--ss--full {
+  padding-inline: 16px;
+  margin-inline: auto;
+}
+
+.row--ss {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  row-gap: clamp(32px, 10vw, 48px);
+}
+
+.col--ss {
+  flex-basis: 100%;
+  max-width: 100%;
+}
+
+.section__cta-wrapper {
+  margin-block-start: 28px;
+}
+
+@media (max-width: 1023px) {
+  .row--ss {
+    justify-content: center;
+  }
+  .hide--mobile {
+    display: none;
+  }
+}
+@media (min-width: 1024px) {
+  .row--ss {
+    justify-content: space-between;
+  }
+  .hide--desktop {
+    display: none;
+  }
+}
+@media (min-width: 1440px) and (max-width: 1600px) {
+  .container--ss {
+    padding-inline: 3.33vw;
+  }
+}
+/* common css end
+
+/* spacing css start */
+@media (max-width: 1023px) {
+  .section__padding {
+    padding-block: clamp(32px, 10vw, 48px);
+  }
+}
+@media (min-width: 1024px) {
+  .section__padding {
+    padding-block: clamp(52px, 5vw, 72px);
+  }
+}
+/* spacing css end */
+/* typography css start */
+.text--center {
+  text-align: center;
+}
+
+.text--uppercase {
+  text-transform: uppercase;
+}
+
+/* typography css end */
+.guarantee--moneyback .visual__wrapper img,
+.guarantee--moneyback .visual__wrapper svg {
+  margin-inline: auto;
+}
+
+.btn--dj {
+  display: inline-block;
+  background-image: none;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.btn--mouthrinse {
+  align-self: stretch;
+  flex-basis: 100%;
+  max-width: 385px;
+  padding-block: 20px;
+  font-size: 24px;
+  font-weight: 700;
+  --box-shadow: 4px 4px 0 0;
+}
+
+.is--rounded {
+  border-radius: 52px;
+}
+
+.has--border {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.has--shadow {
+  box-shadow: var(--box-shadow) transparent;
+}
+
+.is--cranberry {
+  background-color: #e04880;
+  border-color: #2e374e;
+  color: #fff;
+  box-shadow: var(--box-shadow) #2e374e;
+  transition: all 0.3s;
+}
+.is--cranberry:hover {
+  background-color: #5ac9d3;
+}
+
+.is--disabled {
+  opacity: 0.75;
+  filter: grayscale(1);
+  pointer-events: none;
+  user-select: none;
+}
+
+#page--mouthrinse .section__heading {
+  font-size: 32px;
+  font-weight: 600;
+}
+#page--mouthrinse .section__sub-heading {
+  font-size: 18px;
+  font-weight: 500;
+}
+#page--mouthrinse .section__desc {
+  margin-block-start: 28px;
+  font-size: 16px;
+}
+#page--mouthrinse .section__desc + .section__desc {
+  margin-block-start: 24px;
+}
+
+@media (min-width: 1024px) {
+  #page--mouthrinse .section__desc {
+    margin-block-start: 36px;
+  }
+}
+@media (min-width: 1280px) {
+  #page--mouthrinse .section__heading {
+    font-size: 36px;
+  }
+  #page--mouthrinse .section__desc {
+    font-size: 20px;
+  }
+}
+.cta__wrapper {
+  margin-block-start: 44px;
+  margin-inline: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 385px;
+}
+
+.note--moneyback {
+  font-size: 16px;
+  letter-spacing: 1.5px;
+}
+
+.mouthrinse__hero {
+  position: relative;
+  background-color: #8fe3e5;
+  padding-block: 14vw 7vw;
+}
+.mouthrinse__hero .hero__banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.mouthrinse__hero .hero__banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+}
+.mouthrinse__hero .content__wrapper {
+  position: relative;
+}
+.mouthrinse__hero .hero__sub-heading {
+  font-size: 18px;
+  font-weight: 500;
+}
+.mouthrinse__hero .hero__heading {
+  margin-block-start: 24px;
+  color: #fff;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.mouthrinse__hero .hero__desc {
+  margin-block-start: 24px;
+  max-width: 464px;
+}
+
+@media (max-width: 1023px) {
+  .mouthrinse__hero {
+    padding-block-start: 0;
+  }
+  .mouthrinse__hero .hero__banner {
+    height: 97vw;
+  }
+  .mouthrinse__hero .content__wrapper {
+    padding-block-start: 103vw;
+  }
+  .mouthrinse__hero .hero__desc {
+    text-align: center;
+    margin-inline: auto;
+  }
+}
+@media (min-width: 1024px) {
+  .mouthrinse__hero .row--ss {
+    justify-content: flex-end;
+  }
+  .mouthrinse__hero .col--content {
+    flex-basis: 44%;
+  }
+  .mouthrinse__hero .hero__banner {
+    height: 100%;
+  }
+  .mouthrinse__hero .content__wrapper {
+    padding-block-start: 0;
+  }
+  .mouthrinse__hero .cta__wrapper {
+    margin-inline: 0;
+  }
+}
+@media (max-width: 1279px) {
+  .mouthrinse__hero .hero__heading {
+    font-size: 32px;
+  }
+  .mouthrinse__hero .hero__desc {
+    font-size: 16px;
+  }
+}
+@media (min-width: 1280px) {
+  .mouthrinse__hero .hero__heading {
+    font-size: 55px;
+  }
+  .mouthrinse__hero .hero__desc {
+    font-size: 20px;
+  }
+}
+.mouthrinse__features {
+  background-color: #eefdff;
+}
+.mouthrinse__features .section__heading {
+  font-size: 28px !important;
+  font-weight: 700 !important;
+}
+
+.features__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+}
+.features__wrapper .feature__item {
+  flex: 0 0 152px;
+}
+.features__wrapper .feature__item:hover .feature__icon::before {
+  transform: rotate(360deg);
+}
+.features__wrapper .feature__icon {
+  width: 108px;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-inline: auto;
+  position: relative;
+}
+.features__wrapper .feature__icon::before {
+  position: absolute;
+  content: "";
+  inset: 0;
+  background-image: linear-gradient(to bottom, #58aec5, #8cc8c6);
+  transition: all 1s;
+  will-change: transform;
+}
+.features__wrapper .feature__icon > * {
+  position: relative;
+}
+.features__wrapper .feature__title {
+  margin-block-start: 20px;
+  text-align: center;
+  font-size: 16px;
+}
+
+@media (min-width: 1024px) {
+  .features__wrapper {
+    justify-content: space-around;
+  }
+}
+@media (min-width: 1280px) {
+  .mouthrinse__features .section__heading {
+    font-size: 30px !important;
+  }
+}
+.mouthrinse__power {
+  position: relative;
+  padding-block: 8vw;
+}
+.mouthrinse__power .section__visual {
+  position: absolute;
+  top: 0;
+  left: 2%;
+  width: 96%;
+  height: 57vw;
+}
+.mouthrinse__power .section__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 0 40%;
+}
+.mouthrinse__power .content__wrapper {
+  padding-block-start: 57vw;
+  max-width: 514px;
+  margin-inline: auto;
+}
+.mouthrinse__power .section__heading {
+  font-weight: 600 !important;
+}
+
+@media (min-width: 1024px) {
+  .mouthrinse__power .section__visual {
+    left: -10%;
+    width: 60%;
+    height: 100%;
+  }
+  .mouthrinse__power .row--ss {
+    justify-content: flex-end;
+  }
+  .mouthrinse__power .col--content {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+  .mouthrinse__power .content__wrapper {
+    padding-block-start: 0;
+  }
+}
+.mouthrinse__approved {
+  background-color: #eefdff;
+  position: relative;
+}
+.mouthrinse__approved .section__visual {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vw;
+}
+.mouthrinse__approved .section__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mouthrinse__approved .content__wrapper {
+  padding-block-start: 100vw;
+  max-width: 514px;
+  margin-inline: auto;
+}
+
+@media (max-width: 1023px) {
+  .mouthrinse__approved {
+    padding-block: 8vw;
+  }
+}
+@media (min-width: 1024px) {
+  .mouthrinse__approved {
+    padding-block: 12vw;
+  }
+  .mouthrinse__approved .section__visual {
+    width: 50%;
+    height: 100%;
+  }
+  .mouthrinse__approved .col--content {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+  .mouthrinse__approved .content__wrapper {
+    padding-block-start: 0;
+  }
+}
+.mouthrinse__prebiotics {
+  background-color: #eefdff;
+  padding-block-start: 0 !important;
+}
+.mouthrinse__prebiotics .section__heading {
+  font-weight: 700 !important;
+}
+.mouthrinse__prebiotics .content__wrapper {
+  background-color: #2e374e;
+  color: #fff;
+  padding-inline: 16px;
+  margin-inline: -16px;
+}
+.mouthrinse__prebiotics .prebiotics__wrapper {
+  margin-block-start: 44px;
+}
+.mouthrinse__prebiotics .prebiotics__cta {
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.prebiotics__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+.prebiotics__wrapper .prebiotics__item {
+  position: relative;
+  padding-inline-start: 24px;
+}
+.prebiotics__wrapper .prebiotics__item::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background-color: #97dbdd;
+}
+.prebiotics__wrapper .prebiotics__title {
+  font-size: 30px;
+  font-weight: bold;
+}
+.prebiotics__wrapper .prebiotics__desc {
+  margin-block: 16px 8px;
+  font-size: 20px;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .prebiotics__wrapper {
+    justify-content: center;
+  }
+  .prebiotics__wrapper .prebiotics__item {
+    flex: 1 0 46%;
+  }
+}
+@media (min-width: 1024px) {
+  .mouthrinse__prebiotics .section__heading,
+  .mouthrinse__prebiotics .section__sub-heading {
+    text-align: center;
+  }
+  .mouthrinse__prebiotics .content__wrapper {
+    margin-inline: 0;
+  }
+  .prebiotics__wrapper {
+    justify-content: space-around;
+  }
+  .prebiotics__wrapper .prebiotics__item {
+    flex: 0 1 auto;
+  }
+}
+.mouthrinse__product .mouthrinse__variant {
+  border: 1px solid #2e374e;
+  box-shadow: 4px 4px 0 0 #2e374e;
+  text-align: center;
+}
+.mouthrinse__product .variant__ribbon {
+  padding: 12px 40px;
+}
+.mouthrinse__product .variant__ribbon.pack--two {
+  background-color: #e04880;
+  color: #2e374e;
+}
+.mouthrinse__product .variant__ribbon.pack--four {
+  background-color: #2e374e;
+  color: #ffc185;
+}
+.mouthrinse__product .variant__ribbon h5 {
+  font-size: 22px;
+}
+.mouthrinse__product .variant__ribbon span {
+  text-transform: uppercase;
+}
+.mouthrinse__product .variant__image {
+  position: relative;
+  padding-top: 100%;
+}
+.mouthrinse__product .variant__image img {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  object-position: center;
+}
+.mouthrinse__product .variant--details {
+  padding-block: 28px;
+}
+.mouthrinse__product .variant__title {
+  font-size: 24px;
+}
+.mouthrinse__product .variant__content {
+  margin-block-start: 16px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.mouthrinse__product .variant__flavour {
+  margin-block-start: 12px;
+  text-align: center;
+}
+.mouthrinse__product .variant__flavour img,
+.mouthrinse__product .variant__flavour svg {
+  margin-inline: auto;
+}
+.mouthrinse__product .variant__price.price--compare-at {
+  margin-block-start: 36px;
+  font-size: 24px;
+  font-weight: 500;
+  text-decoration: line-through;
+}
+.mouthrinse__product .variant__price.price--selling {
+  margin-block-start: 16px;
+  font-size: 38px;
+  line-height: 1;
+}
+.mouthrinse__product .variant__discount {
+  margin-block-start: 12px;
+  font-size: 24px;
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .mouthrinse__product .row--mouthrinse__variant {
+    column-gap: 32px;
+    justify-content: center;
+  }
+  .mouthrinse__product .row--mouthrinse__variant > .col--ss {
+    flex-basis: calc(50% - 16px);
+    max-width: calc(50% - 16px);
+  }
+}
+@media (min-width: 1280px) {
+  .mouthrinse__product .row--mouthrinse__variant {
+    column-gap: 40px;
+    align-items: flex-start;
+  }
+  .mouthrinse__product .row--mouthrinse__variant > .col--ss {
+    flex-basis: calc(33.33% - 40px);
+    max-width: calc(33.33% - 40px);
+  }
+}
+.mouthrinse__vitamins {
+  background-color: #eefdff;
+}
+
+.vitamins__wrapper {
+  margin-inline-end: -16px;
+}
+.vitamins__wrapper .slick-slide {
+  margin-inline-end: 40px;
+}
+.vitamins__wrapper .vitamin__item {
+  vertical-align: top;
+}
+.vitamins__wrapper .vitamin__item:hover .vitamin__icon::before {
+  transform: rotate(360deg);
+}
+.vitamins__wrapper .vitamin__icon {
+  width: 144px;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-inline: auto;
+  position: relative;
+}
+.vitamins__wrapper .vitamin__icon::before {
+  position: absolute;
+  content: "";
+  inset: 0;
+  z-index: 0;
+  background-image: linear-gradient(to bottom, #8ac5c9, #58aec5);
+  transition: all 1s;
+  will-change: transform;
+}
+.vitamins__wrapper .vitamin__icon > * {
+  position: relative;
+  z-index: 1;
+}
+.vitamins__wrapper .vitamin__title {
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: bold;
+}
+.vitamins__wrapper .vitamin__title strong {
+  font-size: 30px;
+}
+.vitamins__wrapper .vitamin__desc {
+  margin-block-start: 20px;
+}
+
+@media (min-width: 1024px) {
+  .mouthrinse__vitamins .section__heading {
+    text-align: center;
+  }
+  .mouthrinse__vitamins .section__desc {
+    text-align: center;
+    max-width: 938px;
+    margin-inline: auto;
+  }
+  .vitamins__wrapper {
+    margin-inline-end: 0;
+  }
+  .vitamins__wrapper .vitamin__item {
+    padding: 16px 32px;
+    min-height: 340px;
+  }
+  .vitamins__wrapper .vitamin__desc {
+    text-align: center;
+  }
+}
+.mouthrinse__good-stuff {
+  position: relative;
+  padding-block: 8vw 0;
+}
+.mouthrinse__good-stuff .section__visual {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vw;
+}
+.mouthrinse__good-stuff .section__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mouthrinse__good-stuff .content__wrapper {
+  padding-block-start: 100vw;
+  max-width: 514px;
+  margin-inline: auto;
+  position: relative;
+}
+
+.list--no-bad-stuff {
+  list-style-type: none;
+  padding-block: 40px;
+  padding-inline: 28px;
+  margin-block-start: 24px;
+  position: relative;
+  z-index: 1;
+}
+.list--no-bad-stuff::before {
+  position: absolute;
+  content: "";
+  inset: 0;
+  z-index: -1;
+  background-image: linear-gradient(to bottom, #85d4db, #5db1c6);
+  margin-inline: -16px;
+}
+.list--no-bad-stuff li h5 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+@media (min-width: 1024px) {
+  .mouthrinse__good-stuff {
+    padding-block: 12vw 0;
+  }
+  .mouthrinse__good-stuff .section__visual {
+    width: 50%;
+    height: 50%;
+  }
+  .mouthrinse__good-stuff .col--content {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+  .mouthrinse__good-stuff .content__wrapper {
+    padding-block-start: 0;
+  }
+  .list--no-bad-stuff {
+    padding-inline: 5vw 0;
+    margin-block-start: 56px;
+  }
+  .list--no-bad-stuff::before {
+    margin-inline: 0px;
+    right: -10vw;
+  }
+}
+@media (min-width: 1280px) {
+  .list--no-bad-stuff li h5 {
+    font-size: 30px;
+  }
+}
+.mouthrinse__testimonials {
+  background-color: #2e374e;
+  margin-block-start: 28px;
+}
+.mouthrinse__testimonials .content__wrapper {
+  color: #fff;
+  text-align: center;
+}
+.mouthrinse__testimonials .testimonials__wrapper {
+  margin-block-start: 60px;
+}
+
+.testimonials--card .slick-slide {
+  padding-inline: 16px;
+}
+.testimonials--card .slick-dots {
+  position: relative;
+  bottom: 0;
+  margin-block-start: 10px;
+}
+.testimonials--card .slick-dots li button::before {
+  color: #5ac9d3 !important;
+  font-size: 12px !important;
+  opacity: 0.7;
+  transform: scale(0.7);
+}
+.testimonials--card .slick-dots li.slick-active button::before {
+  opacity: 1;
+  transform: scale(1);
+}
+.testimonials--card .testimonial__item {
+  background-color: #eefdff;
+  box-shadow: 4px 4px 0 0 #5ac9d3;
+  padding: 16px;
+}
+.testimonials--card .testimonial__author {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  gap: 40px;
+  margin-block-start: -115px;
+  padding-inline-start: 0;
+}
+.testimonials--card .author__picture {
+  flex: 0 0 198px;
+}
+.testimonials--card .author__picture img {
+  border: 1px solid #707070;
+  border-radius: 50%;
+}
+.testimonials--card .author__content {
+  text-align: center;
+}
+.testimonials--card .author__name {
+  margin-block-start: 12px;
+  font-size: 24px;
+  font-weight: 600;
+}
+.testimonials--card .author__text {
+  margin-block-start: 4px;
+  font-size: 16px;
+}
+
+@media (max-width: 767px) {
+  .testimonials--card .slick-list {
+    padding-block-start: 99px !important;
+  }
+}
+@media (min-width: 768px) {
+  .mouthrinse__testimonials .testimonials__wrapper {
+    margin-inline: -16px;
+  }
+  .testimonials--card .slick-slide {
+    padding-inline: 28px;
+  }
+  .testimonials--card .testimonial__item {
+    padding: 4.44vw 3.6vw;
+  }
+  .testimonials--card .testimonial__author {
+    flex-wrap: nowrap;
+    margin-block-start: 0;
+  }
+  .testimonials--card .author__content {
+    text-align: start;
+  }
+}

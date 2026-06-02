@@ -1,0 +1,32 @@
+<div class="Homepage-icon-w-text">
+    <img src="{{section.settings.image | img_url: '180x'}}" alt="">
+    <h3>{{section.settings.heading}}</h3>
+    <p>{{section.settings.subheading}}</p>
+</div>
+{% schema %}
+{
+   "name": "Homepage-Icon-W-Text",
+   "settings" : [
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Icon"
+        },
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "heading"
+        },
+        {
+            "type": "richtext",
+            "id": "subheading",
+            "label": "subheading"
+        }
+   ],
+   "presets": [
+    {
+        "name": "Homepage-Icon-w-text"
+    }
+   ]
+}
+{% endschema %}

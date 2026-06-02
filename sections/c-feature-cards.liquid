@@ -1,0 +1,261 @@
+{%- style -%}
+  /* IMPORTACIÓN DE FUENTE RALEWAY */
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap');
+
+  /* =========================================
+     AISLAMIENTO TOTAL POR SECCIÓN
+     ========================================= */
+  #c-features-{{ section.id }} {
+    /* --- COLORES GLOBALES --- */
+    --cf-bg-section: {{ section.settings.bg_color }};
+    --cf-card-bg: {{ section.settings.card_bg }};
+    --cf-border-color: {{ section.settings.border_color }};
+    --cf-text-dark: #000000; /* Texto principal oscuro */
+    --cf-text-light: #4b5563; /* Texto descripción */
+    
+    font-family: 'Raleway', sans-serif;
+    background-color: var(--cf-bg-section);
+    width: 100%;
+    padding-top: {{ section.settings.pad_top_mob }}px;
+    padding-bottom: {{ section.settings.pad_bot_mob }}px;
+    overflow: hidden; /* Evita scroll horizontal en la página */
+  }
+
+  #c-features-{{ section.id }} .c-features__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* =========================================
+     GRID DE 3 TARJETAS
+     ========================================= */
+  #c-features-{{ section.id }} .c-features__track {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 30px;
+  }
+
+  /* =========================================
+     ESTILOS DE LA TARJETA
+     ========================================= */
+  #c-features-{{ section.id }} .c-features__card {
+    background-color: var(--cf-card-bg);
+    border: 1.5px solid var(--cf-border-color);
+    border-radius: 16px;
+    padding: 24px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 0;
+  }
+
+  /* Icono */
+  #c-features-{{ section.id }} .c-features__icon {
+    height: 28px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cf-text-dark); /* Por si usan SVG con currentColor */
+  }
+
+  #c-features-{{ section.id }} .c-features__icon svg,
+  #c-features-{{ section.id }} .c-features__icon img {
+    max-height: 100%;
+    width: auto;
+    display: block;
+  }
+
+  /* Textos */
+  #c-features-{{ section.id }} .c-features__title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--cf-text-dark);
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+  }
+
+  #c-features-{{ section.id }} .c-features__desc {
+    font-size: 12px;
+    color: var(--cf-text-light);
+    font-weight: 400;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  /* =========================================
+     COMPORTAMIENTO DESKTOP
+     ========================================= */
+  @media (min-width: 768px) {
+    #c-features-{{ section.id }} {
+      padding-top: {{ section.settings.pad_top_desk }}px;
+      padding-bottom: {{ section.settings.pad_bot_desk }}px;
+    }
+
+  #c-features-{{ section.id }} .c-features__track {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 50px;
+  }
+
+
+    #c-features-{{ section.id }} .c-features__container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 50px;
+    }
+
+    #c-features-{{ section.id }} .c-features__track {
+      gap: 32px;
+    }
+
+    #c-features-{{ section.id }} .c-features__card {
+      padding: 20px 20px;
+      border-radius: 20px;
+    }
+
+    #c-features-{{ section.id }} .c-features__icon {
+      height: 40px;
+      margin-bottom: 20px;
+    }
+
+    #c-features-{{ section.id }} .c-features__title {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    #c-features-{{ section.id }} .c-features__desc {
+      font-size: 16px;
+      color:#000;
+    }
+  }
+{%- endstyle -%}
+
+<section id="c-features-{{ section.id }}" class="c-features">
+  <div class="c-features__container">
+    
+    <div class="c-features__track">
+      {% for block in section.blocks %}
+        <div class="c-features__card" {{ block.shopify_attributes }}>
+          
+          <div class="c-features__icon">
+            {% if block.settings.svg_code != blank %}
+              {{ block.settings.svg_code }}
+            {% elsif block.settings.image != blank %}
+              {{ block.settings.image | image_url: height: 80 | image_tag: loading: 'lazy' }}
+            {% endif %}
+          </div>
+
+          {% if block.settings.title != blank %}
+            <h3 class="c-features__title">{{ block.settings.title }}</h3>
+          {% endif %}
+          
+          {% if block.settings.description != blank %}
+            <p class="c-features__desc">{{ block.settings.description | newline_to_br }}</p>
+          {% endif %}
+          
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "C - Feature Cards",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Color Fondo de Sección",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Color Fondo Tarjeta",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Color Borde Tarjeta",
+      "default": "#2b62f6"
+    },
+    {
+      "type": "header",
+      "content": "Paddings de Sección"
+    },
+    { "type": "range", "id": "pad_top_desk", "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Padding Top Desktop", "default": 60 },
+    { "type": "range", "id": "pad_bot_desk", "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Padding Bottom Desktop", "default": 60 },
+    { "type": "range", "id": "pad_top_mob", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Padding Top Mobile", "default": 40 },
+    { "type": "range", "id": "pad_bot_mob", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Padding Bottom Mobile", "default": 40 }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Beneficio",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "html",
+          "id": "svg_code",
+          "label": "Código SVG del Ícono (Recomendado)",
+          "info": "Pega aquí el código <svg> del ícono."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "O usar Imagen (si no tienes SVG)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Proven to Support Healthy Smiles"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Descripción",
+          "default": "Powered by ingredients like Nanohydroxyapatite and xylitol—clinically shown to protect enamel and reduce sensitivity."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "C - Feature Cards",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Proven to Support Healthy Smiles",
+            "description": "Powered by ingredients like Nanohydroxyapatite and xylitol—clinically shown to protect enamel and reduce sensitivity.",
+            "svg_code": "<svg width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z\"/></svg>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Dentist Developed & Approved",
+            "description": "Created by a licensed dentist with decades of experience, trusted by professionals and families alike.",
+            "svg_code": "<svg width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\"/><polyline points=\"9 12 11 14 15 10\"/></svg>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Over 360,000 Cleaner Smiles",
+            "description": "Join the growing community who've made the switch to safer, science-backed oral care.",
+            "svg_code": "<svg width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z\"/><polygon points=\"12 6 13.5 9 17 9.5 14.5 12 15.5 15.5 12 14 8.5 15.5 9.5 12 7 9.5 10.5 9 12 6\"/></svg>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

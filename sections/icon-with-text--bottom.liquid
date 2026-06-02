@@ -1,0 +1,39 @@
+
+<div class="container">
+<div class="Homepage-icon-w-text">
+  <img src="{{section.settings.image | img_url: '90x'}}" alt="">
+  <h3 class="section__heading">{{section.settings.heading}}</h3>
+  <div class="richtext__content">
+  <p>{{section.settings.subheading}}</p>
+  </div>
+</div>
+  </div>
+{% schema %}
+{
+   "name": "Icon with text - bottom",
+  "tag": "section",
+  "class": "section__padding ss--icon-with-text--bottom",
+   "settings" : [
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Icon"
+        },
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "heading"
+        },
+        {
+            "type": "richtext",
+            "id": "subheading",
+            "label": "subheading"
+        }
+   ],
+   "presets": [
+    {
+        "name": "Icon with text - bottom"
+    }
+   ]
+}
+{% endschema %}

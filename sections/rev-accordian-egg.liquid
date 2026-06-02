@@ -1,0 +1,286 @@
+<!-- Schema Section -->
+
+<!-- Styles -->
+<style>
+  #rev-accordion-egg {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+  }
+#rev-accordion-egg .accordion-wrapper {
+  background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+  #rev-accordion-egg .bottom-left-image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    width:20%;
+  }
+#rev-accordion-egg .container .row{
+    padding: 100px 0px 100px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+  #rev-accordion-egg .heading-column {
+    padding: 20px;
+    margin:0px 35px 0px 50px;
+    width:40%;
+  }
+  #rev-accordion-egg .heading-column h2{
+    font-size:47px;
+    line-height:53px;
+  }
+  #rev-accordion-egg .accordion-column {
+    padding: 20px;
+    width:100%;
+  }
+  #rev-accordion-egg .accordion-item {
+    margin-bottom: 10px;
+    border:0px;
+    border-bottom:1px solid #F2F1F2;
+  }
+  #rev-accordion-egg .accordion-header {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    gap:30px;
+  }
+  #rev-accordion-egg .accordion-header h3 {
+    margin: 0;
+    font-weight:400;
+    font-size:24px;
+  }
+  #rev-accordion-egg .accordion-icon {
+  width: 35px;
+    height: 35px;
+    padding:10px;
+    background: #D2F4EF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    border-radius: 100%;
+  }
+  #rev-accordion-egg .accordion-content {
+    display: none;
+    padding: 10px 0;
+  }
+  @media screen and (max-width: 1080px) {
+    #rev-accordion-egg .heading-column {
+      padding: 10px;
+      margin: 0px 20px 0px 40px;
+    }
+    #rev-accordion-egg .accordion-header h3 {
+      font-size: 20px;
+      line-height: 27px;
+    }
+    #rev-accordion-egg .heading-column h2 {
+      font-size: 34px;
+      line-height: 40px;
+    }
+  }
+  @media screen and (max-width: 900px) {
+      #rev-accordion-egg .accordion-header h3 {
+        font-size: 18px;
+        line-height: 22px;
+    }
+    #rev-accordion-egg .heading-column h2 {
+        font-size: 30px;
+        line-height: 36px;
+    }
+    #rev-accordion-egg .container .row {
+      padding: 65px 0px 65px 30px;
+    }
+}
+  @media screen and (max-width: 600px) {
+    #rev-accordion-egg .container .row {
+      padding: 65px 0px 65px 0px;
+      justify-content: flex-end;
+      flex-direction: column;
+    }
+    #rev-accordion-egg .heading-column h2 {
+      font-size: 30px;
+      width: 100%;
+      text-align: center;
+      line-height: 36px;
+    }
+   #rev-accordion-egg .bottom-left-image{
+    display:none;
+  }
+    #rev-accordion-egg .accordion-wrapper{
+      background-image:none !important;
+    }
+    #rev-accordion-egg .heading-column{
+      width:100%;
+      margin: 0px;
+    }
+    #rev-accordion-egg .accordion-column{
+      padding:0px;
+    }
+}
+@media screen and (max-width: 400px) {
+    #rev-accordion-egg .heading-column h2 {
+      font-size: 26px;
+      line-height: 30px;
+  }
+  #rev-accordion-egg .accordion-header{
+    gap: 9px;
+  }
+  #rev-accordion-egg .accordion-header h3 {
+        font-size: 16px;
+        line-height: 19px;
+    }
+ #rev-accordion-egg .accordion p{
+  font-size: 13px;
+    line-height: 17px;
+}
+}
+</style>
+
+<!-- Section HTML -->
+<section id="rev-accordion-egg" class="rev-accordion-section">
+  <div class="accordion-wrapper" style="background-image: url({{ section.settings.bg_image_desktop | image_url }}); background-color: {{ section.settings.bg_color }}">
+    <!-- Bottom Left Image for Desktop -->
+{% if section.settings.bottom_left_image != blank %}
+    <div class="bottom-left-image">
+      <img src="{{ section.settings.bottom_left_image | image_url }}" alt="Bottom Left Image">
+    </div>
+    {% endif %}
+    <!-- Content Columns -->
+    <div class="container">
+      <div class="row">
+        <div class="heading-column">
+          <h2 style="color:{{ section.settings.hd_color }}">{{ section.settings.heading }}</h2>
+        </div>
+        <div class="accordion-column">
+          {% for block in section.blocks %}
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <h3 style="color:{{ block.settings.text_color }}">{{ block.settings.accordion_question }}</h3>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content" style="color:{{ block.settings.text_color }}">
+              {{ block.settings.accordion_answer }}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Script -->
+<!-- <script>
+  document.querySelectorAll('#rev-accordion-egg .accordion-header').forEach(function(header) {
+    header.addEventListener('click', function() {
+      var content = header.nextElementSibling;
+      var icon = header.querySelector('.accordion-icon');
+      if (content.style.display === 'block') {
+        content.style.display = 'none';
+        icon.textContent = '+';
+      } else {
+        content.style.display = 'block';
+        icon.textContent = '-';
+      }
+    });
+  });
+</script> -->
+<!-- Script -->
+<script>
+  document.querySelectorAll('#rev-accordion-egg .accordion-header').forEach(function(header) {
+    header.addEventListener('click', function() {
+      // Close all other accordion items
+      document.querySelectorAll('#rev-accordion-egg .accordion-content').forEach(function(content) {
+        content.style.display = 'none';
+      });
+
+      document.querySelectorAll('#rev-accordion-egg .accordion-icon').forEach(function(icon) {
+        icon.textContent = '+';
+      });
+
+      // Toggle the clicked accordion
+      var content = header.nextElementSibling;
+      var icon = header.querySelector('.accordion-icon');
+      if (content.style.display === 'block') {
+        content.style.display = 'none';
+        icon.textContent = '+';
+      } else {
+        content.style.display = 'block';
+        icon.textContent = '-';
+      }
+    });
+  });
+</script>
+{% schema %}
+{
+  "name": "Rev Accordion Section egg",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image_desktop",
+      "label": "Background Image for Desktop"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "BG Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_left_image",
+      "label": "Bottom Left Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Frequently Asked Questions"
+    },
+      {
+      "type": "color",
+      "id": "hd_color",
+      "label": "Heading Color",
+      "default": "#ffffff"
+    },
+  ],
+  "blocks": [
+    {
+      "type": "accordion_block",
+      "name": "Accordion Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "accordion_question",
+          "label": "Accordion Question (Heading)"
+        },
+        {
+          "type": "richtext",
+          "id": "accordion_answer",
+          "label": "Accordion Answer"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color",
+          "default": "#000000"
+        }
+
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rev Accordion Section Egg",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}

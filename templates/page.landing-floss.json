@@ -1,0 +1,528 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {}
+    },
+    "1658221340cacc560e": {
+      "type": "Homepage-Banner-Alternative",
+      "settings": {
+        "heading": "Ditch the Plastic.",
+        "heading_size": "6vw",
+        "subheading": "Dr.Jen’s all-natural Silk Floss combines non-toxic & clinically proven Nano-Hydroxyapatite designed to restore oral health and strengthen your smile without harming you OR the environment.",
+        "button_link": "#featuredProductsSaving",
+        "button_text": "Add to Cart",
+        "button_color": "#df477f",
+        "desktop_image": "shopify://shop_images/flosslpherodesktop_2x_35f8155d-d24b-43fa-8943-0ad84282e945.jpg",
+        "mobile_image": "shopify://shop_images/flosslpheromobile_2x_2x_2x_2x_2x_eb0478ff-8ebc-4f86-b58f-e5e9413b20f2.jpg",
+        "height_selector": "small"
+      }
+    },
+    "1658221719e1787a3f": {
+      "type": "homepage1x4",
+      "blocks": {
+        "385b0a81-eacc-4cff-9c9b-cda367c56aad": {
+          "type": "Icon-Block",
+          "settings": {
+            "image": "shopify://shop_images/clinically-proven_png_f654af63-05d3-45a7-8507-02f7d15118be.png",
+            "title": "Clinically Proven Protection",
+            "info": ""
+          }
+        },
+        "b416cadd-0bf6-467a-8d4c-25a21826eb3b": {
+          "type": "Icon-Block",
+          "settings": {
+            "image": "shopify://shop_images/environmentallyfriendlyicon.png",
+            "title": "Environmentally Friendly",
+            "info": ""
+          }
+        },
+        "81e65a53-ced7-4e7d-b871-8f599bf58a4b": {
+          "type": "Icon-Block",
+          "settings": {
+            "image": "shopify://shop_images/dentist-developed_png_fe920905-4577-4720-8f55-8f7b3f7d1a51.png",
+            "title": "Dentist Developed & Approved",
+            "info": ""
+          }
+        }
+      },
+      "block_order": [
+        "385b0a81-eacc-4cff-9c9b-cda367c56aad",
+        "b416cadd-0bf6-467a-8d4c-25a21826eb3b",
+        "81e65a53-ced7-4e7d-b871-8f599bf58a4b"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "override_css": "[SectionID] + div{\nmargin-bottom: 80px;\n}"
+      }
+    },
+    "16594489360a1f2e22": {
+      "type": "featured-images",
+      "blocks": {
+        "1b9684e0-439f-4cae-8eb3-4ca66150fc30": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/UGC-1_copy_9886e6cd-5b10-420a-9fe0-837b9492a543.jpg"
+          }
+        },
+        "864c8491-cfc5-49c6-b8da-3c5fe49c397e": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/UGC-2.jpg"
+          }
+        },
+        "72469d9f-effb-482b-8cdb-426e3054f7b8": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/UGC-3.jpg"
+          }
+        },
+        "42449b3c-d3e0-4437-be1a-7334b8673f80": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/UGC-4.jpg"
+          }
+        },
+        "259b49c1-0a8b-4ad2-bc6d-29fb366695c0": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/UGC-5.jpg"
+          }
+        },
+        "ddcaaaff-7ceb-49fa-924a-3b0bb6922499": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/UGC-6.jpg"
+          }
+        },
+        "5f64fc38-8e7f-4c77-83b8-59e050c5678e": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/UGC-7.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "1b9684e0-439f-4cae-8eb3-4ca66150fc30",
+        "864c8491-cfc5-49c6-b8da-3c5fe49c397e",
+        "72469d9f-effb-482b-8cdb-426e3054f7b8",
+        "42449b3c-d3e0-4437-be1a-7334b8673f80",
+        "259b49c1-0a8b-4ad2-bc6d-29fb366695c0",
+        "ddcaaaff-7ceb-49fa-924a-3b0bb6922499",
+        "5f64fc38-8e7f-4c77-83b8-59e050c5678e"
+      ],
+      "settings": {
+        "heading": "Over 360,000 Healthier & Stronger Smiles"
+      }
+    },
+    "1658221842286d2dd8": {
+      "type": "Image-w-text-AB",
+      "settings": {
+        "section_image": "shopify://shop_images/50-50leftimgfloss.png",
+        "section_title": "Non-Toxic & Clinically  Proven Ingredients  Designed to Help Prevent Tooth Decay",
+        "section_text": "<p>• Made with all-natural ingredients<br/>• Paraben-free, vegan & cruelty-free<br/>• Remineralizing to strengthen and restore tooth enamel<br/>• Plastic Free and Environmentally Friendly<br/>• Available in 3 delicious flavors</p>",
+        "first_flavor": "shopify://shop_images/papaya.png",
+        "second_flavor": "shopify://shop_images/mint.png",
+        "third_flavor": "shopify://shop_images/black_cherry.png",
+        "main_container_background": "#ffebe3",
+        "section_second_text": "<p>• Plastic Free Floss<br/>• Non-toxic<br/>• All-Natural Ingredients<br/>• No\tArtificial Color<br/>• Biodegradeable</p>",
+        "second_text_font_color": "#1d2433",
+        "second_text_background": "#abe9ed",
+        "bottom_container_title": "Ingredients:",
+        "bottom_container_text": "<p>Mint:  Premium Italian Silk, vegetable wax, spearmint, nano-hydroxyapatite, cocoa butterBlack Cherry: Premium Italian Silk, vegetable wax, Black Cherry, nano-hydroxyapatite, cocoa butter Papaya: Premium Italian Silk, vegetable wax, Papaya, nano-hydroxyapatite, cocoa butter. Dispensers are reusable and made from recycled plastic</p>",
+        "url": "#featuredProductsSaving",
+        "button_text": "Add to Cart",
+        "bottom_container_background": "#ffffff"
+      }
+    },
+    "165822189116e7879e": {
+      "type": "homepage1x4",
+      "blocks": {
+        "132b644d-80b6-44d8-a8f5-b5e179cc1677": {
+          "type": "Icon-Block",
+          "settings": {
+            "image": "shopify://shop_images/30-day.png",
+            "title": "",
+            "info": ""
+          }
+        },
+        "e4ffc29e-5da3-4a32-bbc9-b8358348e2bf": {
+          "type": "Icon-Block",
+          "settings": {
+            "image": "shopify://shop_images/secure-checkout.png",
+            "title": "",
+            "info": ""
+          }
+        },
+        "e86eeeba-a0eb-4fd0-a664-a5e805d3fbe2": {
+          "type": "Icon-Block",
+          "settings": {
+            "image": "shopify://shop_images/360k.png",
+            "title": "",
+            "info": ""
+          }
+        }
+      },
+      "block_order": [
+        "132b644d-80b6-44d8-a8f5-b5e179cc1677",
+        "e4ffc29e-5da3-4a32-bbc9-b8358348e2bf",
+        "e86eeeba-a0eb-4fd0-a664-a5e805d3fbe2"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "override_css": "[SectionID] > .homepage-1x4{\n    background: #ffebe3;\n    padding-top: 0;\n    margin-top: 0 !important;\n}\n\n[SectionID] > .homepage-1x4 > .homepage-1x4-icons > .icon {\n    width: max-content !important;\n}\n\n[SectionID] > .homepage-1x4 > .homepage-1x4-icons > .icon > img {\n    max-width: 100px;\n    max-height: 100px;\n    height: 100px;\n}\n\n@media(max-width:768px){\n[SectionID] > .homepage-1x4{\n    background: #f4fefe;\n    padding-top: 40px;\n    margin-top: 0 !important;\n}\n}"
+      }
+    },
+    "1658222061ec572af7": {
+      "type": "image-with-text-altered",
+      "blocks": {
+        "16582220619f3f48bf-0": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/50505rightimgfloss.png",
+            "tab_label": "Item",
+            "subheading": "",
+            "title": "Better for you. Better for the Earth.",
+            "content": "<p><em><strong>(Now that’s something to smile about!)</strong></em><strong><br/></strong>Every time we’re flossing, microparticles of the floss break down in our mouths and we end up swallowing. We believe our bodies deserve better than the plastics found in over 90% of the other brands.<br/><br/>Dr.Jens floss was created with all-natural & premium silk thats safe for your body and the environment.</p>",
+            "button_text": "Add to Cart",
+            "button_link": "#featuredProductsSaving"
+          }
+        }
+      },
+      "block_order": [
+        "16582220619f3f48bf-0"
+      ],
+      "settings": {
+        "reveal_on_scroll": true,
+        "padding_top": true,
+        "background_type": "full_width",
+        "background_overlap": "image",
+        "hide_mobile_color_overlap": false,
+        "offset_color_overlap_desktop": false,
+        "image_position": "right",
+        "text_alignment": "left",
+        "cycle_speed": 8,
+        "accent_background": "rgba(0,0,0,0)",
+        "text_color": "rgba(0,0,0,0)",
+        "button_background": "#fa4f39",
+        "button_text_color": "rgba(0,0,0,0)",
+        "background_color": "#fef6f2"
+      }
+    },
+    "165822247917338808": {
+      "type": "Homepage-Doctor-Testomonials",
+      "blocks": {
+        "fcf33ed6-2e4b-4c52-9c80-d818b99dfb18": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/flossmorgan.jpg",
+            "star_rating": 5,
+            "name": "Morgan. Licensed Dental Assistant",
+            "description": "\"Once I found out the floss I was using was made from plastic, I switched to Dr Jen's silk floss.  The Papaya flavor is awesome!  When flossing with Dr Jen's, it feels like a spa day for my teeth and gums!\"",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "ba21bf85-37dc-40ba-b5fc-ef5c833dbce9": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/flosspeters.jpg",
+            "star_rating": 5,
+            "name": "Dr Peters. Dentist",
+            "description": "\"It is difficult to find a quality floss that is not made from plastic.  Dr Jen's silk floss is gentle to use yet effective at removing plaque between the teeth.  Her floss also has the added benefit of including nano Hydroxyapatite in the floss.  If you are looking for floss that is non-toxic and effective, choose Dr Jen's silk floss\"",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "8ac5ea30-886f-431a-b0c5-b2138f9519f0": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/drjenalexandradentist.jpg",
+            "star_rating": 5,
+            "name": "Alexandra. Dental Hygienist",
+            "description": "\"Dr Jen's silk floss was designed by a real dentist. No more plastic microparticles being swallowed when flossing using Dr Jen's silk floss.  Plus the flavor is amazing! It will want to make you floss\"",
+            "star_color": "#8bd1cf"
+          }
+        }
+      },
+      "block_order": [
+        "fcf33ed6-2e4b-4c52-9c80-d818b99dfb18",
+        "ba21bf85-37dc-40ba-b5fc-ef5c833dbce9",
+        "8ac5ea30-886f-431a-b0c5-b2138f9519f0"
+      ],
+      "settings": {
+        "small_heading": "",
+        "large_heading": "Real dental professionals. Real reviews.",
+        "stack_content": true,
+        "round_image": false,
+        "bg_color": "#ffffff",
+        "text_color": "#1d2333",
+        "mobile_padding": 80
+      }
+    },
+    "1658222972a240ed56": {
+      "type": "text-w-image",
+      "disabled": true,
+      "settings": {
+        "heading": "The Dr. Jen Difference",
+        "subheading": "You'd think that all natural floss products would be good for your teeth, but they are not. Dr. Jen’s floss brings together all-natural ingredients, sustainable and biodegradable materials, as well as a proven remineralizer so it tastes good, \u0003feels good and fights decay without harming the planet.",
+        "section_image": "shopify://shop_images/comparison.png",
+        "button_url": "#featuredProductsSaving",
+        "button_text": "Add to Cart",
+        "button_color": "#df477f",
+        "Background_Color": "#fef6f2"
+      }
+    },
+    "166144295034f5fb59": {
+      "type": "text-with-image-compare",
+      "settings": {
+        "heading": "The Dr. Jen Difference",
+        "subheading": "You'd think that all natural floss products would be good for your teeth, but they are not. Dr. Jen’s floss brings together all-natural ingredients, sustainable and biodegradable materials, as well as a proven remineralizer so it tastes good, \u0003feels good and fights decay without harming the planet.",
+        "section_image": "shopify://shop_images/comparison.png",
+        "additional_text": "Dr. Jen's products are good for your body & good for the earth.  Our flosses are earthfriendly, made from all biodegradable materials, vegan friendly, and never tested on animals.",
+        "first_icon": "shopify://shop_images/environmentally-friendly_png.png",
+        "first_icon_text": "Environmentally Friendly",
+        "second_icon": "shopify://shop_images/no-animal-testing_png.png",
+        "second_icon_text": "No Animal Testing",
+        "button_url": "",
+        "button_text": "Add to Cart",
+        "button_color": "#df477f",
+        "Background_Color": "#fef6f2"
+      }
+    },
+    "1658224180b5a18ed7": {
+      "type": "MC-Testimonials",
+      "blocks": {
+        "c0fc9b10-e5c8-48a5-a1b5-4183ccc6a77e": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": 5,
+            "description": "\"The flavor does not taste synthetic.  The flavor is pleasant and fresh and the silk is gentle on my gums\"",
+            "buyer_name": "Kevin P",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "d6f48ad6-0629-47d9-ac1f-00e6c0f0d470": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": 5,
+            "description": "\"I had no idea my old floss was plastic and I was introducing plastic microparticles into my body when flossing with plastic.  I love that Dr Jen's Silk floss is safe for both my body and the planet.\"",
+            "buyer_name": "Peter A",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "a65492ad-fa6b-4923-a2b1-8d01e880f1d9": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": 5,
+            "description": "\"The Papaya flavoring is amazing, plus the silk is very soft and kind with my gums. For the first time, I now enjoy flossing!\"",
+            "buyer_name": "Lisa B",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "1c05c6c3-db33-419d-ad74-156a2c587b1c": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": 5,
+            "description": "\"Dr Jen's silk floss makes it easier to clean between my teeth.  I feel it is better at removing plaque and the flavors are like no other.  Plus it was designed by a dentist using nano Hydroxyapatite\"",
+            "buyer_name": "Sebastion D",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "282cde33-fcfb-4fce-9677-87af2bb5c2cd": {
+          "type": "testimonial",
+          "settings": {
+            "star_rating": 5,
+            "description": "\"I have tried a number of natural flosses and enjoy Dr Jen's the most.  Very comfortable to use and it tastes great.  Dr Jen's floss is also biodegradable which is another big win for me.\"",
+            "buyer_name": "Jean E",
+            "star_color": "#8bd1cf"
+          }
+        }
+      },
+      "block_order": [
+        "c0fc9b10-e5c8-48a5-a1b5-4183ccc6a77e",
+        "d6f48ad6-0629-47d9-ac1f-00e6c0f0d470",
+        "a65492ad-fa6b-4923-a2b1-8d01e880f1d9",
+        "1c05c6c3-db33-419d-ad74-156a2c587b1c",
+        "282cde33-fcfb-4fce-9677-87af2bb5c2cd"
+      ],
+      "settings": {
+        "testimonials_heading": "Customer Reviews",
+        "bg_color": "#f3fefd",
+        "text_color": "#1d2433"
+      }
+    },
+    "1659013508d465d7ed": {
+      "type": "Featured-Saving-Products",
+      "blocks": {
+        "1f7b4fd8-ea88-41ea-b54f-63e337239436": {
+          "type": "Product-Saving",
+          "settings": {
+            "product_selling": "all-natural-silk-floss",
+            "offer_text": "One time Purchase",
+            "discount_percentage": 0,
+            "product_quantity": 1,
+            "saving_color": "#f37d45",
+            "product_image": "shopify://shop_images/singlefloss.png",
+            "color_header1": "Select Flavor",
+            "color_header2": "",
+            "color_header3": ""
+          }
+        },
+        "de28f186-cbc2-4f42-8b71-781ccafb2bf0": {
+          "type": "Product-Saving",
+          "settings": {
+            "product_selling": "all-natural-silk-floss",
+            "offer_text": "Buy 2 spools - Save 15%",
+            "discount_percentage": 15,
+            "product_quantity": 2,
+            "saving_color": "#df477f",
+            "product_image": "shopify://shop_images/2packfloss.png",
+            "color_header1": "Select Flavor for First Product",
+            "color_header2": "Select Flavor for Second Product",
+            "color_header3": ""
+          }
+        },
+        "619ec7a3-4d6a-4e02-81f8-e20bafaa5ab2": {
+          "type": "Product-Saving",
+          "settings": {
+            "product_selling": "all-natural-silk-floss",
+            "offer_text": "Buy 3 spools  - Save 20%",
+            "discount_percentage": 20,
+            "product_quantity": 3,
+            "saving_color": "#8bd3cf",
+            "product_image": "shopify://shop_images/3packfloss_1793e83b-085d-460a-a70e-5c168ff186da.png",
+            "color_header1": "Select Flavor for First Product",
+            "color_header2": "Select Flavor for Second Product",
+            "color_header3": "Select Flavor for Third Product"
+          }
+        },
+        "a3d3a615-945c-4ecf-b7a5-8616362187d5": {
+          "type": "Product-Color",
+          "settings": {
+            "color_pick": "#f37d45",
+            "color_name": "Papaya"
+          }
+        },
+        "5b18fa8a-cc82-4b51-9656-dc4cfdc84d1b": {
+          "type": "Product-Color",
+          "settings": {
+            "color_pick": "#df477f",
+            "color_name": "Black Cherry"
+          }
+        },
+        "9583020a-dfa5-42fa-bc5d-8ce81d86c530": {
+          "type": "Product-Color",
+          "settings": {
+            "color_pick": "#8bd3cf",
+            "color_name": "Mint"
+          }
+        }
+      },
+      "block_order": [
+        "1f7b4fd8-ea88-41ea-b54f-63e337239436",
+        "de28f186-cbc2-4f42-8b71-781ccafb2bf0",
+        "619ec7a3-4d6a-4e02-81f8-e20bafaa5ab2",
+        "a3d3a615-945c-4ecf-b7a5-8616362187d5",
+        "5b18fa8a-cc82-4b51-9656-dc4cfdc84d1b",
+        "9583020a-dfa5-42fa-bc5d-8ce81d86c530"
+      ],
+      "settings": {}
+    },
+    "1658224292daf91134": {
+      "type": "Homepage-Icon-w-text",
+      "settings": {
+        "image": "shopify://shop_images/smile-icon.png",
+        "heading": "Dr. Jen’s 30 Day Smile Guarantee",
+        "subheading": "<p>If your teeth are not happy, we’re not happy and your toothpaste is on us!</p>"
+      }
+    },
+    "1659634107cc0bcc0f": {
+      "type": "video",
+      "settings": {
+        "subheading": "",
+        "title": "Backed by over 25 years of Dental Experience",
+        "video_url": "https://www.youtube.com/watch?v=oKiFSgmNs9A&ab_channel=Dr.JenNatural",
+        "image": "shopify://shop_images/thumbnail.png",
+        "background_type": "boxed",
+        "video_size": "auto",
+        "autoplay": false,
+        "background": "rgba(0,0,0,0)",
+        "text_color": "rgba(0,0,0,0)"
+      }
+    },
+    "165901374621e001f0": {
+      "type": "Featured-Products",
+      "settings": {
+        "featured_products": "all-products",
+        "featured_heading": "Dr. Jen’s Toothpastes"
+      }
+    },
+    "1659013797c9904ba4": {
+      "type": "homepage1x4",
+      "blocks": {
+        "1a1f8c54-266f-44ab-a6c5-79568dc8e66d": {
+          "type": "Icon-Block",
+          "settings": {
+            "image": "shopify://shop_images/environmentally-friendly.png",
+            "title": "Environmentally Friendly",
+            "info": ""
+          }
+        },
+        "c0ddfb5f-9e4a-4275-8f57-0953ce1c071c": {
+          "type": "Icon-Block",
+          "settings": {
+            "image": "shopify://shop_images/no-animal-testing.png",
+            "title": "No Animal Testing",
+            "info": ""
+          }
+        }
+      },
+      "block_order": [
+        "1a1f8c54-266f-44ab-a6c5-79568dc8e66d",
+        "c0ddfb5f-9e4a-4275-8f57-0953ce1c071c"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "<p><strong>Dr.Jen’s products are good for your body & good for the earth. Our toothpastes are earthfriendly, made from all biodegradeable materials, vegan friendly, and never tested on animals.</strong></p>",
+        "override_css": "[SectionID]> .homepage-1x4 > p { \nfont-size: 27px;\n}\n\n[SectionID] > .homepage-1x4 > .homepage-1x4-icons > .icon {\nwidth: max-content;\n}\n\n@media(max-width:768px){\n\n[SectionID] > .homepage-1x4 > p {\n    font-size: 15px;\n    padding: 15px;\n}\n}"
+      }
+    },
+    "16599035620d98e26e": {
+      "type": "apps",
+      "settings": {
+        "include_horizontal_margins": true,
+        "include_vertical_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1658221340cacc560e",
+    "1658221719e1787a3f",
+    "16594489360a1f2e22",
+    "1658221842286d2dd8",
+    "165822189116e7879e",
+    "1658222061ec572af7",
+    "165822247917338808",
+    "1658222972a240ed56",
+    "166144295034f5fb59",
+    "1658224180b5a18ed7",
+    "1659013508d465d7ed",
+    "1658224292daf91134",
+    "1659634107cc0bcc0f",
+    "165901374621e001f0",
+    "1659013797c9904ba4",
+    "16599035620d98e26e"
+  ]
+}

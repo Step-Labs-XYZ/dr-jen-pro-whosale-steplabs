@@ -1,0 +1,70 @@
+
+<div class="text--center">
+    <h3 class="section__heading">{{section.settings.featured_heading}}</h3>
+
+    <div class="featured-products" data-flickity='{"wrapAround" : true, "contain" : true, "imagesLoaded" : true, "cellAlign" : "left", "prevNextButtons" : false}'>
+        {% for product in collections[section.settings.featured_products].products %}
+          <div class="featured-product-cell">
+            <a href="{{ product.url }}">
+              <img src="{{product.featured_image | img_url: 'master'}}" alt="{{product.title}}" width="400px" height="400px"/>
+              <p>{{product.title}}</p>
+              <p>{{product.price | money}}</p>
+            </a>
+          </div>
+    
+        {% endfor %}
+    </div>
+
+    <div class="wrapper--cta">
+      <a class="featured-button btn--dj" href="{{collections[section.settings.featured_products].url}}" style="background-color:#df477f;">View All Products</a>
+    </div>
+    
+</div>
+
+{% schema %}
+{
+   "name": "Featured Products - dj",
+  "tag": "section",
+  "class": "section__padding ss--featured-products--improved",
+   "settings" : [
+      {
+        "type": "text",
+        "id": "featured_heading",
+        "label": "Heading"
+       },
+       {
+            "type": "collection",
+            "id": "featured_products",
+            "label": "Products to Display"
+       }
+    ],
+   "presets": [
+    {
+      "name": "Featured Products - improved",
+      "category": "Featured Products"
+    }
+   ]
+}
+{% endschema %}
+
+{% comment %}
+{% assign productsInCarousel = collections[section.settings.featured_products].products | size %}
+
+{% if productsInCarousel == 4 %}
+
+<style>
+    #shopify-section-{{section.id}} > div > .featured-products .featured-product-cell{
+        width: calc(30% - 60px);
+    }
+</style>
+
+{%- elsif productsInCarousel > 4  -%}
+    
+<style>
+    #shopify-section-{{section.id}} > div > .featured-products .featured-product-cell{
+        width: calc(25% - 60px);
+    }
+</style>
+
+{% endif %}
+{% endcomment %}

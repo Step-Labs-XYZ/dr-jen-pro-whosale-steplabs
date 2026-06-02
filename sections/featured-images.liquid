@@ -1,0 +1,40 @@
+
+<h1 class="image-carousel-heading">{{section.settings.heading}} </h1>
+
+<div class="image-carousel" data-flickity='{"cellAlign": "left", "wrapAround" : true,  "contain" : true, "pageDots" : false}'>
+    {% for block in section.blocks %}
+        <img class="image-carousel-rounded-image" src="{{ block.settings.image | img_url: 'master' }}" />
+    {% endfor %}
+</div>
+
+{% schema %}
+{
+   "name": "Image Carousel",
+   "settings" : [
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+        }
+   ],
+   "blocks" : [
+        {
+            "name": "Image",
+            "type": "Image",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                }
+            ]
+        }
+   ],
+   "presets": [
+    {
+        "name": "Image Carousel"
+    }
+   ]
+
+}
+{% endschema %}

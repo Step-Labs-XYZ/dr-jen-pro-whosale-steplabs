@@ -1,0 +1,137 @@
+<div class="homepage-img-container" style="background-color: {{section.settings.bg_color}};">
+    <h5>{{section.settings.small_heading}}</h5>
+    <h3>{{section.settings.large_heading}}</h3>
+
+    <div class="Homepage-Image-Testimonials" data-flickity='{"wrapAround" : true, "imagesLoaded" : true, "contain": true, "cellAlign" : "left"}'>
+        {% for block in section.blocks %}
+            <div class="MC-Image-Testimonial">    
+                <div class="flex-container-testimonials"{% if section.settings.stack_content %}style="flex-direction: column; text-align:center; justify-content:center; align-items:center;"{% endif %}>
+                    <img src="{{block.settings.image | img_url: '320x'}}" alt="" class="{{section.id}}-rounded" >
+                    <div class="info-testimonial" {% if section.settings.stack_content %}style="text-align:center !important;"{% endif %}>
+                        <div class="start-rating">
+                            {% for i in (1..block.settings.star_rating) %}
+                                <i class="fa-solid fa-star" style="color: {{block.settings.star_color}}; font-size: 35px;"></i>
+                            {% endfor %}
+                        </div>
+                        <h3 style=" color:{{section.settings.text_color}} !important;">{{block.settings.name}}</h3>
+                        <p  style=" color:{{section.settings.text_color}} !important;">{{block.settings.description}}</p>
+                    </div>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+{% schema %}
+{
+   "name": "Homepage Img Testimonials",
+   "settings" : [
+    {
+        "type": "text",
+        "id": "small_heading",
+        "label": "Small Heading"
+    },
+    {
+        "type": "text",
+        "id": "large_heading",
+        "label": "Large Heading"
+    },
+    {
+        "type": "checkbox",
+        "id": "stack_content",
+        "label": "Stack Content",
+        "default": false
+    },
+    {
+        "type": "checkbox",
+        "id": "round_image",
+        "label": "Rounded Images",
+        "default": false
+    },
+    {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background Color",
+        "default": "#8BD1CF"
+    },
+    {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color",
+        "default": "#ffffff"
+    },
+    {
+        "type": "range",
+        "id": "mobile_padding",
+        "label": "Mobile Top Padding",
+        "unit": "px",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 0
+    }
+   ],
+   "blocks" : [
+        {
+             "name": "Testimonial",
+             "type" : "testimonial",
+             "settings" : [
+
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Testimonial Image"
+                },
+                {
+                    "type": "range",
+                    "id": "star_rating",
+                    "label": "Star Rating",
+                    "unit": "*",
+                    "min": 1,
+                    "max": 5,
+                    "step": 1,
+                    "default": 5
+                },
+                {
+                    "type": "text",
+                    "id": "name",
+                    "label": "Name"
+                },
+                {
+                    "type": "textarea",
+                    "id": "description",
+                    "label": "description"
+                },
+                {
+                    "type": "color",
+                    "id": "star_color",
+                    "label": "Star Color",
+                    "default": "#000000"
+                }
+             ]
+        }
+   ],
+   "presets": [
+    {
+        "name": "Homepage-Image-Testimonials"
+    }
+   ]
+}
+{% endschema %}
+
+<style>
+    {% if section.settings.round_image %}
+         .{{section.id}}-rounded{
+            border-radius: 50%;
+         }
+    {% endif %}
+    @media(max-width:1000px){
+        #shopify-section-{{section.id}} > .homepage-img-container{
+            padding-top: {{section.settings.mobile_padding}}px;
+        }
+    }
+
+</style>

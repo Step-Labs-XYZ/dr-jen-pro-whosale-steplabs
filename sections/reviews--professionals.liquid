@@ -1,0 +1,144 @@
+<style>
+  #shopify-section-{{ section.id }}{
+    background-color: {{section.settings.bg_color}};
+  }
+{% if section.settings.round_image %}
+     .{{section.id}}-rounded{
+        border-radius: 50%;
+     }
+{% endif %}
+</style>
+
+<div class="homepage-img-container">
+  <div class="container">
+    {% if section.settings.small_heading != blank %}
+      <h4 class="section__sub-heading">
+      {{ section.settings.small_heading }}
+      </h4>
+    {% endif %}
+  
+    <h3 class="section__heading">{{section.settings.large_heading}}</h3>
+
+    <div class="Homepage-Image-Testimonials slider--reviews {% if section.settings.stack_content %}slider--reviews--stacked slider--fix-width{% else %}slider--reviews--unstacked{% endif %}" data-flickity='{"wrapAround" : true, "imagesLoaded" : true, "contain": true, "cellAlign" : "left"}'>
+        {% for block in section.blocks %}
+            <div class="MC-Image-Testimonial">    
+                <div class="flex-container-testimonials"{% if section.settings.stack_content %}style="flex-direction: column; text-align:center; justify-content:center; align-items:center;"{% endif %}>
+                    <img src="{{block.settings.image | img_url: '320x'}}" alt="" class="{{section.id}}-rounded" >
+                    <div class="info-testimonial" {% if section.settings.stack_content %}style="text-align:center !important;"{% endif %}>
+                        <div class="start-rating">
+                            {% for i in (1..block.settings.star_rating) %}
+                                <i class="fa-solid fa-star" style="color: {{block.settings.star_color}}; font-size: 24px;"></i>
+                            {% endfor %}
+                        </div>
+                        <h5 class="section__title">{{block.settings.title}}</h3>
+                        <p class="section__desc">{{block.settings.description}}</p>
+                    </div>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+
+{% schema %}
+{
+   "name": "Reviews - professionals",
+    "tag": "section",
+    "class": "section__padding ss--reviews--professionals",
+   "settings" : [
+     {
+        "type": "text",
+        "id": "small_heading",
+        "label": "Small Heading"
+    },
+     {
+        "type": "text",
+        "id": "large_heading",
+        "label": "Large Heading"
+    },
+    {
+        "type": "checkbox",
+        "id": "stack_content",
+        "label": "Stack Content",
+        "default": false
+    },
+    {
+        "type": "checkbox",
+        "id": "round_image",
+        "label": "Rounded Images",
+        "default": false
+    },
+    {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background Color",
+        "default": "#8BD1CF"
+    },
+    {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color",
+        "default": "#ffffff"
+    },
+    {
+        "type": "range",
+        "id": "mobile_padding",
+        "label": "Mobile Top Padding",
+        "unit": "px",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 0
+    }
+   ],
+   "blocks" : [
+        {
+             "name": "Testimonial",
+             "type" : "testimonial",
+             "settings" : [
+
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Testimonial Image"
+                },
+                {
+                    "type": "range",
+                    "id": "star_rating",
+                    "label": "Star Rating",
+                    "unit": "*",
+                    "min": 1,
+                    "max": 5,
+                    "step": 1,
+                    "default": 5
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Name"
+                },
+                {
+                    "type": "textarea",
+                    "id": "description",
+                    "label": "description"
+                },
+                {
+                    "type": "color",
+                    "id": "star_color",
+                    "label": "Star Color",
+                    "default": "#8BD1CF"
+                }
+             ]
+        }
+   ],
+   "presets": [
+    {
+        "name": "Reviews - professionals",
+      "category": "Reviews or Testimonials"
+    }
+   ]
+}
+{% endschema %}

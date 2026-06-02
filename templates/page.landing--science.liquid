@@ -1,0 +1,21 @@
+{{ 'page--landing-science.css' | asset_url | stylesheet_tag }}
+
+<div id="page--landing-science">
+    {% section 'page-intro' %}
+    {% section 'nHap-history' %}
+    {% section 'nHap-difference' %}
+    {% section 'features-with-icons' %}
+    {% section 'nHap-compare' %}
+    {% section 'authentic-choice' %}
+    {% section 'faqs-accordion' %}
+</div>
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script>
+        $('.accordion__head').on('click', function () {
+            $(this).parent('.accordion__item').siblings().removeClass('active');
+            $(this).parent('.accordion__item').siblings().find('.accordion__body').slideUp();
+            $(this).parent('.accordion__item').toggleClass('active');
+            $(this).siblings('.accordion__body').slideToggle();
+        });
+    </script>

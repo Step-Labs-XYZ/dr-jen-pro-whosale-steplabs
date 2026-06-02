@@ -1,0 +1,1780 @@
+{%- style -%}
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
+
+  /* =============================================
+     C-DENTAL-PROFESSIONALS
+     sl-section-dental-professionals-v1
+     =============================================
+     Tipos de bloque:
+       photo_text  → imagen circular flotando sobre tarjeta blancaa
+       video_image → imagen/video full que llena toda la tarjeta
+       quote_text  → tarjeta blanca solo con cita + nombre al fondo
+     ============================================= */
+
+  #c-dental-pros-{{ section.id }} {
+    --cdp-bg:              {{ section.settings.bg_color }};
+    --cdp-eyebrow-color:   {{ section.settings.eyebrow_color }};
+    --cdp-heading-color:   {{ section.settings.heading_color }};
+    --cdp-card-bg:         {{ section.settings.card_bg }};
+    --cdp-name-color:      {{ section.settings.name_color }};
+    --cdp-quote-color:     {{ section.settings.quote_color }};
+    --cdp-dot-active:      {{ section.settings.dot_active_color }};
+    --cdp-dot-inactive:    {{ section.settings.dot_inactive_color }};
+    --cdp-play-bg:         {{ section.settings.play_btn_bg }};
+    --cdp-play-icon:       {{ section.settings.play_btn_icon_color }};
+    --cdp-radius-mob:      {{ section.settings.card_radius_mob }}px;
+    --cdp-radius-desk:     {{ section.settings.card_radius_desk }}px;
+    --cdp-eyebrow-align:   {{ section.settings.eyebrow_align }};
+    --cdp-heading-align:   {{ section.settings.heading_align }};
+    --cdp-name-weight:     {{ section.settings.name_font_weight }};
+    --cdp-name-transform:  {{ section.settings.name_text_transform }};
+    --cdp-name-ls:         {{ section.settings.name_letter_spacing | divided_by: 100.0 }}em;
+    --cdp-name-lh:         {{ section.settings.name_line_height | divided_by: 10.0 }};
+    --cdp-quote-weight:    {{ section.settings.quote_font_weight }};
+    --cdp-quote-lh:        {{ section.settings.quote_line_height | divided_by: 10.0 }};
+
+    font-family: 'Raleway', sans-serif !important;
+    background-color: var(--cdp-bg);
+    padding-top: {{ section.settings.pad_top_mob }}px;
+    padding-bottom: {{ section.settings.pad_bot_mob }}px;
+  }
+
+  /* ---- CONTAINER ---- */
+  #c-dental-pros-{{ section.id }} .c-dental-pros__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ---- HEADER ---- */
+  #c-dental-pros-{{ section.id }} .c-dental-pros__header {
+    margin-bottom: {{ section.settings.header_mb_mob }}px;
+  }
+
+  #c-dental-pros-{{ section.id }} .c-dental-pros__eyebrow {
+    display: block;
+    font-family: 'Playfair Display', Georgia, serif !important;
+    font-size: {{ section.settings.eyebrow_size_mob }}px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--cdp-eyebrow-color);
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+    text-align: var(--cdp-eyebrow-align);
+  }
+
+  #c-dental-pros-{{ section.id }} .c-dental-pros__heading {
+    font-family: 'Raleway', sans-serif !important;
+    font-size: {{ section.settings.heading_size_mob }}px;
+    font-weight: 600;
+    color: var(--cdp-heading-color);
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    text-align: var(--cdp-heading-align);
+  }
+
+  /* ---- SLIDER ---- */
+  #c-dental-pros-{{ section.id }} .c-dental-pros__slider-clip {
+    overflow: hidden;
+  }
+
+  #c-dental-pros-{{ section.id }} .c-dental-pros__slider {
+    outline: none;
+  }
+
+  #c-dental-pros-{{ section.id }} .c-dental-pros__slider.flickity-enabled {
+    overflow: visible;
+  }
+
+  /* ---- SLIDE BASE ---- */
+  #c-dental-pros-{{ section.id }} .c-dental-pros__slide {
+    width: calc(82% - 16px);
+    margin: 0 8px 20px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    box-sizing: border-box;
+  }
+
+  /* ==============================================
+     TIPO 1 — FOTO CIRCULAR + TARJETA TEXTO
+     ============================================== */
+
+  /* TIPO 1: tarjeta unificada en mobile — oval sin fondo + texto con fondo separado */
+  #c-dental-pros-{{ section.id }} .c-dental-pros__slide--photo {
+    background: transparent;
+    border-radius: 0;
+    overflow: visible;
+    align-items: stretch;
+    gap: 30px;
+  }
+
+  /* Contenedor imagen — ovalado en mobile también */
+  #c-dental-pros-{{ section.id }} .c-dental-pros__photo-wrap {
+    width: 100%;
+    height: var(--cdp-ph-h-mob, 200px);
+    border-radius: 100px;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  /* Imagen dentro del oval */
+  #c-dental-pros-{{ section.id }} .c-dental-pros__photo {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  /* Tarjeta texto — CON fondo propio en mobile */
+  #c-dental-pros-{{ section.id }} .c-dental-pros__photo-card {
+    background-color: var(--cdp-card-bg);
+    border-radius: var(--cdp-radius-mob);
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 12px;
+    flex: 1;
+  }
+
+  /* ==============================================
+     TIPO 2 — IMAGEN / VIDEO + TEXTO (lado a lado)
+     MOBILE: igual que photo_text → oval sin fondo + tarjeta con fondo + gap 30px
+     ============================================== */
+
+  #c-dental-pros-{{ section.id }} .c-dental-pros__slide--video {
+    background: transparent;
+    border-radius: 0;
+    overflow: visible;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  /* Panel imagen/video — full-width en mobile con bordes ovalados */
+  #c-dental-pros-{{ section.id }} .c-dental-pros__video-wrap {
+    position: relative;
+    width: 100%;
+    flex-shrink: 0;
+    padding-bottom: 0;
+    min-height: var(--cdp-vw-h-mob, 220px);
+    overflow: hidden;
+    cursor: pointer;
+    background: #1a3446;
+    border-radius: 100px;
+  }
+
+  /* Poster image */
+  #c-dental-pros-{{ section.id }} .c-dental-pros__poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.3s ease;
+  }
+
+  /* ── POSTER / PHOTO RESPONSIVE: móvil vs escritorio ── */
+  #c-dental-pros-{{ section.id }} .c-dental-pros__poster--mob,
+  #c-dental-pros-{{ section.id }} .c-dental-pros__photo--mob {
+    display: block;
+  }
+
+  #c-dental-pros-{{ section.id }} .c-dental-pros__poster--desk,
+  #c-dental-pros-{{ section.id }} .c-dental-pros__photo--desk {
+    display: none;
+  }
+
+  /* Iframe YouTube/Vimeo */
+  #c-dental-pros-{{ section.id }} .c-dental-pros__iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: none;
+  }
+
+  /* Video nativo Shopify */
+  #c-dental-pros-{{ section.id }} .c-dental-pros__native-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none;
+    display: none;
+    background: #000;
+  }
+
+  /* Estado reproduciendo */
+  #c-dental-pros-{{ section.id }} .c-dental-pros__video-wrap.is-playing .c-dental-pros__poster,
+  #c-dental-pros-{{ section.id }} .c-dental-pros__video-wrap.is-playing .c-dental-pros__play-btn {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #c-dental-pros-{{ section.id }} .c-dental-pros__video-wrap.is-playing .c-dental-pros__iframe,
+  #c-dental-pros-{{ section.id }} .c-dental-pros__video-wrap.is-playing .c-dental-pros__native-video {
+    display: block;
+  }
+
+  /* Estado reproduciendo — photo-wrap con video */
+  #c-dental-pros-{{ section.id }} .c-dental-pros__photo-wrap[data-video-type] {
+    cursor: pointer;
+  }
+
+  #c-dental-pros-{{ section.id }} .c-dental-pros__photo-wrap.is-playing .c-dental-pros__photo,
+  #c-dental-pros-{{ section.id }} .c-dental-pros__photo-wrap.is-playing .c-dental-pros__play-btn {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #c-dental-pros-{{ section.id }} .c-dental-pros__photo-wrap.is-playing .c-dental-pros__iframe,
+  #c-dental-pros-{{ section.id }} .c-dental-pros__photo-wrap.is-playing .c-dental-pros__native-video {
+    display: block;
+  }
+
+  /* Placeholder sin imagen */
+  #c-dental-pros-{{ section.id }} .c-dental-pros__poster-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a3446 0%, #2a4d60 100%);
+    color: rgba(255,255,255,0.3);
+    font-family: 'Raleway', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-align: center;
+    padding: 20px;
+  }
+
+  /* Placeholder secundario para mobile */
+  #c-dental-pros-{{ section.id }} .c-dental-pros__poster-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: 0 0;
+    pointer-events: none;
+  }
+
+  /* Botón play */
+  #c-dental-pros-{{ section.id }} .c-dental-pros__play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width:  {{ section.settings.play_btn_size_mob }}px;
+    height: {{ section.settings.play_btn_size_mob }}px;
+    border-radius: 50%;
+    background: var(--cdp-play-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  #c-dental-pros-{{ section.id }} .c-dental-pros__video-wrap:hover .c-dental-pros__play-btn {
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+
+  #c-dental-pros-{{ section.id }} .c-dental-pros__play-btn svg {
+    width: 40%;
+    height: 40%;
+    fill: var(--cdp-play-icon);
+    margin-left: 4px;
+  }
+
+  /* Panel de texto (tipo 2) — CON fondo y radio propios en mobile */
+  #c-dental-pros-{{ section.id }} .c-dental-pros__video-text {
+    flex: 1;
+    background-color: var(--cdp-card-bg);
+    border-radius: var(--cdp-radius-mob);
+    padding: 32px;
+    box-sizing: border-box;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* ==============================================
+     TIPO 3 — SOLO CITA (TEXTO)
+     ============================================== */
+
+  #c-dental-pros-{{ section.id }} .c-dental-pros__slide--quote {
+    border-radius: var(--cdp-radius-mob);
+    overflow: hidden;
+    background-color: var(--cdp-card-bg);
+    gap: 16px;
+  }
+
+  #c-dental-pros-{{ section.id }} .c-dental-pros__quote-card {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    box-sizing: border-box;
+    flex: 1;
+  }
+
+  /* ---- TEXTOS COMUNES ---- */
+  #c-dental-pros-{{ section.id }} .c-dental-pros__name {
+    font-family: 'Raleway', sans-serif !important;
+    font-size: {{ section.settings.name_size_mob }}px;
+    font-weight: var(--cdp-name-weight);
+    color: var(--cdp-name-color);
+    text-transform: var(--cdp-name-transform);
+    letter-spacing: var(--cdp-name-ls);
+    margin: 0;
+    line-height: var(--cdp-name-lh);
+  }
+
+  #c-dental-pros-{{ section.id }} .c-dental-pros__quote {
+    font-family: 'Raleway', sans-serif !important;
+    font-size: {{ section.settings.quote_size_mob }}px;
+    font-weight: var(--cdp-quote-weight);
+    color: var(--cdp-quote-color);
+    margin: 0;
+    line-height: var(--cdp-quote-lh);
+  }
+
+  /* ---- FLICKITY DOTS ---- */
+  #c-dental-pros-{{ section.id }} .flickity-page-dots {
+    position: relative;
+    bottom: auto;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  #c-dental-pros-{{ section.id }} .flickity-page-dots .dot {
+    width: 24px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--cdp-dot-inactive);
+    opacity: 1;
+    margin: 0 3px;
+    transition: background 0.3s ease, width 0.3s ease;
+  }
+
+  #c-dental-pros-{{ section.id }} .flickity-page-dots .dot.is-selected {
+    background: var(--cdp-dot-active);
+    width: 36px;
+  }
+
+  #c-dental-pros-{{ section.id }} .flickity-prev-next-button {
+    display: none;
+  }
+
+  /* =============================================
+     DESKTOP — 768px+
+     ============================================= */
+  @media (min-width: 768px) {
+    #c-dental-pros-{{ section.id }} {
+      padding-top:    {{ section.settings.pad_top_desk }}px;
+      padding-bottom: {{ section.settings.pad_bot_desk }}px;
+    }
+
+    #c-dental-pros-{{ section.id }} .c-dental-pros__container {
+      padding: 0 48px;
+    }
+
+    #c-dental-pros-{{ section.id }} .c-dental-pros__header {
+      margin-bottom: {{ section.settings.header_mb_desk }}px;
+    }
+
+    #c-dental-pros-{{ section.id }} .c-dental-pros__eyebrow {
+      font-size: {{ section.settings.eyebrow_size_desk }}px;
+    }
+
+    #c-dental-pros-{{ section.id }} .c-dental-pros__heading {
+      font-size: {{ section.settings.heading_size_desk }}px;
+    }
+
+    /* peek carousel — video=50vw, foto/cita=25vw
+       Los slides miden contra el viewport; el container tiene padding
+       propio → card 3 arranca antes del borde derecho y queda cortado */
+    #c-dental-pros-{{ section.id }} .c-dental-pros__slide {
+      width: calc(25vw - 20px);
+      margin: 0 10px 24px 10px;
+    }
+
+    #c-dental-pros-{{ section.id }} .c-dental-pros__slide--video {
+      width: calc(50vw - 20px);
+    }
+
+    /* Tipo 1 desktop — restaurar dos piezas (oval + tarjeta gris separada) */
+    #c-dental-pros-{{ section.id }} .c-dental-pros__slide--photo {
+      background: transparent;
+      border-radius: 0;
+      overflow: visible;
+      gap: var(--cdp-ph-gap-desk, 0px);
+    }
+
+    #c-dental-pros-{{ section.id }} .c-dental-pros__photo-wrap {
+      border-radius: 200px;  /* pill oval solo en desktop */
+      height: var(--cdp-ph-h-desk, 220px);
+    }
+
+    #c-dental-pros-{{ section.id }} .c-dental-pros__photo-card {
+      background-color: var(--cdp-card-bg);
+      border-radius: var(--cdp-radius-desk);
+      padding: 32px;
+      gap: 12px;
+    }
+
+    /* Tipo 2 desktop — imagen izquierda, texto derecha */
+    #c-dental-pros-{{ section.id }} .c-dental-pros__slide--video {
+      border-radius: var(--cdp-radius-desk);
+      flex-direction: row;
+      gap: var(--cdp-vi-gap-desk, 0px);
+      background-color: transparent;
+      overflow: visible;
+    }
+
+    #c-dental-pros-{{ section.id }} .c-dental-pros__slide--video .c-dental-pros__video-wrap {
+      width: {{ section.settings.video_panel_width_desk }}%;
+      min-height: var(--cdp-vw-h-desk, 300px);
+      border-radius: var(--cdp-radius-desk);
+    }
+
+    #c-dental-pros-{{ section.id }} .c-dental-pros__video-text {
+      border-radius: 8px;
+    }
+
+    #c-dental-pros-{{ section.id }} .c-dental-pros__play-btn {
+      width:  {{ section.settings.play_btn_size_desk }}px;
+      height: {{ section.settings.play_btn_size_desk }}px;
+    }
+
+    /* Tipo 3 desktop */
+    #c-dental-pros-{{ section.id }} .c-dental-pros__slide--quote {
+      border-radius: var(--cdp-radius-desk);
+    }
+
+    #c-dental-pros-{{ section.id }} .c-dental-pros__quote-card {
+      padding: 32px;
+    }
+
+    /* Textos */
+    #c-dental-pros-{{ section.id }} .c-dental-pros__name {
+      font-size: {{ section.settings.name_size_desk }}px;
+    }
+
+    #c-dental-pros-{{ section.id }} .c-dental-pros__quote {
+      font-size: {{ section.settings.quote_size_desk }}px;
+    }
+
+    #c-dental-pros-{{ section.id }} .flickity-page-dots {
+      text-align: right;
+    }
+
+    /* Poster / photo responsive: en desktop mostrar --desk, ocultar --mob */
+    #c-dental-pros-{{ section.id }} .c-dental-pros__poster--mob,
+    #c-dental-pros-{{ section.id }} .c-dental-pros__photo--mob {
+      display: none;
+    }
+
+    #c-dental-pros-{{ section.id }} .c-dental-pros__poster--desk,
+    #c-dental-pros-{{ section.id }} .c-dental-pros__photo--desk {
+      display: block;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    #c-dental-pros-{{ section.id }} .c-dental-pros__container {
+      padding: 0 60px;
+    }
+  }
+
+  /* ── VIDEO LIGHTBOX ── */
+  .cdp-lightbox-{{ section.id }} {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.88);
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+
+  .cdp-lightbox-{{ section.id }}.is-open {
+    display: flex;
+  }
+
+  .cdp-lightbox-{{ section.id }}__inner {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+  }
+
+  .cdp-lightbox-{{ section.id }}__ratio {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .cdp-lightbox-{{ section.id }}__ratio iframe,
+  .cdp-lightbox-{{ section.id }}__ratio video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .cdp-lightbox-{{ section.id }}__close {
+    position: absolute;
+    top: -48px;
+    right: 0;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    padding: 0;
+    transition: background 0.2s ease;
+  }
+
+  .cdp-lightbox-{{ section.id }}__close:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+{%- endstyle -%}
+
+<section
+  id="c-dental-pros-{{ section.id }}"
+  class="c-dental-pros"
+  data-sl-id="sl-section-dental-professionals-v1"
+>
+  <div class="c-dental-pros__container">
+
+    {%- comment -%} ── HEADER ── {%- endcomment -%}
+    <div class="c-dental-pros__header">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="c-dental-pros__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="c-dental-pros__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ── SLIDER ── {%- endcomment -%}
+    <div class="c-dental-pros__slider-clip">
+      <div
+        class="c-dental-pros__slider"
+        data-flickity='{
+          "wrapAround": true,
+          "imagesLoaded": true,
+          "contain": false,
+          "cellAlign": "left",
+          "pageDots": true,
+          "prevNextButtons": false,
+          "draggable": true,
+          "adaptiveHeight": false
+        }'
+      >
+
+        {%- for block in section.blocks -%}
+
+          {%- comment -%} ━━ TIPO 1: FOTO CIRCULAR + TEXTO ━━ {%- endcomment -%}
+          {%- if block.type == 'photo_text' -%}
+            {%- assign pt_has_shopify_video = false -%}
+            {%- assign pt_has_url_video     = false -%}
+            {%- assign pt_has_any_video     = false -%}
+            {%- if block.settings.shopify_video != blank -%}
+              {%- assign pt_has_shopify_video = true -%}
+              {%- assign pt_has_any_video     = true -%}
+            {%- endif -%}
+            {%- if block.settings.video_url != blank and pt_has_shopify_video == false -%}
+              {%- assign pt_has_url_video = true -%}
+              {%- assign pt_has_any_video = true -%}
+            {%- endif -%}
+
+            <div class="c-dental-pros__slide c-dental-pros__slide--photo" style="--cdp-ph-gap: {{ block.settings.gap_mob }}px; --cdp-ph-gap-desk: {{ block.settings.gap_desk }}px" {{ block.shopify_attributes }}>
+
+              <div class="c-dental-pros__photo-wrap"
+                style="--cdp-ph-h-mob: {{ block.settings.img_height_mob }}px; --cdp-ph-h-desk: {{ block.settings.img_height_desk }}px"
+                {%- if pt_has_url_video -%}
+                  data-video="{{ block.settings.video_url | escape }}"
+                  data-video-type="url"
+                {%- elsif pt_has_shopify_video -%}
+                  data-video-type="shopify"
+                {%- endif -%}
+              >
+                {%- if block.settings.image_mob != blank -%}
+                  {{
+                    block.settings.image_mob
+                    | image_url: width: 400
+                    | image_tag:
+                      class: 'c-dental-pros__photo c-dental-pros__photo--mob',
+                      alt: block.settings.name,
+                      loading: 'lazy',
+                      widths: '200, 300, 400'
+                  }}
+                {%- endif -%}
+                {%- if block.settings.image != blank -%}
+                  {%- if block.settings.image_mob != blank -%}
+                    {%- assign pt_desk_img_class = 'c-dental-pros__photo c-dental-pros__photo--desk' -%}
+                  {%- else -%}
+                    {%- assign pt_desk_img_class = 'c-dental-pros__photo' -%}
+                  {%- endif -%}
+                  {{
+                    block.settings.image
+                    | image_url: width: 400
+                    | image_tag:
+                      class: pt_desk_img_class,
+                      alt: block.settings.name,
+                      loading: 'lazy',
+                      widths: '200, 300, 400'
+                  }}
+                {%- endif -%}
+                {%- if block.settings.image_mob == blank and block.settings.image == blank -%}
+                  <div style="position:absolute;inset:0;background:#2a4d60;display:flex;align-items:center;justify-content:center;">
+                    <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                  </div>
+                {%- endif -%}
+
+                {%- if pt_has_url_video -%}
+                  <iframe
+                    class="c-dental-pros__iframe"
+                    title="{{ block.settings.name | escape }}"
+                    allow="autoplay; fullscreen"
+                    allowfullscreen
+                  ></iframe>
+                {%- endif -%}
+
+                {%- if pt_has_shopify_video -%}
+                  <video class="c-dental-pros__native-video" playsinline preload="none" controls>
+                    {%- for source in block.settings.shopify_video.sources -%}
+                      <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                    {%- endfor -%}
+                  </video>
+                {%- endif -%}
+
+                {%- if pt_has_any_video -%}
+                  <div class="c-dental-pros__play-btn" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                {%- endif -%}
+              </div>
+
+              <div class="c-dental-pros__photo-card">
+                {%- if block.settings.name != blank -%}
+                  <p class="c-dental-pros__name" style="text-align: {{ block.settings.name_align }}">{{ block.settings.name }}</p>
+                {%- endif -%}
+                {%- if block.settings.quote != blank -%}
+                  <p class="c-dental-pros__quote" style="text-align: {{ block.settings.quote_align }}">{{ block.settings.quote }}</p>
+                {%- endif -%}
+              </div>
+
+            </div>
+
+          {%- comment -%} ━━ TIPO 2: IMAGEN / VIDEO FULL ━━ {%- endcomment -%}
+          {%- elsif block.type == 'video_image' -%}
+
+            {%- assign has_shopify_video = false -%}
+            {%- assign has_url_video     = false -%}
+            {%- assign has_any_video     = false -%}
+            {%- if block.settings.shopify_video != blank -%}
+              {%- assign has_shopify_video = true -%}
+              {%- assign has_any_video     = true -%}
+            {%- endif -%}
+            {%- if block.settings.video_url != blank and has_shopify_video == false -%}
+              {%- assign has_url_video = true -%}
+              {%- assign has_any_video = true -%}
+            {%- endif -%}
+
+            <div class="c-dental-pros__slide c-dental-pros__slide--video" style="--cdp-vi-gap: {{ block.settings.gap_mob }}px; --cdp-vi-gap-desk: {{ block.settings.gap_desk }}px" {{ block.shopify_attributes }}>
+
+              <div
+                class="c-dental-pros__video-wrap"
+                style="--cdp-vw-h-mob: {{ block.settings.img_height_mob }}px; --cdp-vw-h-desk: {{ block.settings.img_height_desk }}px"
+                {%- if has_url_video -%}
+                  data-video="{{ block.settings.video_url | escape }}"
+                  data-video-type="url"
+                {%- elsif has_shopify_video -%}
+                  data-video-type="shopify"
+                {%- endif -%}
+              >
+                {%- comment -%} Poster Mobile (si existe, solo se muestra en mobile) {%- endcomment -%}
+                {%- if block.settings.poster_mob != blank -%}
+                  {{
+                    block.settings.poster_mob
+                    | image_url: width: 600
+                    | image_tag:
+                      class: 'c-dental-pros__poster c-dental-pros__poster--mob',
+                      alt: block.settings.name,
+                      loading: 'lazy',
+                      widths: '300, 450, 600'
+                  }}
+                {%- endif -%}
+
+                {%- comment -%} Poster Desktop (o único si no hay poster_mob) {%- endcomment -%}
+                {%- if block.settings.poster_mob != blank -%}
+                  {%- assign vi_desk_poster_class = 'c-dental-pros__poster c-dental-pros__poster--desk' -%}
+                {%- else -%}
+                  {%- assign vi_desk_poster_class = 'c-dental-pros__poster' -%}
+                {%- endif -%}
+                {%- if block.settings.poster != blank -%}
+                  {{
+                    block.settings.poster
+                    | image_url: width: 800
+                    | image_tag:
+                      class: vi_desk_poster_class,
+                      alt: block.settings.name,
+                      loading: 'lazy',
+                      widths: '400, 600, 800'
+                  }}
+                {%- elsif has_shopify_video and block.settings.shopify_video.preview_image != blank -%}
+                  {{
+                    block.settings.shopify_video.preview_image
+                    | image_url: width: 800
+                    | image_tag:
+                      class: vi_desk_poster_class,
+                      alt: block.settings.name,
+                      loading: 'lazy',
+                      widths: '400, 600, 800'
+                  }}
+                {%- elsif block.settings.poster_mob == blank -%}
+                  <div class="c-dental-pros__poster-placeholder">
+                    <span>{{ block.settings.name | default: 'Agregar imagen o video' }}</span>
+                  </div>
+                {%- endif -%}
+
+                {%- if has_url_video -%}
+                  <iframe
+                    class="c-dental-pros__iframe"
+                    title="{{ block.settings.name | escape }}"
+                    allow="autoplay; fullscreen"
+                    allowfullscreen
+                  ></iframe>
+                {%- endif -%}
+
+                {%- if has_shopify_video -%}
+                  <video class="c-dental-pros__native-video" playsinline preload="none" controls>
+                    {%- for source in block.settings.shopify_video.sources -%}
+                      <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                    {%- endfor -%}
+                  </video>
+                {%- endif -%}
+
+                {%- if has_any_video -%}
+                  <div class="c-dental-pros__play-btn" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                {%- endif -%}
+              </div>
+
+              {%- if block.settings.name != blank or block.settings.quote != blank -%}
+                <div class="c-dental-pros__video-text">
+                  {%- if block.settings.quote != blank -%}
+                    <p class="c-dental-pros__quote" style="text-align: {{ block.settings.quote_align }}">{{ block.settings.quote }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.name != blank -%}
+                    <p class="c-dental-pros__name" style="text-align: {{ block.settings.name_align }}">{{ block.settings.name }}</p>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+
+            </div>
+
+          {%- comment -%} ━━ TIPO 3: SOLO CITA ━━ {%- endcomment -%}
+          {%- elsif block.type == 'quote_text' -%}
+            {%- assign qt_has_shopify_video = false -%}
+            {%- assign qt_has_url_video     = false -%}
+            {%- assign qt_has_any_video     = false -%}
+            {%- if block.settings.shopify_video != blank -%}
+              {%- assign qt_has_shopify_video = true -%}
+              {%- assign qt_has_any_video     = true -%}
+            {%- endif -%}
+            {%- if block.settings.video_url != blank and qt_has_shopify_video == false -%}
+              {%- assign qt_has_url_video = true -%}
+              {%- assign qt_has_any_video = true -%}
+            {%- endif -%}
+
+            <div class="c-dental-pros__slide c-dental-pros__slide--quote" {{ block.shopify_attributes }}>
+
+              {%- if qt_has_any_video -%}
+                <div
+                  class="c-dental-pros__video-wrap"
+                  style="--cdp-vw-h-mob: {{ block.settings.img_height_mob }}px; --cdp-vw-h-desk: {{ block.settings.img_height_desk }}px"
+                  {%- if qt_has_url_video -%}
+                    data-video="{{ block.settings.video_url | escape }}"
+                    data-video-type="url"
+                  {%- elsif qt_has_shopify_video -%}
+                    data-video-type="shopify"
+                  {%- endif -%}
+                >
+                  {%- comment -%} Poster Mobile {%- endcomment -%}
+                  {%- if block.settings.poster_mob != blank -%}
+                    {{
+                      block.settings.poster_mob
+                      | image_url: width: 600
+                      | image_tag:
+                        class: 'c-dental-pros__poster c-dental-pros__poster--mob',
+                        alt: block.settings.name,
+                        loading: 'lazy',
+                        widths: '300, 450, 600'
+                    }}
+                  {%- endif -%}
+
+                  {%- comment -%} Poster Desktop (o único si no hay poster_mob) {%- endcomment -%}
+                  {%- if block.settings.poster_mob != blank -%}
+                    {%- assign qt_desk_poster_class = 'c-dental-pros__poster c-dental-pros__poster--desk' -%}
+                  {%- else -%}
+                    {%- assign qt_desk_poster_class = 'c-dental-pros__poster' -%}
+                  {%- endif -%}
+                  {%- if block.settings.poster != blank -%}
+                    {{
+                      block.settings.poster
+                      | image_url: width: 800
+                      | image_tag:
+                        class: qt_desk_poster_class,
+                        alt: block.settings.name,
+                        loading: 'lazy',
+                        widths: '400, 600, 800'
+                    }}
+                  {%- elsif qt_has_shopify_video and block.settings.shopify_video.preview_image != blank -%}
+                    {{
+                      block.settings.shopify_video.preview_image
+                      | image_url: width: 800
+                      | image_tag:
+                        class: qt_desk_poster_class,
+                        alt: block.settings.name,
+                        loading: 'lazy',
+                        widths: '400, 600, 800'
+                    }}
+                  {%- elsif block.settings.poster_mob == blank -%}
+                    <div class="c-dental-pros__poster-placeholder">
+                      <span>{{ block.settings.name | default: 'Agregar video' }}</span>
+                    </div>
+                  {%- endif -%}
+
+                  {%- if qt_has_url_video -%}
+                    <iframe
+                      class="c-dental-pros__iframe"
+                      title="{{ block.settings.name | escape }}"
+                      allow="autoplay; fullscreen"
+                      allowfullscreen
+                    ></iframe>
+                  {%- endif -%}
+
+                  {%- if qt_has_shopify_video -%}
+                    <video class="c-dental-pros__native-video" playsinline preload="none" controls>
+                      {%- for source in block.settings.shopify_video.sources -%}
+                        <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                      {%- endfor -%}
+                    </video>
+                  {%- endif -%}
+
+                  <div class="c-dental-pros__play-btn" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                </div>
+              {%- endif -%}
+
+              <div class="c-dental-pros__quote-card">
+                {%- if block.settings.quote != blank -%}
+                  <p class="c-dental-pros__quote" style="text-align: {{ block.settings.quote_align }}">{{ block.settings.quote }}</p>
+                {%- endif -%}
+                {%- if block.settings.name != blank -%}
+                  <p class="c-dental-pros__name" style="text-align: {{ block.settings.name_align }}">{{ block.settings.name }}</p>
+                {%- endif -%}
+              </div>
+
+            </div>
+          {%- endif -%}
+
+        {%- endfor -%}
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div
+  class="cdp-lightbox-{{ section.id }}"
+  id="cdp-lightbox-{{ section.id }}"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Video"
+>
+  <div class="cdp-lightbox-{{ section.id }}__inner">
+    <button class="cdp-lightbox-{{ section.id }}__close" aria-label="Cerrar video">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="cdp-lightbox-{{ section.id }}__ratio">
+      <iframe
+        class="cdp-lightbox-{{ section.id }}__iframe"
+        allow="autoplay; fullscreen"
+        allowfullscreen
+        title="Video"
+      ></iframe>
+      <video
+        class="cdp-lightbox-{{ section.id }}__video"
+        playsinline
+        controls
+        style="display:none"
+      ></video>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var sect = document.getElementById('c-dental-pros-{{ section.id }}');
+  if (!sect) return;
+
+  /* ── VIDEO LIGHTBOX ── */
+  function getEmbedUrl(url) {
+    var yt = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+    if (yt) return 'https://www.youtube.com/embed/' + yt[1] + '?autoplay=1&rel=0&playsinline=1';
+    var vi = url.match(/vimeo\.com\/(\d+)/);
+    if (vi) return 'https://player.vimeo.com/video/' + vi[1] + '?autoplay=1&autopause=0';
+    return url;
+  }
+
+  var lightbox = document.getElementById('cdp-lightbox-{{ section.id }}');
+  var lbIframe  = lightbox.querySelector('.cdp-lightbox-{{ section.id }}__iframe');
+  var lbVideo   = lightbox.querySelector('.cdp-lightbox-{{ section.id }}__video');
+  var lbClose   = lightbox.querySelector('.cdp-lightbox-{{ section.id }}__close');
+
+  function closeLightbox() {
+    lightbox.classList.remove('is-open');
+    lbIframe.src = '';
+    lbVideo.pause();
+    lbVideo.removeAttribute('src');
+    lbVideo.innerHTML = '';
+    lbVideo.style.display = 'none';
+    lbIframe.style.display = '';
+    document.body.style.overflow = '';
+  }
+
+  lbClose.addEventListener('click', closeLightbox);
+
+  lightbox.addEventListener('click', function (e) {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+  });
+
+  sect.querySelectorAll('.c-dental-pros__video-wrap[data-video-type], .c-dental-pros__photo-wrap[data-video-type]').forEach(function (wrap) {
+    wrap.addEventListener('click', function () {
+      if (wrap.dataset.videoType === 'url') {
+        lbIframe.style.display = '';
+        lbVideo.style.display = 'none';
+        lbIframe.src = getEmbedUrl(wrap.dataset.video);
+      } else if (wrap.dataset.videoType === 'shopify') {
+        var nv = wrap.querySelector('.c-dental-pros__native-video');
+        if (nv) {
+          lbIframe.style.display = 'none';
+          lbVideo.style.display = '';
+          lbVideo.innerHTML = nv.innerHTML;
+          lbVideo.load();
+          lbVideo.play().catch(function () {});
+        }
+      }
+      lightbox.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      lbClose.focus();
+    });
+  });
+
+  /* ── IGUALAR ALTURAS ── */
+  function equalizeHeights() {
+    var isDesktop = window.innerWidth >= 768;
+
+    /* 1. Reset */
+    var slides = sect.querySelectorAll('.c-dental-pros__slide');
+    slides.forEach(function (s) { s.style.height = ''; });
+    var allImgWraps = sect.querySelectorAll('.c-dental-pros__photo-wrap, .c-dental-pros__video-wrap');
+    allImgWraps.forEach(function (w) { w.style.height = ''; });
+
+    /* 2. Igualar áreas de imagen/video
+          Desktop: excluye slide--video .video-wrap (se estira al alto del slide via flex stretch) */
+    var wrapsToEq = isDesktop
+      ? sect.querySelectorAll(
+          '.c-dental-pros__photo-wrap, .c-dental-pros__slide--quote .c-dental-pros__video-wrap'
+        )
+      : allImgWraps;
+
+    var maxImgH = 0;
+    wrapsToEq.forEach(function (w) { maxImgH = Math.max(maxImgH, w.offsetHeight); });
+    if (maxImgH > 0) wrapsToEq.forEach(function (w) { w.style.height = maxImgH + 'px'; });
+
+    /* 3. Igualar altura total de slides (ya con imágenes equalizadas) */
+    var maxH = 0;
+    slides.forEach(function (s) { maxH = Math.max(maxH, s.offsetHeight); });
+    if (maxH > 0) slides.forEach(function (s) { s.style.height = maxH + 'px'; });
+  }
+
+  function onReady() {
+    equalizeHeights();
+    var timer;
+    window.addEventListener('resize', function () {
+      clearTimeout(timer);
+      timer = setTimeout(equalizeHeights, 120);
+    });
+  }
+
+  /* Espera a Flickity */
+  var slider = sect.querySelector('.c-dental-pros__slider');
+  if (slider && window.Flickity) {
+    var flkty = Flickity.data(slider);
+    if (flkty) {
+      flkty.on('ready', onReady);
+    } else {
+      slider.addEventListener('ready.flickity', onReady);
+      setTimeout(onReady, 600);
+    }
+  } else {
+    setTimeout(onReady, 800);
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "C - Dental Professionals",
+  "tag": "section",
+  "class": "c-dental-professionals",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Encabezado"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow (texto pequeño)",
+      "default": "#1 Recommended"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título Principal",
+      "default": "Dental Professionals Choose Dr.Jen"
+    },
+    {
+      "type": "header",
+      "content": "Colores"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Fondo Sección",
+      "default": "#1B3A4B"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Color Eyebrow",
+      "default": "#C9A55A"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color Título",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Fondo Tarjeta",
+      "default": "#F7F7F7"
+    },
+    {
+      "type": "color",
+      "id": "name_color",
+      "label": "Color Nombre",
+      "default": "#002C41"
+    },
+    {
+      "type": "color",
+      "id": "quote_color",
+      "label": "Color Texto Cita",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "dot_active_color",
+      "label": "Dot Activo",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "dot_inactive_color",
+      "label": "Dot Inactivo",
+      "default": "#5B7B8A"
+    },
+    {
+      "type": "header",
+      "content": "Botón Play"
+    },
+    {
+      "type": "color",
+      "id": "play_btn_bg",
+      "label": "Fondo Botón Play",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "play_btn_icon_color",
+      "label": "Color Ícono Play",
+      "default": "#1B3A4B"
+    },
+    {
+      "type": "range",
+      "id": "play_btn_size_mob",
+      "label": "Tamaño Play Mobile (px)",
+      "min": 36, "max": 100, "step": 4, "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "play_btn_size_desk",
+      "label": "Tamaño Play Desktop (px)",
+      "min": 36, "max": 100, "step": 4, "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "header",
+      "content": "Tarjeta Video — Ancho del Panel Imagen"
+    },
+    {
+      "type": "range",
+      "id": "video_panel_width_mob",
+      "label": "Ancho Panel Imagen Mobile (%)",
+      "min": 30, "max": 65, "step": 5,
+      "default": 45
+    },
+    {
+      "type": "range",
+      "id": "video_panel_width_desk",
+      "label": "Ancho Panel Imagen Desktop (%)",
+      "min": 30, "max": 65, "step": 5,
+      "default": 45
+    },
+    {
+      "type": "header",
+      "content": "Tarjetas — Radio de Bordes"
+    },
+    {
+      "type": "range",
+      "id": "card_radius_mob",
+      "label": "Radio Mobile (px)",
+      "min": 0, "max": 40, "step": 2, "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "card_radius_desk",
+      "label": "Radio Desktop (px)",
+      "min": 0, "max": 40, "step": 2, "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Slider"
+    },
+    {
+      "type": "range",
+      "id": "cards_per_row_desk",
+      "label": "Cards por fila (Desktop)",
+      "min": 2, "max": 5, "step": 1,
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Tipografía — Eyebrow"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size_mob",
+      "label": "Tamaño Mobile (px)",
+      "min": 10, "max": 28, "step": 1, "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size_desk",
+      "label": "Tamaño Desktop (px)",
+      "min": 10, "max": 36, "step": 1, "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Tipografía — Título"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mob",
+      "label": "Tamaño Mobile (px)",
+      "min": 18, "max": 60, "step": 1, "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desk",
+      "label": "Tamaño Desktop (px)",
+      "min": 24, "max": 80, "step": 1, "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "header",
+      "content": "Tipografía — Nombre"
+    },
+    {
+      "type": "range",
+      "id": "name_size_mob",
+      "label": "Tamaño Mobile (px)",
+      "min": 10, "max": 22, "step": 1, "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "name_size_desk",
+      "label": "Tamaño Desktop (px)",
+      "min": 10, "max": 26, "step": 1, "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Tipografía — Cita"
+    },
+    {
+      "type": "range",
+      "id": "quote_size_mob",
+      "label": "Tamaño Mobile (px)",
+      "min": 10, "max": 22, "step": 1, "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "quote_size_desk",
+      "label": "Tamaño Desktop (px)",
+      "min": 10, "max": 24, "step": 1, "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Espaciado"
+    },
+    {
+      "type": "range",
+      "id": "pad_top_mob",
+      "label": "Padding Top Mobile (px)",
+      "min": 0, "max": 120, "step": 4, "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "pad_bot_mob",
+      "label": "Padding Bottom Mobile (px)",
+      "min": 0, "max": 120, "step": 4, "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pad_top_desk",
+      "label": "Padding Top Desktop (px)",
+      "min": 0, "max": 160, "step": 4, "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "pad_bot_desk",
+      "label": "Padding Bottom Desktop (px)",
+      "min": 0, "max": 160, "step": 4, "unit": "px",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "header_mb_mob",
+      "label": "Espacio Header→Slider Mobile (px)",
+      "min": 0, "max": 80, "step": 4, "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "header_mb_desk",
+      "label": "Espacio Header→Slider Desktop (px)",
+      "min": 0, "max": 100, "step": 4, "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "header",
+      "content": "Alineación — Encabezado"
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_align",
+      "label": "Alineación Eyebrow",
+      "options": [
+        {"value": "left", "label": "Izquierda"},
+        {"value": "center", "label": "Centro"},
+        {"value": "right", "label": "Derecha"}
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Alineación Título",
+      "options": [
+        {"value": "left", "label": "Izquierda"},
+        {"value": "center", "label": "Centro"},
+        {"value": "right", "label": "Derecha"}
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Estilo — Nombre (global)"
+    },
+    {
+      "type": "select",
+      "id": "name_font_weight",
+      "label": "Peso Fuente Nombre",
+      "options": [
+        {"value": "400", "label": "Regular (400)"},
+        {"value": "500", "label": "Medium (500)"},
+        {"value": "600", "label": "SemiBold (600)"},
+        {"value": "700", "label": "Bold (700)"},
+        {"value": "800", "label": "ExtraBold (800)"}
+      ],
+      "default": "700"
+    },
+    {
+      "type": "select",
+      "id": "name_text_transform",
+      "label": "Transformación Nombre",
+      "options": [
+        {"value": "uppercase", "label": "MAYÚsCULAS"},
+        {"value": "capitalize", "label": "Primera Letra"},
+        {"value": "none", "label": "Normal"}
+      ],
+      "default": "uppercase"
+    },
+    {
+      "type": "range",
+      "id": "name_letter_spacing",
+      "label": "Espaciado letras Nombre",
+      "min": 0, "max": 20, "step": 1,
+      "info": "Centésimas de em (3 = 0.03em)",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "name_line_height",
+      "label": "Interlineado Nombre",
+      "min": 10, "max": 25, "step": 1,
+      "info": "Dividir entre 10 (12 = 1.2)",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Estilo — Cita (global)"
+    },
+    {
+      "type": "select",
+      "id": "quote_font_weight",
+      "label": "Peso Fuente Cita",
+      "options": [
+        {"value": "300", "label": "Light (300)"},
+        {"value": "400", "label": "Regular (400)"},
+        {"value": "500", "label": "Medium (500)"},
+        {"value": "600", "label": "SemiBold (600)"}
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "quote_line_height",
+      "label": "Interlineado Cita",
+      "min": 10, "max": 25, "step": 1,
+      "info": "Dividir entre 10 (12 = 1.2)",
+      "default": 12
+    }
+  ],
+  "blocks": [
+    {
+      "type": "photo_text",
+      "name": "Foto Circular + Texto",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Foto de Perfil (Desktop)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mob",
+          "label": "Foto de Perfil (Mobile)"
+        },
+        {
+          "type": "header",
+          "content": "Video (opcional)"
+        },
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "URL del Video (YouTube o Vimeo)",
+          "info": "Ej: https://www.youtube.com/watch?v=XXXXXXX"
+        },
+        {
+          "type": "video",
+          "id": "shopify_video",
+          "label": "O sube un video desde Shopify"
+        },
+        {
+          "type": "header",
+          "content": "Texto"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Nombre y Título",
+          "default": "LISA MARKER, RHD"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Testimonio",
+          "default": "\"We've been using Dr. Jen's in our office for about a year, we've seen high patient compliance & satisfaction.\""
+        },
+        {
+          "type": "header",
+          "content": "Alineación de Texto"
+        },
+        {
+          "type": "select",
+          "id": "name_align",
+          "label": "Alineación Nombre",
+          "options": [
+            {"value": "left", "label": "Izquierda"},
+            {"value": "center", "label": "Centro"},
+            {"value": "right", "label": "Derecha"}
+          ],
+          "default": "left"
+        },
+        {
+          "type": "select",
+          "id": "quote_align",
+          "label": "Alineación Testimonio",
+          "options": [
+            {"value": "left", "label": "Izquierda"},
+            {"value": "center", "label": "Centro"},
+            {"value": "right", "label": "Derecha"}
+          ],
+          "default": "left"
+        },
+        {
+          "type": "header",
+          "content": "Altura de Imagen"
+        },
+        {
+          "type": "range",
+          "id": "img_height_mob",
+          "label": "Alto Imagen Mobile (px)",
+          "min": 100, "max": 500, "step": 10, "unit": "px",
+          "default": 200
+        },
+        {
+          "type": "range",
+          "id": "img_height_desk",
+          "label": "Alto Imagen Desktop (px)",
+          "min": 100, "max": 500, "step": 10, "unit": "px",
+          "default": 220
+        },
+        {
+          "type": "header",
+          "content": "Separación Imagen ↔ Texto"
+        },
+        {
+          "type": "range",
+          "id": "gap_mob",
+          "label": "Gap Mobile (px)",
+          "min": 0, "max": 40, "step": 2, "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "gap_desk",
+          "label": "Gap Desktop (px)",
+          "min": 0, "max": 40, "step": 2, "unit": "px",
+          "default": 16
+        }
+      ]
+    },
+    {
+      "type": "video_image",
+      "name": "Video / Imagen Full",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Video"
+        },
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "URL del Video (YouTube o Vimeo)",
+          "info": "Ej: https://www.youtube.com/watch?v=XXXXXXX"
+        },
+        {
+          "type": "video",
+          "id": "shopify_video",
+          "label": "O sube un video desde Shopify"
+        },
+        {
+          "type": "image_picker",
+          "id": "poster",
+          "label": "Imagen Poster / Thumbnail (Desktop)"
+        },
+        {
+          "type": "image_picker",
+          "id": "poster_mob",
+          "label": "Imagen Poster / Thumbnail (Mobile)",
+          "info": "Si se deja vacío, se usa la imagen Desktop en ambos tamaños"
+        },
+        {
+          "type": "header",
+          "content": "Texto debajo del video (opcional)"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Nombre y Título"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Testimonio"
+        },
+        {
+          "type": "header",
+          "content": "Alineación de Texto"
+        },
+        {
+          "type": "select",
+          "id": "name_align",
+          "label": "Alineación Nombre",
+          "options": [
+            {"value": "left", "label": "Izquierda"},
+            {"value": "center", "label": "Centro"},
+            {"value": "right", "label": "Derecha"}
+          ],
+          "default": "left"
+        },
+        {
+          "type": "select",
+          "id": "quote_align",
+          "label": "Alineación Testimonio",
+          "options": [
+            {"value": "left", "label": "Izquierda"},
+            {"value": "center", "label": "Centro"},
+            {"value": "right", "label": "Derecha"}
+          ],
+          "default": "left"
+        },
+        {
+          "type": "header",
+          "content": "Altura de Imagen / Video"
+        },
+        {
+          "type": "range",
+          "id": "img_height_mob",
+          "label": "Alto Imagen Mobile (px)",
+          "min": 100, "max": 600, "step": 10, "unit": "px",
+          "default": 220
+        },
+        {
+          "type": "range",
+          "id": "img_height_desk",
+          "label": "Alto Imagen Desktop (px)",
+          "min": 100, "max": 600, "step": 10, "unit": "px",
+          "default": 300
+        },
+        {
+          "type": "header",
+          "content": "Separación Imagen ↔ Texto"
+        },
+        {
+          "type": "range",
+          "id": "gap_mob",
+          "label": "Gap Mobile (px)",
+          "min": 0, "max": 40, "step": 2, "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "gap_desk",
+          "label": "Gap Desktop (px)",
+          "min": 0, "max": 40, "step": 2, "unit": "px",
+          "default": 16
+        }
+      ]
+    },
+    {
+      "type": "quote_text",
+      "name": "Solo Cita (texto)",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Video (opcional)"
+        },
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "URL del Video (YouTube o Vimeo)",
+          "info": "Ej: https://www.youtube.com/watch?v=XXXXXXX"
+        },
+        {
+          "type": "video",
+          "id": "shopify_video",
+          "label": "O sube un video desde Shopify"
+        },
+        {
+          "type": "image_picker",
+          "id": "poster",
+          "label": "Imagen Poster / Thumbnail (Desktop)"
+        },
+        {
+          "type": "image_picker",
+          "id": "poster_mob",
+          "label": "Imagen Poster / Thumbnail (Mobile)",
+          "info": "Si se deja vacío, se usa la imagen Desktop en ambos tamaños"
+        },
+        {
+          "type": "header",
+          "content": "Texto"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Texto de la Cita",
+          "default": "\"I am a hygienist here in Denver, Colorado, and about a year ago, I started using the Dr. Jen Super Paste, and I love it.\""
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Nombre y Título (aparece al fondo)",
+          "default": "DR. NAOMI, DENTAL HYGIENIST"
+        },
+        {
+          "type": "header",
+          "content": "Alineación de Texto"
+        },
+        {
+          "type": "select",
+          "id": "name_align",
+          "label": "Alineación Nombre",
+          "options": [
+            {"value": "left", "label": "Izquierda"},
+            {"value": "center", "label": "Centro"},
+            {"value": "right", "label": "Derecha"}
+          ],
+          "default": "left"
+        },
+        {
+          "type": "select",
+          "id": "quote_align",
+          "label": "Alineación Cita",
+          "options": [
+            {"value": "left", "label": "Izquierda"},
+            {"value": "center", "label": "Centro"},
+            {"value": "right", "label": "Derecha"}
+          ],
+          "default": "left"
+        },
+        {
+          "type": "header",
+          "content": "Altura de Imagen / Video"
+        },
+        {
+          "type": "range",
+          "id": "img_height_mob",
+          "label": "Alto Imagen Mobile (px)",
+          "min": 100, "max": 600, "step": 10, "unit": "px",
+          "default": 220
+        },
+        {
+          "type": "range",
+          "id": "img_height_desk",
+          "label": "Alto Imagen Desktop (px)",
+          "min": 100, "max": 600, "step": 10, "unit": "px",
+          "default": 300
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "C - Dental Professionals",
+      "blocks": [
+        {
+          "type": "photo_text",
+          "settings": {
+            "name": "LISA MARKER, RHD",
+            "quote": "\"We've been using Dr. Jen's in our office for about a year, we've seen high patient compliance & satisfaction. I've had my teen using the SuperPaste and we've noticed a significant difference in his white spot lesions.\"",
+            "gap_desk": 16
+          }
+        },
+        {
+          "type": "video_image",
+          "settings": {
+            "name": "",
+            "quote": ""
+          }
+        },
+        {
+          "type": "quote_text",
+          "settings": {
+            "quote": "\"I am a hygienist here in Denver, Colorado, and about a year ago, I started using the Dr. Jen Super Paste, and I love it. I have noticed my teeth are less sensitive. They are whiter, they are brighter, they are just slicker, if that's a word. And so I do recommend this to my patients.\"",
+            "name": "DR. NAOMI, DENTAL HYGIENIST"
+          }
+        },
+        {
+          "type": "photo_text",
+          "settings": {
+            "name": "DR. TRACY, DENTAL HYGIENE STUDENT",
+            "quote": "\"I think it's an incredible product, especially for patients who maybe feel a little bit skeptical about fluoride. It's a great alternative so that they still have care and protection.\"",
+            "gap_desk": 16
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

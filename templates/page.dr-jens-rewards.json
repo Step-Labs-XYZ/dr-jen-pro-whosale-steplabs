@@ -1,0 +1,245 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {}
+    },
+    "12a393c2-a7c7-4d06-873c-dd57c008e3ae": {
+      "type": "image-with-text",
+      "blocks": {
+        "template--16147326337192__12a393c2-a7c7-4d06-873c-dd57c008e3ae-16766680552b5aa49d-0": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Screen_Shot_2023-02-17_at_4.10_2_1.png",
+            "tab_label": "Item",
+            "subheading": "SECRET SMILE CLUB",
+            "title": "Dr. Jen's Rewards Program",
+            "content": "<p>Join our community and tap into a world of dental health + wellness! Collecting SMILES for supporting Dr. Jen and unlock perks like discounts, specials gifts and the ability to vote on new product flavors!</p>",
+            "button_text": "JOIN NOW",
+            "button_link": "https://drjennatural.com/pages/dr-jens-rewards?with_toki_wallet=1"
+          }
+        }
+      },
+      "block_order": [
+        "template--16147326337192__12a393c2-a7c7-4d06-873c-dd57c008e3ae-16766680552b5aa49d-0"
+      ],
+      "settings": {
+        "reveal_on_scroll": true,
+        "padding_top": false,
+        "background_type": "full_width",
+        "background_overlap": "image",
+        "image_position": "left",
+        "text_alignment": "center",
+        "cycle_speed": 8,
+        "accent_background": "rgba(0,0,0,0)",
+        "text_color": "rgba(0,0,0,0)",
+        "button_background": "rgba(0,0,0,0)",
+        "button_text_color": "rgba(0,0,0,0)",
+        "background_color": ""
+      }
+    },
+    "de297192-9ab4-4948-98c3-cbc6619bbe16": {
+      "type": "multi-column",
+      "blocks": {
+        "template--16147326337192__de297192-9ab4-4948-98c3-cbc6619bbe16-167666839250ce367e-0": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Screen_Shot_2023-02-17_at_4.11_3.png",
+            "image_width": 100,
+            "image_border": "rgba(0,0,0,0)",
+            "title": "",
+            "content": "",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link",
+            "text_alignment": "center",
+            "vertical_alignment": "start"
+          }
+        },
+        "template--16147326337192__de297192-9ab4-4948-98c3-cbc6619bbe16-167666839250ce367e-1": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Screen_Shot_2023-02-17_at_4.11_2.png",
+            "image_width": 100,
+            "image_border": "rgba(0,0,0,0)",
+            "title": "",
+            "content": "",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link",
+            "text_alignment": "center",
+            "vertical_alignment": "start"
+          }
+        },
+        "template--16147326337192__de297192-9ab4-4948-98c3-cbc6619bbe16-167666839250ce367e-2": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Screen_Shot_2023-02-17_at_4.11_1.png",
+            "image_width": 100,
+            "image_border": "rgba(0,0,0,0)",
+            "title": "",
+            "content": "",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link",
+            "text_alignment": "center",
+            "vertical_alignment": "start"
+          }
+        }
+      },
+      "block_order": [
+        "template--16147326337192__de297192-9ab4-4948-98c3-cbc6619bbe16-167666839250ce367e-0",
+        "template--16147326337192__de297192-9ab4-4948-98c3-cbc6619bbe16-167666839250ce367e-1",
+        "template--16147326337192__de297192-9ab4-4948-98c3-cbc6619bbe16-167666839250ce367e-2"
+      ],
+      "settings": {
+        "reveal_on_scroll": true,
+        "stack_items": false,
+        "subheading": "JOIN 100's OF DENTAL EXPERTS",
+        "title": "Supporting smiles everywhere",
+        "content": "",
+        "column_alignment": "center",
+        "mobile_item_size": "medium",
+        "desktop_item_size": "medium",
+        "spacing": "normal",
+        "background": "rgba(0,0,0,0)",
+        "text_color": "rgba(0,0,0,0)"
+      }
+    },
+    "dcf7bbf4-4b5d-432b-8522-93bdf0accd95": {
+      "type": "multi-column",
+      "blocks": {
+        "template--16147326337192__dcf7bbf4-4b5d-432b-8522-93bdf0accd95-167666299318ec90dd-0": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Screen_Shot_2023-02-17_at_4.01_1.png",
+            "image_width": 100,
+            "image_border": "rgba(0,0,0,0)",
+            "title": "Join",
+            "content": "<p>Join Dr. Jen's community and get special access to product drops before anyone else.</p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link",
+            "text_alignment": "center",
+            "vertical_alignment": "start"
+          }
+        },
+        "template--16147326337192__dcf7bbf4-4b5d-432b-8522-93bdf0accd95-167666299318ec90dd-1": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Screen_Shot_2023-02-17_at_4.02_2.png",
+            "image_width": 100,
+            "image_border": "rgba(0,0,0,0)",
+            "title": "Access + Earn",
+            "content": "<p>Earn Smile points by shopping, sharing and supporting us on social. Unlock reward tiers and perks that come with them along the way.</p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link",
+            "text_alignment": "center",
+            "vertical_alignment": "start"
+          }
+        },
+        "template--16147326337192__dcf7bbf4-4b5d-432b-8522-93bdf0accd95-167666299318ec90dd-2": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Screen_Shot_2023-02-17_at_4.02_1.png",
+            "image_width": 100,
+            "image_border": "rgba(0,0,0,0)",
+            "title": "Redeem",
+            "content": "<p>Spend your Smile points here or use them with our alliance brands. </p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link",
+            "text_alignment": "center",
+            "vertical_alignment": "start"
+          }
+        }
+      },
+      "block_order": [
+        "template--16147326337192__dcf7bbf4-4b5d-432b-8522-93bdf0accd95-167666299318ec90dd-0",
+        "template--16147326337192__dcf7bbf4-4b5d-432b-8522-93bdf0accd95-167666299318ec90dd-1",
+        "template--16147326337192__dcf7bbf4-4b5d-432b-8522-93bdf0accd95-167666299318ec90dd-2"
+      ],
+      "settings": {
+        "reveal_on_scroll": true,
+        "stack_items": false,
+        "subheading": "Dr. jen's rewards",
+        "title": "How it works",
+        "content": "",
+        "column_alignment": "center",
+        "mobile_item_size": "medium",
+        "desktop_item_size": "medium",
+        "spacing": "normal",
+        "background": "#9fe1dd",
+        "text_color": "rgba(0,0,0,0)"
+      }
+    },
+    "16766628261d46acea": {
+      "type": "apps",
+      "settings": {
+        "include_horizontal_margins": true,
+        "include_vertical_margins": true
+      }
+    },
+    "8d799485-d47e-4657-8fba-4905c4e86038": {
+      "type": "image-with-text",
+      "blocks": {
+        "fb024f83-31a0-4874-bd58-51ae5f45dce9": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Screen_Shot_2023-02-17_at_4.10_1_1.png",
+            "tab_label": "Item",
+            "subheading": "",
+            "title": "Refer 3 friends, Get 1 Dr. Jen's Toothpaste for free",
+            "content": "",
+            "button_text": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "fb024f83-31a0-4874-bd58-51ae5f45dce9"
+      ],
+      "settings": {
+        "reveal_on_scroll": true,
+        "padding_top": false,
+        "background_type": "full_width",
+        "background_overlap": "image",
+        "image_position": "left",
+        "text_alignment": "center",
+        "cycle_speed": 8,
+        "accent_background": "rgba(0,0,0,0)",
+        "text_color": "rgba(0,0,0,0)",
+        "button_background": "rgba(0,0,0,0)",
+        "button_text_color": "rgba(0,0,0,0)",
+        "background_color": ""
+      }
+    },
+    "1676662808489617f4": {
+      "type": "apps",
+      "settings": {
+        "include_horizontal_margins": true,
+        "include_vertical_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "12a393c2-a7c7-4d06-873c-dd57c008e3ae",
+    "de297192-9ab4-4948-98c3-cbc6619bbe16",
+    "dcf7bbf4-4b5d-432b-8522-93bdf0accd95",
+    "16766628261d46acea",
+    "8d799485-d47e-4657-8fba-4905c4e86038",
+    "1676662808489617f4"
+  ]
+}

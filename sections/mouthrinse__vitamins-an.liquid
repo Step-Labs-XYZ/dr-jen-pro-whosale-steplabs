@@ -1,0 +1,167 @@
+<div class="container--ss">
+    <div class="row--ss">
+        <div class="col--ss">
+            <h3 class="section__heading">
+                More than Just a Mouth Rinse
+            </h3>
+            <p class="section__desc">
+                Dr Jen’s proprietary blend of super ingredients (peppermint, spearmint, black cherry,
+                papaya, and spirulina) provides vitamins and minerals loaded with antioxidants and
+                anti-inflammatories helping to promote a healthy mouth microbiome.
+            </p>
+        </div>
+        <div class="col--ss">
+            <div class="vitamins__wrapper">
+                <div data-slider="vitamins__wrapper">
+                    <div class="vitamin__item">
+                        <div class="vitamin__icon">
+                            <h5 class="vitamin__title">
+                                Vitamin <br>
+                                <strong>B9</strong>
+                            </h5>
+                        </div>
+                        <p class="vitamin__desc">
+                            Reduces gum inflammation and helps them become more resilient to dental plaque
+                            and anaerobic bacteria.
+                        </p>
+                    </div>
+                    <div class="vitamin__item">
+                        <div class="vitamin__icon">
+                            <h5 class="vitamin__title">
+                                Vitamin <br>
+                                <strong>K</strong>
+                            </h5>
+                        </div>
+                        <p class="vitamin__desc">
+                            Think of this vitamin as a shield. It helps block substances that break down
+                            tooth enamel.
+                        </p>
+                    </div>
+                    <div class="vitamin__item">
+                        <div class="vitamin__icon">
+                            <h5 class="vitamin__title">
+                                Vitamin <br>
+                                <strong>A</strong>
+                            </h5>
+                        </div>
+                        <p class="vitamin__desc">
+                            Prevents dry mouth and helps your mouth heal quickly.
+                        </p>
+                    </div>
+                    <div class="vitamin__item">
+                        <div class="vitamin__icon">
+                            <h5 class="vitamin__title">
+                                Vitamin <br>
+                                <strong>c</strong>
+                            </h5>
+                        </div>
+                        <p class="vitamin__desc">
+                            Strengthens your gums and the soft tissue in your mouth. It can protect against
+                            gingivitis, the early stage of gum disease
+                        </p>
+                    </div>
+                    <div class="vitamin__item">
+                        <div class="vitamin__icon">
+                            <h5 class="vitamin__title">
+                                Magnesium
+                            </h5>
+                        </div>
+                        <p class="vitamin__desc">
+                            makes teeth harder, helps to build strong enamel for your teeth, and helps
+                            prevent the formation of cavities.
+                        </p>
+                    </div>
+                    <div class="vitamin__item">
+                        <div class="vitamin__icon">
+                            <h5 class="vitamin__title">
+                                Beta-
+                                Carotene
+                            </h5>
+                        </div>
+                        <p class="vitamin__desc">
+                            Antioxidant that protects the body from damaging molecules called free radicals
+                        </p>
+                    </div>
+                    <div class="vitamin__item">
+                        <div class="vitamin__icon">
+                            <h5 class="vitamin__title">
+                                Vitamin <br>
+                                <strong>E</strong>
+                            </h5>
+                        </div>
+                        <p class="vitamin__desc">
+                            reduces inflammation and serves as an antioxidant.
+                        </p>
+                    </div>
+                    <div class="vitamin__item">
+                        <div class="vitamin__icon">
+                            <h5 class="vitamin__title">
+                                Spirulina
+                            </h5>
+                        </div>
+                        <p class="vitamin__desc">
+                            contains nutrients, including B complex vitamins, beta-carotene, vitamin E,
+                            manganese, zinc, copper, iron, selenium, and gamma linolenic acid (an essential
+                            fatty acid)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="module" defer>
+    $('[data-slider="vitamins__wrapper"]').slick({
+        arrows: false,
+        infinite: false,
+        responsive: [
+            {
+                breakpoint: 12800,
+                settings: {
+                    rows: 2,
+                    slidesPerRow: 4,
+                    slidesToShow: 1
+                }
+            },
+            {
+                breakpoint: 1024,
+                settings: {
+                    centerMode: true,
+                    centerPadding: '96px 0 0',
+                    slidesToShow: 2,
+                    initialSlide: 1
+                }
+            },
+            {
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 1,
+                    centerMode: true,
+                    centerPadding: '96px 0 0'
+                }
+            }
+        ]
+    });
+</script>
+
+{% schema %}
+  {
+    "name": "Mouthrinse vitamins",
+    "class": "section__padding mouthrinse__vitamins ss--mouthrinse__vitamins-an",
+    "tag": "section",
+    "settings": [],
+    "presets": [
+      {
+        "name": "Mouthrinse vitamins",
+        "category": "Mouthrinse page"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,287 @@
+/* ============================ */
+
+
+.popup video{
+  height:400px;
+}
+
+.box {
+  width: 40%;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.2);
+  padding: 35px;
+  border: 2px solid #fff;
+  border-radius: 20px/50px;
+  background-clip: padding-box;
+  text-align: center;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 55555555555555555555;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 900ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target , .overlay:focus , .overlay:focus-within , .overlay:visited {
+  visibility: visible;
+  opacity: 1;
+    z-index: 55555555555555555555;
+}
+
+.popup {
+margin: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    top: 120px;
+    width: 30%;   
+ z-index: 555555555555555555555555555555555555555555;
+    position: relative;
+    transition: all 3s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close-btn {
+    position: absolute;
+    top: -15px;
+    right: 5px;
+    transition: all .2s;
+    font-size: 30px;
+    font-weight: 700;
+    text-decoration: none;
+    color: #8be3e1;
+}
+.popup .close-btn:hover {
+  color: #000000;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+   top: 80px;
+}
+}
+
+
+
+/* ============================ */
+#myModal.modal , #myModalVideo.modal{
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 555; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+visibility:visible;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: 100px auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+}
+.modal-content.video{
+   margin:20px auto;
+}
+
+/* The Close Button */
+ .close {
+    color: rgb(139, 227, 225);
+    float: right;
+        font-size: 36px;
+    display: block;
+    font-weight: 700;
+    z-index: 55555555;
+    position: relative;
+}
+.video-container{
+  height:400px;
+}
+.video-container video {
+      margin-top: 20px;
+    height: 94%;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+
+
+/*---------------0  */
+
+div.out-of-stock span.badge{
+  text-transform: uppercase;
+display:block;
+    background: #ff6b00;
+    padding: 1;
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    border-radius: 15px;
+    width: fit-content;
+}
+
+
+.preorder-box div.content {
+      display: flex;
+    flex-direction: column;
+}
+div.preorder-box {
+      background: #8AE4E1;
+    padding: 50px 7%;
+}
+
+div.preorder-box .content_box span.heading{
+      font-size: 24px;
+    color: #000000;
+    font-weight: 700;
+    line-height: 24px;
+}
+div.preorder-box .content_box span{
+    font-weight: 500;
+    line-height: 20.48px;
+ font-size: 16px;
+}
+
+div.preorder-box .content_buttons .button_box .box1 , div.preorder-box .content_buttons .button_box .box2{
+      display: flex;
+    justify-content: space-between;
+background: white;
+    border-radius: 15px;
+    margin-top: 15px;
+}
+div.preorder-box .content_buttons .button_box .box1 span, div.preorder-box .content_buttons .button_box .box2 span{
+  font-size: 13px;
+    font-weight: 700;
+    line-height: 15px;
+    padding: 18px 12px;
+}
+
+
+
+div.video_box div.box_video {
+      text-align: center;
+    background: #FF6B00;
+    margin-top: 17px;
+    border-radius: 18px;
+}
+div.video_box div.box_video a {
+    padding: 18px 0px;
+    width: 100%;
+    border-radius: 15px;
+font-weight:700;
+  line-height: 20.48px;
+ font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 12px;
+}
+ div.video_box div.box_video button{ 
+ 
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 12px;
+}
+.signin_box .box_signup a{
+  width: 100%;
+    display: block;
+    padding: 18px 0px;
+    text-align: center;
+    margin-top: 17px;
+    border: 2px solid #FF6B00;
+    border-radius: 15px;
+    font-weight: 700;
+    font-size: 14px;
+}
+div.preorder-box .content_buttons .button_box .box1 span.percentage {
+  width:40%;
+}
+@media only screen and (max-width: 1200px) { 
+
+div.preorder-box .content_buttons .button_box .box1 span, div.preorder-box .content_buttons .button_box .box2 span {
+      font-size: 12px;
+}
+
+div.preorder-box .content_box span.heading {
+    font-size: 22px;
+    line-height: 23px;
+}
+div.preorder-box .content_box span {
+    line-height: 20.48px;
+    font-size: 14px;
+}
+}
+@media only screen and (max-width: 600px) { 
+.modal-content {
+    background-color: #fefefe;
+    margin: 5px auto;
+    padding: 10px;
+    border: 1px solid #888;
+    width: 94%;
+}
+#myModal.modal, #myModalVideo.modal{
+      display: none;
+    position: fixed;
+    z-index:5555;
+    padding-top: 100px;
+    left: 0;
+    top: -100%;
+    border: 0px;
+    visibility: visible;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #000;
+    background-color: #0006;
+}
+
+div.preorder-box .content_buttons .button_box .box1 span, div.preorder-box .content_buttons .button_box .box2 span {
+    font-size: 11px;
+    line-height: 13px;
+  padding: 15px 7px;
+}
+div.video_box div.box_video a {
+      font-size: 13px;
+    column-gap: 8px;
+}
+.signin_box .box_signup a{
+  font-size: 13px;
+padding: 13px 0px;
+}
+}
+
+
+
+

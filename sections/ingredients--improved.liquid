@@ -1,0 +1,304 @@
+<style>
+  #shopify-section-{{ section.id }}{
+    background-color: {{ section.settings.main_container_background }};
+  }
+  .info-box > div.section__desc{
+    margin-block-start:16px;
+  }
+  .list--clinically-proven{
+    background-color: {{section.settings.second_text_background}};
+    color:{{section.settings.second_text_font_color}};
+    padding:40px;
+  }
+  .Ingreditents-Container{
+    background-color:{{ section.settings.bottom_container_background }};
+  }
+  .Ingreditents-Container > .richtext__content{
+    margin-block:12px;
+  }
+</style>
+
+<div class="container">
+    
+    <div class="MC-Alternative-Image-w-text">
+      
+    
+    <div class="info-box">
+        <h3 class="section__heading">
+          {{section.settings.section_title}}
+        </h3>
+        <div class="richtext__content list--non-toxic">
+          {{ section.settings.section_text }}
+        </div>
+        {% if section.settings.first_flavor or section.settings.second_flavor or section.settings.third_flavor %}
+            <div class="floss-flavors-container">
+            {% if section.settings.first_flavor %}
+                <div class="">
+                 <img class="flavor-icon" src="{{section.settings.first_flavor | img_url: 'master'}}" />
+                </div>
+            {% endif %}
+            {% if section.settings.second_flavor %}
+                <div class="">
+                 <img class="flavor-icon" src="{{section.settings.second_flavor | img_url: 'master'}}" />
+                </div>
+            {% endif %}
+            {% if section.settings.third_flavor %}
+                <div class="">
+                 <img class="flavor-icon" src="{{section.settings.third_flavor | img_url: 'master'}}" />
+                </div>
+            {% endif %}
+            </div>
+        {% endif %}
+        <div class="richtext__content list--clinically-proven">
+          <p>{{ section.settings.section_second_text }}</p>
+        </div>
+    </div>
+    <div class="info__visual">
+      <img class="image_section_desktop" src="{{section.settings.section_image | img_url: 'master'}}" />  
+      {% if section.settings.section_image_mobile != blank %}
+        <img class="image_section_mobile" src="{{section.settings.section_image_mobile| img_url: 'master'}}" /> 
+      {% endif %}  
+    </div>
+</div>
+
+{% if section.settings.bottom_container_title != blank %}
+    <div class="Ingreditents-Container">
+        <h5 class="section__title">
+          {{section.settings.bottom_container_title}}
+        </h5>
+        <div class="richtext__content">
+          <p>{{section.settings.bottom_container_text}}</p>
+        </div>
+        <a href="{{section.settings.url}}" class="hero-button">{{section.settings.button_text}}</a>
+    </div>
+{% else %}
+    {% if section.settings.button_text != blank %}
+        <a style="background-color: {{ section.settings.bottom_container_background }};" href="{{ section.settings.url }}">{{ section.settings.button_text }}</a>
+    {% endif %}    
+{% endif %}
+
+  </div>
+
+  <style>
+    .template-product .MC-Alternative-Image-w-text .section__heading{
+      font-size: clamp(26px, 3vw, 40px);
+      line-height: normal !important;
+      margin-bottom: 30px;
+    }
+    .template-product .MC-Alternative-Image-w-text .info__visual img{
+      max-width: 550px;
+      margin: auto;
+      width: 100%;
+    }
+    .template-product .MC-Alternative-Image-w-text{
+      gap: 20px;
+      align-items: center;
+    }
+    .template-product .MC-Alternative-Image-w-text .richtext__content ul{
+      padding-left: 35px;
+    } 
+    .template-product .MC-Alternative-Image-w-text .list--non-toxic ul li{
+      font-size: 18px !important;
+      line-height: 32px;
+    }
+    .template-product .MC-Alternative-Image-w-text .list--clinically-proven ul li{
+      font-size: clamp(18px, 3vw, 22px);
+    }
+    .template-product .MC-Alternative-Image-w-text .list--clinically-proven p{
+      font-size: clamp(20px, 3vw, 24px) !important;
+      margin: 0;
+      padding: 4px 18px;
+      line-height: 38px;
+    }
+    .template-product .MC-Alternative-Image-w-text .richtext__content{
+      margin-bottom: 20px;
+      padding: 0;
+    }
+    .template-product .MC-Alternative-Image-w-text .info-box{
+      max-width: 580px;
+    }
+    .template-product .ss--ingredients--improved .container{
+      padding: 40px  20px 0 20px;
+      margin: 0 auto;
+    }
+    .ss--features-icon--improved {
+    background: #f4fefe;
+    }
+    .ss--features-icon--improved .homepage-1x4-icons .icon{
+      width: 10%
+    }
+    .template-product .ss--features-icon--improved  .homepage-1x4-icons{
+      border-top: none;
+      border-bottom: none;
+    }
+    .template-product  .ss--features-icon--improved  .homepage-1x4-icons>.icon>img{
+      max-width: 105px;
+      max-height: 105px;
+      width: 100%;
+      height: 105px;
+    }
+    .ss--features-icon--improved .homepage-1x4-icons{
+      padding: 0 0 45px
+    }
+    .template-product .image_section_mobile{
+      display: none;
+    }
+    .template-floss-wholesale .ss--ingredients--improved .info__visual img{
+      max-width: 568px;
+      width: auto;
+    }
+
+    .template-product.template-floss-wholesale .MC-Alternative-Image-w-text .section__heading{
+      font-size: clamp(24px, 3vw, 32px);
+        line-height: normal !important;
+        margin-bottom: 20px;
+    }
+   
+    .template-floss-wholesale .floss-flavors-container{
+      margin: 0 0 0 20px;
+    }
+    .template-product.template-floss-wholesale .MC-Alternative-Image-w-text .richtext__content ul li{
+      font-size: clamp(12px, 3vw, 18px) !important;
+    }
+    .template-product.template-floss-wholesale .ss--ingredients--improved .container{
+      padding: 40px 40px 0 40px;
+      margin-top: 20px;
+    }
+    @media screen and (max-width: 768px){
+        .template-product  .ss--features-icon--improved  .homepage-1x4-icons>.icon{
+          width: 25%!important;
+          }
+        .template-floss-wholesale .flavor-icon{
+          height: 13vw;
+        }
+        .template-floss-wholesale .floss-flavors-container{
+          margin: 15px 0 15px 20px;
+        }
+        .template-product .MC-Alternative-Image-w-text .richtext__content ul li{
+          line-height: 24px; 
+        }
+        .template-product .MC-Alternative-Image-w-text{
+          flex-direction: column-reverse;
+        }
+        .template-product.template-floss-wholesale  .richtext__content.list--clinically-proven li{
+          font-weight: 600;
+        }
+        .template-product .image_section_mobile{
+          display: block; 
+        }
+        .template-product .image_section_desktop{
+          display: none;
+        }
+        .template-floss-wholesale .ss--ingredients--improved .info__visual img{
+          max-width: 320px;
+        }
+        .template-product.template-floss-wholesale .MC-Alternative-Image-w-text .info-box{
+          margin: 0 auto;
+          margin-top: 0 !important;
+        }
+      }
+  </style>
+{% schema %}
+{
+   "name": "Ingredients - improved",
+  "tag": "section",
+  "class": "ss--ingredients--improved section__padding",
+   "settings" : [
+        {
+            "type": "image_picker",
+            "id": "section_image",
+            "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "section_image_mobile",
+          "label": "Image mobile"
+         },
+        {
+            "type": "text",
+            "id": "section_title",
+            "label": "Title"
+        },
+        {
+            "type": "richtext",
+            "id": "section_text",
+            "label": "Section Text"
+        },
+        {
+            "type": "image_picker",
+            "id": "first_flavor",
+            "label": "Flavor Option 1"
+        },
+        {
+            "type": "image_picker",
+            "id": "second_flavor",
+            "label": "Flavor Option 2"
+        },
+        {
+            "type": "image_picker",
+            "id": "third_flavor",
+            "label": "Flavor Option 3"
+        },
+        {
+            "type": "color",
+            "id": "main_container_background",
+            "label": "Main Container Background Color",
+            "default": "#f4fefe"
+        },
+        {
+            "type": "richtext",
+            "id": "section_second_text",
+            "label": "Second Text"
+        },
+        {
+            "type": "color",
+            "id": "second_text_font_color",
+            "label": "Second Text Font Color",
+            "default": "#1d2433"
+        },        
+        {
+            "type": "color",
+            "id": "second_text_background",
+            "label": "Second Text Background Color",
+            "default": "#8bd1cf"
+        },
+        {
+            "type": "header",
+            "content": "Bottom Container Settings"
+        },
+        {
+            "type": "text",
+            "id": "bottom_container_title",
+            "label": "Bottom Container Title"
+        },
+        {
+            "type": "richtext",
+            "id": "bottom_container_text",
+            "label": "Bottom Container Text"
+        },
+        {
+            "type": "url",
+            "id": "url",
+            "label": "Bottom Container Url"
+        },
+        {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text"
+        },
+        {
+            "type": "color",
+            "id": "bottom_container_background",
+            "label": "Bottom Container Background Color",
+            "default": "#8bd1cf"
+        }
+
+   ],
+  "presets": [
+    {
+        "category": "Image with text",
+        "name":"Ingredients - improved"
+    }
+  ]
+}
+{% endschema %}

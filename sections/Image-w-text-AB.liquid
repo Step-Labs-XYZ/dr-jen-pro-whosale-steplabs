@@ -1,0 +1,143 @@
+<div class="Background-blue"  style="background-color: {{section.settings.main_container_background}}"  >
+<div class="MC-Alternative-Image-w-text" style="background-color: {{section.settings.main_container_background}}">
+
+    <img src="{{section.settings.section_image | img_url: 'master'}}" />
+
+    <div class="info-box">
+        <h1>{{section.settings.section_title}}</h1>
+        <p>{{section.settings.section_text}} </p>
+        {% if section.settings.first_flavor or section.settings.second_flavor or section.settings.third_flavor %}
+            <div class="floss-flavors-container">
+            {% if section.settings.first_flavor %}
+                <div class="">
+                 <img class="flavor-icon" src="{{section.settings.first_flavor | img_url: 'master'}}" />
+                </div>
+            {% endif %}
+            {% if section.settings.second_flavor %}
+                <div class="">
+                 <img class="flavor-icon" src="{{section.settings.second_flavor | img_url: 'master'}}" />
+                </div>
+            {% endif %}
+            {% if section.settings.third_flavor %}
+                <div class="">
+                 <img class="flavor-icon" src="{{section.settings.third_flavor | img_url: 'master'}}" />
+                </div>
+            {% endif %}
+            </div>
+        {% endif %}
+        <div class="second-info" style="background-color: {{section.settings.second_text_background}} !important; color:{{section.settings.second_text_font_color}};">
+            <p>{{section.settings.section_second_text}}</p>
+        </div>
+    </div>
+
+</div>
+
+{% if section.settings.bottom_container_title %}
+    <div class="Ingreditents-Container" style="background-color:{{ section.settings.bottom_container_background }}">
+        <h1>{{section.settings.bottom_container_title}}</h1>
+        <p>{{section.settings.bottom_container_text}}</p>
+        <a href="{{section.settings.url}}" class="hero-button">{{section.settings.button_text}}</a>
+    </div>
+{% endif %}
+
+</div>
+
+
+
+{% schema %}
+{
+   "name": "Alternative Image w/ Text",
+   "settings" : [
+        {
+            "type": "image_picker",
+            "id": "section_image",
+            "label": "Image"
+        },
+        {
+            "type": "text",
+            "id": "section_title",
+            "label": "Title"
+        },
+        {
+            "type": "richtext",
+            "id": "section_text",
+            "label": "Section Text"
+        },
+        {
+            "type": "image_picker",
+            "id": "first_flavor",
+            "label": "Flavor Option 1"
+        },
+        {
+            "type": "image_picker",
+            "id": "second_flavor",
+            "label": "Flavor Option 2"
+        },
+        {
+            "type": "image_picker",
+            "id": "third_flavor",
+            "label": "Flavor Option 3"
+        },
+        {
+            "type": "color",
+            "id": "main_container_background",
+            "label": "Main Container Background Color",
+            "default": "#f4fefe"
+        },
+        {
+            "type": "richtext",
+            "id": "section_second_text",
+            "label": "Second Text"
+        },
+        {
+            "type": "color",
+            "id": "second_text_font_color",
+            "label": "Second Text Font Color",
+            "default": "#1d2433"
+        },        
+        {
+            "type": "color",
+            "id": "second_text_background",
+            "label": "Second Text Background Color",
+            "default": "#8bd1cf"
+        },
+        {
+            "type": "header",
+            "content": "Bottom Container Settings"
+        },
+        {
+            "type": "text",
+            "id": "bottom_container_title",
+            "label": "Bottom Container Title"
+        },
+        {
+            "type": "richtext",
+            "id": "bottom_container_text",
+            "label": "Bottom Container Text"
+        },
+        {
+            "type": "url",
+            "id": "url",
+            "label": "Bottom Container Url"
+        },
+        {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text"
+        },
+        {
+            "type": "color",
+            "id": "bottom_container_background",
+            "label": "Bottom Container Background Color",
+            "default": "#8bd1cf"
+        }
+
+   ],
+  "presets": [
+    {
+        "category": "Image w/ Text",
+        "name":"Alternative Image w/ Text"
+    }
+  ]
+}
+{% endschema %}

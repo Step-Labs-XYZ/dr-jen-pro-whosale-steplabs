@@ -1,0 +1,172 @@
+<div class="collection_wholesale_page">
+    <h2>{{ section.settings.title_collection_wholesale }}</h2>
+    <p class="text_wholesale_page">{{ section.settings.text_collection_wholesale }}</p>
+    <div class="container_collection__wholesale">
+        {% for product in collections['Wholesale'].products %}
+            <div class="product_wholesale_card">
+                <a href="{{- product.url}}">
+                    <img src="{{ product.featured_media | image_url: width: 240 }}" alt="">
+                    <p>{{- product.title }}</p>
+                    {% if product.metafields.custom.ph_wholesale != blank %}
+                        <p class="ph_wholesale">{{ product.metafields.custom.ph_wholesale }}</p>
+                    {% endif %}
+                    <div class="retail_text_wholesale_contain">
+                        {% if product.metafields.custom.price_per_use_2 != blank %}
+                            {% assign text_retail = product.metafields.custom.price_per_use_2 | split: '|' %}
+
+                            <p>{{ text_retail[0] }} <span>{{ text_retail[1] }}</span></p> 
+                        {% endif %}
+                    </div>
+                </a>
+            </div>           
+        {% endfor %}
+    </div>
+    
+    <!-- <a class="btn_all_product_wholesale" href="{{ section.settings.button_link }}">EXPLORE PRODUCTS</a> -->
+</div>
+
+<style>
+.container_collection__wholesale{
+display: flex;
+flex-wrap: wrap;
+column-gap: 60px;
+row-gap: 90px;
+text-align: center;
+justify-content: center;
+padding: 0 50px 80px;
+}
+.container_collection__wholesale p{
+color: #2D3852;
+font-size: clamp(16px, 4vw, 18px);
+font-weight: 600;
+max-width: 320px;
+margin: auto;
+width: 100%;
+}
+.collection_wholesale_page h2{
+font-size: clamp(26px, 4vw, 32px);
+line-height: normal;
+text-align: center;
+}
+.collection_wholesale_page p{
+margin: 0;
+font-size: clamp(14px, 4vw, 16px) ;
+line-height: inherit;
+text-align: center;
+font-weight: 700;
+}
+.collection_wholesale_page{
+padding: 50px 0;
+
+}
+.text_wholesale_page{
+padding: 0 50px;
+}
+.ph_wholesale{
+color: #2D3852 !important;
+font-size: 15px !important;
+font-weight: 400 !important;
+margin-top: 2px !important;
+}
+.collection_wholesale_page .btn_all_product_wholesale{
+background: #2D3852;
+color: #fff;
+padding: 10px 30px;
+display: block;
+text-align: center;
+margin: 30px auto;
+max-width: 230px;
+cursor: pointer;
+font-weight: 600;
+}
+.compare_price_p_wholesale{
+font-size: 16px !important;
+line-height: 19px;
+text-align: center;
+text-decoration-line: line-through ;
+color: #5B5C5B !important;
+font-weight: 400 !important;
+}
+.real_price_p_wholesale{
+font-weight: 600 !important;
+font-size: 16px !important;
+color: #E04880  !important;
+}
+.info_product_wholesale_container{
+display: flex;
+justify-content: center;
+gap: 10px;
+align-self: center;
+}
+.info_product_wholesale_container p{
+display: inline-block !important;
+width: auto;
+}
+
+@media screen and (max-width: 1000px) {
+    .container_collection__wholesale{
+        background: none;
+    }
+    .secon_description_tittle{
+        text-align: center;
+    }
+    .collection_wholesale_page p{
+        margin: auto;
+    }
+    .product_wholesale_card{
+        width: 100%;
+    }
+    .info_product_wholesale_container p{
+        margin: initial;
+    }
+    .form_wholessale_request .globo-form-id-109985 .globo-form-app .footer{
+        position: relative !important; 
+        left: 0 !important;
+        text-align: center;
+        margin-top: 15px !important;
+    }
+    .form_wholessale_request .globo-form-app .content{
+        justify-content: center;
+    }
+    .apply_container{
+        padding: 20px 15px;
+    }
+    .form_wholessale_request .globo-form-control{
+        width: 95% !important;
+        margin: 5px auto;
+    }
+    .form_wholessale_request .globo-form-control.layout-1-column:last-child{
+        width: 95% !important; 
+    }
+}
+</style>
+{% schema %}
+{
+   "name": "collection wholesale page",
+   "settings" : [
+   {
+    "type": "text",
+    "id": "title_collection_wholesale",
+    "label": "Title Page",
+    "default": "Wholesale"
+   },
+   {
+    "type": "text",
+    "id": "text_collection_wholesale",
+    "label": "Text Page",
+    "default": "Wholesale"
+   },
+   {
+    "type": "url",
+    "id": "button_link",
+    "label": "Button link"
+  }
+
+],
+   "presets": [
+    {
+        "name": "Collection Wholesale"
+    }
+   ]
+}
+{% endschema %}

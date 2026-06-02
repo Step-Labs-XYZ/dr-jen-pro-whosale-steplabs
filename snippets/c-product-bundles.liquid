@@ -1,0 +1,85 @@
+{% comment %}
+  Snippet: c-product-bundles.liquid
+  Selector de cantidad con bundles (1, 2, 4 tubos) con badges de ahorro
+{% endcomment %}
+
+{%- assign bundle_1_label = section.settings.bundle_1_label | default: 'One tube' -%}
+{%- assign bundle_2_label = section.settings.bundle_2_label | default: '2 tubes' -%}
+{%- assign bundle_2_badge = section.settings.bundle_2_badge | default: 'Save 12%' -%}
+{%- assign bundle_3_label = section.settings.bundle_3_label | default: '4 tubes' -%}
+{%- assign bundle_3_badge = section.settings.bundle_3_badge | default: 'Save 15% + Free Toothbrush' -%}
+
+<div class="c-bundles" data-bundles>
+  <p class="c-bundles__label">{{ 'products.product.quantity' | t | default: 'Quantity' }}</p>
+
+  <div class="c-bundles__options" role="list">
+
+    {%- comment -%} Bundle 1: 1 tubo {%- endcomment -%}
+    <button
+      class="c-bundles__option is-selected"
+      data-bundle-qty="1"
+      data-bundle-index="0"
+      aria-pressed="true"
+      role="listitem"
+    >
+      <div class="c-bundles__option-img">
+        {% if product.featured_image %}
+          <img
+            src="{{ product.featured_image | image_url: width: 80 }}"
+            alt="{{ bundle_1_label }}"
+            width="80"
+            height="80"
+            loading="lazy"
+          >
+        {% endif %}
+      </div>
+      <span class="c-bundles__option-label">{{ bundle_1_label }}</span>
+    </button>
+
+    {%- comment -%} Bundle 2: 2 tubos {%- endcomment -%}
+    <button
+      class="c-bundles__option"
+      data-bundle-qty="2"
+      data-bundle-index="1"
+      aria-pressed="false"
+      role="listitem"
+    >
+      {% if bundle_2_badge != blank %}
+        <span class="c-bundles__badge">{{ bundle_2_badge }}</span>
+      {% endif %}
+      <div class="c-bundles__option-img c-bundles__option-img--double">
+        {% if product.featured_image %}
+          <img src="{{ product.featured_image | image_url: width: 60 }}" alt="" width="60" height="60" loading="lazy">
+          <img src="{{ product.featured_image | image_url: width: 60 }}" alt="" width="60" height="60" loading="lazy">
+        {% endif %}
+      </div>
+      <span class="c-bundles__option-label">{{ bundle_2_label }}</span>
+    </button>
+
+    {%- comment -%} Bundle 3: 4 tubos {%- endcomment -%}
+    <button
+      class="c-bundles__option"
+      data-bundle-qty="4"
+      data-bundle-index="2"
+      aria-pressed="false"
+      role="listitem"
+    >
+      {% if bundle_3_badge != blank %}
+        <span class="c-bundles__badge">{{ bundle_3_badge }}</span>
+      {% endif %}
+      <div class="c-bundles__option-img c-bundles__option-img--quad">
+        {% if product.featured_image %}
+          <img src="{{ product.featured_image | image_url: width: 50 }}" alt="" width="50" height="50" loading="lazy">
+          <img src="{{ product.featured_image | image_url: width: 50 }}" alt="" width="50" height="50" loading="lazy">
+          <img src="{{ product.featured_image | image_url: width: 50 }}" alt="" width="50" height="50" loading="lazy">
+          <img src="{{ product.featured_image | image_url: width: 50 }}" alt="" width="50" height="50" loading="lazy">
+        {% endif %}
+      </div>
+      <span class="c-bundles__option-label">{{ bundle_3_label }}</span>
+    </button>
+
+  </div>
+
+  {%- comment -%} Input oculto para la cantidad — sincroniza con el form {%- endcomment -%}
+  <input type="hidden" name="quantity" value="1" data-bundle-quantity-input>
+</div>

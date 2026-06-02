@@ -1,0 +1,669 @@
+<div id="c-mineral-uptake-{{ section.id }}" class="Cmineral-uptake" data-section-id="{{ section.id }}">
+  <div class="Cmineral-uptake__container">
+    
+    <div class="Cmineral-uptake__content">
+      {%- if section.settings.main_heading != blank -%}
+        <h2 class="Cmineral-uptake__heading">{{ section.settings.main_heading | newline_to_br }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <div class="Cmineral-uptake__description">
+          <p>{{ section.settings.description | newline_to_br }}</p>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.link_text != blank -%}
+        <a href="{{ section.settings.link_url | default: '#' }}" class="Cmineral-uptake__study-link">
+          {{ section.settings.link_text }}
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.description_desktop_extra != blank -%}
+        <div class="Cmineral-uptake__description Cmineral-uptake__description--desktop-extra">
+          <p>{{ section.settings.description_desktop_extra | newline_to_br }}</p>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.button_text != blank -%}
+        <a href="{{ section.settings.button_url | default: '#' }}"
+           class="Cmineral-uptake__button Cmineral-uptake__button--desktop">
+          {{ section.settings.button_text }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="Cmineral-uptake__images">
+      {%- if section.settings.images_title != blank -%}
+        <h3 class="Cmineral-uptake__images-title">{{ section.settings.images_title | newline_to_br }}</h3>
+      {%- endif -%}
+
+      <div class="Cmineral-uptake__images-grid">
+        <div class="Cmineral-uptake__image-item">
+          {%- if section.settings.image_1 != blank -%}
+            <div class="Cmineral-uptake__image-wrapper">
+              <img 
+                src="{{ section.settings.image_1 | image_url: width: 600 }}" 
+                alt="{{ section.settings.image_1_label | escape }}"
+                class="Cmineral-uptake__image"
+                loading="lazy"
+              />
+            </div>
+          {%- else -%}
+            <div class="Cmineral-uptake__image-placeholder">
+              <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="200" height="200" fill="#E5E5E5"/>
+                <text x="50%" y="50%" text-anchor="middle" fill="#999" font-size="14">Image 1</text>
+              </svg>
+            </div>
+          {%- endif -%}
+          
+          {%- if section.settings.image_1_label != blank -%}
+            <p class="Cmineral-uptake__image-label">{{ section.settings.image_1_label | newline_to_br }}</p>
+          {%- endif -%}
+        </div>
+
+        <div class="Cmineral-uptake__image-item">
+          {%- if section.settings.image_2 != blank -%}
+            <div class="Cmineral-uptake__image-wrapper">
+              <img 
+                src="{{ section.settings.image_2 | image_url: width: 600 }}" 
+                alt="{{ section.settings.image_2_label | escape }}"
+                class="Cmineral-uptake__image"
+                loading="lazy"
+              />
+            </div>
+          {%- else -%}
+            <div class="Cmineral-uptake__image-placeholder">
+              <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="200" height="200" fill="#E5E5E5"/>
+                <text x="50%" y="50%" text-anchor="middle" fill="#999" font-size="14">Image 2</text>
+              </svg>
+            </div>
+          {%- endif -%}
+          
+          {%- if section.settings.image_2_label != blank -%}
+            <p class="Cmineral-uptake__image-label">{{ section.settings.image_2_label | newline_to_br }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  {%- comment -%} Mobile-only bottom content {%- endcomment -%}
+  {%- if section.settings.description_mobile_bottom != blank or section.settings.mobile_button_text != blank -%}
+    <div class="Cmineral-uptake__mobile-bottom">
+      {%- if section.settings.description_mobile_bottom != blank -%}
+        <div class="Cmineral-uptake__description Cmineral-uptake__description--mobile-bottom">
+          <p>{{ section.settings.description_mobile_bottom | newline_to_br }}</p>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.mobile_button_text != blank -%}
+        <a href="{{ section.settings.mobile_button_url | default: '#' }}"
+           class="Cmineral-uptake__button Cmineral-uptake__button--mobile">
+          {{ section.settings.mobile_button_text }}
+        </a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap');
+
+#c-mineral-uptake-{{ section.id }} {
+  background-color: {{ section.settings.background_color }};
+  padding-top: {{ section.settings.padding_top_desktop }}px;
+  padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+  overflow: hidden;
+  font-family: 'Raleway', sans-serif;
+}
+
+#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* Columna Izquierda */
+#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__content {
+  display: flex;
+  flex-direction: column;
+}
+
+#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__heading {
+  font-size: {{ section.settings.heading_size_desktop }}px;
+  max-width: {{ section.settings.heading_max_desktop }}%;
+  font-weight: 600;
+  line-height: 1.25;
+  color: {{ section.settings.heading_color }};
+  margin: 0 0 20px 0;
+}
+
+#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__description {
+  font-size: {{ section.settings.text_size_desktop }}px;
+  max-width: {{ section.settings.text_max_desktop }}%;
+  font-weight: 400;
+  line-height: 1.6;
+  color: {{ section.settings.text_color }};
+  margin: 0;
+}
+
+#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__description p {
+  margin: 0;
+}
+
+/* Link de estudio con espacio */
+#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__study-link {
+  font-size: {{ section.settings.text_size_desktop }}px;
+  color: {{ section.settings.link_color }};
+  text-decoration: underline;
+  font-weight: 400;
+  display: inline-block;
+  margin-bottom: 24px;
+  transition: opacity 0.3s ease;
+}
+
+#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__study-link:hover {
+  opacity: 0.7;
+}
+
+/* Texto extra negrita */
+#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__description--desktop-extra {
+  font-weight: 700;
+  color: {{ section.settings.bold_text_color }};
+}
+
+#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__description--mobile-bottom {
+  font-weight: 700;
+  color: {{ section.settings.bold_text_color }};
+}
+
+/* Botón (si se usa) */
+#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 40px;
+  background: transparent;
+  border: 2px solid {{ section.settings.heading_color }};
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  color: {{ section.settings.heading_color }};
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+  margin-top: 20px;
+}
+
+#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__button:hover {
+  background: {{ section.settings.heading_color }};
+  color: {{ section.settings.background_color }};
+  transform: translateY(-2px);
+}
+
+/* Columna Derecha */
+#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__images {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__images-title {
+  font-size: {{ section.settings.img_title_size_desktop }}px;
+  max-width: {{ section.settings.img_title_max_desktop }}%;
+  font-weight: 400;
+  line-height: 1.3;
+  color: {{ section.settings.images_title_color }};
+  margin: 0 auto;
+  text-align: center;
+}
+
+#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__images-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__image-item {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__image-wrapper {
+  width: 100%;
+  aspect-ratio: 1; 
+  border-radius: 12px;
+  overflow: hidden;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__image {
+  width: 80%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__image-placeholder {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  background: #F8F8F8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #D6D6D6;
+}
+
+#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__image-label {
+  font-size: {{ section.settings.label_size_desktop }}px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: {{ section.settings.labels_color }};
+  margin: 0;
+  text-align: center;
+}
+
+#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__mobile-bottom {
+  display: none;
+}
+
+#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__button--mobile {
+  display: none;
+}
+
+/* Responsivo */
+@media (max-width: 991px) {
+  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__container {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  #c-mineral-uptake-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__container {
+    padding: 0 20px;
+    gap: 40px;
+  }
+
+  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__heading {
+    font-size: {{ section.settings.heading_size_mobile }}px;
+    max-width: {{ section.settings.heading_max_mobile }}%;
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__description {
+    font-size: {{ section.settings.text_size_mobile }}px;
+    max-width: {{ section.settings.text_max_mobile }}%;
+  }
+
+  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__study-link {
+    font-size: {{ section.settings.text_size_mobile }}px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__images-title {
+    font-size: {{ section.settings.img_title_size_mobile }}px;
+    max-width: {{ section.settings.img_title_max_mobile }}%;
+  }
+
+  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__image-label {
+    font-size: {{ section.settings.label_size_mobile }}px;
+  }
+
+  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__images-grid {
+    gap: 24px;
+  }
+
+  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__button {
+    padding: 14px 32px;
+    font-size: 14px;
+  }
+
+  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__description--desktop-extra {
+    display: block;
+  }
+
+  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__mobile-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 1400px;
+    margin: 28px auto 0;
+    padding: 0 20px;
+  }
+
+  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__button--desktop {
+    display: none;
+  }
+
+  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__button--mobile {
+    display: inline-flex;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__button {
+    width: 70%;
+    align-self: center;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "C Mineral Uptake",
+  "class": "section-cmineral-uptake",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#002C41"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Regular Text Color",
+      "default": "#4A4A4A"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link Color",
+      "default": "#002C41"
+    },
+    {
+      "type": "color",
+      "id": "bold_text_color",
+      "label": "Bold Text Color",
+      "default": "#002C41"
+    },
+    {
+      "type": "color",
+      "id": "images_title_color",
+      "label": "Images Title Color",
+      "default": "#4A4A4A"
+    },
+    {
+      "type": "color",
+      "id": "labels_color",
+      "label": "Image Labels Color",
+      "default": "#002C41"
+    },
+    {
+      "type": "header",
+      "content": "Left Content Column"
+    },
+    {
+      "type": "textarea",
+      "id": "main_heading",
+      "label": "Main Heading",
+      "default": "Not All nHAp Is Created Equal.\nQuality & Crystal Size Matter"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description Text",
+      "default": "Dr. Jen sources premium Nanohydroxyapatite crystals engineered for optimal particle size and delivered at the ideal 10% concentration."
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Study Link Text",
+      "default": "Link to study"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Study Link URL"
+    },
+    {
+      "type": "textarea",
+      "id": "description_desktop_extra",
+      "label": "Extra Bold Description (Desktop only)",
+      "default": "While other brands may include nHAp, Dr. Jen sources the highest grade Nanohydroxyapatite at optimal levels to deliver the highest performance"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text (Desktop - Optional)"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL (Desktop - Optional)",
+      "default": "/"
+    },
+    {
+      "type": "header",
+      "content": "Right Images Column"
+    },
+    {
+      "type": "textarea",
+      "id": "images_title",
+      "label": "Images Title",
+      "default": "Mineral Uptake\nCalcium And Phosphate"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "text",
+      "id": "image_1_label",
+      "label": "Image 1 Label",
+      "default": "Low-Grade\nnHAp"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "text",
+      "id": "image_2_label",
+      "label": "Image 2 Label",
+      "default": "Premium\nGrade nHAp"
+    },
+    {
+      "type": "header",
+      "content": "Mobile-only Bottom Content"
+    },
+    {
+      "type": "textarea",
+      "id": "description_mobile_bottom",
+      "label": "Description (Mobile bottom)",
+      "default": "While other brands may include nHAp, Dr. Jen sources the highest grade Nanohydroxyapatite at optimal levels to deliver the highest performance"
+    },
+    {
+      "type": "text",
+      "id": "mobile_button_text",
+      "label": "Button Text (Mobile - Optional)"
+    },
+    {
+      "type": "url",
+      "id": "mobile_button_url",
+      "label": "Button URL (Mobile - Optional)",
+      "default": "/"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Configuration"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "min": 20, "max": 80, "step": 1, "unit": "px",
+      "label": "Heading Size",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "heading_max_desktop",
+      "min": 10, "max": 100, "step": 5, "unit": "%",
+      "label": "Heading Max Width",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "text_size_desktop",
+      "min": 12, "max": 30, "step": 1, "unit": "px",
+      "label": "Description & Link Size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_max_desktop",
+      "min": 10, "max": 100, "step": 5, "unit": "%",
+      "label": "Description Max Width",
+      "default": 85
+    },
+    {
+      "type": "range",
+      "id": "img_title_size_desktop",
+      "min": 12, "max": 40, "step": 1, "unit": "px",
+      "label": "Images Title Size",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "img_title_max_desktop",
+      "min": 10, "max": 100, "step": 5, "unit": "%",
+      "label": "Images Title Max Width",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "label_size_desktop",
+      "min": 12, "max": 30, "step": 1, "unit": "px",
+      "label": "Image Labels Size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Mobile Configuration"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 16, "max": 60, "step": 1, "unit": "px",
+      "label": "Heading Size (Mobile)",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "heading_max_mobile",
+      "min": 10, "max": 100, "step": 5, "unit": "%",
+      "label": "Heading Max Width (Mobile)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "min": 10, "max": 24, "step": 1, "unit": "px",
+      "label": "Description & Link Size (Mobile)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "text_max_mobile",
+      "min": 10, "max": 100, "step": 5, "unit": "%",
+      "label": "Description Max Width (Mobile)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "img_title_size_mobile",
+      "min": 12, "max": 40, "step": 1, "unit": "px",
+      "label": "Images Title Size (Mobile)",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "img_title_max_mobile",
+      "min": 10, "max": 100, "step": 5, "unit": "%",
+      "label": "Images Title Max Width (Mobile)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "label_size_mobile",
+      "min": 10, "max": 24, "step": 1, "unit": "px",
+      "label": "Image Labels Size (Mobile)",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Paddings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0, "max": 120, "step": 5, "unit": "px",
+      "label": "Padding Top (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0, "max": 120, "step": 5, "unit": "px",
+      "label": "Padding Bottom (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0, "max": 100, "step": 5, "unit": "px",
+      "label": "Padding Top (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0, "max": 100, "step": 5, "unit": "px",
+      "label": "Padding Bottom (Mobile)",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "C Mineral Uptake"
+    }
+  ]
+}
+{% endschema %}

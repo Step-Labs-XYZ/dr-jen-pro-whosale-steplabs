@@ -1,0 +1,170 @@
+{{ 'section-two-column-icon.css' | asset_url | stylesheet_tag }}
+
+<div class="two-column-icon-section" style="background: {{ section.settings.background_color }};">
+  <div class="two-column-container">
+    <div class="content-column">
+      {% if section.settings.icon != blank %}
+        <div class="icon-wrapper">
+          <img src="{{ section.settings.icon | image_url: width: 80 }}" 
+               alt="{{ section.settings.icon.alt | default: 'Icon' }}"
+               width="80"
+               height="80"
+               loading="lazy">
+        </div>
+      {% endif %}
+      
+      {% if section.settings.headline != blank %}
+        <h2 class="headline">{{ section.settings.headline }}</h2>
+      {% endif %}
+      
+      {% if section.settings.paragraph != blank %}
+        <div class="paragraph">
+          {{ section.settings.paragraph | newline_to_br }}
+        </div>
+      {% endif %}
+    </div>
+    
+    <div class="image-column">
+      {% if section.settings.image != blank %}
+        <img src="{{ section.settings.image | image_url }}" 
+             alt="{{ section.settings.image.alt | default: 'Section image' }}"
+             width="{{ section.settings.image.width }}"
+             height="{{ section.settings.image.height }}"
+             loading="lazy">
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<style>
+.two-column-icon-section {
+  padding: 40px 20px;
+  overflow: hidden;
+}
+
+.two-column-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.content-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.icon-wrapper {
+  flex-shrink: 0;
+}
+
+.icon-wrapper img {
+  display: block;
+  max-width: 80px;
+  height: auto;
+}
+
+.headline {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.paragraph {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #666;
+}
+
+.image-column {
+  width: 100%;
+}
+
+.image-column img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  border-radius: {{ section.settings.border_radius }}px;
+}
+
+/* Mobile stacking */
+@media screen and (max-width: 768px) {
+  .two-column-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .two-column-icon-section {
+    padding: 30px 15px;
+  }
+  
+  .headline {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .headline {
+    font-size: 1.25rem;
+  }
+  
+  .paragraph {
+    font-size: 0.9rem;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Two Column Icon Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline"
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph",
+      "label": "Paragraph"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border Radius",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Two Column Icon Section"
+    }
+  ]
+}
+{% endschema %}

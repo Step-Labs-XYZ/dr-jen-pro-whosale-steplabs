@@ -1,0 +1,74 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-cart",
+      "blocks": {
+        "totals": {
+          "type": "totals",
+          "settings": {}
+        },
+        "order_note": {
+          "type": "order_note",
+          "settings": {
+            "open_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "totals",
+        "order_note"
+      ],
+      "settings": {
+        "before_cart": "<p>Apply <strong>SMILESALE </strong>at checkout to get 25% off!</p>",
+        "show_payment_methods": true,
+        "show_shipping_estimator": false,
+        "shipping_estimator_default_country": "United States",
+        "empty_button_link": "shopify://collections/all"
+      }
+    },
+    "cart-recommendations": {
+      "type": "cart-recommendations",
+      "settings": {
+        "title": "You may also like"
+      }
+    },
+    "1662746885d798c233": {
+      "type": "cf_cart-freebies",
+      "disabled": true,
+      "blocks": {
+        "e3a4aa08-9103-4cf7-bb7d-65f7ffcc2273": {
+          "type": "cart_freebie",
+          "settings": {
+            "free_product_threshold": 5000,
+            "third_party_will_add": false,
+            "show_popup_selector": true,
+            "free_product_autoremove": true,
+            "always_remove_if_exclusion_present": false,
+            "only_with_referral_code": "",
+            "free_product": "all-natural-remineralizing-floss-with-nano-hydroxyapatite-free-on-orders-50",
+            "exclusion_collection": "",
+            "inclusion_collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "e3a4aa08-9103-4cf7-bb7d-65f7ffcc2273"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "cart-recommendations",
+    "1662746885d798c233"
+  ]
+}

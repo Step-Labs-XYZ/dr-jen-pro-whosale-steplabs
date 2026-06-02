@@ -1,0 +1,396 @@
+<style>
+ .signup_form_inner {
+    width: 856px;
+    border-radius: 30px;
+    background: #FFF;
+    box-shadow: 0px 10px 40px 0px rgba(28, 76, 81, 0.10);
+    margin: auto;
+    padding: 30px;
+  }
+ .signup_form_inner h2{
+    color: #000;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 56px;
+    text-align:center;
+  }
+  .signup_form_inner h4{
+    color: #5DC7D1;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 56px; 
+    text-align:center;
+  }
+ .signup_form_inner h3{
+    color: #000;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 56px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    width: 100%;
+  }
+  .signup_form_inner h3 span{
+    color: #000;
+    font-family: Raleway;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 31px;
+  }
+  .signup_form_inner label{
+    color: #000;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 31px;
+    display: block;
+  }
+  .signup_form_inner input[type="text"],
+  .signup_form_inner input[type="email"]{
+    border-radius: 5px;
+    border: 1px solid #5DC7D1;
+    background: #FFF;
+    width: 100%;
+    height: 47px;
+    padding: 0 10px;
+  }
+ 
+  .signup_form_inner .fieldset {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+  .signup_form_inner .field {
+    width:48%;
+    margin-bottom: 15px;
+  }
+  .signup_form_inner .field.w-full{
+    width:100%;
+  }
+
+  .signup_form_inner input[type="radio"] + label{
+    width: 20px;
+    height: 20px;
+    display: block;
+    border: 1px solid #5DC7D1;
+    border-radius: 50%;
+    position: relative;
+  }
+  .signup_form_inner input[type="radio"]:checked + label::before{
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #5DC7D1;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+  }
+
+  .signup_form_inner input[type="radio"]{
+    display:none;
+  }
+
+  .signup_form_inner .field_radiobox{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .signup_form_inner .field_radiobox label{
+    cursor:pointer;
+  }
+
+  .signup_form_inner .field_radios{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+    gap:30px;
+  }
+
+  .signup_form_inner .w-22{
+    width:22%;
+  }
+
+  .signup_form_inner .w-16{
+     width:16%;
+  }
+
+  .signup_form_inner button[type="submit"]{
+    border-radius: 5px;
+    background: #E04880;
+    width: 100%;
+    text-align: center;
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 20px;
+    margin: 60px 0 20px 0;
+    padding: 15px 10px;
+  }
+
+  .signup_form_inner .addional{
+    color: #1D2433;
+    text-align: center;
+    font-family: Raleway;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    text-align:center;
+  }
+
+ 
+  
+</style>
+
+<div class="signup_form_main">
+  <div class="signup_form_inner">
+    
+    {% if section.settings.headline %}
+      <h2>{{ section.settings.headline }}</h2>
+    {% endif %}
+    
+    <div class="fieldset">
+      <h3>YOUr INFORMATION</h3>
+      <div class="field">
+        <label>Your Name*</label>
+        <input type="text">
+      </div>
+      <div class="field">
+        <label>Your Title*</label>
+        <input type="text">
+      </div>
+    </div>
+
+    <div class="fieldset">
+      <h3>Practice Information</h3>
+      <div class="field">
+        <label>Practice Name</label>
+        <input type="text">
+      </div>
+      <div class="field">
+        <label>Practice Phone Number*</label>
+        <input type="text">
+      </div>
+      <div class="field w-full">
+        <label>Email Address*</label>
+        <input type="email" required>
+      </div>
+      <div class="field">
+        <label>City*</label>
+        <input type="text">
+      </div>
+      <div class="field">
+        <label>State*</label>
+        <input type="text">
+      </div>
+      <div class="field">
+        <label>Zip Code*</label>
+        <input type="text">
+      </div>
+      <div class="field">
+        <label>Country*</label>
+        <input type="text">
+      </div>
+    </div>
+
+    <div class="fieldset">
+       <h3>WHAT TYPE OF PATIENTS DO YOU SEE THE MOST OF IN YOUR OFFICE?</h3>
+       <div class="field_radios">
+        <div class="field_radiobox"> 
+          <input type="radio" id="radio-1" name="type_of_patient">
+          <label for="radio-1"></label>
+          <label for="radio-1">Adults</label>
+        </div>
+
+         <div class="field_radiobox"> 
+          <input type="radio" id="radio-2" name="type_of_patient">
+          <label for="radio-2"></label>
+          <label for="radio-2">Children</label>
+        </div>
+
+         <div class="field_radiobox"> 
+          <input type="radio" id="radio-3" name="type_of_patient">
+          <label for="radio-3"></label>
+          <label for="radio-3">Orthodontic</label>
+        </div>
+
+         <div class="field_radiobox"> 
+          <input type="radio" id="radio-4" name="type_of_patient">
+          <label for="radio-4"></label>
+          <label for="radio-4">Periodontal</label>
+        </div>
+
+         <div class="field_radiobox"> 
+          <input type="radio" id="radio-5" name="type_of_patient">
+          <label for="radio-5"></label>
+          <label for="radio-5">Other</label>
+        </div>
+      </div>
+     </div>
+
+
+    {% if section.settings.headline_2 %}
+      <h4>{{ section.settings.headline_2 }}</h4>
+    {% endif %}
+
+
+    <div class="fieldset">
+      <h3>Name of contact for scheduling</h3>
+      <div class="field w-full">
+        <input type="text">
+      </div>
+    </div>
+
+
+     <div class="fieldset">
+       <h3>ATTENDEES <span>(Webinars are available Monday-Thursday, 8-3 pacific time)</span></h3>
+       <div class="field_radios">
+        <div class="field_radiobox"> 
+          <input type="radio" id="radio-1-1" name="attendees">
+          <label for="radio-1-1"></label>
+          <label for="radio-1-1">I plan to do the webinar myself</label>
+        </div>
+
+         <div class="field_radiobox"> 
+          <input type="radio" id="radio-2-2" name="attendees">
+          <label for="radio-2-2"></label>
+          <label for="radio-2-2">I would like to include my team on the webinar</label>
+        </div>
+      </div>
+     </div>
+
+     <div class="fieldset">
+       <h3>WHAT TIME WORKS BEST FOR YOUR Free CE webinar?</h3>
+       <div class="field_radios">
+        <div class="field_radiobox"> 
+          <input type="radio" id="radio-Monday" name="webinar">
+          <label for="radio-Monday"></label>
+          <label for="radio-Monday">Monday</label>
+        </div>
+
+         <div class="field_radiobox"> 
+          <input type="radio" id="radio-Tuesday" name="webinar">
+          <label for="radio-Tuesday"></label>
+          <label for="radio-Tuesday">Tuesday</label>
+        </div>
+
+         <div class="field_radiobox"> 
+          <input type="radio" id="radio-Wednesday" name="webinar">
+          <label for="radio-Wednesday"></label>
+          <label for="radio-Wednesday">Wednesday</label>
+        </div>
+
+         <div class="field_radiobox"> 
+          <input type="radio" id="radio-Thursday" name="webinar">
+          <label for="radio-Thursday"></label>
+          <label for="radio-Thursday">Thursday</label>
+        </div>
+
+         <div class="field_radiobox"> 
+          <input type="radio" id="radio-Morning" name="webinar">
+          <label for="radio-Morning"></label>
+          <label for="radio-Morning">Morning</label>
+        </div>
+
+         <div class="field_radiobox"> 
+          <input type="radio" id="radio-Lunchtime" name="webinar">
+          <label for="radio-Lunchtime"></label>
+          <label for="radio-Lunchtime">Lunchtime</label>
+        </div>
+
+         <div class="field_radiobox"> 
+          <input type="radio" id="radio-Afternoon" name="webinar">
+          <label for="radio-Afternoon"></label>
+          <label for="radio-Afternoon">Afternoon</label>
+        </div>
+      </div>
+     </div>
+
+
+    {% if section.settings.headline_3 %}
+      <h4>{{ section.settings.headline_3 }}</h4>
+    {% endif %}
+
+     <div class="fieldset">
+      <h3>How did you hear about Dr. Jen's Oral care products?</h3>
+      <div class="field w-full">
+        <input type="text">
+      </div>
+    </div>
+
+     <div class="fieldset">
+       <h3>PLEASE CHOOSE YOUR SAMPLE BOX FLAVOR:*</h3>
+       <div class="field_radios">
+        <div class="field_radiobox"> 
+          <input type="radio" id="radio-1-1-1" name="flavor">
+          <label for="radio-1-1-1"></label>
+          <label for="radio-1-1-1">Fluoride Free Strawberry</label>
+        </div>
+        <div class="field_radiobox"> 
+          <input type="radio" id="radio-1-1-2" name="flavor">
+          <label for="radio-1-1-2"></label>
+          <label for="radio-1-1-2">Fluoride Free Cool MInt</label>
+        </div>
+        <div class="field_radiobox"> 
+          <input type="radio" id="radio-1-1-3" name="flavor">
+          <label for="radio-1-1-3"></label>
+          <label for="radio-1-1-3">Super Paste with Fluoride</label>
+        </div>
+      </div>
+     </div>
+
+
+
+     <button type="submit">Sign Up Now</button>
+
+    {% if section.settings.bottom_text != blank %}
+     <p class="addional">{{ section.settings.bottom_text }}</p>
+    {% endif %}
+    
+  </div>
+</div>
+
+
+
+{% schema %}
+  {
+    "name": "MM B2B SignUp Form",
+    "settings": [
+      {
+        "type": "text",
+        "id": "headline",
+        "label": "Headline",
+        "default": "Get Free Samples & Sign Up For FREE CE Webinar"
+      },
+      {
+        "type": "text",
+        "id": "headline_2",
+        "label": "Headline 2",
+        "default": "Please fill out the following if you would like to schedule a free CE webinar:"
+      },
+      {
+        "type": "text",
+        "id": "headline_3",
+        "label": "Headline 3",
+        "default": "Others"
+      },
+       {
+        "type": "text",
+        "id": "bottom_text",
+        "label": "Bottom Text",
+        "default": "Your information is safe with us. We will not share your data with third parties"
+      }
+    ],
+    "presets":[
+      {
+        "name":"MM B2B SignUp Form"
+      }
+    ]
+  }
+{% endschema %}

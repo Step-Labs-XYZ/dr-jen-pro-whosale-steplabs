@@ -1,0 +1,285 @@
+// this is actually a js file (although saved in /snippets) as it is rendered by cf inside script tags
+
+/**
+ * Preact and Htm product popup selector
+ *
+ * the available LIQUID variables are:
+ * - productUrl: the url of the product to be added to the cart
+ * - freebie_threshold: the price threshold for the freebie in cents
+ * - only_with_referral_code: the freebie should only be added when the referral code exists in sessionStorage
+ */
+/** @typedef { { productTitle: string; optionsTitle: string | void; variants: CFVariant[]; productImageUrl: string } } CFVariants */
+/** @typedef { { variantId: string; title: string; variant_image_url: string, compareAtPrice: string } } CFVariant */
+
+// @ts-ignore
+import { html, render } from 'https://unpkg.com/htm/preact/index.mjs?module';
+// @ts-ignore
+import { useState, useEffect } from 'https://unpkg.com/preact@latest/hooks/dist/hooks.module.js?module';
+// @ts-ignore
+import { meetsReferralCompliance } from '{{ "cf_source-tracking.js" | asset_url }}';
+
+/**
+ * Customize the popup per store in
+ * cf_popup-selector-theme-customizations.js.liquid
+*/
+// Do not edit the classes here for theme changes! Use the file above.
+let popupFormClasses = '';
+let popupTitleClass = 'h2';
+let popupSubtitleClass = '';
+let popupVariantImageClasses = 'width-250';
+let popupSubmitButtonClasses = '';
+let popupCancelButtonClasses = '';
+// @ts-ignore
+{% render 'cf_popup-selector-theme-customizations.js' %}
+
+const renderEl = document.createElement('div');
+document.body.appendChild(renderEl);
+render(html`<${CartFreebiePopup} productUrl="{{productUrl}}" />`, renderEl);
+
+/**
+ * @param {Object} props
+ * @param {number} props.productUrl
+ */
+function CartFreebiePopup({ productUrl }) {
+  // State
+  // -----
+  /** @type {[CFVariants: CFVariants, setCFVariants: (CFVariants: CFVariants) => void]} */
+  const [CFVariants, setCFVariants] = useState(null);
+  /** @type {[selectedCFVariant: CFVariant, setSelectedCFVariant: (CFVariant: CFVariant) => void]} */
+  const [selectedCFVariant, setSelectedCFVariant] = useState(null);
+  const [isHidden, setIsHidden] = useState(true);
+
+  const freebie_threshold = Math.ceil(Number("{{ freebie_threshold }}") / 100);
+  /** @type {boolean} */
+  const meetsReferralRequirements = meetsReferralCompliance("{{ only_with_referral_code }}");
+
+  // UseEffects
+  // ----------
+  useEffect(async () => {
+    const _CFVariants = await useProductLookup(productUrl);
+    setCFVariants(_CFVariants);
+    setSelectedCFVariant(_CFVariants.variants[0]);
+    setTimeout(() => {
+    setIsHidden(false);
+    }, 0);
+  }, [productUrl]);
+
+  // Callbacks
+  // ---------
+  function onChange(event) {
+    const selectedVariantId = /** @type {HTMLSelectElement} */ (event.target).value;
+    const selectedVariant = CFVariants.variants.find(variant => variant.variantId == selectedVariantId);
+    if (selectedVariant) {
+      setSelectedCFVariant(selectedVariant);
+    }
+  }
+
+  function onCancel() {
+    setIsHidden(true);
+  }
+
+  function onSubmit(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    addSelectedToCart(selectedCFVariant.variantId);
+    setIsHidden(true);
+  }
+
+  return html`
+    ${!!CFVariants && !!CFVariants.variants && meetsReferralRequirements && html`
+    <${Backdrop} hidden=${isHidden}>
+      <form onsubmit=${onSubmit} class="position-relative display-flex flex-direction-column align-items-center justify content center padding-30
+        padding-16-tabletdown border-radius-8 ${popupFormClasses}" style="background-color: white; max-height: 70vh; overflow: scroll;">
+        <span class="pr-15 pt-10 position-absolute cursor-pointer font-weight-bold--hover color-black--hover"
+          style="top: 0; right: 0;" onclick=${onCancel}>X</span>
+        <h2 class="${popupTitleClass}">Claim Your Freebie 🎉</h2>
+
+        <${FreebieProductTitle} title=${CFVariants.productTitle} class="${popupSubtitleClass}" />
+        <img width="150" height="150" src=${CFVariants.productImageUrl} class="${popupVariantImageClasses} height-auto" loading="lazy" />
+
+        <${Prices} originalPrice=${selectedCFVariant.compareAtPrice} />
+        ${CFVariants.variants.length > 1 ? html`
+          ${CFVariants.optionsTitle ? html`
+          <div class="padding-top-10">
+            <span class="font-weight-bold">${CFVariants.optionsTitle}:</span>
+          </div>
+          ` : null
+          }
+          <select
+            value=${selectedCFVariant.variantId}
+            onChange=${onChange}
+            class="mb-15 font-size-16 text-align-center p-6"
+            style="width: 85%"
+            required
+            autofocus
+          >
+            ${CFVariants.variants.map((CFVariant) => html`
+            <option value=${CFVariant.variantId}>${CFVariant.title}</option>
+            `)}
+          </select>
+        ` : html`
+          <div class="mb-15 font-size-16 text-align-center p-6"></div>
+        `}
+        <button type="submit" class="btn btn-primary button w100 border-radius-4 mb-1 ${popupSubmitButtonClasses}">Add To Cart</button>
+        <span onclick="${onCancel}" style="cursor: pointer" class="${popupCancelButtonClasses}">No thanks</span>
+        <span class="mt-1 font-size-14">Offer Only Valid on Orders $${freebie_threshold} and up.</span>
+      </form>
+      </ />
+      `}
+  `;
+}
+
+// Styled Sub-components
+function Backdrop(props) {
+  const style = `
+    position: fixed;
+    background-color: rgba(0,0,0,.3);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000000000;
+    opacity: 1;
+    visibility: visible;
+    transition: 0.2s ease-in-out;
+    ${props.hidden && `
+      visibility: hidden;
+      opacity: 0;
+    `}
+  `
+  return html`<div style="${style}">${props.children}</div>`
+}
+
+/**
+ * @param {Object} props
+ * @param {string} props.title
+ */
+function FreebieProductTitle({ title, ...props }) {
+  const style = `
+    width: 30ch;
+    text-align: center;
+    padding: 0 10px;
+    line-height: 1.2;
+  `
+  return html`<span style="${style}" ...${props}>${title}</span>`
+}
+
+/**
+ * @param {Object} props
+ * @param {string} props.originalPrice
+ */
+function Prices({ originalPrice }) {
+  const style = `
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #519a40;
+    margin-bottom: 1rem;
+  `
+  const hasOriginalPrice = Number(originalPrice) > 0;
+  return html`<div class="mt-16 mb-6">
+  ${hasOriginalPrice && html`
+  <${OriginalPrice} originalPrice=${originalPrice} />
+  `}
+  <span style="${style}">$0.00</span>
+</div>`
+}
+
+/**
+ * @param {Object} props
+ * @param {string} props.originalPrice
+ */
+function OriginalPrice({ originalPrice }) {
+  const style = `
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #fc6559;
+    text-decoration: line-through;
+    margin-bottom: 0;
+    margin-right: 1rem;
+  `
+  return html`<span style="${style}">$${originalPrice}</span>`
+}
+
+
+// Helper Functions
+function addSelectedToCart(variantId) {
+  let formData = {
+    'items': [{
+      'id': Number(variantId),
+      'quantity': 1
+    }]
+  };
+
+  return fetch('/cart/add.js', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  })
+    .then(async response => {
+      if (response.ok) {
+        window.location.reload();
+      } else {
+        const data = await response.json();
+        console.error(data);
+
+        return Promise.reject(`${data.message}: ${data.description}`);
+      }
+    })
+    .catch((error) => {
+      alert(`${error} Please contact us if this issue continues.`);
+    });
+}
+
+async function useProductLookup(productUrl) {
+  const productUrlJson = `${productUrl}.json`
+
+  const product = await fetch(productUrlJson).then(response => {
+    return response.json();
+  }).then(data => {
+    return data.product;
+  });
+
+  /** @type {CFVariant[]} */
+  const variantsForCF = product.variants.reduce((prev, current) => {
+    prev.push({
+      variantId: current.id,
+      title: current.title,
+      compareAtPrice: current.compare_at_price,
+      variant_image_url: current.image_id
+        ? product.images.find(img_obj => img_obj.id === current.image_id).src
+        : product.image.src,
+    })
+    return prev;
+  }, []);
+
+  const productDetails = {
+    productTitle: product.title,
+    productImageUrl: product.image.src,
+    optionsTitle: getProductOptionsTitle(product),
+    variants: variantsForCF,
+  };
+  return productDetails;
+}
+
+/**
+ * Given a product with options, returns the options title.
+ *
+ * When a product has multiple options will separate them with a '/'.
+ * e.g. T-Shirt Size / T-Shirt Color
+ * @returns {string | void} the options title
+ */
+function getProductOptionsTitle(product) {
+  if (!(product.options && product.options.length)) return;
+
+  const allOptions =  Array.from(product.options).reduce((prev, current) => {
+    return [...prev, current.name];
+  }, []);
+
+  return allOptions.join(' / ');
+}

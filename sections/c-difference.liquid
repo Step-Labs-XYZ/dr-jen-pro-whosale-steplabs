@@ -1,0 +1,442 @@
+<style>
+  /* Contenedor Principal Encapsulado */
+  #C-difference-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding-top: {{ section.settings.padding_top_desktop }}px;
+    padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    overflow: hidden;
+  }
+
+  #C-difference-{{ section.id }} .c-difference__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+      "text lifestyle"
+      "table lifestyle";
+    gap: 0px 40px;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    align-items: center;
+  }
+
+  /* Bloque de Textos */
+  #C-difference-{{ section.id }} .c-difference__text {
+    grid-area: text;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  #C-difference-{{ section.id }} .c-difference__heading {
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    color: {{ section.settings.heading_color }};
+    font-size: {{ section.settings.heading_size_desktop }}px;
+    max-width: {{ section.settings.heading_max_desktop }}%;
+    line-height: 1.2;
+    font-weight: 600;
+  }
+
+  #C-difference-{{ section.id }} .c-difference__subheading {
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    color: {{ section.settings.subheading_color }};
+    font-size: {{ section.settings.subheading_size_desktop }}px;
+    max-width: {{ section.settings.subheading_max_desktop }}%;
+    line-height: 1.5;
+  }
+
+  /* Imagen de la Tabla (Independiente Desktop) */
+  #C-difference-{{ section.id }} .c-difference__table {
+    grid-area: table;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  #C-difference-{{ section.id }} .c-difference__table img {
+    display: block;
+    width: {{ section.settings.table_width_desktop }}%;
+    height: {{ section.settings.table_height_desktop }}%;
+    object-fit: contain; /* Evita que se deforme si las proporciones % cambian */
+  }
+
+  /* Imagen de la Tabla Mobile (Solo Mobile) */
+  #C-difference-{{ section.id }} .c-difference__table-mobile {
+    display: none;
+  }
+
+  #C-difference-{{ section.id }} .c-difference__table-mobile img {
+    display: block;
+    object-fit: contain;
+  }
+
+  /* Imagen Lifestyle (Independiente Desktop) */
+  #C-difference-{{ section.id }} .c-difference__lifestyle {
+    grid-area: lifestyle;
+    display: flex;
+    justify-content: center;
+  }
+
+  #C-difference-{{ section.id }} .c-difference__lifestyle img {
+    display: block;
+    border-radius: 16px;
+    object-fit: cover; /* Mantiene la estética rellenando el % asignado */
+    width: {{ section.settings.lifestyle_width_desktop }}%;
+    height: {{ section.settings.lifestyle_height_desktop }}%;
+  }
+
+  /* --- MÓVIL --- */
+  @media screen and (max-width: 768px) {
+    #C-difference-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+
+    #C-difference-{{ section.id }} .c-difference__container {
+      grid-template-columns: 1fr;
+      grid-template-areas: 
+        "lifestyle"
+        "text"
+        "table"
+        "table-mobile";
+      padding: 0; 
+      gap: 30px;
+    }
+
+    #C-difference-{{ section.id }} .c-difference__text,
+    #C-difference-{{ section.id }} .c-difference__table {
+      padding: 0 20px;
+    }
+
+    /* Textos Móvil */
+    #C-difference-{{ section.id }} .c-difference__heading {
+      font-size: {{ section.settings.heading_size_mobile }}px;
+      max-width: {{ section.settings.heading_max_mobile }}%;
+    }
+
+    #C-difference-{{ section.id }} .c-difference__subheading {
+      font-size: {{ section.settings.subheading_size_mobile }}px;
+      max-width: {{ section.settings.subheading_max_mobile }}%;
+    }
+
+    /* Imagen Tabla Original (Oculta en Mobile) */
+    #C-difference-{{ section.id }} .c-difference__table {
+      display: none;
+    }
+
+    /* Imagen Tabla Mobile Específica */
+    #C-difference-{{ section.id }} .c-difference__table-mobile {
+      display: flex;
+      justify-content: center;
+      grid-area: table-mobile;
+      padding: 0 20px;
+      margin-top:-40px;
+    }
+    #C-difference-{{ section.id }} .c-difference__table-mobile img {
+      width: {{ section.settings.table_mobile_width_mobile }}%;
+      height: {{ section.settings.table_mobile_height_mobile }}%;
+      margin: 0 auto;
+    }
+
+    /* Imagen Lifestyle Móvil (Va arriba de todo) */
+    #C-difference-{{ section.id }} .c-difference__lifestyle img {
+      border-radius: 0;
+      width: {{ section.settings.lifestyle_width_mobile }}%;
+      height: {{ section.settings.lifestyle_height_mobile }}%;
+      margin: 0 auto;
+    }
+  }
+</style>
+
+<section id="C-difference-{{ section.id }}" class="c-difference">
+  <div class="c-difference__container">
+    
+    <div class="c-difference__text">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="c-difference__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      
+      {%- if section.settings.subheading != blank -%}
+        <p class="c-difference__subheading">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="c-difference__table">
+      {%- if section.settings.image_table != blank -%}
+        <img 
+          src="{{ section.settings.image_table | image_url: width: 1000 }}" 
+          alt="{{ section.settings.heading | escape }}"
+          loading="lazy"
+          width="{{ section.settings.image_table.width }}"
+          height="{{ section.settings.image_table.height }}"
+        >
+      {%- endif -%}
+    </div>
+
+    <div class="c-difference__table-mobile">
+      {%- if section.settings.image_table_mobile != blank -%}
+        <img 
+          src="{{ section.settings.image_table_mobile | image_url: width: 1000 }}" 
+          alt="{{ section.settings.heading | escape }}"
+          loading="lazy"
+          width="{{ section.settings.image_table_mobile.width }}"
+          height="{{ section.settings.image_table_mobile.height }}"
+        >
+      {%- endif -%}
+    </div>
+
+    <div class="c-difference__lifestyle">
+      {%- if section.settings.image_lifestyle != blank -%}
+        <img 
+          src="{{ section.settings.image_lifestyle | image_url: width: 1400 }}" 
+          alt="Lifestyle Dr Jen"
+          loading="lazy"
+          width="{{ section.settings.image_lifestyle.width }}"
+          height="{{ section.settings.image_lifestyle.height }}"
+        >
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "C Difference Section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Text Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "See The Dr. Jen's Difference"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#002C41"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Created by a dentist with decades of experience, trusted by professionals and families alike."
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#4A4A4A"
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_table",
+      "label": "Table Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_table_mobile",
+      "label": "Table Image (Mobile Only)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_lifestyle",
+      "label": "Lifestyle Image"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Image Sizes (%)"
+    },
+    {
+      "type": "range",
+      "id": "table_width_desktop",
+      "min": 10, "max": 100, "step": 1, "unit": "%",
+      "label": "Table Image Width",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "table_height_desktop",
+      "min": 10, "max": 100, "step": 1, "unit": "%",
+      "label": "Table Image Height",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "lifestyle_width_desktop",
+      "min": 10, "max": 100, "step": 1, "unit": "%",
+      "label": "Lifestyle Image Width",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "lifestyle_height_desktop",
+      "min": 10, "max": 100, "step": 1, "unit": "%",
+      "label": "Lifestyle Image Height",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Mobile Image Sizes (%)"
+    },
+    {
+      "type": "range",
+      "id": "table_width_mobile",
+      "min": 10, "max": 100, "step": 1, "unit": "%",
+      "label": "Table Image Width (Mobile)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "table_height_mobile",
+      "min": 10, "max": 100, "step": 1, "unit": "%",
+      "label": "Table Image Height (Mobile)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "lifestyle_width_mobile",
+      "min": 10, "max": 100, "step": 1, "unit": "%",
+      "label": "Lifestyle Image Width (Mobile)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "lifestyle_height_mobile",
+      "min": 10, "max": 100, "step": 1, "unit": "%",
+      "label": "Lifestyle Image Height (Mobile)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "table_mobile_width_mobile",
+      "min": 10, "max": 100, "step": 1, "unit": "%",
+      "label": "Table Mobile Image Width",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "table_mobile_height_mobile",
+      "min": 10, "max": 100, "step": 1, "unit": "%",
+      "label": "Table Mobile Image Height",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Desktop Text Config"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "min": 20, "max": 80, "step": 1, "unit": "px",
+      "label": "Heading Size",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "heading_max_desktop",
+      "min": 10, "max": 100, "step": 5, "unit": "%",
+      "label": "Heading Max Width",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_desktop",
+      "min": 12, "max": 30, "step": 1, "unit": "px",
+      "label": "Subheading Size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "subheading_max_desktop",
+      "min": 10, "max": 100, "step": 5, "unit": "%",
+      "label": "Subheading Max Width",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Mobile Text Config"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 16, "max": 60, "step": 1, "unit": "px",
+      "label": "Heading Size (Mobile)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "heading_max_mobile",
+      "min": 10, "max": 100, "step": 5, "unit": "%",
+      "label": "Heading Max Width (Mobile)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_mobile",
+      "min": 10, "max": 24, "step": 1, "unit": "px",
+      "label": "Subheading Size (Mobile)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "subheading_max_mobile",
+      "min": 10, "max": 100, "step": 5, "unit": "%",
+      "label": "Subheading Max Width (Mobile)",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Paddings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0, "max": 120, "step": 5, "unit": "px",
+      "label": "Padding Top (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0, "max": 120, "step": 5, "unit": "px",
+      "label": "Padding Bottom (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0, "max": 100, "step": 5, "unit": "px",
+      "label": "Padding Top (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0, "max": 100, "step": 5, "unit": "px",
+      "label": "Padding Bottom (Mobile)",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "C Difference Section"
+    }
+  ]
+}
+{% endschema %}

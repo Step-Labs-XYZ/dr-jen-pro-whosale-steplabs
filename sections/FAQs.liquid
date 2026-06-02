@@ -1,0 +1,64 @@
+<div class="FAQs-Container">
+
+    <h1>FAQs</h1>
+    {% for block in section.blocks %}
+    <div class="faq-question">
+        <span class="faq-title">{{block.settings.question}}</span>
+        <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-answer">
+        {{block.settings.answer}}
+    </div>
+    {% endfor %}
+
+
+</div>
+
+<script>
+
+    document.querySelectorAll(`.faq-question`).forEach(entry => {
+        entry.addEventListener('click', () => {
+            if( entry.nextElementSibling.style.display != "block"){
+                entry.nextElementSibling.style.display = "block"
+                entry.nextElementSibling.style.height = "100%"
+                entry.querySelector(`.faq-icon`).innerHTML = "-"
+            }else{
+                entry.nextElementSibling.style.display = ""
+                entry.nextElementSibling.style.height = ""
+                entry.querySelector(`.faq-icon`).innerHTML = "+"
+            }
+
+        })
+    })
+</script>
+
+{% schema %}
+{
+   "name": "FAQs",
+   "settings" : [
+   ],
+   "blocks": [
+        {
+            "type": "FAQ",
+            "name": "FAQ",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "question",
+                    "label": "Question"
+                },
+                {
+                    "type": "richtext",
+                    "id": "answer",
+                    "label": "Answer"
+                }
+            ]
+        }
+   ],
+   "presets": [
+    {
+        "name": "FAQs"
+    }
+   ]
+}
+{% endschema %}

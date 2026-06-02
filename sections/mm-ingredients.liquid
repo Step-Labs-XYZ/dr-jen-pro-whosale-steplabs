@@ -1,0 +1,334 @@
+{% if section.blocks.size > 0 %}
+    <style>
+        #shopify-section-{{ section.id }} .mm-ingredients{
+            padding-top: {{ section.settings.top_padding | default: 60 }}px;
+            padding-bottom: {{ section.settings.bottom_padding | default: 60 }}px;
+            @media (max-width: 749px){
+                padding-top: {{ section.settings.mobile_top_padding | default: 20 }}px;
+                padding-bottom: {{ section.settings.mobile_bottom_padding | default: 20 }}px;
+            }
+        }
+        .mm-ingredients{
+            .container{
+                max-width: 1440px;
+            }
+            .ingredients-heading{
+                text-align: center;
+                margin: 0;
+                padding: 0 20px 32px;
+                font-size: 47.5px;
+                line-height: 59.4px;
+                color: {{ section.settings.heading_color }};
+                .highlight{
+                    color: var(--color-highlight);
+                    position: relative;
+                    display: inline-block;
+                }
+                .svg-highlight{
+                    position: absolute;
+                    bottom: -20px;
+                    top: auto;
+                    left: 0;
+                    width: 100%;
+                    height: auto;
+                }
+                @media (max-width: 1024px){
+                    font-size: 28px;
+                    line-height: 35px;
+                    .svg-highlight{
+                        bottom: -10px;
+                    }
+                }
+            }
+            .ingredients-progress {
+                width: 100%;
+                height: 3px;
+                background: rgba(225, 227, 225, 0.2);
+                overflow: hidden;
+                position: relative;
+                margin-top: 10px;
+              }
+              .ingredients-progress-bar {
+                height: 100%;
+                background: rgb(211, 211, 211);
+                position: absolute;
+                left: 0;
+                top: 0;
+                will-change: transform;
+                transition: transform 0.35s ease;
+              }
+              .ingredient-block{
+                padding: 28px;
+                border-radius: 6px;
+                text-align: center;
+                background-color: {{ section.settings.block_bg_color }};
+                @media (max-width: 749px){
+                    padding: 28px 40px;
+                }
+            }
+            .icon-img{
+                max-width: 37px;
+                margin: auto;
+                padding-top: 8px;
+                margin-bottom: 8px;
+                @media (max-width: 1024px){
+                    max-width: 26px;
+                }
+            }
+            .block-text{
+                padding-top: 8px;
+            }
+            .block-title{
+                font-size: 19.8px;
+                font-weight: 600;
+                line-height: 24px;
+                margin: 0;
+                @media (max-width: 749px){
+                    font-size: 15.8px;
+                }
+            }
+            .rte{
+                margin: 8px 0;
+                font-size: 15.8px;
+                line-height: 23px;
+                font-weight: 500;
+                color: rgb(69, 70, 69);
+                @media (max-width: 749px){
+                    font-size: 13.8px;
+                }
+            }
+        }
+    </style>
+    <div class="mm-ingredients">
+        <div class="container">
+            <div class="ingredients-wrapper">
+                {% if section.settings.heading != blank %}
+                    {% liquid
+                      assign headingId = section.id
+                      assign heading = section.settings.heading
+                      assign highlight_type = section.settings.highlight_type
+                      assign color_heading_highlight_light = section.settings.heading_highlight_color
+                    %}
+                    {% style %}
+                      .heading-{{ headingId }} {
+                        {% if color_heading_highlight_light != blank and color_heading_highlight_light.alpha != 0.0 %}
+                          --color-highlight: {{ color_heading_highlight_light }};
+                        {% endif %}
+                      }
+                    {% endstyle %}
+                    {% liquid
+                      if highlight_type == 'underline'
+                        assign svg_highlight = '<svg class="svg-highlight svg-underline absolute left-0 top-auto w-full h-[30%] -bottom-[20%]" xmlns="http://www.w3.org/2000/svg" width="216" height="13" viewBox="0 0 216 13" fill="none" style="fill: none;" preserveAspectRatio="none"><path d="M0.406646 9.68922C49.5975 4.73865 161.298 -2.39378 214.572 8.68106" vector-effect="non-scaling-stroke" stroke="var(--color-highlight);" stroke-width="4px" style="stroke: var(--color-highlight);"/></svg>'
+                        assign heading_highlight = '<span class="highlight relative inline-block hl-underline mb-2.5">'
+                      elsif highlight_type == 'font_highlight'
+                        assign svg_highlight = ''
+                        assign heading_highlight = '<span class="highlight relative inline-block hl-font">'
+                      endif
+                      assign icon_highlight = svg_highlight | append: "</span>"
+                    %}
+                    <h2 class="heading-{{ headingId }} ingredients-heading">
+                      {% if heading contains '[' and heading contains ']' %}
+                        {{ heading | replace: '[', heading_highlight | replace: ']', icon_highlight }}
+                      {% else %}
+                        {{ heading }}
+                      {% endif %}
+                    </h2>
+                  {% endif %}
+                <div class="ingredients-blocks splide">
+                    <div class="splide__track">
+                        <ul class="splide__list">
+                            {% for block in section.blocks %}
+                                <div class="splide__slide ingredient-block">
+                                    <div class="ingredient-block-wrap">
+                                        <div class="icon-img">
+                                            {% if block.settings.icon_image != blank %}
+                                                    {{ block.settings.icon_image | image_url: width: block.settings.icon_image.width | image_tag }}
+                                            {% else %}
+                                                <svg style="fill: none" width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M35 50L45 60L65 40M50 5L59.5505 14.3573L72.5 11.0289L76.092 23.9077L88.971 27.5L85.6425 40.4495L95 50L85.6425 59.5505L88.971 72.5L76.092 76.092L72.5 88.971L59.5505 85.6425L50 95L40.4495 85.6425L27.5 88.971L23.9077 76.092L11.0289 72.5L14.3573 59.5505L5 50L14.3573 40.4495L11.0289 27.5L23.9077 23.9077L27.5 11.0289L40.4495 14.3573L50 5Z" stroke="currentColor" stroke-width="5.4" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                </svg>
+                                            {% endif %}
+                                        </div>
+                                        <div class="block-text">
+                                            <p class="block-title">{{ block.settings.ingredient_heading }}</p>
+                                            <div class="rte">{{ block.settings.ingredient_text }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="ingredients-progress">
+                        <div class="ingredients-progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var splide = new Splide('.ingredients-blocks', {
+              speed: 1000,
+              pagination: false,
+              mediaQuery: 'min',
+              updateOnMove: true,
+              pauseOnHover: true,
+              pauseOnFocus: false,
+              type: 'slide',
+              rewind: true,
+              autoplay: true,
+              arrows:false,
+              interval: 4000,
+              direction: document.documentElement.dir === 'rtl' ? 'rtl' : 'ltr',
+              breakpoints: {
+                300: {
+                  gap: '8px',
+                  focus: 'right',
+                  perPage: 1,
+                  perMove: 1,
+                },
+                768: {
+                  perPage: 2,
+                  perMove: 2,
+                },
+                1024: {
+                  perPage: 4,
+                  perMove: 4,
+                  gap: '24px',
+                  drag: true,
+                },
+              },
+              classes: {
+                arrows: 'hidden',
+              },
+            });
+            var progressBar = document.querySelector('.ingredients-progress-bar');
+            function updateProgress() {
+              var Controller = splide.Components.Controller;
+              var end = Controller.getEnd();
+              var index = Controller.getIndex();
+              var perPage = splide.options.perPage;
+              var totalSlides = splide.length;
+              var visibleWidth = perPage / totalSlides;
+              var position = (index / totalSlides);
+              visibleWidth = Math.max(0, Math.min(visibleWidth, 1));
+              position = Math.max(0, Math.min(position, 1 - visibleWidth));
+              progressBar.style.width = `${visibleWidth * 100}%`;
+              progressBar.style.transform = `translateX(${position * 100 / visibleWidth}%)`;
+              progressBar.style.transformOrigin = 'left';
+            }
+            splide.on('mounted move resized autoplay:playing', updateProgress);
+            splide.mount();
+          });
+    </script>
+    {% endif %}
+    {% schema %}
+    {
+        "name":"MM Ingredients",
+        "settings":[{
+            "type":"text",
+            "label":"Add Class",
+            "id":"add_class"
+        },{
+            "type":"text",
+            "label":"Heading",
+            "id":"heading",
+            "info":"Wrap your text between [] to add heading highlights. E.g: Adding [marker] will underline [highlight] text."
+        },{
+            "type":"select",
+            "label":"Highlight Type",
+            "id":"highlight_type",
+            "options":[
+                {
+                    "value":"underline",
+                    "label":"Underline"
+                },
+                {
+                    "value":"font_highlight",
+                    "label":"Font Highlight"
+                }
+            ],
+            "default":"underline"
+        },{
+            "type":"header",
+            "content":"Colors"
+        },{
+            "type":"color",
+            "label":"Block Background Color",
+            "id":"block_bg_color",
+            "default":"rgb(247, 255, 253)"
+        },{
+            "type":"color",
+            "label":"Heading Color",
+            "id":"heading_color",
+            "default":"rgb(0, 62, 82)"
+        },{
+            "type":"color",
+            "label":"Heading Highlight Color",
+            "id":"heading_highlight_color",
+            "default":"rgb(88, 180, 154)"
+        },{
+            "type":"header",
+            "content":"Paddings"
+        },{
+            "type":"range",
+            "label":"Top Padding",
+            "id":"top_padding",
+            "min":0,
+            "max":100,
+            "step":2,
+            "default":60
+        },{
+            "type":"range",
+            "label":"Bottom Padding",
+            "id":"bottom_padding",
+            "min":0,
+            "max":100,
+            "step":2,
+            "default":60
+        },{
+            "type":"header",
+            "content":"Mobile Paddings"
+        },{
+            "type":"range",
+            "label":"Top Padding (Mobile)",
+            "id":"mobile_top_padding",
+            "min":0,
+            "max":100,
+            "step":2,
+            "default":20
+        },{
+            "type":"range",
+            "label":"Bottom Padding (Mobile)",
+            "id":"mobile_bottom_padding",
+            "min":0,
+            "max":100,
+            "step":2,
+            "default":20
+        }],
+        "blocks":[{
+            "type":"ingredient",
+            "name":"Ingredient",
+            "settings":[{
+                "type":"image_picker",
+                "label":"Custom Icon Image",
+                "id":"icon_image"
+            },{
+                "type":"text",
+                "label":"Ingredient Heading",
+                "id":"ingredient_heading",
+            },{
+                "type":"richtext",
+                "label":"Text",
+                "id":"ingredient_text"
+            }]
+        }],
+        "presets": [{
+            "name": "MM Ingredients"
+        }]
+    }
+    {% endschema %}

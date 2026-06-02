@@ -1,0 +1,490 @@
+<div id="c-premium-{{ section.id }}" class="Cpremium-comparison" data-section-id="{{ section.id }}">
+  <div class="Cpremium-comparison__container">
+    
+    <div class="Cpremium-comparison__content">
+      {%- if section.settings.main_heading != blank -%}
+        <h2 class="Cpremium-comparison__heading">{{ section.settings.main_heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <div class="Cpremium-comparison__description">
+          {{ section.settings.description }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.description_desktop_extra != blank -%}
+        <div class="Cpremium-comparison__description Cpremium-comparison__description--desktop-extra">
+          {{ section.settings.description_desktop_extra }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.button_text != blank -%}
+        <a href="{{ section.settings.button_url | default: '#' }}"
+           class="Cpremium-comparison__button Cpremium-comparison__button--desktop">
+          {{ section.settings.button_text }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="Cpremium-comparison__images">
+      {%- if section.settings.images_title != blank -%}
+        <h3 class="Cpremium-comparison__images-title">{{ section.settings.images_title }}</h3>
+      {%- endif -%}
+
+      <div class="Cpremium-comparison__images-grid">
+        <div class="Cpremium-comparison__image-item">
+          {%- if section.settings.image_1 != blank -%}
+            <div class="Cpremium-comparison__image-wrapper">
+              <img 
+                src="{{ section.settings.image_1 | image_url: width: 600 }}" 
+                alt="{{ section.settings.image_1_label | escape }}"
+                class="Cpremium-comparison__image"
+                loading="lazy"
+              />
+            </div>
+          {%- else -%}
+            <div class="Cpremium-comparison__image-placeholder">
+              <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="200" height="200" fill="#E5E5E5"/>
+                <text x="50%" y="50%" text-anchor="middle" fill="#999" font-size="14">Image 1</text>
+              </svg>
+            </div>
+          {%- endif -%}
+          
+          {%- if section.settings.image_1_label != blank -%}
+            <p class="Cpremium-comparison__image-label">{{ section.settings.image_1_label }}</p>
+          {%- endif -%}
+        </div>
+
+        <div class="Cpremium-comparison__image-item">
+          {%- if section.settings.image_2 != blank -%}
+            <div class="Cpremium-comparison__image-wrapper">
+              <img 
+                src="{{ section.settings.image_2 | image_url: width: 600 }}" 
+                alt="{{ section.settings.image_2_label | escape }}"
+                class="Cpremium-comparison__image"
+                loading="lazy"
+              />
+            </div>
+          {%- else -%}
+            <div class="Cpremium-comparison__image-placeholder">
+              <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="200" height="200" fill="#E5E5E5"/>
+                <text x="50%" y="50%" text-anchor="middle" fill="#999" font-size="14">Image 2</text>
+              </svg>
+            </div>
+          {%- endif -%}
+          
+          {%- if section.settings.image_2_label != blank -%}
+            <p class="Cpremium-comparison__image-label">{{ section.settings.image_2_label }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  {%- comment -%} Mobile-only bottom content (below everything) {%- endcomment -%}
+  {%- if section.settings.description_mobile_bottom != blank or section.settings.mobile_button_text != blank -%}
+    <div class="Cpremium-comparison__mobile-bottom">
+      {%- if section.settings.description_mobile_bottom != blank -%}
+        <div class="Cpremium-comparison__description Cpremium-comparison__description--mobile-bottom">
+          {{ section.settings.description_mobile_bottom }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.mobile_button_text != blank -%}
+        <a href="{{ section.settings.mobile_button_url | default: '#' }}"
+           class="Cpremium-comparison__button Cpremium-comparison__button--mobile">
+          {{ section.settings.mobile_button_text }}
+        </a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap');
+
+/* Aislamiento y Variables de Color */
+#c-premium-{{ section.id }} {
+  --cp-bg: {{ section.settings.background_color }};
+  background-color: var(--cp-bg);
+  padding: 80px 0;
+  overflow: hidden;
+  font-family: 'Raleway', sans-serif;
+}
+
+#c-premium-{{ section.id }} .Cpremium-comparison__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* Left Content Column */
+#c-premium-{{ section.id }} .Cpremium-comparison__content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#c-premium-{{ section.id }} .Cpremium-comparison__heading {
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #002C41;
+  margin: 0;
+}
+
+#c-premium-{{ section.id }} .Cpremium-comparison__description {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #002C41;
+  margin: 0;
+}
+
+#c-premium-{{ section.id }} .Cpremium-comparison__description--desktop-extra {
+    font-weight: 600 !important;
+}
+
+#c-premium-{{ section.id }} .Cpremium-comparison__description p {
+  margin: 0 0 16px 0;
+}
+
+#c-premium-{{ section.id }} .Cpremium-comparison__description p:last-child {
+  margin-bottom: 0;
+}
+
+#c-premium-{{ section.id }} .Cpremium-comparison__description a {
+  color: #3E5565;
+  text-decoration: none;
+  word-break: break-word;
+}
+
+#c-premium-{{ section.id }} .Cpremium-comparison__description a:hover {
+  text-decoration: underline;
+}
+
+/* Utility classes you can use inside your HTML content */
+#c-premium-{{ section.id }} .Cpremium-comparison__description .pc-text-lg { font-size: 18px; font-weight: 700; line-height: 1.55; }
+#c-premium-{{ section.id }} .Cpremium-comparison__description .pc-text-md { font-size: 16px; font-weight: 600; line-height: 1.6; }
+#c-premium-{{ section.id }} .Cpremium-comparison__description .pc-text-sm { font-size: 14px; font-weight: 500; line-height: 1.6; }
+#c-premium-{{ section.id }} .Cpremium-comparison__description .pc-link-row { font-size: 14px; font-weight: 600; }
+#c-premium-{{ section.id }} .Cpremium-comparison__description .pc-link-row a { font-size: 14px; }
+
+#c-premium-{{ section.id }} .Cpremium-comparison__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 40px;
+  background: transparent;
+  border: 2px solid #002C41;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #002C41;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+  margin-top: 10px;
+}
+
+#c-premium-{{ section.id }} .Cpremium-comparison__button:hover {
+  background: #002C41;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 44, 65, 0.2);
+}
+
+/* Right Images Column */
+#c-premium-{{ section.id }} .Cpremium-comparison__images {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+#c-premium-{{ section.id }} .Cpremium-comparison__images-title {
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 1.3;
+  color: #002C41;
+  margin: 0;
+  text-align: center;
+}
+
+#c-premium-{{ section.id }} .Cpremium-comparison__images-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+#c-premium-{{ section.id }} .Cpremium-comparison__image-item {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+#c-premium-{{ section.id }} .Cpremium-comparison__image-wrapper {
+  width: 100%;
+  aspect-ratio: 1; 
+  border-radius: 12px;
+  overflow: hidden;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#c-premium-{{ section.id }} .Cpremium-comparison__image {
+  width: 80%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+#c-premium-{{ section.id }} .Cpremium-comparison__image-placeholder {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  background: #F8F8F8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #D6D6D6;
+}
+
+#c-premium-{{ section.id }} .Cpremium-comparison__image-label {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #002C41;
+  margin: 0;
+  text-align: center;
+}
+
+/* Desktop/Mobile visibility defaults */
+#c-premium-{{ section.id }} .Cpremium-comparison__mobile-bottom {
+  display: none;
+}
+
+#c-premium-{{ section.id }} .Cpremium-comparison__button--mobile {
+  display: none;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  #c-premium-{{ section.id }} {
+    padding: 60px 0;
+  }
+
+  #c-premium-{{ section.id }} .Cpremium-comparison__container {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  #c-premium-{{ section.id }} .Cpremium-comparison__heading {
+    font-size: 36px;
+  }
+
+  #c-premium-{{ section.id }} .Cpremium-comparison__images-grid {
+    gap: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  #c-premium-{{ section.id }} {
+    padding: 50px 0;
+  }
+
+  #c-premium-{{ section.id }} .Cpremium-comparison__container {
+    padding: 0 20px;
+    gap: 50px;
+  }
+
+  #c-premium-{{ section.id }} .Cpremium-comparison__heading {
+    font-size: 32px;
+    text-align: center;
+  }
+
+  #c-premium-{{ section.id }} .Cpremium-comparison__images-title {
+    font-size: 24px;
+  }
+
+  #c-premium-{{ section.id }} .Cpremium-comparison__images-grid {
+    gap: 24px;
+  }
+
+  #c-premium-{{ section.id }} .Cpremium-comparison__image-label {
+    font-size: 16px;
+  }
+
+  #c-premium-{{ section.id }} .Cpremium-comparison__button {
+    padding: 14px 32px;
+    font-size: 14px;
+  }
+
+  /* hide desktop-only extra description on mobile */
+  #c-premium-{{ section.id }} .Cpremium-comparison__description--desktop-extra {
+    display: none;
+  }
+
+  /* show mobile-only bottom block */
+  #c-premium-{{ section.id }} .Cpremium-comparison__mobile-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 1400px;
+    margin: 28px auto 0;
+    padding: 0 20px;
+  }
+
+  /* Only one button visible on mobile */
+  #c-premium-{{ section.id }} .Cpremium-comparison__button--desktop {
+    display: none;
+  }
+
+  #c-premium-{{ section.id }} .Cpremium-comparison__button--mobile {
+    display: inline-flex;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  #c-premium-{{ section.id }} .Cpremium-comparison__heading {
+    font-size: 28px;
+  }
+
+  #c-premium-{{ section.id }} .Cpremium-comparison__description {
+    font-size: 15px;
+  }
+
+  #c-premium-{{ section.id }} .Cpremium-comparison__images-title {
+    font-size: 20px;
+  }
+
+  #c-premium-{{ section.id }} .Cpremium-comparison__button {
+    width: 70%;
+    align-self: center;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "C Premium Comparison",
+  "class": "section-Cpremium-comparison",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Left Content Column"
+    },
+    {
+      "type": "textarea",
+      "id": "main_heading",
+      "label": "Main Heading",
+      "default": "The Dr.Jen Difference: Premium-Grade nHAp"
+    },
+    {
+      "type": "liquid",
+      "id": "description",
+      "label": "Description (HTML allowed)",
+      "default": "<p><span class='pc-text-md'>Premium-grade nano-Hydroxyapatite is proven to deliver optimal levels of protection, reduction in acid-causing bacteria, hypersensitivity management, and whitening benefits when used at concentrations of 10%.</span></p><p class='pc-link-row'><span class='pc-text-sm'>Link to study </span><a href='https://www.mdpi.com/1660-4601/19/9/5629' target='_blank' rel='noopener'>https://www.mdpi.com/1660-4601/19/9/5629</a></p><p><span class='pc-text-md'>While cheaper formulations source lower grade nano Hydroxyapatite, Dr. Jen's sources Premium Grade nano Hydroxyapatite for higher performance.</span></p>"
+    },
+    {
+      "type": "liquid",
+      "id": "description_desktop_extra",
+      "label": "Extra Description (Desktop only) (HTML allowed)",
+      "default": "<p></p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text (Desktop)",
+      "default": "LEARN MORE"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL (Desktop)",
+      "default": "/"
+    },
+    {
+      "type": "header",
+      "content": "Right Images Column"
+    },
+    {
+      "type": "text",
+      "id": "images_title",
+      "label": "Images Title",
+      "default": "Mineral Uptake Calcium And Phosphate"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "text",
+      "id": "image_1_label",
+      "label": "Image 1 Label",
+      "default": "Low-Grade nHAp"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "text",
+      "id": "image_2_label",
+      "label": "Image 2 Label",
+      "default": "Premium Grade nHAp"
+    },
+    {
+      "type": "header",
+      "content": "Mobile-only Bottom Content"
+    },
+    {
+      "type": "liquid",
+      "id": "description_mobile_bottom",
+      "label": "Description (Mobile bottom) (HTML allowed)",
+      "default": "<p></p>"
+    },
+    {
+      "type": "text",
+      "id": "mobile_button_text",
+      "label": "Button Text (Mobile)",
+      "default": "LEARN MORE"
+    },
+    {
+      "type": "url",
+      "id": "mobile_button_url",
+      "label": "Button URL (Mobile)",
+      "default": "/"
+    }
+  ],
+  "presets": [
+    {
+      "name": "C Premium Comparison"
+    }
+  ]
+}
+{% endschema %}

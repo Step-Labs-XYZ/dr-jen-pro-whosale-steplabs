@@ -1,0 +1,113 @@
+
+<style>
+  .custom_scrolling_main{
+    overflow:hidden;
+    display: flex;
+  }
+  .custom_scrolling_text{
+    display: flex;
+    align-items: center;
+    flex: none;
+    animation: translateFull 40s linear infinite;
+  }
+  
+  .scrolling_div_content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right:50px;
+  }
+
+  .scrolling_div_content p {
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 35px;
+    padding: 10px 0;
+  }
+  @keyframes translateFull {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@media(max-width:767px){
+  .scrolling_div_content p {
+    font-size: 25px;
+    line-height: 30px;
+  }
+}
+  
+#custom_scrolling_main-{{ section.id }} {
+    background: {{section.settings.bg_color}};
+    border-top: 1px solid {{section.settings.border_color}};
+    border-bottom: 1px solid {{section.settings.border_color}};
+}
+
+#custom_scrolling_main-{{ section.id }} p{
+    color:{{section.settings.text_color}};
+}
+
+</style>
+  
+    <div class="custom_scrolling_main" id="custom_scrolling_main-{{ section.id }}">
+      {% for i in (1..4) %}  
+        <div class="custom_scrolling_text">
+          {% for block in section.blocks %}
+               <div class="scrolling_div_content">
+                <p>{{ block.settings.text }}</p>
+              </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+
+   
+{% schema %}
+  {
+    "name": "MM Scrollig Text",
+    "settings": [
+      {
+        "type":"color",
+        "id":"bg_color",
+        "label":"Background Color",
+        "default":"#fff"
+      },
+       {
+        "type":"color",
+        "id":"border_color",
+        "label":"Border Color",
+        "default":"#fff"
+      },
+      {
+        "type":"color",
+        "id":"text_color",
+        "label":"Text Color",
+        "default":"#2E4368"
+      }
+    ],
+    "blocks":[
+      {
+        "name":"Scrolling Text",
+        "type":"Scrolling_Text",
+        "settings":[
+          {
+            "type":"text",
+            "id":"text",
+            "label":"Text",
+            "default":"Made in the USA"
+          }
+        ]
+      }
+    ],
+    "presets":[
+      {
+        "name":"MM Scrollig Text"
+      }
+    ]
+  }
+{% endschema %}

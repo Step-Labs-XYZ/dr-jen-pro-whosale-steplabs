@@ -1,0 +1,318 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "825a7fe5-b3f1-4592-9641-8c54403e2a2c": {
+      "type": "rich-text",
+      "disabled": true,
+      "custom_css": [
+        ".section__color-wrapper {background: #1d2433; padding: 10px 0;}",
+        "section {margin: 0;}",
+        ".heading.heading--small {color: #fff; text-align: center; font-family: Raleway; font-size: 14px; font-style: normal; font-weight: 500; line-height: 25px;}"
+      ],
+      "settings": {
+        "subheading": "Register now to get your FREE samples.",
+        "title": "",
+        "content": "",
+        "button_text": "",
+        "button_link": "",
+        "background_type": "full_width",
+        "text_width": "medium",
+        "text_position": "center",
+        "text_alignment": "center",
+        "background": "rgba(0,0,0,0)",
+        "text_color": "rgba(0,0,0,0)",
+        "button_background": "rgba(0,0,0,0)",
+        "button_text_color": "rgba(0,0,0,0)"
+      }
+    },
+    "0db7f983-93e4-49b2-92d8-42195e28e3fc": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "custom_css": [
+        "@media (max-width: 999px) {.rich_main_img {width: 134px; height: 48px; } .rich_main_content p {display: none; }}"
+      ],
+      "settings": {
+        "subheading": "",
+        "title": "",
+        "liquid": "<style>\n.rich_main {\n    display: flex;\n    justify-content: space-between;\n    padding: 15px 0;\n}\n.rich_main_img {\n    width: 186px;\n    height: 67px;\n}\n.rich_main_img img{\n    width: 100%;\n    height: 100%;\n    object-fit: contain;\n}\n.rich_main_content{\n    display: flex;\n    align-items: center;\n    gap: 20px;\n}\n.rich_main_content p{\n    color: #1D2433;\n    text-align: center;\n    font-family: Raleway;\n    font-size: 18px;\n    font-style: normal;\n    font-weight: 600;\n    line-height: 25px;\n    max-width: 467px;\n    margin: 0;\n}\n.rich_main_content a{\nborder-radius: 5px;\n    background: #E04880;\n    color: #FFF;\n    font-size: 18px;\n    font-style: normal;\n    font-weight: 700;\n    line-height: 20px;\n    padding: 15px 18px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n</style>\n<div class=\"rich_main\">\n<div class=\"rich_main_img\">\n<img src=\"https://cdn.shopify.com/s/files/1/0747/1769/2180/files/image_2__6_-removebg-preview.png?v=1703283869\">\n</div>\n<div class=\"rich_main_content\">\n<p>Don't miss this opportunity to transform your smile! Register now for our dental health webinar.</p>\n<a href=\"#\">Register Now</a>\n</div>\n</div>",
+        "add_vertical_spacing": false,
+        "background_type": "full_width",
+        "background": "rgba(0,0,0,0)",
+        "text_color": "rgba(0,0,0,0)"
+      }
+    },
+    "bc92f801-9857-4884-affa-9f4865616b28": {
+      "type": "MM-banner",
+      "custom_css": [
+        "h3 {font-size: 20px; letter-spacing: 1px; text-transform: uppercase;}",
+        "h2 {font-size: 45px; line-height: 50px; padding-top: 15px;}",
+        ".banner_image {margin-bottom: 0;}",
+        ".banner_main {background: linear-gradient( 180deg, #ddf4f6 61.4%, rgba(221, 244, 246, 0) 127.38% ); padding: 40px 0 150px 0;}",
+        "@media (max-width: 999px) {h3 {font-size: 14px; text-align: center; } h2 {font-size: 25px; line-height: 33px; } p {text-align: center; } .banner_image_mobile {display: none; } .banner_image {display: block; } .banner_main {padding: 20px 0; }}"
+      ],
+      "settings": {
+        "bg_color": "#e6f5f7",
+        "image": "shopify://shop_images/dr-jen-oral-care.png",
+        "sub_headline": "The Next Generation of Oral Care Product",
+        "headline": "Discover why Dr. Jen's Oral Care is the #1 nHAp oral care brand recommended by Dentists – Get your free samples today!",
+        "text": "<p>Schedule your free CE event today to learn about the modern science behind Nano Hydroxyapatite as a safe and effective ingredient to help strengthen enamel.</p>",
+        "btn_text": "",
+        "btn_link": ""
+      }
+    },
+    "main": {
+      "type": "main-customers-register",
+      "blocks": {
+        "register_hhjH6U": {
+          "type": "register",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "register_hhjH6U"
+      ],
+      "disabled": true,
+      "settings": {}
+    },
+    "2680b747-6476-496e-9c4a-a7b81e075e4e": {
+      "type": "custom-liquid",
+      "settings": {
+        "subheading": "",
+        "title": "",
+        "liquid": "<div id=\"register-section\">\n</div>",
+        "add_vertical_spacing": false,
+        "background_type": "full_width",
+        "background": "rgba(0,0,0,0)",
+        "text_color": "rgba(0,0,0,0)"
+      }
+    },
+    "6b42ceec-5ddb-4fc7-9a3a-0133392f7a34": {
+      "type": "custom-liquid",
+      "settings": {
+        "subheading": "",
+        "title": "",
+        "liquid": "<style>\n/** lessen space between checkmarks in registration form */\n    [data-default-value=\\\\] {\n        margin-bottom: 0;\n    }\n</style>",
+        "add_vertical_spacing": false,
+        "background_type": "full_width",
+        "background": "rgba(0,0,0,0)",
+        "text_color": "rgba(0,0,0,0)"
+      }
+    },
+    "3f057d66-407f-480c-8d77-ca2912180134": {
+      "type": "register_section",
+      "disabled": true,
+      "settings": {}
+    },
+    "19345422-e38c-4488-86f3-192875299083": {
+      "type": "MM-banner-text",
+      "settings": {
+        "bg_color": "#ffffff",
+        "image": "shopify://shop_images/Group_11_1.png",
+        "sub_headline": "",
+        "headline": "Key Benefits",
+        "text": "<p>Learn  about the history of nano Hydroxyapatite  along with clinical studies supporting nano Hydroxyapatite as an effective preventive ingredients in modern toothpaste.</p><ul><li>Learn how nHAp is effective at helping to remove plaque.</li><li>Discover how nHAp is clinically proven to remineralize enamel.</li><li>Understand how nHAp is effective at managing hypersensitivity.</li><li>Learn how combining fluoride with 10% nHAp outperforms <br/>fluoride alone toothpaste.</li></ul>",
+        "btn_text": "",
+        "btn_link": ""
+      }
+    },
+    "d0c175d0-1b80-4f9b-afdf-b86c864f1765": {
+      "type": "MM-meet",
+      "custom_css": [
+        ".image_with_text {padding-bottom: 0;}"
+      ],
+      "settings": {
+        "bg_color": "#ddf4f6",
+        "coment_bg_color": "#ffffff",
+        "text_color": "#000000",
+        "description_color": "#1d2433",
+        "padding_top_desktop": 35,
+        "padding_bottom_desktop": 30,
+        "margin_top_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 30,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "card_image": "shopify://shop_images/DSC05863_1.png",
+        "top_text": "Meet Your Expert Guide",
+        "desc": "<p>As a practicing dental professional, Dr. Jen has spent the last 25 years committed to advancing oral care.  Her dedication to advancing oral care products using modern and advanced clinically proven ingredients.</p>",
+        "coment": "<p>Her knowledge and passion to advancing preventive oral products is unparalleled</p>",
+        "auther_name": "- Happy Attendee"
+      }
+    },
+    "7190c5fe-3eeb-4df3-84c5-70cfef08760f": {
+      "type": "MM-webinar",
+      "blocks": {
+        "e65119a9-5fec-4dde-9b78-cacc585a4673": {
+          "type": "add_card",
+          "settings": {
+            "content_text": "Introduction & Welcome (5 minutes)",
+            "content_desc": "<p>We'll start by setting the stage and welcoming all attendees to the webinar.</p>"
+          }
+        },
+        "95e1c0da-0b78-4be6-b2f2-a768ee15d88c": {
+          "type": "add_card",
+          "settings": {
+            "content_text": "Dental Health Insights (20 minutes)",
+            "content_desc": "<p>Dr. Jen's team will share valuable insights into maintaining optimal oral health and achieving a optimal enamel remineralizing.</p>"
+          }
+        },
+        "936d9136-1385-4399-a92a-d03ad1ae2bc5": {
+          "type": "add_card",
+          "settings": {
+            "content_text": "Toothpaste Demonstration (15 minutes)",
+            "content_desc": "<p>Review of third party clinical studies supporting nano Hydroxyapatite's efficacy as a proven remineralizing ingredient.</p>"
+          }
+        },
+        "b3abc5c7-25f2-4ad3-96b3-c5ae0266de6e": {
+          "type": "add_card",
+          "settings": {
+            "content_text": "Q&A Session (10 minutes)",
+            "content_desc": "<p>Your chance to ask questions, seek clarifications, and engage with Dr. Jen directly.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "e65119a9-5fec-4dde-9b78-cacc585a4673",
+        "95e1c0da-0b78-4be6-b2f2-a768ee15d88c",
+        "936d9136-1385-4399-a92a-d03ad1ae2bc5",
+        "b3abc5c7-25f2-4ad3-96b3-c5ae0266de6e"
+      ],
+      "settings": {
+        "bg_color": "#ffffff",
+        "text_color": "#000000",
+        "card_text_color": "#1d2433",
+        "card_bg_color": "#ffffff",
+        "number": "#ffffff",
+        "btn_bg_color": "#e04880",
+        "btn_text_color": "#ffffff",
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "margin_top_desktop": 35,
+        "margin_bottom_desktop": 30,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 30,
+        "margin_top_mobile": 30,
+        "margin_bottom_mobile": 0,
+        "top_text": "Unveiling the Webinar Agenda",
+        "top_desc": "<p>We believe in providing a well-structured and informative experience during our dental health webinar. To ensure you make the most of your time with us, we're pleased to unveil the detailed agenda for the event. Here's what you can expect:</p>",
+        "btn_text": "Register Now",
+        "btn_url": "#register-section"
+      }
+    },
+    "36ad2cc4-5cdf-4bad-959d-d93625c0194d": {
+      "type": "faq",
+      "blocks": {
+        "template--21860230070548__36ad2cc4-5cdf-4bad-959d-d93625c0194d-question-1": {
+          "type": "question",
+          "settings": {
+            "title": "What do I need to join the webinar?",
+            "answer": "<p>All you need is a computer or mobile device with internet access.</p>"
+          }
+        },
+        "template--21860230070548__36ad2cc4-5cdf-4bad-959d-d93625c0194d-question-2": {
+          "type": "question",
+          "settings": {
+            "title": "Can I cancel my registration?",
+            "answer": "<p>Absolutely!  We can help you reschedule for another date or simply cancel there is no obligation.  However in order to receive the free CE credits you would have to attend. </p>"
+          }
+        },
+        "template--21860230070548__36ad2cc4-5cdf-4bad-959d-d93625c0194d-question-3": {
+          "type": "question",
+          "settings": {
+            "title": "How do I access the webinar?",
+            "answer": "<p>You will receive an email with access details and a link to join. </p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--21860230070548__36ad2cc4-5cdf-4bad-959d-d93625c0194d-question-1",
+        "template--21860230070548__36ad2cc4-5cdf-4bad-959d-d93625c0194d-question-2",
+        "template--21860230070548__36ad2cc4-5cdf-4bad-959d-d93625c0194d-question-3"
+      ],
+      "custom_css": [
+        ".faq__wrapper {max-width: 850px; width: 100%;}",
+        ".faq__item button {color: #1d2433; font-size: 20px; font-weight: 700; line-height: 26px;}",
+        ".section__color-wrapper {background: #f9f9f9; padding: 60px 0;}",
+        "section {margin: 0;}"
+      ],
+      "settings": {
+        "show_navigation": false,
+        "title": "Frequently Asked Questions",
+        "content": "",
+        "background": "rgba(0,0,0,0)",
+        "text_color": "rgba(0,0,0,0)"
+      }
+    },
+    "dc4c0471-b7b7-4b6c-b177-29bacca56b57": {
+      "type": "rich-text",
+      "custom_css": [
+        ".section__color-wrapper {padding: 40px 0;}",
+        ".heading {font-size: 35px; line-height: 48px; max-width: 1018px; margin: auto;}",
+        ".button--primary {padding: 2px 30px; text-transform: capitalize; background-color: #e04880; border-radius: 7px; color: #fff; font-size: 18px; font-weight: 700; line-height: 56px;}",
+        "@media (max-width: 999px) {.heading {font-size: 25px; line-height: 35px; } .button--primary {width: 100%; }}"
+      ],
+      "settings": {
+        "subheading": "",
+        "title": "Don't miss the opportunity to become an expert in understanding the science behind nHAp to help guide your patients in choosing a product with efficacy.",
+        "content": "",
+        "button_text": "Register Now",
+        "button_link": "#register-section",
+        "background_type": "full_width",
+        "text_width": "fill",
+        "text_position": "center",
+        "text_alignment": "center",
+        "background": "#8ae4e1",
+        "text_color": "#1d2433",
+        "button_background": "#e04880",
+        "button_text_color": "rgba(0,0,0,0)"
+      }
+    },
+    "c0bf7909-3538-443b-96eb-4bedd81e2b09": {
+      "type": "rich-text",
+      "custom_css": [
+        ".section__color-wrapper {background: #1d2433; padding: 20px 0;}",
+        "section {margin: 0;}",
+        ".heading.heading--small {color: #fff; text-align: center; font-family: Raleway; font-size: 14px; font-style: normal; font-weight: 500; line-height: 25px;}"
+      ],
+      "settings": {
+        "subheading": "Copyright © 2023 Dr. Jen. All rights reserved.",
+        "title": "",
+        "content": "",
+        "button_text": "",
+        "button_link": "",
+        "background_type": "full_width",
+        "text_width": "medium",
+        "text_position": "center",
+        "text_alignment": "center",
+        "background": "rgba(0,0,0,0)",
+        "text_color": "rgba(0,0,0,0)",
+        "button_background": "rgba(0,0,0,0)",
+        "button_text_color": "rgba(0,0,0,0)"
+      }
+    }
+  },
+  "order": [
+    "825a7fe5-b3f1-4592-9641-8c54403e2a2c",
+    "0db7f983-93e4-49b2-92d8-42195e28e3fc",
+    "bc92f801-9857-4884-affa-9f4865616b28",
+    "main",
+    "2680b747-6476-496e-9c4a-a7b81e075e4e",
+    "6b42ceec-5ddb-4fc7-9a3a-0133392f7a34",
+    "3f057d66-407f-480c-8d77-ca2912180134",
+    "19345422-e38c-4488-86f3-192875299083",
+    "d0c175d0-1b80-4f9b-afdf-b86c864f1765",
+    "7190c5fe-3eeb-4df3-84c5-70cfef08760f",
+    "36ad2cc4-5cdf-4bad-959d-d93625c0194d",
+    "dc4c0471-b7b7-4b6c-b177-29bacca56b57",
+    "c0bf7909-3538-443b-96eb-4bedd81e2b09"
+  ]
+}

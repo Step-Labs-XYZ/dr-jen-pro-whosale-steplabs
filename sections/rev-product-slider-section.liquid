@@ -1,0 +1,354 @@
+<div id="rev-product-slider-{{ section.id }}" class="rev-product-slider-section">
+ <div class="container">
+  <div class="rev-carousel-heading-container">
+    <h2 class="rev-carousel-heading">{{ section.settings.heading }}</h2>
+    <a href="{{ section.settings.button_url }}" class="rev-carousel-button">
+      {{ section.settings.button_text }}
+    </a>
+  </div>
+  
+  <div class="rev-product-carousel">
+    {% assign products = section.settings.products %}
+    {% if section.settings.collection %}
+      {% assign products = section.settings.collection.products %}
+    {% endif %}
+    {% assign limited_products = products %}
+    {% for product in limited_products limit: section.settings.limit_products %}
+      <div class="rev-product-item">
+        <a href="{{ product.url }}">
+          <div class="product-image-container">
+            <img src="{{ product.featured_image | img_url: '600x600' }}" alt="{{ product.title }}">
+            <!-- Add to Cart Button Icon -->
+            {%- if product.variants.size >= 1 -%}
+        {%- capture form_id -%}product_form_{{ section.id }}_{{ block.id }}_{{ product.id }}_{% increment product_form_index %}{%- endcapture -%}
+        {%- form 'product', product, is: 'product-form', id: form_id, class: 'product-item__quick-form--visible' -%}
+          <input type="hidden" name="quantity" value="1">
+          <input type="hidden" name="id" value="{{ product.first_available_variant.id }}">
+          <input type="hidden" name="properties[_compare_price]" value="{{ product.compare_at_price }}" />
+          <!-- <button is="loader-button" type="submit" class="button button--outline button--text button--full {% if section.settings.desktop_products_per_row >= 5 %}button--small{% endif %} hidden-touch">{{ 'collection.product.add_to_cart_short' | t }}</button> -->
+          <button type="submit" class="button add-to-cart-button  button--text ">
+            {% render 'add-to-cart-icon' %}
+          </button>
+        {%- endform -%}
+      {%- endif -%}
+          </div>
+        </a>
+        <div class="product-details">
+         <p class="title">{{ product.title }}</p>
+        <!-- Okendo Review Stars -->
+        <div class="okendo-stars">
+           {%- render 'product-rating', product: product -%}
+        </div>
+        <!-- Price Range -->
+        <div class="price-range">
+          {% if product.price_varies %}
+            <span>{{ product.price_min | money }} - {{ product.price_max | money }}</span>
+          {% else %}
+            <span>{{ product.price | money }}</span>
+          {% endif %}
+        </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+<div class="button-mob">
+   <a class="mobile-only" href="{{ section.settings.button_url }}" class="rev-carousel-button">
+      {{ section.settings.button_text }}
+    </a>
+</div>
+ </div>
+</div>
+
+<style>
+  #rev-product-slider-{{ section.id }} {
+    padding: 20px;
+  }
+  #rev-product-slider-{{ section.id }} .rev-carousel-heading-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  #rev-product-slider-{{ section.id }} .rev-carousel-heading {
+    color: {{ section.settings.heading_color }};
+    font-size: 47px;
+    margin: 0;
+  }
+  #rev-product-slider-{{ section.id }} .rev-carousel-button {
+    background-color: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_text_color }};
+    padding: 10px 50px;
+    text-decoration: underline;
+    font-size:15;
+    line-height:26px;
+    font-weight:800;
+    border-radius:60px;
+  }
+  #rev-product-slider-{{ section.id }} .rev-product-carousel .rev-product-item {
+    padding: 10px;
+    position: relative;
+    display: flex !important;
+    flex-direction: column;
+    gap: 15px;
+  }
+ #rev-product-slider-{{ section.id }} .rev-product-carousel .rev-product-item a{
+   padding-bottom:10px;
+ }
+  #rev-product-slider-{{ section.id }} .rev-product-carousel .rev-product-item img {
+    width: 100%;
+    height: auto;
+    transform: scale(1.1);
+  }
+  #rev-product-slider-{{ section.id }} .product-image-container {
+    position: relative;
+    border-radius: 21px;
+    border: 1px solid #003E52;
+    padding: 0px;
+    overflow:hidden;
+  }
+  #rev-product-slider-{{ section.id }} .add-to-cart-button {
+    position: absolute;
+    bottom: 0px;
+    right: 10px;
+    color: #fff;
+    padding: 0px;
+    border: none;
+    cursor: pointer;
+    z-index:555;
+  }
+  #rev-product-slider-{{ section.id }} .okendo-stars {
+    margin-top: 10px;
+  }
+  #rev-product-slider-{{ section.id }} .price-range {
+    margin-top: 0px;
+    font-size: 20px;
+    color: #333;
+  }
+ #rev-product-slider-{{ section.id }} .product-details span.rating__caption{
+   font-size: 16px;
+ }
+  #rev-product-slider-{{ section.id }} .product-details p.title{
+    font-size: 22px;
+    line-height: 28px;
+    font-weight: 800;
+  }
+  #rev-product-slider-{{ section.id }} .button-mob a.mobile-only{
+  display:none;
+}
+  @media (max-width: 769px) {
+    #rev-product-slider-{{ section.id }} .rev-carousel-heading-container {
+      flex-direction: column;
+      text-align: center;
+    }
+    #rev-product-slider-{{ section.id }} .rev-carousel-button {
+      margin-top: 10px;
+    }
+    #rev-product-slider-{{ section.id }} .product-details p.title {
+      font-size: 18px;
+      line-height: 21px;
+    }
+    #rev-product-slider-{{ section.id }} .price-range {
+      font-size: 14px;
+    }
+   #rev-product-slider-{{ section.id }} {
+     padding:20px 0px;
+   }
+    #rev-product-slider-{{ section.id }}  .rating__star {
+      width:16px;
+    }
+    
+  }
+  @media (max-width: 480px) {
+   #rev-product-slider-{{ section.id }} .rev-carousel-heading{
+     font-size:32px;
+     line-height:normal;
+   }
+ /* #rev-product-slider-{{ section.id }} .slick-track { 	
+display: flex !important;
+ }  
+ #rev-product-slider-{{ section.id }} .slick-slide { 	
+height: inherit !important; 	
+display: flex !important; 	
+justify-content: center; 	
+align-items: center; 
+       flex-wrap: wrap;
+}  */
+#rev-product-slider-{{ section.id }} .rev-carousel-heading-container a{
+  display:none;
+}
+   #rev-product-slider-{{ section.id }} .product-details p.title {
+    font-size: 14px;
+    line-height: 19px;
+  }
+  #rev-product-slider-{{ section.id }}  .rating__star {
+    width:13px;
+  }
+  #rev-product-slider-{{ section.id }} .product-details span.rating__caption{
+    font-size: 13px;
+    marfin-left:5px;
+  }
+    #rev-product-slider-{{ section.id }} .price-range {
+      font-size: 13px;
+    }
+    #rev-product-slider-{{ section.id }} .button-mob a.mobile-only{
+      display:block;
+      background-color: {{ section.settings.button_bg_color }};
+      color: {{ section.settings.button_text_color }};
+      padding: 8px 40px;
+      text-decoration: underline;
+      font-size:14px;
+      line-height:24px;
+      font-weight:800;
+      border-radius:60px;
+      text-align:center;
+    }
+  }
+  @media (max-width: 410px) {
+     #rev-product-slider-{{ section.id }} .rev-carousel-heading{
+       font-size:24px;
+     }
+     #rev-product-slider-{{ section.id }} .product-details p.title {
+      font-size: 13px;
+      line-height: 17px;
+    }
+  }
+</style>
+<!-- <script>
+    // Select all buttons with the class 'add-to-cart-button'
+    const buttons = document.querySelectorAll('rev-product-slider-section .add-to-cart-button');
+
+    // Loop through each button and apply the mutation observer
+    buttons.forEach((button) => {
+        // Store the original text or HTML of the button
+        const originalContent = button.innerHTML;
+
+        // Observe any changes and revert them back
+        const observer = new MutationObserver(function (mutationsList) {
+            mutationsList.forEach(function (mutation) {
+                if (mutation.type === 'childList') {
+                    // Revert back to original content if changed
+                    if (button.innerHTML !== originalContent) {
+                        button.innerHTML = originalContent;
+                    }
+                }
+            });
+        });
+
+        // Start observing each button for changes
+        observer.observe(button, { childList: true, subtree: true });
+    });
+</script>
+ -->
+
+ <script>
+    // Select all buttons with the class 'add-to-cart-button'
+    const buttons = document.querySelectorAll('.rev-product-slider-section .add-to-cart-button');
+
+    // Function to lock button text
+    function lockButtonContent(button, originalContent) {
+        // Add event listeners to prevent any changes on various events
+        button.addEventListener('click', () => {
+            button.innerHTML = originalContent;
+        });
+
+        button.addEventListener('input', () => {
+            button.innerHTML = originalContent;
+        });
+
+        button.addEventListener('DOMSubtreeModified', () => {
+            if (button.innerHTML !== originalContent) {
+                button.innerHTML = originalContent;
+            }
+        });
+    }
+
+    // Loop through each button and lock its content
+    buttons.forEach((button) => {
+        const originalContent = button.innerHTML;
+
+        // Lock the content on page load
+        lockButtonContent(button, originalContent);
+
+        // Ensure the content is locked even after changes by using a MutationObserver
+        const observer = new MutationObserver(function (mutationsList) {
+            mutationsList.forEach(function (mutation) {
+                if (mutation.type === 'childList') {
+                    // Revert back to original content if changed
+                    if (button.innerHTML !== originalContent) {
+                        button.innerHTML = originalContent;
+                    }
+                }
+            });
+        });
+
+        // Start observing each button for changes
+        observer.observe(button, { childList: true, subtree: true });
+    });
+</script>
+
+{% schema %}
+{
+  "name": "Rev Product Slider",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Select Collection"
+    },
+    {
+      "type": "product_list",
+      "id": "products",
+      "label": "Select Products",
+      "limit": 12
+    },
+    {
+      "type": "range",
+      "id": "limit_products",
+      "label": "Limit Products",
+      "default": 6,
+      "min": 6,
+      "max":12
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rev Product Slider",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

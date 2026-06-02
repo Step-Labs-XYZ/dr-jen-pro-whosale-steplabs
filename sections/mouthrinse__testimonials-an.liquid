@@ -1,0 +1,141 @@
+<style>
+  #shopify-section-{{ section.id }}{
+    background-color: {{ section.settings.i_section_bg_color }};
+  }
+</style>
+
+<div class="container--ss--full">
+  <div class="row--ss">
+      <div class="col--ss">
+          <div class="content__wrapper">
+              <h4 class="section__sub-heading text--uppercase">
+                {{ section.settings.i_sub_heading }}
+              </h4>
+              <h3 class="section__heading">
+                {{ section.settings.i_heading }}
+              </h3>
+          </div>
+          <div class="testimonials__wrapper" data-slider="testimonials__wrapper">
+            {% for block in section.blocks %}
+              <div class="testimonial__item" {{ block.shopify_attributes }}>
+                  <div class="testimonial__author">
+                      <div class="author__picture">
+                        <img src="{{ block.settings.bi_author_picture | image_url: width: 396 }}" alt="" />
+                      </div>
+                      <div class="author__content">
+                          <div class="author__rating">
+                            {% for i in (1..block.settings.bi_star_rating) %}
+                                <i class="fa-solid fa-star" style="color: {{ section.settings.i_star_color}}; font-size: 24px;" {{ block.shopify_attributes }}></i>
+                            {% endfor %}
+                          </div>
+                          <h5 class="author__name">
+                            {{ block.settings.title }}
+                          </h5>
+                          <p class="author__text">
+                            {{ block.settings.bi_author_testimonial_text }}
+                          </p>
+                      </div>
+                  </div>
+              </div>
+              {% endfor %}
+          </div>
+      </div>
+  </div>
+</div>
+
+  <script type="module" defer>
+        $('[data-slider="testimonials__wrapper"]').slick({
+            arrows: false,
+            infinite: false,
+            centerMode: true,
+            centerPadding: '30vw 4px 12vw',
+            slidesToShow: 1,
+            initialSlide: 1,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        centerPadding: '56px 4px',
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        centerPadding: '0px 4px',
+                        dots: true
+                    }
+                }
+            ]
+        });
+    </script>
+
+{% schema %}
+{
+   "name": "Mouthrinse testimonials",
+    "tag": "section",
+    "class": "section__padding testimonials--card mouthrinse__testimonials ss--mouthrinse__testimonials-an",
+   "settings" : [
+     {
+        "type": "color",
+        "id": "i_section_bg_color",
+        "label": "Section background color",
+        "default": "#8BD1CF"
+    },
+    {
+        "type": "color",
+        "id": "i_star_color",
+        "label": "Ratings star color",
+        "default": "#8BD1CF"
+    },
+     {
+        "type": "text",
+        "id": "i_sub_heading",
+        "label": "Sub Heading"
+    },
+     {
+        "type": "text",
+        "id": "i_heading",
+        "label": "Heading"
+    }
+   ],
+   "blocks" : [
+        {
+             "name": "Testimonial",
+             "type" : "testimonial",
+             "settings" : [
+                {
+                    "type": "image_picker",
+                    "id": "bi_author_picture",
+                    "label": "Testimonial author picture"
+                },
+                {
+                    "type": "range",
+                    "id": "bi_star_rating",
+                    "label": "Star Rating",
+                    "unit": "*",
+                    "min": 1,
+                    "max": 5,
+                    "step": 1,
+                    "default": 5
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Author name"
+                },
+                {
+                    "type": "textarea",
+                    "id": "bi_author_testimonial_text",
+                    "label": "Author testimonial text"
+                }
+             ]
+        }
+   ],
+   "presets": [
+    {
+      "name": "Mouthrinse testimonials",
+      "category": "Reviews or Testimonials"
+    }
+   ]
+}
+{% endschema %}

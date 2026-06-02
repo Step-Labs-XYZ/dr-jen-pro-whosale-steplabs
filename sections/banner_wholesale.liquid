@@ -1,0 +1,82 @@
+<div class="new_banner_wholesale__container">
+
+    <div class="whdole_title_container">
+        <p class="title_wholesale">{{ section.settings.title_banner_wholesale }}</p>
+    </div>
+    <div class="image_dr_container">
+        <img src="{{ section.settings.dr_image | image_url: width: 341 }}" alt="{{ section.settings.dr_image.alt }}">
+    </div>
+</div>
+
+<style>
+    .new_banner_wholesale__container{
+        background-image: url('{{ section.settings.background_image | image_url: width: master }}');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        padding: 115px 0;
+    }
+    .title_wholesale{
+        color: #fff;
+        font-weight: 600;
+        font-size: clamp(25px, 4vw, 42px);
+        max-width: 602px;
+        text-align: center;
+        line-height: normal;
+    }
+    .whdole_title_container{
+        background: rgba(45, 56, 82, 0.6);
+        padding: 10px 190px;
+    }
+    .image_dr_container{
+        display: inline-block;
+        position: absolute;
+        right: 8%;
+        bottom: 0;
+    }
+
+    @media screen and (max-width: 1000px ) {
+        .new_banner_wholesale__container{
+            display: flex;
+            flex-flow: column-reverse;
+            align-items: center;
+            padding: 0;
+        }
+        .image_dr_container{
+            position: initial;
+        }
+        .whdole_title_container{
+            padding: 15px 27px;
+        }
+    }
+ 
+</style>
+{% schema %}
+{
+   "name": "Banner wholesale",
+   "settings" : [
+   {
+    "type": "text",
+    "id": "title_banner_wholesale",
+    "label": "Title Page",
+    "default": "Wholesale"
+   },
+   {
+    "type": "image_picker",
+    "id": "background_image",
+    "label": "Background"
+   },
+   {
+    "type": "image_picker",
+    "id": "dr_image",
+    "label": "Dr. image"
+   }
+
+],
+   "presets": [
+    {
+        "name": "Banner Wholesale"
+    }
+   ]
+}
+{% endschema %}

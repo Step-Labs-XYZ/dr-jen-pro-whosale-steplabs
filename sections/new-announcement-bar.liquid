@@ -1,0 +1,78 @@
+<style>
+    .new-announcement-bar {
+        width: 100%;
+        padding: 16px 0px;
+        background-color: {{ section.settings.bg_color }};
+    }
+    .new-announcement-bar__container {
+        width: 95%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+    }
+    .new-announcement-bar__text1, .new-announcement-bar__text2, .new-announcement-bar__mobile-text {
+        font-family: "Raleway";
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 15px;
+        letter-spacing: 0em;
+        color: #FFF;
+    }
+    .new-announcement-bar__text1, .new-announcement-bar__text2 {
+        display: block;
+    }
+    .new-announcement-bar__mobile-text {
+        display: none;
+    }
+    @media (max-width: 768px) {
+        .new-announcement-bar {
+            padding: 7px 0;
+        }
+        .new-announcement-bar__container {
+            justify-content: center;
+        }
+        .new-announcement-bar__text1, .new-announcement-bar__text2 {
+            display: none;
+        }
+        .new-announcement-bar__mobile-text {
+            display: block;
+        }
+    }
+</style>
+
+<div class="new-announcement-bar">
+  <div class="new-announcement-bar__container">
+    <div class="new-announcement-bar__text1">{{ section.settings.text1 }}</div>
+    <div class="new-announcement-bar__text2">{{ section.settings.text2 }}</div>
+    <div class="new-announcement-bar__mobile-text">{{ section.settings.mobile_text }}</div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "New announcement bar",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#FF6B00"
+    },
+    {
+      "type": "richtext",
+      "id": "text1",
+      "label": "Text 1"
+    },
+    {
+      "type": "richtext",
+      "id": "text2",
+      "label": "Text 2"
+    },
+    {
+      "type": "richtext",
+      "id": "mobile_text",
+      "label": "Mobile text"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,300 @@
+<style>
+.as_product_feature {
+  width: 100%;
+  height: auto;
+}
+.as_product_feature .container{
+  max-width: 1270px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 30px;
+}
+.as_product_feature .feature_inner {
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+}
+.as_product_feature .image_card {
+  width: 60%;
+}
+.as_product_feature .image_card img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.as_product_feature .text_card {
+  width: 40%;
+  padding: 45px 50px;
+  border-radius: 40px;
+}
+.as_product_feature .text_card h2 {
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 45px;
+  padding-bottom: 26px;
+  max-width: 280px;
+  margin:0;
+}
+.as_product_feature .card_content {
+  display: flex;
+  gap: 24px;
+  row-gap: 24px;
+  align-items: center;
+}
+.as_product_feature .card_content .svg_img{
+  max-width: 92px;
+}
+.as_product_feature .card_content .svg_img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.as_product_feature .card_content h3 {
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 31px;
+  margin: 0;
+}
+#as_product_feature-{{ section.id }} {
+  background: {{section.settings.bg_color}};
+  padding-top:{{ section.settings.padding_top_desktop }}px;
+  padding-bottom:{{ section.settings.padding_bottom_desktop }}px;
+  margin-top:{{ section.settings.margin_top_desktop }}px;
+  margin-bottom:{{ section.settings.margin_bottom_desktop }}px;
+}
+#as_product_feature-{{ section.id }} h2,
+#as_product_feature-{{ section.id }} h3 {
+  color: {{section.settings.text_color}};
+}
+#as_product_feature-{{ section.id }} .text_card {
+  background: {{section.settings.card_bg_color}};
+} 
+@media screen and (max-width: 1199px) {
+  .as_product_feature .text_card h2 {
+    font-size: 27px;
+    line-height: 35px;
+  }
+  .as_product_feature .text_card {
+    width: 44%;
+    padding: 30px 34px;
+  }
+  .as_product_feature .card_content h3 {
+    font-size: 15px;
+    line-height: 26px;
+  }
+}
+
+
+@media screen and (max-width: 991px) {
+  #as_product_feature-{{ section.id }} {
+    padding-top:{{ section.settings.padding_top_mobile }}px;
+    padding-bottom:{{ section.settings.padding_bottom_mobile }}px;
+    margin-top:{{ section.settings.margin_top_mobile }}px;
+    margin-bottom:{{ section.settings.margin_bottom_mobile }}px;
+  }
+  .as_product_feature .container {
+    padding:0 20px;
+  }
+  .as_product_feature .feature_inner {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .as_product_feature .image_card {
+    width: 100%;
+    max-width:400px;
+  }
+  .as_product_feature .text_card {
+    width: 100%;
+    padding: 37px 18px;
+  }
+  .as_product_feature .card_content .svg_img {
+    max-width: 64px;
+  }
+  .as_product_feature .text_card h2 {
+    font-size: 25px;
+    text-align: center;
+    padding-bottom: 10px;
+    margin: 0 auto;
+  }
+  .as_product_feature .card_content {
+    gap: 16px;
+    max-width: 300px;
+    margin: auto;
+    padding-bottom: 8px;
+  }
+  .as_product_feature .card_content h3 {
+    font-size: 15px;
+    line-height: 26px;
+  }
+}
+</style>
+<section class="as_product_feature" id="as_product_feature-{{ section.id }}">
+  <div class="container">
+    <div class="feature_inner">
+      <div class="image_card">
+        {% if section.settings.card_img !=blank %}
+          {{ section.settings.card_img| image_url: width: section.settings.card_img.width | image_tag: loading: 'lazy' }}
+        {% endif %}
+      </div>
+      <div class="text_card">
+        {% if section.settings.card_headline != blank %}
+          <h2>{{ section.settings.card_headline }}</h2>
+        {% endif %}
+        {% for block in section.blocks %}
+          <div class="card_content">
+            <div class="svg_img">
+              {% if block.settings.svg_img !=blank %}
+                {{ block.settings.svg_img| image_url: width: block.settings.svg_img.width | image_tag: loading: 'lazy' }}
+              {% endif %}
+            </div>
+            {% if block.settings.card_text != blank %}
+              <h3>{{ block.settings.card_text }}</h3>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>  
+</section>
+{% schema %}
+  {
+    "name":"MM Feature Details",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background color",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "card_bg_color",
+        "label": "Card BG Color",
+        "default": "#ECECEA"
+      },
+      {
+        "type": "range",
+        "id": "padding_top_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Top Desktop",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Bottom Desktop",
+        "default": 0
+       },
+       {
+        "type": "range",
+        "id": "margin_top_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Top Desktop",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Bottom Desktop",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_top_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Top Mobile",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Bottom Mobile",
+        "default": 0
+       },
+       {
+        "type": "range",
+        "id": "margin_top_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Top Mobile",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Bottom Mobile",
+        "default": 0
+      },
+      {
+        "type": "image_picker",
+        "id": "card_img",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "card_headline",
+        "label": "Card Headline",
+        "default": "Power Your Smile Three Ways"
+      }
+    ],
+    "blocks": [
+       {
+         "name": "ADD Tile",
+         "type": "add_tile",
+         "settings": [
+          {
+            "type": "image_picker",
+            "id": "svg_img",
+            "label": "SVG Image"
+          },
+          {
+            "type": "text",
+            "id": "card_text",
+            "label": "Card Text",
+            "default": "10% Nano-Hydroxyapaptite"
+          }
+         ]
+       }
+    ],
+    "presets":[
+      {
+        "name":"MM Feature Details"
+      }
+    ]
+  }
+{% endschema %}

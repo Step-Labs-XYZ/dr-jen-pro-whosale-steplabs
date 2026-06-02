@@ -1,0 +1,44 @@
+
+  <h3 class="section__heading text--center">
+  {{section.settings.heading}}
+  </h3>
+  
+  <div class="image-carousel slider--full-width" data-flickity='{"wrapAround" : true,  "contain" : true, "pageDots" : false}'>
+  {% for block in section.blocks %}
+      <img class="image-carousel-rounded-image" src="{{ block.settings.image | img_url: 'master' }}" />
+  {% endfor %}
+  </div>
+
+{% schema %}
+{
+   "name": "Featured images - dj",
+  "tag": "section",
+  "class": "section__padding ss--featured-images--improved",
+   "settings" : [
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+        }
+   ],
+   "blocks" : [
+        {
+            "name": "Image",
+            "type": "Image",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                }
+            ]
+        }
+   ],
+   "presets": [
+    {
+        "name": "Featured images - improved"
+    }
+   ]
+
+}
+{% endschema %}

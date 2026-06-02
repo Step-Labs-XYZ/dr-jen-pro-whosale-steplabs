@@ -1,0 +1,72 @@
+{% comment %}
+  Snippet: Subscription Info Box
+  Usage: {% render 'c-subscription-box' %}
+{% endcomment %}
+
+<div class="c-subscription-box">
+  <p class="c-subscription-box__title">Your subscription includes:</p>
+  <ul class="c-subscription-box__list">
+    <li>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#002C41" stroke-width="2">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+      <span>Free shipping always</span>
+    </li>
+    <li>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#002C41" stroke-width="2">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 6v6l4 2"/>
+      </svg>
+      <span>Never worry about running out</span>
+    </li>
+    <li>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#002C41" stroke-width="2">
+        <path d="M19 12H5M12 19V5"/>
+      </svg>
+      <span>Easy to adjust or skip</span>
+    </li>
+    <li>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#002C41" stroke-width="2">
+        <polyline points="3 12 9 19 21 5"/>
+      </svg>
+      <span>Cancel anytime</span>
+    </li>
+  </ul>
+</div>
+
+{% stylesheet %}
+  .c-subscription-box {
+    background: #eef4f2;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin: 24px 0;
+  }
+
+  .c-subscription-box__title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #002C41;
+    margin: 0 0 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .c-subscription-box__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .c-subscription-box__list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #002C41;
+    line-height: 1.4;
+  }
+{% endstylesheet %}

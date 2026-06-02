@@ -1,0 +1,160 @@
+<div class="container--ss">
+    <div class="row--ss">
+        <div class="col--ss">
+            <div class="content__wrapper section__padding">
+                <h4 class="section__sub-heading text--uppercase">
+                    Nourish your smile with prebiotics
+                </h4>
+                <h3 class="section__heading">
+                    Oral Prebiotics in Dr Jen’s Mouth Rinse:
+                </h3>
+                <div class="prebiotics__wrapper">
+                    <div class="prebiotics__item">
+                        <h5 class="prebiotics__title">
+                            Inulin Root
+                        </h5>
+                        <p class="prebiotics__desc">
+                            helps to maintain a healthy <br>
+                            balance of bacteria for your <br>
+                            oral microbiome
+                        </p>
+                    </div>
+                    <div class="prebiotics__item">
+                        <h5 class="prebiotics__title">
+                            Guar Gum
+                        </h5>
+                        <p class="prebiotics__desc">
+                            promotes the growth of <br>
+                            beneficial microflora
+                        </p>
+                    </div>
+                    <div class="prebiotics__item">
+                        <h5 class="prebiotics__title">
+                            Pectin
+                        </h5>
+                        <p class="prebiotics__desc">
+                            promotes a protective layer over <br>
+                            mucous membranes and relieving <br>
+                            inflammation and irritation
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="cta__wrapper">
+                <a class="prebiotics__cta" id="mw-view-ingredients">
+                    VIEW ALL INGREDIENTS
+                </a>
+                <a href="#shopify-section-mouthrinse__product-an"
+                    class="btn--dj btn--mouthrinse is--cranberry is--rounded has--border has--shadow">
+                    Shop Now
+                </a>
+                <h5 class="note--moneyback">
+                    30-DAY MONEY BACK GUARANTEE
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="mw-myModal" class="mw-modal">
+
+  <!-- Modal content -->
+  <div class="mw-modal-content">
+    <span class="mw-close">&times;</span>
+    <h2>Ingredients</h2>
+    <p>Water, Xylitol, Aloe Vera, Glycerin, Menthol, Stevia Rebaudiana Leaf Extract, Mentha Arvensis (Peppermint) Oil, Potassium Sorbate, Sodium Bicarbonate, Black Cherry Extract, Papaya Extract, Spirulina, Vitamin C, Sea Salt, Citric Acid, Inulin Root Extract, Guar Gum, Pectin</p>
+  </div>
+
+</div>
+<style>
+  /* The Modal (background) */
+.mw-modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.mw-modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+@media (max-width: 768px) {
+  .mw-modal-content {
+    margin: 50% auto; /* 15% from the top and centered */
+  }
+}
+/* The Close Button */
+.mw-close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.mw-close:hover,
+.mw-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+#mw-view-ingredients {
+  cursor: pointer;
+}
+</style>
+<script>
+  // Get the modal
+var modal = document.getElementById("mw-myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("mw-view-ingredients");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("mw-close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+{% schema %}
+  {
+    "name": "Mouthrinse prebiotics",
+    "class": "section__padding mouthrinse__prebiotics ss--mouthrinse__prebiotics-an",
+    "tag": "section",
+    "settings": [],
+    "presets": [
+      {
+        "name": "Mouthrinse prebiotics",
+        "category": "Mouthrinse page"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

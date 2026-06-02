@@ -1,0 +1,579 @@
+{% doc %}
+  Renders the Dr. Jen Difference section with a two-column layout:
+  left column shows crystal quality comparison, right column shows main content.
+
+  @param {richtext} heading - Main section heading
+  @param {richtext} description - Description paragraph (18px)
+  @param {richtext} bold_text - Bold emphasis paragraph
+  @param {richtext} secondary_text - Secondary paragraph before quote
+  @param {image_picker} scientific_image - Scientific committee image
+  @param {richtext} scientific_quote - Quote from SCCS (italic)
+  @param {text} crystal_heading - Crystal comparison heading
+  @param {richtext} crystal_description - Crystal comparison description
+  @param {image_picker} low_grade_image - Low-grade crystal image
+  @param {text} low_grade_label - Low-grade crystal label
+  @param {image_picker} premium_grade_image - Premium grade crystal image
+  @param {text} premium_grade_label - Premium grade crystal label
+  @param {color} bg_color - Background color
+  @param {color} heading_color - Heading color
+  @param {color} text_color - Text color
+  @param {range} padding_top - Top padding in px
+  @param {range} padding_bottom - Bottom padding in px
+
+  @example
+  {% render 'c-dr-jen-difference' %}
+{% enddoc %}
+
+{%- style -%}
+  #{{ section.id }} {
+    --bg-color: {{ section.settings.bg_color }};
+    --heading-color: {{ section.settings.heading_color }};
+    --text-color: {{ section.settings.text_color }};
+    --padding-top: {{ section.settings.padding_top }}px;
+    --padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  /* Section wrapper */
+  #{{ section.id }}.dr-jen-difference {
+    background-color: var(--bg-color, #ffffff);
+    padding-top: var(--padding-top, 64px);
+    padding-bottom: var(--padding-bottom, 64px);
+  }
+
+  /* Container — vertical on mobile, horizontal on desktop */
+  #{{ section.id }} .dr-jen-difference__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+  }
+
+  /* Crystal comparison column — second on mobile */
+  #{{ section.id }} .dr-jen-difference__crystals {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 44px;
+    width: 100%;
+  }
+
+  /* Crystal header block */
+  #{{ section.id }} .dr-jen-difference__crystal-header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    text-align: center;
+    max-width: 338px;
+    line-height: 1.2;
+  }
+
+  #{{ section.id }} .dr-jen-difference__crystal-title {
+    font-family: var(--title-family, 'Raleway', sans-serif);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.2;
+    color: var(--heading-color, #002c41);
+    margin: 0;
+  }
+
+  #{{ section.id }} .dr-jen-difference__crystal-desc {
+    font-family: var(--title-family, 'Raleway', sans-serif);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.2;
+    color: var(--text-color, #000000);
+    margin: 0;
+  }
+
+  #{{ section.id }} .dr-jen-difference__crystal-desc p {
+    margin: 0;
+  }
+
+  /* Crystal cards row */
+  #{{ section.id }} .dr-jen-difference__crystal-cards {
+    display: flex;
+    gap: 44px;
+    align-items: flex-start;
+  }
+
+  #{{ section.id }} .dr-jen-difference__crystal-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  #{{ section.id }} .dr-jen-difference__crystal-img-wrap {
+    width: 117px;
+    height: 118px;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  #{{ section.id }} .dr-jen-difference__crystal-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  #{{ section.id }} .dr-jen-difference__crystal-label {
+    font-family: var(--title-family, 'Raleway', sans-serif);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.2;
+    color: var(--heading-color, #002c41);
+    text-align: center;
+    margin: 0;
+  }
+
+  /* Main content column — first on mobile */
+  #{{ section.id }} .dr-jen-difference__content {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  /* Heading H2 */
+  #{{ section.id }} .dr-jen-difference__heading {
+    font-family: var(--title-family, 'Raleway', sans-serif);
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 1.2;
+    color: var(--heading-color, #002c41);
+    text-transform: capitalize;
+    width: 100%;
+  }
+
+  #{{ section.id }} .dr-jen-difference__heading p {
+    margin: 0;
+  }
+
+  /* Description 18px */
+  #{{ section.id }} .dr-jen-difference__description {
+    font-family: var(--title-family, 'Raleway', sans-serif);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.2;
+    color: var(--text-color, #000000);
+    width: 100%;
+  }
+
+  #{{ section.id }} .dr-jen-difference__description p {
+    margin: 0;
+  }
+
+  /* Bold text 16px */
+  #{{ section.id }} .dr-jen-difference__bold-text {
+    font-family: var(--title-family, 'Raleway', sans-serif);
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.2;
+    color: var(--text-color, #000000);
+    width: 100%;
+  }
+
+  #{{ section.id }} .dr-jen-difference__bold-text p,
+  #{{ section.id }} .dr-jen-difference__bold-text strong {
+    font-weight: 700;
+    margin: 0;
+  }
+
+  /* Secondary text 16px */
+  #{{ section.id }} .dr-jen-difference__secondary-text {
+    font-family: var(--title-family, 'Raleway', sans-serif);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.2;
+    color: var(--text-color, #000000);
+    width: 100%;
+  }
+
+  #{{ section.id }} .dr-jen-difference__secondary-text p {
+    margin: 0;
+  }
+
+  /* Scientific block — vertical on mobile */
+  #{{ section.id }} .dr-jen-difference__scientific {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  #{{ section.id }} .dr-jen-difference__scientific-img-wrap {
+    width: 100%;
+    height: 146px;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  #{{ section.id }} .dr-jen-difference__scientific-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Quote italic 16px */
+  #{{ section.id }} .dr-jen-difference__quote {
+    font-family: var(--title-family, 'Raleway', sans-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.2;
+    color: var(--text-color, #000000);
+    width: 100%;
+  }
+
+  #{{ section.id }} .dr-jen-difference__quote p,
+  #{{ section.id }} .dr-jen-difference__quote em {
+    font-style: italic;
+    margin: 0;
+  }
+
+  /* Tablet */
+  @media (width >= 768px) {
+    #{{ section.id }} .dr-jen-difference__container {
+      padding: 0 40px;
+    }
+
+    #{{ section.id }} .dr-jen-difference__crystal-header {
+      max-width: 416px;
+    }
+
+    #{{ section.id }} .dr-jen-difference__crystal-img-wrap {
+      width: 160px;
+      height: 162px;
+    }
+  }
+
+  /* Laptop */
+  @media (width >= 978px) {
+    #{{ section.id }} .dr-jen-difference__container {
+      flex-direction: row;
+      align-items: center;
+      padding: 0 64px;
+    }
+
+    #{{ section.id }} .dr-jen-difference__crystals {
+      order: 0;
+      flex-shrink: 0;
+      width: 50%;
+    }
+
+    #{{ section.id }} .dr-jen-difference__content {
+      order: 0;
+      flex: 1;
+      max-width: 588px;
+    }
+
+    #{{ section.id }} .dr-jen-difference__crystal-header {
+      max-width: 416px;
+    }
+
+    #{{ section.id }} .dr-jen-difference__crystal-img-wrap {
+      width: 209px;
+      height: 211px;
+    }
+
+    #{{ section.id }} .dr-jen-difference__scientific {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    #{{ section.id }} .dr-jen-difference__scientific-img-wrap {
+      width: 262px;
+      height: 104px;
+      flex-shrink: 0;
+    }
+
+    #{{ section.id }} .dr-jen-difference__quote {
+      flex: 1;
+      min-width: 0;
+    }
+
+    #{{ section.id }} .dr-jen-difference__secondary-text {
+      max-width: 540px;
+    }
+  }
+
+  /* Desktop */
+  @media (width >= 1200px) {
+    #{{ section.id }} .dr-jen-difference__container {
+      padding: 0 64px;
+    }
+    #{{ section.id }} .dr-jen-difference__heading  {
+      font-size: 48px;
+    }
+  }
+
+  /* TV */
+  @media (width >= 1980px) {
+    #{{ section.id }} .dr-jen-difference__container {
+      padding: 0 80px;
+    }
+
+    #{{ section.id }} .dr-jen-difference__heading {
+      font-size: 56px;
+    }
+
+    #{{ section.id }} .dr-jen-difference__crystal-title {
+      font-size: 28px;
+    }
+  }
+{%- endstyle -%}
+
+<section id="{{ section.id }}" class="c-section dr-jen-difference">
+  <div class="dr-jen-difference__container">
+
+    {%- comment -%} Crystal comparison column (left on desktop, second on mobile) {%- endcomment -%}
+    <div class="dr-jen-difference__crystals">
+      {%- if section.settings.crystal_heading != blank or section.settings.crystal_description != blank -%}
+        <div class="dr-jen-difference__crystal-header">
+          {%- if section.settings.crystal_heading != blank -%}
+            <p class="dr-jen-difference__crystal-title">{{ section.settings.crystal_heading }}</p>
+          {%- endif -%}
+          {%- if section.settings.crystal_description != blank -%}
+            <div class="dr-jen-difference__crystal-desc">{{ section.settings.crystal_description }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="dr-jen-difference__crystal-cards">
+        {%- if section.settings.low_grade_image != blank or section.settings.low_grade_label != blank -%}
+          <div class="dr-jen-difference__crystal-card">
+            {%- if section.settings.low_grade_image != blank -%}
+              <div class="dr-jen-difference__crystal-img-wrap">
+                {{
+                  section.settings.low_grade_image
+                  | image_url: width: 420
+                  | image_tag:
+                    alt: section.settings.low_grade_label,
+                    class: 'dr-jen-difference__crystal-img',
+                    loading: 'lazy',
+                    widths: '117, 209, 420'
+                }}
+              </div>
+            {%- endif -%}
+            {%- if section.settings.low_grade_label != blank -%}
+              <p class="dr-jen-difference__crystal-label">{{ section.settings.low_grade_label }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.premium_grade_image != blank or section.settings.premium_grade_label != blank -%}
+          <div class="dr-jen-difference__crystal-card">
+            {%- if section.settings.premium_grade_image != blank -%}
+              <div class="dr-jen-difference__crystal-img-wrap">
+                {{
+                  section.settings.premium_grade_image
+                  | image_url: width: 420
+                  | image_tag:
+                    alt: section.settings.premium_grade_label,
+                    class: 'dr-jen-difference__crystal-img',
+                    loading: 'lazy',
+                    widths: '117, 210, 420'
+                }}
+              </div>
+            {%- endif -%}
+            {%- if section.settings.premium_grade_label != blank -%}
+              <p class="dr-jen-difference__crystal-label">{{ section.settings.premium_grade_label }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- comment -%} Main content column (right on desktop, first on mobile) {%- endcomment -%}
+    <div class="dr-jen-difference__content">
+      {%- if section.settings.heading != blank -%}
+        <div class="dr-jen-difference__heading">{{ section.settings.heading }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <div class="dr-jen-difference__description">{{ section.settings.description }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.bold_text != blank -%}
+        <div class="dr-jen-difference__bold-text">{{ section.settings.bold_text }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.secondary_text != blank -%}
+        <div class="dr-jen-difference__secondary-text">{{ section.settings.secondary_text }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.scientific_image != blank or section.settings.scientific_quote != blank -%}
+        <div class="dr-jen-difference__scientific">
+          {%- if section.settings.scientific_image != blank -%}
+            <div class="dr-jen-difference__scientific-img-wrap">
+              {{
+                section.settings.scientific_image
+                | image_url: width: 524
+                | image_tag:
+                  alt: 'Scientific committee',
+                  class: 'dr-jen-difference__scientific-img',
+                  loading: 'lazy',
+                  widths: '262, 524'
+              }}
+            </div>
+          {%- endif -%}
+          {%- if section.settings.scientific_quote != blank -%}
+            <div class="dr-jen-difference__quote">{{ section.settings.scientific_quote }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "C Dr. Jen Difference",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Main Content"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>The Dr. Jen Difference: Premium Grade nHAp</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Premium-grade Nanohydroxyapatite is proven to deliver optimal levels of protection, reduction in acid-causing bacteria, and hypersensitivity management when used at concentrations of 10%</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "bold_text",
+      "label": "Bold Text",
+      "default": "<p><strong>While cheaper formulations source lower grade Nanohydroxyapatite, Dr. Jen's sources premium grade Nanohydroxyapatite for higher performance.</strong></p>"
+    },
+    {
+      "type": "richtext",
+      "id": "secondary_text",
+      "label": "Secondary Text",
+      "default": "<p>That's the exact specification the Scientific Committee on Consumer Safety (SCCS) has officially recognized as safe:</p>"
+    },
+    {
+      "type": "header",
+      "content": "Scientific Committee"
+    },
+    {
+      "type": "image_picker",
+      "id": "scientific_image",
+      "label": "Scientific Committee Image"
+    },
+    {
+      "type": "richtext",
+      "id": "scientific_quote",
+      "label": "Scientific Quote",
+      "default": "<p><em>\"Based on the data provided, the SCCS considers hydroxyapatite (nano) safe when used at concentrations up to 10% in toothpaste — composed of rod-shaped particles.\"</em></p>"
+    },
+    {
+      "type": "header",
+      "content": "Crystal Comparison"
+    },
+    {
+      "type": "text",
+      "id": "crystal_heading",
+      "label": "Crystal Heading",
+      "default": "Does quality of the crystal matter?"
+    },
+    {
+      "type": "richtext",
+      "id": "crystal_description",
+      "label": "Crystal Description",
+      "default": "<p>Crystals have to be 'Nano' in size to be able to penetrate the enamel surface pores and dentin tubules.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "low_grade_image",
+      "label": "Low-Grade Crystal Image"
+    },
+    {
+      "type": "text",
+      "id": "low_grade_label",
+      "label": "Low-Grade Label",
+      "default": "Low-Grade nHAp"
+    },
+    {
+      "type": "image_picker",
+      "id": "premium_grade_image",
+      "label": "Premium Grade Crystal Image"
+    },
+    {
+      "type": "text",
+      "id": "premium_grade_label",
+      "label": "Premium Grade Label",
+      "default": "Premium Grade nHAp"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#002c41"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "C Dr. Jen Difference"
+    }
+  ]
+}
+{% endschema %}

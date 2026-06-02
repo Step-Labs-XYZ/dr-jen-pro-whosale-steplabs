@@ -1,0 +1,79 @@
+<div class="MC-Testimonial-Container" style="background-color: {{section.settings.bg_color}}; color:{{section.settings.text_color}} !important;">
+<h3 class="testimonial-header">{{section.settings.testimonials_heading}}</h3>
+<div class="Homepage-Testimonials" data-flickity='{"wrapAround" : true, "contain": true, "cellAlign" : "left"}'>
+    {% for block in section.blocks %}
+        <div class="MC-Testimonial">
+            <div class="start-rating">
+                {% for i in (1..block.settings.star_rating) %}
+                    <i class="fa-solid fa-star" style="color: {{block.settings.star_color}}; font-size: 35px;"></i>
+                {% endfor %}
+            </div>
+            <p>{{block.settings.description}}</p>
+            <span>{{block.settings.buyer_name}} - Verified Buyer</span>
+        </div>
+    {% endfor %}
+</div>
+</div>
+{% schema %}
+{
+   "name": "Homepage-Testimonials",
+   "settings" : [
+    {
+        "type": "text",
+        "id": "testimonials_heading",
+        "label": "Testimonial Title"
+    },
+    {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background Color",
+        "default": "#ffffff"
+    },
+    {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color",
+        "default": "#1D2433"
+    }
+   ],
+   "blocks" : [
+        {
+             "name": "Testimonial",
+             "type" : "testimonial",
+             "settings" : [
+                {
+                    "type": "range",
+                    "id": "star_rating",
+                    "label": "Star Rating",
+                    "unit": "*",
+                    "min": 1,
+                    "max": 5,
+                    "step": 1,
+                    "default": 5
+                },
+                {
+                    "type": "textarea",
+                    "id": "description",
+                    "label": "description"
+                },
+                {
+                    "type": "text",
+                    "id": "buyer_name",
+                    "label": "Buyer Name"
+                },
+                {
+                    "type": "color",
+                    "id": "star_color",
+                    "label": "Star Color",
+                    "default": "#000000"
+                }
+             ]
+        }
+   ],
+   "presets": [
+    {
+        "name": "Homepage-Testimonials"
+    }
+   ]
+}
+{% endschema %}

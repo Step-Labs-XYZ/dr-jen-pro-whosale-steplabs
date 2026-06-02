@@ -1,0 +1,350 @@
+<style>
+  #testimonial-section {
+    padding: 50px 0 20px 0;
+  }
+  #testimonial-section h2{
+   font-size: 47px;
+  }
+    #testimonial-section h3{
+    font-size: 20px;
+  }
+#testimonial-section .subheading-wrapper {
+    width: max-content;
+    text-align: center;
+    margin: auto;
+    padding: 2px 30px;
+    border-radius: 60px;
+}
+  #testimonial-section .custom-blocks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    row-gap:50px;
+  }
+  #testimonial-section. custom-block {
+    box-sizing: border-box;
+    padding: 10px;
+  }
+  #testimonial-section .custom-block-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+  #testimonial-section .block-image {
+    flex: 1;
+  }
+  #testimonial-section .block-image img {
+    width: 100%;
+    height: auto;
+  }
+  #testimonial-section .block-text {
+    flex: 2;
+    padding-left: 15px;
+    text-align:left;
+  }
+  #testimonial-section .block-text p{
+  font-size: 21px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin:5px 0px;
+  line-height: 26px;
+}
+  #testimonial-section .block-text div.rte p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height:21px;
+}
+  #testimonial-section .block-stars {
+    margin-bottom: 10px;
+  }
+ #testimonial-section div.custom-block:nth-child(even) {
+    padding-left: 5%;
+  }
+ #testimonial-section div.custom-block:nth-child(odd) {
+    padding-right: 5%;
+  }
+   #testimonial-section .block-image img.desktop-only{
+    display:block;
+  }
+   #testimonial-section .block-image img.mobile-only{
+    display:none;
+  }
+    @media (max-width: 1080px) {
+       #testimonial-section div.custom-block:nth-child(even) {
+    padding-left: 2%;
+  }
+  #testimonial-section div.custom-block:nth-child(odd) {
+    padding-right: 2%;
+  }
+  #testimonial-section .block-text div.rte p {
+    font-size: 15px;
+    line-height: 18px;
+  }
+    #testimonial-section .block-text p {
+      font-size: 19px;
+      line-height: 24px;
+  }
+    }
+  @media (max-width: 768px) {
+    #testimonial-section .custom-blocks {
+      display: block;
+      overflow: hidden;
+      position: relative;
+    }
+    #testimonial-section .custom-block {
+      width: 100% !important;
+      display: none;
+    }
+    #testimonial-section .custom-block:first-child {
+      display: block;
+    }
+    #testimonial-section ul.slick-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 25px;
+      gap: 16px;
+      padding: 0;
+      list-style: none;
+    }
+     #testimonial-section li[role="presentation"].slick-active button {
+      box-shadow: inset 0px 0px 0px 2px #73E0C1;
+      background-color: #ffffff;
+    }
+     #testimonial-section li[role="presentation"] button {
+        font-size: 0px;
+        width: 10px;
+        height: 10px;
+        background: #73E0C1;
+        border-radius: 100%;
+        background-color: #73E0C1;
+    }
+    #testimonial-section div.custom-block:nth-child(even) {
+      padding: 1%;
+    }
+    #testimonial-section div.custom-block:nth-child(odd) {
+      padding: 1%;
+    }
+    #testimonial-section h2 {
+      font-size: 28px;
+    }
+    #testimonial-section h3 {
+        font-size: 16px;
+    }
+ #testimonial-section .block-image{
+      width:max-content;
+    }
+  }
+  @media (max-width: 480px) {
+    #testimonial-section h2 {
+      font-size: 24px;
+      line-height: 30px;
+      margin-top: 15px;
+    }
+    #testimonial-section .custom-block-content {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: column;
+      gap: 15px;
+    }
+    #testimonial-section .block-image{
+      width:max-content;
+    }
+    #testimonial-section .block-image img.desktop-only{
+      display:none;
+    }
+    #testimonial-section .block-image img.mobile-only{
+      display:block;
+    }
+    #testimonial-section .block-text{
+      padding-left:0px;
+    }
+    #testimonial-section .custom-blocks{
+      padding: 30px 0px;
+    }
+  }
+</style>
+
+<section id="testimonial-section" style="text-align: center; background-color: {{ section.settings.section_bg_color }}">
+<div class="container">
+  {% if section.settings.subheading %}
+    <div class="subheading-wrapper"style="background-color: {{ section.settings.subheading_bg_color }};">
+      <h3 style="color: {{ section.settings.subheading_text_color }}; ">
+        {{ section.settings.subheading }}
+      </h3>
+    </div>
+  {% endif %}
+  {% if section.settings.main_heading %}
+    <h2 style="color: {{ section.settings.main_heading_color }};">
+      {{ section.settings.main_heading }}
+    </h2>
+  {% endif %}
+
+  <div class="custom-blocks custom-slider">
+    {% for block in section.blocks %}
+      <div class="custom-block" style="width: {{ block.settings.block_width }};">
+        <div class="custom-block-content">
+          <div class="block-image">
+            {% if block.settings.image %}
+              <img class="desktop-only" src="{{ block.settings.image | img_url: 'master' }}" alt="Image">
+            {% endif %}
+            {% if block.settings.mbl_image %}
+              <img class="mobile-only" src="{{ block.settings.mbl_image | img_url: 'master' }}" alt="Image">
+            {% endif %}
+          </div>
+          <div class="block-text">
+            {% if block.settings.star_icon %}
+              <img src="{{ block.settings.star_icon | img_url: 'small' }}" alt="Stars" class="block-stars">
+            {% endif %}
+            <p>{{ block.settings.name }}</p>
+            <div class="rte">{{ block.settings.rich_text }}</div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  function initializeSlick() {
+    $('.custom-slider').slick({
+      dots: true,
+      arrows: false,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      adaptiveHeight: true
+    });
+  }
+
+  function destroySlick() {
+    if ($('.custom-slider').hasClass('slick-initialized')) {
+      $('.custom-slider').slick('unslick');
+    }
+  }
+
+  function checkScreenWidth() {
+    if (window.innerWidth < 769) {
+      initializeSlick();
+    } else {
+      destroySlick();
+    }
+  }
+
+  // Initial check on page load
+  checkScreenWidth();
+
+  // Check on window resize
+  window.addEventListener('resize', function() {
+    checkScreenWidth();
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Rev Testimonial Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "color",
+      "id": "subheading_text_color",
+      "label": "Subheading Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subheading_bg_color",
+      "label": "Subheading Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "main_heading",
+      "label": "Main Heading"
+    },
+    {
+      "type": "color",
+      "id": "main_heading_color",
+      "label": "Main Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section Background Color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mbl_image",
+          "label": "Mobile Slider Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "star_icon",
+          "label": "Star Icon"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "richtext",
+          "id": "rich_text",
+          "label": "Rich Text"
+        },
+        {
+          "type": "select",
+          "id": "block_width",
+          "label": "Block Width",
+          "options": [
+            {
+              "value": "33%",
+              "label": "33%"
+            },
+            {
+              "value": "50%",
+              "label": "50%"
+            },
+            {
+              "value": "100%",
+              "label": "100%"
+            }
+          ],
+          "default": "33%"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rev Testimonial Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

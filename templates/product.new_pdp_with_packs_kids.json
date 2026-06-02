@@ -1,0 +1,461 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "wrapper": "div#product_packs_new.product_packs_news",
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "selector_mode": "block",
+            "color_mode": "dropdown",
+            "size_chart_page": ""
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "atc_button_background": "rgba(0,0,0,0)",
+            "atc_button_text_color": "rgba(0,0,0,0)",
+            "buy_now_button_background": "rgba(0,0,0,0)",
+            "buy_now_button_text_color": "rgba(0,0,0,0)"
+          }
+        },
+        "bdca51c9-fba6-4839-9aa1-4202fd3afff8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Click <a href=\"/pages/science\" title=\"Science Behind Dr. Jen's Toothpaste\">here</a> to learn more about Nano-Hydroxyapatite.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "bdca51c9-fba6-4839-9aa1-4202fd3afff8"
+      ],
+      "settings": {
+        "show_vendor": true,
+        "show_sku": false,
+        "show_taxes_included": false,
+        "show_product_rating": true,
+        "show_sticky_add_to_cart": true,
+        "show_share_buttons": true,
+        "help_page": "",
+        "enable_video_autoplay": true,
+        "enable_video_looping": false,
+        "enable_image_zoom": true,
+        "show_thumbnails_on_mobile": false,
+        "desktop_thumbnails_position": "left",
+        "transition_effect": "slide"
+      }
+    },
+    "165944941252f988e7": {
+      "type": "featured-images",
+      "blocks": {
+        "fbc1a81d-0e10-49dd-8e94-5d6583e040d7": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/KID-08_e44e1761-1562-4a6b-a681-2f5ad810bf5e.jpg"
+          }
+        },
+        "26fab977-15b6-46ad-bdf0-3d22459a72c4": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/KID-02_22cd9e43-5a21-4cb5-9e19-b5d473ff6fea.jpg"
+          }
+        },
+        "fe8fd3b3-fd33-4161-a825-a7308a3cbe2a": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/KID-03_b1c92f4e-b58d-45d8-be22-78f3d5a63738.jpg"
+          }
+        },
+        "abac819d-a18f-4930-84ee-feb206138f60": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/KID-04_cd91a1fa-13c7-4c22-b4de-1cc9d057eff7.jpg"
+          }
+        },
+        "9f80f749-f815-4f41-bc4d-4566a5c12e9c": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/KID-05_4ffc6c90-f81b-4520-91d2-06e94137e50f.jpg"
+          }
+        },
+        "8b208086-2ca4-40b1-a07d-12f02c25ce8c": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/KID-06_027da195-3abe-4f36-86a0-eaa30b6cf306.jpg"
+          }
+        },
+        "0d364b13-0727-409d-b240-e255ef9b6efa": {
+          "type": "Image",
+          "settings": {
+            "image": "shopify://shop_images/KID-07_e3a0571e-69f2-413d-ac87-0bf3002f856b.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "fbc1a81d-0e10-49dd-8e94-5d6583e040d7",
+        "26fab977-15b6-46ad-bdf0-3d22459a72c4",
+        "fe8fd3b3-fd33-4161-a825-a7308a3cbe2a",
+        "abac819d-a18f-4930-84ee-feb206138f60",
+        "9f80f749-f815-4f41-bc4d-4566a5c12e9c",
+        "8b208086-2ca4-40b1-a07d-12f02c25ce8c",
+        "0d364b13-0727-409d-b240-e255ef9b6efa"
+      ],
+      "settings": {
+        "heading": ""
+      }
+    },
+    "product-content": {
+      "type": "product-content",
+      "settings": {}
+    },
+    "1659370024416725b4": {
+      "type": "image-w-text-overlay",
+      "disabled": true,
+      "settings": {
+        "desktop_img": "shopify://shop_images/img-t-overlay-desktop.jpg",
+        "mobile_img": "shopify://shop_images/mobile.jpg",
+        "heading": "The Science Behind Our Super Paste",
+        "description": "<p>The key remineralizing ingredient found in Dr.Jen’s toothpaste was originally discovered by NASA. Clinically proven effective in remineralizing and repairing bones and teeth, nano Hydroxyapatite can be found in Dr. Jen’s flouride-free toothpaste for stronger and healthier, <strong>out of this world</strong> smiles.</p>",
+        "button_text": "Shop Now",
+        "button_link": "",
+        "text_background_color": "#ffffff",
+        "overlay_text_color": "#1d2333",
+        "button_color": "#df477f",
+        "button_text_color": "#ffffff"
+      }
+    },
+    "1659370104ce9cf776": {
+      "type": "Homepage-Doctor-Testomonials",
+      "blocks": {
+        "cfbe9e4e-4ac8-4d9b-9f04-5d5c0f1f90b0": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Chris_Stansbury.jpg",
+            "star_rating": 5,
+            "name": "Dr. Chris Stansburry Orthodontist",
+            "description": "\"When I normally went for my 6-month checkup, my dentist usually found a few areas of inflammation regardless of how much I brushed and flossed.  It was so frustrating.  Since I started using Dr Jen's toothpaste, there has been not trace of inflammation! Dr Jen's toothpaste is only made with the high quality natural ingredients and formulated by dental healthcare professionals. I highly recommend Dr Jen's toothpaste.\"",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "05b0e447-fd9c-4d9a-aaf6-79f5f6768e7f": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/IMG-4256.jpg",
+            "star_rating": 5,
+            "name": "Dr. Samatha Nelson, DDS",
+            "description": "\"Dr Jen's Super Paste is made by a real dentist using two proven ingredients to remineralize tooth enamel.  It is natural, tastes great, and is gentle on teeth and gums.\"",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "66ffbb29-8c45-4c1c-8c84-b6a2af9a76d9": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/IMG_4996.jpg",
+            "star_rating": 5,
+            "name": "Alex Dental Student",
+            "description": "\"Dr Jen's Super Paste offers double the remineralizing using fluoride and nano Hydroxyapaptie, which is great for people with sensitive teeth.  Her blend of peppermint, spearmint, black cherry, and papaya is also beneficial at killing bad breath bacteria and promoting a healthy mouth microbiome.  Tastes amazing and is all natural!\"",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "9b6cab62-de99-4ee1-ad9e-14b162167a19": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Jae_Brimhall_a0f3bdb2-cd42-4b5a-9028-970533643237.jpg",
+            "star_rating": 5,
+            "name": "Jae Brimhall, DDS",
+            "description": "\"Seriously, my kids LOVE this stuff. I used to fight them to brush their teeth but now they run to do it. Amazing piece of mind that they are brushing with such a high quality product as well that I know is doing good for them.\"",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "1bc4df92-ba26-4834-af67-2b9b2e6f7654": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/IMG-4257.jpg",
+            "star_rating": 5,
+            "name": "Dr. Alyssa Domico, DDS",
+            "description": "\"Dr Jen is an amazing Dentist who has made an incredible natural toothpaste. I love using Dr Jen's Super Paste!\"",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "512e7763-0ee7-46c3-8473-c712272874bd": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Tonya_Volk_f22b1fe4-cc91-40e8-a7b7-34b30fe13ed3.jpg",
+            "star_rating": 5,
+            "name": "Dr. Tonya Volk",
+            "description": "\"Dr Jen's toothpaste and floss are the only way to go. They are made with only healthy ingredients (check the ingredients on other labels to compare) by a world-known orthodontist. Thank you for making products we can use and feel good about , Dr Jen!\"",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "dfca43a4-82c9-4ff7-a576-4e1836c864a3": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/20220913_125505.jpg",
+            "star_rating": 5,
+            "name": "Megan, Licensed Dental Assistant",
+            "description": "\"Dr Jen's Super Paste is amazing. Made by a dentist using safe and natural ingredients.  I have noticed healthier teeth and gums from brushing with Dr Jen's.\"",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "c7babb59-9dfe-4773-a251-4988ea76d724": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Dr_Peters_320x_conv_320x_600e721e-5d47-43a2-ab5a-950dda41d960.jpg",
+            "star_rating": 5,
+            "name": "Morgan. Licensed Dental Assistant",
+            "description": "\"As a Licensed Dental Assistant, I have tried many different kinds of toothpaste and Dr Jen's Super Paste has provided my teeth with the best results.  My teeth feel cleaner, and whiter with no sensitivity issues.  I highly recommend using Dr Jen's Super Paste\"",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "acd10f20-8037-4b82-8344-6c0caf1e19b4": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Dr_Peters_320x_conv.jpg",
+            "star_rating": 5,
+            "name": "Dr Peters",
+            "description": "\"Dr Jen's Natural toothpaste uses clinically proven remineralizing ingredients to help stop tooth decay. Tastes great and freshens breath. I highly recommend it.\"",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "a874b676-25d9-4cfc-aa42-883bd5fad162": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Mary_L.jpg",
+            "star_rating": 5,
+            "name": "Kristi. - Licensed Dental Assistant",
+            "description": "Dr Jen's toothpaste makes my teeth feel silky smooth while safely whitening my teeth. It has great-tasting peppermint oil that helps kill bad bacteria while creating fresh breath. I highly recommend using Dr Jen's!",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "3135af15-3828-4d1d-a06e-e95985113d44": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/simon_conv.jpg",
+            "star_rating": 5,
+            "name": "Simon Broccard,  DDS",
+            "description": "\"I recommend Dr Jen Toothpaste to all my friends. Dr Jen's natural ingredients are nontoxic yet have safe tooth strengthen ingredients. Also tastes great and safely whitens my teeth.\"",
+            "star_color": "#8bd1cf"
+          }
+        },
+        "49d7e2a0-f3e7-4f92-86b0-43f250ac8265": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/ross_conv.jpg",
+            "star_rating": 5,
+            "name": "Ross E.  Dental Student",
+            "description": "\"I used to use charcoal toothpaste before I found Dr Jen's. Now I'm remineralizing my teeth with a natural toothpaste that tastes amazing!\"",
+            "star_color": "#8bd1cf"
+          }
+        }
+      },
+      "block_order": [
+        "cfbe9e4e-4ac8-4d9b-9f04-5d5c0f1f90b0",
+        "05b0e447-fd9c-4d9a-aaf6-79f5f6768e7f",
+        "66ffbb29-8c45-4c1c-8c84-b6a2af9a76d9",
+        "9b6cab62-de99-4ee1-ad9e-14b162167a19",
+        "1bc4df92-ba26-4834-af67-2b9b2e6f7654",
+        "512e7763-0ee7-46c3-8473-c712272874bd",
+        "dfca43a4-82c9-4ff7-a576-4e1836c864a3",
+        "c7babb59-9dfe-4773-a251-4988ea76d724",
+        "acd10f20-8037-4b82-8344-6c0caf1e19b4",
+        "a874b676-25d9-4cfc-aa42-883bd5fad162",
+        "3135af15-3828-4d1d-a06e-e95985113d44",
+        "49d7e2a0-f3e7-4f92-86b0-43f250ac8265"
+      ],
+      "settings": {
+        "small_heading": "",
+        "large_heading": "Real dental professionals. real reviews.",
+        "stack_content": true,
+        "round_image": true,
+        "bg_color": "#ffffff",
+        "text_color": "#1d2433",
+        "mobile_padding": 60
+      }
+    },
+    "16593702156f5b18cc": {
+      "type": "homepage1x4",
+      "blocks": {
+        "b4aa07c1-3749-4684-aac8-4549aa5a018f": {
+          "type": "Icon-Block",
+          "settings": {
+            "image": "shopify://shop_images/clinicallyproven.png",
+            "title": "Clinically Proven Protection",
+            "info": ""
+          }
+        },
+        "4a3fd4da-84f0-4b6e-ab7e-95dc9e825472": {
+          "type": "Icon-Block",
+          "settings": {
+            "image": "shopify://shop_images/dentistdev_ae915d66-37bc-44dd-a5a3-fa7215c86a8e.png",
+            "title": "Dentist Developed & Approved",
+            "info": ""
+          }
+        },
+        "9a2cd57c-6bed-47b1-9550-738b0d8d6312": {
+          "type": "Icon-Block",
+          "settings": {
+            "image": "shopify://shop_images/safe.png",
+            "title": "Made With 100% Safe & Natural Ingredients",
+            "info": ""
+          }
+        },
+        "df67909b-085d-4cd7-b170-e4dbed8aa80f": {
+          "type": "Icon-Block",
+          "settings": {
+            "image": "shopify://shop_images/smile-icon.png",
+            "title": "Over 360,000 Stronger Smiles",
+            "info": ""
+          }
+        }
+      },
+      "block_order": [
+        "b4aa07c1-3749-4684-aac8-4549aa5a018f",
+        "4a3fd4da-84f0-4b6e-ab7e-95dc9e825472",
+        "9a2cd57c-6bed-47b1-9550-738b0d8d6312",
+        "df67909b-085d-4cd7-b170-e4dbed8aa80f"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "override_css": "[SectionID]{\nmargin: 80px 0;\n}\n\n@media(max-width:950px){\n\n[SectionID] > .homepage-1x4{\nmargin-top:20px;\n}\n\n[SectionID]{\nmargin: 30px 0;\n}\n\n[SectionID] > .homepage-1x4>  .homepage-1x4-icons > .icon {\nwidth:100% !important;\n}\n}"
+      }
+    },
+    "16593703577835f0d9": {
+      "type": "FAQs",
+      "disabled": true,
+      "blocks": {
+        "8fed5602-149a-4d06-8203-b9eaa0c5f9a6": {
+          "type": "FAQ",
+          "settings": {
+            "question": "Why is natural toothpaste important?",
+            "answer": "<p>Example Answer #1</p>"
+          }
+        },
+        "abbf3075-9624-4d11-88f6-1545bb42c744": {
+          "type": "FAQ",
+          "settings": {
+            "question": "What ingredients strengthen enamel?",
+            "answer": "<p>Example Answer #2</p>"
+          }
+        },
+        "0f9b9915-eb31-4076-983f-5db3ed56b5af": {
+          "type": "FAQ",
+          "settings": {
+            "question": "How do I know which paste is right for me?",
+            "answer": "<p>Example Answer #3</p>"
+          }
+        },
+        "c69a3b3d-0488-425a-98c6-3184e257d101": {
+          "type": "FAQ",
+          "settings": {
+            "question": "Why did you develop your own toothpaste?",
+            "answer": "<p>Example Answer #4</p>"
+          }
+        }
+      },
+      "block_order": [
+        "8fed5602-149a-4d06-8203-b9eaa0c5f9a6",
+        "abbf3075-9624-4d11-88f6-1545bb42c744",
+        "0f9b9915-eb31-4076-983f-5db3ed56b5af",
+        "c69a3b3d-0488-425a-98c6-3184e257d101"
+      ],
+      "settings": {}
+    },
+    "1659370425125ddd93": {
+      "type": "product-ingredients-promo",
+      "disabled": true,
+      "blocks": {
+        "3fd91416-7f3e-4ca7-96f1-4bffdc63bbd5": {
+          "type": "product_ingredient",
+          "settings": {
+            "ingredient_title": "Peppermint & Spearmint Oil",
+            "ingredient_desc": "Adds fresh breath flavor while killing bad breath mouth bacteria"
+          }
+        },
+        "b41310b9-2ad1-453a-9c08-ff7c00492ac7": {
+          "type": "product_ingredient",
+          "settings": {
+            "ingredient_title": "Black Cherry",
+            "ingredient_desc": "Provides Antioxidants, Reduces inflamation"
+          }
+        },
+        "e3abe1c1-019f-4aa8-96c2-957009a130f5": {
+          "type": "product_ingredient",
+          "settings": {
+            "ingredient_title": "Papaya",
+            "ingredient_desc": "Provides Antioxidants"
+          }
+        }
+      },
+      "block_order": [
+        "3fd91416-7f3e-4ca7-96f1-4bffdc63bbd5",
+        "b41310b9-2ad1-453a-9c08-ff7c00492ac7",
+        "e3abe1c1-019f-4aa8-96c2-957009a130f5"
+      ],
+      "settings": {
+        "section_image": "shopify://shop_images/imgforsection.jpg",
+        "section_title_line_1": "All-Natural Ingredients.",
+        "section_title_line_2": "All-Day Fresh Breath.",
+        "section_paragraph": "Our touthpaste is not only effective at remineralizing teeth, but also tastes delicious.  Dr.Jen’s proprietary blend is the perfect balance of all-natural ingredients to help fight mouth microbiome for fresh breath \u0003and whiter teeth. . . naturally.",
+        "section_button_text": "View All Ingredients",
+        "section_button_link": "",
+        "Override_Ingredients": true
+      }
+    },
+    "1659370572e861914d": {
+      "type": "Featured-Products",
+      "settings": {
+        "featured_products": "all-products",
+        "featured_heading": "You May also Love"
+      }
+    },
+    "1659370602396c8bce": {
+      "type": "Homepage-Icon-w-text",
+      "settings": {
+        "image": "shopify://shop_images/smile-icon.png",
+        "heading": "Dr. Jen’s 30 Day Smile Guarantee",
+        "subheading": "<p>If your teeth are not happy, we’re not happy and your toothpaste is on us!</p>"
+      }
+    },
+    "1659632928e379313e": {
+      "type": "apps",
+      "settings": {
+        "include_horizontal_margins": true,
+        "include_vertical_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "165944941252f988e7",
+    "product-content",
+    "1659370024416725b4",
+    "1659370104ce9cf776",
+    "16593702156f5b18cc",
+    "16593703577835f0d9",
+    "1659370425125ddd93",
+    "1659370572e861914d",
+    "1659370602396c8bce",
+    "1659632928e379313e"
+  ]
+}

@@ -1,0 +1,323 @@
+<style>
+.image_with_text {
+  width: 100%;
+  height: auto;
+}
+.image_with_text .container {
+  max-width: 1200px;
+  height: 100%;
+  padding: 0 30px;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+.image_with_text .image_with_text_inner {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 36% 46%;
+  justify-content: space-around;
+}
+.image_with_text .image_card {
+    width: 100%;
+}
+.image_with_text .image_card img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.image_with_text .text_card {
+  width: 100%;
+  height: auto;
+}
+.image_with_text .text_card h2 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 56px;
+  margin: 0 auto;
+  padding-bottom: 16px;
+}
+.image_with_text .text_card .desc {
+  font-family: 'Raleway', sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 31px;
+  padding-bottom: 37px;
+  margin: 0 auto;
+  display: block;
+}
+.image_with_text .text_card .desc p {
+  margin: 0;
+}
+.image_with_text .text_card .coment_text {
+  width: 100%;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  box-shadow: 0px 10px 52px 0px #98C1C5;
+  padding: 37px 37px 19px;
+}
+.image_with_text .text_card .coment_text span {
+  display: block;
+  padding-bottom: 20px;
+  max-width: 403px;
+}
+.image_with_text .text_card .coment_text span p {
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 32px;
+  margin: 0;
+}
+.image_with_text .text_card .coment_text h3 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 25px;
+  margin: 0;
+}
+#image_with_text-{{ section.id }} {
+  background: {{section.settings.bg_color}};
+  padding-top:{{ section.settings.padding_top_desktop }}px;
+  padding-bottom:{{ section.settings.padding_bottom_desktop }}px;
+  margin-top:{{ section.settings.margin_top_desktop }}px;
+  margin-bottom:{{ section.settings.margin_bottom_desktop }}px;
+}
+#image_with_text-{{ section.id }} .coment_text {
+  background: {{section.settings.coment_bg_color}};
+}
+#image_with_text-{{ section.id }} h2 {
+  color: {{section.settings.text_color}};
+}
+#image_with_text-{{ section.id }} .desc,
+#image_with_text-{{ section.id }} p,
+#image_with_text-{{ section.id }} h3 {
+  color: {{section.settings.description_color}};
+}
+@media screen and (max-width: 1199px) {
+  .image_with_text .image_with_text_inner {
+    grid-template-columns: 36% 54%;
+    justify-content: space-between;
+  }
+}
+@media screen and (max-width: 991px) {
+#image_with_text-{{ section.id }} {
+  padding-top:{{ section.settings.padding_top_mobile }}px;
+  padding-bottom:{{ section.settings.padding_bottom_mobile }}px;
+  margin-top:{{ section.settings.margin_top_mobile }}px;
+  margin-bottom:{{ section.settings.margin_bottom_mobile }}px;
+}
+  .image_with_text .container {
+    padding: 0 16px;
+  }
+  .image_with_text .image_with_text_inner {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .image_with_text .image_card {
+    order: 2;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .image_with_text .text_card .coment_text {
+    padding: 16px 27px 10px;
+    max-width: 390px;
+    margin: 0 auto;
+  }
+  .image_with_text .text_card h2 {
+    line-height: 34px;
+    font-size: 25px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .image_with_text .text_card .desc {
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;    
+    max-width: 354px 
+  }
+  .image_with_text .text_card .coment_text span p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+</style>
+<Section class="image_with_text" id ="image_with_text-{{ section.id }}">
+  <div class="container">
+    <div class="image_with_text_inner">
+      <div class="image_card">
+        {% if section.settings.card_image !=blank %}
+          {{ section.settings.card_image| image_url: width: section.settings.card_image.width | image_tag: loading: 'lazy' }}
+        {% endif %}
+      </div>
+      <div class="text_card">
+        {% if section.settings.top_text != blank %}
+          <h2>{{ section.settings.top_text }}</h2>
+        {% endif %}
+        {% if section.settings.desc != blank %}
+          <span class="desc">{{ section.settings.desc }}</span>
+        {% endif %}
+        <div class="coment_text">
+          {% if section.settings.coment != blank %}
+            <span>{{ section.settings.coment }}</span>
+          {% endif %}
+          {% if section.settings.auther_name != blank %}
+            <h3>{{ section.settings.auther_name }}</h3>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</Section>
+{% schema %}
+  {
+    "name":"MM Meet",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background color",
+        "default": "#DDF4F6"
+      },
+      {
+        "type": "color",
+        "id": "coment_bg_color",
+        "label": "Coment Background color",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "description_color",
+        "label": "Description Color",
+        "default": "#1D2433"
+      },
+      {
+        "type": "range",
+        "id": "padding_top_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Top Desktop",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Bottom Desktop",
+        "default": 0
+       },
+       {
+        "type": "range",
+        "id": "margin_top_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Top Desktop",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Bottom Desktop",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_top_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Top Mobile",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Bottom Mobile",
+        "default": 0
+       },
+       {
+        "type": "range",
+        "id": "margin_top_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Top Mobile",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Bottom Mobile",
+        "default": 0
+      },
+      {
+        "type": "image_picker",
+        "id": "card_image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "top_text",
+        "label": "Top Text",
+        "default": "Meet Your Expert Guide"
+      },
+      {
+        "type": "richtext",
+        "id": "desc",
+        "label": "Description",
+        "default": "<p>As a practicing dental professional, Dr. Jen has spent the last 25 years committed to advancing oral care.  Her dedication to advancing oral care products using modern and advanced clinically proven ingredients.</p>"
+      },
+      {
+        "type": "richtext",
+        "id": "coment",
+        "label": "Coment",
+        "default": "<p>Her knowledge and passion to advancing preventive oral products is unparalleled</p>"
+      },
+      {
+        "type": "text",
+        "id": "auther_name",
+        "label": "Name",
+        "default": "- Happy Attendee"
+      }
+    ],
+    "presets":[
+      {
+        "name":"MM Meet"
+      }
+    ]
+  }
+{% endschema %}

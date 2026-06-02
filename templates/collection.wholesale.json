@@ -1,0 +1,111 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "collection-banner": {
+      "type": "collection-banner",
+      "disabled": true,
+      "settings": {
+        "show_collection_image": false,
+        "show_collection_title": true,
+        "show_collection_description": true,
+        "section_height": "small",
+        "text_width": "medium",
+        "image_text_color": "#ffffff",
+        "image_overlay_color": "#000000",
+        "image_overlay_opacity": 13,
+        "quick_links": ""
+      }
+    },
+    "7d7cb204-e6ca-4fce-bf38-a27eb4734a85": {
+      "type": "valueprops_collection",
+      "blocks": {
+        "652581f0-0606-4f75-88c7-a086d9475f42": {
+          "type": "Icons",
+          "settings": {}
+        },
+        "ddc71955-fc14-413a-9448-abe221f07038": {
+          "type": "Icons",
+          "settings": {}
+        },
+        "7da259de-4beb-460e-9840-7e7ec79cefd5": {
+          "type": "Icons",
+          "settings": {}
+        },
+        "0cde3269-9510-472d-8d9a-ae30524096d1": {
+          "type": "Icons",
+          "settings": {}
+        },
+        "04513724-3d70-4d85-ab01-25df03cbfdf2": {
+          "type": "Icons",
+          "settings": {}
+        },
+        "2ca4762d-b0e5-4b47-ab45-b239eb8f79ae": {
+          "type": "Icons",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "652581f0-0606-4f75-88c7-a086d9475f42",
+        "ddc71955-fc14-413a-9448-abe221f07038",
+        "7da259de-4beb-460e-9840-7e7ec79cefd5",
+        "0cde3269-9510-472d-8d9a-ae30524096d1",
+        "04513724-3d70-4d85-ab01-25df03cbfdf2",
+        "2ca4762d-b0e5-4b47-ab45-b239eb8f79ae"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": ""
+      }
+    },
+    "main": {
+      "type": "main-collection--wholesale",
+      "settings": {
+        "show_sort_by": false,
+        "title_id": "Shop our products",
+        "paragraph_id": "<strong>Give Your Patients Superior Oral Health with Dr. Jen Oral Care</strong><br> Elevate patient care with science-backed solutions designed for optimal outcomes. Dr. Jen Oral Care products deliver advanced oral health benefits with a clinically proven 10% nano-hydroxyapatite formulation—supporting stronger enamel, a healthier oral microbiome, and better long-term results. Upgrade your standard of care today.",
+        "products_per_page": 24,
+        "mobile_products_per_row": "1",
+        "desktop_products_per_row": 3,
+        "show_filters": false,
+        "show_filter_group_name": false,
+        "show_color_swatch": true,
+        "open_first_filter_group": false,
+        "filter_position": "always_visible",
+        "promotion_position": "top",
+        "promotion_height": "medium"
+      }
+    },
+    "1659903519998b6b30": {
+      "type": "apps",
+      "disabled": true,
+      "settings": {
+        "include_horizontal_margins": true,
+        "include_vertical_margins": true
+      }
+    },
+    "c08eebdb-27f0-4c11-a033-de7e343c9e08": {
+      "type": "wholesale_collection",
+      "disabled": true,
+      "settings": {
+        "title_collection_wholesale": "Shop our products",
+        "text_collection_wholesale": "Wholesale",
+        "button_link": ""
+      }
+    }
+  },
+  "order": [
+    "collection-banner",
+    "7d7cb204-e6ca-4fce-bf38-a27eb4734a85",
+    "main",
+    "1659903519998b6b30",
+    "c08eebdb-27f0-4c11-a033-de7e343c9e08"
+  ]
+}

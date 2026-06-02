@@ -1,0 +1,642 @@
+{%- comment -%}
+  Section: Blend of Science & Flavor
+  Description: Renders a two-column layout with product image on the left and a styled
+               bullet list + ingredient table with collapsible groups on the right.
+  sl-id: sl-section-blend-science-flavor-v1
+  Figma: (figma url)
+{%- endcomment -%}
+
+{%- comment -%} ===== Styles ===== {%- endcomment -%}
+{%- style -%}
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap');
+
+  /* ================================================
+     ROOT VARIABLES
+     ================================================ */
+  #c-blend-{{ section.id }} {
+    --c-blend-bg:         {{ section.settings.bg_color }};
+    --c-blend-img-bg:     {{ section.settings.img_bg_color }};
+    --c-blend-text-dark:  {{ section.settings.text_color }};
+    --c-blend-text-light: #6b7280;
+    --c-blend-border:     #dde1e4;
+
+    font-family: 'Raleway', sans-serif;
+    background-color: var(--c-blend-bg);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ================================================
+     IMAGE COLUMN — Mobile first
+     ================================================ */
+  #c-blend-{{ section.id }} .c-blend__image-col {
+    width: 100%;
+    background-color: var(--c-blend-img-bg);
+    padding: 0;
+    /* min-height: 320px; */
+    overflow: hidden;
+  }
+
+  #c-blend-{{ section.id }} .c-blend__product-img {
+    width: 100%;
+    /* height: 320px; */
+    object-fit: contain;
+    object-position: center top;
+    display: block;
+  }
+
+  /* Mobile-first: show mobile image, hide desktop image */
+  #c-blend-{{ section.id }} .c-blend__product-img--desktop {
+    display: none;
+  }
+
+  /* ================================================
+     CONTENT COLUMN — Mobile first
+     ================================================ */
+  #c-blend-{{ section.id }} .c-blend__content-col {
+    width: 100%;
+    padding: {{ section.settings.pad_top_mob }}px 24px {{ section.settings.pad_bot_mob }}px;
+  }
+
+  #c-blend-{{ section.id }} .c-blend__inner {
+    width: 100%;
+    max-width: 700px;
+  }
+
+  /* --- Heading --- */
+  #c-blend-{{ section.id }} .c-blend__title {
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--c-blend-text-dark);
+    line-height: 1.18;
+    margin: 0 0 24px 0;
+  }
+
+  /* ================================================
+     BULLET LIST
+     ================================================ */
+  #c-blend-{{ section.id }} .c-blend__bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 36px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #c-blend-{{ section.id }} .c-blend__bullet {
+    position: relative;
+    padding-left: 15px;
+    font-size: 14px;
+    color: #000;
+    line-height: 1.1;
+  }
+
+  #c-blend-{{ section.id }} .c-blend__bullet::before {
+    content: '';
+    position: absolute;
+    left: 1px;
+    top: calc((1.6em - 5px) / 2);
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--c-blend-text-dark);
+  }
+
+  /* ================================================
+     INGREDIENT GRID — 2 columns
+     ================================================ */
+  #c-blend-{{ section.id }} .c-blend__ing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 32px;
+  }
+
+  /* Regular ingredient cell */
+  #c-blend-{{ section.id }} .c-blend__ing-item {
+    padding: 19px 12px 19px 0;
+    border-bottom: 2px solid #002C41;
+  }
+
+  #c-blend-{{ section.id }} .c-blend__ing-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  #c-blend-{{ section.id }} .c-blend__ing-note {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--c-blend-text-light);
+  }
+
+  /* ================================================
+     EXPANDABLE GROUP CELL
+     ================================================ */
+  #c-blend-{{ section.id }} .c-blend__expand {
+    padding: 13px 12px 13px 0;
+    border-top: 1px solid var(--c-blend-border);
+  }
+
+  #c-blend-{{ section.id }} .c-blend__expand-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    gap: 8px;
+  }
+
+  #c-blend-{{ section.id }} .c-blend__expand-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  #c-blend-{{ section.id }} .c-blend__expand-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #000;
+    line-height: 1.4;
+  }
+
+  #c-blend-{{ section.id }} .c-blend__expand-icon {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--c-blend-text-dark);
+    transition: transform 0.25s ease;
+  }
+
+  /* SVG points UP by default → rotate 180deg when closed (points down = expand affordance) */
+  #c-blend-{{ section.id }} .c-blend__expand-icon {
+    transform: rotate(180deg);
+  }
+
+  /* When open → rotate back to 0deg (points up = collapse affordance) */
+  #c-blend-{{ section.id }} .c-blend__expand[open] .c-blend__expand-icon {
+    transform: rotate(0deg);
+  }
+
+  #c-blend-{{ section.id }} .c-blend__expand-list {
+    margin: 10px 0 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  #c-blend-{{ section.id }} .c-blend__expand-list li {
+    font-size: 13px;
+    color: #000;
+    line-height: 1.55;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  #c-blend-{{ section.id }} .c-blend__expand-list li::before {
+    content: '\2022'; /* • */
+    position: absolute;
+    left: 2px;
+    color: var(--c-blend-text-dark);
+  }
+
+  /* ================================================
+     BREAKPOINT: 768px — side-by-side layout
+     ================================================ */
+  @media (width >= 768px) {
+    #c-blend-{{ section.id }} {
+      flex-direction: row;
+      min-height: 600px;
+    }
+
+    #c-blend-{{ section.id }} .c-blend__image-col {
+      width: 40%;
+      flex-shrink: 0;
+      min-height: 100%;
+      padding: 0;
+      position: relative;
+    }
+
+    /* ≥768px: show desktop image, hide mobile image */
+    #c-blend-{{ section.id }} .c-blend__product-img--mobile {
+      display: none;
+    }
+
+    #c-blend-{{ section.id }} .c-blend__product-img--desktop {
+      display: block;
+    }
+
+    #c-blend-{{ section.id }} .c-blend__product-img {
+      position: absolute;
+      top: 60px;
+      left: 60px;
+      width: calc(100% - 120px);
+      height: calc(100% - 120px);
+      object-fit: contain;
+      object-position: center center;
+      border-radius: 15px;
+    }
+
+    #c-blend-{{ section.id }} .c-blend__content-col {
+      width: 58%;
+      padding: {{ section.settings.pad_top_desk }}px 48px {{ section.settings.pad_bot_desk }}px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    #c-blend-{{ section.id }} .c-blend__inner {
+      width: 100%;
+    }
+
+    #c-blend-{{ section.id }} .c-blend__title {
+      font-size: 36px;
+    }
+
+    #c-blend-{{ section.id }} .c-blend__bullet {
+      font-size: 14px;
+    }
+  }
+
+  /* ================================================
+     BREAKPOINT: 978px
+     ================================================ */
+  @media (width >= 978px) {
+    #c-blend-{{ section.id }} .c-blend__title {
+      font-size: 42px;
+    }
+
+    #c-blend-{{ section.id }} .c-blend__content-col {
+      padding: {{ section.settings.pad_top_desk }}px 64px {{ section.settings.pad_bot_desk }}px 64px;
+    }
+  }
+
+  /* ================================================
+     BREAKPOINT: 1200px
+     ================================================ */
+  @media (width >= 1200px) {
+    #c-blend-{{ section.id }} .c-blend__image-col {
+      width: 40%;
+    }
+
+    #c-blend-{{ section.id }} .c-blend__content-col {
+      width: 56%;
+      padding: {{ section.settings.pad_top_desk }}px 80px {{ section.settings.pad_bot_desk }}px 40px;
+    }
+
+    #c-blend-{{ section.id }} .c-blend__title {
+      font-size: 46px;
+    }
+
+    #c-blend-{{ section.id }} .c-blend__bullet {
+      font-size: 15px;
+    }
+
+    #c-blend-{{ section.id }} .c-blend__ing-name {
+      font-size: 15px;
+    }
+
+    #c-blend-{{ section.id }} .c-blend__ing-note {
+      font-size: 14px;
+    }
+  }
+
+  /* ================================================
+     BREAKPOINT: 1980px
+     ================================================ */
+  @media (width >= 1980px) {
+    #c-blend-{{ section.id }} .c-blend__content-col {
+      padding: {{ section.settings.pad_top_desk }}px 120px {{ section.settings.pad_bot_desk }}px 100px;
+    }
+
+    #c-blend-{{ section.id }} .c-blend__title {
+      font-size: 52px;
+    }
+  }
+{%- endstyle -%}
+
+{%- comment -%} ===== HTML ===== {%- endcomment -%}
+<section
+  {% if section.settings.sl_anchor_id != blank %}id="{{ section.settings.sl_anchor_id }}"{% endif %}
+  class="c-section c-blend-science-flavor"
+  data-sl-id="sl-section-blend-science-flavor-v1"
+  data-section-id="{{ section.id }}"
+  style="font-family: 'Raleway', sans-serif;"
+>
+  <div id="c-blend-{{ section.id }}">
+
+    {%- comment -%} ─── IMAGE COLUMN ─── {%- endcomment -%}
+    {%- liquid
+      assign desktop_img = section.settings.product_image
+      assign mobile_img = section.settings.product_image_mobile | default: desktop_img
+    -%}
+    <div class="c-blend__image-col">
+      {%- comment -%} Mobile image (hidden ≥768px) {%- endcomment -%}
+      {%- if mobile_img != blank -%}
+        {{
+          mobile_img
+          | image_url: width: 900
+          | image_tag:
+            loading: 'lazy',
+            class: 'c-blend__product-img c-blend__product-img--mobile',
+            alt: mobile_img.alt | default: section.settings.title
+        }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'c-blend__product-img c-blend__product-img--mobile placeholder-svg' }}
+      {%- endif -%}
+
+      {%- comment -%} Desktop image (hidden <768px) {%- endcomment -%}
+      {%- if desktop_img != blank -%}
+        {{
+          desktop_img
+          | image_url: width: 900
+          | image_tag:
+            loading: 'lazy',
+            class: 'c-blend__product-img c-blend__product-img--desktop',
+            alt: desktop_img.alt | default: section.settings.title
+        }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'c-blend__product-img c-blend__product-img--desktop placeholder-svg' }}
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ─── CONTENT COLUMN ─── {%- endcomment -%}
+    <div class="c-blend__content-col">
+      <div class="c-blend__inner">
+
+        {%- comment -%} Heading {%- endcomment -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="c-blend__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+
+        {%- comment -%} Bullet Points {%- endcomment -%}
+        {%- assign has_bullets = false -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'bullet' and block.settings.text != blank -%}
+            {%- assign has_bullets = true -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if has_bullets -%}
+          <ul class="c-blend__bullets">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'bullet' and block.settings.text != blank -%}
+                {%- assign bullet_lines = block.settings.text | newline_to_br | split: '<br />' -%}
+                {%- for bullet_line in bullet_lines -%}
+                  {%- assign bullet_trimmed = bullet_line | strip -%}
+                  {%- if bullet_trimmed != blank -%}
+                    <li class="c-blend__bullet" {{ block.shopify_attributes }}>{{ bullet_trimmed }}</li>
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- comment -%} Ingredient Grid {%- endcomment -%}
+        {%- assign has_grid = false -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'ingredient' or block.type == 'expandable_group' -%}
+            {%- assign has_grid = true -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- if has_grid -%}
+          <div class="c-blend__ing-grid">
+            {%- for block in section.blocks -%}
+
+              {%- if block.type == 'ingredient' -%}
+                <div class="c-blend__ing-item" {{ block.shopify_attributes }}>
+                  <p class="c-blend__ing-name">
+                    {{ block.settings.name }}{%- if block.settings.note != blank -%}<span class="c-blend__ing-note"> ({{ block.settings.note }})</span>{%- endif -%}
+                  </p>
+                </div>
+
+              {%- elsif block.type == 'expandable_group' -%}
+                <details
+                  class="c-blend__expand"
+                  {% if block.settings.open_by_default %}open{% endif %}
+                  {{ block.shopify_attributes }}
+                >
+                  <summary class="c-blend__expand-summary">
+                    <span class="c-blend__expand-label">{{ block.settings.title | default: 'All Extracts' }}</span>
+                    <span class="c-blend__expand-icon" aria-hidden="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.6023 8.86784C11.822 8.64817 12.1781 8.64817 12.3978 8.86784L18.1326 14.6027C18.3523 14.8224 18.3523 15.1785 18.1326 15.3982L17.8674 15.6634C17.6478 15.883 17.2916 15.883 17.0719 15.6634L12 10.5914L6.92808 15.6634C6.7084 15.883 6.3523 15.883 6.13263 15.6634L5.86743 15.3982C5.64775 15.1785 5.64775 14.8224 5.86743 14.6027L11.6023 8.86784Z" fill="currentColor"/>
+                      </svg>
+                    </span>
+                  </summary>
+                  {%- if block.settings.items != blank -%}
+                    <ul class="c-blend__expand-list">
+                      {%- assign item_lines = block.settings.items | newline_to_br | split: '<br />' -%}
+                      {%- for item_line in item_lines -%}
+                        {%- assign trimmed = item_line | strip -%}
+                        {%- if trimmed != blank -%}
+                          <li>{{ trimmed }}</li>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                </details>
+
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{%- comment -%} ===== Schema ===== {%- endcomment -%}
+{% schema %}
+{
+  "name": "C - Blend of Science",
+  "tag": "section",
+  "class": "c-blend-science-flavor-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "sl_anchor_id",
+      "label": "Anchor ID",
+      "info": "Optional. Sets an HTML id on the section for anchor links."
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product Image — Desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image_mobile",
+      "label": "Product Image — Mobile",
+      "info": "Optional. Falls back to the desktop image if empty."
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "A Blend Of Science & Flavor"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "img_bg_color",
+      "label": "Image Column Background",
+      "default": "#e0eff5"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#002C41"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "pad_top_desk",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top — Desktop",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "pad_bot_desk",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom — Desktop",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "pad_top_mob",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top — Mobile",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "pad_bot_mob",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom — Mobile",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bullet",
+      "name": "Bullet Points",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Bullets (one per line)",
+          "default": "Triple the proven remineralizing ingredients using 10% nano Hydroxyapatite, xylitol and fluoride.\nProprietary formulation for balancing pH and managing halitoses.\n10% Nano Hydroxyapatite. proven enamel remineralization.\nXylitol- Low Abrasion – Helps whitens"
+        }
+      ]
+    },
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Ingredient Name",
+          "default": "Aqua"
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Description (shown in parentheses)",
+          "info": "Leave blank if none."
+        }
+      ]
+    },
+    {
+      "type": "expandable_group",
+      "name": "Expandable Group",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Group Title",
+          "default": "All Extracts"
+        },
+        {
+          "type": "textarea",
+          "id": "items",
+          "label": "Items (one per line)",
+          "default": "Stevia Rebaudiana Leaf Extract\nAnise Extract\nPapaya Extract\nBlack Cherry Extract\nGlycyhizein (Chinese Licorice Root Extract)"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "label": "Open by default",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "C - Blend of Science",
+      "blocks": [
+        { "type": "bullet", "settings": { "text": "Triple the proven remineralizing ingredients using 10% nano Hydroxyapatite, xylitol and fluoride.\nProprietary formulation for balancing pH and managing halitoses.\n10% Nano Hydroxyapatite. proven enamel remineralization.\nXylitol- Low Abrasion – Helps whitens" } },
+        { "type": "ingredient", "settings": { "name": "Aqua", "note": "" } },
+        { "type": "ingredient", "settings": { "name": "Peppermint oil", "note": "" } },
+        { "type": "ingredient", "settings": { "name": "Glycerin", "note": "soothes and moisturizes" } },
+        { "type": "ingredient", "settings": { "name": "Spearmint oil", "note": "" } },
+        { "type": "ingredient", "settings": { "name": "Silica", "note": "polishes teeth" } },
+        { "type": "ingredient", "settings": { "name": "Citric Acid", "note": "preserves naturally" } },
+        { "type": "ingredient", "settings": { "name": "Calcium Carbonate", "note": "helps remove stains" } },
+        { "type": "ingredient", "settings": { "name": "Spirulina", "note": "" } },
+        { "type": "ingredient", "settings": { "name": "Xylitol", "note": "reduces acid-causing bacteria" } },
+        { "type": "ingredient", "settings": { "name": "Vitamin D3, Vitamin K2", "note": "" } },
+        { "type": "ingredient", "settings": { "name": "Nanohydroxyapatite", "note": "strengthens enamel" } },
+        { "type": "ingredient", "settings": { "name": "Calendula", "note": "" } },
+        { "type": "ingredient", "settings": { "name": "Cellulose Gum", "note": "thickens paste" } },
+        { "type": "expandable_group", "settings": { "title": "All Extracts", "items": "Stevia Rebaudiana Leaf Extract\nAnise Extract\nPapaya Extract\nBlack Cherry Extract\nGlycyhizein (Chinese Licorice Root Extract)", "open_by_default": false } },
+        { "type": "ingredient", "settings": { "name": "Potassium Cocoate", "note": "foams paste from coconut oil" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,190 @@
+
+<div class="remineralizing_section_contain{% if section.settings.custom_css_class != blank %} {{ section.settings.custom_css_class }}{% endif %}">
+    <div class="section_block_1">
+        <div class="text_title_block_1">
+            <h2>{{ section.settings.title_remineralizing_wholesale }}</h2>
+            <img class="image_for_mobile_rem" src="{{ section.settings.tothpaste_image | image_url: width: 690  }}" alt="{{ section.settings.tothpaste_image.alt }}">
+            <p>{{ section.settings.paragraph_1 }}</p>
+        </div>
+        <div class="image_block_1">
+            <img src="{{ section.settings.tothpaste_image | image_url: width: 690  }}" alt="{{ section.settings.tothpaste_image.alt }}">
+        </div>
+        
+    </div>
+    <div class="section_block_2">
+        <div class="image_block_2">
+            <img src="{{ section.settings.tothpaste_image_2 | image_url: width: 672  }}" alt="{{ section.settings.tothpaste_image.alt }}">
+        </div>
+        <div class="text_title_block_2">
+            <p>{{ section.settings.paragraph_2 }}</p>
+            <div class="list_text_block_2">
+                {% for block in section.blocks %}
+                    <p>{{ block.settings.title }}</p>
+                    <span>{{ block.settings.info }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+.section_block_1, .section_block_2{
+display: flex;
+gap: 40px;
+justify-content: space-between;
+margin-bottom: 20px
+}
+.remineralizing_section_contain{
+margin:40px 0;
+overflow: hidden;
+}
+.text_title_block_1 h2{
+
+background: #EEFDFF;
+padding: 10px 80px;
+color: #2D3852;
+text-align: right;
+font-size: clamp(26px, 4vw, 32px);
+margin-left: 0px;
+display: inline-block;
+}
+.text_title_block_1 p{
+font-size: clamp(16px, 4vw, 17px);
+padding: 0 0 0 80px;
+text-align: justify;
+width: 100%;
+max-width: 550px;
+}
+.image_block_2{
+padding-left: 80px;
+    width: 100%;
+}
+.text_title_block_2 p{
+font-size: clamp(16px, 4vw, 18px);
+text-align: justify;
+}
+.list_text_block_2 p{
+  color: #2D3852 !important;
+  font-weight: 600;
+  position: relative;
+ font-size: clamp(16px, 4vw, 17px);
+  margin: 5px 0 5px 20px;
+}
+.list_text_block_2 p::before{
+  content: '\2022';
+    position: absolute;
+    left: -20px;
+    top: -10px;
+    font-size: 30px;
+}
+.list_text_block_2 span{
+  font-size: 14px;
+  max-width:413px;
+}
+.text_title_block_2{
+  padding: 25px 80px;
+}
+@media screen and (max-width: 1000px) {
+    .image_for_mobile_rem{
+        display: block;
+    }
+    .section_block_1, .section_block_2{
+        justify-content: center;
+    }
+    .image_block_1{
+        display: none;
+    }
+    .text_title_block_1 h2{
+        padding: 0 20px;
+        display: block;
+        text-align: center;
+    }
+    .text_title_block_1 p{
+        padding: 0 25px;
+        text-align: left;
+    }
+    .image_block_2{
+        padding: 0;
+    }
+    .section_block_2{
+        flex-flow: column;
+        padding: 0 20px;
+        gap: 0;
+    }
+    .text_title_block_2{
+        padding: 0;
+    }
+    .text_title_block_2 p{
+        text-align: left;
+    }
+    .list_text_block_2{
+        padding: 0 20px;
+    }
+}
+@media screen and (min-width: 999px) {
+    .image_for_mobile_rem{
+        display: none;
+    }
+    
+}
+</style>
+{% schema %}
+{
+   "name": "Remineralizing Wholesale",
+   "settings" : [
+    {
+        "type": "text",
+        "id": "custom_css_class",
+        "label": "Custom CSS Class"
+    },
+   {
+    "type": "text",
+    "id": "title_remineralizing_wholesale",
+    "label": "Title Page",
+    "default": "Wholesale"
+   },
+   {
+    "type": "richtext",
+    "id": "paragraph_1",
+    "label": "Paragraph 1"
+   },
+   {
+    "type": "image_picker",
+    "id": "tothpaste_image",
+    "label": "Image 1"
+   },
+   {
+    "type": "image_picker",
+    "id": "tothpaste_image_2",
+    "label": "Image 2"
+   },
+   {
+    "type": "richtext",
+    "id": "paragraph_2",
+    "label": "Paragraph 2"
+   }
+],
+"blocks" : [
+{
+    "name": "list text",
+    "type": "List-Text",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Icon Title"
+        },
+        {
+            "type": "textarea",
+            "id": "info",
+            "label": "Information"
+        }
+    ]
+}
+],
+   "presets": [
+    {
+        "name": "Remineralizing Wholesale"
+    }
+   ]
+}
+{% endschema %}

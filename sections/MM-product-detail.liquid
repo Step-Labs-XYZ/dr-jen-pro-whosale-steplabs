@@ -1,0 +1,368 @@
+<style>
+.about_product_cards {
+  width: 100%;
+  height: auto;
+}
+.about_product_cards .container {
+  max-width: 1198px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 30px;
+}
+.about_product_cards h2 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 56px;
+  text-align: center;
+  margin: 0 auto;
+}
+.about_product_cards .cards_inner {
+  margin-top: 54px;
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(2, 1fr);
+}
+.about_product_cards .Content_image {
+  display: grid;
+  grid-template-columns: repeat (2. 1fr);
+}
+.about_product_cards .card_content {
+  border-radius: 30px;
+  border: 1px solid #5DC7D1;
+  background: linear-gradient(180deg, #EFFAFB 0%, rgba(255, 255, 255, 0.00) 100%);
+  box-shadow: 0px 0px 40px 0px rgba(99, 136, 192, 0.20);
+  padding: 40px;
+}
+.about_product_cards .content_inner {
+  width: 70%
+}
+.about_product_cards .card_content h6 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 35px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin: 0;
+}
+.about_product_cards .card_content h3 {
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 35px;
+  margin: 0;
+}
+.about_product_cards .card_content h5 {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  margin: 0;
+  line-height: 35px;
+}
+.about_product_cards .card_content span {
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 31px;
+  display: block;
+  margin: 0;
+}
+.about_product_cards .card_content span ul {
+  margin: 0;
+  padding-left: 0;
+}
+.about_product_cards .card_content span li {
+  display: flex;
+  gap: 16px;
+  padding-top: 5px;
+}
+.about_product_cards .card_content span li::before {
+  content:'';
+  background-image: url(https://cdn.shopify.com/s/files/1/0747/1769/2180/files/Group_238.png?v=1703279049);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 19px;
+  height: 19px;
+  display: block;
+  flex: none;
+  margin-top:5px;
+}
+.about_product_cards .card_content {
+  display: flex;
+  justify-content: space-between;
+}
+.about_product_cards .card_image {
+  width: 28%;
+  height: auto;
+}
+.about_product_cards .card_image img{
+  width: 100%;
+  height: 100%;
+  object-fit:cover;
+}
+#about_product_cards-{{ section.id }} {
+  background: {{section.settings.bg_color}};
+  padding-top:{{ section.settings.padding_top_desktop }}px;
+  padding-bottom:{{ section.settings.padding_bottom_desktop }}px;
+  margin-top:{{ section.settings.margin_top_desktop }}px;
+  margin-bottom:{{ section.settings.margin_bottom_desktop }}px;
+}
+
+#about_product_cards-{{ section.id }} h6 {
+  color: {{section.settings.top_color}};
+}
+#about_product_cards-{{ section.id }} h2,
+#about_product_cards-{{ section.id }} h3,
+#about_product_cards-{{ section.id }} h5,
+#about_product_cards-{{ section.id }} span {
+  color: {{section.settings.card_text_color}};
+}
+@media screen and (max-width : 1199px) {
+  .about_product_cards .card_content h3 {
+    font-size: 26px;
+  }
+  .about_product_cards .card_content span {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width : 991px) {
+  #about_product_cards-{{ section.id }} {
+    padding-top:{{ section.settings.padding_top_mobile }}px;
+    padding-bottom:{{ section.settings.padding_bottom_mobile }}px;
+    margin-top:{{ section.settings.margin_top_mobile }}px;
+    margin-bottom:{{ section.settings.margin_bottom_mobile }}px;
+  }
+  .about_product_cards .container {
+    padding: 0 18px;
+  }
+  .about_product_cards h2 {
+    font-size: 25px;
+    line-height: 30px;
+  }
+  .about_product_cards .cards_inner {
+    margin-top: 26px;
+    grid-template-columns: 1fr;
+  }
+  .about_product_cards .card_content {
+    padding: 25px;
+    line-height: 30px;
+  }
+  .about_product_cards .card_content h6 {
+    font-size: 12px;
+    line-height: 18px;
+    padding-bottom: 10px;
+  }
+  .about_product_cards .card_content h3 {
+    font-size: 25px;
+    padding-bottom: 10px;
+    line-height: 32px;
+  }
+  .about_product_cards .card_content h5 {
+    font-size: 16px;
+    padding-bottom: 10px;
+    line-height: 22px;
+  }
+  .about_product_cards .card_content span {
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .about_product_cards .card_content span li {
+    line-height: 20px;
+  }
+  .about_product_cards .card_content span li::before{
+    margin-top: 2px;
+  }
+  .about_product_cards .card_image {
+    max-width: 100%;
+    height: 100%;
+  }
+}
+</style>
+<section class="about_product_cards" id="about_product_cards-{{ section.id }}">
+  <div class="container">
+    {% if section.settings.main_headline != blank %}
+      <h2>{{ section.settings.main_headline }}</h2>
+    {% endif %}
+    <div class="cards_inner">
+        {% for block in section.blocks %}
+        <div class="card_content">
+          <div class="content_inner">
+            {% if block.settings.card_top_text != blank %}
+              <h6>{{ block.settings.card_top_text }}</h6>
+            {% endif %}
+            {% if block.settings.card_headline != blank %}
+              <h3>{{ block.settings.card_headline }}</h3>
+            {% endif %}
+            {% if block.settings.card_subhead != blank %}
+              <h5>{{ block.settings.card_subhead }}</h5>
+            {% endif %}
+            {% if block.settings.card_link %}
+              <span>{{ block.settings.card_link }}</span>
+            {% endif %}
+          </div>
+          <div class="card_image">
+            {% if block.settings.card_img!=blank %}
+            {{ block.settings.card_img| image_url: width: block.settings.card_img.width | image_tag: loading: 'lazy' }}
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "MM Product Detail",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background color",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "top_color",
+        "label": "Top Text color",
+        "default": "#5DC7D1"
+      },
+      {
+        "type": "color",
+        "id": "card_text_color",
+        "label": "Card Text Color",
+        "default": "#000"
+      },
+      {
+        "type": "range",
+        "id": "padding_top_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Top Desktop",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Bottom Desktop",
+        "default": 0
+       },
+       {
+        "type": "range",
+        "id": "margin_top_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Top Desktop",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Bottom Desktop",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_top_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Top Mobile",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Padding Bottom Mobile",
+        "default": 0
+       },
+       {
+        "type": "range",
+        "id": "margin_top_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Top Mobile",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "label": "Margin Bottom Mobile",
+        "default": 0
+      },
+      {
+        "type": "text",
+        "id": "main_headline",
+        "label": "Heading",
+        "default": "Which Product is Right for Your Patients?"
+      }
+    ],
+      "blocks": [
+     {
+       "name": "Card",
+       "type": "card",
+       "settings": [
+          {
+            "type": "text",
+            "id": "card_top_text",
+            "label": "Card Top Text",
+            "default": "Dr Jen’s Remineralizing"
+          },
+          {
+            "type": "text",
+            "id": "card_headline",
+            "label": "Card Heading",
+            "default": "Strawberry Fluorde"
+          },
+          {
+            "type": "text",
+            "id": "card_subhead",
+            "label": "Card Subhead",
+            "default": "Free with 10% nHAp"
+          },
+          {
+            "type": "richtext",
+            "id": "card_link",
+            "label": "Card Links"
+          },
+         {
+           "type": "image_picker",
+           "id": "card_img",
+           "label": "Image"
+         }
+       ]
+     }
+  ],
+    "presets":[
+      {
+        "name": "MM Product Detail"
+      }
+    ]
+  }
+{% endschema %}

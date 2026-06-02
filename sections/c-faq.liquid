@@ -1,0 +1,337 @@
+{%- style -%}
+  /* IMPORTACIÓN DE FUENTE RALEWAY */
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap');
+
+  /* =========================================
+     AISLAMIENTO TOTAL POR SECCIÓN
+     ========================================= */
+  #c-faq-{{ section.id }} {
+    --c-bg: {{ section.settings.bg_color }};
+    --c-text-dark: #002C41; /* Azul oscuro corporativo */
+    --c-text-black: #000000;
+    --c-text-light: #4b5563; /* Gris oscuro para respuestas */
+    --c-border: #e5e7eb; /* Gris claro para líneas separadoras */
+    
+    font-family: 'Raleway', sans-serif;
+    background-color: var(--c-bg);
+    padding-top: {{ section.settings.pad_top_mob }}px;
+    padding-bottom: {{ section.settings.pad_bot_mob }}px;
+    width: 100%;
+  }
+
+  #c-faq-{{ section.id }} .c-faq__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  /* =========================================
+     CABECERA (TÍTULO)
+     ========================================= */
+  #c-faq-{{ section.id }} .c-faq__header {
+    width: 100%;
+    /* ALINEACIÓN MOBILE DINÁMICA DESDE EL EDITOR */
+    text-align: {{ section.settings.mobile_alignment }};
+  }
+
+  #c-faq-{{ section.id }} .c-faq__title {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--c-text-dark);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  /* =========================================
+     ACORDEÓN DE PREGUNTAS (FAQ)
+     ========================================= */
+  #c-faq-{{ section.id }} .c-faq__accordion {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #c-faq-{{ section.id }} .c-faq__item {
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  /* El botón de la pregunta */
+  #c-faq-{{ section.id }} .c-faq__question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 24px 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--c-text-black);
+    text-align: left;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  #c-faq-{{ section.id }} .c-faq__question:hover {
+    color: var(--c-text-dark);
+  }
+
+  #c-faq-{{ section.id }} .c-faq__icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-left: 15px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--c-text-black);
+  }
+
+  /* Envoltura de la respuesta para la animación suave */
+  #c-faq-{{ section.id }} .c-faq__answer-wrapper {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  #c-faq-{{ section.id }} .c-faq__answer {
+    padding-bottom: 24px;
+    font-size: 14px;
+    line-height: 1.6;
+    font-weight: 400;
+    color: #000;
+  }
+
+  #c-faq-{{ section.id }} .c-faq__answer p {
+    margin: 0 0 10px 0;
+  }
+  #c-faq-{{ section.id }} .c-faq__answer p:last-child {
+    margin-bottom: 0;
+  }
+
+  #c-faq-{{ section.id }} .c-faq__answer ul,
+  #c-faq-{{ section.id }} .c-faq__answer ol {
+    margin: 0 0 10px 0;
+    padding-left: 24px;
+  }
+  #c-faq-{{ section.id }} .c-faq__answer ul {
+    list-style: disc;
+  }
+  #c-faq-{{ section.id }} .c-faq__answer ol {
+    list-style: decimal;
+  }
+  #c-faq-{{ section.id }} .c-faq__answer li {
+    margin-bottom: 6px;
+    padding-left: 4px;
+  }
+  #c-faq-{{ section.id }} .c-faq__answer ul:last-child,
+  #c-faq-{{ section.id }} .c-faq__answer ol:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Estado Abierto (Active) */
+  #c-faq-{{ section.id }} .c-faq__item.is-open .c-faq__icon {
+    transform: rotate(180deg);
+  }
+
+  /* =========================================
+     COMPORTAMIENTO DESKTOP (Grid 2 Columnas)
+     ========================================= */
+  @media (min-width: 768px) {
+    #c-faq-{{ section.id }} {
+      padding-top: {{ section.settings.pad_top_desk }}px;
+      padding-bottom: {{ section.settings.pad_bot_desk }}px;
+    }
+
+    #c-faq-{{ section.id }} .c-faq__container {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 80px; /* Separación amplia entre título y preguntas */
+    }
+
+    #c-faq-{{ section.id }} .c-faq__header {
+      width: 40%;
+      position: sticky;
+      top: 40px; /* Hace que el título se quede fijo si hay muchas preguntas */
+      /* Forzamos a la izquierda en desktop sin importar lo que se elija para mobile */
+      text-align: left; 
+    }
+
+    #c-faq-{{ section.id }} .c-faq__title {
+      font-size: 42px;
+    }
+
+    #c-faq-{{ section.id }} .c-faq__accordion {
+      width: 60%;
+    }
+
+    #c-faq-{{ section.id }} .c-faq__question {
+      font-size: 16px;
+      padding: 28px 0;
+    }
+
+    #c-faq-{{ section.id }} .c-faq__answer {
+      font-size: 15px;
+      padding-bottom: 28px;
+    }
+  }
+{%- endstyle -%}
+
+<section id="c-faq-{{ section.id }}" class="c-faq">
+  <div class="c-faq__container">
+    
+    <div class="c-faq__header">
+      {% if section.settings.title != blank %}
+        <h2 class="c-faq__title">{{ section.settings.title | newline_to_br }}</h2>
+      {% endif %}
+    </div>
+
+    <div class="c-faq__accordion js-faq-accordion-{{ section.id }}">
+      
+      {% for block in section.blocks %}
+        <div class="c-faq__item js-faq-item-{{ section.id }}" {{ block.shopify_attributes }}>
+          
+          <button class="c-faq__question js-faq-btn-{{ section.id }}" aria-expanded="false">
+            <span>{{ block.settings.question }}</span>
+            <svg class="c-faq__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          
+          <div class="c-faq__answer-wrapper js-faq-wrapper-{{ section.id }}">
+            <div class="c-faq__answer">
+              {{ block.settings.answer }}
+            </div>
+          </div>
+          
+        </div>
+      {% endfor %}
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Aislar la selección al ID de esta sección
+    const sectionId = '{{ section.id }}';
+    const faqItems = document.querySelectorAll(`.js-faq-item-${sectionId}`);
+
+    faqItems.forEach(item => {
+      const btn = item.querySelector(`.js-faq-btn-${sectionId}`);
+      const wrapper = item.querySelector(`.js-faq-wrapper-${sectionId}`);
+
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.contains('is-open');
+
+        // (Opcional) Si quieres que al abrir una se cierren las demás, descomenta esto:
+        /*
+        faqItems.forEach(otherItem => {
+          otherItem.classList.remove('is-open');
+          otherItem.querySelector(`.js-faq-btn-${sectionId}`).setAttribute('aria-expanded', 'false');
+          otherItem.querySelector(`.js-faq-wrapper-${sectionId}`).style.maxHeight = null;
+        });
+        */
+
+        // Alternar el estado de la pregunta actual
+        if (isOpen) {
+          // Si está abierta, la cerramos
+          item.classList.remove('is-open');
+          btn.setAttribute('aria-expanded', 'false');
+          wrapper.style.maxHeight = null;
+        } else {
+          // Si está cerrada, la abrimos dinámicamente según su contenido
+          item.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+          wrapper.style.maxHeight = wrapper.scrollHeight + "px";
+        }
+      });
+    });
+    
+    // Recalcular el alto en caso de redimensionar la ventana (evita que el texto se corte)
+    window.addEventListener('resize', () => {
+      faqItems.forEach(item => {
+        if (item.classList.contains('is-open')) {
+          const wrapper = item.querySelector(`.js-faq-wrapper-${sectionId}`);
+          wrapper.style.maxHeight = wrapper.scrollHeight + "px";
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "C - FAQ Section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Color de Fondo",
+      "default": "#ffffff"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Título de la Sección",
+      "default": "Frequently Asked\nQuestions"
+    },
+    {
+      "type": "select",
+      "id": "mobile_alignment",
+      "label": "Alineación del Título en Mobile",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right", "label": "Derecha" }
+      ],
+      "default": "left",
+      "info": "En Desktop el título siempre estará a la izquierda por estructura."
+    },
+    {
+      "type": "header",
+      "content": "Paddings de Sección"
+    },
+    { "type": "range", "id": "pad_top_desk", "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Padding Top Desktop", "default": 80 },
+    { "type": "range", "id": "pad_bot_desk", "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Padding Bottom Desktop", "default": 80 },
+    { "type": "range", "id": "pad_top_mob", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Padding Top Mobile", "default": 50 },
+    { "type": "range", "id": "pad_bot_mob", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Padding Bottom Mobile", "default": 50 }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "Pregunta Frecuente",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Pregunta",
+          "default": "¿Es seguro el producto?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Respuesta",
+          "default": "<p>Sí, nuestro producto ha sido probado clínicamente y está compuesto por ingredientes de alta calidad.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "C - FAQ Section",
+      "blocks": [
+        { "type": "faq_item", "settings": { "question": "Is Dr. Jen's toothpaste safe to use?" } },
+        { "type": "faq_item", "settings": { "question": "Which formula is right for me?" } },
+        { "type": "faq_item", "settings": { "question": "Are the ingredients natural?" } },
+        { "type": "faq_item", "settings": { "question": "What exactly is nano-hydroxyapatite?" } },
+        { "type": "faq_item", "settings": { "question": "Why does Dr. Jen's cost more than other toothpastes?" } },
+        { "type": "faq_item", "settings": { "question": "How do I use Dr. Jen's toothpaste?" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
