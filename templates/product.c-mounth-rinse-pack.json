@@ -457,6 +457,7 @@
         "badge_bg": "#4caf7d",
         "badge_text_color": "#ffffff",
         "product_image": "shopify://shop_images/Frame_1484580905_8.png",
+        "product_image_mobile": "shopify://shop_images/Rectangle_34624332_2.png",
         "bg_color": "#f7f7f7",
         "img_bg_color": "#e0eff5",
         "text_color": "#002c41",
