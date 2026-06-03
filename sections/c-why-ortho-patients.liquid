@@ -214,17 +214,24 @@
     display: block;
   }
 
+  /* Mostrar imagen móvil en mobile, ocultar desktop */
+  #c-ortho-{{ section.id }} .c-ortho__product-img--mobile {
+    display: block;
+  }
+
+  #c-ortho-{{ section.id }} .c-ortho__product-img--desktop {
+    display: none;
+  }
 
   @media (max-width: 899px) {
     #c-ortho-{{ section.id }} .c-ortho__comparison-label {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--c-ortho-text-dark);
-    margin: 0 0 12px 0;
-    line-height: 1.4;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--c-ortho-text-dark);
+      margin: 0 0 12px 0;
+      line-height: 1.4;
+    }
   }
-  }
-
 
   /* ================================================
      BREAKPOINT: 768px — side-by-side
@@ -250,6 +257,15 @@
 
     #c-ortho-{{ section.id }} .c-ortho__product-img {
       height: 1050px;
+    }
+
+    /* Mostrar desktop y ocultar mobile en pantallas grandes */
+    #c-ortho-{{ section.id }} .c-ortho__product-img--mobile {
+      display: none;
+    }
+
+    #c-ortho-{{ section.id }} .c-ortho__product-img--desktop {
+      display: block;
     }
 
     #c-ortho-{{ section.id }} .c-ortho__title {
@@ -444,7 +460,26 @@
 
     {%- comment -%} ─── RIGHT: IMAGE COLUMN ─── {%- endcomment -%}
     <div class="c-ortho__image-col">
-      {%- if section.settings.product_image != blank -%}
+      {%- if section.settings.product_image_mobile != blank -%}
+        {%- comment -%} Imagen Product Mobile {%- endcomment -%}
+        {{
+          section.settings.product_image_mobile
+          | image_url: width: 1000
+          | image_tag:
+            loading: 'lazy',
+            class: 'c-ortho__product-img c-ortho__product-img--mobile',
+            alt: section.settings.product_image_mobile.alt | default: section.settings.title
+        }}
+        {%- comment -%} Imagen Product Desktop {%- endcomment -%}
+        {{
+          section.settings.product_image
+          | image_url: width: 1000
+          | image_tag:
+            loading: 'lazy',
+            class: 'c-ortho__product-img c-ortho__product-img--desktop',
+            alt: section.settings.product_image.alt | default: section.settings.title
+        }}
+      {%- elsif section.settings.product_image != blank -%}
         {{
           section.settings.product_image
           | image_url: width: 1000
@@ -563,7 +598,13 @@
     {
       "type": "image_picker",
       "id": "product_image",
-      "label": "Product Image"
+      "label": "Product Image — Desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image_mobile",
+      "label": "Product Image — Mobile",
+      "info": "Si se deja en blanco, se usará la imagen de Desktop en todos los dispositivos."
     },
     {
       "type": "header",
