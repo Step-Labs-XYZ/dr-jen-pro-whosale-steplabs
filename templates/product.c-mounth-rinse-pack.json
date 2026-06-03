@@ -324,6 +324,65 @@
         "pad_bot_mob": 30
       }
     },
+    "c_badges_bar_v2_hVXVCp": {
+      "type": "c-badges-bar-v2",
+      "blocks": {
+        "badge_Eh9Bye": {
+          "type": "badge",
+          "settings": {
+            "svg_code": "",
+            "text": "Clinically Proven Protection"
+          }
+        },
+        "badge_FEx4qV": {
+          "type": "badge",
+          "settings": {
+            "svg_code": "",
+            "text": "Dentist Developed & Approved"
+          }
+        },
+        "badge_T6ePrW": {
+          "type": "badge",
+          "settings": {
+            "svg_code": "",
+            "text": "Over 360,000 Cleaner Smiles"
+          }
+        },
+        "badge_CGyd7D": {
+          "type": "badge",
+          "settings": {
+            "svg_code": "",
+            "text": "100% Proven Ingredients"
+          }
+        },
+        "badge_WaN8BN": {
+          "type": "badge",
+          "settings": {
+            "svg_code": "",
+            "text": "Made in USA"
+          }
+        }
+      },
+      "block_order": [
+        "badge_Eh9Bye",
+        "badge_FEx4qV",
+        "badge_T6ePrW",
+        "badge_CGyd7D",
+        "badge_WaN8BN"
+      ],
+      "name": "C Badges Bar v2",
+      "settings": {
+        "sl_anchor_id": "",
+        "bg_color": "#ffffff",
+        "badge_icon_color": "#002C41",
+        "badge_text_color": "#002C41",
+        "badges_bg_color": "#f8f8f6",
+        "pad_top_mob": 60,
+        "pad_bot_mob": 60,
+        "pad_top_desk": 80,
+        "pad_bot_desk": 80
+      }
+    },
     "c_dr_jen_difference_AgUcYd": {
       "type": "c-dr-jen-difference",
       "custom_css": [],
@@ -786,6 +845,7 @@
     "main",
     "c_product_topbar_RNYRDa",
     "c_product_page_rKyTxE",
+    "c_badges_bar_v2_hVXVCp",
     "c_dr_jen_difference_AgUcYd",
     "c_why_ortho_patients_m39DVK",
     "c_comparison_table_AWfMDe",
