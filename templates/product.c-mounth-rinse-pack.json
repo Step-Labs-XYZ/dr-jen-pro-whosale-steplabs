@@ -374,8 +374,8 @@
       "settings": {
         "sl_anchor_id": "",
         "bg_color": "#f7f7f7",
-        "badge_icon_color": "#002C41",
-        "badge_text_color": "#002C41",
+        "badge_icon_color": "#000000",
+        "badge_text_color": "#000000",
         "badges_bg_color": "#f7f7f7",
         "pad_top_mob": 60,
         "pad_bot_mob": 60,
