@@ -373,7 +373,7 @@
       "name": "C Badges Bar v2",
       "settings": {
         "sl_anchor_id": "",
-        "bg_color": "#ffffff",
+        "bg_color": "#f7f7f7",
         "badge_icon_color": "#002C41",
         "badge_text_color": "#002C41",
         "badges_bg_color": "#f8f8f6",
