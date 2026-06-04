@@ -454,7 +454,7 @@
       "new-announcement-bar": {
         "type": "new-announcement-bar",
         "settings": {
-          "bg_color": "#ff6b00",
+          "bg_color": "#002c41",
           "text1": "<p><a href=\"mailto:info@drjennatural.com\" title=\"mailto:info@drjennatural.com\">info@drjennatural.com</a></p>",
           "text2": "<p><strong>Professionals</strong>  (651) 233-6274.</p>",
           "mobile_text": "<p>We have inventory at a dentist's office near you!</p>"
