@@ -552,7 +552,7 @@ p a:not(.button),
   p a:not(.button):hover,
   .rte a:not(.button):hover,
   .link:hover {
-    color: rgb(var(--text-color));
+    color: #fff;
     -webkit-text-decoration-color: rgb(var(--text-color));
             text-decoration-color: rgb(var(--text-color));
   }
