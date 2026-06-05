@@ -28,39 +28,27 @@
       "blocks": {
         "652581f0-0606-4f75-88c7-a086d9475f42": {
           "type": "Icons",
-          "settings": {
-            "image": "shopify://shop_images/Frame_335.png"
-          }
+          "settings": {}
         },
         "ddc71955-fc14-413a-9448-abe221f07038": {
           "type": "Icons",
-          "settings": {
-            "image": "shopify://shop_images/Frame_335_1.png"
-          }
+          "settings": {}
         },
         "7da259de-4beb-460e-9840-7e7ec79cefd5": {
           "type": "Icons",
-          "settings": {
-            "image": "shopify://shop_images/Frame_335_2.png"
-          }
+          "settings": {}
         },
         "0cde3269-9510-472d-8d9a-ae30524096d1": {
           "type": "Icons",
-          "settings": {
-            "image": "shopify://shop_images/Frame_335_3.png"
-          }
+          "settings": {}
         },
         "04513724-3d70-4d85-ab01-25df03cbfdf2": {
           "type": "Icons",
-          "settings": {
-            "image": "shopify://shop_images/Frame_336.png"
-          }
+          "settings": {}
         },
         "2ca4762d-b0e5-4b47-ab45-b239eb8f79ae": {
           "type": "Icons",
-          "settings": {
-            "image": "shopify://shop_images/Frame_335_4.png"
-          }
+          "settings": {}
         }
       },
       "block_order": [
@@ -77,6 +65,7 @@
     },
     "main": {
       "type": "main-collection",
+      "disabled": true,
       "settings": {
         "show_sort_by": true,
         "products_per_page": 24,
@@ -104,6 +93,40 @@
         "include_horizontal_margins": true,
         "include_vertical_margins": true
       }
+    },
+    "c_collection_new_rYzRic": {
+      "type": "c-collection-new",
+      "name": "C - Collection New",
+      "settings": {
+        "bg_color": "#FFFFFF",
+        "heading_color": "#002C41",
+        "text_color": "#4A4A4A",
+        "link_color": "#002C41",
+        "btn_bg_color": "#1164E8",
+        "btn_text_color": "#FFFFFF",
+        "btn_bg_hover": "#0D50B8",
+        "show_search": true,
+        "search_placeholder": "Search",
+        "filter_label": "TYPE",
+        "all_label": "All",
+        "sidebar_width": 180,
+        "show_subscribe_save": true,
+        "subscribe_text": "Subscribe & Save up to 15% OFF",
+        "badge_alignment": "left",
+        "add_to_cart_text": "ADD TO CART",
+        "learn_more_text": "LEARN MORE",
+        "no_results_text": "No products found.",
+        "empty_text": "No products in this collection.",
+        "columns_desktop": "3",
+        "grid_gap": 32,
+        "image_height_desktop": 320,
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "card_width_mobile": 82,
+        "image_height_mobile": 280,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
     }
   },
   "order": [
@@ -111,6 +134,7 @@
     "7d7cb204-e6ca-4fce-bf38-a27eb4734a85",
     "main",
     "1659903519998b6b30",
-    "16766554811e820a75"
+    "16766554811e820a75",
+    "c_collection_new_rYzRic"
   ]
 }
