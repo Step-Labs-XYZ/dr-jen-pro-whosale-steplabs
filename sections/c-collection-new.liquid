@@ -1,9 +1,6 @@
 {% comment %}
   ╔══════════════════════════════════════════════════════════════╗
   ║  C - Collection New                                          ║
-  ║  Section para páginas de colección con filtros dinámicos     ║
-  ║  desde metafields de productos.                              ║
-  ║                                                              ║
   ║  Metafields requeridos en productos:                         ║
   ║    custom.tag_one    → filtro / badge 1                      ║
   ║    custom.tag_two    → filtro / badge 2                      ║
@@ -12,13 +9,36 @@
   ╚══════════════════════════════════════════════════════════════╝
 {% endcomment %}
 
-{%- assign section_id = section.id -%}
+{%- assign section_id    = section.id -%}
+{%- assign default_filter = section.settings.default_filter | strip | downcase -%}
+
+{%- comment %} ── Recolectar tags únicos de metafields ── {%- endcomment %}
+{%- assign all_filter_tags = '' -%}
+{%- assign seen_tags = '' -%}
+{%- for product in collection.products -%}
+  {%- assign t1 = product.metafields.custom.tag_one.value | strip -%}
+  {%- assign t2 = product.metafields.custom.tag_two.value | strip -%}
+  {%- unless t1 == blank -%}
+    {%- unless seen_tags contains t1 -%}
+      {%- assign seen_tags = seen_tags | append: t1 | append: '|||' -%}
+      {%- assign all_filter_tags = all_filter_tags | append: t1 | append: '|||' -%}
+    {%- endunless -%}
+  {%- endunless -%}
+  {%- unless t2 == blank -%}
+    {%- unless seen_tags contains t2 -%}
+      {%- assign seen_tags = seen_tags | append: t2 | append: '|||' -%}
+      {%- assign all_filter_tags = all_filter_tags | append: t2 | append: '|||' -%}
+    {%- endunless -%}
+  {%- endunless -%}
+{%- endfor -%}
+{%- assign filter_tags_array = all_filter_tags | split: '|||' -%}
 
 <div
   id="c-col-new-{{ section_id }}"
   class="c-col-new"
   data-section-id="{{ section_id }}"
   data-collection-handle="{{ collection.handle }}"
+  data-default-filter="{{ default_filter | escape }}"
 >
 
   <!-- ══════════════════════════════════════
@@ -52,35 +72,41 @@
       </div>
 
       <div class="c-col-new__filters" id="c-col-new-filters-{{ section_id }}">
+
+        {%- comment %} "All" option {%- endcomment %}
+        {%- assign all_checked = '' -%}
+        {%- if default_filter == blank or default_filter == 'all' -%}
+          {%- assign all_checked = 'checked' -%}
+        {%- endif -%}
         <label class="c-col-new__filter-item">
-          <input type="radio" name="c-col-new-type-{{ section_id }}" value="all" checked class="c-col-new__radio" />
+          <input type="radio" name="c-col-new-type-{{ section_id }}" value="all" {{ all_checked }} class="c-col-new__radio" />
           <span class="c-col-new__radio-dot"></span>
           {{ section.settings.all_label | default: 'All' }}
         </label>
 
-        {%- assign seen_tags = '' -%}
-        {%- for product in collection.products -%}
-          {%- assign t1 = product.metafields.custom.tag_one.value -%}
-          {%- assign t2 = product.metafields.custom.tag_two.value -%}
-
-          {%- unless t1 == blank or seen_tags contains t1 -%}
-            {%- assign seen_tags = seen_tags | append: t1 | append: '|||' -%}
+        {%- comment %} Dynamic tags from metafields {%- endcomment %}
+        {%- for tag in filter_tags_array -%}
+          {%- assign tag_trimmed = tag | strip -%}
+          {%- unless tag_trimmed == blank -%}
+            {%- assign tag_lower = tag_trimmed | downcase -%}
+            {%- assign tag_checked = '' -%}
+            {%- if default_filter == tag_lower -%}
+              {%- assign tag_checked = 'checked' -%}
+            {%- endif -%}
             <label class="c-col-new__filter-item">
-              <input type="radio" name="c-col-new-type-{{ section_id }}" value="{{ t1 | escape }}" class="c-col-new__radio" />
+              <input
+                type="radio"
+                name="c-col-new-type-{{ section_id }}"
+                value="{{ tag_trimmed | escape }}"
+                {{ tag_checked }}
+                class="c-col-new__radio"
+              />
               <span class="c-col-new__radio-dot"></span>
-              {{ t1 }}
-            </label>
-          {%- endunless -%}
-
-          {%- unless t2 == blank or seen_tags contains t2 -%}
-            {%- assign seen_tags = seen_tags | append: t2 | append: '|||' -%}
-            <label class="c-col-new__filter-item">
-              <input type="radio" name="c-col-new-type-{{ section_id }}" value="{{ t2 | escape }}" class="c-col-new__radio" />
-              <span class="c-col-new__radio-dot"></span>
-              {{ t2 }}
+              {{ tag_trimmed }}
             </label>
           {%- endunless -%}
         {%- endfor -%}
+
       </div>
     </div>
 
@@ -100,11 +126,11 @@
         {%- assign p_tag_one   = product.metafields.custom.tag_one.value | default: '' -%}
         {%- assign p_tag_two   = product.metafields.custom.tag_two.value | default: '' -%}
         {%- assign p_variant   = product.first_available_variant -%}
-        {%- assign p_data_tags = p_tag_one | append: '|||' | append: p_tag_two -%}
+        {%- assign p_data_tags = p_tag_one | downcase | append: '|||' | append: p_tag_two | downcase -%}
 
         <div
           class="c-col-new__card"
-          data-tags="{{ p_data_tags | downcase | escape }}"
+          data-tags="{{ p_data_tags | escape }}"
           data-title="{{ product.title | downcase | escape }}"
         >
 
@@ -208,7 +234,7 @@
 
 
 <!-- ════════════════════════════════════════════════════════════
-     STYLES  — scoped to #c-col-new-{{ section.id }}
+     STYLES
 ════════════════════════════════════════════════════════════ -->
 <style>
 #c-col-new-{{ section_id }} {
@@ -226,7 +252,7 @@
   box-sizing: border-box;
 }
 
-/* ── Sidebar ── */
+/* ════ SIDEBAR ════ */
 #c-col-new-{{ section_id }} .c-col-new__sidebar {
   width: {{ section.settings.sidebar_width }}px;
   flex-shrink: 0;
@@ -234,6 +260,7 @@
   top: 100px;
 }
 
+/* Search box */
 #c-col-new-{{ section_id }} .c-col-new__search-box {
   display: flex;
   align-items: center;
@@ -241,7 +268,7 @@
   border: 1.5px solid #e2e8f0;
   border-radius: 8px;
   padding: 8px 12px;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
   background: #fff;
   transition: border-color 0.2s ease;
 }
@@ -262,6 +289,14 @@
   background: transparent;
 }
 #c-col-new-{{ section_id }} .c-col-new__search-input::placeholder { color: #bbb; }
+
+/* Filter section — bordered box like the design */
+#c-col-new-{{ section_id }} .c-col-new__filter-section {
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 16px 16px 20px;
+  background: #fff;
+}
 
 #c-col-new-{{ section_id }} .c-col-new__filter-header {
   display: flex;
@@ -288,6 +323,7 @@
   display: none;
 }
 
+/* Filter items */
 #c-col-new-{{ section_id }} .c-col-new__filter-item {
   display: flex;
   align-items: center;
@@ -299,6 +335,7 @@
   cursor: pointer;
   user-select: none;
   transition: color 0.2s;
+  line-height: 1.3;
 }
 #c-col-new-{{ section_id }} .c-col-new__filter-item:last-child { margin-bottom: 0; }
 #c-col-new-{{ section_id }} .c-col-new__filter-item:hover { color: {{ section.settings.heading_color }}; }
@@ -332,7 +369,7 @@
   transform: translate(-50%, -50%) scale(1);
 }
 
-/* ── Main & Grid ── */
+/* ════ MAIN & GRID ════ */
 #c-col-new-{{ section_id }} .c-col-new__main {
   flex: 1;
   min-width: 0;
@@ -354,7 +391,7 @@
   grid-column: 1 / -1;
 }
 
-/* ── Card ── */
+/* ════ CARD ════ */
 #c-col-new-{{ section_id }} .c-col-new__card {
   display: flex;
   flex-direction: column;
@@ -383,7 +420,6 @@
   align-items: center;
   height: {{ section.settings.image_height_desktop }}px;
 }
-
 #c-col-new-{{ section_id }} .c-col-new__image-link {
   display: block;
   width: 100%;
@@ -450,11 +486,7 @@
   gap: 12px;
   padding: 12px;
 }
-
-#c-col-new-{{ section_id }} .c-col-new__title-link {
-  text-decoration: none;
-  color: inherit;
-}
+#c-col-new-{{ section_id }} .c-col-new__title-link { text-decoration: none; color: inherit; }
 #c-col-new-{{ section_id }} .c-col-new__title {
   font-family: 'Raleway', sans-serif;
   font-size: 16px;
@@ -463,9 +495,7 @@
   margin: 0;
   line-height: 1.3;
 }
-#c-col-new-{{ section_id }} .c-col-new__title-link:hover .c-col-new__title {
-  text-decoration: underline;
-}
+#c-col-new-{{ section_id }} .c-col-new__title-link:hover .c-col-new__title { text-decoration: underline; }
 
 #c-col-new-{{ section_id }} .c-col-new__list {
   list-style: none;
@@ -558,21 +588,23 @@
     padding-top: {{ section.settings.padding_top_mobile }}px;
     padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
     padding-left: 20px;
-    padding-right: 0;
-    gap: 24px;
+    padding-right: 20px;
+    gap: 20px;
   }
 
   #c-col-new-{{ section_id }} .c-col-new__sidebar {
     width: 100%;
     position: static;
-    padding-right: 20px;
   }
 
   #c-col-new-{{ section_id }} .c-col-new__search-box {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
 
-  /* Filters become horizontal pills on mobile */
+  /* Filter section box stays, filters become pills */
+  #c-col-new-{{ section_id }} .c-col-new__filter-header {
+    margin-bottom: 12px;
+  }
   #c-col-new-{{ section_id }} .c-col-new__filters {
     display: flex;
     flex-wrap: wrap;
@@ -580,13 +612,14 @@
   }
   #c-col-new-{{ section_id }} .c-col-new__filter-item {
     margin-bottom: 0;
-    padding: 8px 16px;
+    padding: 7px 16px;
     border: 1.5px solid {{ section.settings.heading_color }};
     border-radius: 40px;
     font-size: 13px;
     transition: background 0.2s ease, color 0.2s ease;
+    gap: 0;
   }
-  #c-col-new-{{ section_id }} .c-col-new__filter-item:has(.c-col-new__radio:checked) {
+  #c-col-new-{{ section_id }} .c-col-new__filter-item.is-active-pill {
     background: {{ section.settings.heading_color }};
     color: #fff;
   }
@@ -621,38 +654,50 @@
 ════════════════════════════════════════════════════════════ -->
 <script>
 (function () {
-  const sId       = {{ section_id | json }};
-  const wrapper   = document.getElementById('c-col-new-' + sId);
+  var sId      = {{ section_id | json }};
+  var wrapper  = document.getElementById('c-col-new-' + sId);
   if (!wrapper) return;
 
-  const grid       = wrapper.querySelector('.c-col-new__grid');
-  const noResults  = wrapper.querySelector('.c-col-new__no-results');
-  const searchInput= wrapper.querySelector('.c-col-new__search-input');
-  const radios     = wrapper.querySelectorAll('.c-col-new__radio');
-  const filterHdr  = wrapper.querySelector('.c-col-new__filter-header');
-  const filterSec  = wrapper.querySelector('.c-col-new__filter-section');
+  var grid        = wrapper.querySelector('.c-col-new__grid');
+  var noResults   = wrapper.querySelector('.c-col-new__no-results');
+  var searchInput = wrapper.querySelector('.c-col-new__search-input');
+  var radios      = wrapper.querySelectorAll('.c-col-new__radio');
+  var filterHdr   = wrapper.querySelector('.c-col-new__filter-header');
+  var filterSec   = wrapper.querySelector('.c-col-new__filter-section');
 
-  let activeFilter = 'all';
-  let searchQuery  = '';
+  /* ── Read default filter set by Liquid in the HTML attribute ── */
+  var defaultFilter = (wrapper.dataset.defaultFilter || 'all').trim().toLowerCase();
+  var activeFilter  = defaultFilter;
+  var searchQuery   = '';
+
+  /* ── Sync checked state to default (in case Liquid didn't pre-check) ── */
+  radios.forEach(function(radio) {
+    var val = radio.value.trim().toLowerCase();
+    if (val === activeFilter) {
+      radio.checked = true;
+    } else if (activeFilter !== 'all' && val === 'all') {
+      radio.checked = false;
+    }
+  });
 
   /* ── Filter + Search logic ── */
   function applyFilters() {
-    let visible = 0;
+    var visible = 0;
 
-    grid.querySelectorAll('.c-col-new__card').forEach(card => {
-      const tags  = (card.dataset.tags  || '').toLowerCase();
-      const title = (card.dataset.title || '').toLowerCase();
+    grid.querySelectorAll('.c-col-new__card').forEach(function(card) {
+      var tags  = (card.dataset.tags  || '').toLowerCase();
+      var title = (card.dataset.title || '').toLowerCase();
 
-      const matchFilter =
+      var matchFilter =
         activeFilter === 'all' ||
-        tags.indexOf(activeFilter.toLowerCase()) !== -1;
+        tags.indexOf(activeFilter) !== -1;
 
-      const matchSearch =
+      var matchSearch =
         searchQuery === '' ||
         title.indexOf(searchQuery) !== -1 ||
         tags.indexOf(searchQuery) !== -1;
 
-      const show = matchFilter && matchSearch;
+      var show = matchFilter && matchSearch;
       card.setAttribute('data-hidden', show ? 'false' : 'true');
       if (show) visible++;
     });
@@ -660,13 +705,23 @@
     if (noResults) {
       noResults.style.display = visible === 0 ? 'block' : 'none';
     }
+
+    /* Update active-pill class for mobile */
+    wrapper.querySelectorAll('.c-col-new__filter-item').forEach(function(label) {
+      var radio = label.querySelector('.c-col-new__radio');
+      if (radio && radio.checked) {
+        label.classList.add('is-active-pill');
+      } else {
+        label.classList.remove('is-active-pill');
+      }
+    });
   }
 
-  /* ── Radio buttons ── */
+  /* ── Radio change ── */
   radios.forEach(function(radio) {
     radio.addEventListener('change', function() {
       if (this.checked) {
-        activeFilter = this.value;
+        activeFilter = this.value.trim().toLowerCase();
         applyFilters();
       }
     });
@@ -683,17 +738,17 @@
   /* ── Sidebar collapse ── */
   if (filterHdr && filterSec) {
     filterHdr.addEventListener('click', function() {
-      const isCollapsed = filterSec.classList.toggle('is-collapsed');
-      filterHdr.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+      var collapsed = filterSec.classList.toggle('is-collapsed');
+      filterHdr.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
     });
   }
 
   /* ── Add to Cart AJAX ── */
   grid.querySelectorAll('.c-col-new__add-btn').forEach(function(btn) {
     btn.addEventListener('click', async function() {
-      const variantId  = this.dataset.variantId;
-      const productUrl = this.dataset.productUrl;
-      const addText    = this.dataset.addText || 'ADD TO CART';
+      var variantId  = this.dataset.variantId;
+      var productUrl = this.dataset.productUrl;
+      var addText    = this.dataset.addText || 'ADD TO CART';
 
       if (!variantId || variantId === '') {
         if (productUrl) window.location.href = productUrl;
@@ -704,7 +759,7 @@
       this.textContent = 'ADDING...';
 
       try {
-        const res = await fetch('/cart/add.js', {
+        var res = await fetch('/cart/add.js', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -714,20 +769,18 @@
         });
 
         if (!res.ok) {
-          const errText = await res.text();
+          var errText = await res.text();
           throw new Error(errText || 'Add to cart failed');
         }
 
-        /* Notify cart drawer / bubble (compatible with most themes) */
         document.dispatchEvent(new CustomEvent('cart:updated'));
         document.dispatchEvent(new CustomEvent('cart:refresh'));
-
         window.location.href = productUrl || '/cart';
 
       } catch (err) {
         console.error('[C-Collection-New] Add to cart error:', err);
         this.textContent = 'ERROR';
-        const self = this;
+        var self = this;
         setTimeout(function() {
           self.textContent = addText;
           self.disabled    = false;
@@ -821,6 +874,12 @@
       "id": "all_label",
       "label": "\"All\" Filter Label",
       "default": "All"
+    },
+    {
+      "type": "text",
+      "id": "default_filter",
+      "label": "Default Selected Filter",
+      "info": "Escribe exactamente el valor del tag_one o tag_two que quieres seleccionado por defecto (ej: Fluoride-Free). Deja vacío para mostrar 'All' por defecto.",
     },
     {
       "type": "range",
