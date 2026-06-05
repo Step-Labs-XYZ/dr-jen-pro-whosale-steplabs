@@ -1,0 +1,992 @@
+{% comment %}
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  C - Collection New                                          ║
+  ║  Section para páginas de colección con filtros dinámicos     ║
+  ║  desde metafields de productos.                              ║
+  ║                                                              ║
+  ║  Metafields requeridos en productos:                         ║
+  ║    custom.tag_one    → filtro / badge 1                      ║
+  ║    custom.tag_two    → filtro / badge 2                      ║
+  ║    custom.short_name → nombre corto (override del título)    ║
+  ║    custom.list       → bullets (newlines o pipe "|")         ║
+  ╚══════════════════════════════════════════════════════════════╝
+{% endcomment %}
+
+{%- assign section_id = section.id -%}
+
+<div
+  id="c-col-new-{{ section_id }}"
+  class="c-col-new"
+  data-section-id="{{ section_id }}"
+  data-collection-handle="{{ collection.handle }}"
+>
+
+  <!-- ══════════════════════════════════════
+       SIDEBAR
+  ══════════════════════════════════════ -->
+  <aside class="c-col-new__sidebar" id="c-col-new-sidebar-{{ section_id }}">
+
+    {%- if section.settings.show_search -%}
+    <div class="c-col-new__search-box">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+        <path d="M20 20L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <input
+        type="text"
+        id="c-col-new-search-{{ section_id }}"
+        class="c-col-new__search-input"
+        placeholder="{{ section.settings.search_placeholder | default: 'Search' }}"
+        autocomplete="off"
+        aria-label="Search products"
+      />
+    </div>
+    {%- endif -%}
+
+    <div class="c-col-new__filter-section" id="c-col-new-filter-section-{{ section_id }}">
+      <div class="c-col-new__filter-header" role="button" aria-expanded="true" aria-controls="c-col-new-filters-{{ section_id }}">
+        <span class="c-col-new__filter-label">{{ section.settings.filter_label | default: 'TYPE' }}</span>
+        <svg class="c-col-new__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="c-col-new__filters" id="c-col-new-filters-{{ section_id }}">
+        <label class="c-col-new__filter-item">
+          <input type="radio" name="c-col-new-type-{{ section_id }}" value="all" checked class="c-col-new__radio" />
+          <span class="c-col-new__radio-dot"></span>
+          {{ section.settings.all_label | default: 'All' }}
+        </label>
+
+        {%- assign seen_tags = '' -%}
+        {%- for product in collection.products -%}
+          {%- assign t1 = product.metafields.custom.tag_one.value -%}
+          {%- assign t2 = product.metafields.custom.tag_two.value -%}
+
+          {%- unless t1 == blank or seen_tags contains t1 -%}
+            {%- assign seen_tags = seen_tags | append: t1 | append: '|||' -%}
+            <label class="c-col-new__filter-item">
+              <input type="radio" name="c-col-new-type-{{ section_id }}" value="{{ t1 | escape }}" class="c-col-new__radio" />
+              <span class="c-col-new__radio-dot"></span>
+              {{ t1 }}
+            </label>
+          {%- endunless -%}
+
+          {%- unless t2 == blank or seen_tags contains t2 -%}
+            {%- assign seen_tags = seen_tags | append: t2 | append: '|||' -%}
+            <label class="c-col-new__filter-item">
+              <input type="radio" name="c-col-new-type-{{ section_id }}" value="{{ t2 | escape }}" class="c-col-new__radio" />
+              <span class="c-col-new__radio-dot"></span>
+              {{ t2 }}
+            </label>
+          {%- endunless -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ══════════════════════════════════════
+       PRODUCT GRID
+  ══════════════════════════════════════ -->
+  <main class="c-col-new__main">
+    <div class="c-col-new__grid" id="c-col-new-grid-{{ section_id }}">
+
+      {%- for product in collection.products -%}
+        {%- assign p_img       = product.featured_image -%}
+        {%- assign p_title     = product.metafields.custom.short_name.value | default: product.title -%}
+        {%- assign p_price     = product.price_min | money -%}
+        {%- assign p_list_raw  = product.metafields.custom.list.value | default: '' -%}
+        {%- assign p_tag_one   = product.metafields.custom.tag_one.value | default: '' -%}
+        {%- assign p_tag_two   = product.metafields.custom.tag_two.value | default: '' -%}
+        {%- assign p_variant   = product.first_available_variant -%}
+        {%- assign p_data_tags = p_tag_one | append: '|||' | append: p_tag_two -%}
+
+        <div
+          class="c-col-new__card"
+          data-tags="{{ p_data_tags | downcase | escape }}"
+          data-title="{{ product.title | downcase | escape }}"
+        >
+
+          <!-- Image Box -->
+          <div class="c-col-new__image-box">
+
+            {%- if p_tag_one != blank or p_tag_two != blank -%}
+              <div class="c-col-new__badges c-col-new__badges--{{ section.settings.badge_alignment }}">
+                {%- if p_tag_one != blank -%}
+                  <span class="c-col-new__badge">{{ p_tag_one }}</span>
+                {%- endif -%}
+                {%- if p_tag_two != blank -%}
+                  <span class="c-col-new__badge">{{ p_tag_two }}</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+            {%- if p_img != blank -%}
+              <a href="{{ product.url }}" class="c-col-new__image-link">
+                <img
+                  src="{{ p_img | image_url: width: 600 }}"
+                  alt="{{ product.title | escape }}"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+              </a>
+            {%- endif -%}
+
+            {%- if section.settings.show_subscribe_save -%}
+              <div class="c-col-new__subscribe-pill">
+                {{ section.settings.subscribe_text | default: 'Subscribe & Save up to 15% OFF' }}
+              </div>
+            {%- endif -%}
+
+          </div>
+
+          <!-- Info -->
+          <div class="c-col-new__info">
+
+            <a href="{{ product.url }}" class="c-col-new__title-link">
+              <h3 class="c-col-new__title">{{ p_title }}</h3>
+            </a>
+
+            {%- assign p_list_trim = p_list_raw | strip -%}
+            {%- if p_list_trim != blank -%}
+              {%- assign p_list_lines = p_list_trim | replace: '<br />', '\n' | replace: '<br/>', '\n' | replace: '<br>', '\n' | split: '\n' -%}
+              {%- if p_list_lines.size < 2 -%}
+                {%- assign p_list_lines = p_list_trim | split: '|' -%}
+              {%- endif -%}
+              <ul class="c-col-new__list">
+                {%- assign p_shown = 0 -%}
+                {%- for line in p_list_lines -%}
+                  {%- assign tline = line | strip -%}
+                  {%- if tline != blank -%}
+                    <li>{{ tline }}</li>
+                    {%- assign p_shown = p_shown | plus: 1 -%}
+                    {%- if p_shown >= 4 -%}{% break %}{%- endif -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+
+            <div class="c-col-new__price">{{ p_price }}</div>
+
+            <div class="c-col-new__actions">
+              {%- if p_variant != blank -%}
+                <button
+                  class="c-col-new__add-btn"
+                  type="button"
+                  data-variant-id="{{ p_variant.id }}"
+                  data-product-url="{{ product.url }}"
+                  data-add-text="{{ section.settings.add_to_cart_text | default: 'ADD TO CART' | escape }}"
+                >
+                  {{ section.settings.add_to_cart_text | default: 'ADD TO CART' }}
+                </button>
+              {%- endif -%}
+
+              <a href="{{ product.url }}" class="c-col-new__learn-more">
+                {{ section.settings.learn_more_text | default: 'LEARN MORE' }}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      {%- else -%}
+        <p class="c-col-new__empty">{{ section.settings.empty_text | default: 'No products in this collection.' }}</p>
+      {%- endfor -%}
+
+    </div>
+
+    <p class="c-col-new__no-results" id="c-col-new-no-results-{{ section_id }}" style="display:none;">
+      {{ section.settings.no_results_text | default: 'No products found.' }}
+    </p>
+  </main>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════
+     STYLES  — scoped to #c-col-new-{{ section.id }}
+════════════════════════════════════════════════════════════ -->
+<style>
+#c-col-new-{{ section_id }} {
+  display: flex;
+  gap: 40px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-top: {{ section.settings.padding_top_desktop }}px;
+  padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+  padding-left: 40px;
+  padding-right: 40px;
+  background-color: {{ section.settings.bg_color }};
+  font-family: 'Raleway', sans-serif;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+/* ── Sidebar ── */
+#c-col-new-{{ section_id }} .c-col-new__sidebar {
+  width: {{ section.settings.sidebar_width }}px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 100px;
+}
+
+#c-col-new-{{ section_id }} .c-col-new__search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 28px;
+  background: #fff;
+  transition: border-color 0.2s ease;
+}
+#c-col-new-{{ section_id }} .c-col-new__search-box:focus-within {
+  border-color: {{ section.settings.heading_color }};
+}
+#c-col-new-{{ section_id }} .c-col-new__search-box svg {
+  color: #aaa;
+  flex-shrink: 0;
+}
+#c-col-new-{{ section_id }} .c-col-new__search-input {
+  border: none;
+  outline: none;
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  color: #1F2023;
+  width: 100%;
+  background: transparent;
+}
+#c-col-new-{{ section_id }} .c-col-new__search-input::placeholder { color: #bbb; }
+
+#c-col-new-{{ section_id }} .c-col-new__filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 16px;
+  user-select: none;
+}
+#c-col-new-{{ section_id }} .c-col-new__filter-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: {{ section.settings.heading_color }};
+}
+#c-col-new-{{ section_id }} .c-col-new__chevron {
+  color: #666;
+  transition: transform 0.25s ease;
+}
+#c-col-new-{{ section_id }} .c-col-new__filter-section.is-collapsed .c-col-new__chevron {
+  transform: rotate(-90deg);
+}
+#c-col-new-{{ section_id }} .c-col-new__filter-section.is-collapsed .c-col-new__filters {
+  display: none;
+}
+
+#c-col-new-{{ section_id }} .c-col-new__filter-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  color: {{ section.settings.text_color }};
+  margin-bottom: 14px;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s;
+}
+#c-col-new-{{ section_id }} .c-col-new__filter-item:last-child { margin-bottom: 0; }
+#c-col-new-{{ section_id }} .c-col-new__filter-item:hover { color: {{ section.settings.heading_color }}; }
+
+#c-col-new-{{ section_id }} .c-col-new__radio { display: none; }
+
+#c-col-new-{{ section_id }} .c-col-new__radio-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease;
+  position: relative;
+}
+#c-col-new-{{ section_id }} .c-col-new__radio-dot::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: {{ section.settings.heading_color }};
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.2s ease;
+}
+#c-col-new-{{ section_id }} .c-col-new__radio:checked + .c-col-new__radio-dot {
+  border-color: {{ section.settings.heading_color }};
+}
+#c-col-new-{{ section_id }} .c-col-new__radio:checked + .c-col-new__radio-dot::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* ── Main & Grid ── */
+#c-col-new-{{ section_id }} .c-col-new__main {
+  flex: 1;
+  min-width: 0;
+}
+
+#c-col-new-{{ section_id }} .c-col-new__grid {
+  display: grid;
+  grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+  gap: {{ section.settings.grid_gap }}px;
+}
+
+#c-col-new-{{ section_id }} .c-col-new__empty,
+#c-col-new-{{ section_id }} .c-col-new__no-results {
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+  color: #999;
+  text-align: center;
+  padding: 60px 0;
+  grid-column: 1 / -1;
+}
+
+/* ── Card ── */
+#c-col-new-{{ section_id }} .c-col-new__card {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  transition: transform 0.3s ease;
+  height: 100%;
+}
+#c-col-new-{{ section_id }} .c-col-new__card:hover {
+  transform: translateY(-4px);
+}
+#c-col-new-{{ section_id }} .c-col-new__card[data-hidden="true"] {
+  display: none;
+}
+
+/* Image Box */
+#c-col-new-{{ section_id }} .c-col-new__image-box {
+  position: relative;
+  background: #F7F7F7;
+  border: 1.5px solid {{ section.settings.heading_color }};
+  border-radius: 12px;
+  padding: 40px 20px;
+  margin-bottom: 12px;
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: {{ section.settings.image_height_desktop }}px;
+}
+
+#c-col-new-{{ section_id }} .c-col-new__image-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+#c-col-new-{{ section_id }} .c-col-new__image-link img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Badges */
+#c-col-new-{{ section_id }} .c-col-new__badges {
+  position: absolute;
+  top: 0;
+  display: flex;
+  gap: 8px;
+  white-space: nowrap;
+  z-index: 2;
+}
+#c-col-new-{{ section_id }} .c-col-new__badges--left   { left: 20px; transform: translateY(-50%); }
+#c-col-new-{{ section_id }} .c-col-new__badges--center { left: 50%; transform: translate(-50%, -50%); }
+#c-col-new-{{ section_id }} .c-col-new__badges--right  { right: 20px; left: auto; transform: translateY(-50%); }
+
+#c-col-new-{{ section_id }} .c-col-new__badge {
+  background: #fff;
+  border: 1.5px solid {{ section.settings.heading_color }};
+  color: {{ section.settings.heading_color }};
+  font-family: 'Raleway', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  line-height: 1;
+}
+
+/* Subscribe pill */
+#c-col-new-{{ section_id }} .c-col-new__subscribe-pill {
+  position: absolute;
+  bottom: 29px;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  background: #fff;
+  color: #1F2023;
+  font-family: 'Raleway', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  font-style: italic;
+  padding: 6px 24px;
+  border-radius: 40px;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(0,0,0,.08);
+  width: max-content;
+  max-width: 90%;
+  z-index: 2;
+}
+
+/* Info */
+#c-col-new-{{ section_id }} .c-col-new__info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 12px;
+  padding: 12px;
+}
+
+#c-col-new-{{ section_id }} .c-col-new__title-link {
+  text-decoration: none;
+  color: inherit;
+}
+#c-col-new-{{ section_id }} .c-col-new__title {
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: {{ section.settings.heading_color }};
+  margin: 0;
+  line-height: 1.3;
+}
+#c-col-new-{{ section_id }} .c-col-new__title-link:hover .c-col-new__title {
+  text-decoration: underline;
+}
+
+#c-col-new-{{ section_id }} .c-col-new__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: {{ section.settings.text_color }};
+  line-height: 1.5;
+}
+#c-col-new-{{ section_id }} .c-col-new__list li {
+  padding: 2px 0 2px 14px;
+  position: relative;
+}
+#c-col-new-{{ section_id }} .c-col-new__list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: {{ section.settings.text_color }};
+}
+
+#c-col-new-{{ section_id }} .c-col-new__price {
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1F2023;
+  margin-top: auto;
+}
+
+/* Actions */
+#c-col-new-{{ section_id }} .c-col-new__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+#c-col-new-{{ section_id }} .c-col-new__add-btn {
+  width: 100%;
+  padding: 14px;
+  background: {{ section.settings.btn_bg_color }};
+  color: {{ section.settings.btn_text_color }};
+  border: none;
+  border-radius: 40px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+#c-col-new-{{ section_id }} .c-col-new__add-btn:hover {
+  background: {{ section.settings.btn_bg_hover }};
+  transform: translateY(-2px);
+}
+#c-col-new-{{ section_id }} .c-col-new__add-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#c-col-new-{{ section_id }} .c-col-new__learn-more {
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: {{ section.settings.link_color }};
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: opacity 0.2s ease;
+}
+#c-col-new-{{ section_id }} .c-col-new__learn-more:hover { opacity: 0.7; }
+
+/* ════ RESPONSIVE ════ */
+@media (max-width: 1100px) {
+  #c-col-new-{{ section_id }} .c-col-new__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  #c-col-new-{{ section_id }} {
+    flex-direction: column;
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    padding-left: 20px;
+    padding-right: 0;
+    gap: 24px;
+  }
+
+  #c-col-new-{{ section_id }} .c-col-new__sidebar {
+    width: 100%;
+    position: static;
+    padding-right: 20px;
+  }
+
+  #c-col-new-{{ section_id }} .c-col-new__search-box {
+    margin-bottom: 20px;
+  }
+
+  /* Filters become horizontal pills on mobile */
+  #c-col-new-{{ section_id }} .c-col-new__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  #c-col-new-{{ section_id }} .c-col-new__filter-item {
+    margin-bottom: 0;
+    padding: 8px 16px;
+    border: 1.5px solid {{ section.settings.heading_color }};
+    border-radius: 40px;
+    font-size: 13px;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  #c-col-new-{{ section_id }} .c-col-new__filter-item:has(.c-col-new__radio:checked) {
+    background: {{ section.settings.heading_color }};
+    color: #fff;
+  }
+  #c-col-new-{{ section_id }} .c-col-new__radio-dot { display: none; }
+
+  /* Grid → horizontal carousel */
+  #c-col-new-{{ section_id }} .c-col-new__grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding-bottom: 20px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  #c-col-new-{{ section_id }} .c-col-new__grid::-webkit-scrollbar { display: none; }
+
+  #c-col-new-{{ section_id }} .c-col-new__card {
+    flex: 0 0 {{ section.settings.card_width_mobile }}%;
+    scroll-snap-align: start;
+  }
+
+  #c-col-new-{{ section_id }} .c-col-new__image-box {
+    height: {{ section.settings.image_height_mobile }}px;
+  }
+}
+</style>
+
+
+<!-- ════════════════════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  const sId       = {{ section_id | json }};
+  const wrapper   = document.getElementById('c-col-new-' + sId);
+  if (!wrapper) return;
+
+  const grid       = wrapper.querySelector('.c-col-new__grid');
+  const noResults  = wrapper.querySelector('.c-col-new__no-results');
+  const searchInput= wrapper.querySelector('.c-col-new__search-input');
+  const radios     = wrapper.querySelectorAll('.c-col-new__radio');
+  const filterHdr  = wrapper.querySelector('.c-col-new__filter-header');
+  const filterSec  = wrapper.querySelector('.c-col-new__filter-section');
+
+  let activeFilter = 'all';
+  let searchQuery  = '';
+
+  /* ── Filter + Search logic ── */
+  function applyFilters() {
+    let visible = 0;
+
+    grid.querySelectorAll('.c-col-new__card').forEach(card => {
+      const tags  = (card.dataset.tags  || '').toLowerCase();
+      const title = (card.dataset.title || '').toLowerCase();
+
+      const matchFilter =
+        activeFilter === 'all' ||
+        tags.indexOf(activeFilter.toLowerCase()) !== -1;
+
+      const matchSearch =
+        searchQuery === '' ||
+        title.indexOf(searchQuery) !== -1 ||
+        tags.indexOf(searchQuery) !== -1;
+
+      const show = matchFilter && matchSearch;
+      card.setAttribute('data-hidden', show ? 'false' : 'true');
+      if (show) visible++;
+    });
+
+    if (noResults) {
+      noResults.style.display = visible === 0 ? 'block' : 'none';
+    }
+  }
+
+  /* ── Radio buttons ── */
+  radios.forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      if (this.checked) {
+        activeFilter = this.value;
+        applyFilters();
+      }
+    });
+  });
+
+  /* ── Search ── */
+  if (searchInput) {
+    searchInput.addEventListener('input', function() {
+      searchQuery = this.value.trim().toLowerCase();
+      applyFilters();
+    });
+  }
+
+  /* ── Sidebar collapse ── */
+  if (filterHdr && filterSec) {
+    filterHdr.addEventListener('click', function() {
+      const isCollapsed = filterSec.classList.toggle('is-collapsed');
+      filterHdr.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+    });
+  }
+
+  /* ── Add to Cart AJAX ── */
+  grid.querySelectorAll('.c-col-new__add-btn').forEach(function(btn) {
+    btn.addEventListener('click', async function() {
+      const variantId  = this.dataset.variantId;
+      const productUrl = this.dataset.productUrl;
+      const addText    = this.dataset.addText || 'ADD TO CART';
+
+      if (!variantId || variantId === '') {
+        if (productUrl) window.location.href = productUrl;
+        return;
+      }
+
+      this.disabled    = true;
+      this.textContent = 'ADDING...';
+
+      try {
+        const res = await fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ id: Number(variantId), quantity: 1 })
+        });
+
+        if (!res.ok) {
+          const errText = await res.text();
+          throw new Error(errText || 'Add to cart failed');
+        }
+
+        /* Notify cart drawer / bubble (compatible with most themes) */
+        document.dispatchEvent(new CustomEvent('cart:updated'));
+        document.dispatchEvent(new CustomEvent('cart:refresh'));
+
+        window.location.href = productUrl || '/cart';
+
+      } catch (err) {
+        console.error('[C-Collection-New] Add to cart error:', err);
+        this.textContent = 'ERROR';
+        const self = this;
+        setTimeout(function() {
+          self.textContent = addText;
+          self.disabled    = false;
+        }, 1400);
+      }
+    });
+  });
+
+  /* ── Init ── */
+  applyFilters();
+
+})();
+</script>
+
+
+{% schema %}
+{
+  "name": "C - Collection New",
+  "class": "section-c-collection-new",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading & Accent Color",
+      "default": "#002C41"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body Text Color",
+      "default": "#4A4A4A"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Learn More Link Color",
+      "default": "#002C41"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_color",
+      "label": "Button Background",
+      "default": "#1164E8"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Button Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_hover",
+      "label": "Button Hover Background",
+      "default": "#0D50B8"
+    },
+    {
+      "type": "header",
+      "content": "Sidebar & Filters"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show Search Box",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search Placeholder",
+      "default": "Search"
+    },
+    {
+      "type": "text",
+      "id": "filter_label",
+      "label": "Filter Section Label",
+      "default": "TYPE"
+    },
+    {
+      "type": "text",
+      "id": "all_label",
+      "label": "\"All\" Filter Label",
+      "default": "All"
+    },
+    {
+      "type": "range",
+      "id": "sidebar_width",
+      "min": 140,
+      "max": 280,
+      "step": 10,
+      "unit": "px",
+      "label": "Sidebar Width (Desktop)",
+      "default": 180
+    },
+    {
+      "type": "header",
+      "content": "Cards"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_subscribe_save",
+      "label": "Show Subscribe & Save Pill",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "subscribe_text",
+      "label": "Subscribe Pill Text",
+      "default": "Subscribe & Save up to 15% OFF"
+    },
+    {
+      "type": "select",
+      "id": "badge_alignment",
+      "label": "Badge Alignment",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_text",
+      "label": "Add to Cart Button Text",
+      "default": "ADD TO CART"
+    },
+    {
+      "type": "text",
+      "id": "learn_more_text",
+      "label": "Learn More Link Text",
+      "default": "LEARN MORE"
+    },
+    {
+      "type": "text",
+      "id": "no_results_text",
+      "label": "No Results Message",
+      "default": "No products found."
+    },
+    {
+      "type": "text",
+      "id": "empty_text",
+      "label": "Empty Collection Message",
+      "default": "No products in this collection."
+    },
+    {
+      "type": "header",
+      "content": "Desktop Layout"
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Columns",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "min": 12,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Grid Gap",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "image_height_desktop",
+      "min": 200,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Image Box Height",
+      "default": 320
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Mobile Layout"
+    },
+    {
+      "type": "range",
+      "id": "card_width_mobile",
+      "min": 50,
+      "max": 98,
+      "step": 1,
+      "unit": "%",
+      "label": "Card Width (Peek Control)",
+      "default": 82
+    },
+    {
+      "type": "range",
+      "id": "image_height_mobile",
+      "min": 200,
+      "max": 420,
+      "step": 10,
+      "unit": "px",
+      "label": "Image Box Height",
+      "default": 280
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "C - Collection New"
+    }
+  ]
+}
+{% endschema %}
