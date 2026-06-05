@@ -109,7 +109,7 @@
         "search_placeholder": "Search",
         "filter_label": "TYPE",
         "all_label": "All",
-        "default_filter": "new-collection",
+        "default_filter": "",
         "sidebar_width": 180,
         "show_subscribe_save": true,
         "subscribe_text": "Subscribe & Save up to 15% OFF",
