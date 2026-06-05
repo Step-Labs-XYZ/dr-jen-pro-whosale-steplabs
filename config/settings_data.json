@@ -498,7 +498,7 @@
           "logo_width_desktop": 120,
           "logo_width_mobile": 90,
           "cta_text": "SHOP ALL",
-          "cta_url": "",
+          "cta_url": "https://drjenoralcare.com/account/login?return_url=%2Faccount",
           "show_search": true,
           "show_account": true,
           "show_cart": true,
