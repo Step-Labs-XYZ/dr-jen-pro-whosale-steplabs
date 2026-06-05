@@ -533,10 +533,16 @@
   if (searchBtn) {
     searchBtn.addEventListener('click', function () {
       document.dispatchEvent(new CustomEvent('c-header:search-open'));
-      // Attempt to open common search modals/drawers
-      const searchToggle = document.querySelector(
-        '[data-predictive-search-open], .search-modal__open-button, [data-search-toggle], .header__search'
-      );
+      // Busca el toggle link con aria-controls="search-drawer"
+      let searchToggle = document.querySelector('[aria-controls="search-drawer"]');
+      
+      // Si no lo encuentra, intenta otros selectores comunes
+      if (!searchToggle) {
+        searchToggle = document.querySelector(
+          '[data-predictive-search-open], .search-modal__open-button, [data-search-toggle], .header__search'
+        );
+      }
+      
       if (searchToggle) searchToggle.click();
     });
   }
