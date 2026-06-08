@@ -1,0 +1,362 @@
+{%- style -%}
+  /* --- Estilos Dinámicos por CSS Variables --- */
+  #shopify-section-{{ section.id }} {
+    --bg-color: {{ section.settings.bg_color }};
+    --text-color: {{ section.settings.text_color }};
+    --subtitle-color: {{ section.settings.subtitle_color }};
+    --author-color: {{ section.settings.author_color }};
+    --max-width: {{ section.settings.max_width }}px;
+    
+    /* Espaciados y Tamaños Escritorio */
+    --padding-top-desktop: {{ section.settings.padding_top_desktop }}px;
+    --padding-bottom-desktop: {{ section.settings.padding_bottom_desktop }}px;
+    --title-size-desktop: {{ section.settings.title_size_desktop }}px;
+    --subtitle-size-desktop: {{ section.settings.subtitle_size_desktop }}px;
+    --author-size-desktop: {{ section.settings.author_size_desktop }}px;
+
+    /* Espaciados y Tamaños Móvil */
+    --padding-top-mobile: {{ section.settings.padding_top_mobile }}px;
+    --padding-bottom-mobile: {{ section.settings.padding_bottom_mobile }}px;
+    --title-size-mobile: {{ section.settings.title_size_mobile }}px;
+    --subtitle-size-mobile: {{ section.settings.subtitle_size_mobile }}px;
+    --author-size-mobile: {{ section.settings.author_size_mobile }}px;
+    
+    background-color: var(--bg-color);
+    padding-top: var(--padding-top-desktop);
+    padding-bottom: var(--padding-bottom-desktop);
+  }
+
+  .c-info-collection__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+
+  .c-info-collection__category {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: {{ section.settings.category_transform }};
+    letter-spacing: 1px;
+    color: var(--text-color);
+    margin-bottom: {{ section.settings.category_margin_bottom }}px;
+  }
+
+  .c-info-collection__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 40px;
+  }
+
+  .c-info-collection__left {
+    flex: 1;
+  }
+
+  .c-info-collection__title {
+    font-size: var(--title-size-desktop);
+    font-weight: {{ section.settings.title_weight }};
+    color: var(--text-color);
+    margin: 0 0 12px 0;
+    line-height: 1.15;
+  }
+
+  .c-info-collection__subtitle {
+    font-size: var(--subtitle-size-desktop);
+    color: var(--subtitle-color);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .c-info-collection__right {
+    flex-shrink: 0;
+  }
+
+  .c-info-collection__author {
+    font-size: var(--author-size-desktop);
+    font-style: italic;
+    color: var(--author-color);
+    white-space: nowrap;
+  }
+
+  /* --- RESPONSIVE Desktop / Mobile --- */
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} {
+      padding-top: var(--padding-top-mobile);
+      padding-bottom: var(--padding-bottom-mobile);
+    }
+
+    .c-info-collection__content {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    /* Invierte el orden en móvil para cumplir con el diseño */
+    .c-info-collection__right {
+      order: -1; 
+    }
+
+    .c-info-collection__title {
+      font-size: var(--title-size-mobile);
+    }
+
+    .c-info-collection__subtitle {
+      font-size: var(--subtitle-size-mobile);
+    }
+
+    .c-info-collection__author {
+      font-size: var(--author-size-mobile);
+      white-space: normal;
+    }
+  }
+{%- endstyle -%}
+
+<section class="c-info-collection">
+  <div class="c-info-collection__container">
+    {%- if section.settings.category_text != blank -%}
+      <span class="c-info-collection__category">{{ section.settings.category_text | escape }}</span>
+    {%- endif -%}
+    
+    <div class="c-info-collection__content">
+      <div class="c-info-collection__left">
+        {%- if section.settings.title_text != blank -%}
+          <h2 class="c-info-collection__title">{{ section.settings.title_text | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subtitle_text != blank -%}
+          <p class="c-info-collection__subtitle">{{ section.settings.subtitle_text | escape }}</p>
+        {%- endif -%}
+      </div>
+      
+      <div class="c-info-collection__right">
+        {%- if section.settings.author_text != blank -%}
+          <span class="c-info-collection__author">{{ section.settings.author_text | escape }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "C - Info Collection",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Contenido"
+    },
+    {
+      "type": "text",
+      "id": "category_text",
+      "label": "Texto Categoría Superior",
+      "default": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "title_text",
+      "label": "Título",
+      "default": "Health starts in the mouth"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle_text",
+      "label": "Subtítulo",
+      "default": "Dr. Jen's complete line of oral wellness products"
+    },
+    {
+      "type": "text",
+      "id": "author_text",
+      "label": "Texto Autor / Formulación",
+      "default": "Formulated by Dr. Jen"
+    },
+    {
+      "type": "header",
+      "content": "Colores"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Color de Fondo",
+      "default": "#f6f8f8"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color del Título y Categoría",
+      "default": "#0d3b4c"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Color del Subtítulo",
+      "default": "#53717e"
+    },
+    {
+      "type": "color",
+      "id": "author_color",
+      "label": "Color del Autor",
+      "default": "#436574"
+    },
+    {
+      "type": "header",
+      "content": "Diseño Estructural (Layout)"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "label": "Ancho Máximo de Sección",
+      "default": 1200
+    },
+    {
+      "type": "select",
+      "id": "category_transform",
+      "label": "Formato Texto Superior",
+      "options": [
+        { "value": "none", "label": "Tal como se escribe" },
+        { "value": "uppercase", "label": "MAYÚSCULAS" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "category_margin_bottom",
+      "min": 10,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Separación del texto superior",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "title_weight",
+      "label": "Grosor del Título",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "600", "label": "Semibold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "header",
+      "content": "Ajustes de Tamaño: ESCRITORIO"
+    },
+    {
+      "type": "range",
+      "id": "title_size_desktop",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño del Título",
+      "default": 38
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size_desktop",
+      "min": 14,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño del Subtítulo",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "author_size_desktop",
+      "min": 14,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño del Autor",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Margen Superior Interior",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Margen Inferior Interior",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Ajustes de Tamaño: MÓVIL"
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "min": 18,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño del Título (Móvil)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size_mobile",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño del Subtítulo (Móvil)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "author_size_mobile",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño del Autor (Móvil)",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 10,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Margen Superior Interior (Móvil)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 10,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Margen Inferior Interior (Móvil)",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "C - Info Collection"
+    }
+  ]
+}
+{% endschema %}
