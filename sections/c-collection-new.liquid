@@ -581,11 +581,12 @@
 
 @media (max-width: 768px) {
   #c-col-new-{{ section_id }} {
+    display:block;
     flex-direction: column;
     padding-top: {{ section.settings.padding_top_mobile }}px;
     padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
     padding-left: 20px;
-    padding-right: 0;
+    padding-right: 20px;
     gap: 20px;
   }
 
