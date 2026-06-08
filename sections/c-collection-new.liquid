@@ -5,33 +5,15 @@
   ║    custom.tag_one    → filtro / badge 1                      ║
   ║    custom.tag_two    → filtro / badge 2                      ║
   ║    custom.short_name → nombre corto (override del título)    ║
-  ║    custom.list       → bullets (newlines o pipe "|")         ║
+  ║    custom.list       → bullets (Rich Text metafield)           ║
   ╚══════════════════════════════════════════════════════════════╝
 {% endcomment %}
 
 {%- assign section_id    = section.id -%}
 {%- assign default_filter = section.settings.default_filter | strip | downcase -%}
 
-{%- comment %} ── Recolectar tags únicos de metafields ── {%- endcomment %}
-{%- assign all_filter_tags = '' -%}
-{%- assign seen_tags = '' -%}
-{%- for product in collection.products -%}
-  {%- assign t1 = product.metafields.custom.tag_one.value | strip -%}
-  {%- assign t2 = product.metafields.custom.tag_two.value | strip -%}
-  {%- unless t1 == blank -%}
-    {%- unless seen_tags contains t1 -%}
-      {%- assign seen_tags = seen_tags | append: t1 | append: '|||' -%}
-      {%- assign all_filter_tags = all_filter_tags | append: t1 | append: '|||' -%}
-    {%- endunless -%}
-  {%- endunless -%}
-  {%- unless t2 == blank -%}
-    {%- unless seen_tags contains t2 -%}
-      {%- assign seen_tags = seen_tags | append: t2 | append: '|||' -%}
-      {%- assign all_filter_tags = all_filter_tags | append: t2 | append: '|||' -%}
-    {%- endunless -%}
-  {%- endunless -%}
-{%- endfor -%}
-{%- assign filter_tags_array = all_filter_tags | split: '|||' -%}
+{%- comment %} ── Tags nativos de la colección (Admin → Products → Tags) ── {%- endcomment %}
+{%- assign filter_tags_array = collection.all_tags -%}
 
 <div
   id="c-col-new-{{ section_id }}"
@@ -126,7 +108,7 @@
         {%- assign p_tag_one   = product.metafields.custom.tag_one.value | default: '' -%}
         {%- assign p_tag_two   = product.metafields.custom.tag_two.value | default: '' -%}
         {%- assign p_variant   = product.first_available_variant -%}
-        {%- assign p_data_tags = p_tag_one | downcase | append: '|||' | append: p_tag_two | downcase -%}
+        {%- assign p_data_tags = product.tags | join: '|||' | downcase -%}
 
         <div
           class="c-col-new__card"
@@ -175,23 +157,10 @@
               <h3 class="c-col-new__title">{{ p_title }}</h3>
             </a>
 
-            {%- assign p_list_trim = p_list_raw | strip -%}
-            {%- if p_list_trim != blank -%}
-              {%- assign p_list_lines = p_list_trim | replace: '<br />', '\n' | replace: '<br/>', '\n' | replace: '<br>', '\n' | split: '\n' -%}
-              {%- if p_list_lines.size < 2 -%}
-                {%- assign p_list_lines = p_list_trim | split: '|' -%}
-              {%- endif -%}
-              <ul class="c-col-new__list">
-                {%- assign p_shown = 0 -%}
-                {%- for line in p_list_lines -%}
-                  {%- assign tline = line | strip -%}
-                  {%- if tline != blank -%}
-                    <li>{{ tline }}</li>
-                    {%- assign p_shown = p_shown | plus: 1 -%}
-                    {%- if p_shown >= 4 -%}{% break %}{%- endif -%}
-                  {%- endif -%}
-                {%- endfor -%}
-              </ul>
+            {%- if p_list_raw != blank -%}
+              <div class="c-col-new__list">
+                {{ product.metafields.custom.list | metafield_tag }}
+              </div>
             {%- endif -%}
 
             <div class="c-col-new__price">{{ p_price }}</div>
@@ -498,23 +467,37 @@
 #c-col-new-{{ section_id }} .c-col-new__title-link:hover .c-col-new__title { text-decoration: underline; }
 
 #c-col-new-{{ section_id }} .c-col-new__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
   font-family: 'Raleway', sans-serif;
   font-size: 13px;
   font-weight: 400;
   color: {{ section.settings.text_color }};
   line-height: 1.5;
 }
-#c-col-new-{{ section_id }} .c-col-new__list li {
+#c-col-new-{{ section_id }} .c-col-new__list ul,
+#c-col-new-{{ section_id }} .c-col-new__list ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#c-col-new-{{ section_id }} .c-col-new__list ul li,
+#c-col-new-{{ section_id }} .c-col-new__list ol li {
   padding: 2px 0 2px 14px;
   position: relative;
 }
-#c-col-new-{{ section_id }} .c-col-new__list li::before {
-  content: '•';
+#c-col-new-{{ section_id }} .c-col-new__list ul li::before,
+#c-col-new-{{ section_id }} .c-col-new__list ol li::before {
+  content: '\2022';
   position: absolute;
   left: 0;
+  color: {{ section.settings.text_color }};
+}
+#c-col-new-{{ section_id }} .c-col-new__list p,
+#c-col-new-{{ section_id }} .c-col-new__list h1,
+#c-col-new-{{ section_id }} .c-col-new__list h2,
+#c-col-new-{{ section_id }} .c-col-new__list h3 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 400;
   color: {{ section.settings.text_color }};
 }
 
@@ -879,7 +862,7 @@
       "type": "text",
       "id": "default_filter",
       "label": "Default Selected Filter",
-      "info": "Escribe exactamente el valor del tag_one o tag_two que quieres seleccionado por defecto (ej: Fluoride-Free). Deja vacío para mostrar 'All' por defecto.",
+      "info": "Escribe exactamente el valor del tag_one o tag_two que quieres seleccionado por defecto (ej: Fluoride-Free). Deja vacío para mostrar 'All' por defecto."
     },
     {
       "type": "range",
