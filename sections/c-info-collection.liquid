@@ -45,22 +45,36 @@
   }
 
   .c-info-collection__content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start; /* Cambiado a flex-start para alinear arriba en Escritorio */
-    gap: 40px;
+    max-width: 100%;
   }
 
-  .c-info-collection__left {
-    flex: 1;
+  /* El título ahora es un contenedor flexible que acepta elementos inline */
+  .c-info-collection__title-container {
+    display: inline-flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 16px; /* Espacio exacto entre el título y el autor */
+    margin-bottom: 12px;
+    width: 100%;
   }
 
   .c-info-collection__title {
     font-size: var(--title-size-desktop);
     font-weight: {{ section.settings.title_weight }};
     color: var(--text-color);
-    margin: 0 0 12px 0;
+    margin: 0;
     line-height: 1.15;
+    display: inline;
+  }
+
+  .c-info-collection__author {
+    font-size: var(--author-size-desktop);
+    font-style: italic;
+    color: var(--author-color);
+    white-space: nowrap;
+    display: inline-block;
+    position: relative;
+    top: -2px; /* Ajuste milimétrico hacia arriba */
   }
 
   .c-info-collection__subtitle {
@@ -70,18 +84,6 @@
     line-height: 1.4;
   }
 
-  .c-info-collection__right {
-    flex-shrink: 0;
-    padding-top: 4px; /* Pequeño ajuste para nivelar perfectamente con la primera línea de texto */
-  }
-
-  .c-info-collection__author {
-    font-size: var(--author-size-desktop);
-    font-style: italic;
-    color: var(--author-color);
-    white-space: nowrap;
-  }
-
   /* --- RESPONSIVE Desktop / Mobile --- */
   @media (max-width: 768px) {
     #shopify-section-{{ section.id }} {
@@ -89,16 +91,19 @@
       padding-bottom: var(--padding-bottom-mobile);
     }
 
-    .c-info-collection__content {
+    /* En móvil cambiamos la dirección para que el autor pase ARRIBA del título */
+    .c-info-collection__title-container {
       flex-direction: column;
       align-items: flex-start;
-      gap: 20px;
+      gap: 12px;
+      margin-bottom: 16px;
     }
 
-    /* Invierte el orden en móvil para que quede arriba del título */
-    .c-info-collection__right {
-      order: -1; 
-      padding-top: 0;
+    .c-info-collection__author {
+      order: -1; /* Mueve el autor arriba del título en móvil */
+      font-size: var(--author-size-mobile);
+      white-space: normal;
+      top: 0;
     }
 
     .c-info-collection__title {
@@ -107,11 +112,6 @@
 
     .c-info-collection__subtitle {
       font-size: var(--subtitle-size-mobile);
-    }
-
-    .c-info-collection__author {
-      font-size: var(--author-size-mobile);
-      white-space: normal;
     }
   }
 {%- endstyle -%}
@@ -123,20 +123,19 @@
     {%- endif -%}
     
     <div class="c-info-collection__content">
-      <div class="c-info-collection__left">
+      <div class="c-info-collection__title-container">
         {%- if section.settings.title_text != blank -%}
           <h2 class="c-info-collection__title">{{ section.settings.title_text | escape }}</h2>
         {%- endif -%}
-        {%- if section.settings.subtitle_text != blank -%}
-          <p class="c-info-collection__subtitle">{{ section.settings.subtitle_text | escape }}</p>
-        {%- endif -%}
-      </div>
-      
-      <div class="c-info-collection__right">
+        
         {%- if section.settings.author_text != blank -%}
           <span class="c-info-collection__author">{{ section.settings.author_text | escape }}</span>
         {%- endif -%}
       </div>
+
+      {%- if section.settings.subtitle_text != blank -%}
+        <p class="c-info-collection__subtitle">{{ section.settings.subtitle_text | escape }}</p>
+      {%- endif -%}
     </div>
   </div>
 </section>
