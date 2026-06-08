@@ -10,6 +10,8 @@
     /* Espaciados y Tamaños Escritorio */
     --padding-top-desktop: {{ section.settings.padding_top_desktop }}px;
     --padding-bottom-desktop: {{ section.settings.padding_bottom_desktop }}px;
+    --padding-left-desktop: {{ section.settings.padding_left_desktop }}px;
+    --padding-right-desktop: {{ section.settings.padding_right_desktop }}px;
     --title-size-desktop: {{ section.settings.title_size_desktop }}px;
     --subtitle-size-desktop: {{ section.settings.subtitle_size_desktop }}px;
     --author-size-desktop: {{ section.settings.author_size_desktop }}px;
@@ -17,6 +19,8 @@
     /* Espaciados y Tamaños Móvil */
     --padding-top-mobile: {{ section.settings.padding_top_mobile }}px;
     --padding-bottom-mobile: {{ section.settings.padding_bottom_mobile }}px;
+    --padding-left-mobile: {{ section.settings.padding_left_mobile }}px;
+    --padding-right-mobile: {{ section.settings.padding_right_mobile }}px;
     --title-size-mobile: {{ section.settings.title_size_mobile }}px;
     --subtitle-size-mobile: {{ section.settings.subtitle_size_mobile }}px;
     --author-size-mobile: {{ section.settings.author_size_mobile }}px;
@@ -24,14 +28,13 @@
     background-color: var(--bg-color);
     padding-top: var(--padding-top-desktop);
     padding-bottom: var(--padding-bottom-desktop);
-    padding-left: 40px;
-    padding-right:40px;
+    padding-left: var(--padding-left-desktop);
+    padding-right: var(--padding-right-desktop);
   }
 
   .c-info-collection__container {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 20px;
     box-sizing: border-box;
   }
 
@@ -76,7 +79,7 @@
     white-space: nowrap;
     display: inline-block;
     position: relative;
-    top: -9px; /* Ajuste milimétrico hacia arriba */
+    top: -2px; /* Ajuste milimétrico hacia arriba */
   }
 
   .c-info-collection__subtitle {
@@ -91,6 +94,8 @@
     #shopify-section-{{ section.id }} {
       padding-top: var(--padding-top-mobile);
       padding-bottom: var(--padding-bottom-mobile);
+      padding-left: var(--padding-left-mobile);
+      padding-right: var(--padding-right-mobile);
     }
 
     /* En móvil cambiamos la dirección para que el autor pase ARRIBA del título */
@@ -284,22 +289,42 @@
     {
       "type": "range",
       "id": "padding_top_desktop",
-      "min": 20,
+      "min": 0,
       "max": 120,
       "step": 4,
       "unit": "px",
-      "label": "Margen Superior Interior",
+      "label": "Padding Superior",
       "default": 60
     },
     {
       "type": "range",
       "id": "padding_bottom_desktop",
-      "min": 20,
+      "min": 0,
       "max": 120,
       "step": 4,
       "unit": "px",
-      "label": "Margen Inferior Interior",
+      "label": "Padding Inferior",
       "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_left_desktop",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Izquierdo",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_right_desktop",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Derecho",
+      "default": 40
     },
     {
       "type": "header",
@@ -338,22 +363,42 @@
     {
       "type": "range",
       "id": "padding_top_mobile",
-      "min": 10,
+      "min": 0,
       "max": 80,
       "step": 2,
       "unit": "px",
-      "label": "Margen Superior Interior (Móvil)",
+      "label": "Padding Superior (Móvil)",
       "default": 40
     },
     {
       "type": "range",
       "id": "padding_bottom_mobile",
-      "min": 10,
+      "min": 0,
       "max": 80,
       "step": 2,
       "unit": "px",
-      "label": "Margen Inferior Interior (Móvil)",
+      "label": "Padding Inferior (Móvil)",
       "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Izquierdo (Móvil)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Derecho (Móvil)",
+      "default": 20
     }
   ],
   "presets": [
