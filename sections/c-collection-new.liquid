@@ -622,21 +622,11 @@
   }
   #c-col-new-{{ section_id }} .c-col-new__radio-dot { display: none; }
 
-  /* Grid → horizontal carousel */
+  /* Grid mobile: 1 o 2 columnas */
   #c-col-new-{{ section_id }} .c-col-new__grid {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns_mobile }}, 1fr);
     gap: 16px;
-    padding-bottom: 20px;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  #c-col-new-{{ section_id }} .c-col-new__grid::-webkit-scrollbar { display: none; }
-
-  #c-col-new-{{ section_id }} .c-col-new__card {
-    flex: 0 0 {{ section.settings.card_width_mobile }}%;
-    scroll-snap-align: start;
   }
 
   #c-col-new-{{ section_id }} .c-col-new__image-box {
@@ -1000,15 +990,16 @@
       "content": "Mobile Layout"
     },
     {
-      "type": "range",
-      "id": "card_width_mobile",
-      "min": 50,
-      "max": 98,
-      "step": 1,
-      "unit": "%",
-      "label": "Card Width (Peek Control)",
-      "default": 82
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columnas en móvil",
+      "options": [
+        { "value": "1", "label": "1 columna (carrusel)" },
+        { "value": "2", "label": "2 columnas (grid)" }
+      ],
+      "default": "1"
     },
+
     {
       "type": "range",
       "id": "image_height_mobile",
