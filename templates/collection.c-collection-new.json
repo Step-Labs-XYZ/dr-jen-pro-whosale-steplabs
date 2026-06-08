@@ -11,6 +11,7 @@
   "sections": {
     "collection-banner": {
       "type": "collection-banner",
+      "disabled": true,
       "settings": {
         "show_collection_image": false,
         "show_collection_title": true,
@@ -59,6 +60,7 @@
         "04513724-3d70-4d85-ab01-25df03cbfdf2",
         "2ca4762d-b0e5-4b47-ab45-b239eb8f79ae"
       ],
+      "disabled": true,
       "settings": {
         "title": ""
       }
@@ -94,6 +96,34 @@
         "include_vertical_margins": true
       }
     },
+    "c_info_collection_CtXgAW": {
+      "type": "c-info-collection",
+      "name": "C - Info Collection",
+      "settings": {
+        "category_text": "Collection",
+        "title_text": "Health starts in the mouth",
+        "subtitle_text": "Dr. Jen's complete line of oral wellness products",
+        "author_text": "Formulated by Dr. Jen",
+        "bg_color": "#f6f8f8",
+        "text_color": "#0d3b4c",
+        "subtitle_color": "#53717e",
+        "author_color": "#436574",
+        "max_width": 1200,
+        "category_transform": "none",
+        "category_margin_bottom": 40,
+        "title_weight": "700",
+        "title_size_desktop": 38,
+        "subtitle_size_desktop": 18,
+        "author_size_desktop": 20,
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "title_size_mobile": 32,
+        "subtitle_size_mobile": 16,
+        "author_size_mobile": 18,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
     "c_collection_new_rYzRic": {
       "type": "c-collection-new",
       "name": "C - Collection New",
@@ -123,7 +153,7 @@
         "image_height_desktop": 320,
         "padding_top_desktop": 60,
         "padding_bottom_desktop": 60,
-        "card_width_mobile": 82,
+        "columns_mobile": "1",
         "image_height_mobile": 280,
         "padding_top_mobile": 40,
         "padding_bottom_mobile": 40
@@ -136,6 +166,7 @@
     "main",
     "1659903519998b6b30",
     "16766554811e820a75",
+    "c_info_collection_CtXgAW",
     "c_collection_new_rYzRic"
   ]
 }
