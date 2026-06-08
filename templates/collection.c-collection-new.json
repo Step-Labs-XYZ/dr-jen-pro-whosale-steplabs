@@ -193,13 +193,29 @@
             "question": "What exactly is nano-hydroxyapatite?",
             "answer": "<p>Nanohydroxyapatite (nHAp) is composed of calcium and phosphate minerals, the same minerals that make up 97% of your tooth enamel and the mineral portion of your bones. The \"nano\" means the particles are extremely small, measured in nanometers, allowing them to behave like your natural enamel crystals.  </p><p><strong>How it works:</strong></p><ul><li>Absorbs and removes dental plaque</li><li>Replenishes lost calcium and phosphate minerals</li><li>Fills in micro-fissures on tooth surfaces</li><li>Reduces sensitivity by sealing exposed dentinal tubules</li></ul><p>Think of it as giving your teeth the building blocks they need to stay strong.</p>"
           }
+        },
+        "faq_item_7wqBVP": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Why does Dr. Jen's cost more than other toothpastes?",
+            "answer": "<p>There's something we want you to know because behind every tube is a story that started long before it reached your bathroom shelf.<br/><br/><strong>It began in a hospital room.<br/></strong>Years ago, Dr. Jen's daughter became dangerously ill with a life-threatening stomach condition. As any parent would, Dr. Jen searched for every way to support her daughter's healing, down to the smallest details, including something as simple as toothpaste.<br/><br/>What she discovered shocked her.<br/><br/>Fluoride-free toothpastes aren't regulated. Brands can claim \"nanohydroxyapatite\" while using cheap, low-quality versions or including so little that it does almost nothing. Labels didn't tell the full truth, and Dr. Jen couldn't find a single toothpaste that matched what the science said her daughter needed.<br/><br/>In that hospital room, one thing became clear: <strong>if the right toothpaste didn't exist, she would have to create it.<br/>A mother's worry became a mission.<br/></strong>Dr. Jen spent years studying particle size, purity, concentration, safety, and biocompatibility. She rejected anything that didn't meet the highest standard, even when it cost more.<br/><br/>Only true high-grade nanohydroxyapatite<br/><br/>Only the optimal concentration proven to protect enamel<br/><br/>Only clean, gut-friendly ingredients gentle enough for someone fighting for their health<br/><br/>No shortcuts. No compromises. Just a formula built with the same care she wanted for her own child.<br/><br/><strong>That's why our toothpaste costs more</strong>. Because it was never created to be the cheapest. It was created to be the safest, the purest, and the most effective. Born from fear, love, science, and the determination of a mother who refused to settle.<br/><br/><strong>And yet, it comes down to 25 cents a day.<br/></strong>For up to 25 cents per day, you give your enamel the level of protection research actually supports, without the gut-disrupting ingredients found in many conventional formulas. About the same as your morning coffee, but for your long-term health.</p>"
+          }
+        },
+        "faq_item_fhf7ba": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I use Dr. Jen's toothpaste?",
+            "answer": "<p>Brush as you normally would, then spit out the excess but don't rinse. For maximum mineral uptake, wait 30 minutes before eating or drinking. This allows the nanohydroxyapatite to fully bond with your enamel.<br/><br/>As always, discuss any specific questions or concerns with your dental team, who knows your personal oral health best.</p>"
+          }
         }
       },
       "block_order": [
         "faq_item_dkadVy",
         "faq_item_q7qrHT",
         "faq_item_XXR3f6",
-        "faq_item_wE94zQ"
+        "faq_item_wE94zQ",
+        "faq_item_7wqBVP",
+        "faq_item_fhf7ba"
       ],
       "name": "C - FAQ Section",
       "settings": {
