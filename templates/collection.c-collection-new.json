@@ -117,11 +117,15 @@
         "author_size_desktop": 20,
         "padding_top_desktop": 60,
         "padding_bottom_desktop": 60,
+        "padding_left_desktop": 40,
+        "padding_right_desktop": 40,
         "title_size_mobile": 32,
         "subtitle_size_mobile": 16,
         "author_size_mobile": 18,
         "padding_top_mobile": 40,
-        "padding_bottom_mobile": 40
+        "padding_bottom_mobile": 40,
+        "padding_left_mobile": 20,
+        "padding_right_mobile": 20
       }
     },
     "c_collection_new_rYzRic": {
@@ -140,7 +144,7 @@
         "filter_label": "TYPE",
         "all_label": "All",
         "default_filter": "",
-        "sidebar_width": 180,
+        "sidebar_width": 250,
         "show_subscribe_save": true,
         "subscribe_text": "Subscribe & Save up to 15% OFF",
         "badge_alignment": "left",
