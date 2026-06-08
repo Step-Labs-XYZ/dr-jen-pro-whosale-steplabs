@@ -12,35 +12,22 @@
 {%- assign section_id    = section.id -%}
 {%- assign default_filter = section.settings.default_filter | strip | downcase -%}
 
-{%- comment %}
-  ── Colecciones dinámicas desde product.collections ──
-  Se excluyen colecciones cuyo handle esté en la lista exclude_collections del schema.
-  El handle actual de la colección también se excluye automáticamente.
-{%- endcomment %}
-{%- assign exclude_handles_raw = section.settings.exclude_collections | strip | downcase -%}
-{%- assign exclude_handles = exclude_handles_raw | split: ',' -%}
-{%- assign seen_col_handles = '' -%}
-{%- assign filter_collections = '' -%}
+{%- comment %} ── Filtros desde custom.tag_one y custom.tag_two de metafields ── {%- endcomment %}
+{%- assign seen_tags = '' -%}
+{%- assign all_filter_tags = '' -%}
 {%- for product in collection.products -%}
-  {%- for col in product.collections -%}
-    {%- assign col_handle = col.handle | strip | downcase -%}
-    {%- comment %} Skip: already seen, is the current collection, or is excluded {%- endcomment %}
-    {%- if seen_col_handles contains col_handle -%}{%- continue -%}{%- endif -%}
-    {%- if col_handle == collection.handle -%}{%- continue -%}{%- endif -%}
-    {%- assign is_excluded = false -%}
-    {%- for ex in exclude_handles -%}
-      {%- assign ex_trimmed = ex | strip -%}
-      {%- if ex_trimmed == col_handle -%}
-        {%- assign is_excluded = true -%}
-      {%- endif -%}
-    {%- endfor -%}
-    {%- unless is_excluded -%}
-      {%- assign seen_col_handles = seen_col_handles | append: col_handle | append: '|||' -%}
-      {%- assign filter_collections = filter_collections | append: col.handle | append: '::' | append: col.title | append: '|||' -%}
-    {%- endunless -%}
-  {%- endfor -%}
+  {%- assign t1 = product.metafields.custom.tag_one.value | strip -%}
+  {%- assign t2 = product.metafields.custom.tag_two.value | strip -%}
+  {%- unless t1 == blank or seen_tags contains t1 -%}
+    {%- assign seen_tags = seen_tags | append: t1 | append: '|||' -%}
+    {%- assign all_filter_tags = all_filter_tags | append: t1 | append: '|||' -%}
+  {%- endunless -%}
+  {%- unless t2 == blank or seen_tags contains t2 -%}
+    {%- assign seen_tags = seen_tags | append: t2 | append: '|||' -%}
+    {%- assign all_filter_tags = all_filter_tags | append: t2 | append: '|||' -%}
+  {%- endunless -%}
 {%- endfor -%}
-{%- assign filter_collections_array = filter_collections | split: '|||' -%}
+{%- assign filter_tags_array = all_filter_tags | split: '|||' -%}
 
 <div
   id="c-col-new-{{ section_id }}"
@@ -93,28 +80,25 @@
           {{ section.settings.all_label | default: 'All' }}
         </label>
 
-        {%- comment %} Dynamic filters from product.collections {%- endcomment %}
-        {%- for col_pair in filter_collections_array -%}
-          {%- assign col_pair_trim = col_pair | strip -%}
-          {%- unless col_pair_trim == blank -%}
-            {%- assign col_parts  = col_pair_trim | split: '::' -%}
-            {%- assign col_handle = col_parts[0] | strip -%}
-            {%- assign col_title  = col_parts[1] | strip -%}
-            {%- assign col_lower  = col_handle | downcase -%}
-            {%- assign col_checked = '' -%}
-            {%- if default_filter == col_lower -%}
-              {%- assign col_checked = 'checked' -%}
+        {%- comment %} Dynamic filters from custom.tag_one / custom.tag_two metafields {%- endcomment %}
+        {%- for tag in filter_tags_array -%}
+          {%- assign tag_trimmed = tag | strip -%}
+          {%- unless tag_trimmed == blank -%}
+            {%- assign tag_lower = tag_trimmed | downcase -%}
+            {%- assign tag_checked = '' -%}
+            {%- if default_filter == tag_lower -%}
+              {%- assign tag_checked = 'checked' -%}
             {%- endif -%}
             <label class="c-col-new__filter-item">
               <input
                 type="radio"
                 name="c-col-new-type-{{ section_id }}"
-                value="{{ col_handle | escape }}"
-                {{ col_checked }}
+                value="{{ tag_trimmed | escape }}"
+                {{ tag_checked }}
                 class="c-col-new__radio"
               />
               <span class="c-col-new__radio-dot"></span>
-              {{ col_title }}
+              {{ tag_trimmed }}
             </label>
           {%- endunless -%}
         {%- endfor -%}
@@ -138,11 +122,11 @@
         {%- assign p_tag_one   = product.metafields.custom.tag_one.value | default: '' -%}
         {%- assign p_tag_two   = product.metafields.custom.tag_two.value | default: '' -%}
         {%- assign p_variant   = product.first_available_variant -%}
-        {%- assign p_col_handles = product.collections | map: 'handle' | join: '|||' | downcase -%}
+        {%- assign p_data_tags = p_tag_one | downcase | append: '|||' | append: p_tag_two | downcase -%}
 
         <div
           class="c-col-new__card"
-          data-tags="{{ p_col_handles | escape }}"
+          data-tags="{{ p_data_tags | escape }}"
           data-title="{{ product.title | downcase | escape }}"
         >
 
@@ -894,12 +878,7 @@
       "label": "Default Selected Filter",
       "info": "Escribe exactamente el valor del tag_one o tag_two que quieres seleccionado por defecto (ej: Fluoride-Free). Deja vacío para mostrar 'All' por defecto."
     },
-    {
-      "type": "text",
-      "id": "exclude_collections",
-      "label": "Excluir colecciones (handles)",
-      "info": "Handles separados por coma que NO deben aparecer como filtro. Ej: shop-all,wholesale,home-page"
-    },
+
     {
       "type": "range",
       "id": "sidebar_width",
