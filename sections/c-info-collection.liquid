@@ -47,7 +47,7 @@
   .c-info-collection__content {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: flex-start; /* Cambiado a flex-start para alinear arriba en Escritorio */
     gap: 40px;
   }
 
@@ -72,6 +72,7 @@
 
   .c-info-collection__right {
     flex-shrink: 0;
+    padding-top: 4px; /* Pequeño ajuste para nivelar perfectamente con la primera línea de texto */
   }
 
   .c-info-collection__author {
@@ -91,12 +92,13 @@
     .c-info-collection__content {
       flex-direction: column;
       align-items: flex-start;
-      gap: 24px;
+      gap: 20px;
     }
 
-    /* Invierte el orden en móvil para cumplir con el diseño */
+    /* Invierte el orden en móvil para que quede arriba del título */
     .c-info-collection__right {
       order: -1; 
+      padding-top: 0;
     }
 
     .c-info-collection__title {
