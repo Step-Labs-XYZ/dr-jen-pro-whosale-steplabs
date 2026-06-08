@@ -162,6 +162,55 @@
         "padding_top_mobile": 40,
         "padding_bottom_mobile": 40
       }
+    },
+    "c_faq_cVi4ak": {
+      "type": "c-faq",
+      "blocks": {
+        "faq_item_dkadVy": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is Dr. Jen's toothpaste safe to use?",
+            "answer": "<p>Dr. Jen's is the #1 dentist-recommended nanohydroxyapatite toothpaste, trusted by dental professionals nationwide. Dr. Jen has spent six years perfecting these advanced formulations, sourcing the highest-grade nanohydroxyapatite available.<br/><br/>Our rod-shaped crystals meet rigorous EU safety standards for synthetic nHAp, and our eggshell nHAp is ISO certified. While other brands have approached us wanting to use our premium sources, we protect the integrity of our supply chain to ensure every tube meets our exacting standards.<br/><br/></p>"
+          }
+        },
+        "faq_item_q7qrHT": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Which formula is right for me?",
+            "answer": "<p>Dr. Jen Super Paste combines 10% nanohydroxyapatite with fluoride, clinically proven to outperform fluoride-only toothpastes. This triple-action formula uses nanohydroxyapatite, fluoride, and xylitol to keep enamel strong and resilient. Available in Mint and Strawberry.<br/><br/>Dr. Jen Fluoride-Free delivers the same cavity protection as fluoride using premium-grade nanohydroxyapatite at the optimal 10% concentration. Blended with our proprietary essential oils, it freshens breath while supporting a healthy oral microbiome. Available in Mint and Strawberry.<br/><br/>Dr. Jen Eggshell is the first and only naturally-derived nHAp toothpaste, formulated with 10% eggshell nanohydroxyapatite. Eggshells naturally contain magnesium and zinc, which promote higher mineral uptake for enhanced enamel protection. Available in Mint and Orange Mango.</p>"
+          }
+        },
+        "faq_item_XXR3f6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are the ingredients natural?",
+            "answer": "<p>We use a proprietary blend of natural essential oils, no synthetic flavoring. Our mint paste contains essential oils with coconut oil-based foaming, while our strawberry paste is naturally foam-free. You'll never find sodium lauryl sulfate (SLS) in any Dr. Jen's formula.</p>"
+          }
+        },
+        "faq_item_wE94zQ": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What exactly is nano-hydroxyapatite?",
+            "answer": "<p>Nanohydroxyapatite (nHAp) is composed of calcium and phosphate minerals, the same minerals that make up 97% of your tooth enamel and the mineral portion of your bones. The \"nano\" means the particles are extremely small, measured in nanometers, allowing them to behave like your natural enamel crystals.  </p><p><strong>How it works:</strong></p><ul><li>Absorbs and removes dental plaque</li><li>Replenishes lost calcium and phosphate minerals</li><li>Fills in micro-fissures on tooth surfaces</li><li>Reduces sensitivity by sealing exposed dentinal tubules</li></ul><p>Think of it as giving your teeth the building blocks they need to stay strong.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_dkadVy",
+        "faq_item_q7qrHT",
+        "faq_item_XXR3f6",
+        "faq_item_wE94zQ"
+      ],
+      "name": "C - FAQ Section",
+      "settings": {
+        "bg_color": "#ffffff",
+        "title": "Frequently Asked\nQuestions",
+        "mobile_alignment": "left",
+        "pad_top_desk": 80,
+        "pad_bot_desk": 80,
+        "pad_top_mob": 50,
+        "pad_bot_mob": 50
+      }
     }
   },
   "order": [
@@ -171,6 +220,7 @@
     "1659903519998b6b30",
     "16766554811e820a75",
     "c_info_collection_CtXgAW",
-    "c_collection_new_rYzRic"
+    "c_collection_new_rYzRic",
+    "c_faq_cVi4ak"
   ]
 }
