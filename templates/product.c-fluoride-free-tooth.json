@@ -1,1 +1,794 @@
-{"sections":{"main":{"type":"main-product","blocks":{"variant_picker":{"type":"variant_picker","settings":{"hide_sold_out_variants":false,"selector_mode":"dropdown","color_mode":"dropdown","size_chart_page":""}},"quantity_selector":{"type":"quantity_selector","settings":{}},"recharge_subscriptions_subscription_widget_v2_cAQFwP":{"type":"shopify:\/\/apps\/recharge-subscriptions\/blocks\/subscription-widget-v2\/371eed76-0b44-4869-9813-730372ea378e","settings":{}},"buy_buttons":{"type":"buy_buttons","settings":{"show_payment_button":true,"atc_button_background":"rgba(0,0,0,0)","atc_button_text_color":"rgba(0,0,0,0)","buy_now_button_background":"rgba(0,0,0,0)","buy_now_button_text_color":"rgba(0,0,0,0)"}}},"block_order":["variant_picker","quantity_selector","recharge_subscriptions_subscription_widget_v2_cAQFwP","buy_buttons"],"disabled":true,"settings":{"show_vendor":true,"show_sku":false,"show_taxes_included":false,"show_product_rating":true,"show_sticky_add_to_cart":true,"show_share_buttons":true,"help_page":"","enable_video_autoplay":true,"enable_video_looping":false,"enable_image_zoom":true,"show_thumbnails_on_mobile":false,"desktop_thumbnails_position":"bottom","transition_effect":"slide"}},"c_product_topbar_6kFXg6":{"type":"c-product-topbar","name":"C - Product Top Bar","settings":{"custom_text":"","bg_color":"#e5e5e5","text_color":"#002C41","font_weight":700,"font_size_desktop":14,"font_size_mobile":11,"pad_y_desktop":10,"pad_y_mobile":8}},"c_product_page_rKyTxE":{"type":"c-product-page","blocks":{"reviews_fwBPUi":{"type":"reviews","settings":{}},"title_AUHa6c":{"type":"title","settings":{"title_source":"secondary","secondary_title":"Fluoride-Free 10% Premium Nanohydroxyapatite Toothpaste\u2028— 12\/24 Pack","secondary_title_line2":""}},"variant_pills_XcBFbd":{"type":"variant_pills","settings":{"option_name":"Flavor"}},"price_stock_4Qk3Yf":{"type":"price_stock","settings":{"unit_label":"tube","retail_text":"Retail $28.00\/unit"}},"description_block_jyEXcG":{"type":"description_block","settings":{"description":"<p>Breakthrough fluoride-free toothpaste for your patients. Dr. Jen's delivers 10% premium Nanohydroxyapatite with a proprietary essential oil complex, providing clinically proven cavity protection, deep enamel remineralization, and sensitivity relief without fluoride. Cleaner ingredients your patients can trust, and you can confidently recommend.<\/p>"}},"ingredients_tab_adicional_JLVC6B":{"type":"ingredients_tab_adicional","settings":{"ingredients_trigger_label":"Ingredients","ingredients_modal_subtitle":"Supplement Facts","ingredients_modal_title":"Fluoride-Free","f1_name":"Cool Mint","f1_color":"#002c41","f1_bg_color":"#f4f8fb","f1_s1_title":"KEY ACTIVES","f1_s1_i1_name":"Nano-Hydroxyapatite (nHAp)","f1_s1_i1_desc":"","f1_s1_i1_tag":"10%","f1_s1_i2_name":"Xylitol","f1_s1_i2_desc":"","f1_s1_i2_tag":"Active","f1_s1_i3_name":"","f1_s1_i3_desc":"","f1_s1_i3_tag":"","f1_s1_i4_name":"","f1_s1_i4_desc":"","f1_s1_i4_tag":"","f1_s2_title":"FLAVOR & FRESHNESS","f1_s2_i1_name":"Peppermint Oil (Mentha Arvensis)","f1_s2_i1_desc":"Naturally antibacterial mint that helps reduce odor-causing bacteria.","f1_s2_i1_tag":"Natural","f1_s2_i2_name":"Spearmint Oil (Mentha Spicata)","f1_s2_i2_desc":"Provides natural antibacterial activity while helping maintain oral freshness.","f1_s2_i2_tag":"Natural","f1_s2_i3_name":"","f1_s2_i3_desc":"","f1_s2_i3_tag":"","f1_s2_i4_name":"","f1_s2_i4_desc":"","f1_s2_i4_tag":"","f1_s3_title":"BOTANICALS","f1_s3_i1_name":"Anise Extract (Illicium verum)","f1_s3_i1_desc":"Helps inhibit odor-causing bacteria and support oral microbiome balance.","f1_s3_i1_tag":"Botanical","f1_s3_i2_name":"Papaya Extract","f1_s3_i2_desc":"Support healing in mild gingivitis environments","f1_s3_i2_tag":"Botanical","f1_s3_i3_name":"Black Cherry Extract","f1_s3_i3_desc":"Antioxidant-rich extract that supports gum health and protects oral tissues.","f1_s3_i3_tag":"Botanical","f1_s3_i4_name":"","f1_s3_i4_desc":"","f1_s3_i4_tag":"","f2_name":"Strawberry","f2_color":"#ff69b4","f2_bg_color":"#fff0f5","f2_s1_title":"KEY ACTIVES","f2_s1_i1_name":"Nano-Hydroxyapatite (nHAp)","f2_s1_i1_desc":"","f2_s1_i1_tag":"10%","f2_s1_i2_name":"","f2_s1_i2_desc":"","f2_s1_i2_tag":"","f2_s1_i3_name":"","f2_s1_i3_desc":"","f2_s1_i3_tag":"","f2_s1_i4_name":"","f2_s1_i4_desc":"","f2_s1_i4_tag":"","f2_s2_title":"FLAVOR & FRESHNESS","f2_s2_i1_name":"Natural Strawberry Flavor","f2_s2_i1_desc":"Sweet and fruity flavor derived naturally.","f2_s2_i1_tag":"Natural","f2_s2_i2_name":"Xanthan Gum","f2_s2_i2_desc":"","f2_s2_i2_tag":"Natural","f2_s2_i3_name":"Potassium Sorbate","f2_s2_i3_desc":"","f2_s2_i3_tag":"Natural","f2_s2_i4_name":"Calendula Extract","f2_s2_i4_desc":"","f2_s2_i4_tag":"Natural","f2_s3_title":"BOTANICALS","f2_s3_i1_name":"Aloe Vera Extract","f2_s3_i1_desc":"Soothes and protects delicate oral tissues.","f2_s3_i1_tag":"Botanical","f2_s3_i2_name":"Papaya Extract","f2_s3_i2_desc":"Support healing in mild gingivitis environments","f2_s3_i2_tag":"Botanical","f2_s3_i3_name":"Black Cherry Extract","f2_s3_i3_desc":"Antioxidant-rich extract that supports gum health and protects oral tissues.","f2_s3_i3_tag":"Botanical","f2_s3_i4_name":"","f2_s3_i4_desc":"","f2_s3_i4_tag":"","ingredients_negative_title":"WHAT'S NOT IN IT","ingredients_negative_item_1":"No SLS","ingredients_negative_item_2":"No Titanium Dioxide","ingredients_negative_item_3":"No Artificial Color","ingredients_negative_item_4":"No Propylene Glycol","ingredients_negative_item_5":"No Fluoride","ingredients_negative_item_6":"No Artificial Flavor","ingredients_negative_item_7":"No Pain Blockers","ingredients_negative_item_8":"No Fillers","ingredients_footer_text_show":true,"ingredients_footer_text":"<p>Cleaner ingredients. Made in an FDA-registered facility in the USA.<br\/>Brush twice daily with a pea-sized amount. Spit — do not rinse.<\/p>"}},"variant_cards_MBMMJm":{"type":"variant_cards","settings":{"option_name":"Quantity","unit_label":"tube","badge_2":"","badge_3":"","badge_2_orange_mango":"","badge_3_orange_mango":""}},"recharge_subscriptions_subscription_widget_v2_9hkAJG":{"type":"shopify:\/\/apps\/recharge-subscriptions\/blocks\/subscription-widget-v2\/371eed76-0b44-4869-9813-730372ea378e","settings":{}},"custom_liquid_RnzabW":{"type":"custom_liquid","settings":{"custom_liquid":""}},"terms_text_aHf4k3":{"type":"terms_text","settings":{"text":"<p><em>Value of one-time purchase<\/em><\/p>"}},"buy_buttons_UaBk3f":{"type":"buy_buttons","settings":{"btn_text":"ADD TO CART","show_add_to_cart":true,"show_dynamic_checkout":true}}},"block_order":["reviews_fwBPUi","title_AUHa6c","variant_pills_XcBFbd","price_stock_4Qk3Yf","description_block_jyEXcG","ingredients_tab_adicional_JLVC6B","variant_cards_MBMMJm","recharge_subscriptions_subscription_widget_v2_9hkAJG","custom_liquid_RnzabW","terms_text_aHf4k3","buy_buttons_UaBk3f"],"custom_css":[".button {border-radius: 30px !important;}"],"name":"C - Main Product","settings":{"bg_color":"#ffffff","gallery_bg":"#f6f4ee","badge_left":"","badge_right_svg":"shopify:\/\/shop_images\/Group_48097983_1.png","badge_right_1":"#1","badge_right_2":"ONLY NATURALLY DERIVED TOOTHPASTE","pad_top_desk":60,"pad_bot_desk":60,"pad_top_mob":30,"pad_bot_mob":30}},"c_study_chart_pdp_YVPGxq":{"type":"c-study-chart-pdp","blocks":{"badge_K6pCeK":{"type":"badge","settings":{"icon_image":"shopify:\/\/shop_images\/water_drop.svg","svg_code":"","text":"Clinically Proven Protection"}},"badge_4RbpAg":{"type":"badge","settings":{"icon_image":"shopify:\/\/shop_images\/verified.svg","svg_code":"","text":"Dentist Developed & Approved"}},"badge_8rBxcm":{"type":"badge","settings":{"icon_image":"shopify:\/\/shop_images\/reviews.svg","svg_code":"","text":"Over 360,000 Cleaner Smiles"}},"badge_9j37Jb":{"type":"badge","settings":{"icon_image":"shopify:\/\/shop_images\/nest_eco_leaf.svg","svg_code":"","text":"100% Proven Ingredients"}},"badge_Qmnxd7":{"type":"badge","settings":{"icon_image":"shopify:\/\/shop_images\/reviewss.svg","svg_code":"","text":"Made in USA"}}},"block_order":["badge_K6pCeK","badge_4RbpAg","badge_8rBxcm","badge_9j37Jb","badge_Qmnxd7"],"name":"C Study Chart","settings":{"sl_anchor_id":"","heading":"What Does Your Patients Enamel Really Need in Your Fluoride Toothpaste?","subheading":"The answer is easy: Optimal cavity protection and remineralization","subtitle":"The 10% Premium Difference","body_text":"<p>In a Pilot Study conducted in December 2023, Dr. Jen's Super Paste (10% Nanohydroxyapatite, 0.22% fluoride, and xylitol) was tested against a high-prescription fluoride toothpaste containing 5000 ppm. Dr. Jen's Super Paste delivered six times higher levels of remineralization.<\/p>","chart_image":"shopify:\/\/shop_images\/Frame_1484580905_5.png","bg_color":"#f7f7f7","color_heading":"#002c41","color_body":"#4b5563","chart_bg_color":"#f7f7f7","badge_icon_color":"#002c41","badge_text_color":"#002c41","badges_bg_color":"#f7f7f7","pad_top_mob":60,"pad_bot_mob":0,"pad_top_desk":80,"pad_bot_desk":80}},"c_dr_jen_difference_yWMcpP":{"type":"c-dr-jen-difference","name":"C Dr. Jen Difference","settings":{"heading":"<p>Premium Grade nHAp<\/p>","description":"<p>Premium-grade Nanohydroxyapatite is proven to deliver optimal levels of protection, reduction in acid-causing bacteria, and hypersensitivity management when used at concentrations of 10%<\/p>","bold_text":"<p><strong>While cheaper formulations source lower grade Nanohydroxyapatite, Dr. Jen's sources premium grade Nanohydroxyapatite for higher performance.<\/strong><\/p>","secondary_text":"<p>That's the exact specification the Scientific Committee on Consumer Safety (SCCS) has officially recognized as safe:<\/p>","scientific_image":"shopify:\/\/shop_images\/logo-2.png","scientific_quote":"<p><em>\"Based on the data provided, the SCCS considers hydroxyapatite (nano) safe when used at concentrations up to 10% in toothpaste — composed of rod-shaped particles.\"<\/em><\/p>","crystal_heading":"Does quality of the crystal matter?","crystal_description":"<p>Crystals have to be 'Nano' in size to be able to penetrate the enamel surface pores and dentin tubules.<\/p>","low_grade_image":"shopify:\/\/shop_images\/Group_1000007150.png","low_grade_label":"Low-Grade nHAp","premium_grade_image":"shopify:\/\/shop_images\/Group_1000007167.png","premium_grade_label":"Premium Grade nHAp","bg_color":"#ffffff","heading_color":"#002c41","text_color":"#000000","padding_top":64,"padding_bottom":64}},"c_fluoride_free_pitch_FwhAWT":{"type":"c-fluoride-free-pitch","blocks":{"feature_mN3baP":{"type":"feature","settings":{"title":"Fluoride-Free Formula","body":"<p>Advanced oral health without fluoride, naturally derived Nanohydroxyapatite at 10% premium concentration.<\/p>","open_by_default":false}},"feature_mUUTap":{"type":"feature","settings":{"title":"Naturally Derived","body":"<p>No synthetic compromises and no SLS.<\/p>","open_by_default":false}},"feature_HPUVg6":{"type":"feature","settings":{"title":"Trusted by Professionals","body":"<p>Recommended and used by 500+ dentists across 6 continents.<\/p>","open_by_default":false}}},"block_order":["feature_mN3baP","feature_mUUTap","feature_HPUVg6"],"name":"C - Fluoride-Free Pitch","settings":{"sl_anchor_id":"","bg_color":"#f2f2f0","heading_color":"#002c41","body_color":"#000000","divider_color":"#3d441e","heading":"Why Your Patients \nDeserve Fluoride-Free","body":"<p>The cleaner toothpaste alternative for patients who prefer fluoride-free care, built on 10% premium Nanohydroxyapatite and a proprietary essential oil complex. Unlike conventional toothpastes that rely on fluoride and petroleum-based ingredients, Dr. Jen's Fluoride-Free delivers clinically proven cavity protection and deep enamel remineralization with cleaner ingredients you can trust.<\/p>","comparison_label":"See the Difference at the Microscopic Level:","comparison_image":"shopify:\/\/shop_images\/Frame_1618873401_d214a5d2-0f05-4ba9-b9a1-9723e7830997.png","comparison_image_alt":"Microscopic before-and-after comparison of enamel surface treated with Dr. Jen's Fluoride-Free toothpaste","before_label":"Before","after_label":"After","product_image":"shopify:\/\/shop_images\/Frame_1484580905.png","product_image_alt":"Dr. Jen's Fluoride-Free toothpaste tube","collapse_others":true}},"c_comparison_table_qEw8Un":{"type":"c-comparison-table","blocks":{"row_yfYxzq":{"type":"row","settings":{"title":"Premium-Grade nHAp at 10% Concentration","our_has":true,"other_has":false}},"row_88WUQ7":{"type":"row","settings":{"title":"EU-Certified Rod-Shaped nHAp Crystals","our_has":true,"other_has":false}},"row_mbmh4m":{"type":"row","settings":{"title":"Dentist Developed & Owned","our_has":true,"other_has":false}},"row_XTQycR":{"type":"row","settings":{"title":"Cleaner Ingredients","our_has":true,"other_has":false}},"row_Jn4WH8":{"type":"row","settings":{"title":"No SLS, No Titanium Dioxide, No Artificial Color","our_has":true,"other_has":false}},"row_gMx4E9":{"type":"row","settings":{"title":"Made in an FDA-Registered Facility (USA)","our_has":true,"other_has":false}},"row_EUQNFE":{"type":"row","settings":{"title":"Xylitol for Oral Microbiome Balance","our_has":true,"other_has":false}},"row_YfjER6":{"type":"row","settings":{"title":"Proprietary Essential Oil Complex","our_has":true,"other_has":false}},"row_bcgE8f":{"type":"row","settings":{"title":"Transparent, Science-Backed Formula","our_has":true,"other_has":false}},"row_4mmHTg":{"type":"row","settings":{"title":"Built for Daily, Long-Term Use","our_has":true,"other_has":false}}},"block_order":["row_yfYxzq","row_88WUQ7","row_mbmh4m","row_XTQycR","row_Jn4WH8","row_gMx4E9","row_EUQNFE","row_YfjER6","row_bcgE8f","row_4mmHTg"],"name":"C - Comparison Table","settings":{"bg_color":"#ffffff","pre_title":"","title":"Everything Your Smile Needs, & Nothing It Doesn't","subtitle":"Dr. Jen's vs. other nanohydroxyapatite toothpastes","our_title":"Fluoride-Free 10% Premium \u2028Nanohydroxyapatite","other_title":"Other Toothpaste","pad_top_desk":80,"pad_bot_desk":80,"pad_top_mob":50,"pad_bot_mob":50}},"c_blend_science_flavor_v2_PKeJHb":{"type":"c-blend-science-flavor-v2","blocks":{"bullet_LE9MpT":{"type":"bullet","settings":{"text":"Triple the proven remineralizing ingredients using 10% nano Hydroxyapatite, xylitol and fluoride.\nProprietary formulation for balancing pH and managing halitoses.\n10% Nano Hydroxyapatite. proven enamel remineralization.\nXylitol- Low Abrasion – Helps whitens"}},"ingredient_TtrBdY":{"type":"ingredient","settings":{"name":"Aqua","note":""}},"ingredient_PMXbkU":{"type":"ingredient","settings":{"name":"Glycerin","note":"soothes and moisturizes"}},"ingredient_nQPDVw":{"type":"ingredient","settings":{"name":"Peppermint oil","note":""}},"ingredient_DVXYPW":{"type":"ingredient","settings":{"name":"Potassium Cocoate","note":"foams paste from coconut oil"}},"ingredient_9P7pwN":{"type":"ingredient","settings":{"name":"Silica","note":"polishes teeth"}},"ingredient_gLGYyk":{"type":"ingredient","settings":{"name":"Cellulose Gum","note":"thickens paste"}},"ingredient_9PB3yA":{"type":"ingredient","settings":{"name":"Calcium Carbonate","note":"helps remove stains"}},"ingredient_MTEyfG":{"type":"ingredient","settings":{"name":"Xylitol","note":"reduces acid-causing bacteria"}},"ingredient_7G7UHD":{"type":"ingredient","settings":{"name":"Citric Acid","note":"preserves naturally"}},"ingredient_aXfWKe":{"type":"ingredient","settings":{"name":"Spirulina","note":""}},"ingredient_9yWXaY":{"type":"ingredient","settings":{"name":"Spearmint oil","note":""}},"expandable_group_jxEbNf":{"type":"expandable_group","settings":{"title":"All Extracts","items":"Stevia Rebaudiana Leaf Extract\nAnise Extract\nPapaya Extract\nBlack Cherry Extract\nGlycyhizein (Chinese Licorice Root Extract)","open_by_default":false}},"ingredient_wGnfDi":{"type":"ingredient","settings":{"name":"Nanohydroxyapatite","note":"strengthens enamel"}}},"block_order":["bullet_LE9MpT","ingredient_TtrBdY","ingredient_PMXbkU","ingredient_nQPDVw","ingredient_DVXYPW","ingredient_9P7pwN","ingredient_gLGYyk","ingredient_9PB3yA","ingredient_MTEyfG","ingredient_7G7UHD","ingredient_aXfWKe","ingredient_9yWXaY","expandable_group_jxEbNf","ingredient_wGnfDi"],"name":"C - Blend of Science","settings":{"sl_anchor_id":"","product_image":"shopify:\/\/shop_images\/Frame_1484580905_953817b4-341f-4bc0-81b3-1723d0f79753.png","product_image_mobile":"shopify:\/\/shop_images\/Rectangle_34624332.png","title":"A Blend Of Science & Flavor","bg_color":"#f7f7f7","img_bg_color":"#f7f7f7","text_color":"#002c41","pad_top_desk":80,"pad_bot_desk":80,"pad_top_mob":48,"pad_bot_mob":48}},"c_clinically_backed_XbENcG":{"type":"c-clinically-backed","name":"C - Clinically Backed","settings":{"bg_color":"#ffffff","image_1":"shopify:\/\/shop_images\/image_1290.png","label_1":"Low-\nGrade nHAp","image_2":"shopify:\/\/shop_images\/image_1291.png","label_2":"Premium-\nGrade nHAp","title":"Clinically Backed\nOral Care","description":"Premium-grade Nanohydroxyapatite is clinically proven to support enamel protection and reduce hypersensitivity.","stat1_label":"PROVEN OPTIMAL","stat1_value":"10%","stat1_desc":"Nanohydroxyapatite concentration","stat2_label":"FULL FORMULA STRENGTH","stat2_value":"free","stat2_desc":"from harsh chemicals","detail_label":"PREMIUM CRYSTAL QUALITY","detail_title":"High-Purity nHAp","detail_text":"Enhanced with botanical extracts including Pimpinella anisum, Carica papaya, Prunus serotina, Mentha spicata, and Mentha piperita.","sccs_quote":"","btn_text":"","btn_url":"shopify:\/\/pages\/science","pad_top_desk":80,"pad_bot_desk":80,"pad_top_mob":50,"pad_bot_mob":50}},"product-content":{"type":"product-content","disabled":true,"settings":{}},"1659632928e379313e":{"type":"apps","settings":{"include_horizontal_margins":true,"include_vertical_margins":true}},"c_faq_EEe7Md":{"type":"c-faq","blocks":{"faq_item_9QefQB":{"type":"faq_item","settings":{"question":"Is Dr. Jen's toothpaste safe to use?","answer":"<p>Dr. Jen's is the #1 dentist-recommended nanohydroxyapatite toothpaste, trusted by dental professionals nationwide. Dr. Jen has spent six years perfecting these advanced formulations, sourcing the highest-grade nano-hydroxyapatite available.<br\/><br\/>Our rod-shaped crystals meet rigorous EU safety standards for synthetic nHAp, and our eggshell nHAp is ISO certified. While other brands have approached us wanting to use our premium sources, we protect the integrity of our supply chain to ensure every tube meets our exacting standards.<\/p>"}},"faq_item_X9HyFN":{"type":"faq_item","settings":{"question":"Which formula is right for me?","answer":"<p>Dr. Jen Super Paste combines 10% nanohydroxyapatite with fluoride, clinically proven to outperform fluoride-only toothpastes. This triple-action formula uses nanohydroxyapatite, fluoride, and xylitol to keep enamel strong and resilient. Available in Mint and Strawberry.<br\/><br\/>Dr. Jen Fluoride-Free delivers the same cavity protection as fluoride using premium-grade nanohydroxyapatite at the optimal 10% concentration. Blended with our proprietary essential oils, it freshens breath while supporting a healthy oral microbiome. Available in Mint and Strawberry.<br\/><br\/>Dr. Jen Eggshell is the first and only naturally-derived nHAp toothpaste, formulated with 10% eggshell nanohydroxyapatite. Eggshells naturally contain magnesium and zinc, which promote higher mineral uptake for enhanced enamel protection. Available in Mint and Orange Mango.<\/p>"}},"faq_item_d8m7YW":{"type":"faq_item","settings":{"question":"Are the ingredients natural?","answer":"<p>We use a proprietary blend of natural essential oils, no synthetic flavoring. Our mint paste contains essential oils with coconut oil-based foaming, while our strawberry paste is naturally foam-free. You'll never find sodium lauryl sulfate (SLS) in any Dr. Jen's formula.<\/p>"}},"faq_item_HQ84kE":{"type":"faq_item","settings":{"question":"What exactly is nanohydroxyapatite?","answer":"<p>Nanohydroxyapatite (nHAp) is composed of calcium and phosphate minerals, the same minerals that make up 97% of your tooth enamel and the mineral portion of your bones. The \"nano\" means the particles are extremely small, measured in nanometers, allowing them to behave like your natural enamel crystals.<\/p><p><strong>How it works:<\/strong><\/p><ul><li>Absorbs and removes dental plaque<\/li><li>Replenishes lost calcium and phosphate minerals<\/li><li>Fills in micro-fissures on tooth surfaces<\/li><li>Reduces sensitivity by sealing exposed dentinal tubules<\/li><\/ul><p>Think of it as giving your teeth the building blocks they need to stay strong.<\/p>"}},"faq_item_MEG9f3":{"type":"faq_item","settings":{"question":"Why does Dr. Jen's cost more than other toothpastes?","answer":"<p>There's something we want you to know because behind every tube is a story that started long before it reached your bathroom shelf.<br\/><br\/><strong>It began in a hospital room.<\/strong><br\/><br\/>Years ago, Dr. Jen's daughter became dangerously ill with a life-threatening stomach condition. As any parent would, Dr. Jen searched for every way to support her daughter's healing, down to the smallest details, including something as simple as toothpaste.<br\/><br\/>What she discovered shocked her.<br\/><br\/>Fluoride-free toothpastes aren't regulated. Brands can claim \"nanohydroxyapatite\" while using cheap, low-quality versions or including so little that it does almost nothing. Labels didn't tell the full truth, and Dr. Jen couldn't find a single toothpaste that matched what the science said her daughter needed.<br\/><br\/>In that hospital room, one thing became clear:<strong> if the right toothpaste didn't exist, she would have to create it.<\/strong><br\/><br\/><strong>A mother's worry became a mission.<\/strong><br\/><br\/>Dr. Jen spent years studying particle size, purity, concentration, safety, and biocompatibility. She rejected anything that didn't meet the highest standard, even when it cost more.<br\/><br\/>Only true high-grade nanohydroxyapatite<br\/>Only the optimal concentration proven to protect enamel<br\/>Only clean, gut-friendly ingredients gentle enough for someone fighting for their health<br\/>No shortcuts. No compromises. Just a formula built with the same care she wanted for her own child.<br\/><br\/><strong>That's why our toothpaste costs more. <\/strong>Because it was never created to be the cheapest. It was created to be the safest, the purest, and the most effective. Born from fear, love, science, and the determination of a mother who refused to settle.<br\/><strong><br\/>And yet, it comes down to 25 cents a day.<\/strong><br\/><br\/>For up to 25 cents per day, you give your enamel the level of protection research actually supports, without the gut-disrupting ingredients found in many conventional formulas. About the same as your morning coffee, but for your long-term health.<\/p>"}},"faq_item_Y4VXLd":{"type":"faq_item","settings":{"question":"How do I use Dr. Jen's toothpaste?","answer":"<p>Brush as you normally would, then spit out the excess but don't rinse. For maximum mineral uptake, wait 30 minutes before eating or drinking. This allows the nanohydroxyapatite to fully bond with your enamel.<br\/><br\/>As always, discuss any specific questions or concerns with your dental team, who knows your personal oral health best.<\/p>"}}},"block_order":["faq_item_9QefQB","faq_item_X9HyFN","faq_item_d8m7YW","faq_item_HQ84kE","faq_item_MEG9f3","faq_item_Y4VXLd"],"name":"C - FAQ Section","settings":{"bg_color":"#ffffff","title":"Frequently Asked\nQuestions","mobile_alignment":"left","pad_top_desk":80,"pad_bot_desk":80,"pad_top_mob":50,"pad_bot_mob":50}}},"order":["main","c_product_topbar_6kFXg6","c_product_page_rKyTxE","c_study_chart_pdp_YVPGxq","c_dr_jen_difference_yWMcpP","c_fluoride_free_pitch_FwhAWT","c_comparison_table_qEw8Un","c_blend_science_flavor_v2_PKeJHb","c_clinically_backed_XbENcG","product-content","1659632928e379313e","c_faq_EEe7Md"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "selector_mode": "dropdown",
+            "color_mode": "dropdown",
+            "size_chart_page": ""
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "recharge_subscriptions_subscription_widget_v2_cAQFwP": {
+          "type": "shopify://apps/recharge-subscriptions/blocks/subscription-widget-v2/371eed76-0b44-4869-9813-730372ea378e",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "atc_button_background": "rgba(0,0,0,0)",
+            "atc_button_text_color": "rgba(0,0,0,0)",
+            "buy_now_button_background": "rgba(0,0,0,0)",
+            "buy_now_button_text_color": "rgba(0,0,0,0)"
+          }
+        }
+      },
+      "block_order": [
+        "variant_picker",
+        "quantity_selector",
+        "recharge_subscriptions_subscription_widget_v2_cAQFwP",
+        "buy_buttons"
+      ],
+      "disabled": true,
+      "settings": {
+        "show_vendor": true,
+        "show_sku": false,
+        "show_taxes_included": false,
+        "show_product_rating": true,
+        "show_sticky_add_to_cart": true,
+        "show_share_buttons": true,
+        "help_page": "",
+        "enable_video_autoplay": true,
+        "enable_video_looping": false,
+        "enable_image_zoom": true,
+        "show_thumbnails_on_mobile": false,
+        "desktop_thumbnails_position": "bottom",
+        "transition_effect": "slide"
+      }
+    },
+    "c_product_topbar_6kFXg6": {
+      "type": "c-product-topbar",
+      "name": "C - Product Top Bar",
+      "settings": {
+        "custom_text": "",
+        "bg_color": "#e5e5e5",
+        "text_color": "#002C41",
+        "font_weight": 700,
+        "font_size_desktop": 14,
+        "font_size_mobile": 11,
+        "pad_y_desktop": 10,
+        "pad_y_mobile": 8
+      }
+    },
+    "c_product_page_rKyTxE": {
+      "type": "c-product-page",
+      "blocks": {
+        "reviews_fwBPUi": {
+          "type": "reviews",
+          "settings": {}
+        },
+        "title_AUHa6c": {
+          "type": "title",
+          "settings": {
+            "title_source": "secondary",
+            "secondary_title": "Fluoride-Free 10% Premium Nanohydroxyapatite Toothpaste — 12/24 Pack",
+            "secondary_title_line2": ""
+          }
+        },
+        "variant_pills_XcBFbd": {
+          "type": "variant_pills",
+          "settings": {
+            "option_name": "Flavor"
+          }
+        },
+        "price_stock_4Qk3Yf": {
+          "type": "price_stock",
+          "settings": {
+            "unit_label": "tube",
+            "retail_text": "Retail $18.50/unit"
+          }
+        },
+        "description_block_jyEXcG": {
+          "type": "description_block",
+          "settings": {
+            "description": "<p>Breakthrough fluoride-free toothpaste for your patients. Dr. Jen's delivers 10% premium Nanohydroxyapatite with a proprietary essential oil complex, providing clinically proven cavity protection, deep enamel remineralization, and sensitivity relief without fluoride. Cleaner ingredients your patients can trust, and you can confidently recommend.</p>"
+          }
+        },
+        "ingredients_tab_adicional_JLVC6B": {
+          "type": "ingredients_tab_adicional",
+          "settings": {
+            "ingredients_trigger_label": "Ingredients",
+            "ingredients_modal_subtitle": "Supplement Facts",
+            "ingredients_modal_title": "Fluoride-Free",
+            "f1_name": "Cool Mint",
+            "f1_color": "#002c41",
+            "f1_bg_color": "#f4f8fb",
+            "f1_s1_title": "KEY ACTIVES",
+            "f1_s1_i1_name": "Nano-Hydroxyapatite (nHAp)",
+            "f1_s1_i1_desc": "",
+            "f1_s1_i1_tag": "10%",
+            "f1_s1_i2_name": "Xylitol",
+            "f1_s1_i2_desc": "",
+            "f1_s1_i2_tag": "Active",
+            "f1_s1_i3_name": "",
+            "f1_s1_i3_desc": "",
+            "f1_s1_i3_tag": "",
+            "f1_s1_i4_name": "",
+            "f1_s1_i4_desc": "",
+            "f1_s1_i4_tag": "",
+            "f1_s2_title": "FLAVOR & FRESHNESS",
+            "f1_s2_i1_name": "Peppermint Oil (Mentha Arvensis)",
+            "f1_s2_i1_desc": "Naturally antibacterial mint that helps reduce odor-causing bacteria.",
+            "f1_s2_i1_tag": "Natural",
+            "f1_s2_i2_name": "Spearmint Oil (Mentha Spicata)",
+            "f1_s2_i2_desc": "Provides natural antibacterial activity while helping maintain oral freshness.",
+            "f1_s2_i2_tag": "Natural",
+            "f1_s2_i3_name": "",
+            "f1_s2_i3_desc": "",
+            "f1_s2_i3_tag": "",
+            "f1_s2_i4_name": "",
+            "f1_s2_i4_desc": "",
+            "f1_s2_i4_tag": "",
+            "f1_s3_title": "BOTANICALS",
+            "f1_s3_i1_name": "Anise Extract (Illicium verum)",
+            "f1_s3_i1_desc": "Helps inhibit odor-causing bacteria and support oral microbiome balance.",
+            "f1_s3_i1_tag": "Botanical",
+            "f1_s3_i2_name": "Papaya Extract",
+            "f1_s3_i2_desc": "Support healing in mild gingivitis environments",
+            "f1_s3_i2_tag": "Botanical",
+            "f1_s3_i3_name": "Black Cherry Extract",
+            "f1_s3_i3_desc": "Antioxidant-rich extract that supports gum health and protects oral tissues.",
+            "f1_s3_i3_tag": "Botanical",
+            "f1_s3_i4_name": "",
+            "f1_s3_i4_desc": "",
+            "f1_s3_i4_tag": "",
+            "f2_name": "Strawberry",
+            "f2_color": "#ff69b4",
+            "f2_bg_color": "#fff0f5",
+            "f2_s1_title": "KEY ACTIVES",
+            "f2_s1_i1_name": "Nano-Hydroxyapatite (nHAp)",
+            "f2_s1_i1_desc": "",
+            "f2_s1_i1_tag": "10%",
+            "f2_s1_i2_name": "",
+            "f2_s1_i2_desc": "",
+            "f2_s1_i2_tag": "",
+            "f2_s1_i3_name": "",
+            "f2_s1_i3_desc": "",
+            "f2_s1_i3_tag": "",
+            "f2_s1_i4_name": "",
+            "f2_s1_i4_desc": "",
+            "f2_s1_i4_tag": "",
+            "f2_s2_title": "FLAVOR & FRESHNESS",
+            "f2_s2_i1_name": "Natural Strawberry Flavor",
+            "f2_s2_i1_desc": "Sweet and fruity flavor derived naturally.",
+            "f2_s2_i1_tag": "Natural",
+            "f2_s2_i2_name": "Xanthan Gum",
+            "f2_s2_i2_desc": "",
+            "f2_s2_i2_tag": "Natural",
+            "f2_s2_i3_name": "Potassium Sorbate",
+            "f2_s2_i3_desc": "",
+            "f2_s2_i3_tag": "Natural",
+            "f2_s2_i4_name": "Calendula Extract",
+            "f2_s2_i4_desc": "",
+            "f2_s2_i4_tag": "Natural",
+            "f2_s3_title": "BOTANICALS",
+            "f2_s3_i1_name": "Aloe Vera Extract",
+            "f2_s3_i1_desc": "Soothes and protects delicate oral tissues.",
+            "f2_s3_i1_tag": "Botanical",
+            "f2_s3_i2_name": "Papaya Extract",
+            "f2_s3_i2_desc": "Support healing in mild gingivitis environments",
+            "f2_s3_i2_tag": "Botanical",
+            "f2_s3_i3_name": "Black Cherry Extract",
+            "f2_s3_i3_desc": "Antioxidant-rich extract that supports gum health and protects oral tissues.",
+            "f2_s3_i3_tag": "Botanical",
+            "f2_s3_i4_name": "",
+            "f2_s3_i4_desc": "",
+            "f2_s3_i4_tag": "",
+            "ingredients_negative_title": "WHAT'S NOT IN IT",
+            "ingredients_negative_item_1": "No SLS",
+            "ingredients_negative_item_2": "No Titanium Dioxide",
+            "ingredients_negative_item_3": "No Artificial Color",
+            "ingredients_negative_item_4": "No Propylene Glycol",
+            "ingredients_negative_item_5": "No Fluoride",
+            "ingredients_negative_item_6": "No Artificial Flavor",
+            "ingredients_negative_item_7": "No Pain Blockers",
+            "ingredients_negative_item_8": "No Fillers",
+            "ingredients_footer_text_show": true,
+            "ingredients_footer_text": "<p>Cleaner ingredients. Made in an FDA-registered facility in the USA.<br/>Brush twice daily with a pea-sized amount. Spit — do not rinse.</p>"
+          }
+        },
+        "variant_cards_MBMMJm": {
+          "type": "variant_cards",
+          "settings": {
+            "option_name": "Quantity",
+            "unit_label": "tube",
+            "badge_2": "",
+            "badge_3": "",
+            "badge_2_orange_mango": "",
+            "badge_3_orange_mango": ""
+          }
+        },
+        "recharge_subscriptions_subscription_widget_v2_9hkAJG": {
+          "type": "shopify://apps/recharge-subscriptions/blocks/subscription-widget-v2/371eed76-0b44-4869-9813-730372ea378e",
+          "settings": {}
+        },
+        "custom_liquid_RnzabW": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": ""
+          }
+        },
+        "terms_text_aHf4k3": {
+          "type": "terms_text",
+          "settings": {
+            "text": "<p><em>Value of one-time purchase</em></p>"
+          }
+        },
+        "buy_buttons_UaBk3f": {
+          "type": "buy_buttons",
+          "settings": {
+            "btn_text": "ADD TO CART",
+            "show_add_to_cart": true,
+            "show_dynamic_checkout": true
+          }
+        }
+      },
+      "block_order": [
+        "reviews_fwBPUi",
+        "title_AUHa6c",
+        "variant_pills_XcBFbd",
+        "price_stock_4Qk3Yf",
+        "description_block_jyEXcG",
+        "ingredients_tab_adicional_JLVC6B",
+        "variant_cards_MBMMJm",
+        "recharge_subscriptions_subscription_widget_v2_9hkAJG",
+        "custom_liquid_RnzabW",
+        "terms_text_aHf4k3",
+        "buy_buttons_UaBk3f"
+      ],
+      "custom_css": [
+        ".button {border-radius: 30px !important;}"
+      ],
+      "name": "C - Main Product",
+      "settings": {
+        "bg_color": "#ffffff",
+        "gallery_bg": "#f6f4ee",
+        "badge_left": "",
+        "badge_right_svg": "shopify://shop_images/Group_48097983_1.png",
+        "badge_right_1": "#1",
+        "badge_right_2": "ONLY NATURALLY DERIVED TOOTHPASTE",
+        "pad_top_desk": 60,
+        "pad_bot_desk": 60,
+        "pad_top_mob": 30,
+        "pad_bot_mob": 30
+      }
+    },
+    "c_study_chart_pdp_YVPGxq": {
+      "type": "c-study-chart-pdp",
+      "blocks": {
+        "badge_K6pCeK": {
+          "type": "badge",
+          "settings": {
+            "icon_image": "shopify://shop_images/water_drop.svg",
+            "svg_code": "",
+            "text": "Clinically Proven Protection"
+          }
+        },
+        "badge_4RbpAg": {
+          "type": "badge",
+          "settings": {
+            "icon_image": "shopify://shop_images/verified.svg",
+            "svg_code": "",
+            "text": "Dentist Developed & Approved"
+          }
+        },
+        "badge_8rBxcm": {
+          "type": "badge",
+          "settings": {
+            "icon_image": "shopify://shop_images/reviews.svg",
+            "svg_code": "",
+            "text": "Over 360,000 Cleaner Smiles"
+          }
+        },
+        "badge_9j37Jb": {
+          "type": "badge",
+          "settings": {
+            "icon_image": "shopify://shop_images/nest_eco_leaf.svg",
+            "svg_code": "",
+            "text": "100% Proven Ingredients"
+          }
+        },
+        "badge_Qmnxd7": {
+          "type": "badge",
+          "settings": {
+            "icon_image": "shopify://shop_images/reviewss.svg",
+            "svg_code": "",
+            "text": "Made in USA"
+          }
+        }
+      },
+      "block_order": [
+        "badge_K6pCeK",
+        "badge_4RbpAg",
+        "badge_8rBxcm",
+        "badge_9j37Jb",
+        "badge_Qmnxd7"
+      ],
+      "name": "C Study Chart",
+      "settings": {
+        "sl_anchor_id": "",
+        "heading": "What Does Your Patients Enamel Really Need in Your Fluoride Toothpaste?",
+        "subheading": "The answer is easy: Optimal cavity protection and remineralization",
+        "subtitle": "The 10% Premium Difference",
+        "body_text": "<p>In a Pilot Study conducted in December 2023, Dr. Jen's Super Paste (10% Nanohydroxyapatite, 0.22% fluoride, and xylitol) was tested against a high-prescription fluoride toothpaste containing 5000 ppm. Dr. Jen's Super Paste delivered six times higher levels of remineralization.</p>",
+        "chart_image": "shopify://shop_images/Frame_1484580905_5.png",
+        "bg_color": "#f7f7f7",
+        "color_heading": "#002c41",
+        "color_body": "#4b5563",
+        "chart_bg_color": "#f7f7f7",
+        "badge_icon_color": "#002c41",
+        "badge_text_color": "#002c41",
+        "badges_bg_color": "#f7f7f7",
+        "pad_top_mob": 60,
+        "pad_bot_mob": 0,
+        "pad_top_desk": 80,
+        "pad_bot_desk": 80
+      }
+    },
+    "c_dr_jen_difference_yWMcpP": {
+      "type": "c-dr-jen-difference",
+      "name": "C Dr. Jen Difference",
+      "settings": {
+        "heading": "<p>Premium Grade nHAp</p>",
+        "description": "<p>Premium-grade Nanohydroxyapatite is proven to deliver optimal levels of protection, reduction in acid-causing bacteria, and hypersensitivity management when used at concentrations of 10%</p>",
+        "bold_text": "<p><strong>While cheaper formulations source lower grade Nanohydroxyapatite, Dr. Jen's sources premium grade Nanohydroxyapatite for higher performance.</strong></p>",
+        "secondary_text": "<p>That's the exact specification the Scientific Committee on Consumer Safety (SCCS) has officially recognized as safe:</p>",
+        "scientific_image": "shopify://shop_images/logo-2.png",
+        "scientific_quote": "<p><em>\"Based on the data provided, the SCCS considers hydroxyapatite (nano) safe when used at concentrations up to 10% in toothpaste — composed of rod-shaped particles.\"</em></p>",
+        "crystal_heading": "Does quality of the crystal matter?",
+        "crystal_description": "<p>Crystals have to be 'Nano' in size to be able to penetrate the enamel surface pores and dentin tubules.</p>",
+        "low_grade_image": "shopify://shop_images/Group_1000007150.png",
+        "low_grade_label": "Low-Grade nHAp",
+        "premium_grade_image": "shopify://shop_images/Group_1000007167.png",
+        "premium_grade_label": "Premium Grade nHAp",
+        "bg_color": "#ffffff",
+        "heading_color": "#002c41",
+        "text_color": "#000000",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "c_fluoride_free_pitch_FwhAWT": {
+      "type": "c-fluoride-free-pitch",
+      "blocks": {
+        "feature_mN3baP": {
+          "type": "feature",
+          "settings": {
+            "title": "Fluoride-Free Formula",
+            "body": "<p>Advanced oral health without fluoride, naturally derived Nanohydroxyapatite at 10% premium concentration.</p>",
+            "open_by_default": false
+          }
+        },
+        "feature_mUUTap": {
+          "type": "feature",
+          "settings": {
+            "title": "Naturally Derived",
+            "body": "<p>No synthetic compromises and no SLS.</p>",
+            "open_by_default": false
+          }
+        },
+        "feature_HPUVg6": {
+          "type": "feature",
+          "settings": {
+            "title": "Trusted by Professionals",
+            "body": "<p>Recommended and used by 500+ dentists across 6 continents.</p>",
+            "open_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "feature_mN3baP",
+        "feature_mUUTap",
+        "feature_HPUVg6"
+      ],
+      "name": "C - Fluoride-Free Pitch",
+      "settings": {
+        "sl_anchor_id": "",
+        "bg_color": "#f2f2f0",
+        "heading_color": "#002c41",
+        "body_color": "#000000",
+        "divider_color": "#3d441e",
+        "heading": "Why Your Patients \nDeserve Fluoride-Free",
+        "body": "<p>The cleaner toothpaste alternative for patients who prefer fluoride-free care, built on 10% premium Nanohydroxyapatite and a proprietary essential oil complex. Unlike conventional toothpastes that rely on fluoride and petroleum-based ingredients, Dr. Jen's Fluoride-Free delivers clinically proven cavity protection and deep enamel remineralization with cleaner ingredients you can trust.</p>",
+        "comparison_label": "See the Difference at the Microscopic Level:",
+        "comparison_image": "shopify://shop_images/Frame_1618873401_d214a5d2-0f05-4ba9-b9a1-9723e7830997.png",
+        "comparison_image_alt": "Microscopic before-and-after comparison of enamel surface treated with Dr. Jen's Fluoride-Free toothpaste",
+        "before_label": "Before",
+        "after_label": "After",
+        "product_image": "shopify://shop_images/Frame_1484580905.png",
+        "product_image_alt": "Dr. Jen's Fluoride-Free toothpaste tube",
+        "collapse_others": true
+      }
+    },
+    "c_comparison_table_qEw8Un": {
+      "type": "c-comparison-table",
+      "blocks": {
+        "row_yfYxzq": {
+          "type": "row",
+          "settings": {
+            "title": "Premium-Grade nHAp at 10% Concentration",
+            "our_has": true,
+            "other_has": false
+          }
+        },
+        "row_88WUQ7": {
+          "type": "row",
+          "settings": {
+            "title": "EU-Certified Rod-Shaped nHAp Crystals",
+            "our_has": true,
+            "other_has": false
+          }
+        },
+        "row_mbmh4m": {
+          "type": "row",
+          "settings": {
+            "title": "Dentist Developed & Owned",
+            "our_has": true,
+            "other_has": false
+          }
+        },
+        "row_XTQycR": {
+          "type": "row",
+          "settings": {
+            "title": "Cleaner Ingredients",
+            "our_has": true,
+            "other_has": false
+          }
+        },
+        "row_Jn4WH8": {
+          "type": "row",
+          "settings": {
+            "title": "No SLS, No Titanium Dioxide, No Artificial Color",
+            "our_has": true,
+            "other_has": false
+          }
+        },
+        "row_gMx4E9": {
+          "type": "row",
+          "settings": {
+            "title": "Made in an FDA-Registered Facility (USA)",
+            "our_has": true,
+            "other_has": false
+          }
+        },
+        "row_EUQNFE": {
+          "type": "row",
+          "settings": {
+            "title": "Xylitol for Oral Microbiome Balance",
+            "our_has": true,
+            "other_has": false
+          }
+        },
+        "row_YfjER6": {
+          "type": "row",
+          "settings": {
+            "title": "Proprietary Essential Oil Complex",
+            "our_has": true,
+            "other_has": false
+          }
+        },
+        "row_bcgE8f": {
+          "type": "row",
+          "settings": {
+            "title": "Transparent, Science-Backed Formula",
+            "our_has": true,
+            "other_has": false
+          }
+        },
+        "row_4mmHTg": {
+          "type": "row",
+          "settings": {
+            "title": "Built for Daily, Long-Term Use",
+            "our_has": true,
+            "other_has": false
+          }
+        }
+      },
+      "block_order": [
+        "row_yfYxzq",
+        "row_88WUQ7",
+        "row_mbmh4m",
+        "row_XTQycR",
+        "row_Jn4WH8",
+        "row_gMx4E9",
+        "row_EUQNFE",
+        "row_YfjER6",
+        "row_bcgE8f",
+        "row_4mmHTg"
+      ],
+      "name": "C - Comparison Table",
+      "settings": {
+        "bg_color": "#ffffff",
+        "pre_title": "",
+        "title": "Everything Your Smile Needs, & Nothing It Doesn't",
+        "subtitle": "Dr. Jen's vs. other nanohydroxyapatite toothpastes",
+        "our_title": "Fluoride-Free 10% Premium  Nanohydroxyapatite",
+        "other_title": "Other Toothpaste",
+        "pad_top_desk": 80,
+        "pad_bot_desk": 80,
+        "pad_top_mob": 50,
+        "pad_bot_mob": 50
+      }
+    },
+    "c_blend_science_flavor_v2_PKeJHb": {
+      "type": "c-blend-science-flavor-v2",
+      "blocks": {
+        "bullet_LE9MpT": {
+          "type": "bullet",
+          "settings": {
+            "text": "Triple the proven remineralizing ingredients using 10% nano Hydroxyapatite, xylitol and fluoride.\nProprietary formulation for balancing pH and managing halitoses.\n10% Nano Hydroxyapatite. proven enamel remineralization.\nXylitol- Low Abrasion – Helps whitens"
+          }
+        },
+        "ingredient_TtrBdY": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Aqua",
+            "note": ""
+          }
+        },
+        "ingredient_PMXbkU": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Glycerin",
+            "note": "soothes and moisturizes"
+          }
+        },
+        "ingredient_nQPDVw": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Peppermint oil",
+            "note": ""
+          }
+        },
+        "ingredient_DVXYPW": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Potassium Cocoate",
+            "note": "foams paste from coconut oil"
+          }
+        },
+        "ingredient_9P7pwN": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Silica",
+            "note": "polishes teeth"
+          }
+        },
+        "ingredient_gLGYyk": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Cellulose Gum",
+            "note": "thickens paste"
+          }
+        },
+        "ingredient_9PB3yA": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Calcium Carbonate",
+            "note": "helps remove stains"
+          }
+        },
+        "ingredient_MTEyfG": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Xylitol",
+            "note": "reduces acid-causing bacteria"
+          }
+        },
+        "ingredient_7G7UHD": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Citric Acid",
+            "note": "preserves naturally"
+          }
+        },
+        "ingredient_aXfWKe": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Spirulina",
+            "note": ""
+          }
+        },
+        "ingredient_9yWXaY": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Spearmint oil",
+            "note": ""
+          }
+        },
+        "expandable_group_jxEbNf": {
+          "type": "expandable_group",
+          "settings": {
+            "title": "All Extracts",
+            "items": "Stevia Rebaudiana Leaf Extract\nAnise Extract\nPapaya Extract\nBlack Cherry Extract\nGlycyhizein (Chinese Licorice Root Extract)",
+            "open_by_default": false
+          }
+        },
+        "ingredient_wGnfDi": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Nanohydroxyapatite",
+            "note": "strengthens enamel"
+          }
+        }
+      },
+      "block_order": [
+        "bullet_LE9MpT",
+        "ingredient_TtrBdY",
+        "ingredient_PMXbkU",
+        "ingredient_nQPDVw",
+        "ingredient_DVXYPW",
+        "ingredient_9P7pwN",
+        "ingredient_gLGYyk",
+        "ingredient_9PB3yA",
+        "ingredient_MTEyfG",
+        "ingredient_7G7UHD",
+        "ingredient_aXfWKe",
+        "ingredient_9yWXaY",
+        "expandable_group_jxEbNf",
+        "ingredient_wGnfDi"
+      ],
+      "name": "C - Blend of Science",
+      "settings": {
+        "sl_anchor_id": "",
+        "product_image": "shopify://shop_images/Frame_1484580905_953817b4-341f-4bc0-81b3-1723d0f79753.png",
+        "product_image_mobile": "shopify://shop_images/Rectangle_34624332.png",
+        "title": "A Blend Of Science & Flavor",
+        "bg_color": "#f7f7f7",
+        "img_bg_color": "#f7f7f7",
+        "text_color": "#002c41",
+        "pad_top_desk": 80,
+        "pad_bot_desk": 80,
+        "pad_top_mob": 48,
+        "pad_bot_mob": 48
+      }
+    },
+    "c_clinically_backed_XbENcG": {
+      "type": "c-clinically-backed",
+      "name": "C - Clinically Backed",
+      "settings": {
+        "bg_color": "#ffffff",
+        "image_1": "shopify://shop_images/image_1290.png",
+        "label_1": "Low-\nGrade nHAp",
+        "image_2": "shopify://shop_images/image_1291.png",
+        "label_2": "Premium-\nGrade nHAp",
+        "title": "Clinically Backed\nOral Care",
+        "description": "Premium-grade Nanohydroxyapatite is clinically proven to support enamel protection and reduce hypersensitivity.",
+        "stat1_label": "PROVEN OPTIMAL",
+        "stat1_value": "10%",
+        "stat1_desc": "Nanohydroxyapatite concentration",
+        "stat2_label": "FULL FORMULA STRENGTH",
+        "stat2_value": "free",
+        "stat2_desc": "from harsh chemicals",
+        "detail_label": "PREMIUM CRYSTAL QUALITY",
+        "detail_title": "High-Purity nHAp",
+        "detail_text": "Enhanced with botanical extracts including Pimpinella anisum, Carica papaya, Prunus serotina, Mentha spicata, and Mentha piperita.",
+        "sccs_quote": "",
+        "btn_text": "",
+        "btn_url": "shopify://pages/science",
+        "pad_top_desk": 80,
+        "pad_bot_desk": 80,
+        "pad_top_mob": 50,
+        "pad_bot_mob": 50
+      }
+    },
+    "product-content": {
+      "type": "product-content",
+      "disabled": true,
+      "settings": {}
+    },
+    "1659632928e379313e": {
+      "type": "apps",
+      "settings": {
+        "include_horizontal_margins": true,
+        "include_vertical_margins": true
+      }
+    },
+    "c_faq_EEe7Md": {
+      "type": "c-faq",
+      "blocks": {
+        "faq_item_9QefQB": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is Dr. Jen's toothpaste safe to use?",
+            "answer": "<p>Dr. Jen's is the #1 dentist-recommended nanohydroxyapatite toothpaste, trusted by dental professionals nationwide. Dr. Jen has spent six years perfecting these advanced formulations, sourcing the highest-grade nano-hydroxyapatite available.<br/><br/>Our rod-shaped crystals meet rigorous EU safety standards for synthetic nHAp, and our eggshell nHAp is ISO certified. While other brands have approached us wanting to use our premium sources, we protect the integrity of our supply chain to ensure every tube meets our exacting standards.</p>"
+          }
+        },
+        "faq_item_X9HyFN": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Which formula is right for me?",
+            "answer": "<p>Dr. Jen Super Paste combines 10% nanohydroxyapatite with fluoride, clinically proven to outperform fluoride-only toothpastes. This triple-action formula uses nanohydroxyapatite, fluoride, and xylitol to keep enamel strong and resilient. Available in Mint and Strawberry.<br/><br/>Dr. Jen Fluoride-Free delivers the same cavity protection as fluoride using premium-grade nanohydroxyapatite at the optimal 10% concentration. Blended with our proprietary essential oils, it freshens breath while supporting a healthy oral microbiome. Available in Mint and Strawberry.<br/><br/>Dr. Jen Eggshell is the first and only naturally-derived nHAp toothpaste, formulated with 10% eggshell nanohydroxyapatite. Eggshells naturally contain magnesium and zinc, which promote higher mineral uptake for enhanced enamel protection. Available in Mint and Orange Mango.</p>"
+          }
+        },
+        "faq_item_d8m7YW": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are the ingredients natural?",
+            "answer": "<p>We use a proprietary blend of natural essential oils, no synthetic flavoring. Our mint paste contains essential oils with coconut oil-based foaming, while our strawberry paste is naturally foam-free. You'll never find sodium lauryl sulfate (SLS) in any Dr. Jen's formula.</p>"
+          }
+        },
+        "faq_item_HQ84kE": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What exactly is nanohydroxyapatite?",
+            "answer": "<p>Nanohydroxyapatite (nHAp) is composed of calcium and phosphate minerals, the same minerals that make up 97% of your tooth enamel and the mineral portion of your bones. The \"nano\" means the particles are extremely small, measured in nanometers, allowing them to behave like your natural enamel crystals.</p><p><strong>How it works:</strong></p><ul><li>Absorbs and removes dental plaque</li><li>Replenishes lost calcium and phosphate minerals</li><li>Fills in micro-fissures on tooth surfaces</li><li>Reduces sensitivity by sealing exposed dentinal tubules</li></ul><p>Think of it as giving your teeth the building blocks they need to stay strong.</p>"
+          }
+        },
+        "faq_item_MEG9f3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Why does Dr. Jen's cost more than other toothpastes?",
+            "answer": "<p>There's something we want you to know because behind every tube is a story that started long before it reached your bathroom shelf.<br/><br/><strong>It began in a hospital room.</strong><br/><br/>Years ago, Dr. Jen's daughter became dangerously ill with a life-threatening stomach condition. As any parent would, Dr. Jen searched for every way to support her daughter's healing, down to the smallest details, including something as simple as toothpaste.<br/><br/>What she discovered shocked her.<br/><br/>Fluoride-free toothpastes aren't regulated. Brands can claim \"nanohydroxyapatite\" while using cheap, low-quality versions or including so little that it does almost nothing. Labels didn't tell the full truth, and Dr. Jen couldn't find a single toothpaste that matched what the science said her daughter needed.<br/><br/>In that hospital room, one thing became clear:<strong> if the right toothpaste didn't exist, she would have to create it.</strong><br/><br/><strong>A mother's worry became a mission.</strong><br/><br/>Dr. Jen spent years studying particle size, purity, concentration, safety, and biocompatibility. She rejected anything that didn't meet the highest standard, even when it cost more.<br/><br/>Only true high-grade nanohydroxyapatite<br/>Only the optimal concentration proven to protect enamel<br/>Only clean, gut-friendly ingredients gentle enough for someone fighting for their health<br/>No shortcuts. No compromises. Just a formula built with the same care she wanted for her own child.<br/><br/><strong>That's why our toothpaste costs more. </strong>Because it was never created to be the cheapest. It was created to be the safest, the purest, and the most effective. Born from fear, love, science, and the determination of a mother who refused to settle.<br/><strong><br/>And yet, it comes down to 25 cents a day.</strong><br/><br/>For up to 25 cents per day, you give your enamel the level of protection research actually supports, without the gut-disrupting ingredients found in many conventional formulas. About the same as your morning coffee, but for your long-term health.</p>"
+          }
+        },
+        "faq_item_Y4VXLd": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I use Dr. Jen's toothpaste?",
+            "answer": "<p>Brush as you normally would, then spit out the excess but don't rinse. For maximum mineral uptake, wait 30 minutes before eating or drinking. This allows the nanohydroxyapatite to fully bond with your enamel.<br/><br/>As always, discuss any specific questions or concerns with your dental team, who knows your personal oral health best.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_9QefQB",
+        "faq_item_X9HyFN",
+        "faq_item_d8m7YW",
+        "faq_item_HQ84kE",
+        "faq_item_MEG9f3",
+        "faq_item_Y4VXLd"
+      ],
+      "name": "C - FAQ Section",
+      "settings": {
+        "bg_color": "#ffffff",
+        "title": "Frequently Asked\nQuestions",
+        "mobile_alignment": "left",
+        "pad_top_desk": 80,
+        "pad_bot_desk": 80,
+        "pad_top_mob": 50,
+        "pad_bot_mob": 50
+      }
+    }
+  },
+  "order": [
+    "main",
+    "c_product_topbar_6kFXg6",
+    "c_product_page_rKyTxE",
+    "c_study_chart_pdp_YVPGxq",
+    "c_dr_jen_difference_yWMcpP",
+    "c_fluoride_free_pitch_FwhAWT",
+    "c_comparison_table_qEw8Un",
+    "c_blend_science_flavor_v2_PKeJHb",
+    "c_clinically_backed_XbENcG",
+    "product-content",
+    "1659632928e379313e",
+    "c_faq_EEe7Md"
+  ]
+}
