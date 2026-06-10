@@ -2859,6 +2859,10 @@ shopify-accelerated-checkout {
       } else {
         document.dispatchEvent(new CustomEvent('cart:refresh'));
         document.dispatchEvent(new CustomEvent('cart:open'));
+        document.dispatchEvent(new CustomEvent('mini-cart:open'));
+        window.dispatchEvent(new CustomEvent('mini-cart:open'));
+        const miniCartEl = document.querySelector('mini-cart-form');
+        if (miniCartEl) miniCartEl.dispatchEvent(new CustomEvent('cart:open', { bubbles: true }));
       }
     };
 
