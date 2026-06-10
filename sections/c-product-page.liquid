@@ -2829,17 +2829,16 @@ shopify-accelerated-checkout {
       const cartHelper = hasAlpine ? Alpine.store('xCartHelper') : null;
       const miniCart = hasAlpine ? Alpine.store('xMiniCart') : null;
       const popupStore = hasAlpine ? Alpine.store('xPopup') : null;
+      const cartDrawerSelectors = '[data-cart-drawer], cart-drawer, #cart-drawer, #CartDrawer, cart-drawer#mini-cart, .cart-drawer, .mini-cart, .cart__drawer, #miniCart, #cartDrawer';
 
-      if (
-        cartHelper
-        && typeof cartHelper.getSectionsToRender === 'function'
-        && response.sections
-        && typeof getSectionInnerHTML === 'function'
-      ) {
+      if (cartHelper && typeof cartHelper.getSectionsToRender === 'function' && response.sections) {
         cartHelper.getSectionsToRender().forEach((section) => {
           const sectionElement = document.querySelector(section.selector);
-          if (sectionElement && response.sections[section.id]) {
-            sectionElement.innerHTML = getSectionInnerHTML(response.sections[section.id], section.selector);
+          const sectionHtml = response.sections[section.id];
+          if (sectionElement && sectionHtml) {
+            sectionElement.innerHTML = typeof getSectionInnerHTML === 'function'
+              ? getSectionInnerHTML(sectionHtml, section.selector)
+              : sectionHtml;
           }
         });
 
@@ -2849,6 +2848,10 @@ shopify-accelerated-checkout {
         }
       }
 
+      document.dispatchEvent(new CustomEvent('cart:updated', { detail: response }));
+      document.dispatchEvent(new CustomEvent('cart:refresh'));
+      document.dispatchEvent(new CustomEvent('cart:open'));
+
       if (miniCart && typeof miniCart.openCart === 'function') {
         if (popupStore && typeof popupStore.close === 'function') {
           popupStore.close();
@@ -2857,11 +2860,11 @@ shopify-accelerated-checkout {
         document.dispatchEvent(new CustomEvent('eurus:cart:redirect'));
         document.dispatchEvent(new CustomEvent('eurus:cart:items-changed'));
       } else {
-        document.dispatchEvent(new CustomEvent('cart:refresh'));
-        document.dispatchEvent(new CustomEvent('cart:open'));
-        const cartDrawer = document.querySelector('[data-cart-drawer], cart-drawer, #cart-drawer, #CartDrawer, cart-drawer#mini-cart');
+        const cartDrawer = document.querySelector(cartDrawerSelectors);
         if (cartDrawer && typeof cartDrawer.open === 'function') {
           cartDrawer.open();
+        } else if (window.Shopify && window.Shopify.theme && window.Shopify.theme.cartDrawer && typeof window.Shopify.theme.cartDrawer.open === 'function') {
+          window.Shopify.theme.cartDrawer.open();
         } else if (cartDrawer) {
           cartDrawer.classList.add('is-open', 'active');
           cartDrawer.removeAttribute('hidden');
@@ -2910,11 +2913,13 @@ shopify-accelerated-checkout {
     };
 
     const hasCartDrawer = () => {
-    const hasDrawerElement = document.querySelector('[data-cart-drawer], cart-drawer, #cart-drawer, #CartDrawer, cart-drawer#mini-cart');      const hasMiniCartStore = typeof window.Alpine !== 'undefined'
+      const hasDrawerElement = document.querySelector('[data-cart-drawer], cart-drawer, #cart-drawer, #CartDrawer, cart-drawer#mini-cart, .cart-drawer, .mini-cart, .cart__drawer, #miniCart, #cartDrawer');
+      const hasMiniCartStore = typeof window.Alpine !== 'undefined'
         && Alpine.store('xMiniCart')
         && typeof Alpine.store('xMiniCart').openCart === 'function';
+      const hasThemeCartDrawer = window.Shopify && window.Shopify.theme && window.Shopify.theme.cartDrawer && typeof window.Shopify.theme.cartDrawer.open === 'function';
 
-      return Boolean(hasDrawerElement || hasMiniCartStore);
+      return Boolean(hasDrawerElement || hasMiniCartStore || hasThemeCartDrawer);
     };
 
     const getCartSections = () => {
@@ -2969,8 +2974,6 @@ shopify-accelerated-checkout {
 
       productForm.dataset.ajaxCartInitialized = 'true';
       productForm.addEventListener('submit', async (event) => {
-        if (!hasCartDrawer()) return;
-
         event.preventDefault();
 
         const submitButton = productForm.querySelector('.js-btn-' + sId);
@@ -3019,8 +3022,6 @@ shopify-accelerated-checkout {
         if (!submitButton) return;
 
         submitButton.addEventListener('click', async (event) => {
-          if (!hasCartDrawer()) return;
-
           event.preventDefault();
           event.stopPropagation();
 
