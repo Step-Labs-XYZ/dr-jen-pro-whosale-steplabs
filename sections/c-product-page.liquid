@@ -2859,7 +2859,7 @@ shopify-accelerated-checkout {
       } else {
         document.dispatchEvent(new CustomEvent('cart:refresh'));
         document.dispatchEvent(new CustomEvent('cart:open'));
-        const cartDrawer = document.querySelector('cart-drawer#mini-cart');
+        const cartDrawer = document.querySelector('[data-cart-drawer], cart-drawer, #cart-drawer, #CartDrawer, cart-drawer#mini-cart');
         if (cartDrawer && typeof cartDrawer.open === 'function') {
           cartDrawer.open();
         } else if (cartDrawer) {
