@@ -2831,17 +2831,33 @@ shopify-accelerated-checkout {
       const popupStore = hasAlpine ? Alpine.store('xPopup') : null;
       const cartDrawerSelectors = '[data-cart-drawer], cart-drawer, #cart-drawer, #CartDrawer, cart-drawer#mini-cart, .cart-drawer, .mini-cart, .cart__drawer, #miniCart, #cartDrawer';
 
-      if (cartHelper && typeof cartHelper.getSectionsToRender === 'function' && response.sections) {
-        cartHelper.getSectionsToRender().forEach((section) => {
-          const sectionElement = document.querySelector(section.selector);
-          const sectionHtml = response.sections[section.id];
-          if (sectionElement && sectionHtml) {
-            sectionElement.innerHTML = typeof getSectionInnerHTML === 'function'
-              ? getSectionInnerHTML(sectionHtml, section.selector)
-              : sectionHtml;
-          }
-        });
+      const updateSectionHTML = (selector, sectionHtml) => {
+        const sectionElement = document.querySelector(selector);
+        if (!sectionElement || !sectionHtml) return;
+        sectionElement.innerHTML = typeof getSectionInnerHTML === 'function'
+          ? getSectionInnerHTML(sectionHtml, selector)
+          : sectionHtml;
+      };
 
+      if (response.sections) {
+        if (cartHelper && typeof cartHelper.getSectionsToRender === 'function') {
+          cartHelper.getSectionsToRender().forEach((section) => {
+            const sectionElement = document.querySelector(section.selector);
+            const sectionHtml = response.sections[section.id];
+            if (sectionElement && sectionHtml) {
+              sectionElement.innerHTML = typeof getSectionInnerHTML === 'function'
+                ? getSectionInnerHTML(sectionHtml, section.selector)
+                : sectionHtml;
+            }
+          });
+        }
+
+        Object.entries(response.sections).forEach(([sectionId, sectionHtml]) => {
+          updateSectionHTML(`cart-drawer[section="${sectionId}"], [data-section-id="${sectionId}"], #${sectionId}`, sectionHtml);
+        });
+      }
+
+      if (cartHelper && typeof cartHelper.getSectionsToRender === 'function' && response.sections) {
         const cartBubbleCount = document.querySelector('#cart-icon-bubble span');
         if (cartBubbleCount) {
           cartHelper.currentItemCount = parseInt(cartBubbleCount.textContent, 10) || cartHelper.currentItemCount;
@@ -2926,9 +2942,18 @@ shopify-accelerated-checkout {
     };
 
     const getCartSections = () => {
-      return (typeof window.Alpine !== 'undefined' && Alpine.store('xCartHelper') && typeof Alpine.store('xCartHelper').getSectionsToRender === 'function')
-        ? Alpine.store('xCartHelper').getSectionsToRender().map((section) => section.id)
-        : [];
+      if (typeof window.Alpine !== 'undefined' && Alpine.store('xCartHelper') && typeof Alpine.store('xCartHelper').getSectionsToRender === 'function') {
+        return Alpine.store('xCartHelper').getSectionsToRender().map((section) => section.id);
+      }
+
+      const cartDrawer = document.querySelector('cart-drawer[section], cart-drawer#mini-cart, .mini-cart[section], .cart-drawer[section], [data-section-id], #mini-cart');
+      const sectionIds = [];
+      if (cartDrawer) {
+        const sectionId = cartDrawer.getAttribute('section') || cartDrawer.dataset.sectionId || cartDrawer.id;
+        if (sectionId) sectionIds.push(sectionId);
+      }
+
+      return sectionIds;
     };
 
     const addItemsToCart = async (items) => {
