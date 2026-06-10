@@ -2829,11 +2829,36 @@ shopify-accelerated-checkout {
       const cartHelper = hasAlpine ? Alpine.store('xCartHelper') : null;
       const miniCart = hasAlpine ? Alpine.store('xMiniCart') : null;
       const popupStore = hasAlpine ? Alpine.store('xPopup') : null;
-      const cartDrawerSelectors = '[data-cart-drawer], cart-drawer, #cart-drawer, #CartDrawer, cart-drawer#mini-cart, .cart-drawer, .mini-cart, .cart__drawer, #miniCart, #cartDrawer, #mini-cart';
+      const cartDrawerSelectors = '.js-go-cart-drawer, [data-cart-drawer], cart-drawer, #cart-drawer, #CartDrawer, cart-drawer#mini-cart, .cart-drawer, .mini-cart, .cart__drawer, #miniCart, #cartDrawer, #mini-cart';
 
       const updateSectionHTML = (selector, sectionHtml) => {
         const sectionElement = document.querySelector(selector);
         if (!sectionElement || !sectionHtml) return;
+        
+        // Special handling for go-cart drawer
+        if (selector.includes('go-cart') || selector.includes('js-go-cart')) {
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = sectionHtml;
+          
+          // Find the content container in the response HTML
+          const responseContent = tempDiv.querySelector('.js-go-cart-drawer-content');
+          if (responseContent) {
+            const drawerContent = document.querySelector('.js-go-cart-drawer-content');
+            if (drawerContent) {
+              drawerContent.innerHTML = responseContent.innerHTML;
+            }
+            return;
+          }
+          
+          // Also update footer if present
+          const responseFooter = tempDiv.querySelector('.js-go-cart-drawer-footer');
+          if (responseFooter) {
+            const drawerFooter = document.querySelector('.js-go-cart-drawer-footer');
+            if (drawerFooter) {
+              drawerFooter.innerHTML = responseFooter.innerHTML;
+            }
+          }
+        }
         
         // Special handling for mini-cart/cart-drawer
         if (selector.includes('mini-cart') || selector.includes('cart-drawer')) {
@@ -2873,6 +2898,11 @@ shopify-accelerated-checkout {
           // Try multiple selectors for the section
           let selectors = `cart-drawer[section="${sectionId}"], [data-section-id="${sectionId}"], #${sectionId}, #shopify-section-${sectionId}, [id="shopify-section-${sectionId}"]`;
           
+          // For go-cart, use its specific selectors
+          if (sectionId === 'go-cart') {
+            selectors = `.js-go-cart-drawer, .js-go-cart-drawer-content, #shopify-section-go-cart, [id="shopify-section-go-cart"], ${selectors}`;
+          }
+          
           // For mini-cart, also check the cart-drawer directly
           if (sectionId === 'mini-cart') {
             selectors = `#mini-cart, cart-drawer#mini-cart, cart-drawer[section="mini-cart"], #shopify-section-mini-cart, ${selectors}`;
@@ -2901,6 +2931,19 @@ shopify-accelerated-checkout {
         document.dispatchEvent(new CustomEvent('eurus:cart:redirect'));
         document.dispatchEvent(new CustomEvent('eurus:cart:items-changed'));
       } else {
+        // For go-cart drawer specifically
+        const goCartDrawer = document.querySelector('.js-go-cart-drawer');
+        const goCartOverlay = document.querySelector('.js-go-cart-overlay');
+        
+        if (goCartDrawer) {
+          // Open the go-cart drawer with its own mechanism
+          goCartDrawer.classList.add('is-open');
+          if (goCartOverlay) {
+            goCartOverlay.classList.add('is-open');
+          }
+        }
+        
+        // Fallback to generic cart drawer
         const cartDrawer = document.querySelector(cartDrawerSelectors);
         if (cartDrawer && typeof cartDrawer.open === 'function') {
           cartDrawer.open();
@@ -3005,7 +3048,7 @@ shopify-accelerated-checkout {
       };
 
     const initCartDrawerScrollReset = () => {
-      const cartDrawer = document.getElementById('mini-cart') || document.getElementById('CartDrawer') || document.querySelector('cart-drawer[section="mini-cart"], cart-drawer#mini-cart');
+      const cartDrawer = document.querySelector('.js-go-cart-drawer') || document.getElementById('mini-cart') || document.getElementById('CartDrawer') || document.querySelector('cart-drawer[section="mini-cart"], cart-drawer#mini-cart');
       if (!cartDrawer || cartDrawer.dataset.scrollResetInitialized === 'true') return;
 
       const unlockScrollIfDrawerClosed = () => {
@@ -3044,7 +3087,7 @@ shopify-accelerated-checkout {
     };
 
     const hasCartDrawer = () => {
-      const hasDrawerElement = document.querySelector('[data-cart-drawer], cart-drawer, #cart-drawer, #CartDrawer, cart-drawer#mini-cart, .cart-drawer, .mini-cart, .cart__drawer, #miniCart, #cartDrawer, #mini-cart');
+      const hasDrawerElement = document.querySelector('.js-go-cart-drawer, [data-cart-drawer], cart-drawer, #cart-drawer, #CartDrawer, cart-drawer#mini-cart, .cart-drawer, .mini-cart, .cart__drawer, #miniCart, #cartDrawer, #mini-cart');
       const hasMiniCartStore = typeof window.Alpine !== 'undefined'
         && Alpine.store('xMiniCart')
         && typeof Alpine.store('xMiniCart').openCart === 'function';
@@ -3058,14 +3101,20 @@ shopify-accelerated-checkout {
         return Alpine.store('xCartHelper').getSectionsToRender().map((section) => section.id);
       }
 
-      const cartDrawer = document.querySelector('cart-drawer[section], cart-drawer#mini-cart, .mini-cart[section], .cart-drawer[section], [data-section-id], #mini-cart');
+      // For go-cart drawer
+      const cartDrawer = document.querySelector('.js-go-cart-drawer');
       const sectionIds = [];
+      
       if (cartDrawer) {
-        const sectionId = cartDrawer.getAttribute('section') || cartDrawer.dataset.sectionId || cartDrawer.id;
-        if (sectionId) sectionIds.push(sectionId);
-      } else if (document.getElementById('mini-cart')) {
-        // Fallback: Always add mini-cart section if drawer exists
-        sectionIds.push('mini-cart');
+        const sectionId = cartDrawer.getAttribute('section') || cartDrawer.dataset.sectionId;
+        if (sectionId) {
+          sectionIds.push(sectionId);
+        } else {
+          // Fallback: use 'go-cart' as the section name
+          sectionIds.push('go-cart');
+        }
+      } else if (document.getElementById('go-cart')) {
+        sectionIds.push('go-cart');
       }
 
       return sectionIds;
