@@ -1923,8 +1923,8 @@ shopify-accelerated-checkout {
                       <span class="c-prod__variant-title js-variant-title-{{ section.id }}">{{ _price_opt_val }}: </span>
                     {%- endunless -%}
                     <span class="js-price-amount-{{ section.id }}">{{ _sel.price | money }}</span>
-                    {%- if _uc > 1 -%}
-                      <span class="c-prod__per-unit js-per-unit-{{ section.id }}">{{ _sel.price | times: 1.0 | divided_by: _uc | round | money }}/{{ block.settings.unit_label }}</span>
+                    {%- if block.settings.unit_label != blank -%}
+                      <span class="c-prod__per-unit js-per-unit-{{ section.id }}">{{ block.settings.unit_label }}</span>
                     {%- else -%}
                       <span class="c-prod__per-unit js-per-unit-{{ section.id }}" style="display:none;"></span>
                     {%- endif -%}
@@ -2461,8 +2461,8 @@ shopify-accelerated-checkout {
                             data-badge-tpl-orange="{{ block.settings.badge_3_orange_mango | escape }}"
                           >{{ block.settings.badge_3 }}</div>
                         {% endif %}
-                        {%- if _card_variant and _card_uc > 1 -%}
-                          <span class="c-prod__card-per-unit js-card-per-unit-{{ section.id }}" data-card-value="{{ value | escape }}" data-cards-opt-pos="{{ cards_option.position }}" data-unit-count="{{ _card_uc }}" data-unit-label="{{ block.settings.unit_label | escape }}">{{ _card_variant.price | times: 1.0 | divided_by: _card_uc | round | money }}/{{ block.settings.unit_label }}</span>
+                        {%- if _card_variant and block.settings.unit_label != blank -%}
+                          <span class="c-prod__card-per-unit js-card-per-unit-{{ section.id }}" data-card-value="{{ value | escape }}" data-cards-opt-pos="{{ cards_option.position }}" data-unit-count="{{ _card_uc }}" data-unit-label="{{ block.settings.unit_label | escape }}">{{ block.settings.unit_label }}</span>
                         {%- endif -%}
                         <img src="{{ card_img | image_url: width: 150 }}" class="c-prod__card-img" alt="{{ value }}" data-default-src="{{ card_img | image_url: width: 150 }}">
                         <span class="c-prod__card-name">{{ value }}</span>
@@ -3225,13 +3225,11 @@ shopify-accelerated-checkout {
         const _priceOptIndex = priceEl ? parseInt(priceEl.dataset.priceOptIndex || '0', 10) : 0;
         const _optVal = matchedVariant.options && matchedVariant.options[_priceOptIndex];
         if (variantTitleEl) variantTitleEl.textContent = (_optVal && _optVal !== 'Default Title') ? _optVal + ': ' : '';
-        // Actualizar precio por unidad
+        // Actualizar precio por unidad manualmente, sin cálculo automático
         if (perUnitEl) {
-          const _uc = matchedVariant.unit_count || 0;
-          const _unitLabel = priceEl ? (priceEl.dataset.unitLabel || 'tube') : 'tube';
-          if (_uc > 1) {
-            const _fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: window.Shopify && window.Shopify.currency ? window.Shopify.currency.active : 'USD', minimumFractionDigits: 2 });
-            perUnitEl.textContent = _fmt.format(Math.round(matchedVariant.price_cents / _uc) / 100) + '/' + _unitLabel;
+          const _unitLabel = priceEl ? (priceEl.dataset.unitLabel || '') : '';
+          if (_unitLabel.trim()) {
+            perUnitEl.textContent = _unitLabel;
             perUnitEl.style.display = '';
           } else {
             perUnitEl.style.display = 'none';
@@ -3309,9 +3307,12 @@ shopify-accelerated-checkout {
         if (el.classList.contains('js-card-price-' + sId)) {
           el.textContent = matchedV.price;
         } else {
-          const _uc = parseInt(el.dataset.unitCount, 10) || 0;
-          const _ul = el.dataset.unitLabel || 'tube';
-          if (_uc > 1) el.textContent = _fmt.format(Math.round(matchedV.price_cents / _uc) / 100) + '/' + _ul;
+          const _ul = el.dataset.unitLabel || '';
+          if (_ul.trim()) {
+            el.textContent = _ul;
+          } else {
+            el.style.display = 'none';
+          }
         }
       });
     }
