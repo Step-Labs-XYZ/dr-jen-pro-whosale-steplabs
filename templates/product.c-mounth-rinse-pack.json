@@ -101,7 +101,7 @@
         "price_stock_4Qk3Yf": {
           "type": "price_stock",
           "settings": {
-            "unit_label": "bottle",
+            "unit_label": "$18.50/bottle",
             "retail_text": "Retail $18.50/bottle"
           }
         },
