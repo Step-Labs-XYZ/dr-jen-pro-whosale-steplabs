@@ -2869,6 +2869,9 @@ shopify-accelerated-checkout {
           cartDrawer.classList.add('is-open', 'active');
           cartDrawer.removeAttribute('hidden');
           cartDrawer.setAttribute('aria-hidden', 'false');
+          cartDrawer.setAttribute('open', '');
+          const cartToggle = document.querySelector('a[aria-controls="mini-cart"], button[aria-controls="mini-cart"]');
+          if (cartToggle) cartToggle.setAttribute('aria-expanded', 'true');
         }
       }
     };
