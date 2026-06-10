@@ -2698,10 +2698,7 @@ shopify-accelerated-checkout {
 
     const parseVariantIds = (value) => {
       if (!value) return [];
-      return value
-        .split(',')
-        .map((id) => parseInt(id.trim(), 10))
-        .filter((id) => !Number.isNaN(id));
+      return value.split(',').map((id) => parseInt(id.trim(), 10)).filter((id) => !Number.isNaN(id));
     };
 
     const setActiveThumbByImage = (imageUrl) => {
@@ -2720,7 +2717,6 @@ shopify-accelerated-checkout {
       thumbBtns.forEach((btn) => {
         const variantIds = parseVariantIds(btn.dataset.variantIds);
         const shouldShow = !variantId || variantIds.length === 0 || variantIds.includes(variantId);
-
         if (shouldShow) {
           btn.removeAttribute('hidden');
           visibleCount += 1;
@@ -2729,11 +2725,9 @@ shopify-accelerated-checkout {
           btn.classList.remove('is-active');
         }
       });
-
       if (visibleCount === 0) {
         thumbBtns.forEach((btn) => btn.removeAttribute('hidden'));
       }
-
       const activeVisible = Array.from(thumbBtns).find((btn) => btn.classList.contains('is-active') && !btn.hasAttribute('hidden'));
       if (!activeVisible) {
         const firstVisible = Array.from(thumbBtns).find((btn) => !btn.hasAttribute('hidden'));
@@ -2747,85 +2741,70 @@ shopify-accelerated-checkout {
 
     const getSelectedOptionsMap = () => {
       const map = {};
-      const checkedRadios = document.querySelectorAll(`.js-variant-radio-${sId}:checked`);
-      checkedRadios.forEach((radio) => {
+      document.querySelectorAll(`.js-variant-radio-${sId}:checked`).forEach((radio) => {
         const position = parseInt(radio.dataset.position, 10);
-        if (!Number.isNaN(position)) {
-          map[position] = radio.value;
-        }
+        if (!Number.isNaN(position)) map[position] = radio.value;
       });
       return map;
     };
 
-    const updateQuantityCardBadges = (cardsGroup, flavorMode) => {
-      if (!cardsGroup) return;
+    const updateCartIconCount = (count) => {
+      // Eurus: aria-label="Cart (N items)"
+      document.querySelectorAll('a[aria-controls="mini-cart"], a.c-header__cart-icon').forEach((el) => {
+        const label = count === 1 ? 'Cart (1 item)' : `Cart (${count} items)`;
+        el.setAttribute('aria-label', label);
 
-      const badges = cardsGroup.querySelectorAll('.c-prod__card-badge');
-      badges.forEach((badge) => {
-        // Use the original editor text as-is (no automatic % injection)
-        const defaultText = (badge.dataset.badgeTplDefault || badge.dataset.badgeDefault || badge.textContent || '').trim();
-        const orangeText  = (badge.dataset.badgeTplOrange  || badge.dataset.badgeOrange  || '').trim();
-
-        badge.dataset.badgeDefault = defaultText;
-        badge.dataset.badgeOrange  = orangeText;
-
-        const nextText = (flavorMode === 'orange' && orangeText !== '') ? orangeText : defaultText;
-        badge.textContent = nextText;
-      });
-    };
-
-    const updateQuantityCardImages = () => {
-      const cardsGroup = document.querySelector(`#c-prod-${sId} .c-prod__variant-group--cards[data-cards-option-position]`);
-      if (!cardsGroup) return;
-
-      const cardsPosition = parseInt(cardsGroup.dataset.cardsOptionPosition, 10);
-      if (Number.isNaN(cardsPosition)) return;
-
-      const selectedOptionsMap = getSelectedOptionsMap();
-      const selectedVariant = variantsData.find((variant) => String(variant.id) === String(hiddenInput ? hiddenInput.value : ''));
-      const cardRadios = cardsGroup.querySelectorAll(`.js-variant-radio-${sId}[data-position="${cardsPosition}"]`);
-      const selectedValues = Object.values(selectedOptionsMap)
-        .concat(selectedVariant ? selectedVariant.options : [])
-        .filter(Boolean)
-        .map((value) => String(value).toLowerCase());
-      const isOrangeMango = selectedValues.some((value) => /orange[\s-]*mango/.test(value));
-      const flavorMode = isOrangeMango ? 'orange' : 'default';
-
-      cardRadios.forEach((radio) => {
-        const candidateOptions = [];
-        const maxOptionIndex = Math.max(...variantsData.map((variant) => variant.options.length));
-
-        for (let index = 1; index <= maxOptionIndex; index += 1) {
-          if (index === cardsPosition) {
-            candidateOptions[index - 1] = radio.value;
-          } else {
-            candidateOptions[index - 1] = selectedOptionsMap[index] || (selectedVariant ? selectedVariant.options[index - 1] : undefined);
+        // Insertar o actualizar el badge numérico visual si existe
+        let badge = el.querySelector('.cart-count-bubble, [data-cart-count-bubble], .c-header__cart-count');
+        if (count > 0) {
+          if (!badge) {
+            badge = document.createElement('span');
+            badge.className = 'cart-count-bubble';
+            badge.setAttribute('aria-hidden', 'true');
+            badge.style.cssText = 'position:absolute;top:-6px;right:-6px;background:currentColor;color:#fff;border-radius:50%;width:16px;height:16px;font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:700;';
+            el.style.position = 'relative';
+            el.appendChild(badge);
           }
-        }
-
-        const matchedForCard = variantsData.find((variant) => {
-          return variant.options.every((optionValue, optionIndex) => {
-            const expected = candidateOptions[optionIndex];
-            return !expected || optionValue === expected;
-          });
-        });
-
-        const label = cardsGroup.querySelector(`label[for="${radio.id}"]`);
-        const image = label ? label.querySelector('.c-prod__card-img') : null;
-        if (!image) return;
-
-        if (matchedForCard && matchedForCard.image) {
-          image.src = matchedForCard.image;
-        } else if (image.dataset.defaultSrc) {
-          image.src = image.dataset.defaultSrc;
+          badge.textContent = count;
+          badge.style.display = 'flex';
+        } else if (badge) {
+          badge.style.display = 'none';
         }
       });
 
-      updateQuantityCardBadges(cardsGroup, flavorMode);
+      // Dawn / Shopify native bubble
+      const bubble = document.getElementById('cart-icon-bubble');
+      if (bubble) {
+        bubble.innerHTML = count > 0
+          ? `<span class="visually-hidden">Cart</span><span class="cart-count-bubble"><span aria-hidden="true">${count}</span><span class="visually-hidden">${count} item${count !== 1 ? 's' : ''}</span></span>`
+          : '';
+      }
+
+      // Alpine xCartHelper (Eurus interno)
+      if (typeof window.Alpine !== 'undefined') {
+        const cartHelper = Alpine.store('xCartHelper');
+        if (cartHelper) {
+          if ('itemCount' in cartHelper) cartHelper.itemCount = count;
+          if ('currentItemCount' in cartHelper) cartHelper.currentItemCount = count;
+          if ('count' in cartHelper) cartHelper.count = count;
+        }
+        // Algunos temas Eurus usan xCart store directamente
+        const xCart = Alpine.store('xCart');
+        if (xCart) {
+          if ('count' in xCart) xCart.count = count;
+          if ('itemCount' in xCart) xCart.itemCount = count;
+        }
+      }
+
+      // Selectores genéricos adicionales
+      document.querySelectorAll('[data-cart-count], .cart-count, #CartCount, .cart__count, .cart-badge, .cart-item-count').forEach((el) => {
+        el.textContent = count;
+        el.style.display = count > 0 ? '' : 'none';
+      });
     };
 
-const refreshCartUI = (response) => {
-      // 1. Render sections returned by Shopify
+    const refreshCartUI = (response) => {
+      // 1. Renderizar sections devueltas por Shopify
       if (response.sections) {
         Object.entries(response.sections).forEach(([id, html]) => {
           const targets = document.querySelectorAll(
@@ -2834,39 +2813,25 @@ const refreshCartUI = (response) => {
           targets.forEach((el) => {
             const tmp = document.createElement('div');
             tmp.innerHTML = html;
-            // Try to grab inner content matching the element tag/id to avoid double-wrapping
             const inner = tmp.querySelector(`#shopify-section-${id}`) || tmp.querySelector(`#${id}`) || tmp.firstElementChild;
-            if (inner) {
-              el.innerHTML = inner.innerHTML;
-            } else {
-              el.innerHTML = html;
-            }
+            el.innerHTML = inner ? inner.innerHTML : html;
           });
         });
       }
 
-      // 2. Update cart count bubble (works for most themes)
+      // 2. Actualizar contador del ícono
       if (typeof response.item_count !== 'undefined') {
-        document.querySelectorAll('[data-cart-count], .cart-count, #cart-count, .header__cart-count, [aria-label*="cart"] .count').forEach((el) => {
-          el.textContent = response.item_count;
-        });
-        // Shopify native bubble
-        document.querySelectorAll('#cart-icon-bubble').forEach((el) => {
-          el.innerHTML = response.item_count > 0
-            ? `<span class="visually-hidden">Cart</span><span class="cart-count-bubble"><span aria-hidden="true">${response.item_count}</span><span class="visually-hidden">${response.item_count} item${response.item_count !== 1 ? 's' : ''}</span></span>`
-            : '';
-        });
+        updateCartIconCount(response.item_count);
       }
 
-      // 3. Fire standard Shopify/theme events
+      // 3. Disparar eventos estándar
       document.dispatchEvent(new CustomEvent('cart:updated', { detail: response }));
       document.dispatchEvent(new CustomEvent('cart:refresh', { detail: response }));
       document.dispatchEvent(new CustomEvent('theme:cart:added', { detail: response }));
       document.dispatchEvent(new CustomEvent('eurus:cart:items-changed', { detail: response }));
 
-      // 4. Open the drawer — try every known API in order
+      // 4. Abrir el drawer
       const openDrawer = () => {
-        // Alpine xMiniCart (Eurus / Symmetry themes)
         if (typeof window.Alpine !== 'undefined') {
           const miniCart = Alpine.store('xMiniCart');
           const popup = Alpine.store('xPopup');
@@ -2877,33 +2842,23 @@ const refreshCartUI = (response) => {
             return;
           }
         }
-
-        // Shopify theme object
         if (window.Shopify && window.Shopify.theme && window.Shopify.theme.cartDrawer && typeof window.Shopify.theme.cartDrawer.open === 'function') {
           window.Shopify.theme.cartDrawer.open();
           return;
         }
-
-        // cart-drawer custom element (Dawn and relatives)
         const cartDrawer = document.querySelector('cart-drawer');
         if (cartDrawer && typeof cartDrawer.open === 'function') {
           cartDrawer.open();
           return;
         }
-
-        // Fallback: manually toggle classes / attributes
-        const drawer = document.querySelector(
-          '#cart-drawer, #CartDrawer, #mini-cart, .cart-drawer, .mini-cart, [data-cart-drawer]'
-        );
+        const drawer = document.querySelector('#cart-drawer, #CartDrawer, #mini-cart, .cart-drawer, .mini-cart, [data-cart-drawer]');
         if (drawer) {
           drawer.classList.add('is-open', 'active', 'open');
           drawer.removeAttribute('hidden');
           drawer.setAttribute('aria-hidden', 'false');
           drawer.setAttribute('open', '');
           document.body.classList.add('overflow-hidden');
-
-          // find and update the toggle button aria state
-          document.querySelectorAll('[aria-controls="mini-cart"], [aria-controls="CartDrawer"], [aria-controls="cart-drawer"]').forEach((btn) => {
+          document.querySelectorAll('[aria-controls="mini-cart"], [aria-controls="CartDrawer"]').forEach((btn) => {
             btn.setAttribute('aria-expanded', 'true');
           });
         }
@@ -2913,7 +2868,7 @@ const refreshCartUI = (response) => {
     };
 
     const addItemsToCart = async (items) => {
-      // Build sections list dynamically from whatever is in the DOM
+      // Detectar section IDs dinámicamente del DOM
       const sectionIds = [];
       document.querySelectorAll('[id^="shopify-section-"], cart-drawer[section], [data-section-id]').forEach((el) => {
         const id = el.getAttribute('section') || el.dataset.sectionId || el.id.replace('shopify-section-', '');
@@ -2921,21 +2876,14 @@ const refreshCartUI = (response) => {
           sectionIds.push(id);
         }
       });
-      // Always try mini-cart and cart-drawer as fallback
       ['mini-cart', 'cart-drawer'].forEach((id) => {
         if (!sectionIds.includes(id)) sectionIds.push(id);
       });
 
       const response = await fetch(`${window.Shopify.routes.root}cart/add.js`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest',
-        },
-        body: JSON.stringify({
-          items,
-          sections: sectionIds,
-        }),
+        headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+        body: JSON.stringify({ items, sections: sectionIds }),
       });
 
       const payload = await response.json();
@@ -2943,7 +2891,7 @@ const refreshCartUI = (response) => {
         throw new Error(payload.description || 'Unable to add item to cart.');
       }
 
-      // Fetch updated cart for item_count (sections response doesn't include it directly)
+      // Fetch /cart.js para obtener item_count actualizado
       try {
         const cartResp = await fetch(`${window.Shopify.routes.root}cart.js`, {
           headers: { Accept: 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
@@ -2960,16 +2908,9 @@ const refreshCartUI = (response) => {
 
     const cartHasSubscribedMainProduct = async () => {
       const response = await fetch(`${window.Shopify.routes.root}cart.js`, {
-        headers: {
-          Accept: 'application/json',
-          'X-Requested-With': 'XMLHttpRequest',
-        },
+        headers: { Accept: 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
       });
-
-      if (!response.ok) {
-        throw new Error('Unable to load cart state.');
-      }
-
+      if (!response.ok) throw new Error('Unable to load cart state.');
       const cart = await response.json();
       return Array.isArray(cart.items) && cart.items.some((item) => {
         return Number(item.product_id) === Number(currentProductId) && item.selling_plan_allocation;
@@ -2979,43 +2920,27 @@ const refreshCartUI = (response) => {
     const initMainProductForm = () => {
       const productForm = sectionEl ? sectionEl.querySelector('form.c-prod__form') : null;
       if (!productForm || productForm.dataset.ajaxCartInitialized === 'true') return;
-
       productForm.dataset.ajaxCartInitialized = 'true';
       productForm.addEventListener('submit', async (event) => {
         event.preventDefault();
-
         const submitButton = productForm.querySelector('.js-btn-' + sId);
         const originalText = submitButton ? submitButton.innerHTML : '';
         const variantId = parseInt(hiddenInput ? hiddenInput.value : '', 10);
         const sellingPlanInput = productForm.querySelector('[name="selling_plan"]');
         const sellingPlanValue = sellingPlanInput ? String(sellingPlanInput.value || '').trim() : '';
         const sellingPlanId = parseInt(sellingPlanValue, 10);
-
         if (!Number.isFinite(variantId)) return;
-
-        if (submitButton) {
-          submitButton.disabled = true;
-          submitButton.textContent = 'ADDING...';
-        }
-
+        if (submitButton) { submitButton.disabled = true; submitButton.textContent = 'ADDING...'; }
         try {
-          const item = {
-            id: variantId,
-            quantity: 1,
-          };
-
+          const item = { id: variantId, quantity: 1 };
           if (sellingPlanValue !== '' && sellingPlanValue !== 'null' && Number.isFinite(sellingPlanId)) {
             item.selling_plan = sellingPlanId;
           }
-
           await addItemsToCart([item]);
         } catch (error) {
           console.error('[c-product-page] Main add to cart error', error);
         } finally {
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.innerHTML = originalText;
-          }
+          if (submitButton) { submitButton.disabled = false; submitButton.innerHTML = originalText; }
         }
       });
     };
@@ -3025,62 +2950,40 @@ const refreshCartUI = (response) => {
       upsellForms.forEach((form) => {
         if (form.dataset.initialized === 'true') return;
         form.dataset.initialized = 'true';
-
         const submitButton = form.querySelector('.js-upsell-atc-{{ section.id }}');
         if (!submitButton) return;
-
         submitButton.addEventListener('click', async (event) => {
           event.preventDefault();
           event.stopPropagation();
-
           const originalText = submitButton ? submitButton.innerHTML : '';
           const variantId = parseInt(form.dataset.variantId || form.querySelector('[name="id"]')?.value || '', 10);
           const sellingPlanId = parseInt(form.dataset.sellingPlanId || '', 10);
-
           if (!Number.isFinite(variantId)) return;
-
-          if (submitButton) {
-            submitButton.disabled = true;
-            submitButton.textContent = 'ADDING...';
-          }
-
+          if (submitButton) { submitButton.disabled = true; submitButton.textContent = 'ADDING...'; }
           try {
             let shouldApplySubscription = false;
             if (Number.isFinite(sellingPlanId) && sellingPlanId > 0) {
               shouldApplySubscription = await cartHasSubscribedMainProduct();
             }
-
-            const item = {
-              id: variantId,
-              quantity: 1,
-            };
-
-            if (shouldApplySubscription) {
-              item.selling_plan = sellingPlanId;
-            }
-
+            const item = { id: variantId, quantity: 1 };
+            if (shouldApplySubscription) item.selling_plan = sellingPlanId;
             await addItemsToCart([item]);
           } catch (error) {
             console.error('[c-product-page] Upsell add to cart error', error);
           } finally {
-            if (submitButton) {
-              submitButton.disabled = false;
-              submitButton.innerHTML = originalText;
-            }
+            if (submitButton) { submitButton.disabled = false; submitButton.innerHTML = originalText; }
           }
         });
       });
     };
 
-    // 1. Galería de miniaturas
+    // Galería de miniaturas
     const galleryBadges = sectionEl.querySelectorAll('.c-prod__badge-left, .c-prod__badge-right');
     const firstThumb = Array.from(thumbBtns).find(btn => !btn.hasAttribute('hidden')) || thumbBtns[0];
 
     const updateBadgesVisibility = (activeBtn) => {
       const isFirst = activeBtn === firstThumb || activeBtn === thumbBtns[0];
-      galleryBadges.forEach(badge => {
-        badge.style.display = isFirst ? '' : 'none';
-      });
+      galleryBadges.forEach(badge => { badge.style.display = isFirst ? '' : 'none'; });
     };
 
     thumbBtns.forEach(btn => {
@@ -3088,80 +2991,100 @@ const refreshCartUI = (response) => {
         thumbBtns.forEach(b => b.classList.remove('is-active'));
         this.classList.add('is-active');
         mainImg.style.opacity = '0.5';
-        setTimeout(() => {
-          mainImg.src = this.dataset.image;
-          mainImg.style.opacity = '1';
-        }, 150);
+        setTimeout(() => { mainImg.src = this.dataset.image; mainImg.style.opacity = '1'; }, 150);
         updateBadgesVisibility(this);
       });
     });
 
-    // 2. Lógica de Variantes
+    // Lógica de Variantes
+    const updateQuantityCardBadges = (cardsGroup, flavorMode) => {
+      if (!cardsGroup) return;
+      cardsGroup.querySelectorAll('.c-prod__card-badge').forEach((badge) => {
+        const defaultText = (badge.dataset.badgeTplDefault || badge.dataset.badgeDefault || badge.textContent || '').trim();
+        const orangeText  = (badge.dataset.badgeTplOrange  || badge.dataset.badgeOrange  || '').trim();
+        badge.dataset.badgeDefault = defaultText;
+        badge.dataset.badgeOrange  = orangeText;
+        badge.textContent = (flavorMode === 'orange' && orangeText !== '') ? orangeText : defaultText;
+      });
+    };
+
+    const updateQuantityCardImages = () => {
+      const cardsGroup = document.querySelector(`#c-prod-${sId} .c-prod__variant-group--cards[data-cards-option-position]`);
+      if (!cardsGroup) return;
+      const cardsPosition = parseInt(cardsGroup.dataset.cardsOptionPosition, 10);
+      if (Number.isNaN(cardsPosition)) return;
+      const selectedOptionsMap = getSelectedOptionsMap();
+      const selectedVariant = variantsData.find((variant) => String(variant.id) === String(hiddenInput ? hiddenInput.value : ''));
+      const cardRadios = cardsGroup.querySelectorAll(`.js-variant-radio-${sId}[data-position="${cardsPosition}"]`);
+      const selectedValues = Object.values(selectedOptionsMap)
+        .concat(selectedVariant ? selectedVariant.options : [])
+        .filter(Boolean).map((value) => String(value).toLowerCase());
+      const isOrangeMango = selectedValues.some((value) => /orange[\s-]*mango/.test(value));
+      const flavorMode = isOrangeMango ? 'orange' : 'default';
+
+      cardRadios.forEach((radio) => {
+        const candidateOptions = [];
+        const maxOptionIndex = Math.max(...variantsData.map((variant) => variant.options.length));
+        for (let index = 1; index <= maxOptionIndex; index += 1) {
+          if (index === cardsPosition) {
+            candidateOptions[index - 1] = radio.value;
+          } else {
+            candidateOptions[index - 1] = selectedOptionsMap[index] || (selectedVariant ? selectedVariant.options[index - 1] : undefined);
+          }
+        }
+        const matchedForCard = variantsData.find((variant) => {
+          return variant.options.every((optionValue, optionIndex) => {
+            const expected = candidateOptions[optionIndex];
+            return !expected || optionValue === expected;
+          });
+        });
+        const label = cardsGroup.querySelector(`label[for="${radio.id}"]`);
+        const image = label ? label.querySelector('.c-prod__card-img') : null;
+        if (!image) return;
+        if (matchedForCard && matchedForCard.image) {
+          image.src = matchedForCard.image;
+        } else if (image.dataset.defaultSrc) {
+          image.src = image.dataset.defaultSrc;
+        }
+      });
+
+      updateQuantityCardBadges(cardsGroup, flavorMode);
+    };
+
     function updateVariant() {
-      // Recopilar opciones seleccionadas
       let currentOptions = [];
-      const checkedRadios = document.querySelectorAll(`.js-variant-radio-${sId}:checked`);
-      
-      checkedRadios.forEach(radio => {
+      document.querySelectorAll(`.js-variant-radio-${sId}:checked`).forEach(radio => {
         currentOptions[parseInt(radio.dataset.position) - 1] = radio.value;
       });
-
-      // Buscar coincidencia en JSON
-      const matchedVariant = variantsData.find(v => {
-        return v.options.every((val, index) => val === currentOptions[index]);
-      });
-
+      const matchedVariant = variantsData.find(v => v.options.every((val, index) => val === currentOptions[index]));
       if (matchedVariant) {
-        // ID para el carrito
         hiddenInput.value = matchedVariant.id;
-
-        // Actualizar URL
         const newUrl = new URL(window.location.href);
         newUrl.searchParams.set('variant', matchedVariant.id);
         window.history.replaceState({}, '', newUrl);
-
-        // Actualizar Precio
         if (priceAmountEl) priceAmountEl.innerHTML = matchedVariant.price;
         else if (priceEl) priceEl.innerHTML = matchedVariant.price;
         const _priceOptIndex = priceEl ? parseInt(priceEl.dataset.priceOptIndex || '0', 10) : 0;
         const _optVal = matchedVariant.options && matchedVariant.options[_priceOptIndex];
         if (variantTitleEl) variantTitleEl.textContent = (_optVal && _optVal !== 'Default Title') ? _optVal + ': ' : '';
-        // Actualizar precio por unidad manualmente, sin cálculo automático
         if (perUnitEl) {
           const _unitLabel = priceEl ? (priceEl.dataset.unitLabel || '') : '';
-          if (_unitLabel.trim()) {
-            perUnitEl.textContent = _unitLabel;
-            perUnitEl.style.display = '';
-          } else {
-            perUnitEl.style.display = 'none';
-          }
+          if (_unitLabel.trim()) { perUnitEl.textContent = _unitLabel; perUnitEl.style.display = ''; }
+          else { perUnitEl.style.display = 'none'; }
         }
-
-        // Actualizar Stock y Botón
         if (matchedVariant.available) {
-          if(buyBtn) {
-            buyBtn.disabled = false;
-            buyBtn.innerHTML = 'ADD TO CART &rarr;';
-          }
-          if(stockEl) stockEl.innerHTML = '<span class="c-prod__stock-dot"></span> In stock';
+          if (buyBtn) { buyBtn.disabled = false; buyBtn.innerHTML = 'ADD TO CART &rarr;'; }
+          if (stockEl) stockEl.innerHTML = '<span class="c-prod__stock-dot"></span> In stock';
         } else {
-          if(buyBtn) {
-            buyBtn.disabled = true;
-            buyBtn.innerHTML = 'SOLD OUT';
-          }
-          if(stockEl) stockEl.innerHTML = '<span class="c-prod__stock-dot" style="background:#fca5a5;"></span> Out of stock';
+          if (buyBtn) { buyBtn.disabled = true; buyBtn.innerHTML = 'SOLD OUT'; }
+          if (stockEl) stockEl.innerHTML = '<span class="c-prod__stock-dot" style="background:#fca5a5;"></span> Out of stock';
         }
-
         showThumbsForVariant(matchedVariant.id);
-
-        // Cambiar Imagen Principal si la variante tiene
         if (matchedVariant.image) {
           mainImg.style.opacity = '0.5';
           setTimeout(() => {
             mainImg.src = matchedVariant.image;
             mainImg.style.opacity = '1';
-            
-            // Actualizar thumb activa visualmente
             const matchedThumb = setActiveThumbByImage(matchedVariant.image);
             if (!matchedThumb) {
               const firstVisible = Array.from(thumbBtns).find((btn) => !btn.hasAttribute('hidden'));
@@ -3172,7 +3095,6 @@ const refreshCartUI = (response) => {
             }
           }, 150);
         }
-
         updateQuantityCardImages();
         updateCardPrices();
       }
@@ -3183,16 +3105,12 @@ const refreshCartUI = (response) => {
     updateCardPrices();
     updateVariant();
 
-    // Re-run badge update whenever Recharge fires a new discount %
-    document.addEventListener('rc-discount-updated', () => {
-      updateQuantityCardImages();
-    });
+    document.addEventListener('rc-discount-updated', () => { updateQuantityCardImages(); });
 
     function updateCardPrices() {
       const cardPriceEls = sectionEl ? sectionEl.querySelectorAll('.js-card-price-' + sId + ', .js-card-per-unit-' + sId) : [];
       if (!cardPriceEls.length) return;
       const selectedOptionsMap = getSelectedOptionsMap();
-      const _fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: window.Shopify && window.Shopify.currency ? window.Shopify.currency.active : 'USD', minimumFractionDigits: 2 });
       cardPriceEls.forEach(function(el) {
         const cardValue = el.dataset.cardValue;
         const cardsOptPos = parseInt(el.dataset.cardsOptPos, 10);
@@ -3209,11 +3127,8 @@ const refreshCartUI = (response) => {
           el.textContent = matchedV.price;
         } else {
           const _ul = el.dataset.unitLabel || '';
-          if (_ul.trim()) {
-            el.textContent = _ul;
-          } else {
-            el.style.display = 'none';
-          }
+          if (_ul.trim()) { el.textContent = _ul; }
+          else { el.style.display = 'none'; }
         }
       });
     }
@@ -3221,32 +3136,20 @@ const refreshCartUI = (response) => {
     if (sectionEl) {
       initMainProductForm();
       initUpsellForms();
-      initCartDrawerScrollReset();
 
+      // Modal de ingredientes
       const ingredientsOpenButtons = sectionEl.querySelectorAll('[data-ingredients-open]');
       ingredientsOpenButtons.forEach((openButton) => {
         const container = openButton.closest('[data-shopify-editor-block], div');
         if (!container) return;
         const modal = container.querySelector('[data-ingredients-modal]');
         if (!modal) return;
-
         const closeButtons = modal.querySelectorAll('[data-ingredients-close]');
-        const openModal = () => {
-          modal.classList.add('is-open');
-          modal.setAttribute('aria-hidden', 'false');
-          document.body.style.overflow = 'hidden';
-        };
-        const closeModal = () => {
-          modal.classList.remove('is-open');
-          modal.setAttribute('aria-hidden', 'true');
-          document.body.style.overflow = '';
-        };
-
+        const openModal = () => { modal.classList.add('is-open'); modal.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; };
+        const closeModal = () => { modal.classList.remove('is-open'); modal.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; };
         openButton.addEventListener('click', openModal);
         closeButtons.forEach((btn) => btn.addEventListener('click', closeModal));
-        modal.addEventListener('click', (event) => {
-          if (event.target === modal) closeModal();
-        });
+        modal.addEventListener('click', (event) => { if (event.target === modal) closeModal(); });
       });
 
       document.addEventListener('keydown', (event) => {
@@ -3266,10 +3169,10 @@ const refreshCartUI = (response) => {
         }
       }
 
+      // Accordion
       const pacWraps = sectionEl.querySelectorAll('.pac-wrap');
       pacWraps.forEach((wrap) => {
         const headers = wrap.querySelectorAll('.pac-header');
-
         const openPacHeader = (headerToOpen) => {
           headers.forEach((h) => {
             const isTarget = h === headerToOpen;
@@ -3277,24 +3180,16 @@ const refreshCartUI = (response) => {
             if (h.nextElementSibling) h.nextElementSibling.classList.toggle('is-open', isTarget);
           });
         };
-
         const defaultHeader = wrap.querySelector('.pac-item[data-default-open="true"] .pac-header');
-        if (defaultHeader) {
-          openPacHeader(defaultHeader);
-        } else if (headers.length > 0) {
-          openPacHeader(headers[0]);
-        }
-
+        if (defaultHeader) { openPacHeader(defaultHeader); }
+        else if (headers.length > 0) { openPacHeader(headers[0]); }
         headers.forEach((header) => {
           header.addEventListener('click', () => {
             const isOpen = header.getAttribute('aria-expanded') === 'true';
             openPacHeader(null);
-            if (!isOpen) {
-              openPacHeader(header);
-            }
+            if (!isOpen) openPacHeader(header);
           });
         });
-
         const triggers = wrap.querySelectorAll('.htu-trigger');
         triggers.forEach((trigger) => {
           trigger.addEventListener('click', () => {
@@ -3306,25 +3201,21 @@ const refreshCartUI = (response) => {
         });
       });
 
+      // Flavor tabs ingredientes (bloque original)
       const flavorGroups = sectionEl.querySelectorAll('.c-prod__ingredients-flavors');
       flavorGroups.forEach((group) => {
         const flavorButtons = group.querySelectorAll('.c-prod__ingredients-flavor[data-flavor]');
-
         const paintFlavorButtons = () => {
           flavorButtons.forEach((item) => {
             const flavor = item.dataset.flavor;
             const isActive = item.classList.contains('is-active');
             let bg = '#f3f5f6';
-
             if (isActive && flavor === 'cool-mint') bg = '#CDFFF1';
             if (isActive && flavor === 'orange-mango') bg = '#FFC183';
-
             item.style.setProperty('background-color', bg, 'important');
           });
         };
-
         paintFlavorButtons();
-
         flavorButtons.forEach((btn) => {
           btn.addEventListener('click', () => {
             flavorButtons.forEach((item) => item.classList.remove('is-active'));
@@ -3334,31 +3225,23 @@ const refreshCartUI = (response) => {
         });
       });
 
-      // --- Lógica del nuevo bloque "Ingredients Tab Adicional" ---
+      // Ingredients Tab Adicional
       const customTabButtons = sectionEl.querySelectorAll(`.js-ing-tab-btn-${sId}`);
       const customTabContents = sectionEl.querySelectorAll(`.js-ing-tab-content-${sId}`);
-
       customTabButtons.forEach(btn => {
         btn.addEventListener('click', () => {
           customTabButtons.forEach(b => b.classList.remove('is-active'));
           customTabContents.forEach(c => c.classList.remove('is-active'));
-
           btn.classList.add('is-active');
-          const targetId = btn.getAttribute('data-target');
-          const targetContent = document.getElementById(targetId);
-          if (targetContent) {
-            targetContent.classList.add('is-active');
-          }
+          const targetContent = document.getElementById(btn.getAttribute('data-target'));
+          if (targetContent) targetContent.classList.add('is-active');
         });
       });
     }
   });
 
-  // syncRcSubscribeLabel removed – subscribe title is now static ('Subscribe')
-  // and card badges use the text set manually in the editor.
   (function syncRcSubscribeLabel() {
-    // No-op: functionality removed per design decision.
-
+    // No-op
   })();
 </script>
 
