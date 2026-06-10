@@ -2902,7 +2902,7 @@ shopify-accelerated-checkout {
     };
 
     const hasCartDrawer = () => {
-      const hasDrawerElement = document.querySelector('[data-cart-drawer], cart-drawer, #cart-drawer, #CartDrawer');
+      const hasDrawerElement = document.querySelector('[data-cart-drawer], cart-drawer, #cart-drawer, #CartDrawer, mini-cart-form');
       const hasMiniCartStore = typeof window.Alpine !== 'undefined'
         && Alpine.store('xMiniCart')
         && typeof Alpine.store('xMiniCart').openCart === 'function';
