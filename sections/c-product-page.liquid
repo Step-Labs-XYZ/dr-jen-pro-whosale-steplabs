@@ -2889,8 +2889,40 @@ shopify-accelerated-checkout {
           const cartToggle = document.querySelector('a[aria-controls="mini-cart"], button[aria-controls="mini-cart"]');
           if (cartToggle) cartToggle.setAttribute('aria-expanded', 'true');
         }
-      }
-    };
+          // If drawer opened but still empty, try to fetch server-rendered section HTML as a fallback
+          const ensureDrawerContent = async () => {
+            try {
+              const currentDrawer = document.querySelector('cart-drawer[section], cart-drawer#mini-cart, .mini-cart, #mini-cart');
+              if (!currentDrawer) return;
+              const hasItems = currentDrawer.querySelector('.line-item, .mini-cart__items, [data-line-item]');
+              if (hasItems) return;
+
+              const sectionIds = getCartSections();
+              if (!sectionIds || sectionIds.length === 0) return;
+
+              const sectionsParam = sectionIds.join(',');
+              const url = `${window.Shopify.routes.root}?sections=${encodeURIComponent(sectionsParam)}`;
+              const r = await fetch(url, {
+                headers: {
+                  'X-Requested-With': 'XMLHttpRequest',
+                  Accept: 'application/json',
+                },
+              });
+              if (!r.ok) return;
+              const json = await r.json();
+              if (json && json.sections) {
+                Object.entries(json.sections).forEach(([sectionId, html]) => {
+                  updateSectionHTML(`cart-drawer[section="${sectionId}"], [data-section-id="${sectionId}"], #${sectionId}`, html);
+                });
+              }
+            } catch (e) {
+              console.error('[c-product-page] ensureDrawerContent error', e);
+            }
+          };
+
+          ensureDrawerContent();
+        }
+      };
 
     const initCartDrawerScrollReset = () => {
       const cartDrawer = document.getElementById('CartDrawer');
