@@ -2923,34 +2923,27 @@ shopify-accelerated-checkout {
         : [];
     };
 
-const addItemsToCart = async (items) => {
+    const addItemsToCart = async (items) => {
+      const response = await fetch(`${window.Shopify.routes.root}cart/add.js`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+        },
+        body: JSON.stringify({
+          items,
+          sections: getCartSections(),
+        }),
+      });
 
-  const response = await fetch(`${window.Shopify.routes.root}cart/add.js`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest',
-    },
-    body: JSON.stringify({
-      items,
-      sections: getCartSections(),
-    }),
-  });
+      const payload = await response.json();
+      if (!response.ok || payload.status === 422) {
+        throw new Error(payload.description || 'Unable to add item to cart.');
+      }
 
-  const payload = await response.json();
-
-  console.log('Cart response:', payload);
-  console.log('Sections:', payload.sections);
-  console.log('Sections requested:', getCartSections());
-
-  if (!response.ok || payload.status === 422) {
-    throw new Error(payload.description || 'Unable to add item to cart.');
-  }
-
-  refreshCartUI(payload);
-
-  return payload;
-};
+      refreshCartUI(payload);
+      return payload;
+    };
 
     const cartHasSubscribedMainProduct = async () => {
       const response = await fetch(`${window.Shopify.routes.root}cart.js`, {
