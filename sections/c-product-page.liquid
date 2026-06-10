@@ -2859,10 +2859,14 @@ shopify-accelerated-checkout {
       } else {
         document.dispatchEvent(new CustomEvent('cart:refresh'));
         document.dispatchEvent(new CustomEvent('cart:open'));
-        document.dispatchEvent(new CustomEvent('mini-cart:open'));
-        window.dispatchEvent(new CustomEvent('mini-cart:open'));
-        const miniCartEl = document.querySelector('mini-cart-form');
-        if (miniCartEl) miniCartEl.dispatchEvent(new CustomEvent('cart:open', { bubbles: true }));
+        const cartDrawer = document.querySelector('cart-drawer#mini-cart');
+        if (cartDrawer && typeof cartDrawer.open === 'function') {
+          cartDrawer.open();
+        } else if (cartDrawer) {
+          cartDrawer.classList.add('is-open', 'active');
+          cartDrawer.removeAttribute('hidden');
+          cartDrawer.setAttribute('aria-hidden', 'false');
+        }
       }
     };
 
@@ -2906,8 +2910,7 @@ shopify-accelerated-checkout {
     };
 
     const hasCartDrawer = () => {
-      const hasDrawerElement = document.querySelector('[data-cart-drawer], cart-drawer, #cart-drawer, #CartDrawer, mini-cart-form');
-      const hasMiniCartStore = typeof window.Alpine !== 'undefined'
+    const hasDrawerElement = document.querySelector('[data-cart-drawer], cart-drawer, #cart-drawer, #CartDrawer, cart-drawer#mini-cart');      const hasMiniCartStore = typeof window.Alpine !== 'undefined'
         && Alpine.store('xMiniCart')
         && typeof Alpine.store('xMiniCart').openCart === 'function';
 
