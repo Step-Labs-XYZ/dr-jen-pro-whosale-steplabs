@@ -2889,31 +2889,78 @@ shopify-accelerated-checkout {
           const cartToggle = document.querySelector('a[aria-controls="mini-cart"], button[aria-controls="mini-cart"]');
           if (cartToggle) cartToggle.setAttribute('aria-expanded', 'true');
         }
-          // If drawer opened but still empty, try to fetch server-rendered section HTML as a fallback
+          // If drawer opened but still empty, try multiple fallbacks to populate its HTML
           const ensureDrawerContent = async () => {
             try {
               const currentDrawer = document.querySelector('cart-drawer[section], cart-drawer#mini-cart, .mini-cart, #mini-cart');
               if (!currentDrawer) return;
+
               const hasItems = currentDrawer.querySelector('.line-item, .mini-cart__items, [data-line-item]');
               if (hasItems) return;
 
               const sectionIds = getCartSections();
-              if (!sectionIds || sectionIds.length === 0) return;
+              if (sectionIds && sectionIds.length > 0) {
+                try {
+                  const sectionsParam = sectionIds.join(',');
+                  const url = `${window.Shopify.routes.root}?sections=${encodeURIComponent(sectionsParam)}`;
+                  console.debug('[c-product-page] fetching sections JSON', url);
+                  const r = await fetch(url, {
+                    headers: {
+                      'X-Requested-With': 'XMLHttpRequest',
+                      Accept: 'application/json',
+                    },
+                  });
+                  if (r.ok) {
+                    const json = await r.json();
+                    if (json && json.sections) {
+                      Object.entries(json.sections).forEach(([sectionId, html]) => {
+                        updateSectionHTML(`cart-drawer[section="${sectionId}"], [data-section-id="${sectionId}"], #${sectionId}`, html);
+                        document.dispatchEvent(new CustomEvent('shopify:section:load', { detail: { sectionId } }));
+                      });
+                    }
+                  }
+                } catch (e) {
+                  console.debug('[c-product-page] sections JSON fetch failed', e);
+                }
+              }
 
-              const sectionsParam = sectionIds.join(',');
-              const url = `${window.Shopify.routes.root}?sections=${encodeURIComponent(sectionsParam)}`;
-              const r = await fetch(url, {
-                headers: {
-                  'X-Requested-With': 'XMLHttpRequest',
-                  Accept: 'application/json',
-                },
-              });
-              if (!r.ok) return;
-              const json = await r.json();
-              if (json && json.sections) {
-                Object.entries(json.sections).forEach(([sectionId, html]) => {
-                  updateSectionHTML(`cart-drawer[section="${sectionId}"], [data-section-id="${sectionId}"], #${sectionId}`, html);
-                });
+              // If still empty, fetch full /cart page HTML and extract the drawer markup
+              const stillEmpty = !currentDrawer.querySelector('.line-item, .mini-cart__items, [data-line-item]');
+              if (stillEmpty) {
+                try {
+                  console.debug('[c-product-page] fetching /cart HTML fallback');
+                  const pageResp = await fetch('/cart', { headers: { 'X-Requested-With': 'XMLHttpRequest', Accept: 'text/html' } });
+                  if (pageResp.ok) {
+                    const text = await pageResp.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(text, 'text/html');
+                    const newDrawer = doc.querySelector('cart-drawer[section], cart-drawer#mini-cart, .mini-cart, #mini-cart');
+                    if (newDrawer) {
+                      // Replace the old element so custom element lifecycle runs again
+                      currentDrawer.replaceWith(newDrawer.cloneNode(true));
+                      const newInserted = document.querySelector('cart-drawer[section], cart-drawer#mini-cart, .mini-cart, #mini-cart');
+                      if (newInserted) {
+                        newInserted.classList.add('is-open', 'active');
+                        newInserted.removeAttribute('hidden');
+                        newInserted.setAttribute('aria-hidden', 'false');
+                        newInserted.setAttribute('open', '');
+                        const cartToggle = document.querySelector('a[aria-controls="mini-cart"], button[aria-controls="mini-cart"]');
+                        if (cartToggle) cartToggle.setAttribute('aria-expanded', 'true');
+                      }
+                      // re-run any init logic that relies on DOM
+                      try { initCartDrawerScrollReset(); } catch (e) { /* ignore */ }
+                    } else {
+                      // As a last resort, try to copy innerHTML for the drawer region
+                      const fragment = doc.querySelector('#mini-cart, cart-drawer[section="mini-cart"]');
+                      if (fragment) {
+                        currentDrawer.innerHTML = fragment.innerHTML;
+                        try { initCartDrawerScrollReset(); } catch (e) { /* ignore */ }
+                      }
+                    }
+                  }
+                } catch (e) {
+                  console.error('[c-product-page] /cart fallback error', e);
+                }
               }
             } catch (e) {
               console.error('[c-product-page] ensureDrawerContent error', e);
