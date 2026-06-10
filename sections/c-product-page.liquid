@@ -2679,6 +2679,7 @@ shopify-accelerated-checkout {
     const currentProductId = {{ product.id | json }};
     const sectionEl = document.getElementById(`c-prod-${sId}`);
     
+    // Elementos UI
     const mainImg = document.getElementById(`MainImage-${sId}`);
     const thumbBtns = document.querySelectorAll(`.js-thumb-${sId}`);
     const radios = document.querySelectorAll(`.js-variant-radio-${sId}`);
@@ -2690,13 +2691,17 @@ shopify-accelerated-checkout {
     const stockEl = document.querySelector(`.js-stock-${sId}`);
     const buyBtn = document.querySelector(`.js-btn-${sId}`);
     
+    // Cargar JSON
     const jsonEl = document.getElementById(`ProductJSON-${sId}`);
     if(!jsonEl) return;
     const variantsData = JSON.parse(jsonEl.textContent);
 
     const parseVariantIds = (value) => {
       if (!value) return [];
-      return value.split(',').map((id) => parseInt(id.trim(), 10)).filter((id) => !Number.isNaN(id));
+      return value
+        .split(',')
+        .map((id) => parseInt(id.trim(), 10))
+        .filter((id) => !Number.isNaN(id));
     };
 
     const setActiveThumbByImage = (imageUrl) => {
@@ -2715,6 +2720,7 @@ shopify-accelerated-checkout {
       thumbBtns.forEach((btn) => {
         const variantIds = parseVariantIds(btn.dataset.variantIds);
         const shouldShow = !variantId || variantIds.length === 0 || variantIds.includes(variantId);
+
         if (shouldShow) {
           btn.removeAttribute('hidden');
           visibleCount += 1;
@@ -2723,9 +2729,11 @@ shopify-accelerated-checkout {
           btn.classList.remove('is-active');
         }
       });
+
       if (visibleCount === 0) {
         thumbBtns.forEach((btn) => btn.removeAttribute('hidden'));
       }
+
       const activeVisible = Array.from(thumbBtns).find((btn) => btn.classList.contains('is-active') && !btn.hasAttribute('hidden'));
       if (!activeVisible) {
         const firstVisible = Array.from(thumbBtns).find((btn) => !btn.hasAttribute('hidden'));
@@ -2742,19 +2750,25 @@ shopify-accelerated-checkout {
       const checkedRadios = document.querySelectorAll(`.js-variant-radio-${sId}:checked`);
       checkedRadios.forEach((radio) => {
         const position = parseInt(radio.dataset.position, 10);
-        if (!Number.isNaN(position)) map[position] = radio.value;
+        if (!Number.isNaN(position)) {
+          map[position] = radio.value;
+        }
       });
       return map;
     };
 
     const updateQuantityCardBadges = (cardsGroup, flavorMode) => {
       if (!cardsGroup) return;
+
       const badges = cardsGroup.querySelectorAll('.c-prod__card-badge');
       badges.forEach((badge) => {
+        // Use the original editor text as-is (no automatic % injection)
         const defaultText = (badge.dataset.badgeTplDefault || badge.dataset.badgeDefault || badge.textContent || '').trim();
         const orangeText  = (badge.dataset.badgeTplOrange  || badge.dataset.badgeOrange  || '').trim();
+
         badge.dataset.badgeDefault = defaultText;
         badge.dataset.badgeOrange  = orangeText;
+
         const nextText = (flavorMode === 'orange' && orangeText !== '') ? orangeText : defaultText;
         badge.textContent = nextText;
       });
@@ -2763,8 +2777,10 @@ shopify-accelerated-checkout {
     const updateQuantityCardImages = () => {
       const cardsGroup = document.querySelector(`#c-prod-${sId} .c-prod__variant-group--cards[data-cards-option-position]`);
       if (!cardsGroup) return;
+
       const cardsPosition = parseInt(cardsGroup.dataset.cardsOptionPosition, 10);
       if (Number.isNaN(cardsPosition)) return;
+
       const selectedOptionsMap = getSelectedOptionsMap();
       const selectedVariant = variantsData.find((variant) => String(variant.id) === String(hiddenInput ? hiddenInput.value : ''));
       const cardRadios = cardsGroup.querySelectorAll(`.js-variant-radio-${sId}[data-position="${cardsPosition}"]`);
@@ -2778,6 +2794,7 @@ shopify-accelerated-checkout {
       cardRadios.forEach((radio) => {
         const candidateOptions = [];
         const maxOptionIndex = Math.max(...variantsData.map((variant) => variant.options.length));
+
         for (let index = 1; index <= maxOptionIndex; index += 1) {
           if (index === cardsPosition) {
             candidateOptions[index - 1] = radio.value;
@@ -2785,15 +2802,18 @@ shopify-accelerated-checkout {
             candidateOptions[index - 1] = selectedOptionsMap[index] || (selectedVariant ? selectedVariant.options[index - 1] : undefined);
           }
         }
+
         const matchedForCard = variantsData.find((variant) => {
           return variant.options.every((optionValue, optionIndex) => {
             const expected = candidateOptions[optionIndex];
             return !expected || optionValue === expected;
           });
         });
+
         const label = cardsGroup.querySelector(`label[for="${radio.id}"]`);
         const image = label ? label.querySelector('.c-prod__card-img') : null;
         if (!image) return;
+
         if (matchedForCard && matchedForCard.image) {
           image.src = matchedForCard.image;
         } else if (image.dataset.defaultSrc) {
@@ -2804,45 +2824,292 @@ shopify-accelerated-checkout {
       updateQuantityCardBadges(cardsGroup, flavorMode);
     };
 
-    // ── GoCart helpers ──────────────────────────────────────────────────────
-    const openGoCart = () => {
-      const goCart = window.goCartInstance;
-      if (goCart && typeof goCart.fetchAndOpenCart === 'function') {
-        goCart.fetchAndOpenCart();
-      } else {
-        const trigger = document.querySelector('.js-go-cart-trigger');
-        if (trigger) trigger.click();
+    const refreshCartUI = (response) => {
+      const hasAlpine = typeof window.Alpine !== 'undefined';
+      const cartHelper = hasAlpine ? Alpine.store('xCartHelper') : null;
+      const miniCart = hasAlpine ? Alpine.store('xMiniCart') : null;
+      const popupStore = hasAlpine ? Alpine.store('xPopup') : null;
+      const cartDrawerSelectors = '[data-cart-drawer], cart-drawer, #cart-drawer, #CartDrawer, cart-drawer#mini-cart, .cart-drawer, .mini-cart, .cart__drawer, #miniCart, #cartDrawer, #mini-cart';
+
+      const updateSectionHTML = (selector, sectionHtml) => {
+        const sectionElement = document.querySelector(selector);
+        if (!sectionElement || !sectionHtml) return;
+        
+        // Special handling for mini-cart/cart-drawer
+        if (selector.includes('mini-cart') || selector.includes('cart-drawer')) {
+          // Extract inner HTML from the cart-drawer element in the response
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = sectionHtml;
+          
+          // Find the cart-drawer element in the response HTML
+          const responseCartDrawer = tempDiv.querySelector('cart-drawer');
+          if (responseCartDrawer && sectionElement.tagName === 'CART-DRAWER') {
+            // If the target is the cart-drawer itself, update its innerHTML
+            sectionElement.innerHTML = responseCartDrawer.innerHTML;
+            return;
+          }
+        }
+        
+        // Default: update full innerHTML
+        sectionElement.innerHTML = typeof getSectionInnerHTML === 'function'
+          ? getSectionInnerHTML(sectionHtml, selector)
+          : sectionHtml;
+      };
+
+      if (response.sections) {
+        if (cartHelper && typeof cartHelper.getSectionsToRender === 'function') {
+          cartHelper.getSectionsToRender().forEach((section) => {
+            const sectionElement = document.querySelector(section.selector);
+            const sectionHtml = response.sections[section.id];
+            if (sectionElement && sectionHtml) {
+              sectionElement.innerHTML = typeof getSectionInnerHTML === 'function'
+                ? getSectionInnerHTML(sectionHtml, section.selector)
+                : sectionHtml;
+            }
+          });
+        }
+
+        Object.entries(response.sections).forEach(([sectionId, sectionHtml]) => {
+          // Try multiple selectors for the section
+          let selectors = `cart-drawer[section="${sectionId}"], [data-section-id="${sectionId}"], #${sectionId}, #shopify-section-${sectionId}, [id="shopify-section-${sectionId}"]`;
+          
+          // For mini-cart, also check the cart-drawer directly
+          if (sectionId === 'mini-cart') {
+            selectors = `#mini-cart, cart-drawer#mini-cart, cart-drawer[section="mini-cart"], #shopify-section-mini-cart, ${selectors}`;
+          }
+          
+          updateSectionHTML(selectors, sectionHtml);
+        });
       }
+
+      if (cartHelper && typeof cartHelper.getSectionsToRender === 'function' && response.sections) {
+        const cartBubbleCount = document.querySelector('#cart-icon-bubble span');
+        if (cartBubbleCount) {
+          cartHelper.currentItemCount = parseInt(cartBubbleCount.textContent, 10) || cartHelper.currentItemCount;
+        }
+      }
+
+      document.dispatchEvent(new CustomEvent('cart:updated', { detail: response }));
+      document.dispatchEvent(new CustomEvent('cart:refresh'));
+      document.dispatchEvent(new CustomEvent('cart:open'));
+
+      if (miniCart && typeof miniCart.openCart === 'function') {
+        if (popupStore && typeof popupStore.close === 'function') {
+          popupStore.close();
+        }
+        miniCart.openCart();
+        document.dispatchEvent(new CustomEvent('eurus:cart:redirect'));
+        document.dispatchEvent(new CustomEvent('eurus:cart:items-changed'));
+      } else {
+        const cartDrawer = document.querySelector(cartDrawerSelectors);
+        if (cartDrawer && typeof cartDrawer.open === 'function') {
+          cartDrawer.open();
+        } else if (window.Shopify && window.Shopify.theme && window.Shopify.theme.cartDrawer && typeof window.Shopify.theme.cartDrawer.open === 'function') {
+          window.Shopify.theme.cartDrawer.open();
+        } else if (cartDrawer) {
+          cartDrawer.classList.add('is-open', 'active');
+          cartDrawer.removeAttribute('hidden');
+          cartDrawer.setAttribute('aria-hidden', 'false');
+          cartDrawer.setAttribute('open', '');
+          
+          // Update toggle button aria-expanded state
+          const cartToggle = document.querySelector('a[aria-controls="mini-cart"], button[aria-controls="mini-cart"]');
+          if (cartToggle) {
+            cartToggle.setAttribute('aria-expanded', 'true');
+          }
+          
+          // Lock body scroll when drawer is open
+          document.body.classList.add('overflow-hidden');
+          document.body.style.overflow = 'hidden';
+        }
+          // If drawer opened but still empty, try multiple fallbacks to populate its HTML
+          const ensureDrawerContent = async () => {
+            try {
+              const currentDrawer = document.querySelector('cart-drawer[section], cart-drawer#mini-cart, .mini-cart, #mini-cart');
+              if (!currentDrawer) return;
+
+              const hasItems = currentDrawer.querySelector('.line-item, .mini-cart__items, [data-line-item]');
+              if (hasItems) return;
+
+              const sectionIds = getCartSections();
+              if (sectionIds && sectionIds.length > 0) {
+                try {
+                  const sectionsParam = sectionIds.join(',');
+                  const url = `${window.Shopify.routes.root}?sections=${encodeURIComponent(sectionsParam)}`;
+                  console.debug('[c-product-page] fetching sections JSON', url);
+                  const r = await fetch(url, {
+                    headers: {
+                      'X-Requested-With': 'XMLHttpRequest',
+                      Accept: 'application/json',
+                    },
+                  });
+                  if (r.ok) {
+                    const json = await r.json();
+                    if (json && json.sections) {
+                      Object.entries(json.sections).forEach(([sectionId, html]) => {
+                        updateSectionHTML(`cart-drawer[section="${sectionId}"], [data-section-id="${sectionId}"], #${sectionId}`, html);
+                        document.dispatchEvent(new CustomEvent('shopify:section:load', { detail: { sectionId } }));
+                      });
+                    }
+                  }
+                } catch (e) {
+                  console.debug('[c-product-page] sections JSON fetch failed', e);
+                }
+              }
+
+              // If still empty, fetch full /cart page HTML and extract the drawer markup
+              const stillEmpty = !currentDrawer.querySelector('.line-item, .mini-cart__items, [data-line-item]');
+              if (stillEmpty) {
+                try {
+                  console.debug('[c-product-page] fetching /cart HTML fallback');
+                  const pageResp = await fetch('/cart', { headers: { 'X-Requested-With': 'XMLHttpRequest', Accept: 'text/html' } });
+                  if (pageResp.ok) {
+                    const text = await pageResp.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(text, 'text/html');
+                    const newDrawer = doc.querySelector('cart-drawer[section], cart-drawer#mini-cart, .mini-cart, #mini-cart');
+                    if (newDrawer) {
+                      // Replace the old element so custom element lifecycle runs again
+                      currentDrawer.replaceWith(newDrawer.cloneNode(true));
+                      const newInserted = document.querySelector('cart-drawer[section], cart-drawer#mini-cart, .mini-cart, #mini-cart');
+                      if (newInserted) {
+                        newInserted.classList.add('is-open', 'active');
+                        newInserted.removeAttribute('hidden');
+                        newInserted.setAttribute('aria-hidden', 'false');
+                        newInserted.setAttribute('open', '');
+                        const cartToggle = document.querySelector('a[aria-controls="mini-cart"], button[aria-controls="mini-cart"]');
+                        if (cartToggle) cartToggle.setAttribute('aria-expanded', 'true');
+                      }
+                      // re-run any init logic that relies on DOM
+                      try { initCartDrawerScrollReset(); } catch (e) { /* ignore */ }
+                    } else {
+                      // As a last resort, try to copy innerHTML for the drawer region
+                      const fragment = doc.querySelector('#mini-cart, cart-drawer[section="mini-cart"]');
+                      if (fragment) {
+                        currentDrawer.innerHTML = fragment.innerHTML;
+                        try { initCartDrawerScrollReset(); } catch (e) { /* ignore */ }
+                      }
+                    }
+                  }
+                } catch (e) {
+                  console.error('[c-product-page] /cart fallback error', e);
+                }
+              }
+            } catch (e) {
+              console.error('[c-product-page] ensureDrawerContent error', e);
+            }
+          };
+
+          ensureDrawerContent();
+        }
+      };
+
+    const initCartDrawerScrollReset = () => {
+      const cartDrawer = document.getElementById('mini-cart') || document.getElementById('CartDrawer') || document.querySelector('cart-drawer[section="mini-cart"], cart-drawer#mini-cart');
+      if (!cartDrawer || cartDrawer.dataset.scrollResetInitialized === 'true') return;
+
+      const unlockScrollIfDrawerClosed = () => {
+        const drawerIsHidden = cartDrawer.hasAttribute('hidden')
+          || cartDrawer.getAttribute('aria-hidden') === 'true'
+          || cartDrawer.style.display === 'none'
+          || cartDrawer.offsetParent === null;
+
+        if (drawerIsHidden) {
+          document.body.classList.remove('overflow-hidden');
+          document.body.style.removeProperty('overflow');
+        }
+      };
+
+      cartDrawer.dataset.scrollResetInitialized = 'true';
+      new MutationObserver(unlockScrollIfDrawerClosed).observe(cartDrawer, {
+        attributes: true,
+        attributeFilter: ['style', 'class', 'hidden', 'aria-hidden'],
+      });
+
+      document.addEventListener('click', (event) => {
+        const target = event.target;
+        if (!target) return;
+
+        const clickedClose = target.closest('#CloseCart, #CartDrawer-Overlay, .group-close-btn');
+        if (!clickedClose) return;
+
+        setTimeout(unlockScrollIfDrawerClosed, 550);
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          setTimeout(unlockScrollIfDrawerClosed, 550);
+        }
+      });
     };
 
-    const addToCartViaGoCart = async (items) => {
+    const hasCartDrawer = () => {
+      const hasDrawerElement = document.querySelector('[data-cart-drawer], cart-drawer, #cart-drawer, #CartDrawer, cart-drawer#mini-cart, .cart-drawer, .mini-cart, .cart__drawer, #miniCart, #cartDrawer, #mini-cart');
+      const hasMiniCartStore = typeof window.Alpine !== 'undefined'
+        && Alpine.store('xMiniCart')
+        && typeof Alpine.store('xMiniCart').openCart === 'function';
+      const hasThemeCartDrawer = window.Shopify && window.Shopify.theme && window.Shopify.theme.cartDrawer && typeof window.Shopify.theme.cartDrawer.open === 'function';
+
+      return Boolean(hasDrawerElement || hasMiniCartStore || hasThemeCartDrawer);
+    };
+
+    const getCartSections = () => {
+      if (typeof window.Alpine !== 'undefined' && Alpine.store('xCartHelper') && typeof Alpine.store('xCartHelper').getSectionsToRender === 'function') {
+        return Alpine.store('xCartHelper').getSectionsToRender().map((section) => section.id);
+      }
+
+      const cartDrawer = document.querySelector('cart-drawer[section], cart-drawer#mini-cart, .mini-cart[section], .cart-drawer[section], [data-section-id], #mini-cart');
+      const sectionIds = [];
+      if (cartDrawer) {
+        const sectionId = cartDrawer.getAttribute('section') || cartDrawer.dataset.sectionId || cartDrawer.id;
+        if (sectionId) sectionIds.push(sectionId);
+      } else if (document.getElementById('mini-cart')) {
+        // Fallback: Always add mini-cart section if drawer exists
+        sectionIds.push('mini-cart');
+      }
+
+      return sectionIds;
+    };
+
+    const addItemsToCart = async (items) => {
       const response = await fetch(`${window.Shopify.routes.root}cart/add.js`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'X-Requested-With': 'XMLHttpRequest',
         },
-        body: JSON.stringify({ items }),
+        body: JSON.stringify({
+          items,
+          sections: getCartSections(),
+        }),
       });
+
       const payload = await response.json();
       if (!response.ok || payload.status === 422) {
         throw new Error(payload.description || 'Unable to add item to cart.');
       }
-      openGoCart();
+
+      refreshCartUI(payload);
       return payload;
     };
 
     const cartHasSubscribedMainProduct = async () => {
       const response = await fetch(`${window.Shopify.routes.root}cart.js`, {
-        headers: { Accept: 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+        headers: {
+          Accept: 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+        },
       });
-      if (!response.ok) throw new Error('Unable to load cart state.');
+
+      if (!response.ok) {
+        throw new Error('Unable to load cart state.');
+      }
+
       const cart = await response.json();
       return Array.isArray(cart.items) && cart.items.some((item) => {
         return Number(item.product_id) === Number(currentProductId) && item.selling_plan_allocation;
       });
     };
-    // ───────────────────────────────────────────────────────────────────────
 
     const initMainProductForm = () => {
       const productForm = sectionEl ? sectionEl.querySelector('form.c-prod__form') : null;
@@ -2867,11 +3134,16 @@ shopify-accelerated-checkout {
         }
 
         try {
-          const item = { id: variantId, quantity: 1 };
+          const item = {
+            id: variantId,
+            quantity: 1,
+          };
+
           if (sellingPlanValue !== '' && sellingPlanValue !== 'null' && Number.isFinite(sellingPlanId)) {
             item.selling_plan = sellingPlanId;
           }
-          await addToCartViaGoCart([item]);
+
+          await addItemsToCart([item]);
         } catch (error) {
           console.error('[c-product-page] Main add to cart error', error);
         } finally {
@@ -2912,9 +3184,17 @@ shopify-accelerated-checkout {
             if (Number.isFinite(sellingPlanId) && sellingPlanId > 0) {
               shouldApplySubscription = await cartHasSubscribedMainProduct();
             }
-            const item = { id: variantId, quantity: 1 };
-            if (shouldApplySubscription) item.selling_plan = sellingPlanId;
-            await addToCartViaGoCart([item]);
+
+            const item = {
+              id: variantId,
+              quantity: 1,
+            };
+
+            if (shouldApplySubscription) {
+              item.selling_plan = sellingPlanId;
+            }
+
+            await addItemsToCart([item]);
           } catch (error) {
             console.error('[c-product-page] Upsell add to cart error', error);
           } finally {
@@ -2953,28 +3233,35 @@ shopify-accelerated-checkout {
 
     // 2. Lógica de Variantes
     function updateVariant() {
+      // Recopilar opciones seleccionadas
       let currentOptions = [];
       const checkedRadios = document.querySelectorAll(`.js-variant-radio-${sId}:checked`);
+      
       checkedRadios.forEach(radio => {
         currentOptions[parseInt(radio.dataset.position) - 1] = radio.value;
       });
 
+      // Buscar coincidencia en JSON
       const matchedVariant = variantsData.find(v => {
         return v.options.every((val, index) => val === currentOptions[index]);
       });
 
       if (matchedVariant) {
+        // ID para el carrito
         hiddenInput.value = matchedVariant.id;
 
+        // Actualizar URL
         const newUrl = new URL(window.location.href);
         newUrl.searchParams.set('variant', matchedVariant.id);
         window.history.replaceState({}, '', newUrl);
 
+        // Actualizar Precio
         if (priceAmountEl) priceAmountEl.innerHTML = matchedVariant.price;
         else if (priceEl) priceEl.innerHTML = matchedVariant.price;
         const _priceOptIndex = priceEl ? parseInt(priceEl.dataset.priceOptIndex || '0', 10) : 0;
         const _optVal = matchedVariant.options && matchedVariant.options[_priceOptIndex];
         if (variantTitleEl) variantTitleEl.textContent = (_optVal && _optVal !== 'Default Title') ? _optVal + ': ' : '';
+        // Actualizar precio por unidad manualmente, sin cálculo automático
         if (perUnitEl) {
           const _unitLabel = priceEl ? (priceEl.dataset.unitLabel || '') : '';
           if (_unitLabel.trim()) {
@@ -2985,21 +3272,31 @@ shopify-accelerated-checkout {
           }
         }
 
+        // Actualizar Stock y Botón
         if (matchedVariant.available) {
-          if(buyBtn) { buyBtn.disabled = false; buyBtn.innerHTML = 'ADD TO CART &rarr;'; }
+          if(buyBtn) {
+            buyBtn.disabled = false;
+            buyBtn.innerHTML = 'ADD TO CART &rarr;';
+          }
           if(stockEl) stockEl.innerHTML = '<span class="c-prod__stock-dot"></span> In stock';
         } else {
-          if(buyBtn) { buyBtn.disabled = true; buyBtn.innerHTML = 'SOLD OUT'; }
+          if(buyBtn) {
+            buyBtn.disabled = true;
+            buyBtn.innerHTML = 'SOLD OUT';
+          }
           if(stockEl) stockEl.innerHTML = '<span class="c-prod__stock-dot" style="background:#fca5a5;"></span> Out of stock';
         }
 
         showThumbsForVariant(matchedVariant.id);
 
+        // Cambiar Imagen Principal si la variante tiene
         if (matchedVariant.image) {
           mainImg.style.opacity = '0.5';
           setTimeout(() => {
             mainImg.src = matchedVariant.image;
             mainImg.style.opacity = '1';
+            
+            // Actualizar thumb activa visualmente
             const matchedThumb = setActiveThumbByImage(matchedVariant.image);
             if (!matchedThumb) {
               const firstVisible = Array.from(thumbBtns).find((btn) => !btn.hasAttribute('hidden'));
@@ -3021,6 +3318,7 @@ shopify-accelerated-checkout {
     updateCardPrices();
     updateVariant();
 
+    // Re-run badge update whenever Recharge fires a new discount %
     document.addEventListener('rc-discount-updated', () => {
       updateQuantityCardImages();
     });
@@ -3029,6 +3327,7 @@ shopify-accelerated-checkout {
       const cardPriceEls = sectionEl ? sectionEl.querySelectorAll('.js-card-price-' + sId + ', .js-card-per-unit-' + sId) : [];
       if (!cardPriceEls.length) return;
       const selectedOptionsMap = getSelectedOptionsMap();
+      const _fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: window.Shopify && window.Shopify.currency ? window.Shopify.currency.active : 'USD', minimumFractionDigits: 2 });
       cardPriceEls.forEach(function(el) {
         const cardValue = el.dataset.cardValue;
         const cardsOptPos = parseInt(el.dataset.cardsOptPos, 10);
@@ -3057,6 +3356,7 @@ shopify-accelerated-checkout {
     if (sectionEl) {
       initMainProductForm();
       initUpsellForms();
+      initCartDrawerScrollReset();
 
       const ingredientsOpenButtons = sectionEl.querySelectorAll('[data-ingredients-open]');
       ingredientsOpenButtons.forEach((openButton) => {
@@ -3064,6 +3364,7 @@ shopify-accelerated-checkout {
         if (!container) return;
         const modal = container.querySelector('[data-ingredients-modal]');
         if (!modal) return;
+
         const closeButtons = modal.querySelectorAll('[data-ingredients-close]');
         const openModal = () => {
           modal.classList.add('is-open');
@@ -3075,6 +3376,7 @@ shopify-accelerated-checkout {
           modal.setAttribute('aria-hidden', 'true');
           document.body.style.overflow = '';
         };
+
         openButton.addEventListener('click', openModal);
         closeButtons.forEach((btn) => btn.addEventListener('click', closeModal));
         modal.addEventListener('click', (event) => {
@@ -3122,7 +3424,9 @@ shopify-accelerated-checkout {
           header.addEventListener('click', () => {
             const isOpen = header.getAttribute('aria-expanded') === 'true';
             openPacHeader(null);
-            if (!isOpen) openPacHeader(header);
+            if (!isOpen) {
+              openPacHeader(header);
+            }
           });
         });
 
@@ -3140,17 +3444,22 @@ shopify-accelerated-checkout {
       const flavorGroups = sectionEl.querySelectorAll('.c-prod__ingredients-flavors');
       flavorGroups.forEach((group) => {
         const flavorButtons = group.querySelectorAll('.c-prod__ingredients-flavor[data-flavor]');
+
         const paintFlavorButtons = () => {
           flavorButtons.forEach((item) => {
             const flavor = item.dataset.flavor;
             const isActive = item.classList.contains('is-active');
             let bg = '#f3f5f6';
+
             if (isActive && flavor === 'cool-mint') bg = '#CDFFF1';
             if (isActive && flavor === 'orange-mango') bg = '#FFC183';
+
             item.style.setProperty('background-color', bg, 'important');
           });
         };
+
         paintFlavorButtons();
+
         flavorButtons.forEach((btn) => {
           btn.addEventListener('click', () => {
             flavorButtons.forEach((item) => item.classList.remove('is-active'));
@@ -3160,23 +3469,31 @@ shopify-accelerated-checkout {
         });
       });
 
+      // --- Lógica del nuevo bloque "Ingredients Tab Adicional" ---
       const customTabButtons = sectionEl.querySelectorAll(`.js-ing-tab-btn-${sId}`);
       const customTabContents = sectionEl.querySelectorAll(`.js-ing-tab-content-${sId}`);
+
       customTabButtons.forEach(btn => {
         btn.addEventListener('click', () => {
           customTabButtons.forEach(b => b.classList.remove('is-active'));
           customTabContents.forEach(c => c.classList.remove('is-active'));
+
           btn.classList.add('is-active');
           const targetId = btn.getAttribute('data-target');
           const targetContent = document.getElementById(targetId);
-          if (targetContent) targetContent.classList.add('is-active');
+          if (targetContent) {
+            targetContent.classList.add('is-active');
+          }
         });
       });
     }
   });
 
+  // syncRcSubscribeLabel removed – subscribe title is now static ('Subscribe')
+  // and card badges use the text set manually in the editor.
   (function syncRcSubscribeLabel() {
-    // No-op
+    // No-op: functionality removed per design decision.
+
   })();
 </script>
 
