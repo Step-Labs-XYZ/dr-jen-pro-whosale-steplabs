@@ -101,7 +101,7 @@
         "price_stock_4Qk3Yf": {
           "type": "price_stock",
           "settings": {
-            "unit_label": "$18.50/bottle",
+            "unit_label": "bottle",
             "retail_text": "Retail $18.50/bottle"
           }
         },
@@ -262,7 +262,7 @@
           "type": "variant_cards",
           "settings": {
             "option_name": "Quantity",
-            "unit_label": "bottle",
+            "unit_label": "$18.50/bottle",
             "badge_2": "",
             "badge_3": "",
             "badge_2_orange_mango": "",
