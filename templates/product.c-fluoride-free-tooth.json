@@ -101,7 +101,7 @@
         "price_stock_4Qk3Yf": {
           "type": "price_stock",
           "settings": {
-            "unit_label": "tube",
+            "unit_label": "$11.75/unit",
             "retail_text": "Retail $11.75/unit"
           }
         },
