@@ -664,6 +664,146 @@
         "mobile_padding": 30
       }
     },
+    "c_dental_professionals_PMkwNn": {
+      "type": "c-dental-professionals",
+      "blocks": {
+        "photo_text_6ChrJH": {
+          "type": "photo_text",
+          "settings": {
+            "image": "shopify://shop_images/Column-1.png",
+            "image_mob": "shopify://shop_images/Column-1.png",
+            "video_url": "",
+            "name": "LISA MARKER, RHD",
+            "quote": "“We've been using Dr. Jen's in our office for about a year, we've seen high patient compliance & satisfaction. I've had my teen using the SuperPaste and we've noticed a significant difference in his white spot lesions.\"",
+            "name_align": "center",
+            "quote_align": "center",
+            "img_height_mob": 100,
+            "img_height_desk": 220,
+            "gap_mob": 20,
+            "gap_desk": 20
+          }
+        },
+        "video_image_hqxBMM": {
+          "type": "video_image",
+          "settings": {
+            "video_url": "",
+            "shopify_video": "shopify://files/videos/NaomiTetrault.mov",
+            "poster": "shopify://shop_images/Column.png",
+            "poster_mob": "shopify://shop_images/image_1318.png",
+            "name": "DR. Naomi, Dental Hygienist",
+            "quote": "“I am a hygienist here in Denver, Colorado, and about a year ago, I started using the Dr. Jen Super Paste, and I love it. I have noticed my teeth are less sensitive. They are whiter, they are brighter, they are just slicker, if that's a word. And so I do recommend this to my patients, and especially if they're having sensitivity and they're using another sensitive toothpaste and it's just plateauing.”",
+            "name_align": "left",
+            "quote_align": "left",
+            "img_height_mob": 220,
+            "img_height_desk": 300,
+            "gap_mob": 20,
+            "gap_desk": 20
+          }
+        },
+        "photo_text_fhfVii": {
+          "type": "photo_text",
+          "settings": {
+            "image": "shopify://shop_images/Column_6.png",
+            "image_mob": "shopify://shop_images/Column_6_30f94efe-4e17-48a3-8f6a-e79c210c9298.png",
+            "video_url": "",
+            "shopify_video": "shopify://files/videos/TracyHetherington.mov",
+            "name": "DR. Tracy, Dental Hygiene Student",
+            "quote": "\"I think it's an incredible product, especially for people who maybe feel a little bit iffy about fluoride. It's a great alternative so that they still get care and protection\"",
+            "name_align": "center",
+            "quote_align": "center",
+            "img_height_mob": 200,
+            "img_height_desk": 220,
+            "gap_mob": 20,
+            "gap_desk": 20
+          }
+        },
+        "video_image_i3HXdf": {
+          "type": "video_image",
+          "settings": {
+            "video_url": "",
+            "shopify_video": "shopify://files/videos/IMG_0865 2.MOV",
+            "poster": "shopify://shop_images/Column_2.png",
+            "poster_mob": "shopify://shop_images/Column_8.png",
+            "name": "Matt Anderson",
+            "quote": "\"Hey guys, just heard about Dr. Jen's toothpaste. It's got hydroxyapatite mixed with fluoride. It's a great product. It's gonna be awesome for patients, and you guys should all try it out.\"",
+            "name_align": "left",
+            "quote_align": "left",
+            "img_height_mob": 220,
+            "img_height_desk": 300,
+            "gap_mob": 20,
+            "gap_desk": 20
+          }
+        },
+        "photo_text_k3hkyR": {
+          "type": "photo_text",
+          "settings": {
+            "image": "shopify://shop_images/Column_7.png",
+            "image_mob": "shopify://shop_images/Column_7.png",
+            "video_url": "",
+            "shopify_video": "shopify://files/videos/NicoleHartshorn.mp4",
+            "name": "Dr. Nicole Hartshorn  Regional Manager, Pediatric Practice",
+            "quote": "“Before using Dr. Jen's toothpaste, she was having cavities every six months at her visits, and then we put braces on her, and I was very, very worried the whole time. And after entering orthodontic treatment she was using the super paste, and we've gone 18 months with no cavities at all, and her teeth look amazing.“",
+            "name_align": "center",
+            "quote_align": "center",
+            "img_height_mob": 200,
+            "img_height_desk": 220,
+            "gap_mob": 20,
+            "gap_desk": 20
+          }
+        }
+      },
+      "block_order": [
+        "photo_text_6ChrJH",
+        "video_image_hqxBMM",
+        "photo_text_fhfVii",
+        "video_image_i3HXdf",
+        "photo_text_k3hkyR"
+      ],
+      "name": "C - Dental Professionals",
+      "settings": {
+        "eyebrow": "#1 Recommended",
+        "heading": "Dental Professionals Choose Dr. Jen",
+        "bg_color": "#002c41",
+        "eyebrow_color": "#ffffff",
+        "heading_color": "#ffffff",
+        "card_bg": "#ffffff",
+        "name_color": "#002c41",
+        "quote_color": "#000000",
+        "dot_active_color": "#ffffff",
+        "dot_inactive_color": "#5b7b8a",
+        "play_btn_bg": "#ffffff",
+        "play_btn_icon_color": "#002c41",
+        "play_btn_size_mob": 56,
+        "play_btn_size_desk": 44,
+        "video_panel_width_mob": 45,
+        "video_panel_width_desk": 45,
+        "card_radius_mob": 16,
+        "card_radius_desk": 20,
+        "cards_per_row_desk": 4,
+        "eyebrow_size_mob": 18,
+        "eyebrow_size_desk": 24,
+        "heading_size_mob": 31,
+        "heading_size_desk": 48,
+        "name_size_mob": 13,
+        "name_size_desk": 14,
+        "quote_size_mob": 13,
+        "quote_size_desk": 18,
+        "pad_top_mob": 48,
+        "pad_bot_mob": 60,
+        "pad_top_desk": 72,
+        "pad_bot_desk": 80,
+        "header_mb_mob": 32,
+        "header_mb_desk": 40,
+        "eyebrow_align": "left",
+        "heading_align": "left",
+        "name_font_weight": "700",
+        "name_text_transform": "uppercase",
+        "name_letter_spacing": 3,
+        "name_line_height": 12,
+        "quote_font_weight": "400",
+        "quote_line_height": 13
+      }
+    },
     "c_difference_DTXTAV": {
       "type": "c-difference",
       "name": "C Difference Section",
@@ -1063,146 +1203,6 @@
         "padding_bottom_mobile": 50
       }
     },
-    "c_dental_professionals_PMkwNn": {
-      "type": "c-dental-professionals",
-      "blocks": {
-        "photo_text_6ChrJH": {
-          "type": "photo_text",
-          "settings": {
-            "image": "shopify://shop_images/Column-1.png",
-            "image_mob": "shopify://shop_images/Column-1.png",
-            "video_url": "",
-            "name": "LISA MARKER, RHD",
-            "quote": "“We've been using Dr. Jen's in our office for about a year, we've seen high patient compliance & satisfaction. I've had my teen using the SuperPaste and we've noticed a significant difference in his white spot lesions.\"",
-            "name_align": "center",
-            "quote_align": "center",
-            "img_height_mob": 100,
-            "img_height_desk": 220,
-            "gap_mob": 20,
-            "gap_desk": 20
-          }
-        },
-        "video_image_hqxBMM": {
-          "type": "video_image",
-          "settings": {
-            "video_url": "",
-            "shopify_video": "shopify://files/videos/NaomiTetrault.mov",
-            "poster": "shopify://shop_images/Column.png",
-            "poster_mob": "shopify://shop_images/image_1318.png",
-            "name": "DR. Naomi, Dental Hygienist",
-            "quote": "“I am a hygienist here in Denver, Colorado, and about a year ago, I started using the Dr. Jen Super Paste, and I love it. I have noticed my teeth are less sensitive. They are whiter, they are brighter, they are just slicker, if that's a word. And so I do recommend this to my patients, and especially if they're having sensitivity and they're using another sensitive toothpaste and it's just plateauing.”",
-            "name_align": "left",
-            "quote_align": "left",
-            "img_height_mob": 220,
-            "img_height_desk": 300,
-            "gap_mob": 20,
-            "gap_desk": 20
-          }
-        },
-        "photo_text_fhfVii": {
-          "type": "photo_text",
-          "settings": {
-            "image": "shopify://shop_images/Column_6.png",
-            "image_mob": "shopify://shop_images/Column_6_30f94efe-4e17-48a3-8f6a-e79c210c9298.png",
-            "video_url": "",
-            "shopify_video": "shopify://files/videos/TracyHetherington.mov",
-            "name": "DR. Tracy, Dental Hygiene Student",
-            "quote": "\"I think it's an incredible product, especially for people who maybe feel a little bit iffy about fluoride. It's a great alternative so that they still get care and protection\"",
-            "name_align": "center",
-            "quote_align": "center",
-            "img_height_mob": 200,
-            "img_height_desk": 220,
-            "gap_mob": 20,
-            "gap_desk": 20
-          }
-        },
-        "video_image_i3HXdf": {
-          "type": "video_image",
-          "settings": {
-            "video_url": "",
-            "shopify_video": "shopify://files/videos/IMG_0865 2.MOV",
-            "poster": "shopify://shop_images/Column_2.png",
-            "poster_mob": "shopify://shop_images/Column_8.png",
-            "name": "Matt Anderson",
-            "quote": "\"Hey guys, just heard about Dr. Jen's toothpaste. It's got hydroxyapatite mixed with fluoride. It's a great product. It's gonna be awesome for patients, and you guys should all try it out.\"",
-            "name_align": "left",
-            "quote_align": "left",
-            "img_height_mob": 220,
-            "img_height_desk": 300,
-            "gap_mob": 20,
-            "gap_desk": 20
-          }
-        },
-        "photo_text_k3hkyR": {
-          "type": "photo_text",
-          "settings": {
-            "image": "shopify://shop_images/Column_7.png",
-            "image_mob": "shopify://shop_images/Column_7.png",
-            "video_url": "",
-            "shopify_video": "shopify://files/videos/NicoleHartshorn.mp4",
-            "name": "Dr. Nicole Hartshorn  Regional Manager, Pediatric Practice",
-            "quote": "“Before using Dr. Jen's toothpaste, she was having cavities every six months at her visits, and then we put braces on her, and I was very, very worried the whole time. And after entering orthodontic treatment she was using the super paste, and we've gone 18 months with no cavities at all, and her teeth look amazing.“",
-            "name_align": "center",
-            "quote_align": "center",
-            "img_height_mob": 200,
-            "img_height_desk": 220,
-            "gap_mob": 20,
-            "gap_desk": 20
-          }
-        }
-      },
-      "block_order": [
-        "photo_text_6ChrJH",
-        "video_image_hqxBMM",
-        "photo_text_fhfVii",
-        "video_image_i3HXdf",
-        "photo_text_k3hkyR"
-      ],
-      "name": "C - Dental Professionals",
-      "settings": {
-        "eyebrow": "#1 Recommended",
-        "heading": "Dental Professionals Choose Dr. Jen",
-        "bg_color": "#002c41",
-        "eyebrow_color": "#ffffff",
-        "heading_color": "#ffffff",
-        "card_bg": "#ffffff",
-        "name_color": "#002c41",
-        "quote_color": "#000000",
-        "dot_active_color": "#ffffff",
-        "dot_inactive_color": "#5b7b8a",
-        "play_btn_bg": "#ffffff",
-        "play_btn_icon_color": "#002c41",
-        "play_btn_size_mob": 56,
-        "play_btn_size_desk": 44,
-        "video_panel_width_mob": 45,
-        "video_panel_width_desk": 45,
-        "card_radius_mob": 16,
-        "card_radius_desk": 20,
-        "cards_per_row_desk": 4,
-        "eyebrow_size_mob": 18,
-        "eyebrow_size_desk": 24,
-        "heading_size_mob": 31,
-        "heading_size_desk": 48,
-        "name_size_mob": 13,
-        "name_size_desk": 14,
-        "quote_size_mob": 13,
-        "quote_size_desk": 18,
-        "pad_top_mob": 48,
-        "pad_bot_mob": 60,
-        "pad_top_desk": 72,
-        "pad_bot_desk": 80,
-        "header_mb_mob": 32,
-        "header_mb_desk": 40,
-        "eyebrow_align": "left",
-        "heading_align": "left",
-        "name_font_weight": "700",
-        "name_text_transform": "uppercase",
-        "name_letter_spacing": 3,
-        "name_line_height": 12,
-        "quote_font_weight": "400",
-        "quote_line_height": 13
-      }
-    },
     "c_case_study_aPqVyY": {
       "type": "c-case-study",
       "blocks": {
@@ -1467,13 +1467,13 @@
     "c_hero_section_jnm7Yd",
     "c_badges_bar_fBPXjp",
     "c_products_tab_a6KGHU",
+    "c_dental_professionals_PMkwNn",
+    "c_story_comparison_cqffLT",
+    "c_clinically_backed_EVm8hp",
     "c_difference_DTXTAV",
     "c_mineral_uptake_PbAE9W",
     "c_botanicals_E4WBX3",
-    "c_clinically_backed_EVm8hp",
-    "c_story_comparison_cqffLT",
     "c_product_carousel_3A3YGx",
-    "c_dental_professionals_PMkwNn",
     "c_case_study_aPqVyY",
     "c_wholesale_policy_HjbeiN",
     "c_product_carousel_P3NCRt",
