@@ -80,16 +80,6 @@
             {%- endunless -%}
           {%- endfor -%}
 
-          <free-shipping-bar threshold="{{ threshold_in_cents }}" class="shipping-bar" style="--progress: {{ cart.total_price | times: 1.0 | divided_by: threshold_in_cents | at_most: 1 }}">
-            {%- if calculated_total_price >= threshold_in_cents -%}
-              <span class="shipping-bar__text text--small">{{ 'cart.general.free_shipping' | t }}</span>
-            {%- else -%}
-              {%- capture remaining_amount -%}{{ calculated_total_price | minus: threshold_in_cents | abs | money }}{%- endcapture -%}
-              <span class="shipping-bar__text text--small">{{ 'cart.general.free_shipping_remaining_html' | t: remaining_amount: remaining_amount }}</span>
-            {%- endif -%}
-
-            <span class="shipping-bar__progress"></span>
-          </free-shipping-bar>
         {%- endif -%}
       {%- endif -%}
 
