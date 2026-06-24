@@ -92,6 +92,12 @@
             "secondary_title_line2": "secondary_title_line2"
           }
         },
+        "description_block_Kwahik": {
+          "type": "description_block",
+          "settings": {
+            "description": "<p>Dr Jen's Mouth Rinse</p>"
+          }
+        },
         "variant_pills_XcBFbd": {
           "type": "variant_pills",
           "settings": {
@@ -297,6 +303,7 @@
       "block_order": [
         "reviews_fwBPUi",
         "title_AUHa6c",
+        "description_block_Kwahik",
         "variant_pills_XcBFbd",
         "price_stock_4Qk3Yf",
         "description_block_jyEXcG",
