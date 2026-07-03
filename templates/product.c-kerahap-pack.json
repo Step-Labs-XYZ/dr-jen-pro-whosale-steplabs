@@ -403,9 +403,9 @@
         "scientific_quote": "<p><em>\"Based on the data provided, the SCCS considers hydroxyapatite (nano) safe when used at concentrations up to 10% in toothpaste — composed of rod-shaped particles.\"</em></p>",
         "crystal_heading": "Does quality of the crystal matter?",
         "crystal_description": "<p>Crystals have to be 'Nano' in size to be able to penetrate the enamel surface pores and dentin tubules.</p>",
-        "low_grade_image": "shopify://shop_images/Group_1000007150.png",
+        "low_grade_image": "shopify://shop_images/Gris_1_1.gif",
         "low_grade_label": "Low-Grade nHAp",
-        "premium_grade_image": "shopify://shop_images/Group_1000007167.png",
+        "premium_grade_image": "shopify://shop_images/Verde_1.gif",
         "premium_grade_label": "Premium Grade nHAp",
         "bg_color": "#ffffff",
         "heading_color": "#002c41",
@@ -463,8 +463,8 @@
         "badge_text": "",
         "badge_bg": "#4caf7d",
         "badge_text_color": "#ffffff",
-        "product_image": "shopify://shop_images/Frame_1484580905_10.png",
-        "product_image_mobile": "shopify://shop_images/Rectangle_34624332_4.png",
+        "product_image": "shopify://shop_images/Frame_1484580905_16.png",
+        "product_image_mobile": "shopify://shop_images/Rectangle_34624332_8.png",
         "bg_color": "#f7f7f7",
         "img_bg_color": "#e0eff5",
         "text_color": "#002c41",
@@ -473,98 +473,6 @@
         "pad_bot_desk": 72,
         "pad_top_mob": 48,
         "pad_bot_mob": 48
-      }
-    },
-    "c_comparison_table_AWfMDe": {
-      "type": "c-comparison-table",
-      "blocks": {
-        "row_84yGLh": {
-          "type": "row",
-          "settings": {
-            "title": "Premium Grade nHAp",
-            "our_has": true,
-            "other_has": false
-          }
-        },
-        "row_jJWBzz": {
-          "type": "row",
-          "settings": {
-            "title": "Dentist Developed & Owned",
-            "our_has": true,
-            "other_has": false
-          }
-        },
-        "row_QVcdbj": {
-          "type": "row",
-          "settings": {
-            "title": "Cleaner Ingredients",
-            "our_has": true,
-            "other_has": false
-          }
-        },
-        "row_RXRpCD": {
-          "type": "row",
-          "settings": {
-            "title": "Free from SLS, Titanium Dioxide, Artificial Color",
-            "our_has": true,
-            "other_has": false
-          }
-        },
-        "row_N7KURt": {
-          "type": "row",
-          "settings": {
-            "title": "Xylitol for Oral Microbiome Balance",
-            "our_has": true,
-            "other_has": false
-          }
-        },
-        "row_Mpy8Bp": {
-          "type": "row",
-          "settings": {
-            "title": "Proprietary Essential Oil Complex",
-            "our_has": true,
-            "other_has": false
-          }
-        },
-        "row_q9YXyW": {
-          "type": "row",
-          "settings": {
-            "title": "Transparent, Science-Backed Formula",
-            "our_has": true,
-            "other_has": false
-          }
-        },
-        "row_pThpFi": {
-          "type": "row",
-          "settings": {
-            "title": "Built for Daily, Long-Term Use",
-            "our_has": true,
-            "other_has": false
-          }
-        }
-      },
-      "block_order": [
-        "row_84yGLh",
-        "row_jJWBzz",
-        "row_QVcdbj",
-        "row_RXRpCD",
-        "row_N7KURt",
-        "row_Mpy8Bp",
-        "row_q9YXyW",
-        "row_pThpFi"
-      ],
-      "name": "C - Comparison Table",
-      "settings": {
-        "bg_color": "#ffffff",
-        "pre_title": "",
-        "title": "Their Oral Microbiome Deserves Better",
-        "subtitle": "Dr. Jen's vs. other Mouth Pre-Rinse",
-        "our_title": "Wellness Pre-Rinse",
-        "other_title": "Other Mouth Rinse",
-        "pad_top_desk": 80,
-        "pad_bot_desk": 80,
-        "pad_top_mob": 50,
-        "pad_bot_mob": 50
       }
     },
     "c_blend_science_flavor_CU8Q7F": {
@@ -700,35 +608,6 @@
         "pad_bot_mob": 48
       }
     },
-    "c_clinically_backed_gE7YcV": {
-      "type": "c-clinically-backed",
-      "name": "C - Clinically Backed",
-      "settings": {
-        "bg_color": "#ffffff",
-        "image_1": "shopify://shop_images/image_1290.png",
-        "label_1": "Low-\nGrade nHAp",
-        "image_2": "shopify://shop_images/image_1291.png",
-        "label_2": "Premium-\nGrade nHAp",
-        "title": "Clinically Backed \nOral Care",
-        "description": "Premium-grade Nanohydroxyapatite is clinically proven to support enamel protection and reduce hypersensitivity.",
-        "stat1_label": "PROVEN OPTIMAL",
-        "stat1_value": "10%",
-        "stat1_desc": "Nanohydroxyapatite concentration",
-        "stat2_label": "FULL FORMULA STRENGTH",
-        "stat2_value": "free",
-        "stat2_desc": "from harsh chemicals",
-        "detail_label": "PREMIUM CRYSTAL QUALITY",
-        "detail_title": "High-Purity nHAp",
-        "detail_text": "While cheaper formulations source lower grande Nanohydroxyapatite,  Dr. Jen sources Premium Grade Nanohydroxyapatite for higher performance.",
-        "sccs_quote": "",
-        "btn_text": "",
-        "btn_url": "/",
-        "pad_top_desk": 80,
-        "pad_bot_desk": 80,
-        "pad_top_mob": 50,
-        "pad_bot_mob": 50
-      }
-    },
     "product-content": {
       "type": "product-content",
       "disabled": true,
@@ -857,9 +736,7 @@
     "c_badges_bar_v2_hVXVCp",
     "c_dr_jen_difference_AgUcYd",
     "c_why_ortho_patients_m39DVK",
-    "c_comparison_table_AWfMDe",
     "c_blend_science_flavor_CU8Q7F",
-    "c_clinically_backed_gE7YcV",
     "product-content",
     "1659632928e379313e",
     "c_premium_nhap_XcyLKw",
