@@ -390,6 +390,117 @@
         "pad_bot_desk": 80
       }
     },
+    "c_dental_professionals_v2_KdWy8c": {
+      "type": "c-dental-professionals-v2",
+      "blocks": {
+        "photo_text_RHDNNd": {
+          "type": "photo_text",
+          "settings": {
+            "video_url": "",
+            "name": "LISA MARKER, RHD",
+            "quote": "\"We've been using Dr. Jen's in our office for about a year, we've seen high patient compliance & satisfaction. I've had my teen using the SuperPaste and we've noticed a significant difference in his white spot lesions.\"",
+            "name_align": "left",
+            "quote_align": "left",
+            "img_height_mob": 200,
+            "img_height_desk": 220,
+            "gap_mob": 0,
+            "gap_desk": 16
+          }
+        },
+        "video_image_XEMb6L": {
+          "type": "video_image",
+          "settings": {
+            "video_url": "",
+            "name": "",
+            "quote": "",
+            "name_align": "left",
+            "quote_align": "left",
+            "img_height_mob": 220,
+            "img_height_desk": 300,
+            "gap_mob": 0,
+            "gap_desk": 16
+          }
+        },
+        "quote_text_m43Jz3": {
+          "type": "quote_text",
+          "settings": {
+            "video_url": "",
+            "quote": "\"I am a hygienist here in Denver, Colorado, and about a year ago, I started using the Dr. Jen Super Paste, and I love it. I have noticed my teeth are less sensitive. They are whiter, they are brighter, they are just slicker, if that's a word. And so I do recommend this to my patients.\"",
+            "name": "DR. NAOMI, DENTAL HYGIENIST",
+            "name_align": "left",
+            "quote_align": "left",
+            "img_height_mob": 220,
+            "img_height_desk": 300
+          }
+        },
+        "photo_text_pUDhgA": {
+          "type": "photo_text",
+          "settings": {
+            "video_url": "",
+            "name": "DR. TRACY, DENTAL HYGIENE STUDENT",
+            "quote": "\"I think it's an incredible product, especially for patients who maybe feel a little bit skeptical about fluoride. It's a great alternative so that they still have care and protection.\"",
+            "name_align": "left",
+            "quote_align": "left",
+            "img_height_mob": 200,
+            "img_height_desk": 220,
+            "gap_mob": 0,
+            "gap_desk": 16
+          }
+        }
+      },
+      "block_order": [
+        "photo_text_RHDNNd",
+        "video_image_XEMb6L",
+        "quote_text_m43Jz3",
+        "photo_text_pUDhgA"
+      ],
+      "name": "C - Dental Profess v2",
+      "settings": {
+        "eyebrow": "#1 Recommended",
+        "heading": "Dental Professionals Choose Dr.Jen",
+        "bg_color": "#FFFFFF",
+        "bg_color_mob": "#F7F7F7",
+        "bg_color_desk": "#FFFFFF",
+        "eyebrow_color": "#002C41",
+        "heading_color": "#002C41",
+        "card_bg": "#F7F7F7",
+        "name_color": "#002C41",
+        "quote_color": "#000000",
+        "dot_active_color": "#FFFFFF",
+        "dot_inactive_color": "#5B7B8A",
+        "play_btn_bg": "#FFFFFF",
+        "play_btn_icon_color": "#1B3A4B",
+        "play_btn_size_mob": 56,
+        "play_btn_size_desk": 64,
+        "video_panel_width_mob": 45,
+        "video_panel_width_desk": 45,
+        "card_radius_mob": 20,
+        "card_radius_desk": 8,
+        "cards_per_row_desk": 4,
+        "eyebrow_size_mob": 14,
+        "eyebrow_size_desk": 16,
+        "heading_size_mob": 28,
+        "heading_size_desk": 42,
+        "name_size_mob": 14,
+        "name_size_desk": 14,
+        "quote_size_mob": 16,
+        "quote_size_desk": 16,
+        "pad_top_mob": 48,
+        "pad_bot_mob": 64,
+        "pad_top_desk": 72,
+        "pad_bot_desk": 88,
+        "header_mb_mob": 32,
+        "header_mb_desk": 44,
+        "eyebrow_align": "left",
+        "heading_align": "left",
+        "name_font_weight": "700",
+        "name_text_transform": "uppercase",
+        "name_letter_spacing": 3,
+        "name_line_height": 12,
+        "quote_font_weight": "400",
+        "quote_line_height": 12
+      }
+    },
     "c_dr_jen_difference_AgUcYd": {
       "type": "c-dr-jen-difference",
       "custom_css": [],
@@ -420,43 +531,35 @@
         "faq_item_qB876A": {
           "type": "faq_item",
           "settings": {
-            "question": "Advanced Enamel Support",
-            "answer": "<p>Premium Nanohydroxyapatite helps support healthy enamel with daily use.</p>"
+            "question": "10% Premium Nanohydroxyapatite",
+            "answer": "<p>Clinically effective nHAp at the optimal concentration for advanced enamel support.</p>"
           }
         },
         "faq_item_C3fetb": {
           "type": "faq_item",
           "settings": {
-            "question": "Supports Healthier Gums",
-            "answer": "<p>Infused with aloe vera and calendula to help comfort and nourish delicate gum tissues.</p>"
+            "question": "Advanced Peptide Technology",
+            "answer": "<p>Enamel-inspired peptides that support stronger mineral bonding at the enamel surface.</p>"
           }
         },
         "faq_item_hnV6wC": {
           "type": "faq_item",
           "settings": {
-            "question": "Trusted by Professionals",
-            "answer": "<p>Recommended by Dentists and Hygienists.</p>"
-          }
-        },
-        "faq_item_ParRUb": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Promotes Saliva Flow",
-            "answer": "<p>Xylitol helps reduce cariogenic bacteria and raises PH.</p>"
+            "question": "Xylitol",
+            "answer": "<p>Supports a healthier oral environment.</p>"
           }
         }
       },
       "block_order": [
         "faq_item_qB876A",
         "faq_item_C3fetb",
-        "faq_item_hnV6wC",
-        "faq_item_ParRUb"
+        "faq_item_hnV6wC"
       ],
       "name": "C - Why Ortho Patients",
       "settings": {
         "sl_anchor_id": "",
-        "title": "Why Your Patients  Deserve a Better Rinse",
-        "body_text": "<p>The cleaner rinse alternative for patients who deserve more from their daily routine, built on premium Nanohydroxyapatite with soothing botanicals and essential oils. Unlike conventional mouthwashes that rely on alcohol and harsh additives, Wellness Pre-Rinse delivers advanced enamel and gum support with cleaner ingredients you can trust.</p>",
+        "title": "Advanced Protection for  Periodontal Patients",
+        "body_text": "<p>The most advanced fluoride-free toothpaste for patients who demand more from their oral care, built on 10% premium Nanohydroxyapatite with advanced enamel-inspired peptides. Unlike conventional toothpastes that rely on fluoride and petroleum-based ingredients, KeraHAp™ delivers biomimetic enamel support with cleaner ingredients you can trust.</p>",
         "comparison_label": "See the Difference at the Microscopic Level:",
         "comparison_image": "shopify://shop_images/Frame_1618873395_1.png",
         "comparison_image_mobile": "shopify://shop_images/Frame_1618873401.png",
@@ -734,6 +837,7 @@
     "c_product_topbar_RNYRDa",
     "c_product_page_rKyTxE",
     "c_badges_bar_v2_hVXVCp",
+    "c_dental_professionals_v2_KdWy8c",
     "c_dr_jen_difference_AgUcYd",
     "c_why_ortho_patients_m39DVK",
     "c_blend_science_flavor_CU8Q7F",
