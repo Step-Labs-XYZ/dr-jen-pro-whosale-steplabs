@@ -1,0 +1,861 @@
+{% comment %}
+  Custom Comparison Section - Desktop & Mobile Responsive Perfect Match
+  Name: C - Comparison Table
+  Correction: Fixed mobile view to match horizontal icon+text layout aligned to the left.
+{% endcomment %}
+
+{% style %}
+  /* --- Estilos Dinámicos de la Sección --- */
+  .comp-section-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding-top: {{ section.settings.padding_top_mb }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mb }}px;
+  }
+
+  /* Títulos independientes */
+  .comp-section-{{ section.id }} .comp-title-desktop {
+    display: none; /* Se oculta en móvil */
+  }
+
+  .comp-section-{{ section.id }} .comp-title-mobile {
+    display: block;
+    color: {{ section.settings.title_color }};
+    font-family: var(--Primary, Raleway), sans-serif;
+    font-size: {{ section.settings.title_size_mb }}px;
+    font-style: normal;
+    font-weight: {{ section.settings.title_weight }};
+    line-height: 120%; 
+    margin-bottom: 15px;
+    text-align: {{ section.settings.text_align_mb }};
+    max-width: {{ section.settings.title_max_width_mb }}px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .comp-section-{{ section.id }} .comp-subtitle {
+    color: {{ section.settings.subtitle_color }};
+    font-family: var(--Body, Raleway), sans-serif;
+    font-size: {{ section.settings.sub_size_mb }}px;
+    font-style: normal;
+    font-weight: {{ section.settings.sub_weight }};
+    line-height: 120%;
+    margin-bottom: 20px;
+    text-align: {{ section.settings.text_align_mb }};
+    /* Opción de ocultar en móvil */
+    {% if section.settings.hide_subtitle_mobile %}
+      display: none;
+    {% else %}
+      display: block;
+    {% endif %}
+  }
+
+  /* Nuevo Botón / Enlace con Flecha */
+  .comp-section-{{ section.id }} .comp-link-btn {
+    display: flex;
+    width: 133px;
+    padding: 12px 0px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; 
+    color: {{ section.settings.btn_color }};
+    font-family: var(--Primary, Raleway), sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%; 
+    text-decoration: underline solid;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    /* Opción de ocultar en móvil */
+    {% if section.settings.hide_btn_mobile %}
+      display: none;
+    {% else %}
+      display: flex;
+    {% endif %}
+  }
+
+  .comp-section-{{ section.id }} .comp-link-btn svg path {
+    stroke: {{ section.settings.btn_color }};
+  }
+
+  .comp-section-{{ section.id }} .comp-badge-text {
+    color: {{ section.settings.badge_color }};
+    font-family:'EightiesComeback_It VAR';
+    font-size: {{ section.settings.badge_size_mb }}px;
+    font-style: italic;
+    font-weight: {{ section.settings.badge_weight }};
+    line-height: normal;
+    text-align: {{ section.settings.text_align_mb }};
+    margin-bottom: 20px;
+    /* Opción de ocultar en móvil */
+    {% if section.settings.hide_badge_mobile %}
+      display: none;
+    {% else %}
+      display: block;
+    {% endif %}
+  }
+
+  .comp-section-{{ section.id }} .comp-row-text {
+    font-size: {{ section.settings.row_text_size_mb }}px;
+  }
+
+  /* --- Estructura Base Móvil (Mobile First con Corrección Visual) --- */
+  .comp-container-{{ section.id }} {
+    width: 100%;
+    max-width: 1400px; 
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .comp-text-side {
+    width: 100%;
+  }
+
+  .comp-table-side {
+    width: 100%;
+    margin-top: 140px; 
+  }
+
+  .comp-table-wrapper {
+    width: 100%;
+    position: relative;
+  }
+
+  .comp-table-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 3;
+    justify-items: center; 
+  }
+
+  .comp-img-container {
+    position: relative;
+    width: 100%;
+    height: 1px;
+    display: flex;
+    justify-content: center; 
+  }
+
+  .comp-img-box {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: -130px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+  }
+
+  .comp-img-box img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+  }
+
+  .comp-table-header {
+    background-color: var(--Dark-Green, #002C41);
+    border-radius: 12px; 
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 20px 10px;
+    text-align: center;
+    gap: 10px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 15px;
+  }
+
+  .comp-header-title {
+    margin: 0;
+    font-family: var(--Primary, Raleway), sans-serif;
+    color: #ffffff;
+    font-size: {{ section.settings.header_size_mb }}px;
+    font-weight: {{ section.settings.header_weight }};
+    line-height: 1.2;
+  }
+
+  .comp-table-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; 
+  }
+
+  .comp-table-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    align-items: start;
+    border-radius: 12px;
+    padding: 10px 0;
+  }
+
+  .comp-table-row:nth-child(even) {
+    background-color: #F9F9F9;
+  }
+  .comp-table-row:nth-child(odd) {
+    background-color: transparent;
+  }
+
+  .comp-cell {
+    display: flex;
+    flex-direction: row; /* Corregido: Alineación horizontal en móvil */
+    align-items: center; /* Permite que el icono no se estire si el texto es largo */
+    text-align: left; /* Corregido: Texto alineado a la izquierda */
+    gap: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .comp-icon-wrapper {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 26px;
+    width: 26px;
+  }
+
+  .comp-row-text {
+    margin: 0;
+    line-height: 130%;
+    font-family: var(--Body, Raleway), sans-serif;
+    text-align: left;
+  }
+
+  .comp-cell-brand .comp-row-text {
+    font-weight: 700; /* Corregido: Texto destacado en bold como la imagen */
+    color: var(--Dark-Green, #002C41);
+  }
+  
+  .comp-cell-generic .comp-row-text {
+    font-weight: 400;
+    color: #231F20;
+  }
+
+  /* --- Ajustes de Escritorio (Desktop) --- */
+  @media screen and (min-width: 769px) {
+    .comp-section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_dt }}px;
+      padding-bottom: {{ section.settings.padding_bottom_dt }}px;
+    }
+
+    .comp-container-{{ section.id }} {
+      flex-direction: row;
+      align-items: center;
+      gap: 5%;
+    }
+
+    .comp-text-side {
+      width: 40%;
+    }
+
+    .comp-table-side {
+      width: 55%;
+      margin-top: 100px; 
+    }
+
+    /* Comportamiento de títulos en Desktop */
+    .comp-section-{{ section.id }} .comp-title-mobile {
+      display: none !important;
+    }
+
+    .comp-section-{{ section.id }} .comp-title-desktop {
+      display: block;
+      color: {{ section.settings.title_color }};
+      font-family: var(--Primary, Raleway), sans-serif;
+      font-size: {{ section.settings.title_size_dt }}px;
+      font-style: normal;
+      font-weight: {{ section.settings.title_weight }};
+      line-height: 120%; 
+      margin-bottom: 15px;
+      text-align: {{ section.settings.text_align_dt }};
+    }
+
+    /* Asegurar visibilidad de elementos en Desktop */
+    .comp-section-{{ section.id }} .comp-subtitle {
+      display: block !important;
+      font-size: {{ section.settings.sub_size_dt }}px;
+      text-align: {{ section.settings.text_align_dt }};
+    }
+
+    .comp-section-{{ section.id }} .comp-link-btn {
+      display: flex !important;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .comp-section-{{ section.id }} .comp-badge-text {
+      display: block !important;
+      font-size: {{ section.settings.badge_size_dt }}px;
+      text-align: {{ section.settings.text_align_dt }};
+      margin-bottom: 0;
+    }
+
+    .comp-section-{{ section.id }} .comp-header-title {
+      font-size: {{ section.settings.header_size_dt }}px;
+    }
+
+    .comp-section-{{ section.id }} .comp-row-text {
+      font-size: {{ section.settings.row_text_size_dt }}px;
+    }
+
+    .comp-table-header {
+      border-radius: 12px 12px 0 0;
+      margin-bottom: 0;
+      padding: 25px 20px;
+    }
+
+    .comp-table-body {
+      gap: 0;
+      border: 1px solid #f0f0f0;
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+      overflow: hidden;
+    }
+
+    .comp-table-row {
+      padding: 0;
+      border-radius: 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .comp-table-row:last-child {
+      border-bottom: none;
+    }
+
+    .comp-table-row:nth-child(even) {
+      background-color: #F9F9F9;
+    }
+    .comp-table-row:nth-child(odd) {
+      background-color: #FFFFFF;
+    }
+
+    .comp-cell {
+      flex-direction: row; 
+      align-items: center;
+      text-align: left;
+      padding: 22px 25px;
+    }
+
+    .comp-cell-brand {
+      border-right: 1px solid #f0f0f0;
+    }
+  }
+{% endstyle %}
+
+<section class="comp-section-{{ section.id }}">
+  <div class="comp-container-{{ section.id }}">
+    
+    <div class="comp-text-side">
+      {%- if section.settings.title_desktop != blank -%}
+        <h2 class="comp-title-desktop">{{ section.settings.title_desktop }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.title_mobile != blank -%}
+        <h2 class="comp-title-mobile">{{ section.settings.title_mobile }}</h2>
+      {%- endif -%}
+      
+      {%- if section.settings.subtitle != blank -%}
+        <p class="comp-subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.btn_label != blank -%}
+        {%- if section.settings.btn_link != blank -%}
+          <a href="{{ section.settings.btn_link }}" class="comp-link-btn">
+        {%- else -%}
+          <button class="comp-link-btn">
+        {%- endif -%}
+          {{ section.settings.btn_label }}
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14" fill="none">
+            <path d="M0.75 6.75H16.75M10.75 12.75L16.75 6.75L10.75 0.75" stroke="#002C41" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        {%- if section.settings.btn_link != blank -%}
+          </a>
+        {%- else -%}
+          </button>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if section.settings.badge_text != blank -%}
+        <p class="comp-badge-text">{{ section.settings.badge_text }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="comp-table-side">
+      <div class="comp-table-wrapper">
+        
+        <div class="comp-table-images">
+          <div class="comp-img-container">
+            <div class="comp-img-box">
+              {%- if section.settings.brand_image != blank -%}
+                {{ section.settings.brand_image | image_url: width: 300 | image_tag: loading: 'lazy' }}
+              {%- endif -%}
+            </div>
+          </div>
+          <div class="comp-img-container">
+            <div class="comp-img-box">
+              {%- if section.settings.generic_image != blank -%}
+                {{ section.settings.generic_image | image_url: width: 300 | image_tag: loading: 'lazy' }}
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+
+        <div class="comp-table-header">
+          <div class="comp-col-brand">
+            <h4 class="comp-header-title">{{ section.settings.brand_header_text }}</h4>
+          </div>
+          <div class="comp-col-generic">
+            <h4 class="comp-header-title">{{ section.settings.generic_header_text }}</h4>
+          </div>
+        </div>
+
+        <div class="comp-table-body">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'row' -%}
+              <div class="comp-table-row" {{ block.shopify_attributes }}>
+                
+                <div class="comp-cell comp-cell-brand">
+                  <div class="comp-icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="none" viewBox="0 0 26 26">
+                      <rect width="26" height="26" fill="#D6ECE6" rx="13"/>
+                      <path fill="#002C41" d="m8.011 13.906.756-.775 2.625 2.585 5.429-5.41.776.776-6.205 6.185-3.38-3.36Z"/>
+                    </svg>
+                  </div>
+                  <p class="comp-row-text">{{ block.settings.brand_text }}</p>
+                </div>
+
+                <div class="comp-cell comp-cell-generic">
+                  <div class="comp-icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="none" viewBox="0 0 11 11">
+                      <path fill="#707170" d="M.756 10.752 0 9.996l4.592-4.62L0 .756.756 0l4.592 4.62L9.912 0l.756.756-4.592 4.62 4.592 4.62-.756.756L5.348 6.16.756 10.752Z"/>
+                    </svg>
+                  </div>
+                  <p class="comp-row-text">{{ block.settings.generic_text }}</p>
+                </div>
+
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "C - Comparison Table v2",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Ajustes Generales de Sección"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Color de Fondo Sección",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_dt",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Superior (Desktop)",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_dt",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Inferior (Desktop)",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mb",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Superior (Móvil)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mb",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Inferior (Móvil)",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Controles de Visibilidad en Móvil"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_subtitle_mobile",
+      "label": "Ocultar Subtítulo en Móvil",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_btn_mobile",
+      "label": "Ocultar Botón en Móvil",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_badge_mobile",
+      "label": "Ocultar Texto Destacado (Cursiva) en Móvil",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Personalización de Colores de Textos"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color de Títulos",
+      "default": "#002C41"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Color de Subtítulo",
+      "default": "#231F20"
+    },
+    {
+      "type": "color",
+      "id": "btn_color",
+      "label": "Color del Botón",
+      "default": "#002C41"
+    },
+    {
+      "type": "color",
+      "id": "badge_color",
+      "label": "Color Texto Destacado",
+      "default": "#002C41"
+    },
+    {
+      "type": "header",
+      "content": "Textos Principales (Izquierda)"
+    },
+    {
+      "type": "text",
+      "id": "title_desktop",
+      "label": "Título (Desktop)",
+      "default": "Why dentists trust Dr. Jen oral care"
+    },
+    {
+      "type": "text",
+      "id": "title_mobile",
+      "label": "Título (Móvil)",
+      "default": "Why dentists trust Dr. Jen"
+    },
+    {
+      "type": "range",
+      "id": "title_max_width_mb",
+      "min": 200,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "label": "Ancho máximo Título Móvil",
+      "default": 350
+    },
+    {
+      "type": "select",
+      "id": "title_weight",
+      "label": "Grosor del Título (Font Weight)",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Regular" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "title_size_dt",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Título (Desktop)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "title_size_mb",
+      "min": 18,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Título (Móvil)",
+      "default": 28
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtítulo / Párrafo",
+      "default": "Dr. Jen's customized formulas solve unique patient needs, unlike one-size-fits-all, mass-produced toothpaste."
+    },
+    {
+      "type": "select",
+      "id": "sub_weight",
+      "label": "Grosor del Subtítulo",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Regular" },
+        { "value": "600", "label": "Medium" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "sub_size_dt",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Subtítulo (Desktop)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "sub_size_mb",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Subtítulo (Móvil)",
+      "default": 16
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Texto del Botón",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Enlace del Botón"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Texto Destacado (Cursiva)",
+      "default": "Powered by Nature, Rooted in Science"
+    },
+    {
+      "type": "range",
+      "id": "badge_size_dt",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Destacado (Desktop)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "badge_size_mb",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Destacado (Móvil)",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "badge_weight",
+      "label": "Grosor Destacado",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "select",
+      "id": "text_align_dt",
+      "label": "Alineación Textos (Desktop)",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right", "label": "Derecha" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "text_align_mb",
+      "label": "Alineación Textos (Móvil)",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right", "label": "Derecha" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Configuración de la Tabla"
+    },
+    {
+      "type": "image_picker",
+      "id": "brand_image",
+      "label": "Imagen Producto Principal"
+    },
+    {
+      "type": "image_picker",
+      "id": "generic_image",
+      "label": "Imagen Producto Genérico"
+    },
+    {
+      "type": "text",
+      "id": "brand_header_text",
+      "label": "Cabecera Marca",
+      "default": "DR. JEN'S NANO-HYDROXYAPATITE"
+    },
+    {
+      "type": "text",
+      "id": "generic_header_text",
+      "label": "Cabecera Genérico",
+      "default": "GENERIC HYDROXYAPATITE TOOTHPASTES"
+    },
+    {
+      "type": "range",
+      "id": "header_size_dt",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Texto Cabecera (Desktop)",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "header_size_mb",
+      "min": 9,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Texto Cabecera (Móvil)",
+      "default": 11
+    },
+    {
+      "type": "select",
+      "id": "header_weight",
+      "label": "Grosor Texto Cabecera",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "header",
+      "content": "Filas de Contenido"
+    },
+    {
+      "type": "range",
+      "id": "row_text_size_dt",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Texto Filas (Desktop)",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "row_text_size_mb",
+      "min": 11,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Texto Filas (Móvil)",
+      "default": 13
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Fila Comparativa",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "brand_text",
+          "label": "Texto Columna Marca",
+          "default": "Mother and Dentist Founded and Formulated"
+        },
+        {
+          "type": "textarea",
+          "id": "generic_text",
+          "label": "Texto Columna Genérica",
+          "default": "Venture Capitalist and Investment Banker Toothpaste Formulations"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "C - Comparison Table v2",
+      "blocks": [
+        {
+          "type": "row",
+          "settings": {
+            "brand_text": "Mother and Dentist Founded and Formulated",
+            "generic_text": "Venture Capitalist and Investment Banker Toothpaste Formulations"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "brand_text": "Formulated for Optimal Enamel Health",
+            "generic_text": "Mass Produced, Private Label Formulations"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "brand_text": "Driven by Nature, Backed by Science",
+            "generic_text": "Driven by Marketing and Social Media Trends"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
