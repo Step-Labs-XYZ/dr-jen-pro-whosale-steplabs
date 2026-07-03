@@ -390,6 +390,53 @@
         "pad_bot_desk": 80
       }
     },
+    "c_product_features_8rY3zP": {
+      "type": "c-product-features",
+      "blocks": {
+        "feature_MUnBzn": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/Frame_1484580916_3.png",
+            "title": "10% Premium Nanohydroxyapatite",
+            "description": "Clinically effective nHAp at the optimal concentration for advanced enamel support."
+          }
+        },
+        "feature_Qrjc9a": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/Frame_1484580916_4.png",
+            "title": "Advanced Peptide Technology",
+            "description": "Enamel-inspired peptides that support stronger mineral bonding at the enamel surface."
+          }
+        },
+        "feature_VJHneU": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/Frame_1484580916_5.png",
+            "title": "Xylitol",
+            "description": "Supports a healthier oral environment."
+          }
+        }
+      },
+      "block_order": [
+        "feature_MUnBzn",
+        "feature_Qrjc9a",
+        "feature_VJHneU"
+      ],
+      "name": "C Product Features",
+      "settings": {
+        "small_heading": "The World's First",
+        "small_heading_mobile": "Peptide + Nanohydroxyapatite Formula",
+        "main_heading": "Peptide + Nanohydroxyapatite Formula",
+        "main_heading_mobile": "Peptide + Nanohydroxyapatite Formula",
+        "product_image": "shopify://shop_images/Frame_1484580905_17.png",
+        "show_badge": false,
+        "badge_text": "NEW!",
+        "button_text": "SHOP NOW",
+        "button_url": "",
+        "bottom_text": ""
+      }
+    },
     "c_dental_professionals_v2_KdWy8c": {
       "type": "c-dental-professionals-v2",
       "blocks": {
@@ -867,6 +914,7 @@
     "c_product_topbar_RNYRDa",
     "c_product_page_rKyTxE",
     "c_badges_bar_v2_hVXVCp",
+    "c_product_features_8rY3zP",
     "c_dental_professionals_v2_KdWy8c",
     "c_science_study_ApKyNV",
     "c_dr_jen_difference_AgUcYd",
