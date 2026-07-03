@@ -646,10 +646,13 @@
       "name": "C - Science Study Pro",
       "settings": {
         "bg_color": "#ffffff",
-        "title": "Breakthrough Study",
-        "text": "",
-        "badge_text_1": "",
-        "badge_text_2": "",
+        "bg_img_desk": "shopify://shop_images/new-kera_2.png",
+        "bg_img_mob": "shopify://shop_images/new-kera_1.png",
+        "title": "Breakthrough Study:  nHAp + Fluoride Outperforms High-Fluoride Toothpaste",
+        "text": "<p>Breakthrough Study: Peptide + nHAp Outperforms Fluoride ToothpasteAn independent in vitro study conducted at the University of Toronto (April 2026) using real human enamel specimens under daily acid challenge conditions.</p>",
+        "img_table": "shopify://shop_images/Frame_2085665972.png",
+        "badge_text_1": "<b>KeraHAp™ delivered +79% greater </b>remineralization vs. 0.24% OTC fluoride toothpaste.",
+        "badge_text_2": "<b>KeraHAp™ delivered +62% greater  </b>remineralization vs. MI Paste®.",
         "badge_bg": "#ffffff",
         "badge_text_color": "#000000",
         "max_width": 1200,
