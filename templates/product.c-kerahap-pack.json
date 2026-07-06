@@ -101,8 +101,8 @@
         "price_stock_4Qk3Yf": {
           "type": "price_stock",
           "settings": {
-            "unit_label": "$18.50/bottle",
-            "retail_text": "Retail $18.50/bottle"
+            "unit_label": "$15.60/tube",
+            "retail_text": "Retail $26.00/unit"
           }
         },
         "ingredients_tab_effY3y": {
