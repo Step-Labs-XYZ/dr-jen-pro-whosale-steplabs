@@ -519,7 +519,7 @@
         "name_size_desk": 14,
         "quote_size_mob": 16,
         "quote_size_desk": 16,
-        "pad_top_mob": 20,
+        "pad_top_mob": 32,
         "pad_bot_mob": 20,
         "pad_top_desk": 72,
         "pad_bot_desk": 88,
