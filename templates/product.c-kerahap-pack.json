@@ -612,6 +612,77 @@
         "p_bot_mob": 40
       }
     },
+    "c_comparison_table_custom_jrjaaa": {
+      "type": "c-comparison-table-custom",
+      "blocks": {
+        "row_iHAEtn": {
+          "type": "row",
+          "settings": {
+            "brand_text": "Mother and Dentist Founded and Formulated",
+            "generic_text": "Venture Capitalist and Investment Banker Toothpaste Formulations"
+          }
+        },
+        "row_bFGbW8": {
+          "type": "row",
+          "settings": {
+            "brand_text": "Formulated for Optimal Enamel Health",
+            "generic_text": "Mass Produced, Private Label Formulations"
+          }
+        },
+        "row_ktbGKk": {
+          "type": "row",
+          "settings": {
+            "brand_text": "Driven by Nature, Backed by Science",
+            "generic_text": "Driven by Marketing and Social Media Trends"
+          }
+        }
+      },
+      "block_order": [
+        "row_iHAEtn",
+        "row_bFGbW8",
+        "row_ktbGKk"
+      ],
+      "name": "C - Comparison Table v2",
+      "settings": {
+        "bg_color": "#ffffff",
+        "padding_top_dt": 60,
+        "padding_bottom_dt": 60,
+        "padding_top_mb": 40,
+        "padding_bottom_mb": 40,
+        "hide_subtitle_mobile": false,
+        "hide_btn_mobile": false,
+        "hide_badge_mobile": false,
+        "title_color": "#002C41",
+        "subtitle_color": "#231F20",
+        "btn_color": "#002C41",
+        "badge_color": "#002C41",
+        "title_desktop": "Why dentists trust Dr. Jen oral care",
+        "title_mobile": "Why dentists trust Dr. Jen",
+        "title_max_width_mb": 350,
+        "title_weight": "600",
+        "title_size_dt": 32,
+        "title_size_mb": 28,
+        "subtitle": "Dr. Jen's customized formulas solve unique patient needs, unlike one-size-fits-all, mass-produced toothpaste.",
+        "sub_weight": "400",
+        "sub_size_dt": 24,
+        "sub_size_mb": 16,
+        "btn_label": "Shop Now",
+        "btn_link": "",
+        "badge_text": "Powered by Nature, Rooted in Science",
+        "badge_size_dt": 24,
+        "badge_size_mb": 24,
+        "badge_weight": "400",
+        "text_align_dt": "left",
+        "text_align_mb": "left",
+        "brand_header_text": "DR. JEN'S NANO-HYDROXYAPATITE",
+        "generic_header_text": "GENERIC HYDROXYAPATITE TOOTHPASTES",
+        "header_size_dt": 12,
+        "header_size_mb": 11,
+        "header_weight": "700",
+        "row_text_size_dt": 15,
+        "row_text_size_mb": 13
+      }
+    },
     "c_dr_jen_difference_AgUcYd": {
       "type": "c-dr-jen-difference",
       "custom_css": [],
@@ -951,6 +1022,7 @@
     "c_dental_professionals_v2_KdWy8c",
     "c_product_features_8rY3zP",
     "c_science_study_ApKyNV",
+    "c_comparison_table_custom_jrjaaa",
     "c_dr_jen_difference_AgUcYd",
     "c_why_ortho_patients_m39DVK",
     "c_blend_science_flavor_CU8Q7F",
