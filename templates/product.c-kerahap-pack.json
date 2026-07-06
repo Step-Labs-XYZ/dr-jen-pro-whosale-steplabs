@@ -443,11 +443,13 @@
         "photo_text_RHDNNd": {
           "type": "photo_text",
           "settings": {
+            "image": "shopify://shop_images/Column-1_1.png",
+            "image_mob": "shopify://shop_images/Column-1_2.png",
             "video_url": "",
             "name": "LISA MARKER, RHD",
             "quote": "\"We've been using Dr. Jen's in our office for about a year, we've seen high patient compliance & satisfaction. I've had my teen using the SuperPaste and we've noticed a significant difference in his white spot lesions.\"",
-            "name_align": "left",
-            "quote_align": "left",
+            "name_align": "center",
+            "quote_align": "center",
             "img_height_mob": 200,
             "img_height_desk": 220,
             "gap_mob": 0,
@@ -458,8 +460,11 @@
           "type": "video_image",
           "settings": {
             "video_url": "",
-            "name": "",
-            "quote": "",
+            "shopify_video": "shopify://files/videos/NaomiTetrault.mov",
+            "poster": "shopify://shop_images/2-desk.png",
+            "poster_mob": "shopify://shop_images/2-mob.png",
+            "name": "DR. NAOMI, DENTAL HYGIENIST",
+            "quote": "\"I am a hygienist here in Denver, Colorado, and about a year ago, I started using the Dr. Jen Super Paste, and I love it. I have noticed my teeth are less sensitive. They are whiter, they are brighter, they are just slicker, if that's a word. And so I do recommend this to my patients.\"",
             "name_align": "left",
             "quote_align": "left",
             "img_height_mob": 220,
@@ -468,22 +473,13 @@
             "gap_desk": 16
           }
         },
-        "quote_text_m43Jz3": {
-          "type": "quote_text",
-          "settings": {
-            "video_url": "",
-            "quote": "\"I am a hygienist here in Denver, Colorado, and about a year ago, I started using the Dr. Jen Super Paste, and I love it. I have noticed my teeth are less sensitive. They are whiter, they are brighter, they are just slicker, if that's a word. And so I do recommend this to my patients.\"",
-            "name": "DR. NAOMI, DENTAL HYGIENIST",
-            "name_align": "left",
-            "quote_align": "left",
-            "img_height_mob": 220,
-            "img_height_desk": 300
-          }
-        },
         "photo_text_pUDhgA": {
           "type": "photo_text",
           "settings": {
+            "image": "shopify://shop_images/Column_6_bb399127-8458-478a-8c2a-0c0a3f5210b0.png",
+            "image_mob": "shopify://shop_images/Column_6_bb399127-8458-478a-8c2a-0c0a3f5210b0.png",
             "video_url": "",
+            "shopify_video": "shopify://files/videos/TracyHetherington.mov",
             "name": "DR. TRACY, DENTAL HYGIENE STUDENT",
             "quote": "\"I think it's an incredible product, especially for patients who maybe feel a little bit skeptical about fluoride. It's a great alternative so that they still have care and protection.\"",
             "name_align": "left",
@@ -493,13 +489,66 @@
             "gap_mob": 0,
             "gap_desk": 16
           }
+        },
+        "video_image_hmTYfF": {
+          "type": "video_image",
+          "settings": {
+            "video_url": "",
+            "shopify_video": "shopify://files/videos/IMG_0865 2.MOV",
+            "poster": "shopify://shop_images/4-desk.png",
+            "poster_mob": "shopify://shop_images/4-mob.png",
+            "name": "Matt Anderson",
+            "quote": "\"Hey guys, just heard about Dr. Jen's toothpaste. It's got hydroxyapatite mixed with fluoride. It's a great product. It's gonna be awesome for patients, and you guys should all try it out.\"",
+            "name_align": "left",
+            "quote_align": "left",
+            "img_height_mob": 220,
+            "img_height_desk": 300,
+            "gap_mob": 0,
+            "gap_desk": 16
+          }
+        },
+        "photo_text_LwdYGM": {
+          "type": "photo_text",
+          "settings": {
+            "image": "shopify://shop_images/Column_7_62121355-69ae-4767-87d8-d79b26475826.png",
+            "image_mob": "shopify://shop_images/Column_7_62121355-69ae-4767-87d8-d79b26475826.png",
+            "video_url": "",
+            "shopify_video": "shopify://files/videos/NicoleHartshorn.mp4",
+            "name": "Dr. Nicole Hartshorn  Regional Manager, Pediatric Practice",
+            "quote": "“Before using Dr. Jen's toothpaste, she was having cavities every six months at her visits, and then we put braces on her, and I was very, very worried the whole time. And after entering orthodontic treatment she was using the super paste, and we've gone 18 months with no cavities at all, and her teeth look amazing.“",
+            "name_align": "center",
+            "quote_align": "center",
+            "img_height_mob": 200,
+            "img_height_desk": 220,
+            "gap_mob": 0,
+            "gap_desk": 16
+          }
+        },
+        "video_image_hJdVa9": {
+          "type": "video_image",
+          "settings": {
+            "video_url": "",
+            "shopify_video": "shopify://files/videos/JamieHopkins NEW.mp4",
+            "poster": "shopify://shop_images/6-desk.png",
+            "poster_mob": "shopify://shop_images/6-mob.png",
+            "name": "DR. Jamie Hopkins Dental Hygienist",
+            "quote": "“I love the Nanohydroxyapatite and the fluoride combination. Seeing amazing results on patients with incipient caries, with their sensitivity. It's just an amazing toothpaste that you know they're using the right crystals in the Nanohydroxyapatite. It's amazing.”",
+            "name_align": "left",
+            "quote_align": "left",
+            "img_height_mob": 220,
+            "img_height_desk": 300,
+            "gap_mob": 0,
+            "gap_desk": 16
+          }
         }
       },
       "block_order": [
         "photo_text_RHDNNd",
         "video_image_XEMb6L",
-        "quote_text_m43Jz3",
-        "photo_text_pUDhgA"
+        "photo_text_pUDhgA",
+        "video_image_hmTYfF",
+        "photo_text_LwdYGM",
+        "video_image_hJdVa9"
       ],
       "name": "C - Dental Profess v2",
       "settings": {
