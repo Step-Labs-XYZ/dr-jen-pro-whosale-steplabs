@@ -92,12 +92,6 @@
             "secondary_title_line2": "secondary_title_line2"
           }
         },
-        "description_block_Kwahik": {
-          "type": "description_block",
-          "settings": {
-            "description": "<p>Dr Jen's Mouth Rinse</p>"
-          }
-        },
         "variant_pills_XcBFbd": {
           "type": "variant_pills",
           "settings": {
@@ -111,18 +105,12 @@
             "retail_text": "Retail $18.50/bottle"
           }
         },
-        "description_block_jyEXcG": {
-          "type": "description_block",
-          "settings": {
-            "description": "<p>Breakthrough dentist-developed mouth rinse for your patients. Dr. Jen's delivers premium Nanohydroxyapatite with soothing botanicals and essential oils, providing advanced enamel support and healthier gums without alcohol or harsh additives. Cleaner ingredients your patients can trust, and you can confidently recommend.</p>"
-          }
-        },
         "ingredients_tab_effY3y": {
           "type": "ingredients_tab",
           "settings": {
             "ingredients_trigger_label": "ingredients",
             "ingredients_modal_subtitle": "INGREDIENT FACTS",
-            "ingredients_modal_title": "Mouth Rinse with Wellness Pre-Rinse",
+            "ingredients_modal_title": "Dr. Jen's KeraHap",
             "ingredients_flavor_1_label": "Cool Mint",
             "ingredients_flavor_2_label": "",
             "ingredients_flavor_3_label": "",
@@ -153,11 +141,11 @@
             "ingredients_s1_item_12_tag": "",
             "ingredients_section_2_title": "FLAVOR & FRESHNESS",
             "ingredients_s2_item_1_name": "Natural Flavor",
-            "ingredients_s2_item_1_tag": "Potassiumsorbate",
-            "ingredients_s2_item_2_name": "Sodium bicarbonate",
+            "ingredients_s2_item_1_tag": "Natural",
+            "ingredients_s2_item_2_name": "Potassium sorbate",
             "ingredients_s2_item_2_tag": "Natural",
-            "ingredients_s2_item_3_name": "",
-            "ingredients_s2_item_3_tag": "",
+            "ingredients_s2_item_3_name": "Sodium bicarbonate",
+            "ingredients_s2_item_3_tag": "Natural",
             "ingredients_s2_item_4_name": "",
             "ingredients_s2_item_4_tag": "",
             "ingredients_s2_item_5_name": "",
@@ -260,7 +248,7 @@
             "ingredients_negative_item_6": "No Artificial Flavor",
             "ingredients_negative_item_7": "No Pain Blockers",
             "ingredients_negative_item_8": "No Fillers",
-            "ingredients_footer_text_show": true,
+            "ingredients_footer_text_show": false,
             "ingredients_footer_text": "<p>Cleaner ingredients. Made in an FDA-registered facility in the USA.Brush twice daily with a pea-sized amount. Spit — do not rinse. Wait 30 min before eating for max nHAp uptake.</p>"
           }
         },
@@ -303,10 +291,8 @@
       "block_order": [
         "reviews_fwBPUi",
         "title_AUHa6c",
-        "description_block_Kwahik",
         "variant_pills_XcBFbd",
         "price_stock_4Qk3Yf",
-        "description_block_jyEXcG",
         "ingredients_tab_effY3y",
         "variant_cards_MBMMJm",
         "recharge_subscriptions_subscription_widget_v2_9hkAJG",
@@ -562,8 +548,8 @@
         "card_bg": "#f7f7f7",
         "name_color": "#002c41",
         "quote_color": "#000000",
-        "dot_active_color": "#002C41",
-        "dot_inactive_color": "#C7C7C7",
+        "dot_active_color": "#002c41",
+        "dot_inactive_color": "#c7c7c7",
         "play_btn_bg": "#ffffff",
         "play_btn_icon_color": "#1b3a4b",
         "play_btn_size_mob": 36,
