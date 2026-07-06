@@ -635,12 +635,20 @@
             "brand_text": "Driven by Nature, Backed by Science",
             "generic_text": "Driven by Marketing and Social Media Trends"
           }
+        },
+        "row_DWXpAz": {
+          "type": "row",
+          "settings": {
+            "brand_text": "Award Winning Toothpaste",
+            "generic_text": "Formulated for Optimal Profit"
+          }
         }
       },
       "block_order": [
         "row_iHAEtn",
         "row_bFGbW8",
-        "row_ktbGKk"
+        "row_ktbGKk",
+        "row_DWXpAz"
       ],
       "name": "C - Comparison Table v2",
       "settings": {
@@ -656,13 +664,13 @@
         "subtitle_color": "#231F20",
         "btn_color": "#002C41",
         "badge_color": "#002C41",
-        "title_desktop": "Why dentists trust Dr. Jen oral care",
-        "title_mobile": "Why dentists trust Dr. Jen",
+        "title_desktop": "What Does YourPatients Enamel Really Need in Your Fluoride Toothpaste?",
+        "title_mobile": "What Does YourPatients Enamel Really Need in Your Fluoride Toothpaste?",
         "title_max_width_mb": 350,
         "title_weight": "600",
         "title_size_dt": 32,
         "title_size_mb": 28,
-        "subtitle": "Dr. Jen's customized formulas solve unique patient needs, unlike one-size-fits-all, mass-produced toothpaste.",
+        "subtitle": "Dr. Jen's customized formulas solve unique patient needs, unlike one-size-fits-all, mass- produced toothpaste.",
         "sub_weight": "400",
         "sub_size_dt": 24,
         "sub_size_mb": 16,
@@ -674,7 +682,9 @@
         "badge_weight": "400",
         "text_align_dt": "left",
         "text_align_mb": "left",
-        "brand_header_text": "DR. JEN'S NANO-HYDROXYAPATITE",
+        "brand_image": "shopify://shop_images/100x100.png",
+        "generic_image": "shopify://shop_images/100x1002.png",
+        "brand_header_text": "<b>DR. JEN'S PREMIUM </b><br>NANO-HYDROXYAPATITE TOOTHPASTE",
         "generic_header_text": "GENERIC HYDROXYAPATITE TOOTHPASTES",
         "header_size_dt": 12,
         "header_size_mb": 11,
