@@ -85,6 +85,16 @@
     outline: none;
     position: relative;
     padding-bottom: 28px;
+    overflow: visible;
+  }
+
+  #c-dental-pros-{{ section.id }} .c-dental-pros__slider .flickity-viewport {
+    overflow: hidden;
+  }
+
+  #c-dental-pros-{{ section.id }} .c-dental-pros__slider .flickity-slider {
+    display: flex;
+    align-items: stretch;
   }
 
   #c-dental-pros-{{ section.id }} .splide__pagination {
@@ -134,11 +144,13 @@
   /* ---- SLIDE BASE ---- */
   #c-dental-pros-{{ section.id }} .c-dental-pros__slide {
     width: calc(82% - 16px);
+    max-width: 100%;
     margin: 0 8px 20px 8px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     box-sizing: border-box;
+    flex: 0 0 auto;
   }
 
   /* ==============================================
@@ -466,12 +478,12 @@
        Los slides miden contra el viewport; el container tiene padding
        propio → card 3 arranca antes del borde derecho y queda cortado */
     #c-dental-pros-{{ section.id }} .c-dental-pros__slide {
-      width: calc(25vw - 20px);
+      width: min(320px, calc(25vw - 20px));
       margin: 0 10px 24px 10px;
     }
 
     #c-dental-pros-{{ section.id }} .c-dental-pros__slide--video {
-      width: calc(50vw - 20px);
+      width: min(620px, calc(50vw - 20px));
     }
 
     /* Tipo 1 desktop — restaurar dos piezas (oval + tarjeta gris separada) */
@@ -647,35 +659,9 @@
     <div class="c-dental-pros__slider-clip">
       <div
         id="x-c-dental-pros-{{ section.id }}"
-        x-data-slider="{{ section.id }}"
-        class="c-dental-pros__slider x-splide splide visible overflow-hidden"
-        x-intersect.once.margin.200px='$store.xSplide.load($el, {
-          "type": "loop",
-          "autoWidth": true,
-          "perMove": 1,
-          "pagination": true,
-          "arrows": false,
-          "drag": true,
-          "gap": 20,
-          "focus": "left",
-          "updateOnMove": true,
-          "breakpoints": {
-            768: {
-              "autoWidth": true
-            }
-          },
-          "events": [
-            {
-              "event": "ready",
-              "callback": () => {
-                document.dispatchEvent(new CustomEvent("eurus:{{ section.id }}:splide-ready"));
-              }
-            }
-          ]
-        })'
+        class="c-dental-pros__slider"
+        data-flickity='{"wrapAround": true, "imagesLoaded": true, "contain": false, "cellAlign": "left", "pageDots": true, "prevNextButtons": false, "draggable": true, "adaptiveHeight": false}'
       >
-        <div class="splide__track">
-          <div class="splide__list">
 
         {%- for block in section.blocks -%}
 
@@ -693,7 +679,7 @@
               {%- assign pt_has_any_video = true -%}
             {%- endif -%}
 
-            <div class="splide__slide x-splide-slide c-dental-pros__slide c-dental-pros__slide--photo" style="--cdp-ph-gap: {{ block.settings.gap_mob }}px; --cdp-ph-gap-desk: {{ block.settings.gap_desk }}px" {{ block.shopify_attributes }}>
+            <div class="c-dental-pros__slide c-dental-pros__slide--photo" style="--cdp-ph-gap: {{ block.settings.gap_mob }}px; --cdp-ph-gap-desk: {{ block.settings.gap_desk }}px" {{ block.shopify_attributes }}>
 
               <div class="c-dental-pros__photo-wrap"
                 style="--cdp-ph-h-mob: {{ block.settings.img_height_mob }}px; --cdp-ph-h-desk: {{ block.settings.img_height_desk }}px"
@@ -790,7 +776,7 @@
               {%- assign has_any_video = true -%}
             {%- endif -%}
 
-            <div class="splide__slide x-splide-slide c-dental-pros__slide c-dental-pros__slide--video" style="--cdp-vi-gap: {{ block.settings.gap_mob }}px; --cdp-vi-gap-desk: {{ block.settings.gap_desk }}px" {{ block.shopify_attributes }}>
+            <div class="c-dental-pros__slide c-dental-pros__slide--video" style="--cdp-vi-gap: {{ block.settings.gap_mob }}px; --cdp-vi-gap-desk: {{ block.settings.gap_desk }}px" {{ block.shopify_attributes }}>
 
               <div
                 class="c-dental-pros__video-wrap"
@@ -901,7 +887,7 @@
               {%- assign qt_has_any_video = true -%}
             {%- endif -%}
 
-            <div class="splide__slide x-splide-slide c-dental-pros__slide c-dental-pros__slide--quote" {{ block.shopify_attributes }}>
+            <div class="c-dental-pros__slide c-dental-pros__slide--quote" {{ block.shopify_attributes }}>
 
               {%- if qt_has_any_video -%}
                 <div
@@ -999,8 +985,6 @@
 
         {%- endfor -%}
 
-          </div>
-        </div>
       </div>
     </div>
 
@@ -1136,11 +1120,14 @@
     });
   }
 
-  /* Espera a Splide */
-  var slider = sect.querySelector('.c-dental-pros__slider.x-splide');
+  var slider = sect.querySelector('.c-dental-pros__slider');
   if (slider) {
-    document.addEventListener('eurus:{{ section.id }}:splide-ready', onReady);
-    setTimeout(onReady, 800);
+    setTimeout(onReady, 250);
+    window.addEventListener('load', onReady);
+    window.addEventListener('resize', function () {
+      clearTimeout(window.cdpResizeTimer);
+      window.cdpResizeTimer = setTimeout(onReady, 120);
+    });
   } else {
     setTimeout(onReady, 800);
   }
