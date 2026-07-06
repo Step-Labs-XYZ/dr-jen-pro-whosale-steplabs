@@ -592,10 +592,10 @@
         "title": "Breakthrough Study:  nHAp + Fluoride Outperforms High-Fluoride Toothpaste",
         "text": "<p>Breakthrough Study: Peptide + nHAp Outperforms Fluoride ToothpasteAn independent in vitro study conducted at the University of Toronto (April 2026) using real human enamel specimens under daily acid challenge conditions.</p>",
         "img_table": "shopify://shop_images/Frame_2085665972.png",
-        "badge_text_1": "<b>KeraHAp™ delivered +79% greater </b>remineralization vs. 0.24% OTC fluoride toothpaste.",
-        "badge_text_2": "<b>KeraHAp™ delivered +62% greater  </b>remineralization vs. MI Paste®.",
+        "badge_text_1": "KeraHAp™ delivered +79% greater remineralization vs. 0.24% OTC fluoride toothpaste.",
+        "badge_text_2": "KeraHAp™ delivered +62% greater  remineralization vs. MI Paste®.",
         "badge_bg": "#ffffff",
-        "badge_text_color": "#000000",
+        "badge_text_color": "#002C41",
         "max_width": 1200,
         "space_title_copy": 20,
         "mw_title_desk": 600,
@@ -684,7 +684,7 @@
         "text_align_mb": "left",
         "brand_image": "shopify://shop_images/100x100.png",
         "generic_image": "shopify://shop_images/100x1002.png",
-        "brand_header_text": "<b>DR. JEN'S PREMIUM </b><br>NANO-HYDROXYAPATITE TOOTHPASTE",
+        "brand_header_text": "DR. JEN'S PREMIUM NANO-HYDROXYAPATITE TOOTHPASTE",
         "generic_header_text": "GENERIC HYDROXYAPATITE TOOTHPASTES",
         "header_size_dt": 12,
         "header_size_mb": 11,
