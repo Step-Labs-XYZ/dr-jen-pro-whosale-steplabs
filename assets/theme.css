@@ -11992,6 +11992,7 @@ input:checked + .popover__choice-label::after,
  font-weight: 600;
  margin: 0;
  cursor: pointer;
+ display:none;
 }
 @media(max-width:1000px) {
   .product__media-list,
@@ -16856,6 +16857,7 @@ padding: 2px
   line-height: 16px;
   color: #000;
   margin-bottom: 35px;
+  display:none;
 }
 .retail_message_wholesale{
   font-size: 16px;
