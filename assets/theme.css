@@ -16276,6 +16276,7 @@ border-radius: 8px;
 }
 .contetn_form_snipet{
   margin-top:-5%;
+  display:none;
 }
 .product_info_mobile, .product_price_mobile{
   display: none;
