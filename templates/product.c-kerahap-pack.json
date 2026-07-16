@@ -412,45 +412,21 @@
           "type": "bullet_item",
           "settings": {
             "item_title": "nHAp Crystals",
-            "item_desc": "Premium nano-hydroxyapatite, the mineral naturally found in tooth enamel.",
-            "item_title_size_mob": 18,
-            "item_title_size_desk": 20,
-            "item_title_weight_mob": "700",
-            "item_title_weight_desk": "700",
-            "item_desc_size_mob": 14,
-            "item_desc_size_desk": 15,
-            "item_desc_weight_mob": "400",
-            "item_desc_weight_desk": "400"
+            "item_desc": "Premium nano-hydroxyapatite, the mineral naturally found in tooth enamel."
           }
         },
         "bullet_item_egzTay": {
           "type": "bullet_item",
           "settings": {
             "item_title": "Peptide Matrix",
-            "item_desc": "Biomimetic peptides designed to mimic nature's protein scaffold.",
-            "item_title_size_mob": 18,
-            "item_title_size_desk": 20,
-            "item_title_weight_mob": "700",
-            "item_title_weight_desk": "700",
-            "item_desc_size_mob": 14,
-            "item_desc_size_desk": 15,
-            "item_desc_weight_mob": "400",
-            "item_desc_weight_desk": "400"
+            "item_desc": "Biomimetic peptides designed to mimic nature's protein scaffold."
           }
         },
         "bullet_item_EN6wPh": {
           "type": "bullet_item",
           "settings": {
             "item_title": "Attachment Layer",
-            "item_desc": "Where the peptide layer meets the tooth surface.",
-            "item_title_size_mob": 18,
-            "item_title_size_desk": 20,
-            "item_title_weight_mob": "700",
-            "item_title_weight_desk": "700",
-            "item_desc_size_mob": 14,
-            "item_desc_size_desk": 15,
-            "item_desc_weight_mob": "400",
-            "item_desc_weight_desk": "400"
+            "item_desc": "Where the peptide layer meets the tooth surface."
           }
         }
       },
@@ -474,9 +450,12 @@
         "right_col_bg": "#ffffff",
         "text_color": "#002c41",
         "body_color": "#000000",
-        "eyebrow_color": "#002C41",
-        "bullet_dot_color": "#0d0d0d",
-        "divider_color": "#e5e7eb",
+        "eyebrow_color": "#002c41",
+        "bullet_dot_color": "#002C41",
+        "divider_color": "#646769",
+        "item_title_color": "#000000",
+        "item_desc_color": "#000000",
+        "dot_size": 12,
         "image": "shopify://shop_images/Frame_2085665972_1.png",
         "img_radius": 0,
         "eyebrow": "PEPTIDE-ENHANCED NANO-HYDROXYAPATITE",
@@ -489,6 +468,12 @@
         "title_size_desk": 40,
         "title_weight_mob": "800",
         "title_weight_desk": "600",
+        "subtitle": "Nano-hydroxyapatite, guided by nature's blueprint.",
+        "subtitle_color": "#000000",
+        "subtitle_size_mob": 18,
+        "subtitle_size_desk": 20,
+        "subtitle_weight_mob": "400",
+        "subtitle_weight_desk": "400",
         "body": "<p>KeraHAp™ pairs premium nano-hydroxyapatite with biomimetic peptides, inspired by the protein matrix nature uses to organize that same mineral as enamel forms.</p>",
         "body_size_mob": 16,
         "body_size_desk": 16,
@@ -498,7 +483,15 @@
         "footnote_size_mob": 13,
         "footnote_size_desk": 16,
         "footnote_weight_mob": "400",
-        "footnote_weight_desk": "400"
+        "footnote_weight_desk": "400",
+        "item_title_size_mob": 20,
+        "item_title_size_desk": 24,
+        "item_title_weight_mob": "600",
+        "item_title_weight_desk": "600",
+        "item_desc_size_mob": 14,
+        "item_desc_size_desk": 15,
+        "item_desc_weight_mob": "400",
+        "item_desc_weight_desk": "400"
       }
     },
     "c_why_ortho_patients_m39DVK": {
