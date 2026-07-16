@@ -612,87 +612,6 @@
         "p_bot_mob": 40
       }
     },
-    "c_comparison_table_custom_jrjaaa": {
-      "type": "c-comparison-table-custom",
-      "blocks": {
-        "row_iHAEtn": {
-          "type": "row",
-          "settings": {
-            "brand_text": "Mother and Dentist Founded and Formulated",
-            "generic_text": "Venture Capitalist and Investment Banker Toothpaste Formulations"
-          }
-        },
-        "row_bFGbW8": {
-          "type": "row",
-          "settings": {
-            "brand_text": "Formulated for Optimal Enamel Health",
-            "generic_text": "Mass Produced, Private Label Formulations"
-          }
-        },
-        "row_ktbGKk": {
-          "type": "row",
-          "settings": {
-            "brand_text": "Driven by Nature, Backed by Science",
-            "generic_text": "Driven by Marketing and Social Media Trends"
-          }
-        },
-        "row_DWXpAz": {
-          "type": "row",
-          "settings": {
-            "brand_text": "Award Winning Toothpaste",
-            "generic_text": "Formulated for Optimal Profit"
-          }
-        }
-      },
-      "block_order": [
-        "row_iHAEtn",
-        "row_bFGbW8",
-        "row_ktbGKk",
-        "row_DWXpAz"
-      ],
-      "name": "C - Comparison Table v2",
-      "settings": {
-        "bg_color": "#ffffff",
-        "padding_top_dt": 60,
-        "padding_bottom_dt": 60,
-        "padding_top_mb": 40,
-        "padding_bottom_mb": 40,
-        "hide_subtitle_mobile": false,
-        "hide_btn_mobile": false,
-        "hide_badge_mobile": false,
-        "title_color": "#002c41",
-        "subtitle_color": "#231f20",
-        "btn_color": "#002c41",
-        "badge_color": "#002c41",
-        "title_desktop": "What Does YourPatients Enamel Really Need in Your Fluoride Toothpaste?",
-        "title_mobile": "What Does YourPatients Enamel Really Need in Your Fluoride Toothpaste?",
-        "title_max_width_mb": 350,
-        "title_weight": "600",
-        "title_size_dt": 32,
-        "title_size_mb": 28,
-        "subtitle": "Dr. Jen's customized formulas solve unique patient needs, unlike one-size-fits-all, mass- produced toothpaste.",
-        "sub_weight": "400",
-        "sub_size_dt": 24,
-        "sub_size_mb": 16,
-        "btn_label": "Shop Now",
-        "btn_link": "",
-        "badge_text": "Powered by Nature, Rooted in Science",
-        "badge_size_dt": 24,
-        "badge_size_mb": 24,
-        "badge_weight": "400",
-        "text_align_dt": "left",
-        "text_align_mb": "left",
-        "brand_image": "shopify://shop_images/100x100.png",
-        "generic_image": "shopify://shop_images/100x1002.png",
-        "brand_header_text": "DR. JEN'S PREMIUM NANO-HYDROXYAPATITE TOOTHPASTE",
-        "generic_header_text": "GENERIC HYDROXYAPATITE TOOTHPASTES",
-        "header_size_dt": 12,
-        "header_size_mb": 11,
-        "header_weight": "700",
-        "row_text_size_dt": 15,
-        "row_text_size_mb": 13
-      }
-    },
     "c_dr_jen_difference_AgUcYd": {
       "type": "c-dr-jen-difference",
       "custom_css": [],
@@ -768,6 +687,87 @@
         "pad_bot_desk": 72,
         "pad_top_mob": 48,
         "pad_bot_mob": 48
+      }
+    },
+    "c_comparison_table_custom_jrjaaa": {
+      "type": "c-comparison-table-custom",
+      "blocks": {
+        "row_iHAEtn": {
+          "type": "row",
+          "settings": {
+            "brand_text": "Independent Dental Family-Owned Brand",
+            "generic_text": "Venture Capitalist and Investment Banker Formulas"
+          }
+        },
+        "row_bFGbW8": {
+          "type": "row",
+          "settings": {
+            "brand_text": "Formulated for Enamel Health",
+            "generic_text": "Mass Produced for Maximum Profit"
+          }
+        },
+        "row_ktbGKk": {
+          "type": "row",
+          "settings": {
+            "brand_text": "Backed by Science",
+            "generic_text": "Driven by Marketing and Social Media Trends"
+          }
+        },
+        "row_DWXpAz": {
+          "type": "row",
+          "settings": {
+            "brand_text": "Customized Formulas for Individual Needs",
+            "generic_text": "Generic, One Size Fits All Formulations"
+          }
+        }
+      },
+      "block_order": [
+        "row_iHAEtn",
+        "row_bFGbW8",
+        "row_ktbGKk",
+        "row_DWXpAz"
+      ],
+      "name": "C - Comparison Table v2",
+      "settings": {
+        "bg_color": "#ffffff",
+        "padding_top_dt": 60,
+        "padding_bottom_dt": 60,
+        "padding_top_mb": 40,
+        "padding_bottom_mb": 40,
+        "hide_subtitle_mobile": false,
+        "hide_btn_mobile": false,
+        "hide_badge_mobile": false,
+        "title_color": "#002c41",
+        "subtitle_color": "#231f20",
+        "btn_color": "#002c41",
+        "badge_color": "#002c41",
+        "title_desktop": "Who is actually behind your toothpaste?",
+        "title_mobile": "Dr. Jen's customized formulas solve unique patient needs, unlike one-size-fits-all, mass- produced toothpaste.",
+        "title_max_width_mb": 350,
+        "title_weight": "600",
+        "title_size_dt": 32,
+        "title_size_mb": 28,
+        "subtitle": "Dr. Jen's customized formulas solve unique patient needs, unlike one-size-fits-all, mass- produced toothpaste.",
+        "sub_weight": "400",
+        "sub_size_dt": 24,
+        "sub_size_mb": 16,
+        "btn_label": "Shop Now",
+        "btn_link": "",
+        "badge_text": "Powered by Nature, Rooted in Science",
+        "badge_size_dt": 24,
+        "badge_size_mb": 24,
+        "badge_weight": "400",
+        "text_align_dt": "left",
+        "text_align_mb": "left",
+        "brand_image": "shopify://shop_images/Product_image-1_3.png",
+        "generic_image": "shopify://shop_images/100x1002.png",
+        "brand_header_text": "DR. JEN'S KERAHAP™",
+        "generic_header_text": "GENERIC HYDROXYAPATITE TOOTHPASTES",
+        "header_size_dt": 12,
+        "header_size_mb": 11,
+        "header_weight": "700",
+        "row_text_size_dt": 15,
+        "row_text_size_mb": 13
       }
     },
     "c_blend_science_flavor_CU8Q7F": {
@@ -1024,9 +1024,9 @@
     "c_dental_professionals_v2_KdWy8c",
     "c_product_features_8rY3zP",
     "c_science_study_ApKyNV",
-    "c_comparison_table_custom_jrjaaa",
     "c_dr_jen_difference_AgUcYd",
     "c_why_ortho_patients_m39DVK",
+    "c_comparison_table_custom_jrjaaa",
     "c_blend_science_flavor_CU8Q7F",
     "product-content",
     "1659632928e379313e",
