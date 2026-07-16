@@ -45,7 +45,7 @@
      ================================================ */
   #c-pop-{{ section.id }} .pop__left {
     background-color: var(--pop-left-bg);
-    padding: {{ section.settings.pad_top_mob }}px 24px {{ section.settings.pad_bot_mob }}px;
+    padding: {{ section.settings.left_pad_top_mob }}px 0 {{ section.settings.left_pad_bot_mob }}px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -56,11 +56,15 @@
     width: 100%;
     max-width: 520px;
     margin: 0 auto;
+    {%- if section.settings.img_height_mob > 0 -%}
+    height: {{ section.settings.img_height_mob }}px;
+    overflow: hidden;
+    {%- endif -%}
   }
 
   #c-pop-{{ section.id }} .pop__image-wrap img {
     width: 100%;
-    height: auto;
+    height: {%- if section.settings.img_height_mob > 0 -%}100%{%- else -%}auto{%- endif -%};
     display: block;
     object-fit: cover;
     border-radius: {{ section.settings.img_radius }}px;
@@ -216,6 +220,21 @@
       padding: {{ section.settings.pad_top_desk }}px 40px {{ section.settings.pad_bot_desk }}px;
       order: 0;
       align-items: flex-start;
+    }
+
+    #c-pop-{{ section.id }} .pop__image-wrap {
+      max-width: 100%;
+      {%- if section.settings.img_height_desk > 0 -%}
+      height: {{ section.settings.img_height_desk }}px;
+      overflow: hidden;
+      {%- else -%}
+      height: auto;
+      overflow: visible;
+      {%- endif -%}
+    }
+
+    #c-pop-{{ section.id }} .pop__image-wrap img {
+      height: {%- if section.settings.img_height_desk > 0 -%}100%{%- else -%}auto{%- endif -%};
     }
 
     #c-pop-{{ section.id }} .pop__right {
@@ -520,6 +539,54 @@
       "step": 2,
       "unit": "px",
       "label": "Image border radius",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Image height (0 = auto)"
+    },
+    {
+      "type": "range",
+      "id": "img_height_mob",
+      "min": 0,
+      "max": 700,
+      "step": 10,
+      "unit": "px",
+      "label": "Image height \u2014 mobile (0 = auto)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "img_height_desk",
+      "min": 0,
+      "max": 900,
+      "step": 10,
+      "unit": "px",
+      "label": "Image height \u2014 desktop (0 = auto)",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Image column padding (mobile)"
+    },
+    {
+      "type": "range",
+      "id": "left_pad_top_mob",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Image column padding top \u2014 mobile",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "left_pad_bot_mob",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Image column padding bottom \u2014 mobile",
       "default": 0
     },
     {
