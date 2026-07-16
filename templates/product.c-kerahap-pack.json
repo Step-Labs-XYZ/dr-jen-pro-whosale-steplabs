@@ -439,7 +439,7 @@
       "settings": {
         "image_position": "left",
         "left_col_width": 50,
-        "max_width": 1280,
+        "max_width": 1300,
         "min_height_desk": 500,
         "pad_top_mob": 48,
         "pad_bot_mob": 48,
