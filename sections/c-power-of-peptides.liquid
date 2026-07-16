@@ -78,59 +78,80 @@
   #c-pop-{{ section.id }} .pop__eyebrow {
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--pop-eyebrow);
-    margin: 0 0 10px 0;
+    margin: 0 0 12px 0;
   }
 
   #c-pop-{{ section.id }} .pop__title {
-    font-size: 30px;
-    font-weight: 700;
+    font-size: 36px;
+    font-weight: 800;
+    font-family: 'Raleway', sans-serif;
     color: var(--pop-text-dark);
-    line-height: 1.15;
-    margin: 0 0 16px 0;
+    line-height: 1.1;
+    margin: 0 0 18px 0;
   }
 
   #c-pop-{{ section.id }} .pop__body {
     font-size: 15px;
     font-weight: 400;
+    font-family: 'Raleway', sans-serif;
     color: var(--pop-text-body);
     line-height: 1.7;
-    margin: 0 0 28px 0;
+    margin: 0 0 32px 0;
+  }
+
+  #c-pop-{{ section.id }} .pop__body p {
+    margin: 0 0 6px 0;
+  }
+
+  #c-pop-{{ section.id }} .pop__body p:last-child {
+    margin-bottom: 0;
   }
 
   /* ================================================
-     BULLET LIST
+     TIMELINE
      ================================================ */
   #c-pop-{{ section.id }} .pop__items {
     list-style: none;
-    margin: 0 0 20px 0;
+    margin: 0 0 24px 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
+    position: relative;
+  }
+
+  /* Vertical connector line between first and last dot */
+  #c-pop-{{ section.id }} .pop__items::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    width: 2px;
+    top: 18px;
+    bottom: 18px;
+    background-color: var(--pop-divider);
   }
 
   #c-pop-{{ section.id }} .pop__item {
     display: flex;
     align-items: flex-start;
-    gap: 14px;
-    padding: 14px 0;
-    border-top: 1px solid var(--pop-divider);
+    gap: 20px;
+    padding: 0 0 28px 0;
   }
 
   #c-pop-{{ section.id }} .pop__item:last-child {
-    border-bottom: 1px solid var(--pop-divider);
+    padding-bottom: 0;
   }
 
   #c-pop-{{ section.id }} .pop__dot {
     flex-shrink: 0;
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     background-color: var(--pop-bullet-dot);
-    margin-top: 6px;
+    margin-top: 5px;
+    position: relative;
+    z-index: 1;
   }
 
   #c-pop-{{ section.id }} .pop__item-content {
@@ -138,16 +159,18 @@
   }
 
   #c-pop-{{ section.id }} .pop__item-title {
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 700;
+    font-family: 'Raleway', sans-serif;
     color: var(--pop-text-dark);
-    margin: 0 0 3px 0;
-    line-height: 1.3;
+    margin: 0 0 5px 0;
+    line-height: 1.25;
   }
 
   #c-pop-{{ section.id }} .pop__item-desc {
     font-size: 14px;
     font-weight: 400;
+    font-family: 'Raleway', sans-serif;
     color: var(--pop-text-body);
     line-height: 1.6;
     margin: 0;
@@ -160,9 +183,10 @@
     font-size: 13px;
     font-style: italic;
     font-weight: 400;
+    font-family: 'Raleway', sans-serif;
     color: var(--pop-text-body);
     line-height: 1.5;
-    margin: 0;
+    margin: 24px 0 0 0;
   }
 
   /* ================================================
@@ -190,6 +214,10 @@
 
     #c-pop-{{ section.id }} .pop__title {
       font-size: {{ section.settings.title_size_desk }}px;
+    }
+
+    #c-pop-{{ section.id }} .pop__items::before {
+      left: 5px;
     }
 
     #c-pop-{{ section.id }} .pop__image-wrap {

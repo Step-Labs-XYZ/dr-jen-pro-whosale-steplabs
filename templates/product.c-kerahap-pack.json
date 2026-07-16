@@ -405,6 +405,63 @@
         "p_bot_mob": 40
       }
     },
+    "c_power_of_peptides_mr9jRU": {
+      "type": "c-power-of-peptides",
+      "blocks": {
+        "bullet_item_x4NdPf": {
+          "type": "bullet_item",
+          "settings": {
+            "item_title": "nHAp Crystals",
+            "item_desc": "Premium nano-hydroxyapatite, the mineral naturally found in tooth enamel."
+          }
+        },
+        "bullet_item_egzTay": {
+          "type": "bullet_item",
+          "settings": {
+            "item_title": "Peptide Matrix",
+            "item_desc": "Biomimetic peptides designed to mimic nature's protein scaffold."
+          }
+        },
+        "bullet_item_EN6wPh": {
+          "type": "bullet_item",
+          "settings": {
+            "item_title": "Attachment Layer",
+            "item_desc": "Where the peptide layer meets the tooth surface."
+          }
+        }
+      },
+      "block_order": [
+        "bullet_item_x4NdPf",
+        "bullet_item_egzTay",
+        "bullet_item_EN6wPh"
+      ],
+      "name": "Power of Peptides",
+      "settings": {
+        "image_position": "left",
+        "left_col_width": 50,
+        "max_width": 1280,
+        "min_height_desk": 560,
+        "pad_top_mob": 48,
+        "pad_bot_mob": 48,
+        "pad_top_desk": 64,
+        "pad_bot_desk": 64,
+        "bg_color": "#ffffff",
+        "left_col_bg": "#FFFFFF",
+        "right_col_bg": "#ffffff",
+        "text_color": "#0d0d0d",
+        "body_color": "#444444",
+        "eyebrow_color": "#555555",
+        "bullet_dot_color": "#0d0d0d",
+        "divider_color": "#e5e7eb",
+        "image": "shopify://shop_images/Frame_2085665972_1.png",
+        "img_radius": 0,
+        "eyebrow": "PEPTIDE-ENHANCED NANO-HYDROXYAPATITE",
+        "title": "The Power of Peptides",
+        "title_size_desk": 38,
+        "body": "<p>Nano-hydroxyapatite, guided by nature's blueprint. KeraHAp™ pairs premium nano-hydroxyapatite with biomimetic peptides, inspired by the protein matrix nature uses to organize that same mineral as enamel forms.</p>",
+        "footnote": "*A formula modeled on how enamel is built in nature."
+      }
+    },
     "c_why_ortho_patients_m39DVK": {
       "type": "c-why-ortho-patients",
       "blocks": {
@@ -791,6 +848,7 @@
     "c_product_page_rKyTxE",
     "c_badges_bar_v2_hVXVCp",
     "c_science_study_ApKyNV",
+    "c_power_of_peptides_mr9jRU",
     "c_why_ortho_patients_m39DVK",
     "c_comparison_table_custom_jrjaaa",
     "c_blend_science_flavor_CU8Q7F",
