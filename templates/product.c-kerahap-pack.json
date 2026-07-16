@@ -80,10 +80,6 @@
     "c_product_page_rKyTxE": {
       "type": "c-product-page",
       "blocks": {
-        "reviews_fwBPUi": {
-          "type": "reviews",
-          "settings": {}
-        },
         "title_AUHa6c": {
           "type": "title",
           "settings": {
@@ -256,7 +252,7 @@
           "type": "variant_cards",
           "settings": {
             "option_name": "Quantity",
-            "unit_label": "$18.50/bottle",
+            "unit_label": "$15.60/tube",
             "badge_2": "",
             "badge_3": "",
             "badge_2_orange_mango": "",
@@ -292,7 +288,6 @@
         }
       },
       "block_order": [
-        "reviews_fwBPUi",
         "title_AUHa6c",
         "variant_pills_XcBFbd",
         "price_stock_4Qk3Yf",
