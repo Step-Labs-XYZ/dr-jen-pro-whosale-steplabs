@@ -45,7 +45,7 @@
      ================================================ */
   #c-pop-{{ section.id }} .pop__left {
     background-color: var(--pop-left-bg);
-    padding: 0;
+    padding: {{ section.settings.pad_top_mob }}px 24px {{ section.settings.pad_bot_mob }}px;
     display: flex;
     flex-direction: column;
     align-items: center;
