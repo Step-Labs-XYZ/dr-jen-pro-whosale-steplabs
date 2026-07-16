@@ -18,8 +18,11 @@
     --pop-text-dark:   {{ section.settings.text_color }};
     --pop-text-body:   {{ section.settings.body_color }};
     --pop-eyebrow:     {{ section.settings.eyebrow_color }};
-    --pop-bullet-dot:  {{ section.settings.bullet_dot_color }};
-    --pop-divider:     {{ section.settings.divider_color }};
+    --pop-bullet-dot:       {{ section.settings.bullet_dot_color }};
+    --pop-divider:          {{ section.settings.divider_color }};
+    --pop-item-title-color: {{ section.settings.item_title_color }};
+    --pop-item-desc-color:  {{ section.settings.item_desc_color }};
+    --pop-dot-size:         {{ section.settings.dot_size }}px;
 
     font-family: 'Raleway', sans-serif;
     background-color: var(--pop-bg);
@@ -94,6 +97,15 @@
     margin: 0 0 18px 0;
   }
 
+  #c-pop-{{ section.id }} .pop__subtitle {
+    font-size: {{ section.settings.subtitle_size_mob }}px;
+    font-weight: {{ section.settings.subtitle_weight_mob }};
+    font-family: 'Raleway', sans-serif;
+    color: {{ section.settings.subtitle_color }};
+    line-height: 1.2;
+    margin: 0 0 18px 0;
+  }
+
   #c-pop-{{ section.id }} .pop__body {
     font-size: {{ section.settings.body_size_mob }}px;
     font-weight: {{ section.settings.body_weight_mob }};
@@ -125,10 +137,10 @@
   #c-pop-{{ section.id }} .pop__items::before {
     content: '';
     position: absolute;
-    left: 5px;
+    left: calc(var(--pop-dot-size) / 2 - 1px);
     width: 2px;
-    top: 18px;
-    bottom: 18px;
+    top: calc(5px + var(--pop-dot-size));
+    bottom: calc(5px + var(--pop-dot-size));
     background-color: var(--pop-divider);
   }
 
@@ -145,8 +157,8 @@
 
   #c-pop-{{ section.id }} .pop__dot {
     flex-shrink: 0;
-    width: 12px;
-    height: 12px;
+    width: var(--pop-dot-size);
+    height: var(--pop-dot-size);
     border-radius: 50%;
     background-color: var(--pop-bullet-dot);
     margin-top: 5px;
@@ -162,7 +174,7 @@
     font-size: {{ section.settings.item_title_size_mob }}px;
     font-weight: {{ section.settings.item_title_weight_mob }};
     font-family: 'Raleway', sans-serif;
-    color: var(--pop-text-dark);
+    color: var(--pop-item-title-color);
     margin: 0 0 5px 0;
     line-height: 1.25;
   }
@@ -171,7 +183,7 @@
     font-size: {{ section.settings.item_desc_size_mob }}px;
     font-weight: {{ section.settings.item_desc_weight_mob }};
     font-family: 'Raleway', sans-serif;
-    color: var(--pop-text-body);
+    color: var(--pop-item-desc-color);
     line-height: 1.6;
     margin: 0;
   }
@@ -222,6 +234,11 @@
       font-weight: {{ section.settings.title_weight_desk }};
     }
 
+    #c-pop-{{ section.id }} .pop__subtitle {
+      font-size: {{ section.settings.subtitle_size_desk }}px;
+      font-weight: {{ section.settings.subtitle_weight_desk }};
+    }
+
     #c-pop-{{ section.id }} .pop__body {
       font-size: {{ section.settings.body_size_desk }}px;
       font-weight: {{ section.settings.body_weight_desk }};
@@ -240,10 +257,6 @@
     #c-pop-{{ section.id }} .pop__footnote {
       font-size: {{ section.settings.footnote_size_desk }}px;
       font-weight: {{ section.settings.footnote_weight_desk }};
-    }
-
-    #c-pop-{{ section.id }} .pop__items::before {
-      left: 5px;
     }
 
     #c-pop-{{ section.id }} .pop__image-wrap {
@@ -280,6 +293,10 @@
 
       {%- if section.settings.title != blank -%}
         <h2 class="pop__title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.subtitle != blank -%}
+        <p class="pop__subtitle">{{ section.settings.subtitle }}</p>
       {%- endif -%}
 
       {%- if section.settings.body != blank -%}
@@ -451,14 +468,40 @@
     {
       "type": "color",
       "id": "bullet_dot_color",
-      "label": "Bullet dot color",
+      "label": "Timeline — dot color",
       "default": "#0d0d0d"
     },
     {
       "type": "color",
       "id": "divider_color",
-      "label": "Bullet divider line color",
+      "label": "Timeline — line color",
       "default": "#e5e7eb"
+    },
+    {
+      "type": "color",
+      "id": "item_title_color",
+      "label": "Timeline — item title color",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "color",
+      "id": "item_desc_color",
+      "label": "Timeline — item description color",
+      "default": "#444444"
+    },
+    {
+      "type": "header",
+      "content": "Timeline dot"
+    },
+    {
+      "type": "range",
+      "id": "dot_size",
+      "min": 6,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Dot size",
+      "default": 12
     },
     {
       "type": "header",
@@ -600,10 +643,74 @@
       "default": "800"
     },
     {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Nano-hydroxyapatite, guided by nature's blueprint."
+    },
+    {
+      "type": "header",
+      "content": "Subtitle typography"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size_mob",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle size \u2014 mobile",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size_desk",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle size \u2014 desktop",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "subtitle_weight_mob",
+      "label": "Subtitle weight \u2014 mobile",
+      "options": [
+        { "value": "300", "label": "300 Light" },
+        { "value": "400", "label": "400 Regular" },
+        { "value": "500", "label": "500 Medium" },
+        { "value": "600", "label": "600 SemiBold" },
+        { "value": "700", "label": "700 Bold" },
+        { "value": "800", "label": "800 ExtraBold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "select",
+      "id": "subtitle_weight_desk",
+      "label": "Subtitle weight \u2014 desktop",
+      "options": [
+        { "value": "300", "label": "300 Light" },
+        { "value": "400", "label": "400 Regular" },
+        { "value": "500", "label": "500 Medium" },
+        { "value": "600", "label": "600 SemiBold" },
+        { "value": "700", "label": "700 Bold" },
+        { "value": "800", "label": "800 ExtraBold" }
+      ],
+      "default": "400"
+    },
+    {
       "type": "richtext",
       "id": "body",
       "label": "Body text",
-      "default": "<p>Nano-hydroxyapatite, guided by nature's blueprint. KeraHAp™ pairs premium nano-hydroxyapatite with biomimetic peptides, inspired by the protein matrix nature uses to organize that same mineral as enamel forms.</p>"
+      "default": "<p>KeraHAp\u2122 pairs premium nano-hydroxyapatite with biomimetic peptides, inspired by the protein matrix nature uses to organize that same mineral as enamel forms.</p>"
     },
     {
       "type": "header",
@@ -714,6 +821,110 @@
         { "value": "800", "label": "800 ExtraBold" }
       ],
       "default": "400"
+    },
+    {
+      "type": "header",
+      "content": "Timeline item title typography"
+    },
+    {
+      "type": "range",
+      "id": "item_title_size_mob",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Item title size \u2014 mobile",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "item_title_size_desk",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Item title size \u2014 desktop",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "item_title_weight_mob",
+      "label": "Item title weight \u2014 mobile",
+      "options": [
+        { "value": "300", "label": "300 Light" },
+        { "value": "400", "label": "400 Regular" },
+        { "value": "500", "label": "500 Medium" },
+        { "value": "600", "label": "600 SemiBold" },
+        { "value": "700", "label": "700 Bold" },
+        { "value": "800", "label": "800 ExtraBold" }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "select",
+      "id": "item_title_weight_desk",
+      "label": "Item title weight \u2014 desktop",
+      "options": [
+        { "value": "300", "label": "300 Light" },
+        { "value": "400", "label": "400 Regular" },
+        { "value": "500", "label": "500 Medium" },
+        { "value": "600", "label": "600 SemiBold" },
+        { "value": "700", "label": "700 Bold" },
+        { "value": "800", "label": "800 ExtraBold" }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "header",
+      "content": "Timeline item description typography"
+    },
+    {
+      "type": "range",
+      "id": "item_desc_size_mob",
+      "min": 10,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Item description size \u2014 mobile",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "item_desc_size_desk",
+      "min": 10,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Item description size \u2014 desktop",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "item_desc_weight_mob",
+      "label": "Item description weight \u2014 mobile",
+      "options": [
+        { "value": "300", "label": "300 Light" },
+        { "value": "400", "label": "400 Regular" },
+        { "value": "500", "label": "500 Medium" },
+        { "value": "600", "label": "600 SemiBold" },
+        { "value": "700", "label": "700 Bold" },
+        { "value": "800", "label": "800 ExtraBold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "select",
+      "id": "item_desc_weight_desk",
+      "label": "Item description weight \u2014 desktop",
+      "options": [
+        { "value": "300", "label": "300 Light" },
+        { "value": "400", "label": "400 Regular" },
+        { "value": "500", "label": "500 Medium" },
+        { "value": "600", "label": "600 SemiBold" },
+        { "value": "700", "label": "700 Bold" },
+        { "value": "800", "label": "800 ExtraBold" }
+      ],
+      "default": "400"
     }
   ],
   "blocks": [
@@ -732,110 +943,6 @@
           "id": "item_desc",
           "label": "Description",
           "default": "Premium nano-hydroxyapatite, the mineral naturally found in tooth enamel."
-        },
-        {
-          "type": "header",
-          "content": "Item title typography"
-        },
-        {
-          "type": "range",
-          "id": "item_title_size_mob",
-          "min": 12,
-          "max": 32,
-          "step": 1,
-          "unit": "px",
-          "label": "Title size — mobile",
-          "default": 18
-        },
-        {
-          "type": "range",
-          "id": "item_title_size_desk",
-          "min": 12,
-          "max": 32,
-          "step": 1,
-          "unit": "px",
-          "label": "Title size — desktop",
-          "default": 20
-        },
-        {
-          "type": "select",
-          "id": "item_title_weight_mob",
-          "label": "Title weight — mobile",
-          "options": [
-            { "value": "300", "label": "300 Light" },
-            { "value": "400", "label": "400 Regular" },
-            { "value": "500", "label": "500 Medium" },
-            { "value": "600", "label": "600 SemiBold" },
-            { "value": "700", "label": "700 Bold" },
-            { "value": "800", "label": "800 ExtraBold" }
-          ],
-          "default": "700"
-        },
-        {
-          "type": "select",
-          "id": "item_title_weight_desk",
-          "label": "Title weight — desktop",
-          "options": [
-            { "value": "300", "label": "300 Light" },
-            { "value": "400", "label": "400 Regular" },
-            { "value": "500", "label": "500 Medium" },
-            { "value": "600", "label": "600 SemiBold" },
-            { "value": "700", "label": "700 Bold" },
-            { "value": "800", "label": "800 ExtraBold" }
-          ],
-          "default": "700"
-        },
-        {
-          "type": "header",
-          "content": "Item description typography"
-        },
-        {
-          "type": "range",
-          "id": "item_desc_size_mob",
-          "min": 10,
-          "max": 22,
-          "step": 1,
-          "unit": "px",
-          "label": "Description size — mobile",
-          "default": 14
-        },
-        {
-          "type": "range",
-          "id": "item_desc_size_desk",
-          "min": 10,
-          "max": 22,
-          "step": 1,
-          "unit": "px",
-          "label": "Description size — desktop",
-          "default": 15
-        },
-        {
-          "type": "select",
-          "id": "item_desc_weight_mob",
-          "label": "Description weight — mobile",
-          "options": [
-            { "value": "300", "label": "300 Light" },
-            { "value": "400", "label": "400 Regular" },
-            { "value": "500", "label": "500 Medium" },
-            { "value": "600", "label": "600 SemiBold" },
-            { "value": "700", "label": "700 Bold" },
-            { "value": "800", "label": "800 ExtraBold" }
-          ],
-          "default": "400"
-        },
-        {
-          "type": "select",
-          "id": "item_desc_weight_desk",
-          "label": "Description weight — desktop",
-          "options": [
-            { "value": "300", "label": "300 Light" },
-            { "value": "400", "label": "400 Regular" },
-            { "value": "500", "label": "500 Medium" },
-            { "value": "600", "label": "600 SemiBold" },
-            { "value": "700", "label": "700 Bold" },
-            { "value": "800", "label": "800 ExtraBold" }
-          ],
-          "default": "400"
         }
       ]
     }
