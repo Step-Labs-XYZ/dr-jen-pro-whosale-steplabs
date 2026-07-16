@@ -2581,13 +2581,13 @@ shopify-accelerated-checkout {
               </div>
 
             {% when 'buy_buttons' %}
-              <div {{ block.shopify_attributes }}>
+              <div {{ block.shopify_attributes }} data-block-type="buy_buttons" data-add-to-cart="{{ block.settings.add_to_cart_text | default: 'ADD TO CART →' }}" data-out-of-stock="{{ block.settings.out_of_stock_text | default: 'SOLD OUT' }}" data-stock-label="{{ block.settings.stock_label_text | default: 'Out of stock' }}">
                 {% if block.settings.show_add_to_cart %}
                   <button type="submit" name="add" class="c-prod__btn-submit js-btn-{{ section.id }}" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
                     {% if product.selected_or_first_available_variant.available %}
-                      {{ block.settings.btn_text | default: 'ADD TO CART' }} &rarr;
+                      {{ block.settings.btn_text | default: 'ADD TO CART' }} →
                     {% else %}
-                      SOLD OUT
+                      {{ block.settings.out_of_stock_text | default: 'SOLD OUT' }}
                     {% endif %}
                   </button>
                 {% endif %}
@@ -2690,6 +2690,14 @@ shopify-accelerated-checkout {
     const perUnitEl = document.querySelector(`.js-per-unit-${sId}`);
     const stockEl = document.querySelector(`.js-stock-${sId}`);
     const buyBtn = document.querySelector(`.js-btn-${sId}`);
+    
+    // Obtener textos personalizados del bloque buy_buttons
+    const buyButtonsContainer = document.querySelector(`[data-block-type="buy_buttons"]`);
+    const customTexts = {
+      addToCart: buyButtonsContainer?.getAttribute('data-add-to-cart') || 'ADD TO CART →',
+      outOfStock: buyButtonsContainer?.getAttribute('data-out-of-stock') || 'SOLD OUT',
+      stockLabel: buyButtonsContainer?.getAttribute('data-stock-label') || 'Out of stock'
+    };
     
     // Cargar JSON
     const jsonEl = document.getElementById(`ProductJSON-${sId}`);
@@ -3141,15 +3149,15 @@ const refreshCartUI = (response) => {
         if (matchedVariant.available) {
           if(buyBtn) {
             buyBtn.disabled = false;
-            buyBtn.innerHTML = 'ADD TO CART &rarr;';
+            buyBtn.innerHTML = customTexts.addToCart || 'ADD TO CART →';
           }
           if(stockEl) stockEl.innerHTML = '<span class="c-prod__stock-dot"></span> In stock';
         } else {
           if(buyBtn) {
             buyBtn.disabled = true;
-            buyBtn.innerHTML = 'SOLD OUT';
+            buyBtn.innerHTML = customTexts.outOfStock || 'SOLD OUT';
           }
-          if(stockEl) stockEl.innerHTML = '<span class="c-prod__stock-dot" style="background:#fca5a5;"></span> Out of stock';
+          if(stockEl) stockEl.innerHTML = '<span class="c-prod__stock-dot" style="background:#fca5a5;"></span> ' + (customTexts.stockLabel || 'Out of stock');
         }
 
         showThumbsForVariant(matchedVariant.id);
@@ -4013,6 +4021,9 @@ const refreshCartUI = (response) => {
       "type": "buy_buttons", "name": "Buy Buttons", "limit": 1,
       "settings": [
         { "type": "text", "id": "btn_text", "label": "Texto del botón", "default": "ADD TO CART" },
+        { "type": "text", "id": "add_to_cart_text", "label": "Texto cuando está disponible", "default": "ADD TO CART →" },
+        { "type": "text", "id": "out_of_stock_text", "label": "Texto cuando está agotado", "default": "SOLD OUT" },
+        { "type": "text", "id": "stock_label_text", "label": "Texto de stock agotado", "default": "Out of stock" },
         { "type": "checkbox", "id": "show_add_to_cart", "label": "Mostrar Add to Cart", "default": true },
         { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Mostrar Dynamic Checkout", "default": true }
       ]
