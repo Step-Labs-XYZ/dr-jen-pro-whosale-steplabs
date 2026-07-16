@@ -789,7 +789,7 @@
         "ingredient_jkXcXN": {
           "type": "ingredient",
           "settings": {
-            "name": "Sodium bicarbonate",
+            "name": "Sodium gluconate",
             "note": ""
           }
         },
@@ -832,7 +832,7 @@
           "type": "ingredient",
           "settings": {
             "name": "Citric Acid",
-            "note": "(preserves naturally)"
+            "note": "preserves naturally"
           }
         },
         "ingredient_tHDfA9": {
@@ -860,7 +860,7 @@
           "type": "expandable_group",
           "settings": {
             "title": "All Extracts",
-            "items": "Stevia Rebaudiana Leaf Extract\nAnise Extract\nPapaya Extract\nBlack Cherry Extract\nGlycyhizein (Chinese Licorice Root Extract)",
+            "items": "Anise Extract\nAloe Vera (Aloe Barbadensis)\nGlycyhizein\n(Chinese Licorice Root Extract)",
             "open_by_default": false
           }
         },
