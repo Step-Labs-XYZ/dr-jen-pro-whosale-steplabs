@@ -492,9 +492,9 @@
       "settings": {
         "eyebrow": "#1 Recommended",
         "heading": "Dental Professionals Choose Dr.Jen",
-        "bg_color": "#00000000",
+        "bg_color": "rgba(0,0,0,0)",
         "bg_color_mob": "#f7f7f7",
-        "bg_color_desk": "#00000000",
+        "bg_color_desk": "rgba(0,0,0,0)",
         "eyebrow_color": "#002c41",
         "heading_color": "#002c41",
         "card_bg": "#f7f7f7",
@@ -723,7 +723,7 @@
         "faq_item_qB876A": {
           "type": "faq_item",
           "settings": {
-            "question": "10% Premium Nanohydroxyapatite",
+            "question": "10% Premium Nano-hydroxyapatite",
             "answer": "<p>Clinically effective nHAp at the optimal concentration for advanced enamel support.</p>"
           }
         },
@@ -751,7 +751,7 @@
       "settings": {
         "sl_anchor_id": "",
         "title": "Advanced Protection for  Periodontal Patients",
-        "body_text": "<p>The most advanced fluoride-free toothpaste for patients who demand more from their oral care, built on 10% premium Nanohydroxyapatite with advanced enamel-inspired peptides. Unlike conventional toothpastes that rely on fluoride and petroleum-based ingredients, KeraHAp™ delivers biomimetic enamel support with cleaner ingredients you can trust.</p>",
+        "body_text": "<p>The most advanced fluoride-free toothpaste for patients who demand more from their oral care, built on 10% premium Nano-hydroxyapatite with advanced enamel-inspired peptides. Unlike conventional toothpastes that rely on fluoride and petroleum-based ingredients, KeraHAp™ delivers biomimetic enamel support with cleaner ingredients you can trust.</p>",
         "comparison_label": "See the Difference at the Microscopic Level:",
         "comparison_image": "shopify://shop_images/Frame_1618873395_1.png",
         "comparison_image_mobile": "shopify://shop_images/Frame_1618873401.png",
