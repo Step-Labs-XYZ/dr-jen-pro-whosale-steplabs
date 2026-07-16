@@ -664,6 +664,24 @@
         "mobile_padding": 30
       }
     },
+    "1784205230037621d1": {
+      "type": "apps",
+      "blocks": {
+        "tolstoy_ads_image_video_tolstoy_builder_aDJHxL": {
+          "type": "shopify://apps/tolstoy-ads-image-video/blocks/tolstoy-builder/06fa8282-42ff-403e-b67c-1936776aed11",
+          "settings": {
+            "custom_code": "<tolstoy-widget data-tolstoy-widget-id=\"01KXNEH9FMS6VNP6KYEMD1JPHA\" data-product-id=\"{{ product.id }}\" data-tags=\"{%- for tag in product.tags -%}{{ tag | escape }},{%- endfor -%}\"></tolstoy-widget>\n<script src=\"https://ai-widgets.gotolstoy.com/8507f226-1a78-4bae-ab97-4b9fbe7d2eee/01KXNEH9FMS6VNP6KYEMD1JPHA/latest/dist/widget.iife.js\" defer></script>"
+          }
+        }
+      },
+      "block_order": [
+        "tolstoy_ads_image_video_tolstoy_builder_aDJHxL"
+      ],
+      "settings": {
+        "include_horizontal_margins": true,
+        "include_vertical_margins": true
+      }
+    },
     "c_dental_professionals_PMkwNn": {
       "type": "c-dental-professionals",
       "blocks": {
@@ -1467,6 +1485,7 @@
     "c_hero_section_jnm7Yd",
     "c_badges_bar_fBPXjp",
     "c_products_tab_a6KGHU",
+    "1784205230037621d1",
     "c_dental_professionals_PMkwNn",
     "c_story_comparison_cqffLT",
     "c_clinically_backed_EVm8hp",
