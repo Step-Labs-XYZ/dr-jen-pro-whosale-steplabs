@@ -1,0 +1,574 @@
+{%- comment -%}
+  Section: The Power of Peptides
+  Description: Two-column layout — left: science image with title and caption;
+               right: eyebrow, main heading, body text, bullet-point feature list, footnote.
+  sl-id: sl-section-power-of-peptides-v1
+{%- endcomment -%}
+
+{%- style -%}
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap');
+
+  /* ================================================
+     ROOT
+     ================================================ */
+  #c-pop-{{ section.id }} {
+    --pop-bg:          {{ section.settings.bg_color }};
+    --pop-left-bg:     {{ section.settings.left_col_bg }};
+    --pop-right-bg:    {{ section.settings.right_col_bg }};
+    --pop-text-dark:   {{ section.settings.text_color }};
+    --pop-text-body:   {{ section.settings.body_color }};
+    --pop-eyebrow:     {{ section.settings.eyebrow_color }};
+    --pop-bullet-dot:  {{ section.settings.bullet_dot_color }};
+    --pop-divider:     {{ section.settings.divider_color }};
+
+    font-family: 'Raleway', sans-serif;
+    background-color: var(--pop-bg);
+    width: 100%;
+  }
+
+  /* ================================================
+     WRAPPER
+     ================================================ */
+  #c-pop-{{ section.id }} .pop__wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+  }
+
+  /* ================================================
+     LEFT COLUMN — image + title + caption
+     ================================================ */
+  #c-pop-{{ section.id }} .pop__left {
+    background-color: var(--pop-left-bg);
+    padding: {{ section.settings.pad_top_mob }}px 24px {{ section.settings.pad_bot_mob }}px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    order: 2;
+  }
+
+  #c-pop-{{ section.id }} .pop__img-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--pop-text-dark);
+    text-align: center;
+    line-height: 1.3;
+    margin: 0 0 16px 0;
+  }
+
+  #c-pop-{{ section.id }} .pop__image-wrap {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  #c-pop-{{ section.id }} .pop__image-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: {{ section.settings.img_radius }}px;
+  }
+
+  #c-pop-{{ section.id }} .pop__caption {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--pop-text-body);
+    text-align: center;
+    line-height: 1.65;
+    margin: 16px 0 0 0;
+    max-width: 480px;
+  }
+
+  /* ================================================
+     RIGHT COLUMN — eyebrow, title, body, bullets
+     ================================================ */
+  #c-pop-{{ section.id }} .pop__right {
+    background-color: var(--pop-right-bg);
+    padding: {{ section.settings.pad_top_mob }}px 24px {{ section.settings.pad_bot_mob }}px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    order: 1;
+  }
+
+  #c-pop-{{ section.id }} .pop__eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pop-eyebrow);
+    margin: 0 0 10px 0;
+  }
+
+  #c-pop-{{ section.id }} .pop__title {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--pop-text-dark);
+    line-height: 1.15;
+    margin: 0 0 16px 0;
+  }
+
+  #c-pop-{{ section.id }} .pop__body {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--pop-text-body);
+    line-height: 1.7;
+    margin: 0 0 28px 0;
+  }
+
+  /* ================================================
+     BULLET LIST
+     ================================================ */
+  #c-pop-{{ section.id }} .pop__items {
+    list-style: none;
+    margin: 0 0 20px 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  #c-pop-{{ section.id }} .pop__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-top: 1px solid var(--pop-divider);
+  }
+
+  #c-pop-{{ section.id }} .pop__item:last-child {
+    border-bottom: 1px solid var(--pop-divider);
+  }
+
+  #c-pop-{{ section.id }} .pop__dot {
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--pop-bullet-dot);
+    margin-top: 6px;
+  }
+
+  #c-pop-{{ section.id }} .pop__item-content {
+    flex: 1;
+  }
+
+  #c-pop-{{ section.id }} .pop__item-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--pop-text-dark);
+    margin: 0 0 3px 0;
+    line-height: 1.3;
+  }
+
+  #c-pop-{{ section.id }} .pop__item-desc {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--pop-text-body);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ================================================
+     FOOTNOTE
+     ================================================ */
+  #c-pop-{{ section.id }} .pop__footnote {
+    font-size: 13px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--pop-text-body);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ================================================
+     BREAKPOINT: 768px — side by side
+     ================================================ */
+  @media (min-width: 768px) {
+    #c-pop-{{ section.id }} .pop__wrapper {
+      flex-direction: {% if section.settings.image_position == 'right' %}row-reverse{% else %}row{% endif %};
+      min-height: {{ section.settings.min_height_desk }}px;
+    }
+
+    #c-pop-{{ section.id }} .pop__left {
+      width: {{ section.settings.left_col_width }}%;
+      flex-shrink: 0;
+      padding: {{ section.settings.pad_top_desk }}px 40px {{ section.settings.pad_bot_desk }}px;
+      order: 0;
+      align-items: flex-start;
+    }
+
+    #c-pop-{{ section.id }} .pop__right {
+      width: calc(100% - {{ section.settings.left_col_width }}%);
+      padding: {{ section.settings.pad_top_desk }}px 52px {{ section.settings.pad_bot_desk }}px 48px;
+      order: 0;
+    }
+
+    #c-pop-{{ section.id }} .pop__img-title {
+      font-size: {{ section.settings.img_title_size_desk }}px;
+      text-align: left;
+    }
+
+    #c-pop-{{ section.id }} .pop__caption {
+      text-align: left;
+    }
+
+    #c-pop-{{ section.id }} .pop__title {
+      font-size: {{ section.settings.title_size_desk }}px;
+    }
+
+    #c-pop-{{ section.id }} .pop__image-wrap {
+      max-width: 100%;
+    }
+  }
+{%- endstyle -%}
+
+<section id="c-pop-{{ section.id }}" aria-label="{{ section.settings.title | escape }}">
+  <div class="pop__wrapper">
+
+    {%- comment -%} ── LEFT COLUMN ── {%- endcomment -%}
+    <div class="pop__left">
+      {%- if section.settings.img_title != blank -%}
+        <h3 class="pop__img-title">{{ section.settings.img_title }}</h3>
+      {%- endif -%}
+
+      {%- if section.settings.image != blank -%}
+        <div class="pop__image-wrap">
+          {{
+            section.settings.image
+            | image_url: width: 800
+            | image_tag: loading: 'lazy', alt: section.settings.image.alt | default: section.settings.img_title
+          }}
+        </div>
+      {%- else -%}
+        <div class="pop__image-wrap">
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.caption != blank -%}
+        <p class="pop__caption">{{ section.settings.caption }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ── RIGHT COLUMN ── {%- endcomment -%}
+    <div class="pop__right">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="pop__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h2 class="pop__title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.body != blank -%}
+        <div class="pop__body">{{ section.settings.body }}</div>
+      {%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <ul class="pop__items">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'bullet_item' -%}
+              <li class="pop__item" {{ block.shopify_attributes }}>
+                <span class="pop__dot" aria-hidden="true"></span>
+                <div class="pop__item-content">
+                  {%- if block.settings.item_title != blank -%}
+                    <p class="pop__item-title">{{ block.settings.item_title }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.item_desc != blank -%}
+                    <p class="pop__item-desc">{{ block.settings.item_desc }}</p>
+                  {%- endif -%}
+                </div>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- if section.settings.footnote != blank -%}
+        <p class="pop__footnote">{{ section.settings.footnote }}</p>
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Power of Peptides",
+  "tag": "section",
+  "class": "c-power-of-peptides",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image column position",
+      "options": [
+        { "value": "left",  "label": "Left"  },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "left_col_width",
+      "min": 30,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "label": "Image column width (desktop)",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 900,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "label": "Max section width",
+      "default": 1280
+    },
+    {
+      "type": "range",
+      "id": "min_height_desk",
+      "min": 300,
+      "max": 900,
+      "step": 20,
+      "unit": "px",
+      "label": "Min height (desktop)",
+      "default": 560
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "pad_top_mob",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top (mobile)",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "pad_bot_mob",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom (mobile)",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "pad_top_desk",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top (desktop)",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pad_bot_desk",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom (desktop)",
+      "default": 64
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "left_col_bg",
+      "label": "Image column background",
+      "default": "#f5f5f3"
+    },
+    {
+      "type": "color",
+      "id": "right_col_bg",
+      "label": "Text column background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading color",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body / caption color",
+      "default": "#444444"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow tag color",
+      "default": "#555555"
+    },
+    {
+      "type": "color",
+      "id": "bullet_dot_color",
+      "label": "Bullet dot color",
+      "default": "#0d0d0d"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Bullet divider line color",
+      "default": "#e5e7eb"
+    },
+    {
+      "type": "header",
+      "content": "Image Column"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Science image"
+    },
+    {
+      "type": "text",
+      "id": "img_title",
+      "label": "Image title",
+      "default": "Science That Works at the Molecular Level"
+    },
+    {
+      "type": "range",
+      "id": "img_title_size_desk",
+      "min": 14,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "label": "Image title font size (desktop)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "img_radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 0
+    },
+    {
+      "type": "textarea",
+      "id": "caption",
+      "label": "Image caption",
+      "default": "Peptides mimic the extracellular matrix that is essential for developing enamel. The extracellular protein matrix organizes and stabilizes nHAp crystals, mediating adhesion to the enamel surface through specific modular actions."
+    },
+    {
+      "type": "header",
+      "content": "Text Column"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow / tag line",
+      "default": "PEPTIDE-ENHANCED NANO-HYDROXYAPATITE"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Main heading",
+      "default": "The Power of Peptides"
+    },
+    {
+      "type": "range",
+      "id": "title_size_desk",
+      "min": 22,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading font size (desktop)",
+      "default": 38
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body text",
+      "default": "<p>Nano-hydroxyapatite, guided by nature's blueprint. KeraHAp™ pairs premium nano-hydroxyapatite with biomimetic peptides, inspired by the protein matrix nature uses to organize that same mineral as enamel forms.</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "footnote",
+      "label": "Footnote / disclaimer",
+      "default": "*A formula modeled on how enamel is built in nature."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bullet_item",
+      "name": "Bullet Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "item_title",
+          "label": "Title",
+          "default": "nHAp Crystals"
+        },
+        {
+          "type": "textarea",
+          "id": "item_desc",
+          "label": "Description",
+          "default": "Premium nano-hydroxyapatite, the mineral naturally found in tooth enamel."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Power of Peptides",
+      "blocks": [
+        {
+          "type": "bullet_item",
+          "settings": {
+            "item_title": "nHAp Crystals",
+            "item_desc": "Premium nano-hydroxyapatite, the mineral naturally found in tooth enamel."
+          }
+        },
+        {
+          "type": "bullet_item",
+          "settings": {
+            "item_title": "Peptide Matrix",
+            "item_desc": "Biomimetic peptides designed to mimic nature's protein scaffold."
+          }
+        },
+        {
+          "type": "bullet_item",
+          "settings": {
+            "item_title": "Attachment Layer",
+            "item_desc": "Where the peptide layer meets the tooth surface."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
