@@ -76,8 +76,8 @@
   }
 
   #c-pop-{{ section.id }} .pop__eyebrow {
-    font-size: 11px;
-    font-weight: 700;
+    font-size: {{ section.settings.eyebrow_size_mob }}px;
+    font-weight: {{ section.settings.eyebrow_weight_mob }};
     font-family: 'Raleway', sans-serif;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -86,8 +86,8 @@
   }
 
   #c-pop-{{ section.id }} .pop__title {
-    font-size: 36px;
-    font-weight: 800;
+    font-size: {{ section.settings.title_size_mob }}px;
+    font-weight: {{ section.settings.title_weight_mob }};
     font-family: 'Raleway', sans-serif;
     color: var(--pop-text-dark);
     line-height: 1.1;
@@ -95,8 +95,8 @@
   }
 
   #c-pop-{{ section.id }} .pop__body {
-    font-size: 15px;
-    font-weight: 400;
+    font-size: {{ section.settings.body_size_mob }}px;
+    font-weight: {{ section.settings.body_weight_mob }};
     font-family: 'Raleway', sans-serif;
     color: var(--pop-text-body);
     line-height: 1.7;
@@ -159,8 +159,8 @@
   }
 
   #c-pop-{{ section.id }} .pop__item-title {
-    font-size: 20px;
-    font-weight: 700;
+    font-size: {{ section.settings.item_title_size_mob }}px;
+    font-weight: {{ section.settings.item_title_weight_mob }};
     font-family: 'Raleway', sans-serif;
     color: var(--pop-text-dark);
     margin: 0 0 5px 0;
@@ -168,8 +168,8 @@
   }
 
   #c-pop-{{ section.id }} .pop__item-desc {
-    font-size: 14px;
-    font-weight: 400;
+    font-size: {{ section.settings.item_desc_size_mob }}px;
+    font-weight: {{ section.settings.item_desc_weight_mob }};
     font-family: 'Raleway', sans-serif;
     color: var(--pop-text-body);
     line-height: 1.6;
@@ -180,9 +180,9 @@
      FOOTNOTE
      ================================================ */
   #c-pop-{{ section.id }} .pop__footnote {
-    font-size: 13px;
+    font-size: {{ section.settings.footnote_size_mob }}px;
     font-style: italic;
-    font-weight: 400;
+    font-weight: {{ section.settings.footnote_weight_mob }};
     font-family: 'Raleway', sans-serif;
     color: var(--pop-text-body);
     line-height: 1.5;
@@ -212,8 +212,34 @@
       order: 0;
     }
 
+    #c-pop-{{ section.id }} .pop__eyebrow {
+      font-size: {{ section.settings.eyebrow_size_desk }}px;
+      font-weight: {{ section.settings.eyebrow_weight_desk }};
+    }
+
     #c-pop-{{ section.id }} .pop__title {
       font-size: {{ section.settings.title_size_desk }}px;
+      font-weight: {{ section.settings.title_weight_desk }};
+    }
+
+    #c-pop-{{ section.id }} .pop__body {
+      font-size: {{ section.settings.body_size_desk }}px;
+      font-weight: {{ section.settings.body_weight_desk }};
+    }
+
+    #c-pop-{{ section.id }} .pop__item-title {
+      font-size: {{ section.settings.item_title_size_desk }}px;
+      font-weight: {{ section.settings.item_title_weight_desk }};
+    }
+
+    #c-pop-{{ section.id }} .pop__item-desc {
+      font-size: {{ section.settings.item_desc_size_desk }}px;
+      font-weight: {{ section.settings.item_desc_weight_desk }};
+    }
+
+    #c-pop-{{ section.id }} .pop__footnote {
+      font-size: {{ section.settings.footnote_size_desk }}px;
+      font-weight: {{ section.settings.footnote_weight_desk }};
     }
 
     #c-pop-{{ section.id }} .pop__items::before {
@@ -464,20 +490,114 @@
       "default": "PEPTIDE-ENHANCED NANO-HYDROXYAPATITE"
     },
     {
+      "type": "header",
+      "content": "Eyebrow typography"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size_mob",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Eyebrow size — mobile",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size_desk",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Eyebrow size — desktop",
+      "default": 11
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_weight_mob",
+      "label": "Eyebrow weight — mobile",
+      "options": [
+        { "value": "300", "label": "300 Light" },
+        { "value": "400", "label": "400 Regular" },
+        { "value": "500", "label": "500 Medium" },
+        { "value": "600", "label": "600 SemiBold" },
+        { "value": "700", "label": "700 Bold" },
+        { "value": "800", "label": "800 ExtraBold" }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_weight_desk",
+      "label": "Eyebrow weight — desktop",
+      "options": [
+        { "value": "300", "label": "300 Light" },
+        { "value": "400", "label": "400 Regular" },
+        { "value": "500", "label": "500 Medium" },
+        { "value": "600", "label": "600 SemiBold" },
+        { "value": "700", "label": "700 Bold" },
+        { "value": "800", "label": "800 ExtraBold" }
+      ],
+      "default": "700"
+    },
+    {
       "type": "text",
       "id": "title",
       "label": "Main heading",
       "default": "The Power of Peptides"
     },
     {
+      "type": "header",
+      "content": "Heading typography"
+    },
+    {
       "type": "range",
-      "id": "title_size_desk",
-      "min": 22,
+      "id": "title_size_mob",
+      "min": 20,
       "max": 60,
       "step": 1,
       "unit": "px",
-      "label": "Heading font size (desktop)",
-      "default": 38
+      "label": "Heading size — mobile",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "title_size_desk",
+      "min": 20,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading size — desktop",
+      "default": 48
+    },
+    {
+      "type": "select",
+      "id": "title_weight_mob",
+      "label": "Heading weight — mobile",
+      "options": [
+        { "value": "300", "label": "300 Light" },
+        { "value": "400", "label": "400 Regular" },
+        { "value": "500", "label": "500 Medium" },
+        { "value": "600", "label": "600 SemiBold" },
+        { "value": "700", "label": "700 Bold" },
+        { "value": "800", "label": "800 ExtraBold" }
+      ],
+      "default": "800"
+    },
+    {
+      "type": "select",
+      "id": "title_weight_desk",
+      "label": "Heading weight — desktop",
+      "options": [
+        { "value": "300", "label": "300 Light" },
+        { "value": "400", "label": "400 Regular" },
+        { "value": "500", "label": "500 Medium" },
+        { "value": "600", "label": "600 SemiBold" },
+        { "value": "700", "label": "700 Bold" },
+        { "value": "800", "label": "800 ExtraBold" }
+      ],
+      "default": "800"
     },
     {
       "type": "richtext",
@@ -486,10 +606,114 @@
       "default": "<p>Nano-hydroxyapatite, guided by nature's blueprint. KeraHAp™ pairs premium nano-hydroxyapatite with biomimetic peptides, inspired by the protein matrix nature uses to organize that same mineral as enamel forms.</p>"
     },
     {
+      "type": "header",
+      "content": "Body typography"
+    },
+    {
+      "type": "range",
+      "id": "body_size_mob",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Body size — mobile",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "body_size_desk",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Body size — desktop",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "body_weight_mob",
+      "label": "Body weight — mobile",
+      "options": [
+        { "value": "300", "label": "300 Light" },
+        { "value": "400", "label": "400 Regular" },
+        { "value": "500", "label": "500 Medium" },
+        { "value": "600", "label": "600 SemiBold" },
+        { "value": "700", "label": "700 Bold" },
+        { "value": "800", "label": "800 ExtraBold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "select",
+      "id": "body_weight_desk",
+      "label": "Body weight — desktop",
+      "options": [
+        { "value": "300", "label": "300 Light" },
+        { "value": "400", "label": "400 Regular" },
+        { "value": "500", "label": "500 Medium" },
+        { "value": "600", "label": "600 SemiBold" },
+        { "value": "700", "label": "700 Bold" },
+        { "value": "800", "label": "800 ExtraBold" }
+      ],
+      "default": "400"
+    },
+    {
       "type": "textarea",
       "id": "footnote",
       "label": "Footnote / disclaimer",
       "default": "*A formula modeled on how enamel is built in nature."
+    },
+    {
+      "type": "header",
+      "content": "Footnote typography"
+    },
+    {
+      "type": "range",
+      "id": "footnote_size_mob",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Footnote size — mobile",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "footnote_size_desk",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Footnote size — desktop",
+      "default": 13
+    },
+    {
+      "type": "select",
+      "id": "footnote_weight_mob",
+      "label": "Footnote weight — mobile",
+      "options": [
+        { "value": "300", "label": "300 Light" },
+        { "value": "400", "label": "400 Regular" },
+        { "value": "500", "label": "500 Medium" },
+        { "value": "600", "label": "600 SemiBold" },
+        { "value": "700", "label": "700 Bold" },
+        { "value": "800", "label": "800 ExtraBold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "select",
+      "id": "footnote_weight_desk",
+      "label": "Footnote weight — desktop",
+      "options": [
+        { "value": "300", "label": "300 Light" },
+        { "value": "400", "label": "400 Regular" },
+        { "value": "500", "label": "500 Medium" },
+        { "value": "600", "label": "600 SemiBold" },
+        { "value": "700", "label": "700 Bold" },
+        { "value": "800", "label": "800 ExtraBold" }
+      ],
+      "default": "400"
     }
   ],
   "blocks": [
@@ -508,6 +732,110 @@
           "id": "item_desc",
           "label": "Description",
           "default": "Premium nano-hydroxyapatite, the mineral naturally found in tooth enamel."
+        },
+        {
+          "type": "header",
+          "content": "Item title typography"
+        },
+        {
+          "type": "range",
+          "id": "item_title_size_mob",
+          "min": 12,
+          "max": 32,
+          "step": 1,
+          "unit": "px",
+          "label": "Title size — mobile",
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "item_title_size_desk",
+          "min": 12,
+          "max": 32,
+          "step": 1,
+          "unit": "px",
+          "label": "Title size — desktop",
+          "default": 20
+        },
+        {
+          "type": "select",
+          "id": "item_title_weight_mob",
+          "label": "Title weight — mobile",
+          "options": [
+            { "value": "300", "label": "300 Light" },
+            { "value": "400", "label": "400 Regular" },
+            { "value": "500", "label": "500 Medium" },
+            { "value": "600", "label": "600 SemiBold" },
+            { "value": "700", "label": "700 Bold" },
+            { "value": "800", "label": "800 ExtraBold" }
+          ],
+          "default": "700"
+        },
+        {
+          "type": "select",
+          "id": "item_title_weight_desk",
+          "label": "Title weight — desktop",
+          "options": [
+            { "value": "300", "label": "300 Light" },
+            { "value": "400", "label": "400 Regular" },
+            { "value": "500", "label": "500 Medium" },
+            { "value": "600", "label": "600 SemiBold" },
+            { "value": "700", "label": "700 Bold" },
+            { "value": "800", "label": "800 ExtraBold" }
+          ],
+          "default": "700"
+        },
+        {
+          "type": "header",
+          "content": "Item description typography"
+        },
+        {
+          "type": "range",
+          "id": "item_desc_size_mob",
+          "min": 10,
+          "max": 22,
+          "step": 1,
+          "unit": "px",
+          "label": "Description size — mobile",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "item_desc_size_desk",
+          "min": 10,
+          "max": 22,
+          "step": 1,
+          "unit": "px",
+          "label": "Description size — desktop",
+          "default": 15
+        },
+        {
+          "type": "select",
+          "id": "item_desc_weight_mob",
+          "label": "Description weight — mobile",
+          "options": [
+            { "value": "300", "label": "300 Light" },
+            { "value": "400", "label": "400 Regular" },
+            { "value": "500", "label": "500 Medium" },
+            { "value": "600", "label": "600 SemiBold" },
+            { "value": "700", "label": "700 Bold" },
+            { "value": "800", "label": "800 ExtraBold" }
+          ],
+          "default": "400"
+        },
+        {
+          "type": "select",
+          "id": "item_desc_weight_desk",
+          "label": "Description weight — desktop",
+          "options": [
+            { "value": "300", "label": "300 Light" },
+            { "value": "400", "label": "400 Regular" },
+            { "value": "500", "label": "500 Medium" },
+            { "value": "600", "label": "600 SemiBold" },
+            { "value": "700", "label": "700 Bold" },
+            { "value": "800", "label": "800 ExtraBold" }
+          ],
+          "default": "400"
         }
       ]
     }
