@@ -283,6 +283,9 @@
           "type": "buy_buttons",
           "settings": {
             "btn_text": "ADD TO CART",
+            "add_to_cart_text": "ADD TO CART →",
+            "out_of_stock_text": "COMING SOON",
+            "stock_label_text": "COMING SOON",
             "show_add_to_cart": true,
             "show_dynamic_checkout": true
           }
