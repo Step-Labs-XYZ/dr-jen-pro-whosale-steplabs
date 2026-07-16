@@ -49,15 +49,6 @@
     order: 2;
   }
 
-  #c-pop-{{ section.id }} .pop__img-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--pop-text-dark);
-    text-align: center;
-    line-height: 1.3;
-    margin: 0 0 16px 0;
-  }
-
   #c-pop-{{ section.id }} .pop__image-wrap {
     width: 100%;
     max-width: 520px;
@@ -70,16 +61,6 @@
     display: block;
     object-fit: cover;
     border-radius: {{ section.settings.img_radius }}px;
-  }
-
-  #c-pop-{{ section.id }} .pop__caption {
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--pop-text-body);
-    text-align: center;
-    line-height: 1.65;
-    margin: 16px 0 0 0;
-    max-width: 480px;
   }
 
   /* ================================================
@@ -207,15 +188,6 @@
       order: 0;
     }
 
-    #c-pop-{{ section.id }} .pop__img-title {
-      font-size: {{ section.settings.img_title_size_desk }}px;
-      text-align: left;
-    }
-
-    #c-pop-{{ section.id }} .pop__caption {
-      text-align: left;
-    }
-
     #c-pop-{{ section.id }} .pop__title {
       font-size: {{ section.settings.title_size_desk }}px;
     }
@@ -231,26 +203,18 @@
 
     {%- comment -%} ── LEFT COLUMN ── {%- endcomment -%}
     <div class="pop__left">
-      {%- if section.settings.img_title != blank -%}
-        <h3 class="pop__img-title">{{ section.settings.img_title }}</h3>
-      {%- endif -%}
-
       {%- if section.settings.image != blank -%}
         <div class="pop__image-wrap">
           {{
             section.settings.image
             | image_url: width: 800
-            | image_tag: loading: 'lazy', alt: section.settings.image.alt | default: section.settings.img_title
+            | image_tag: loading: 'lazy', alt: section.settings.image.alt
           }}
         </div>
       {%- else -%}
         <div class="pop__image-wrap">
           {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
         </div>
-      {%- endif -%}
-
-      {%- if section.settings.caption != blank -%}
-        <p class="pop__caption">{{ section.settings.caption }}</p>
       {%- endif -%}
     </div>
 
@@ -452,22 +416,6 @@
       "label": "Science image"
     },
     {
-      "type": "text",
-      "id": "img_title",
-      "label": "Image title",
-      "default": "Science That Works at the Molecular Level"
-    },
-    {
-      "type": "range",
-      "id": "img_title_size_desk",
-      "min": 14,
-      "max": 36,
-      "step": 1,
-      "unit": "px",
-      "label": "Image title font size (desktop)",
-      "default": 20
-    },
-    {
       "type": "range",
       "id": "img_radius",
       "min": 0,
@@ -476,12 +424,6 @@
       "unit": "px",
       "label": "Image border radius",
       "default": 0
-    },
-    {
-      "type": "textarea",
-      "id": "caption",
-      "label": "Image caption",
-      "default": "Peptides mimic the extracellular matrix that is essential for developing enamel. The extracellular protein matrix organizes and stabilizes nHAp crystals, mediating adhesion to the enamel surface through specific modular actions."
     },
     {
       "type": "header",
