@@ -670,7 +670,7 @@
         "tolstoy_ads_image_video_tolstoy_builder_aDJHxL": {
           "type": "shopify://apps/tolstoy-ads-image-video/blocks/tolstoy-builder/06fa8282-42ff-403e-b67c-1936776aed11",
           "settings": {
-            "custom_code": "<tolstoy-widget data-tolstoy-widget-id=\"01KXNEH9FMS6VNP6KYEMD1JPHA\" data-product-id=\"{{ product.id }}\" data-tags=\"{%- for tag in product.tags -%}{{ tag | escape }},{%- endfor -%}\"></tolstoy-widget>\n<script src=\"https://ai-widgets.gotolstoy.com/8507f226-1a78-4bae-ab97-4b9fbe7d2eee/01KXNEH9FMS6VNP6KYEMD1JPHA/latest/dist/widget.iife.js\" defer></script>"
+            "custom_code": "<tolstoy-widget data-tolstoy-widget-id=\"01KXNEVPXBBS39FMNWHZJ7S40R\" data-product-id=\"{{ product.id }}\" data-tags=\"{%- for tag in product.tags -%}{{ tag | escape }},{%- endfor -%}\"></tolstoy-widget>\n<script src=\"https://ai-widgets.gotolstoy.com/8507f226-1a78-4bae-ab97-4b9fbe7d2eee/01KXNEVPXBBS39FMNWHZJ7S40R/latest/dist/widget.iife.js\" defer></script>"
           }
         }
       },
