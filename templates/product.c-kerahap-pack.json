@@ -97,8 +97,8 @@
         "price_stock_4Qk3Yf": {
           "type": "price_stock",
           "settings": {
-            "unit_label": "$15.60/tube",
-            "retail_text": "Retail $26.00/unit"
+            "unit_label": "$17.33/tube",
+            "retail_text": "Retail $28.00/unit"
           }
         },
         "ingredients_tab_effY3y": {
@@ -252,7 +252,7 @@
           "type": "variant_cards",
           "settings": {
             "option_name": "Quantity",
-            "unit_label": "$15.60/tube",
+            "unit_label": "$17.33/tube",
             "badge_2": "",
             "badge_3": "",
             "badge_2_orange_mango": "",
