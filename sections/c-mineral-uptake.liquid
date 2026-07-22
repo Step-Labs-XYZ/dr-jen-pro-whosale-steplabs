@@ -1,668 +1,1012 @@
-<div id="c-mineral-uptake-{{ section.id }}" class="Cmineral-uptake" data-section-id="{{ section.id }}">
-  <div class="Cmineral-uptake__container">
-    
-    <div class="Cmineral-uptake__content">
-      {%- if section.settings.main_heading != blank -%}
-        <h2 class="Cmineral-uptake__heading">{{ section.settings.main_heading | newline_to_br }}</h2>
-      {%- endif -%}
+{%- comment -%}
+  Section: Dr.Jen Difference Premium NHAp
+  Description: Comparison layout with left tooth comparison and right material images.
+  sl-id: sl-section-drjen-difference-premium-nhap-v1
+{%- endcomment -%}
 
-      {%- if section.settings.description != blank -%}
-        <div class="Cmineral-uptake__description">
-          <p>{{ section.settings.description | newline_to_br }}</p>
-        </div>
-      {%- endif -%}
+{%- style -%}
+  #c-drjen-diff-{{ section.id }} {
+    --c-bg: {{ section.settings.bg_color }};
+    --c-title: {{ section.settings.title_color }};
+    --c-subtitle: {{ section.settings.subtitle_color }};
+    --c-text: {{ section.settings.text_color }};
+    --c-label-bg: {{ section.settings.label_bg_color }};
+    --c-label-text: {{ section.settings.label_text_color }};
 
-      {%- if section.settings.link_text != blank -%}
-        <a href="{{ section.settings.link_url | default: '#' }}" class="Cmineral-uptake__study-link">
-          {{ section.settings.link_text }}
-        </a>
-      {%- endif -%}
-
-      {%- if section.settings.description_desktop_extra != blank -%}
-        <div class="Cmineral-uptake__description Cmineral-uptake__description--desktop-extra">
-          <p>{{ section.settings.description_desktop_extra | newline_to_br }}</p>
-        </div>
-      {%- endif -%}
-
-      {%- if section.settings.button_text != blank -%}
-        <a href="{{ section.settings.button_url | default: '#' }}"
-           class="Cmineral-uptake__button Cmineral-uptake__button--desktop">
-          {{ section.settings.button_text }}
-        </a>
-      {%- endif -%}
-    </div>
-
-    <div class="Cmineral-uptake__images">
-      {%- if section.settings.images_title != blank -%}
-        <h3 class="Cmineral-uptake__images-title">{{ section.settings.images_title | newline_to_br }}</h3>
-      {%- endif -%}
-
-      <div class="Cmineral-uptake__images-grid">
-        <div class="Cmineral-uptake__image-item">
-          {%- if section.settings.image_1 != blank -%}
-            <div class="Cmineral-uptake__image-wrapper">
-              <img 
-                src="{{ section.settings.image_1 | image_url: width: 600 }}" 
-                alt="{{ section.settings.image_1_label | escape }}"
-                class="Cmineral-uptake__image"
-                loading="lazy"
-              />
-            </div>
-          {%- else -%}
-            <div class="Cmineral-uptake__image-placeholder">
-              <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="200" height="200" fill="#E5E5E5"/>
-                <text x="50%" y="50%" text-anchor="middle" fill="#999" font-size="14">Image 1</text>
-              </svg>
-            </div>
-          {%- endif -%}
-          
-          {%- if section.settings.image_1_label != blank -%}
-            <p class="Cmineral-uptake__image-label">{{ section.settings.image_1_label | newline_to_br }}</p>
-          {%- endif -%}
-        </div>
-
-        <div class="Cmineral-uptake__image-item">
-          {%- if section.settings.image_2 != blank -%}
-            <div class="Cmineral-uptake__image-wrapper">
-              <img 
-                src="{{ section.settings.image_2 | image_url: width: 600 }}" 
-                alt="{{ section.settings.image_2_label | escape }}"
-                class="Cmineral-uptake__image"
-                loading="lazy"
-              />
-            </div>
-          {%- else -%}
-            <div class="Cmineral-uptake__image-placeholder">
-              <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="200" height="200" fill="#E5E5E5"/>
-                <text x="50%" y="50%" text-anchor="middle" fill="#999" font-size="14">Image 2</text>
-              </svg>
-            </div>
-          {%- endif -%}
-          
-          {%- if section.settings.image_2_label != blank -%}
-            <p class="Cmineral-uptake__image-label">{{ section.settings.image_2_label | newline_to_br }}</p>
-          {%- endif -%}
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  {%- comment -%} Mobile-only bottom content {%- endcomment -%}
-  {%- if section.settings.description_mobile_bottom != blank or section.settings.mobile_button_text != blank -%}
-    <div class="Cmineral-uptake__mobile-bottom">
-      {%- if section.settings.description_mobile_bottom != blank -%}
-        <div class="Cmineral-uptake__description Cmineral-uptake__description--mobile-bottom">
-          <p>{{ section.settings.description_mobile_bottom | newline_to_br }}</p>
-        </div>
-      {%- endif -%}
-
-      {%- if section.settings.mobile_button_text != blank -%}
-        <a href="{{ section.settings.mobile_button_url | default: '#' }}"
-           class="Cmineral-uptake__button Cmineral-uptake__button--mobile">
-          {{ section.settings.mobile_button_text }}
-        </a>
-      {%- endif -%}
-    </div>
-  {%- endif -%}
-</div>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap');
-
-#c-mineral-uptake-{{ section.id }} {
-  background-color: {{ section.settings.background_color }};
-  padding-top: {{ section.settings.padding_top_desktop }}px;
-  padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
-  overflow: hidden;
-  font-family: 'Raleway', sans-serif;
-}
-
-#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__container {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 40px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
-}
-
-/* Columna Izquierda */
-#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__content {
-  display: flex;
-  flex-direction: column;
-}
-
-#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__heading {
-  font-size: {{ section.settings.heading_size_desktop }}px;
-  max-width: {{ section.settings.heading_max_desktop }}%;
-  font-weight: 600;
-  line-height: 1.25;
-  color: {{ section.settings.heading_color }};
-  margin: 0 0 20px 0;
-}
-
-#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__description {
-  font-size: {{ section.settings.text_size_desktop }}px;
-  max-width: {{ section.settings.text_max_desktop }}%;
-  font-weight: 400;
-  line-height: 1.6;
-  color: {{ section.settings.text_color }};
-  margin: 0;
-}
-
-#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__description p {
-  margin: 0;
-}
-
-/* Link de estudio con espacio */
-#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__study-link {
-  font-size: {{ section.settings.text_size_desktop }}px;
-  color: {{ section.settings.link_color }};
-  text-decoration: underline;
-  font-weight: 400;
-  display: inline-block;
-  margin-bottom: 24px;
-  transition: opacity 0.3s ease;
-}
-
-#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__study-link:hover {
-  opacity: 0.7;
-}
-
-/* Texto extra negrita */
-#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__description--desktop-extra {
-  font-weight: 700;
-  color: {{ section.settings.bold_text_color }};
-}
-
-#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__description--mobile-bottom {
-  font-weight: 700;
-  color: {{ section.settings.bold_text_color }};
-}
-
-/* Botón (si se usa) */
-#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px 40px;
-  background: transparent;
-  border: 2px solid {{ section.settings.heading_color }};
-  border-radius: 50px;
-  font-size: 16px;
-  font-weight: 700;
-  color: {{ section.settings.heading_color }};
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
-  align-self: flex-start;
-  margin-top: 20px;
-}
-
-#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__button:hover {
-  background: {{ section.settings.heading_color }};
-  color: {{ section.settings.background_color }};
-  transform: translateY(-2px);
-}
-
-/* Columna Derecha */
-#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__images {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__images-title {
-  font-size: {{ section.settings.img_title_size_desktop }}px;
-  max-width: {{ section.settings.img_title_max_desktop }}%;
-  font-weight: 400;
-  line-height: 1.3;
-  color: {{ section.settings.images_title_color }};
-  margin: 0 auto;
-  text-align: center;
-}
-
-#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__images-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
-}
-
-#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__image-item {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: center;
-}
-
-#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__image-wrapper {
-  width: 100%;
-  aspect-ratio: 1; 
-  border-radius: 12px;
-  overflow: hidden;
-  background: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__image {
-  width: 80%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 12px;
-}
-
-#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__image-placeholder {
-  width: 100%;
-  aspect-ratio: 1;
-  border-radius: 12px;
-  background: #F8F8F8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px dashed #D6D6D6;
-}
-
-#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__image-label {
-  font-size: {{ section.settings.label_size_desktop }}px;
-  font-weight: 700;
-  line-height: 1.4;
-  color: {{ section.settings.labels_color }};
-  margin: 0;
-  text-align: center;
-}
-
-#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__mobile-bottom {
-  display: none;
-}
-
-#c-mineral-uptake-{{ section.id }} .Cmineral-uptake__button--mobile {
-  display: none;
-}
-
-/* Responsivo */
-@media (max-width: 991px) {
-  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__container {
-    grid-template-columns: 1fr;
-    gap: 60px;
-  }
-}
-
-@media (max-width: 768px) {
-  #c-mineral-uptake-{{ section.id }} {
+    background: var(--c-bg);
     padding-top: {{ section.settings.padding_top_mobile }}px;
     padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
   }
 
-  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__container {
-    padding: 0 20px;
-    gap: 40px;
+  #c-drjen-diff-{{ section.id }} .c-drjen-diff__container {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 16px;
   }
 
-  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__heading {
-    font-size: {{ section.settings.heading_size_mobile }}px;
-    max-width: {{ section.settings.heading_max_mobile }}%;
-    text-align: left;
-    margin-left: 0;
-    margin-right: 0;
+  #c-drjen-diff-{{ section.id }} .c-drjen-diff__title {
+    margin: 0 0 22px;
+    color: var(--c-title);
+    text-align: center;
+    font-size: {{ section.settings.title_size_mobile }}px;
+    font-weight: {{ section.settings.title_weight }};
+    line-height: 1.2;
+    letter-spacing: -0.02em;
   }
 
-  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__description {
-    font-size: {{ section.settings.text_size_mobile }}px;
-    max-width: {{ section.settings.text_max_mobile }}%;
+  #c-drjen-diff-{{ section.id }} .c-drjen-diff__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: {{ section.settings.mobile_gap }}px;
+    align-items: stretch;
   }
 
-  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__study-link {
-    font-size: {{ section.settings.text_size_mobile }}px;
-    margin-top: 10px;
-    margin-bottom: 20px;
+  #c-drjen-diff-{{ section.id }} .c-drjen-diff__left {
+    padding: 4px 0;
   }
 
-  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__images-title {
-    font-size: {{ section.settings.img_title_size_mobile }}px;
-    max-width: {{ section.settings.img_title_max_mobile }}%;
+  #c-drjen-diff-{{ section.id }} .c-drjen-diff__subtitle {
+    margin: 0 0 16px;
+    color: var(--c-subtitle);
+    font-size: {{ section.settings.subtitle_size_mobile }}px;
+    font-weight: {{ section.settings.subtitle_weight }};
+    line-height: 1.25;
+    text-align: center;
+    max-width: {{ section.settings.subtitle_max_width_mobile }}px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__image-label {
-    font-size: {{ section.settings.label_size_mobile }}px;
+  #c-drjen-diff-{{ section.id }} .c-drjen-diff__teeth {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 16px;
   }
 
-  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__images-grid {
-    gap: 24px;
+  #c-drjen-diff-{{ section.id }} .c-drjen-diff__tooth-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
 
-  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__button {
-    padding: 14px 32px;
-    font-size: 14px;
+  #c-drjen-diff-{{ section.id }} .c-drjen-diff__tooth-media {
+    width: 100%;
+    max-width: 130px;
+    aspect-ratio: 0.9;
+    min-height: 120px;
+    overflow: hidden;
   }
 
-  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__description--desktop-extra {
+  #c-drjen-diff-{{ section.id }} .c-drjen-diff__tooth-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     display: block;
   }
 
-  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__mobile-bottom {
-    display: flex;
-    flex-direction: column;
+  #c-drjen-diff-{{ section.id }} .c-drjen-diff__tooth-label {
+    margin: 0;
+    color: var(--c-title);
+    text-align: center;
+    font-size: {{ section.settings.tooth_label_size_mobile }}px;
+    font-weight: {{ section.settings.tooth_label_weight }};
+    line-height: 1.25;
+    max-width: {{ section.settings.tooth_label_max_width_mobile }}px;
+  }
+
+  #c-drjen-diff-{{ section.id }} .c-drjen-diff__desc {
+    color: var(--c-text);
+    line-height: 1.45;
+  }
+
+  #c-drjen-diff-{{ section.id }} .c-drjen-diff__desc p {
+    font-size: {{ section.settings.body_size_mobile }}px;
+    font-weight: {{ section.settings.body_weight }};
+    margin: 0 0 10px;
+    max-width: {{ section.settings.body_primary_max_width_mobile }}px;
+  }
+
+  #c-drjen-diff-{{ section.id }} .c-drjen-diff__desc p:last-child {
+    font-size: {{ section.settings.body_secondary_size_mobile }}px;
+    font-weight: {{ section.settings.body_secondary_weight }};
+    max-width: {{ section.settings.body_secondary_max_width_mobile }}px;
+  }
+
+  #c-drjen-diff-{{ section.id }} .c-drjen-diff__desc p:last-child {
+    margin-bottom: 0;
+  }
+
+  #c-drjen-diff-{{ section.id }} .c-drjen-diff__desc strong {
+    font-weight: inherit;
+    color: var(--c-title);
+  }
+
+  #c-drjen-diff-{{ section.id }} .c-drjen-diff__right-group {
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 16px;
-    max-width: 1400px;
-    margin: 28px auto 0;
-    padding: 0 20px;
   }
 
-  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__button--desktop {
-    display: none;
+  #c-drjen-diff-{{ section.id }} .c-drjen-diff__right {
+    min-width: 0;
   }
 
-  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__button--mobile {
-    display: inline-flex;
+  #c-drjen-diff-{{ section.id }} .c-drjen-diff__image-card {
+    position: relative;
+    border-radius: {{ section.settings.image_radius }}px;
+    overflow: hidden;
+    background: #f5f5f5;
+    min-height: {{ section.settings.image_height_mobile }}px;
+  }
+
+  #c-drjen-diff-{{ section.id }} .c-drjen-diff__image {
     width: 100%;
+    height: {{ section.settings.image_height_mobile }}px;
+    object-fit: cover;
+    display: block;
   }
-}
 
-@media (max-width: 480px) {
-  #c-mineral-uptake-{{ section.id }} .Cmineral-uptake__button {
-    width: 70%;
-    align-self: center;
+  #c-drjen-diff-{{ section.id }} .c-drjen-diff__badge {
+    position: absolute;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+    background: var(--c-label-bg);
+    color: var(--c-label-text);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: {{ section.settings.badge_size_mobile }}px;
+    font-weight: {{ section.settings.badge_weight }};
+    line-height: 1.2;
+    text-align: center;
+    min-width: 130px;
+    max-width: {{ section.settings.badge_max_width_mobile }}px;
   }
-}
-</style>
+
+  @media (min-width: 768px) {
+    #c-drjen-diff-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_desktop }}px;
+      padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__container {
+      padding: 0 24px;
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__title {
+      margin-bottom: 30px;
+      font-size: {{ section.settings.title_size_tablet }}px;
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: {{ section.settings.desktop_gap }}px;
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__subtitle {
+      font-size: {{ section.settings.subtitle_size_tablet }}px;
+      margin-bottom: 20px;
+      max-width: {{ section.settings.subtitle_max_width_desktop }}px;
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__tooth-media {
+      max-width: 150px;
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__tooth-label {
+      font-size: {{ section.settings.tooth_label_size_tablet }}px;
+      max-width: {{ section.settings.tooth_label_max_width_desktop }}px;
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__desc {
+      line-height: 1.5;
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__desc p {
+      font-size: {{ section.settings.body_size_tablet }}px;
+      font-weight: {{ section.settings.body_weight }};
+      max-width: {{ section.settings.body_primary_max_width_desktop }}px;
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__desc p:last-child {
+      font-size: {{ section.settings.body_secondary_size_tablet }}px;
+      font-weight: {{ section.settings.body_secondary_weight }};
+      max-width: {{ section.settings.body_secondary_max_width_desktop }}px;
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__right-group {
+      grid-template-columns: 1fr;
+      align-self: stretch;
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__image {
+      height: {{ section.settings.image_height_tablet }}px;
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__image-card {
+      min-height: {{ section.settings.image_height_tablet }}px;
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__badge {
+      bottom: 14px;
+      padding: 10px 18px;
+      font-size: {{ section.settings.badge_size_tablet }}px;
+      min-width: 160px;
+      max-width: {{ section.settings.badge_max_width_desktop }}px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__right-group {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: stretch;
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__title {
+      font-size: {{ section.settings.title_size_desktop }}px;
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__subtitle {
+      font-size: {{ section.settings.subtitle_size_desktop }}px;
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__tooth-label {
+      font-size: {{ section.settings.tooth_label_size_desktop }}px;
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__desc p {
+      font-size: {{ section.settings.body_size_desktop }}px;
+      font-weight: {{ section.settings.body_weight }};
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__desc p:last-child {
+      font-size: {{ section.settings.body_secondary_size_desktop }}px;
+      font-weight: {{ section.settings.body_secondary_weight }};
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__image {
+      height: {{ section.settings.image_height_desktop }}px;
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__image-card {
+      min-height: {{ section.settings.image_height_desktop }}px;
+    }
+
+    #c-drjen-diff-{{ section.id }} .c-drjen-diff__badge {
+      font-size: {{ section.settings.badge_size_desktop }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section
+  {% if section.settings.sl_anchor_id != blank %}id="{{ section.settings.sl_anchor_id }}"{% endif %}
+  class="c-section c-drjen-difference-premium-nhap"
+  data-sl-id="sl-section-drjen-difference-premium-nhap-v1"
+  data-section-id="{{ section.id }}"
+>
+  <div id="c-drjen-diff-{{ section.id }}">
+    <div class="c-drjen-diff__container">
+      {%- if section.settings.title != blank -%}
+        <h2 class="c-drjen-diff__title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+
+      <div class="c-drjen-diff__grid">
+        <div class="c-drjen-diff__left">
+          {%- if section.settings.left_subtitle != blank -%}
+            <p class="c-drjen-diff__subtitle">{{ section.settings.left_subtitle | escape | newline_to_br }}</p>
+          {%- endif -%}
+
+          <div class="c-drjen-diff__teeth">
+            <div class="c-drjen-diff__tooth-item">
+              <div class="c-drjen-diff__tooth-media">
+                {%- if section.settings.tooth_low_image != blank -%}
+                  <img
+                    class="c-drjen-diff__tooth-image"
+                    src="{{ section.settings.tooth_low_image | image_url: width: 900 }}"
+                    srcset="{{ section.settings.tooth_low_image | image_url: width: 300 }} 300w, {{ section.settings.tooth_low_image | image_url: width: 500 }} 500w, {{ section.settings.tooth_low_image | image_url: width: 900 }} 900w"
+                    sizes="(min-width: 1024px) 150px, 130px"
+                    alt="{{ section.settings.tooth_low_label | strip_html | escape }}"
+                    loading="lazy"
+                    width="{{ section.settings.tooth_low_image.width }}"
+                    height="{{ section.settings.tooth_low_image.height }}"
+                  >
+                {%- else -%}
+                  {{ 'image' | placeholder_svg_tag: 'c-drjen-diff__tooth-image' }}
+                {%- endif -%}
+              </div>
+              {%- if section.settings.tooth_low_label != blank -%}
+                {%- assign tooth_low_label_text = section.settings.tooth_low_label | escape | newline_to_br -%}
+                {%- unless tooth_low_label_text contains '<br' -%}
+                  {%- assign tooth_low_label_text = tooth_low_label_text | replace: 'Low-Grade ', 'Low-Grade<br>' -%}
+                {%- endunless -%}
+                <p class="c-drjen-diff__tooth-label">{{ tooth_low_label_text }}</p>
+              {%- endif -%}
+            </div>
+
+            <div class="c-drjen-diff__tooth-item">
+              <div class="c-drjen-diff__tooth-media">
+                {%- if section.settings.tooth_premium_image != blank -%}
+                  <img
+                    class="c-drjen-diff__tooth-image"
+                    src="{{ section.settings.tooth_premium_image | image_url: width: 900 }}"
+                    srcset="{{ section.settings.tooth_premium_image | image_url: width: 300 }} 300w, {{ section.settings.tooth_premium_image | image_url: width: 500 }} 500w, {{ section.settings.tooth_premium_image | image_url: width: 900 }} 900w"
+                    sizes="(min-width: 1024px) 150px, 130px"
+                    alt="{{ section.settings.tooth_premium_label | strip_html | escape }}"
+                    loading="lazy"
+                    width="{{ section.settings.tooth_premium_image.width }}"
+                    height="{{ section.settings.tooth_premium_image.height }}"
+                  >
+                {%- else -%}
+                  {{ 'image' | placeholder_svg_tag: 'c-drjen-diff__tooth-image' }}
+                {%- endif -%}
+              </div>
+              {%- if section.settings.tooth_premium_label != blank -%}
+                <p class="c-drjen-diff__tooth-label">{{ section.settings.tooth_premium_label | escape | newline_to_br }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+
+          {%- if section.settings.description != blank -%}
+            <div class="c-drjen-diff__desc">{{ section.settings.description }}</div>
+          {%- endif -%}
+        </div>
+
+        <div class="c-drjen-diff__right-group">
+          <div class="c-drjen-diff__right">
+            <div class="c-drjen-diff__image-card">
+              {%- if section.settings.right_image_1 != blank -%}
+                <img
+                  class="c-drjen-diff__image"
+                  src="{{ section.settings.right_image_1 | image_url: width: 1600 }}"
+                  srcset="{{ section.settings.right_image_1 | image_url: width: 500 }} 500w, {{ section.settings.right_image_1 | image_url: width: 900 }} 900w, {{ section.settings.right_image_1 | image_url: width: 1200 }} 1200w, {{ section.settings.right_image_1 | image_url: width: 1600 }} 1600w"
+                  sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
+                  alt="{{ section.settings.right_label_1 | strip_html | escape }}"
+                  loading="lazy"
+                  width="{{ section.settings.right_image_1.width }}"
+                  height="{{ section.settings.right_image_1.height }}"
+                >
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'c-drjen-diff__image' }}
+              {%- endif -%}
+              {%- if section.settings.right_label_1 != blank -%}
+                {%- assign right_low_label_text = section.settings.right_label_1 | escape | newline_to_br -%}
+                {%- unless right_low_label_text contains '<br' -%}
+                  {%- assign right_low_label_text = right_low_label_text | replace: 'Low-Grade ', 'Low-Grade<br>' | replace: 'Low- ', 'Low-<br>' -%}
+                {%- endunless -%}
+                <span class="c-drjen-diff__badge">{{ right_low_label_text }}</span>
+              {%- endif -%}
+            </div>
+          </div>
+
+          <div class="c-drjen-diff__right">
+            <div class="c-drjen-diff__image-card">
+              {%- if section.settings.right_image_2 != blank -%}
+                <img
+                  class="c-drjen-diff__image"
+                  src="{{ section.settings.right_image_2 | image_url: width: 1600 }}"
+                  srcset="{{ section.settings.right_image_2 | image_url: width: 500 }} 500w, {{ section.settings.right_image_2 | image_url: width: 900 }} 900w, {{ section.settings.right_image_2 | image_url: width: 1200 }} 1200w, {{ section.settings.right_image_2 | image_url: width: 1600 }} 1600w"
+                  sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
+                  alt="{{ section.settings.right_label_2 | strip_html | escape }}"
+                  loading="lazy"
+                  width="{{ section.settings.right_image_2.width }}"
+                  height="{{ section.settings.right_image_2.height }}"
+                >
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'c-drjen-diff__image' }}
+              {%- endif -%}
+              {%- if section.settings.right_label_2 != blank -%}
+                <span class="c-drjen-diff__badge">{{ section.settings.right_label_2 | escape | newline_to_br }}</span>
+              {%- endif -%}
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 {% schema %}
 {
-  "name": "C Mineral Uptake",
-  "class": "section-cmineral-uptake",
+  "name": "C - Dr.Jen Premium NHAp",
+  "tag": "section",
+  "class": "c-drjen-difference-premium-nhap-wrapper",
   "settings": [
     {
-      "type": "header",
-      "content": "Section Colors"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background Color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading Color",
-      "default": "#002C41"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Regular Text Color",
-      "default": "#4A4A4A"
-    },
-    {
-      "type": "color",
-      "id": "link_color",
-      "label": "Link Color",
-      "default": "#002C41"
-    },
-    {
-      "type": "color",
-      "id": "bold_text_color",
-      "label": "Bold Text Color",
-      "default": "#002C41"
-    },
-    {
-      "type": "color",
-      "id": "images_title_color",
-      "label": "Images Title Color",
-      "default": "#4A4A4A"
-    },
-    {
-      "type": "color",
-      "id": "labels_color",
-      "label": "Image Labels Color",
-      "default": "#002C41"
+      "type": "text",
+      "id": "sl_anchor_id",
+      "label": "Anchor ID"
     },
     {
       "type": "header",
-      "content": "Left Content Column"
-    },
-    {
-      "type": "textarea",
-      "id": "main_heading",
-      "label": "Main Heading",
-      "default": "Not All nHAp Is Created Equal.\nQuality & Crystal Size Matter"
-    },
-    {
-      "type": "textarea",
-      "id": "description",
-      "label": "Description Text",
-      "default": "Dr. Jen sources premium Nanohydroxyapatite crystals engineered for optimal particle size and delivered at the ideal 10% concentration."
+      "content": "Content"
     },
     {
       "type": "text",
-      "id": "link_text",
-      "label": "Study Link Text",
-      "default": "Link to study"
-    },
-    {
-      "type": "url",
-      "id": "link_url",
-      "label": "Study Link URL"
+      "id": "title",
+      "label": "Main title",
+      "default": "The Dr.Jen Difference: Premium-Grade NHAp"
     },
     {
       "type": "textarea",
-      "id": "description_desktop_extra",
-      "label": "Extra Bold Description (Desktop only)",
-      "default": "While other brands may include nHAp, Dr. Jen sources the highest grade Nanohydroxyapatite at optimal levels to deliver the highest performance"
-    },
-    {
-      "type": "text",
-      "id": "button_text",
-      "label": "Button Text (Desktop - Optional)"
-    },
-    {
-      "type": "url",
-      "id": "button_url",
-      "label": "Button URL (Desktop - Optional)",
-      "default": "/"
-    },
-    {
-      "type": "header",
-      "content": "Right Images Column"
-    },
-    {
-      "type": "textarea",
-      "id": "images_title",
-      "label": "Images Title",
+      "id": "left_subtitle",
+      "label": "Left subtitle",
       "default": "Mineral Uptake\nCalcium And Phosphate"
     },
     {
+      "type": "richtext",
+      "id": "description",
+      "label": "Left description",
+      "default": "<p>Premium-grade Nanohydroxyapatite is proven to deliver optimal levels of protection and hypersensitivity management. Link to study.</p><p><strong>While cheaper formulations source lower grade Nanohydroxyapatite, Dr. Jen's sources premium grade Nanohydroxyapatite for higher performance.</strong></p>"
+    },
+    {
+      "type": "header",
+      "content": "Tooth comparison"
+    },
+    {
       "type": "image_picker",
-      "id": "image_1",
-      "label": "Image 1"
+      "id": "tooth_low_image",
+      "label": "Low-grade tooth image"
     },
     {
       "type": "text",
-      "id": "image_1_label",
-      "label": "Image 1 Label",
+      "id": "tooth_low_label",
+      "label": "Low-grade label",
       "default": "Low-Grade\nnHAp"
     },
     {
       "type": "image_picker",
-      "id": "image_2",
-      "label": "Image 2"
+      "id": "tooth_premium_image",
+      "label": "Premium-grade tooth image"
     },
     {
       "type": "text",
-      "id": "image_2_label",
-      "label": "Image 2 Label",
+      "id": "tooth_premium_label",
+      "label": "Premium-grade label",
       "default": "Premium\nGrade nHAp"
     },
     {
       "type": "header",
-      "content": "Mobile-only Bottom Content"
+      "content": "Right image cards"
     },
     {
-      "type": "textarea",
-      "id": "description_mobile_bottom",
-      "label": "Description (Mobile bottom)",
-      "default": "While other brands may include nHAp, Dr. Jen sources the highest grade Nanohydroxyapatite at optimal levels to deliver the highest performance"
+      "type": "image_picker",
+      "id": "right_image_1",
+      "label": "Right card image 1"
     },
     {
       "type": "text",
-      "id": "mobile_button_text",
-      "label": "Button Text (Mobile - Optional)"
+      "id": "right_label_1",
+      "label": "Right card label 1",
+      "default": "Low-\nGrade nHAp"
     },
     {
-      "type": "url",
-      "id": "mobile_button_url",
-      "label": "Button URL (Mobile - Optional)",
-      "default": "/"
+      "type": "image_picker",
+      "id": "right_image_2",
+      "label": "Right card image 2"
+    },
+    {
+      "type": "text",
+      "id": "right_label_2",
+      "label": "Right card label 2",
+      "default": "Premium-\nGrade nHAp"
     },
     {
       "type": "header",
-      "content": "Desktop Configuration"
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#07354d"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#07354d"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body text color",
+      "default": "#26475a"
+    },
+    {
+      "type": "color",
+      "id": "label_bg_color",
+      "label": "Badge background",
+      "default": "#ffffffd9"
+    },
+    {
+      "type": "color",
+      "id": "label_text_color",
+      "label": "Badge text color",
+      "default": "#1b2f3e"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
     },
     {
       "type": "range",
-      "id": "heading_size_desktop",
-      "min": 20, "max": 80, "step": 1, "unit": "px",
-      "label": "Heading Size",
-      "default": 36
+      "id": "max_width",
+      "label": "Container max width",
+      "min": 900,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "default": 1400
     },
     {
       "type": "range",
-      "id": "heading_max_desktop",
-      "min": 10, "max": 100, "step": 5, "unit": "%",
-      "label": "Heading Max Width",
-      "default": 90
-    },
-    {
-      "type": "range",
-      "id": "text_size_desktop",
-      "min": 12, "max": 30, "step": 1, "unit": "px",
-      "label": "Description & Link Size",
+      "id": "mobile_gap",
+      "label": "Mobile gap",
+      "min": 8,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
       "default": 16
     },
     {
       "type": "range",
-      "id": "text_max_desktop",
-      "min": 10, "max": 100, "step": 5, "unit": "%",
-      "label": "Description Max Width",
-      "default": 85
+      "id": "desktop_gap",
+      "label": "Desktop gap",
+      "min": 12,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 22
     },
     {
       "type": "range",
-      "id": "img_title_size_desktop",
-      "min": 12, "max": 40, "step": 1, "unit": "px",
-      "label": "Images Title Size",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "img_title_max_desktop",
-      "min": 10, "max": 100, "step": 5, "unit": "%",
-      "label": "Images Title Max Width",
-      "default": 100
-    },
-    {
-      "type": "range",
-      "id": "label_size_desktop",
-      "min": 12, "max": 30, "step": 1, "unit": "px",
-      "label": "Image Labels Size",
-      "default": 16
-    },
-    {
-      "type": "header",
-      "content": "Mobile Configuration"
-    },
-    {
-      "type": "range",
-      "id": "heading_size_mobile",
-      "min": 16, "max": 60, "step": 1, "unit": "px",
-      "label": "Heading Size (Mobile)",
-      "default": 28
-    },
-    {
-      "type": "range",
-      "id": "heading_max_mobile",
-      "min": 10, "max": 100, "step": 5, "unit": "%",
-      "label": "Heading Max Width (Mobile)",
-      "default": 100
-    },
-    {
-      "type": "range",
-      "id": "text_size_mobile",
-      "min": 10, "max": 24, "step": 1, "unit": "px",
-      "label": "Description & Link Size (Mobile)",
-      "default": 14
-    },
-    {
-      "type": "range",
-      "id": "text_max_mobile",
-      "min": 10, "max": 100, "step": 5, "unit": "%",
-      "label": "Description Max Width (Mobile)",
-      "default": 100
-    },
-    {
-      "type": "range",
-      "id": "img_title_size_mobile",
-      "min": 12, "max": 40, "step": 1, "unit": "px",
-      "label": "Images Title Size (Mobile)",
-      "default": 18
-    },
-    {
-      "type": "range",
-      "id": "img_title_max_mobile",
-      "min": 10, "max": 100, "step": 5, "unit": "%",
-      "label": "Images Title Max Width (Mobile)",
-      "default": 100
-    },
-    {
-      "type": "range",
-      "id": "label_size_mobile",
-      "min": 10, "max": 24, "step": 1, "unit": "px",
-      "label": "Image Labels Size (Mobile)",
-      "default": 14
-    },
-    {
-      "type": "header",
-      "content": "Paddings"
-    },
-    {
-      "type": "range",
-      "id": "padding_top_desktop",
-      "min": 0, "max": 120, "step": 5, "unit": "px",
-      "label": "Padding Top (Desktop)",
-      "default": 80
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom_desktop",
-      "min": 0, "max": 120, "step": 5, "unit": "px",
-      "label": "Padding Bottom (Desktop)",
-      "default": 80
+      "id": "image_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 26,
+      "step": 1,
+      "unit": "px",
+      "default": 10
     },
     {
       "type": "range",
       "id": "padding_top_mobile",
-      "min": 0, "max": 100, "step": 5, "unit": "px",
-      "label": "Padding Top (Mobile)",
-      "default": 40
+      "label": "Top padding mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 28
     },
     {
       "type": "range",
       "id": "padding_bottom_mobile",
-      "min": 0, "max": 100, "step": 5, "unit": "px",
-      "label": "Padding Bottom (Mobile)",
-      "default": 40
+      "label": "Bottom padding mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "label": "Top padding desktop",
+      "min": 0,
+      "max": 220,
+      "step": 4,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "label": "Bottom padding desktop",
+      "min": 0,
+      "max": 220,
+      "step": 4,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_weight",
+      "label": "Title weight",
+      "min": 300,
+      "max": 900,
+      "step": 100,
+      "default": 700
+    },
+    {
+      "type": "range",
+      "id": "subtitle_weight",
+      "label": "Subtitle weight",
+      "min": 300,
+      "max": 900,
+      "step": 100,
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "body_weight",
+      "label": "Body weight",
+      "min": 300,
+      "max": 900,
+      "step": 100,
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "body_strong_weight",
+      "label": "Body strong weight",
+      "min": 500,
+      "max": 900,
+      "step": 100,
+      "default": 700
+    },
+    {
+      "type": "range",
+      "id": "body_secondary_weight",
+      "label": "Body second paragraph weight",
+      "min": 500,
+      "max": 900,
+      "step": 100,
+      "default": 700
+    },
+    {
+      "type": "range",
+      "id": "tooth_label_weight",
+      "label": "Tooth label weight",
+      "min": 300,
+      "max": 900,
+      "step": 100,
+      "default": 700
+    },
+    {
+      "type": "range",
+      "id": "badge_weight",
+      "label": "Badge weight",
+      "min": 300,
+      "max": 900,
+      "step": 100,
+      "default": 700
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Title size mobile",
+      "min": 18,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 34
+    },
+    {
+      "type": "range",
+      "id": "title_size_tablet",
+      "label": "Title size tablet",
+      "min": 20,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "title_size_desktop",
+      "label": "Title size desktop",
+      "min": 24,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 54
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size_mobile",
+      "label": "Subtitle size mobile",
+      "min": 12,
+      "max": 26,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size_tablet",
+      "label": "Subtitle size tablet",
+      "min": 14,
+      "max": 38,
+      "step": 1,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size_desktop",
+      "label": "Subtitle size desktop",
+      "min": 14,
+      "max": 34,
+      "step": 1,
+      "unit": "px",
+      "default": 34
+    },
+    {
+      "type": "range",
+      "id": "subtitle_max_width_mobile",
+      "label": "Subtitle max width mobile",
+      "min": 120,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "subtitle_max_width_desktop",
+      "label": "Subtitle max width desktop",
+      "min": 180,
+      "max": 900,
+      "step": 10,
+      "unit": "px",
+      "default": 520
+    },
+    {
+      "type": "range",
+      "id": "body_size_mobile",
+      "label": "Body size mobile",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "body_size_tablet",
+      "label": "Body size tablet",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "body_size_desktop",
+      "label": "Body size desktop",
+      "min": 13,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "body_secondary_size_mobile",
+      "label": "Body second paragraph size mobile",
+      "min": 10,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "body_secondary_size_tablet",
+      "label": "Body second paragraph size tablet",
+      "min": 11,
+      "max": 26,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "body_secondary_size_desktop",
+      "label": "Body second paragraph size desktop",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "body_primary_max_width_mobile",
+      "label": "Body paragraph 1 max width mobile",
+      "min": 160,
+      "max": 700,
+      "step": 10,
+      "unit": "px",
+      "default": 560
+    },
+    {
+      "type": "range",
+      "id": "body_primary_max_width_desktop",
+      "label": "Body paragraph 1 max width desktop",
+      "min": 220,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "default": 720
+    },
+    {
+      "type": "range",
+      "id": "body_secondary_max_width_mobile",
+      "label": "Body paragraph 2 max width mobile",
+      "min": 140,
+      "max": 700,
+      "step": 10,
+      "unit": "px",
+      "default": 540
+    },
+    {
+      "type": "range",
+      "id": "body_secondary_max_width_desktop",
+      "label": "Body paragraph 2 max width desktop",
+      "min": 200,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "default": 700
+    },
+    {
+      "type": "range",
+      "id": "tooth_label_size_mobile",
+      "label": "Tooth label size mobile",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "tooth_label_size_tablet",
+      "label": "Tooth label size tablet",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "tooth_label_size_desktop",
+      "label": "Tooth label size desktop",
+      "min": 12,
+      "max": 34,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "tooth_label_max_width_mobile",
+      "label": "Tooth label max width mobile",
+      "min": 60,
+      "max": 240,
+      "step": 5,
+      "unit": "px",
+      "default": 130
+    },
+    {
+      "type": "range",
+      "id": "tooth_label_max_width_desktop",
+      "label": "Tooth label max width desktop",
+      "min": 80,
+      "max": 320,
+      "step": 5,
+      "unit": "px",
+      "default": 170
+    },
+    {
+      "type": "range",
+      "id": "badge_size_mobile",
+      "label": "Badge size mobile",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "badge_size_tablet",
+      "label": "Badge size tablet",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "badge_size_desktop",
+      "label": "Badge size desktop",
+      "min": 12,
+      "max": 34,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "badge_max_width_mobile",
+      "label": "Badge max width mobile",
+      "min": 100,
+      "max": 360,
+      "step": 10,
+      "unit": "px",
+      "default": 240
+    },
+    {
+      "type": "range",
+      "id": "badge_max_width_desktop",
+      "label": "Badge max width desktop",
+      "min": 140,
+      "max": 520,
+      "step": 10,
+      "unit": "px",
+      "default": 320
+    },
+    {
+      "type": "header",
+      "content": "Image heights"
+    },
+    {
+      "type": "range",
+      "id": "image_height_mobile",
+      "label": "Image height mobile",
+      "min": 140,
+      "max": 520,
+      "step": 10,
+      "unit": "px",
+      "default": 280
+    },
+    {
+      "type": "range",
+      "id": "image_height_tablet",
+      "label": "Image height tablet",
+      "min": 160,
+      "max": 640,
+      "step": 10,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "image_height_desktop",
+      "label": "Image height desktop",
+      "min": 180,
+      "max": 760,
+      "step": 10,
+      "unit": "px",
+      "default": 500
     }
   ],
   "presets": [
     {
-      "name": "C Mineral Uptake"
+      "name": "C - Dr.Jen Premium NHAp"
     }
   ]
 }
