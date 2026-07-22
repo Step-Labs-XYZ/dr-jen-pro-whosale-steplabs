@@ -97,9 +97,8 @@
         "price_stock_4Qk3Yf": {
           "type": "price_stock",
           "settings": {
-            "unit_label": "$16.80/tube",
-            "unit_label_12_pack": "",
-            "unit_label_24_pack": "",
+            "unit_label": "",
+            "unit_label_map": "12 pack: $17.33/tube\n24 pack: $16.80/tube",
             "retail_text": "Retail $28.00/unit"
           }
         },
@@ -255,8 +254,7 @@
           "settings": {
             "option_name": "Quantity",
             "unit_label": "",
-            "unit_label_12_pack": "$17.33/tube",
-            "unit_label_24_pack": "$16.80/tube",
+            "unit_label_map": "12 pack: $17.33/tube\n24 pack: $16.80/tube",
             "badge_1": "$17.33/tube",
             "badge_2": "$16.80/tube",
             "badge_3": "",
