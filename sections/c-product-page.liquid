@@ -1918,13 +1918,17 @@ shopify-accelerated-checkout {
                 {%- assign _pp = _price_opt_val | split: ' pack' | first | split: '(' | last | strip -%}
                 {%- assign _uc = _pp | plus: 0 -%}
                 {%- assign _initial_unit_label = block.settings.unit_label -%}
-                {%- if _price_opt_val contains '12 pack' and block.settings.unit_label_12_pack != blank -%}
-                  {%- assign _initial_unit_label = block.settings.unit_label_12_pack -%}
-                {%- elsif _price_opt_val contains '24 pack' and block.settings.unit_label_24_pack != blank -%}
-                  {%- assign _initial_unit_label = block.settings.unit_label_24_pack -%}
-                {%- endif -%}
+                {%- assign _unit_label_map_lines = block.settings.unit_label_map | newline_to_br | split: '<br />' -%}
+                {%- for _map_line in _unit_label_map_lines -%}
+                  {%- assign _map_parts = _map_line | split: ':' -%}
+                  {%- assign _map_key = _map_parts | first | strip -%}
+                  {%- if _map_key == _price_opt_val and _map_parts.size > 1 -%}
+                    {%- assign _initial_unit_label = _map_parts | shift | join: ':' | strip -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
                 <div class="c-prod__price-wrap">
-                  <div class="c-prod__price js-price-{{ section.id }}" data-unit-label="{{ block.settings.unit_label | escape }}" data-unit-label-12-pack="{{ block.settings.unit_label_12_pack | escape }}" data-unit-label-24-pack="{{ block.settings.unit_label_24_pack | escape }}" data-price-opt-index="{{ _price_opt_index }}">
+                  <div class="c-prod__price js-price-{{ section.id }}" data-unit-label="{{ block.settings.unit_label | escape }}" data-unit-label-map="{{ block.settings.unit_label_map | escape }}" data-price-opt-index="{{ _price_opt_index }}">
                     {%- unless product.has_only_default_variant -%}
                       <span class="c-prod__variant-title js-variant-title-{{ section.id }}">{{ _price_opt_val }}: </span>
                     {%- endunless -%}
@@ -2468,13 +2472,17 @@ shopify-accelerated-checkout {
                           >{{ block.settings.badge_3 }}</div>
                         {% endif %}
                         {%- assign _card_unit_label = block.settings.unit_label -%}
-                        {%- if value contains '12 pack' and block.settings.unit_label_12_pack != blank -%}
-                          {%- assign _card_unit_label = block.settings.unit_label_12_pack -%}
-                        {%- elsif value contains '24 pack' and block.settings.unit_label_24_pack != blank -%}
-                          {%- assign _card_unit_label = block.settings.unit_label_24_pack -%}
-                        {%- endif -%}
+                        {%- assign _card_unit_label_map_lines = block.settings.unit_label_map | newline_to_br | split: '<br />' -%}
+                        {%- for _card_map_line in _card_unit_label_map_lines -%}
+                          {%- assign _card_map_parts = _card_map_line | split: ':' -%}
+                          {%- assign _card_map_key = _card_map_parts | first | strip -%}
+                          {%- if _card_map_key == value and _card_map_parts.size > 1 -%}
+                            {%- assign _card_unit_label = _card_map_parts | shift | join: ':' | strip -%}
+                            {%- break -%}
+                          {%- endif -%}
+                        {%- endfor -%}
                         {%- if _card_variant and _card_unit_label != blank -%}
-                          <span class="c-prod__card-per-unit js-card-per-unit-{{ section.id }}" data-card-value="{{ value | escape }}" data-cards-opt-pos="{{ cards_option.position }}" data-unit-count="{{ _card_uc }}" data-unit-label="{{ block.settings.unit_label | escape }}" data-unit-label-12-pack="{{ block.settings.unit_label_12_pack | escape }}" data-unit-label-24-pack="{{ block.settings.unit_label_24_pack | escape }}">{{ _card_unit_label }}</span>
+                          <span class="c-prod__card-per-unit js-card-per-unit-{{ section.id }}" data-card-value="{{ value | escape }}" data-cards-opt-pos="{{ cards_option.position }}" data-unit-count="{{ _card_uc }}" data-unit-label="{{ block.settings.unit_label | escape }}" data-unit-label-map="{{ block.settings.unit_label_map | escape }}">{{ _card_unit_label }}</span>
                         {%- endif -%}
                         <img src="{{ card_img | image_url: width: 150 }}" class="c-prod__card-img" alt="{{ value }}" data-default-src="{{ card_img | image_url: width: 150 }}">
                         <span class="c-prod__card-name">{{ value }}</span>
@@ -3117,18 +3125,22 @@ const refreshCartUI = (response) => {
     });
 
     // 2. Lógica de Variantes
-    function extractPackCount(optionValue) {
-      if (!optionValue) return 0;
-      const packMatch = optionValue.match(/(\d+)\s*(?:pack|case|bundle)\b/i);
-      if (packMatch) return parseInt(packMatch[1], 10) || 0;
-      return 0;
-    }
-
     function resolveUnitLabel(sourceEl, optionValue) {
       if (!sourceEl) return '';
-      const packCount = extractPackCount(optionValue);
-      if (packCount === 12) return sourceEl.dataset.unitLabel12Pack || sourceEl.dataset.unitLabel || '';
-      if (packCount === 24) return sourceEl.dataset.unitLabel24Pack || sourceEl.dataset.unitLabel || '';
+      const normalizedOptionValue = String(optionValue || '').trim().toLowerCase();
+      const unitLabelMap = String(sourceEl.dataset.unitLabelMap || '');
+      if (unitLabelMap.trim()) {
+        const lines = unitLabelMap.split(/\r?\n/);
+        for (const line of lines) {
+          const separatorIndex = line.indexOf(':');
+          if (separatorIndex === -1) continue;
+          const key = line.slice(0, separatorIndex).trim().toLowerCase();
+          const value = line.slice(separatorIndex + 1).trim();
+          if (key && key === normalizedOptionValue) {
+            return value;
+          }
+        }
+      }
       return sourceEl.dataset.unitLabel || '';
     }
 
@@ -3464,8 +3476,7 @@ const refreshCartUI = (response) => {
       "type": "price_stock", "name": "Precio y Stock", "limit": 1,
       "settings": [
         { "type": "text", "id": "unit_label", "label": "Etiqueta por unidad", "default": "tube" },
-        { "type": "text", "id": "unit_label_12_pack", "label": "Etiqueta por unidad - 12 pack", "placeholder": "Ej: $17.33/tube" },
-        { "type": "text", "id": "unit_label_24_pack", "label": "Etiqueta por unidad - 24 pack", "placeholder": "Ej: $15.99/tube" },
+        { "type": "textarea", "id": "unit_label_map", "label": "Etiquetas por variante", "info": "Una por línea con formato exacto: Nombre variante: valor. Ejemplo: 12 pack: $17.33/tube", "placeholder": "12 pack: $17.33/tube\n24 pack: $15.99/tube" },
         { "type": "text", "id": "retail_text", "label": "Texto Retail (debajo del precio)", "placeholder": "Ej: Retail $38.00/unit" }
       ]
     },
@@ -4009,8 +4020,7 @@ const refreshCartUI = (response) => {
       "settings": [
         { "type": "text", "id": "option_name", "label": "Nombre de la Opción", "info": "Ej: Quantity, Size.", "default": "Quantity" },
         { "type": "text", "id": "unit_label", "label": "Etiqueta por unidad", "default": "tube" },
-        { "type": "text", "id": "unit_label_12_pack", "label": "Etiqueta por unidad - 12 pack", "placeholder": "Ej: $17.33/tube" },
-        { "type": "text", "id": "unit_label_24_pack", "label": "Etiqueta por unidad - 24 pack", "placeholder": "Ej: $15.99/tube" },
+        { "type": "textarea", "id": "unit_label_map", "label": "Etiquetas por variante", "info": "Una por línea con formato exacto: Nombre variante: valor. Ejemplo: 12 pack: $17.33/tube", "placeholder": "12 pack: $17.33/tube\n24 pack: $15.99/tube" },
         { "type": "text", "id": "badge_1", "label": "Etiqueta Tarjeta 1", "default": "Save 12%" },
         { "type": "text", "id": "badge_2", "label": "Etiqueta Tarjeta 2", "default": "Save 12%" },
         { "type": "text", "id": "badge_3", "label": "Etiqueta Tarjeta 3", "default": "Save 15% + Free Toothbrush" },
