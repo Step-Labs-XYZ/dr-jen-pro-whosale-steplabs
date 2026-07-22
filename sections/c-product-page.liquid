@@ -1922,9 +1922,11 @@ shopify-accelerated-checkout {
                 {%- for _map_line in _unit_label_map_lines -%}
                   {%- assign _map_parts = _map_line | split: ':' -%}
                   {%- assign _map_key = _map_parts | first | strip -%}
-                  {%- if _map_key == _price_opt_val and _map_parts.size > 1 -%}
-                    {%- assign _initial_unit_label = _map_parts | shift | join: ':' | strip -%}
-                    {%- break -%}
+                  {%- if _map_parts.size > 1 -%}
+                    {%- if _map_key == _price_opt_val or _price_opt_val contains _map_key or _map_key contains _price_opt_val -%}
+                      {%- assign _initial_unit_label = _map_parts | shift | join: ':' | strip -%}
+                      {%- break -%}
+                    {%- endif -%}
                   {%- endif -%}
                 {%- endfor -%}
                 <div class="c-prod__price-wrap">
@@ -2483,9 +2485,11 @@ shopify-accelerated-checkout {
                         {%- for _card_map_line in _card_unit_label_map_lines -%}
                           {%- assign _card_map_parts = _card_map_line | split: ':' -%}
                           {%- assign _card_map_key = _card_map_parts | first | strip -%}
-                          {%- if _card_map_key == value and _card_map_parts.size > 1 -%}
-                            {%- assign _card_unit_label = _card_map_parts | shift | join: ':' | strip -%}
-                            {%- break -%}
+                          {%- if _card_map_parts.size > 1 -%}
+                            {%- if _card_map_key == value or value contains _card_map_key or _card_map_key contains value -%}
+                              {%- assign _card_unit_label = _card_map_parts | shift | join: ':' | strip -%}
+                              {%- break -%}
+                            {%- endif -%}
                           {%- endif -%}
                         {%- endfor -%}
                         {%- if _card_variant and _card_unit_label != blank -%}
@@ -3132,9 +3136,15 @@ const refreshCartUI = (response) => {
     });
 
     // 2. Lógica de Variantes
+    function extractPackCount(value) {
+      const match = String(value || '').match(/(\d+)\s*pack/i);
+      return match ? match[1] : '';
+    }
+
     function resolveUnitLabel(sourceEl, optionValue) {
       if (!sourceEl) return '';
       const normalizedOptionValue = String(optionValue || '').trim().toLowerCase();
+      const normalizedPackCount = extractPackCount(optionValue);
       const unitLabelMap = String(sourceEl.dataset.unitLabelMap || '');
       if (unitLabelMap.trim()) {
         const lines = unitLabelMap.split(/\r?\n/);
@@ -3143,7 +3153,15 @@ const refreshCartUI = (response) => {
           if (separatorIndex === -1) continue;
           const key = line.slice(0, separatorIndex).trim().toLowerCase();
           const value = line.slice(separatorIndex + 1).trim();
-          if (key && key === normalizedOptionValue) {
+          const keyPackCount = extractPackCount(key);
+          if (
+            key && (
+              key === normalizedOptionValue ||
+              normalizedOptionValue.includes(key) ||
+              key.includes(normalizedOptionValue) ||
+              (normalizedPackCount && keyPackCount && normalizedPackCount === keyPackCount)
+            )
+          ) {
             return value;
           }
         }

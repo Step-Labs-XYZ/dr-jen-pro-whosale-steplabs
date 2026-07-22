@@ -97,7 +97,7 @@
         "price_stock_4Qk3Yf": {
           "type": "price_stock",
           "settings": {
-            "unit_label": "",
+            "unit_label": "$16.80/tube",
             "unit_label_map": "12 pack: $17.33/tube\n24 pack: $16.80/tube",
             "retail_text": "Retail $28.00/unit"
           }
