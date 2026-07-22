@@ -562,29 +562,29 @@
         "row_iHAEtn": {
           "type": "row",
           "settings": {
-            "brand_text": "Independent Dental Family-Owned Brand",
-            "generic_text": "Venture Capitalist and Investment Banker Formulas"
+            "brand_text": "Advanced Peptides Technology",
+            "generic_text": "Generic, One Size Fits All Formulations"
           }
         },
         "row_bFGbW8": {
           "type": "row",
           "settings": {
-            "brand_text": "Formulated for Enamel Health",
+            "brand_text": "Premium Grade Nano-Hydroxyapatite",
             "generic_text": "Mass Produced for Maximum Profit"
           }
         },
         "row_ktbGKk": {
           "type": "row",
           "settings": {
-            "brand_text": "Backed by Science",
-            "generic_text": "Driven by Marketing and Social Media Trends"
+            "brand_text": "Naturally Derived nHAp from Eggshell",
+            "generic_text": "Large nHAp Particles with More Impurities"
           }
         },
         "row_DWXpAz": {
           "type": "row",
           "settings": {
-            "brand_text": "Customized Formulas for Individual Needs",
-            "generic_text": "Generic, One Size Fits All Formulations"
+            "brand_text": "Supports Enhanced Remineralization",
+            "generic_text": "Less Effective Remineralization"
           }
         }
       },
