@@ -2452,6 +2452,13 @@ shopify-accelerated-checkout {
                              {% if cards_option.selected_value == value %}checked{% endif %}>
                       
                       <label class="c-prod__card-label" for="card-{{ section.id }}-{{ cards_option.position }}-{{ forloop.index }}">
+                        {% if forloop.index == 1 and block.settings.badge_1 != blank %}
+                          <div
+                            class="c-prod__card-badge"
+                            data-badge-default="{{ block.settings.badge_1 | escape }}"
+                            data-badge-tpl-default="{{ block.settings.badge_1 | escape }}"
+                          >{{ block.settings.badge_1 }}</div>
+                        {% endif %}
                         {% if forloop.index == 2 and block.settings.badge_2 != blank %}
                           <div
                             class="c-prod__card-badge"
