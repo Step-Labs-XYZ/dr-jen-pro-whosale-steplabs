@@ -77,6 +77,111 @@
         "pad_y_mobile": 8
       }
     },
+    "c_product_page_rKyTxE": {
+      "type": "c-product-page",
+      "blocks": {
+        "reviews_fwBPUi": {
+          "type": "reviews",
+          "settings": {}
+        },
+        "title_AUHa6c": {
+          "type": "title",
+          "settings": {
+            "title_source": "secondary",
+            "secondary_title": "Fluoride-Free 10% Premium Nanohydroxyapatite Toothpaste — 12/24 Pack",
+            "secondary_title_line2": ""
+          }
+        },
+        "variant_pills_XcBFbd": {
+          "type": "variant_pills",
+          "settings": {
+            "option_name": "Flavor"
+          }
+        },
+        "price_stock_4Qk3Yf": {
+          "type": "price_stock",
+          "settings": {
+            "unit_label": "$11.75/unit",
+            "unit_label_map": "",
+            "retail_text": "Retail $11.75/unit"
+          }
+        },
+        "description_block_jyEXcG": {
+          "type": "description_block",
+          "settings": {
+            "description": "<p>Breakthrough fluoride-free toothpaste for your patients. Dr. Jen's delivers 10% premium Nanohydroxyapatite with a proprietary essential oil complex, providing clinically proven cavity protection, deep enamel remineralization, and sensitivity relief without fluoride. Cleaner ingredients your patients can trust, and you can confidently recommend.</p>"
+          }
+        },
+        "variant_cards_MBMMJm": {
+          "type": "variant_cards",
+          "settings": {
+            "option_name": "Quantity",
+            "unit_label": "",
+            "unit_label_map": "",
+            "badge_1": "Save 5%",
+            "badge_2": "",
+            "badge_3": "",
+            "badge_2_orange_mango": "",
+            "badge_3_orange_mango": ""
+          }
+        },
+        "recharge_subscriptions_subscription_widget_v2_9hkAJG": {
+          "type": "shopify://apps/recharge-subscriptions/blocks/subscription-widget-v2/371eed76-0b44-4869-9813-730372ea378e",
+          "settings": {}
+        },
+        "custom_liquid_RnzabW": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": ""
+          }
+        },
+        "terms_text_aHf4k3": {
+          "type": "terms_text",
+          "settings": {
+            "text": "<p><em>Value of one-time purchase</em></p>"
+          }
+        },
+        "buy_buttons_UaBk3f": {
+          "type": "buy_buttons",
+          "settings": {
+            "btn_text": "ADD TO CART",
+            "add_to_cart_text": "ADD TO CART →",
+            "out_of_stock_text": "SOLD OUT",
+            "stock_label_text": "Out of stock",
+            "show_add_to_cart": true,
+            "show_dynamic_checkout": true
+          }
+        }
+      },
+      "block_order": [
+        "reviews_fwBPUi",
+        "title_AUHa6c",
+        "variant_pills_XcBFbd",
+        "price_stock_4Qk3Yf",
+        "description_block_jyEXcG",
+        "variant_cards_MBMMJm",
+        "recharge_subscriptions_subscription_widget_v2_9hkAJG",
+        "custom_liquid_RnzabW",
+        "terms_text_aHf4k3",
+        "buy_buttons_UaBk3f"
+      ],
+      "custom_css": [
+        ".button {border-radius: 30px !important;}"
+      ],
+      "name": "C - Main Product",
+      "settings": {
+        "bg_color": "#ffffff",
+        "gallery_bg": "#f6f4ee",
+        "badge_left": "",
+        "badge_right_svg": "shopify://shop_images/Group_48097983_1.png",
+        "badge_right_1": "#1",
+        "badge_right_2": "ONLY NATURALLY DERIVED TOOTHPASTE",
+        "pad_top_desk": 60,
+        "pad_bot_desk": 60,
+        "pad_top_mob": 30,
+        "pad_bot_mob": 30
+      }
+    },
     "c_study_chart_pdp_YVPGxq": {
       "type": "c-study-chart-pdp",
       "blocks": {
@@ -577,6 +682,7 @@
   "order": [
     "main",
     "c_product_topbar_6kFXg6",
+    "c_product_page_rKyTxE",
     "c_study_chart_pdp_YVPGxq",
     "c_dr_jen_difference_yWMcpP",
     "c_fluoride_free_pitch_FwhAWT",
