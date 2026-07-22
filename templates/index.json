@@ -937,6 +937,7 @@
     },
     "c_difference_DTXTAV": {
       "type": "c-difference",
+      "disabled": true,
       "name": "C Difference Section",
       "settings": {
         "bg_color": "#ffffff",
@@ -998,9 +999,9 @@
         "desktop_gap": 22,
         "image_radius": 10,
         "padding_top_mobile": 0,
-        "padding_bottom_mobile": 40,
+        "padding_bottom_mobile": 0,
         "padding_top_desktop": 80,
-        "padding_bottom_desktop": 80,
+        "padding_bottom_desktop": 0,
         "title_weight": 700,
         "subtitle_weight": 500,
         "body_weight": 400,
@@ -1632,7 +1633,6 @@
     "c_badges_bar_fBPXjp",
     "c_products_tab_a6KGHU",
     "1784205230037621d1",
-    "c_dental_professionals_PMkwNn",
     "c_story_comparison_cqffLT",
     "c_difference_DTXTAV",
     "c_mineral_uptake_PbAE9W",
@@ -1640,6 +1640,7 @@
     "c_botanicals_E4WBX3",
     "c_product_carousel_3A3YGx",
     "c_case_study_aPqVyY",
+    "c_dental_professionals_PMkwNn",
     "c_wholesale_policy_HjbeiN",
     "c_product_carousel_P3NCRt",
     "c_learn_cards_3hUxLp"
