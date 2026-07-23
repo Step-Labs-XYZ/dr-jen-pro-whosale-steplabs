@@ -383,6 +383,24 @@
         "pad_bot_desk": 80
       }
     },
+    "1659632928e379313e": {
+      "type": "apps",
+      "blocks": {
+        "tolstoy_ads_image_video_tolstoy_builder_yjG49r": {
+          "type": "shopify://apps/tolstoy-ads-image-video/blocks/tolstoy-builder/06fa8282-42ff-403e-b67c-1936776aed11",
+          "settings": {
+            "custom_code": "<tolstoy-widget data-tolstoy-widget-id=\"01KXNS2W8JVJ69K6HEAWM5HAQN\" data-product-id=\"PRODUCT_ID\" data-tags=\"PRODUCT_TAGS\"></tolstoy-widget>\n<script src=\"https://ai-widgets.gotolstoy.com/8507f226-1a78-4bae-ab97-4b9fbe7d2eee/01KXNS2W8JVJ69K6HEAWM5HAQN/latest/dist/widget.iife.js\" defer></script>"
+          }
+        }
+      },
+      "block_order": [
+        "tolstoy_ads_image_video_tolstoy_builder_yjG49r"
+      ],
+      "settings": {
+        "include_horizontal_margins": true,
+        "include_vertical_margins": true
+      }
+    },
     "c_science_study_ApKyNV": {
       "type": "c-science-study",
       "name": "C - Science Study Pro",
@@ -775,13 +793,6 @@
       "disabled": true,
       "settings": {}
     },
-    "1659632928e379313e": {
-      "type": "apps",
-      "settings": {
-        "include_horizontal_margins": true,
-        "include_vertical_margins": true
-      }
-    },
     "c_premium_nhap_XcyLKw": {
       "type": "c-premium-nhap",
       "blocks": {
@@ -888,13 +899,13 @@
     "c_product_topbar_RNYRDa",
     "c_product_page_rKyTxE",
     "c_badges_bar_v2_hVXVCp",
+    "1659632928e379313e",
     "c_science_study_ApKyNV",
     "c_power_of_peptides_mr9jRU",
     "c_why_ortho_patients_m39DVK",
     "c_comparison_table_custom_jrjaaa",
     "c_blend_science_flavor_CU8Q7F",
     "product-content",
-    "1659632928e379313e",
     "c_premium_nhap_XcyLKw",
     "c_faq_EEe7Md"
   ]
