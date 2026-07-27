@@ -80,10 +80,6 @@
     "c_product_page_rKyTxE": {
       "type": "c-product-page",
       "blocks": {
-        "reviews_fwBPUi": {
-          "type": "reviews",
-          "settings": {}
-        },
         "title_AUHa6c": {
           "type": "title",
           "settings": {
@@ -148,7 +144,6 @@
         }
       },
       "block_order": [
-        "reviews_fwBPUi",
         "title_AUHa6c",
         "variant_pills_XcBFbd",
         "price_stock_4Qk3Yf",
