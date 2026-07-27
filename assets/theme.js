@@ -4997,7 +4997,10 @@
   // js/custom-element/section/product/product-form.js
   var ProductForm = class extends HTMLFormElement {
     connectedCallback() {
-      this.id.disabled = false;
+      const variantInput = this.querySelector('[name="id"]');
+      if (variantInput) {
+        variantInput.disabled = false;
+      }
       if (window.themeVariables.settings.cartType === "page" || window.themeVariables.settings.pageType === "cart") {
         return;
       }
