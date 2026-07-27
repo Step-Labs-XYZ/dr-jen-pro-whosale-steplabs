@@ -5457,7 +5457,11 @@
     }
     selectVariant(id) {
       var _a;
-      if (!this._isVariantSelectable(this._getVariantById(id))) {
+      const variant = this._getVariantById(id);
+      if (!variant) {
+        return;
+      }
+      if (!this._isVariantSelectable(variant)) {
         id = this._getFirstMatchingAvailableOrSelectableVariant()["id"];
       }
       if (((_a = this.selectedVariant) == null ? void 0 : _a.id) === id) {
