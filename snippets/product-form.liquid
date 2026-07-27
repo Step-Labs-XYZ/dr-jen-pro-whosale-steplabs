@@ -898,19 +898,3 @@ document.getElementById('select_pack').dispatchEvent(new Event('click'));
 });
 
 </script> -->
-<script>
-  jQuery(document).ready(function(){
-      jQuery(document).on('click','.block-swatch .block-swatch__item',function(){
-          var variant_id = jQuery(this).data('variant_id');
-          var idInput = jQuery('input[name="id"]');
-          idInput.val(variant_id).trigger('change');
-          jQuery('input[name="product-id"]').val(variant_id);
-
-          if (variant_id) {
-            var url = new URL(window.location.href);
-            url.searchParams.set('variant', variant_id);
-            window.history.replaceState({}, '', url.toString());
-          }
-      });
-  })
-</script>
