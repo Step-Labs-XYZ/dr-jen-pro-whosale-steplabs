@@ -5461,9 +5461,6 @@
       if (!variant) {
         return;
       }
-      if (!this._isVariantSelectable(variant)) {
-        id = this._getFirstMatchingAvailableOrSelectableVariant()["id"];
-      }
       if (((_a = this.selectedVariant) == null ? void 0 : _a.id) === id) {
         return;
       }
