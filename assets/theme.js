@@ -5431,7 +5431,7 @@
   // js/custom-element/section/product/variants.js
   var ProductVariants = class extends CustomHTMLElement {
     async connectedCallback() {
-      this.masterSelector = document.getElementById(this.getAttribute("form-id")).id;
+      this.masterSelector = document.getElementById(this.getAttribute("form-id"));
       this.optionSelectors = Array.from(this.querySelectorAll("[data-selector-type]"));
       if (!this.masterSelector) {
         console.warn(`The variant selector for product with handle ${this.productHandle} is not linked to any product form.`);
