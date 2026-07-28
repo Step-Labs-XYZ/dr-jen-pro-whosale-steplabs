@@ -24,7 +24,7 @@
             "product_image_mobile": "shopify://shop_images/8-hero-mob_1.png",
             "show_rating": false,
             "rating_text": "Rated 4.9 by 360,000+ Happy Customers",
-            "heading": "The Next Evolution of  Nano-Hydroxyapatite Technology <br><p style=\"font-size: 16px; line-height: 1.5; margin: 0;\">  <strong>Dr. Jen just created the first polypeptide nano-hydroxyapatite toothpaste. The most advanced toothpaste in the world that combines Biomimetic Peptides with Premium nHAp that helps with:</strong></p>",
+            "heading": "The Next Evolution of  Nano-Hydroxyapatite Technology   Dr. Jen just created the first polypeptide nano-hydroxyapatite toothpaste. The most advanced toothpaste in the world that combines Biomimetic Peptides with Premium nHAp that helps with:",
             "subtitle": "Dr. Jen just created the first polypeptide nano-hydroxyapatite toothpaste. The most advanced toothpaste in the world that combines Biomimetic Peptides with Premium nHAp that helps with:",
             "content_layout": "bullets",
             "body_richtext": "",
@@ -68,6 +68,7 @@
         },
         "slide_EV7mFC": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "slide_type": "fullbg",
             "box_alignment": "flex-end",
@@ -122,6 +123,7 @@
         },
         "slide_kcytWm": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "slide_type": "card",
             "box_alignment": "flex-end",
@@ -176,6 +178,7 @@
         },
         "slide_BQEq8f": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "slide_type": "card",
             "box_alignment": "flex-end",
@@ -230,6 +233,7 @@
         },
         "slide_Y7CaBK": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "slide_type": "card",
             "box_alignment": "flex-end",
@@ -284,6 +288,7 @@
         },
         "slide_MCFeDc": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "slide_type": "card",
             "box_alignment": "flex-end",
@@ -338,6 +343,7 @@
         },
         "slide_AFtJkB": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "slide_type": "card",
             "box_alignment": "flex-start",
