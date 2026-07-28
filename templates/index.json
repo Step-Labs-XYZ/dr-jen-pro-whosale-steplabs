@@ -410,8 +410,8 @@
       "settings": {
         "height_desktop": 680,
         "height_mobile": 700,
-        "show_arrows": true,
-        "show_dots": true,
+        "show_arrows": false,
+        "show_dots": false,
         "autoplay": false,
         "autoplay_speed": 4
       }
