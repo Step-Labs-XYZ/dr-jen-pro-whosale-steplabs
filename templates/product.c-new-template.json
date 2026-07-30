@@ -91,9 +91,9 @@
         "price_stock_4Qk3Yf": {
           "type": "price_stock",
           "settings": {
-            "unit_label": "$15.00/unit",
+            "unit_label": "",
             "unit_label_map": "",
-            "retail_text": "Retail $26.00/unit"
+            "retail_text": ""
           }
         },
         "variant_cards_MBMMJm": {
