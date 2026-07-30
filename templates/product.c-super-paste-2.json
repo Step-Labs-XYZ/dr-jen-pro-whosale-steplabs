@@ -97,9 +97,9 @@
         "price_stock_4Qk3Yf": {
           "type": "price_stock",
           "settings": {
-            "unit_label": "$13.33/unit",
+            "unit_label": "$15.00/unit",
             "unit_label_map": "",
-            "retail_text": "Retail $22/unit"
+            "retail_text": "Retail $26.00/unit"
           }
         },
         "variant_cards_MBMMJm": {
@@ -108,7 +108,7 @@
             "option_name": "Quantity",
             "unit_label": "",
             "unit_label_map": "",
-            "badge_1": "Save 5%",
+            "badge_1": "",
             "badge_2": "",
             "badge_3": "",
             "badge_2_orange_mango": "",
@@ -161,9 +161,8 @@
         "bg_color": "#ffffff",
         "gallery_bg": "#f6f4ee",
         "badge_left": "",
-        "badge_right_svg": "shopify://shop_images/Group_48097983_1.png",
-        "badge_right_1": "#1",
-        "badge_right_2": "ONLY NATURALLY DERIVED TOOTHPASTE",
+        "badge_right_1": "",
+        "badge_right_2": "",
         "pad_top_desk": 60,
         "pad_bot_desk": 60,
         "pad_top_mob": 30,
