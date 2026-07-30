@@ -88,13 +88,6 @@
             "secondary_title_line2": ""
           }
         },
-        "variant_pills_XcBFbd": {
-          "type": "variant_pills",
-          "disabled": true,
-          "settings": {
-            "option_name": "Flavor"
-          }
-        },
         "price_stock_4Qk3Yf": {
           "type": "price_stock",
           "settings": {
@@ -146,7 +139,6 @@
       },
       "block_order": [
         "title_AUHa6c",
-        "variant_pills_XcBFbd",
         "price_stock_4Qk3Yf",
         "variant_cards_MBMMJm",
         "recharge_subscriptions_subscription_widget_v2_9hkAJG",
