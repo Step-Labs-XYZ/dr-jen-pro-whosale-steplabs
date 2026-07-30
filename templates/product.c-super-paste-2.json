@@ -90,6 +90,7 @@
         },
         "variant_pills_XcBFbd": {
           "type": "variant_pills",
+          "disabled": true,
           "settings": {
             "option_name": "Flavor"
           }
