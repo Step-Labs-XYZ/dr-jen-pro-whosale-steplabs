@@ -448,6 +448,9 @@
                   {%- endif -%}
 
                 {%- elsif layout == 'bullets' -%}
+                  {%- if block.settings.subtitle != blank -%}
+                    <div class="Chero2__subtitle" style="max-width: {{ block.settings.body_max_width | default: 480 }}px;">{{ block.settings.subtitle }}</div>
+                  {%- endif -%}
                   <ul class="Chero2__features">
                     {%- for i in (1..6) -%}
                       {%- assign key = 'bullet_' | append: i -%}
