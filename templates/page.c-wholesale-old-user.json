@@ -11,10 +11,17 @@
   "sections": {
     "main": {
       "type": "register_section",
+      "disabled": true,
+      "settings": {}
+    },
+    "c_old_register_section_7LYUPJ": {
+      "type": "c-old-register_section",
+      "name": "C - Old Register Wholesale",
       "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "c_old_register_section_7LYUPJ"
   ]
 }
