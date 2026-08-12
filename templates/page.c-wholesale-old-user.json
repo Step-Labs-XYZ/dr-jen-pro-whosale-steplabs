@@ -13,14 +13,9 @@
       "type": "register_section",
       "disabled": true,
       "settings": {}
-    },
-    "2da8a253-84ab-4f52-b4a8-09cbe829d533": {
-      "type": "new-register-section",
-      "settings": {}
     }
   },
   "order": [
-    "main",
-    "2da8a253-84ab-4f52-b4a8-09cbe829d533"
+    "main"
   ]
 }
