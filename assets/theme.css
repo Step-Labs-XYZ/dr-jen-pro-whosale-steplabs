@@ -17084,7 +17084,7 @@ nav.breadcrumb.text--xsmall.text--subdued.hidden-phone {
 }
 }
 .globo-form-control .globo-list-control{
-  padding: 0 !important;
+  padding: 1px !important;
 }
 .template-wholesale-page .shopify-block.shopify-app-block, .template-wholesale-register .shopify-block.shopify-app-block{
   display: none;
