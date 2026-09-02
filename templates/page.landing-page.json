@@ -24,10 +24,9 @@
       ],
       "settings": {
         "bg_color": "#e6f5f7",
-        "image": "shopify://shop_images/drjen4.png",
         "sub_headline": "The Next Generation of Oral Care Product",
-        "headline": "Discover why Dr. Jen's Super Paste is 6x More Effective than 5000 ppm Fluoride Toothpaste",
-        "text": "<p>Schedule your free CE event today to learn about the modern science behind Nano Hydroxyapatite as a safe and effective ingredient to help strengthen enamel.</p>",
+        "headline": "Dr. Jen isn't competing. She's in a category of her own.",
+        "text": "<p>Schedule your free CE event today to learn about the science behind Nano Hydroxyapatite as a safe and effective ingredient to help strengthen enamel.</p>",
         "btn_text": "",
         "btn_link": ""
       }
@@ -52,6 +51,7 @@
       "block_order": [
         "item_HNFT9i"
       ],
+      "disabled": true,
       "custom_css": [
         ".image-with-text {margin-top: 50px;}"
       ],
@@ -70,8 +70,53 @@
         "background_color": ""
       }
     },
+    "c_feature_cards_TqeLNj": {
+      "type": "c-feature-cards",
+      "blocks": {
+        "feature_3YBkMe": {
+          "type": "feature",
+          "settings": {
+            "svg_code": "<svg width=\"32\" height=\"32\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z\"></path></svg>",
+            "title": "Proven to Support Healthy Smiles",
+            "description": "Powered by ingredients like Nanohydroxyapatite and xylitol—clinically shown to protect enamel and reduce sensitivity."
+          }
+        },
+        "feature_pnXbB9": {
+          "type": "feature",
+          "settings": {
+            "svg_code": "<svg width=\"32\" height=\"32\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\"></path><polyline points=\"9 12 11 14 15 10\"></polyline></svg>",
+            "title": "Dentist Developed & Approved",
+            "description": "Created by a licensed dentist with decades of experience, trusted by professionals and families alike."
+          }
+        },
+        "feature_BQ6R4k": {
+          "type": "feature",
+          "settings": {
+            "svg_code": "<svg width=\"32\" height=\"32\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z\"></path><polygon points=\"12 6 13.5 9 17 9.5 14.5 12 15.5 15.5 12 14 8.5 15.5 9.5 12 7 9.5 10.5 9 12 6\"></polygon></svg>",
+            "title": "Over 360,000 Cleaner Smiles",
+            "description": "Join the growing community who've made the switch to safer, science-backed oral care."
+          }
+        }
+      },
+      "block_order": [
+        "feature_3YBkMe",
+        "feature_pnXbB9",
+        "feature_BQ6R4k"
+      ],
+      "name": "C - Feature Cards",
+      "settings": {
+        "bg_color": "#ffffff",
+        "card_bg": "#ffffff",
+        "border_color": "#2b62f6",
+        "pad_top_desk": 60,
+        "pad_bot_desk": 60,
+        "pad_top_mob": 40,
+        "pad_bot_mob": 40
+      }
+    },
     "home_imgboxes_ce9YQK": {
       "type": "home-imgboxes",
+      "disabled": true,
       "settings": {
         "image_with_text_image_left": "shopify://shop_images/Group_1484580642_1.png",
         "image_with_text_image_right": "shopify://shop_images/Frame_2.png"
@@ -79,6 +124,7 @@
     },
     "mm_banner_text_bRUixf": {
       "type": "MM-banner-text",
+      "disabled": true,
       "settings": {
         "bg_color": "#ffffff",
         "image": "shopify://shop_images/Group_11_1.png",
@@ -166,6 +212,7 @@
     "main",
     "mm_banner_z38WKE",
     "image_wd_text_VwAHfG",
+    "c_feature_cards_TqeLNj",
     "home_imgboxes_ce9YQK",
     "mm_banner_text_bRUixf",
     "mm_meet_gt3UBz",
