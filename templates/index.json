@@ -866,8 +866,8 @@
         "max_width": 1440,
         "bg_color": "#ffffff",
         "heading_color": "#0f172a",
-        "heading_weight": 700,
-        "heading_size_desktop": 36,
+        "heading_weight": 600,
+        "heading_size_desktop": 40,
         "heading_size_mobile": 26,
         "subheading_color": "#64748b",
         "subheading_weight": 500,
@@ -881,7 +881,6 @@
     },
     "c_comparison_cards_PhpDg8": {
       "type": "c-comparison-cards",
-      "disabled": true,
       "name": "C - Comparison Cards",
       "settings": {
         "mobile_overlap": 45,
