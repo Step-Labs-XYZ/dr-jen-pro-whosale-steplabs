@@ -881,6 +881,7 @@
     },
     "c_comparison_cards_PhpDg8": {
       "type": "c-comparison-cards",
+      "disabled": true,
       "name": "C - Comparison Cards",
       "settings": {
         "mobile_overlap": 45,
