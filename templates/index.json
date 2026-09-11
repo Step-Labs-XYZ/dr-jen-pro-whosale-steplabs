@@ -12,42 +12,6 @@
     "c_hero_section_v2_pQytR8": {
       "type": "c-hero-section-v2",
       "blocks": {
-        "slide_Ap7g3x": {
-          "type": "slide",
-          "settings": {
-            "layout_type": "type_1",
-            "bg_desktop": "shopify://shop_images/Frame_1484580993_3.png",
-            "bg_mobile": "shopify://shop_images/Banner-PDP2-mob3_1.png",
-            "bg_fallback": "#e8f4f8",
-            "tagline_text": "MADE BY A MOTHER AND A DENTIST",
-            "tagline_icon_left": "",
-            "tagline_icon_right": "",
-            "pretitle": "",
-            "title": "What she couldn't find on a shelf, \nshe built herself",
-            "top_description": "",
-            "heading_subtitle": "",
-            "bottom_description": "",
-            "subtitle_a": "",
-            "subtitle_b": "",
-            "subtitle_c": "",
-            "subtitle_d": "",
-            "description": "",
-            "bullet_1_title": "Independent Dental Family-Owned Brand",
-            "bullet_1_desc": "",
-            "bullet_2_title": "Formulated for Healthier Enamel and Oral Microbiome",
-            "bullet_2_desc": "",
-            "bullet_3_title": "Dentist-Developed",
-            "bullet_3_desc": "Cleaner ingredients you can trust",
-            "btn_label": "SHOP NOW",
-            "btn_url": "",
-            "t2_badge_pill_text": "CELEBRATE LABOR DAY",
-            "t2_title": "The Cleaner Way to Floss",
-            "t2_description": "<p>Cleaner ingredients mean a better floss, no synthetics, no microplastics, just avocado oil and silk.</p>",
-            "t2_btn_label": "SHOP NOW",
-            "t2_btn_url": "",
-            "html_code": ""
-          }
-        },
         "slide_yaFUNU": {
           "type": "slide",
           "settings": {
@@ -59,7 +23,7 @@
             "tagline_icon_left": "",
             "tagline_icon_right": "",
             "pretitle": "",
-            "title": "A Mother's Love, Turned Into a Mission",
+            "title": "A Mother's Love, Turned<br> Into a Mission",
             "top_description": "When her daughter fell ill, Dr. Jen couldn’t find a clean nHAp toothpaste following the science so she took matters into her own hands to create Dr Jen Oral care.",
             "heading_subtitle": "Powered by Nature, Rooted in Science",
             "bottom_description": "The #1 Nano Hydroxyapatite Oral Care Brand Trusted by Dental Professionals",
@@ -83,11 +47,47 @@
             "t2_btn_url": "",
             "html_code": ""
           }
+        },
+        "slide_Ap7g3x": {
+          "type": "slide",
+          "settings": {
+            "layout_type": "type_1",
+            "bg_desktop": "shopify://shop_images/Frame_1484580993_3.png",
+            "bg_mobile": "shopify://shop_images/Banner-PDP2-mob3_1.png",
+            "bg_fallback": "#e8f4f8",
+            "tagline_text": "MADE BY A MOTHER AND A DENTIST",
+            "tagline_icon_left": "",
+            "tagline_icon_right": "",
+            "pretitle": "",
+            "title": "What she couldn't find on a shelf,<br> \nshe built herself",
+            "top_description": "",
+            "heading_subtitle": "",
+            "bottom_description": "",
+            "subtitle_a": "",
+            "subtitle_b": "",
+            "subtitle_c": "",
+            "subtitle_d": "",
+            "description": "",
+            "bullet_1_title": "Independent Dental Family-Owned Brand",
+            "bullet_1_desc": "",
+            "bullet_2_title": "Formulated for Healthier Enamel and Oral Microbiome",
+            "bullet_2_desc": "",
+            "bullet_3_title": "#1 nHAp Brand Trusted by Dental Professionals",
+            "bullet_3_desc": "",
+            "btn_label": "SHOP NOW",
+            "btn_url": "shopify://collections/all",
+            "t2_badge_pill_text": "CELEBRATE LABOR DAY",
+            "t2_title": "The Cleaner Way to Floss",
+            "t2_description": "<p>Cleaner ingredients mean a better floss, no synthetics, no microplastics, just avocado oil and silk.</p>",
+            "t2_btn_label": "SHOP NOW",
+            "t2_btn_url": "",
+            "html_code": ""
+          }
         }
       },
       "block_order": [
-        "slide_Ap7g3x",
-        "slide_yaFUNU"
+        "slide_yaFUNU",
+        "slide_Ap7g3x"
       ],
       "name": "CTA Hero Slider",
       "settings": {
