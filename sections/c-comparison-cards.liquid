@@ -11,6 +11,18 @@
 
 <div id="c-comparison-{{ section_id }}" class="c-comparison-section">
   <div class="c-comparison__container">
+    
+    {%- if s.section_title != blank or s.section_copy != blank -%}
+      <div class="c-comparison__header-content">
+        {%- if s.section_title != blank -%}
+          <h2 class="c-comparison__main-title">{{ s.section_title }}</h2>
+        {%- endif -%}
+        {%- if s.section_copy != blank -%}
+          <div class="c-comparison__main-copy">{{ s.section_copy }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
     <div class="c-comparison__wrapper">
       
       <!-- TARJETA 1: COMMODITY (IZQUIERDA) -->
@@ -165,6 +177,30 @@
     box-sizing: border-box;
   }
 
+  /* Estilos del encabezado principal de la sección */
+  #c-comparison-{{ section_id }} .c-comparison__header-content {
+    text-align: {{ s.section_header_alignment }};
+    margin-bottom: {{ s.section_header_margin_bottom }}px;
+  }
+
+  #c-comparison-{{ section_id }} .c-comparison__main-title {
+    font-family: 'Raleway', sans-serif;
+    margin: 0 0 12px 0;
+    color: {{ s.section_title_color }};
+    font-weight: 700;
+    font-size: {{ s.section_title_size_desktop }}px;
+    line-height: 1.2;
+  }
+
+  #c-comparison-{{ section_id }} .c-comparison__main-copy {
+    font-family: 'Raleway', sans-serif;
+    margin: 0;
+    color: {{ s.section_copy_color }};
+    font-weight: 400;
+    font-size: {{ s.section_copy_size_desktop }}px;
+    line-height: 1.5;
+  }
+
   #c-comparison-{{ section_id }} .c-comparison__wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -317,6 +353,18 @@
       padding-right: 16px;
     }
 
+    #c-comparison-{{ section_id }} .c-comparison__header-content {
+      text-align: {{ s.section_header_alignment_mobile }};
+    }
+
+    #c-comparison-{{ section_id }} .c-comparison__main-title {
+      font-size: {{ s.section_title_size_mobile }}px;
+    }
+
+    #c-comparison-{{ section_id }} .c-comparison__main-copy {
+      font-size: {{ s.section_copy_size_mobile }}px;
+    }
+
     #c-comparison-{{ section_id }} .c-comparison__wrapper {
       grid-template-columns: 1fr 1fr;
       gap: 0;
@@ -382,6 +430,58 @@
   "tag": "section",
   "class": "c-comparison-cards-section",
   "settings": [
+    { "type": "header", "content": "Título y Copy de la Sección" },
+    { 
+      "type": "text", 
+      "id": "section_title", 
+      "label": "Título de la Sección", 
+      "default": "The Difference is Clear" 
+    },
+    { 
+      "type": "textarea", 
+      "id": "section_copy", 
+      "label": "Copy / Descripción de la Sección", 
+      "default": "Compare standard nano-hydroxyapatite with Dr. Jen's advanced formulation." 
+    },
+    {
+      "type": "select",
+      "id": "section_header_alignment",
+      "label": "Alineación del Encabezado (Desktop)",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right", "label": "Derecha" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "section_header_alignment_mobile",
+      "label": "Alineación del Encabezado (Mobile)",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right", "label": "Derecha" }
+      ],
+      "default": "left"
+    },
+    { 
+      "type": "range", 
+      "id": "section_header_margin_bottom", 
+      "label": "Espacio debajo del Encabezado", 
+      "min": 10, 
+      "max": 80, 
+      "step": 2, 
+      "default": 32, 
+      "unit": "px"
+    },
+    { "type": "color", "id": "section_title_color", "label": "Color Título Sección", "default": "#1e293b" },
+    { "type": "color", "id": "section_copy_color", "label": "Color Copy Sección", "default": "#475569" },
+    { "type": "range", "id": "section_title_size_desktop", "label": "Tamaño Título Sección (Desktop)", "min": 20, "max": 48, "step": 1, "default": 32, "unit": "px" },
+    { "type": "range", "id": "section_title_size_mobile", "label": "Tamaño Título Sección (Mobile)", "min": 16, "max": 32, "step": 1, "default": 24, "unit": "px" },
+    { "type": "range", "id": "section_copy_size_desktop", "label": "Tamaño Copy Sección (Desktop)", "min": 14, "max": 24, "step": 1, "default": 16, "unit": "px" },
+    { "type": "range", "id": "section_copy_size_mobile", "label": "Tamaño Copy Sección (Mobile)", "min": 12, "max": 18, "step": 1, "default": 14, "unit": "px" },
+
     { "type": "header", "content": "Solapamiento Mobile (Superposición)" },
     { 
       "type": "range", 
