@@ -884,7 +884,7 @@
       "name": "C - Comparison Cards",
       "settings": {
         "mobile_overlap": 45,
-        "card1_title": "Commodity nano-hydroxyapatite",
+        "card1_title": "Commodity <br>nano-hydroxyapatite",
         "card1_header_bg": "#C05C4D",
         "card1_body_bg": "#F7F7F7",
         "card1_image": "shopify://shop_images/image_7.png",
@@ -897,7 +897,7 @@
         "card1_item3_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewbox=\"0 0 32 32\" fill=\"none\">\n  <path d=\"M20 12L12 20\" stroke=\"#D04C4C\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n  <path d=\"M12 12L20 20\" stroke=\"#D04C4C\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n  <path d=\"M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z\" stroke=\"#D04C4C\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n</svg>",
         "card1_item3_text": "Rough, chipped surfaces, carries leftovers from how it was made",
         "card1_item3_bold": false,
-        "card2_title": "Dr. Jen’s premium nano-hydroxyapatite",
+        "card2_title": "Dr. Jen’s <br>premium nano-hydroxyapatite",
         "card2_header_bg": "#35BAA4",
         "card2_body_bg": "#FFFFFF",
         "card2_image": "shopify://shop_images/image_8.png",
