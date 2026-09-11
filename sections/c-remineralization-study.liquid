@@ -1,0 +1,402 @@
+{% comment %}
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  C - In Vitro Enamel Remineralization Study Section          ║
+  ║  Columna Izquierda: Título, Subtítulo e Imagen Infográfica   ║
+  ║  Columna Derecha: Imagen Microscópica + Tarjeta Flotante     ║
+  ╚══════════════════════════════════════════════════════════════╝
+{% endcomment %}
+
+{%- assign section_id = section.id -%}
+{%- assign s = section.settings -%}
+
+<div id="c-study-section-{{ section_id }}" class="c-remineralization-study">
+  <div class="c-study-section__container">
+    
+    <!-- Columna Izquierda: Título, Subtítulo e Imagen Completa del Estudio -->
+    <div class="c-study-section__left">
+      {%- if s.heading != blank -%}
+        <h2 class="c-study-section__heading">{{ s.heading }}</h2>
+      {%- endif -%}
+
+      {%- if s.subheading != blank -%}
+        <p class="c-study-section__subheading">{{ s.subheading }}</p>
+      {%- endif -%}
+
+      <div class="c-study-section__chart-wrapper">
+        {%- if s.chart_image != blank -%}
+          {%- assign chart_mobile = s.chart_image_mobile | default: s.chart_image -%}
+          <picture>
+            <source media="(max-width: 749px)" srcset="{{ chart_mobile | image_url: width: 800 }}">
+            {{ s.chart_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'c-study-section__chart-img', alt: s.heading }}
+          </picture>
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'c-study-section__placeholder-chart' }}
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- Columna Derecha: Fondo Microscópico con Box Card Flotante -->
+    <div class="c-study-section__right">
+      <div class="c-study-section__media-card">
+        {%- if s.bg_image != blank -%}
+          {%- assign bg_mobile = s.bg_image_mobile | default: s.bg_image -%}
+          <picture>
+            <source media="(max-width: 749px)" srcset="{{ bg_mobile | image_url: width: 800 }}">
+            {{ s.bg_image | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'c-study-section__bg-img', alt: s.card_title }}
+          </picture>
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'c-study-section__placeholder-bg' }}
+        {%- endif -%}
+
+        <!-- Card Flotante (Diseño Cápsula) -->
+        <div class="c-study-section__float-card">
+          {%- if s.card_image != blank -%}
+            <div class="c-study-section__card-thumb">
+              <img src="{{ s.card_image | image_url: width: 300 }}" alt="{{ s.card_title }}" loading="lazy">
+            </div>
+          {%- endif -%}
+          
+          <div class="c-study-section__card-info">
+            {%- if s.card_title != blank -%}
+              <h4 class="c-study-section__card-title">{{ s.card_title }}</h4>
+            {%- endif -%}
+            {%- if s.card_text != blank -%}
+              <p class="c-study-section__card-text">{{ s.card_text }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  #c-study-section-{{ section_id }} {
+    background-color: {{ s.bg_color }};
+    padding-top: {{ s.padding_top_desktop }}px;
+    padding-bottom: {{ s.padding_bottom_desktop }}px;
+    font-family: 'Raleway', sans-serif;
+  }
+
+  #c-study-section-{{ section_id }} .c-study-section__container {
+    max-width: {{ s.max_width }}px;
+    margin: 0 auto;
+    padding-left: 32px;
+    padding-right: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  /* --- Columna Izquierda --- */
+  #c-study-section-{{ section_id }} .c-study-section__left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #c-study-section-{{ section_id }} .c-study-section__heading {
+    font-family: 'Raleway', sans-serif;
+    font-size: {{ s.heading_size_desktop }}px;
+    font-weight: {{ s.heading_weight }};
+    line-height: 1.15;
+    color: {{ s.heading_color }};
+    margin: 0 0 12px 0;
+  }
+
+  #c-study-section-{{ section_id }} .c-study-section__subheading {
+    font-family: 'Raleway', sans-serif;
+    font-size: {{ s.subheading_size_desktop }}px;
+    font-weight: {{ s.subheading_weight }};
+    color: {{ s.subheading_color }};
+    margin: 0 0 32px 0;
+    line-height: 1.4;
+  }
+
+  #c-study-section-{{ section_id }} .c-study-section__chart-wrapper {
+    width: 100%;
+  }
+
+  #c-study-section-{{ section_id }} .c-study-section__chart-wrapper picture {
+    display: block;
+    width: 100%;
+  }
+
+  #c-study-section-{{ section_id }} .c-study-section__chart-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  #c-study-section-{{ section_id }} .c-study-section__placeholder-chart {
+    width: 100%;
+    height: 350px;
+    background: #f1f5f9;
+  }
+
+  /* --- Columna Derecha --- */
+  #c-study-section-{{ section_id }} .c-study-section__right {
+    height: 100%;
+    display: flex;
+  }
+
+  #c-study-section-{{ section_id }} .c-study-section__media-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 100%;
+    min-height: 520px;
+    background-color: #f3f3f3;
+  }
+
+  #c-study-section-{{ section_id }} .c-study-section__media-card picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  #c-study-section-{{ section_id }} .c-study-section__bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #c-study-section-{{ section_id }} .c-study-section__placeholder-bg {
+    width: 100%;
+    height: 100%;
+    min-height: 520px;
+    background: #e2e8f0;
+  }
+
+  /* --- Card Flotante (Desktop) --- */
+  #c-study-section-{{ section_id }} .c-study-section__float-card {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: {{ s.card_bg_color }};
+    border-radius: 999px;
+    padding: 12px 24px 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    max-width: {{ s.card_max_width_desktop }}px;
+    width: max-content;
+    box-sizing: border-box;
+    z-index: 2;
+  }
+
+  #c-study-section-{{ section_id }} .c-study-section__card-thumb {
+    width: {{ s.card_thumb_width_desktop }}px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #c-study-section-{{ section_id }} .c-study-section__card-thumb img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  #c-study-section-{{ section_id }} .c-study-section__card-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #c-study-section-{{ section_id }} .c-study-section__card-title {
+    font-family: 'Raleway', sans-serif;
+    font-size: {{ s.card_title_size_desktop }}px;
+    font-weight: 800;
+    font-style: italic;
+    color: {{ s.card_title_color }};
+    margin: 0 0 2px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.15;
+  }
+
+  #c-study-section-{{ section_id }} .c-study-section__card-text {
+    font-family: 'Raleway', sans-serif;
+    font-size: {{ s.card_text_size_desktop }}px;
+    font-weight: 400;
+    color: {{ s.card_text_color }};
+    margin: 0;
+    line-height: 1.25;
+  }
+
+  /* --- Responsive Mobile --- */
+  @media screen and (max-width: 749px) {
+    #c-study-section-{{ section_id }} {
+      padding-top: {{ s.padding_top_mobile }}px;
+      padding-bottom: {{ s.padding_bottom_mobile }}px;
+    }
+
+    #c-study-section-{{ section_id }} .c-study-section__container {
+      grid-template-columns: 1fr;
+      padding-left: 20px;
+      padding-right: 20px;
+      gap: 36px;
+    }
+
+    #c-study-section-{{ section_id }} .c-study-section__heading {
+      font-size: {{ s.heading_size_mobile }}px;
+    }
+
+    #c-study-section-{{ section_id }} .c-study-section__subheading {
+      font-size: {{ s.subheading_size_mobile }}px;
+      margin-bottom: 24px;
+    }
+
+    /* Columna Derecha Full-Width en Mobile */
+    #c-study-section-{{ section_id }} .c-study-section__right {
+      margin-left: -20px;
+      margin-right: -20px;
+      width: calc(100% + 40px);
+    }
+
+    #c-study-section-{{ section_id }} .c-study-section__media-card {
+      min-height: 380px;
+      border-radius: 0;
+    }
+
+    /* Card Flotante (Centrada abajo sobre la imagen en Mobile) */
+    #c-study-section-{{ section_id }} .c-study-section__float-card {
+      bottom: 16px;
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+      width: calc(100% - 32px);
+      max-width: {{ s.card_max_width_mobile }}px;
+      padding: 10px 18px 10px 12px;
+      gap: 10px;
+      border-radius: 999px;
+    }
+
+    #c-study-section-{{ section_id }} .c-study-section__card-thumb {
+      width: {{ s.card_thumb_width_mobile }}px;
+    }
+
+    #c-study-section-{{ section_id }} .c-study-section__card-title {
+      font-size: {{ s.card_title_size_mobile }}px;
+    }
+
+    #c-study-section-{{ section_id }} .c-study-section__card-text {
+      font-size: {{ s.card_text_size_mobile }}px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "C - Graphics + Content",
+  "tag": "section",
+  "class": "c-remineralization-study",
+  "settings": [
+    { "type": "header", "content": "Columna Izquierda — Encabezado" },
+    { 
+      "type": "text", 
+      "id": "heading", 
+      "label": "Título Principal", 
+      "default": "In Vitro Enamel Remineralization Study" 
+    },
+    { 
+      "type": "text", 
+      "id": "subheading", 
+      "label": "Subtítulo / Info del Estudio", 
+      "default": "Therametric Technologies Study 26-310, June 2026" 
+    },
+    { 
+      "type": "image_picker", 
+      "id": "chart_image", 
+      "label": "Imagen Infografía (Desktop)" 
+    },
+    { 
+      "type": "image_picker", 
+      "id": "chart_image_mobile", 
+      "label": "Imagen Infografía (Mobile)",
+      "info": "Si se deja en blanco, usará la imagen de Desktop."
+    },
+
+    { "type": "header", "content": "Columna Derecha — Fondo Microscópico" },
+    { 
+      "type": "image_picker", 
+      "id": "bg_image", 
+      "label": "Imagen Fondo Microscopía (Desktop)" 
+    },
+    { 
+      "type": "image_picker", 
+      "id": "bg_image_mobile", 
+      "label": "Imagen Fondo Microscopía (Mobile)",
+      "info": "Si se deja en blanco, usará la imagen de Desktop."
+    },
+
+    { "type": "header", "content": "Tarjeta Flotante — Contenido" },
+    { 
+      "type": "image_picker", 
+      "id": "card_image", 
+      "label": "Imagen de Producto (Miniatura)" 
+    },
+    { 
+      "type": "text", 
+      "id": "card_title", 
+      "label": "Título de la Tarjeta", 
+      "default": "DR. JEN'S NANO-HYDROXYAPATITE" 
+    },
+    { 
+      "type": "text", 
+      "id": "card_text", 
+      "label": "Texto de la Tarjeta", 
+      "default": "Uniform nanorod shape, smooth facets, highly refined" 
+    },
+    { "type": "color", "id": "card_bg_color", "label": "Color Fondo Tarjeta", "default": "#ffffff" },
+    { "type": "color", "id": "card_title_color", "label": "Color Título Tarjeta", "default": "#0f172a" },
+    { "type": "color", "id": "card_text_color", "label": "Color Texto Tarjeta", "default": "#475569" },
+
+    { "type": "header", "content": "Tarjeta Flotante — Tamaños Desktop" },
+    { "type": "range", "id": "card_max_width_desktop", "label": "Ancho Máximo Tarjeta (Desktop)", "min": 250, "max": 600, "step": 10, "default": 360, "unit": "px" },
+    { "type": "range", "id": "card_thumb_width_desktop", "label": "Ancho Imagen/Miniatura (Desktop)", "min": 30, "max": 120, "step": 5, "default": 55, "unit": "px" },
+    { "type": "range", "id": "card_title_size_desktop", "label": "Tamaño Título (Desktop)", "min": 10, "max": 24, "step": 1, "default": 13, "unit": "px" },
+    { "type": "range", "id": "card_text_size_desktop", "label": "Tamaño Texto (Desktop)", "min": 9, "max": 20, "step": 1, "default": 11, "unit": "px" },
+
+    { "type": "header", "content": "Tarjeta Flotante — Tamaños Mobile" },
+    { "type": "range", "id": "card_max_width_mobile", "label": "Ancho Máximo Tarjeta (Mobile)", "min": 200, "max": 450, "step": 10, "default": 340, "unit": "px" },
+    { "type": "range", "id": "card_thumb_width_mobile", "label": "Ancho Imagen/Miniatura (Mobile)", "min": 25, "max": 90, "step": 5, "default": 45, "unit": "px" },
+    { "type": "range", "id": "card_title_size_mobile", "label": "Tamaño Título (Mobile)", "min": 9, "max": 20, "step": 1, "default": 11, "unit": "px" },
+    { "type": "range", "id": "card_text_size_mobile", "label": "Tamaño Texto (Mobile)", "min": 8, "max": 18, "step": 1, "default": 10, "unit": "px" },
+
+    { "type": "header", "content": "Diseño General y Colores" },
+    { "type": "range", "id": "max_width", "label": "Ancho máximo de sección", "min": 900, "max": 1600, "step": 20, "default": 1200, "unit": "px" },
+    { "type": "color", "id": "bg_color", "label": "Fondo de Sección", "default": "#ffffff" },
+
+    { "type": "header", "content": "Tipografía — Título Sección" },
+    { "type": "color", "id": "heading_color", "label": "Color Título", "default": "#0f172a" },
+    { "type": "range", "id": "heading_weight", "label": "Grosor Título", "min": 300, "max": 900, "step": 100, "default": 700 },
+    { "type": "range", "id": "heading_size_desktop", "label": "Tamaño Título (Desktop)", "min": 24, "max": 56, "step": 2, "default": 36 },
+    { "type": "range", "id": "heading_size_mobile", "label": "Tamaño Título (Mobile)", "min": 20, "max": 36, "step": 2, "default": 26 },
+
+    { "type": "header", "content": "Tipografía — Subtítulo Sección" },
+    { "type": "color", "id": "subheading_color", "label": "Color Subtítulo", "default": "#64748b" },
+    { "type": "range", "id": "subheading_weight", "label": "Grosor Subtítulo", "min": 300, "max": 900, "step": 100, "default": 500 },
+    { "type": "range", "id": "subheading_size_desktop", "label": "Tamaño Subtítulo (Desktop)", "min": 12, "max": 24, "step": 1, "default": 18 },
+    { "type": "range", "id": "subheading_size_mobile", "label": "Tamaño Subtítulo (Mobile)", "min": 12, "max": 20, "step": 1, "default": 15 },
+
+    { "type": "header", "content": "Paddings de Sección" },
+    { "type": "range", "id": "padding_top_desktop", "label": "Padding Superior (Desktop)", "min": 0, "max": 120, "step": 4, "default": 64 },
+    { "type": "range", "id": "padding_bottom_desktop", "label": "Padding Inferior (Desktop)", "min": 0, "max": 120, "step": 4, "default": 64 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding Superior (Mobile)", "min": 0, "max": 100, "step": 4, "default": 40 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding Inferior (Mobile)", "min": 0, "max": 100, "step": 4, "default": 40 }
+  ],
+  "presets": [
+    {
+      "name": "C - Graphics + Content"
+    }
+  ]
+}
+{% endschema %}
