@@ -350,6 +350,9 @@
     #chero-slider-{{ section.id }} .chero-slide--stacked { flex-direction: column; align-items: stretch; justify-content: flex-start; background: var(--White,#FFF); }
     #chero-slider-{{ section.id }} .chero-slide--stacked .chero-slide__bg--mobile { position: relative; inset: auto; flex-shrink: 0; aspect-ratio: 412 / 335; }
     #chero-slider-{{ section.id }} .chero-slide--stacked .chero-slide__inner { padding: 0; }
+    {%- if section.settings.show_arrows %}
+    #chero-slider-{{ section.id }} .chero-slide--stacked .chero-slide__tagline { margin-left: 26px; }
+    {%- endif %}
     #chero-slider-{{ section.id }} .chero-slide--stacked .chero-slide__box { background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border-radius: 0 !important; }
   }
 
