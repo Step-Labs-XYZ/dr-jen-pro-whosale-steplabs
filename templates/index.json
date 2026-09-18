@@ -12,42 +12,6 @@
     "c_hero_section_v2_pQytR8": {
       "type": "c-hero-section-v2",
       "blocks": {
-        "slide_sept_offer": {
-          "type": "slide",
-          "settings": {
-            "layout_type": "type_1",
-            "bg_desktop": "shopify://shop_images/c-hp-hero-sept-offer-desktop.webp",
-            "bg_mobile": "shopify://shop_images/c-hp-hero-sept-offer-mobile.webp",
-            "bg_fallback": "#e8f4f8",
-            "tagline_text": "SEPTEMBER OFFER",
-            "tagline_icon_left": "",
-            "tagline_icon_right": "",
-            "pretitle": "",
-            "title": "Buy 2 Cases, Get a Free Half Case",
-            "top_description": "",
-            "heading_subtitle": "",
-            "bottom_description": "",
-            "subtitle_a": "",
-            "subtitle_b": "",
-            "subtitle_c": "",
-            "subtitle_d": "",
-            "description": "Order any 2 cases in September and we'll add a free half case. <br>Your pick of any full-size toothpaste or dry mouth gel, at no cost.",
-            "bullet_1_title": "",
-            "bullet_1_desc": "",
-            "bullet_2_title": "",
-            "bullet_2_desc": "",
-            "bullet_3_title": "",
-            "bullet_3_desc": "",
-            "offer_list": "<ul><li>Your choice: any full-size toothpaste or dry mouth gel (½ case)</li><li>Use code <strong>FREECASE</strong> at checkout</li><li>Offer valid through September 30</li></ul>",
-            "closing_note": "Keep your most-requested products stocked without the extra spend.",
-            "promo_style": true,
-            "mobile_stacked": true,
-            "text_color": "#002c41",
-            "btn_label": "SHOP NOW",
-            "btn_url": "shopify://collections/all",
-            "html_code": ""
-          }
-        },
         "slide_yaFUNU": {
           "type": "slide",
           "settings": {
@@ -119,12 +83,48 @@
             "t2_btn_url": "",
             "html_code": ""
           }
+        },
+        "slide_sept_offer": {
+          "type": "slide",
+          "settings": {
+            "layout_type": "type_1",
+            "bg_desktop": "shopify://shop_images/c-hp-hero-sept-offer-desktop.webp",
+            "bg_mobile": "shopify://shop_images/c-hp-hero-sept-offer-mobile.webp",
+            "bg_fallback": "#e8f4f8",
+            "tagline_text": "SEPTEMBER OFFER",
+            "tagline_icon_left": "",
+            "tagline_icon_right": "",
+            "pretitle": "",
+            "title": "Buy 2 Cases, Get a Free Half Case",
+            "top_description": "",
+            "heading_subtitle": "",
+            "bottom_description": "",
+            "subtitle_a": "",
+            "subtitle_b": "",
+            "subtitle_c": "",
+            "subtitle_d": "",
+            "description": "Order any 2 cases in September and we'll add a free half case. <br>Your pick of any full-size toothpaste or dry mouth gel, at no cost.",
+            "bullet_1_title": "",
+            "bullet_1_desc": "",
+            "bullet_2_title": "",
+            "bullet_2_desc": "",
+            "bullet_3_title": "",
+            "bullet_3_desc": "",
+            "offer_list": "<ul><li>Your choice: any full-size toothpaste or dry mouth gel (½ case)</li><li>Use code <strong>FREECASE</strong> at checkout</li><li>Offer valid through September 30</li></ul>",
+            "closing_note": "Keep your most-requested products stocked without the extra spend.",
+            "promo_style": true,
+            "mobile_stacked": true,
+            "text_color": "#002c41",
+            "btn_label": "SHOP NOW",
+            "btn_url": "shopify://collections/all",
+            "html_code": ""
+          }
         }
       },
       "block_order": [
-        "slide_sept_offer",
         "slide_yaFUNU",
-        "slide_Ap7g3x"
+        "slide_Ap7g3x",
+        "slide_sept_offer"
       ],
       "name": "CTA Hero Slider",
       "settings": {
