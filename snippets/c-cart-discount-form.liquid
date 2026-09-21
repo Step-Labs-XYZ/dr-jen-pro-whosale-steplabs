@@ -1,0 +1,157 @@
+{% comment %}
+  Snippet: Cart Discount Form
+  Discount code field for the cart drawer footer. Applies the code to the cart through the Ajax
+  Cart API (/cart/update.js `discount`) so it carries into checkout, and stores it in the hidden
+  cart attribute _discount_code so Liquid knows which code the shopper entered. Also handles the
+  gift choices rendered by c-cart-gift-picker (behavior lives in assets/c-cart-promo.js).
+  Usage: {% render 'c-cart-discount-form', promo_code: promo_code %}
+{% endcomment %}
+
+{%- assign current_code = cart.attributes['_discount_code'] | strip | upcase -%}
+
+<div class="c-cart-code" data-sl-id="sl-snippet-cart-discount-form-v1" data-cart-code data-promo-code="{{ promo_code | escape }}">
+  {%- if current_code != blank -%}
+    {%- liquid
+      assign code_is_active = false
+      for application in cart.discount_applications
+        assign application_title = application.title | upcase
+        if application_title == current_code
+          assign code_is_active = true
+          break
+        endif
+      endfor
+    -%}
+
+    <div class="c-cart-code__applied">
+      <span class="c-cart-code__chip{% unless code_is_active %} is-pending{% endunless %}">
+        {%- render 'icon' with 'discount-badge' -%}
+        {{ current_code | escape }}
+      </span>
+      <button type="button" class="c-cart-code__remove" data-cart-code-remove>Remove</button>
+    </div>
+  {%- else -%}
+    <form class="c-cart-code__form" data-cart-code-form novalidate>
+      <label for="c-cart-code-input" class="visually-hidden">Discount code</label>
+      <input
+        id="c-cart-code-input"
+        class="c-cart-code__input"
+        name="discount"
+        type="text"
+        placeholder="Discount code"
+        autocomplete="off"
+        autocapitalize="characters"
+        spellcheck="false"
+      >
+      <button type="submit" class="c-cart-code__apply">Apply</button>
+    </form>
+  {%- endif -%}
+
+  <p class="c-cart-code__message" data-cart-code-message role="status" aria-live="polite"></p>
+</div>
+
+{% stylesheet %}
+  .c-cart-code {
+    margin-bottom: 12px;
+    font-family: Raleway, sans-serif;
+    color: #002c41;
+  }
+
+  .c-cart-code__form {
+    display: flex;
+    gap: 8px;
+  }
+
+  .c-cart-code__input {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid #d6dde1;
+    border-radius: 6px;
+    font: inherit;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: inherit;
+    background: #ffffff;
+  }
+
+  .c-cart-code__input:focus {
+    border-color: #002c41;
+    outline: none;
+  }
+
+  .c-cart-code__apply {
+    flex: none;
+    height: 40px;
+    padding: 0 16px;
+    border: 2px solid #002c41;
+    border-radius: 44px;
+    background: transparent;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #002c41;
+    cursor: pointer;
+  }
+
+  .c-cart-code__apply:hover,
+  .c-cart-code__apply:focus-visible {
+    background: #002c41;
+    color: #ffffff;
+  }
+
+  .c-cart-code__applied {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .c-cart-code__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 44px;
+    background: #e6f0fc;
+    font-size: 13px;
+    font-weight: 700;
+    color: #0862df;
+  }
+
+  .c-cart-code__chip.is-pending {
+    background: #f1f3f4;
+    color: #002c41;
+  }
+
+  .c-cart-code__remove {
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-size: 13px;
+    text-decoration: underline;
+    color: #002c41;
+    cursor: pointer;
+  }
+
+  .c-cart-code__message {
+    margin: 6px 0 0;
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .c-cart-code__message:empty {
+    display: none;
+  }
+
+  .c-cart-code__message.is-error {
+    color: #c0392b;
+  }
+
+  [data-cart-code].is-loading {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+{% endstylesheet %}

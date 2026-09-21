@@ -11,6 +11,7 @@
   font-weight: bold;
 }
 </style>
+<script src="{{ 'c-cart-promo.js' | asset_url }}" defer></script>
 <cart-drawer section="{{ section.id }}" id="mini-cart" class="mini-cart drawer drawer--large">
   <span class="drawer__overlay"></span>
 
@@ -48,6 +49,22 @@
       </div>
     </div>
   {%- else -%}
+    {%- liquid
+      assign promo_code = section.settings.promo_code | strip | upcase
+      assign entered_code = cart.attributes['_discount_code'] | strip | upcase
+      assign promo_active = false
+      if section.settings.promo_enabled and promo_code != blank and entered_code == promo_code
+        assign promo_active = true
+        if section.settings.promo_end_date != blank
+          assign promo_end_stamp = section.settings.promo_end_date | remove: '-' | strip | plus: 0
+          assign promo_today_stamp = 'now' | date: '%Y%m%d' | plus: 0
+          if promo_end_stamp > 0 and promo_today_stamp > promo_end_stamp
+            assign promo_active = false
+          endif
+        endif
+      endif
+    -%}
+
     <div class="drawer__content">
       {%- if settings.cart_show_free_shipping_threshold and settings.cart_free_shipping_threshold != '' -%}
         {%- assign free_shipping_thresholds = settings.cart_free_shipping_threshold | remove: ' ' | split: ',' -%}
@@ -266,7 +283,11 @@
         {%- endfor -%}
       </form>
 
-      {%- if section.settings.show_recommendations -%}
+      {%- if promo_active -%}
+        <div class="mini-cart__recommendations">
+          {%- render 'c-cart-gift-picker', settings: section.settings, promo_code: promo_code -%}
+        </div>
+      {%- elsif section.settings.show_recommendations -%}
         <cart-drawer-recommendations section-id="{{ section.id }}" product-id="{{ cart.items.first.product_id }}" class="mini-cart__recommendations">
           {%- assign acceptable_recommendations_count = 0 -%}
 
@@ -331,6 +352,10 @@
             </li>
           {%- endfor -%}
         </ul>
+      {%- endif -%}
+
+      {%- if section.settings.show_discount_code -%}
+        {%- render 'c-cart-discount-form', promo_code: promo_code -%}
       {%- endif -%}
 
       <div class="subtotal-pane">
@@ -423,6 +448,82 @@
       "id": "recommendations_title",
       "label": "Recommendations heading",
       "default": "You may also like"
+    },
+    {
+      "type": "header",
+      "content": "Discount code"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_discount_code",
+      "label": "Show discount code field",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Promo gift picker",
+      "info": "When the shopper applies this code in the cart drawer, the recommendations panel turns into a gift picker."
+    },
+    {
+      "type": "checkbox",
+      "id": "promo_enabled",
+      "label": "Enable gift picker",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "promo_code",
+      "label": "Promo code",
+      "info": "Must match the discount code created in Shopify admin."
+    },
+    {
+      "type": "number",
+      "id": "promo_min_qty",
+      "label": "Qualifying items required",
+      "default": 2
+    },
+    {
+      "type": "textarea",
+      "id": "promo_qualifier_variant_ids",
+      "label": "Qualifying variant IDs",
+      "info": "One variant ID per line. Must match the 'Customer buys' variants of the discount."
+    },
+    {
+      "type": "product_list",
+      "id": "promo_gift_products",
+      "label": "Gift products",
+      "limit": 20
+    },
+    {
+      "type": "textarea",
+      "id": "promo_gift_variant_ids",
+      "label": "Gift variant IDs",
+      "info": "One variant ID per line. Only these variants of the gift products are offered. Must match the 'Customer gets' variants of the discount."
+    },
+    {
+      "type": "text",
+      "id": "promo_end_date",
+      "label": "End date",
+      "info": "YYYY-MM-DD. The gift picker stops showing after this date (store timezone).",
+      "placeholder": "2026-09-30"
+    },
+    {
+      "type": "text",
+      "id": "promo_locked_title",
+      "label": "Heading when the cart does not qualify yet",
+      "info": "[count] is replaced with the number of items missing.",
+      "default": "Add [count] more full case(s) to unlock your free half case"
+    },
+    {
+      "type": "text",
+      "id": "promo_choose_title",
+      "label": "Heading when the gift can be chosen",
+      "default": "Choose your free half case"
+    },
+    {
+      "type": "url",
+      "id": "promo_shop_url",
+      "label": "Shop link when the cart does not qualify yet"
     }
   ]
 }
