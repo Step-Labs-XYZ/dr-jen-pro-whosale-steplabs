@@ -109,6 +109,18 @@
             "badge_3_orange_mango": ""
           }
         },
+        "promo_widget_SEPT26": {
+          "type": "promo_widget",
+          "settings": {
+            "image": "shopify://shop_images/widget-_1.webp",
+            "tagline": "SEPTEMBER OFFER",
+            "heading": "Buy 2 Cases, Get a Free Half Case",
+            "text": "Your pick: a half case of any toothpaste flavor or Dry Mouth Gel. Use code FREECASE at checkout. Valid through September 30.",
+            "code": "FREECASE",
+            "exclude_products": [],
+            "end_date": "2026-09-30"
+          }
+        },
         "recharge_subscriptions_subscription_widget_v2_9hkAJG": {
           "type": "shopify://apps/recharge-subscriptions/blocks/subscription-widget-v2/371eed76-0b44-4869-9813-730372ea378e",
           "settings": {}
@@ -141,6 +153,7 @@
         "title_AUHa6c",
         "price_stock_4Qk3Yf",
         "variant_cards_MBMMJm",
+        "promo_widget_SEPT26",
         "recharge_subscriptions_subscription_widget_v2_9hkAJG",
         "custom_liquid_RnzabW",
         "terms_text_aHf4k3",

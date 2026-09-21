@@ -201,7 +201,27 @@
           "show_checkout_button": true,
           "empty_button_link": "shopify://collections/all",
           "show_recommendations": true,
-          "recommendations_title": "You may also like"
+          "recommendations_title": "You may also like",
+          "show_discount_code": true,
+          "promo_enabled": true,
+          "promo_code": "FREECASE",
+          "promo_min_qty": 2,
+          "promo_qualifier_variant_ids": "47538359927060\n52492315066644\n52525627375892\n47538004164884\n49200164405524\n49805473448212\n52585151529236\n51794413256980\n52335839084820\n52821158625556",
+          "promo_gift_products": [
+            "dr-jens-nano-hydroxyapatite-mouth-gel",
+            "dr-jens-cool-mint-fluoride-free-toothpaste-with-10-nano-hydroxyapatite-12-24-pack",
+            "wholesale-24-pack-super-paste-with-10-nano-hydroxyapatite-fluoride-toothpaste",
+            "dr-jens-strawberry-super-paste-with-fluoride-10-nano-hydroxyapatite-12-24-pack",
+            "new-dr-jens-eggshell-10-nano-hydroxyapatite-toothpaste-12-24-pack",
+            "perio-super-paste",
+            "new-dr-jens-super-paste-ortho-12-24-pack",
+            "dr-jens-kerahap"
+          ],
+          "promo_gift_variant_ids": "49869912015124\n47538359959828\n52492315033876\n52525627343124\n47538004197652\n49200164438292\n49805473480980\n52585151562004\n51794413289748\n52335839117588\n52736737542420",
+          "promo_end_date": "2026-09-30",
+          "promo_locked_title": "Add [count] more full case(s) to unlock your free half case",
+          "promo_choose_title": "Choose your free half case",
+          "promo_shop_url": "shopify://collections/shop-all"
         }
       },
       "static-text-with-icons": {

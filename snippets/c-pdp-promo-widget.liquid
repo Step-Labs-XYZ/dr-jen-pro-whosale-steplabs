@@ -1,0 +1,169 @@
+{% comment %}
+  Snippet: PDP Promo Widget
+  Promotional card over a background image, rendered by the 'promo_widget' block of c-product-page.
+  Same layout on desktop and mobile. Hides itself after end_date (YYYY-MM-DD, store timezone)
+  and on any product listed in exclude_products. The discount code is bolded inside the text.
+  Usage: {% render 'c-pdp-promo-widget', block: block %}
+{% endcomment %}
+
+{%- liquid
+  assign s = block.settings
+  assign is_hidden = false
+  if s.end_date != blank
+    assign end_stamp = s.end_date | remove: '-' | strip | plus: 0
+    assign today_stamp = 'now' | date: '%Y%m%d' | plus: 0
+    if end_stamp > 0 and today_stamp > end_stamp
+      assign is_hidden = true
+    endif
+  endif
+  for excluded in s.exclude_products
+    if excluded.id == product.id
+      assign is_hidden = true
+      break
+    endif
+  endfor
+
+  assign promo_text = s.text | escape
+  if s.code != blank
+    assign code = s.code | escape
+    assign code_html = '<strong class="c-pdp-promo__code">' | append: code | append: '</strong>'
+    assign promo_text = promo_text | replace: code, code_html
+  endif
+-%}
+
+{%- unless is_hidden -%}
+  <div
+    class="c-pdp-promo"
+    data-sl-id="sl-snippet-pdp-promo-widget-v1"
+    {%- if s.image != blank %} style="--c-pdp-promo-ratio: {{ s.image.aspect_ratio }};"{% endif %}
+    {{ block.shopify_attributes }}
+  >
+    {%- if s.image != blank -%}
+      {{
+        s.image
+        | image_url: width: 900
+        | image_tag:
+          class: 'c-pdp-promo__bg',
+          loading: 'lazy',
+          widths: '450, 600, 900',
+          sizes: '(min-width: 900px) 600px, 100vw',
+          alt: ''
+      }}
+    {%- endif -%}
+
+    <div class="c-pdp-promo__card">
+      <div class="c-pdp-promo__content">
+        {%- if s.tagline != blank -%}
+          <p class="c-pdp-promo__tagline">{{ s.tagline }}</p>
+        {%- endif -%}
+        {%- if s.heading != blank -%}
+          <p class="c-pdp-promo__heading">{{ s.heading }}</p>
+        {%- endif -%}
+        {%- if s.text != blank -%}
+          <p class="c-pdp-promo__text">{{ promo_text }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endunless -%}
+
+{% stylesheet %}
+  .c-pdp-promo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 25px 24px;
+    overflow: hidden;
+    background-color: #cde8f1;
+    box-sizing: border-box;
+  }
+
+  .c-pdp-promo__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left center;
+    pointer-events: none;
+  }
+
+  .c-pdp-promo__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    flex: 0 1 297px;
+    min-height: 205px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    background: rgba(248, 247, 248, 0.82);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    box-sizing: border-box;
+  }
+
+  .c-pdp-promo__content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .c-pdp-promo__tagline,
+  .c-pdp-promo__heading,
+  .c-pdp-promo__text {
+    margin: 0;
+    font-family: Raleway, sans-serif;
+    line-height: 1.2;
+    color: #002c41;
+  }
+
+  .c-pdp-promo__tagline {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #0862df;
+  }
+
+  .c-pdp-promo__heading {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .c-pdp-promo__text {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .c-pdp-promo__code {
+    font-weight: 700;
+  }
+
+  /* Narrow column / mobile: full-width image band on top, card stacked below it. */
+  @media (max-width: 899px) {
+    .c-pdp-promo {
+      flex-direction: column;
+      align-items: stretch;
+      padding: 0;
+    }
+
+    .c-pdp-promo__bg {
+      position: static;
+      width: 100%;
+      height: auto;
+      aspect-ratio: var(--c-pdp-promo-ratio, 2.5);
+      object-position: center;
+    }
+
+    .c-pdp-promo__card {
+      flex: 1 1 auto;
+      min-height: 0;
+      padding: 16px 20px;
+      border-radius: 0;
+      background: rgba(248, 247, 248, 0.92);
+    }
+  }
+{% endstylesheet %}

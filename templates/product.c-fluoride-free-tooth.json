@@ -151,6 +151,17 @@
             "show_add_to_cart": true,
             "show_dynamic_checkout": true
           }
+        },
+        "promo_widget_SEPT26": {
+          "type": "promo_widget",
+          "settings": {
+            "tagline": "SEPTEMBER OFFER",
+            "heading": "Buy 2 Cases, Get a Free Half Case",
+            "text": "Your pick: a half case of any toothpaste flavor or Dry Mouth Gel. Use code FREECASE at checkout. Valid through September 30.",
+            "code": "FREECASE",
+            "end_date": "2026-09-30",
+            "image": "shopify://shop_images/widget-_1.webp"
+          }
         }
       },
       "block_order": [
@@ -160,6 +171,7 @@
         "price_stock_4Qk3Yf",
         "description_block_jyEXcG",
         "variant_cards_MBMMJm",
+        "promo_widget_SEPT26",
         "recharge_subscriptions_subscription_widget_v2_9hkAJG",
         "custom_liquid_RnzabW",
         "terms_text_aHf4k3",
