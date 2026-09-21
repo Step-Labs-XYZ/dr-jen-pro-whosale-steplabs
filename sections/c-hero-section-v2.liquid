@@ -103,7 +103,21 @@
 
           {%- else -%}
 
-          <div class="swiper-slide chero-slide" {{ block.shopify_attributes }}>
+          {%- liquid
+            assign slide_class = ''
+            assign box_bg = section.settings.box_bg
+            assign box_blur = section.settings.box_blur
+            if block.settings.promo_style
+              assign slide_class = slide_class | append: ' chero-slide--promo'
+              assign box_bg = 'rgba(255, 255, 255, 0.82)'
+              assign box_blur = 2
+            endif
+            if block.settings.mobile_stacked
+              assign slide_class = slide_class | append: ' chero-slide--stacked'
+            endif
+          -%}
+
+          <div class="swiper-slide chero-slide{{ slide_class }}" {{ block.shopify_attributes }}{% if block.settings.text_color != blank %} style="--chero-text: {{ block.settings.text_color }};"{% endif %}>
 
             <div class="chero-slide__bg chero-slide__bg--desktop">
               {%- if block.settings.video_desktop != blank -%}
@@ -133,7 +147,7 @@
                 </div>
               {%- endif -%}
 
-              <div class="chero-slide__box" style="background:{{ section.settings.box_bg }};backdrop-filter:blur({{ section.settings.box_blur }}px);-webkit-backdrop-filter:blur({{ section.settings.box_blur }}px);border-radius:{{ section.settings.box_radius }}px;">
+              <div class="chero-slide__box" style="background:{{ box_bg }};backdrop-filter:blur({{ box_blur }}px);-webkit-backdrop-filter:blur({{ box_blur }}px);border-radius:{{ section.settings.box_radius }}px;">
 
                 {%- if block.settings.tagline_text != blank -%}
                   <div class="chero-slide__tagline" style="--tl-color:{{ section.settings.rating_color }};border-color:{{ section.settings.tagline_border }};background:{{ section.settings.tagline_bg }};">
@@ -212,6 +226,14 @@
                   </ul>
                 {%- endif -%}
 
+                {%- if block.settings.offer_list != blank -%}
+                  <div class="chero-slide__offer-list">{{ block.settings.offer_list }}</div>
+                {%- endif -%}
+
+                {%- if block.settings.closing_note != blank -%}
+                  <p class="chero-slide__closing">{{ block.settings.closing_note }}</p>
+                {%- endif -%}
+
                 {%- if block.settings.btn_label != blank -%}
                   <a href="{{ block.settings.btn_url }}" class="chero-slide__btn" style="background:{{ section.settings.btn_bg }};color:{{ section.settings.btn_color }};">{{ block.settings.btn_label }}</a>
                 {%- endif -%}
@@ -276,28 +298,63 @@
   #chero-slider-{{ section.id }} .chero-slide__badge img { width: 80px; height: auto; }
   #chero-slider-{{ section.id }} .chero-slide__box { width: 100%; box-sizing: border-box; padding: 16px; }
   #chero-slider-{{ section.id }} .chero-slide__tagline { display: inline-flex; align-items: center; gap: 5px; border: 2px solid #002C41; border-radius: 30px; padding: 6px 20px; margin-bottom: 10px; }
-  #chero-slider-{{ section.id }} .chero-slide__tagline-text { color: var(--tl-color,#000); font-family: var(--Primary,Raleway); font-weight: 700; line-height: 120%; text-transform: uppercase; letter-spacing: 0.04em; font-size: {{ section.settings.tagline_size_mobile }}px; }
-  #chero-slider-{{ section.id }} .chero-slide__tagline-icon { color: var(--tl-color,#000); font-size: {{ section.settings.tagline_size_mobile }}px; }
-  #chero-slider-{{ section.id }} .chero-slide__pretitle { color: var(--Black,#000); font-family: var(--Primary,Raleway); font-style: italic; font-weight: 700; line-height: 140%; margin: 0 0 10px; font-size: {{ section.settings.pretitle_size_mobile }}px; }
-  #chero-slider-{{ section.id }} .chero-slide__title { color: var(--Black,#000); font-family: var(--Primary,Raleway); font-weight: 600; line-height: 120%; margin: 0 0 10px; font-size: {{ section.settings.title_size_mobile }}px; }
-  #chero-slider-{{ section.id }} .chero-slide__top-desc { color: var(--Black,#000); font-family: var(--Body,Raleway); font-style: italic; font-weight: 700; line-height: 120%; margin: 0 0 10px; font-size: {{ section.settings.top_desc_size_mobile }}px; }
-  #chero-slider-{{ section.id }} .chero-slide__h5-subtitle { color: var(--Black,#000); font-family: var(--Primary,Raleway); font-style: normal; font-weight: 400; line-height: 120%; margin: 0 0 10px; font-size: {{ section.settings.h5_subtitle_size_mobile }}px; }
-  #chero-slider-{{ section.id }} .chero-slide__bottom-desc { color: var(--Black,#000); font-family: var(--Body,Raleway); font-style: normal; font-weight: 400; line-height: 120%; margin: 0 0 16px; font-size: {{ section.settings.bottom_desc_size_mobile }}px; }
+  #chero-slider-{{ section.id }} .chero-slide__tagline-text { color: var(--chero-text, var(--tl-color,#000)); font-family: var(--Primary,Raleway); font-weight: 700; line-height: 120%; text-transform: uppercase; letter-spacing: 0.04em; font-size: {{ section.settings.tagline_size_mobile }}px; }
+  #chero-slider-{{ section.id }} .chero-slide__tagline-icon { color: var(--chero-text, var(--tl-color,#000)); font-size: {{ section.settings.tagline_size_mobile }}px; }
+  #chero-slider-{{ section.id }} .chero-slide__pretitle { color: var(--chero-text, var(--Black,#000)); font-family: var(--Primary,Raleway); font-style: italic; font-weight: 700; line-height: 140%; margin: 0 0 10px; font-size: {{ section.settings.pretitle_size_mobile }}px; }
+  #chero-slider-{{ section.id }} .chero-slide__title { color: var(--chero-text, var(--Black,#000)); font-family: var(--Primary,Raleway); font-weight: 600; line-height: 120%; margin: 0 0 10px; font-size: {{ section.settings.title_size_mobile }}px; }
+  #chero-slider-{{ section.id }} .chero-slide__top-desc { color: var(--chero-text, var(--Black,#000)); font-family: var(--Body,Raleway); font-style: italic; font-weight: 700; line-height: 120%; margin: 0 0 10px; font-size: {{ section.settings.top_desc_size_mobile }}px; }
+  #chero-slider-{{ section.id }} .chero-slide__h5-subtitle { color: var(--chero-text, var(--Black,#000)); font-family: var(--Primary,Raleway); font-style: normal; font-weight: 400; line-height: 120%; margin: 0 0 10px; font-size: {{ section.settings.h5_subtitle_size_mobile }}px; }
+  #chero-slider-{{ section.id }} .chero-slide__bottom-desc { color: var(--chero-text, var(--Black,#000)); font-family: var(--Body,Raleway); font-style: normal; font-weight: 400; line-height: 120%; margin: 0 0 16px; font-size: {{ section.settings.bottom_desc_size_mobile }}px; }
   #chero-slider-{{ section.id }} .chero-slide__sub { margin: 0 0 20px; }
-  #chero-slider-{{ section.id }} .chero-slide__sub--a { color: var(--Black,#000); font-family: var(--Primary,Raleway); font-style: italic; font-weight: 400; line-height: 140%; text-transform: uppercase; font-size: {{ section.settings.sub_a_size_mobile }}px; }
-  #chero-slider-{{ section.id }} .chero-slide__sub--b { color: var(--Black,#000); font-family: var(--Body,Raleway); font-style: normal; font-weight: 400; line-height: 140%; font-size: {{ section.settings.sub_b_size_mobile }}px; }
-  #chero-slider-{{ section.id }} .chero-slide__sub--c { color: var(--Black,#000); font-family: var(--Body,Raleway); font-style: italic; font-weight: 700; line-height: 140%; font-size: {{ section.settings.sub_c_size_mobile }}px; }
-  #chero-slider-{{ section.id }} .chero-slide__sub--d { color: var(--Black,#000); font-family: var(--Body,Raleway); font-style: italic; font-weight: 700; line-height: 140%; margin-bottom: 10px; font-size: {{ section.settings.sub_d_size_mobile }}px; }
-  #chero-slider-{{ section.id }} .chero-slide__description { color: var(--Black,#000); font-family: var(--Body,Raleway); font-style: normal; font-weight: 400; line-height: 150%; margin: 0 0 16px; font-size: {{ section.settings.desc_size_mobile }}px; }
+  #chero-slider-{{ section.id }} .chero-slide__sub--a { color: var(--chero-text, var(--Black,#000)); font-family: var(--Primary,Raleway); font-style: italic; font-weight: 400; line-height: 140%; text-transform: uppercase; font-size: {{ section.settings.sub_a_size_mobile }}px; }
+  #chero-slider-{{ section.id }} .chero-slide__sub--b { color: var(--chero-text, var(--Black,#000)); font-family: var(--Body,Raleway); font-style: normal; font-weight: 400; line-height: 140%; font-size: {{ section.settings.sub_b_size_mobile }}px; }
+  #chero-slider-{{ section.id }} .chero-slide__sub--c { color: var(--chero-text, var(--Black,#000)); font-family: var(--Body,Raleway); font-style: italic; font-weight: 700; line-height: 140%; font-size: {{ section.settings.sub_c_size_mobile }}px; }
+  #chero-slider-{{ section.id }} .chero-slide__sub--d { color: var(--chero-text, var(--Black,#000)); font-family: var(--Body,Raleway); font-style: italic; font-weight: 700; line-height: 140%; margin-bottom: 10px; font-size: {{ section.settings.sub_d_size_mobile }}px; }
+  #chero-slider-{{ section.id }} .chero-slide__description { color: var(--chero-text, var(--Black,#000)); font-family: var(--Body,Raleway); font-style: normal; font-weight: 400; line-height: 150%; margin: 0 0 16px; font-size: {{ section.settings.desc_size_mobile }}px; }
   #chero-slider-{{ section.id }} .chero-slide__bullets { list-style: none; padding: 0; margin: 0 0 16px; display: flex; flex-direction: column; gap: 10px; }
   #chero-slider-{{ section.id }} .chero-slide__bullet { display: flex; align-items: flex-start; gap: 7px; }
   #chero-slider-{{ section.id }} .chero-slide__check { flex-shrink: 0; display: flex; align-items: center; margin-top: 1px; }
   #chero-slider-{{ section.id }} .chero-slide__check svg { width: {{ section.settings.bullet_size_mobile }}px; height: {{ section.settings.bullet_size_mobile }}px; }
   #chero-slider-{{ section.id }} .chero-slide__bullet-content { display: flex; flex-direction: column; gap: 1px; }
-  #chero-slider-{{ section.id }} .chero-slide__bullet-title { color: var(--Black,#000); font-family: var(--Body,Raleway); font-weight: 700; line-height: 120%; display: block; font-size: {{ section.settings.bullet_title_size_mobile }}px; }
-  #chero-slider-{{ section.id }} .chero-slide__bullet-desc  { color: var(--Black,#000); font-family: var(--Body,Raleway); font-weight: 400; line-height: 120%; display: block; font-size: {{ section.settings.bullet_desc_size_mobile }}px; }
+  #chero-slider-{{ section.id }} .chero-slide__bullet-title { color: var(--chero-text, var(--Black,#000)); font-family: var(--Body,Raleway); font-weight: 700; line-height: 120%; display: block; font-size: {{ section.settings.bullet_title_size_mobile }}px; }
+  #chero-slider-{{ section.id }} .chero-slide__bullet-desc  { color: var(--chero-text, var(--Black,#000)); font-family: var(--Body,Raleway); font-weight: 400; line-height: 120%; display: block; font-size: {{ section.settings.bullet_desc_size_mobile }}px; }
   #chero-slider-{{ section.id }} .chero-slide__btn { display: block; width: 100%; box-sizing: border-box; text-align: center; text-decoration: none; font-family: var(--Primary,Raleway); font-weight: 700; line-height: 120%; text-transform: uppercase; letter-spacing: 0.06em; padding: 12px 24px; border-radius: 44px; transition: opacity .2s; font-size: {{ section.settings.btn_size_mobile }}px; }
   #chero-slider-{{ section.id }} .chero-slide__btn:hover { opacity: .85; }
+  #chero-slider-{{ section.id }} .chero-slide__offer-list { color: var(--chero-text, var(--Black,#000)); font-family: var(--Body,Raleway); font-weight: 400; line-height: 120%; font-size: 16px; margin: 0 0 16px; }
+  #chero-slider-{{ section.id }} .chero-slide__offer-list ul,
+  #chero-slider-{{ section.id }} .chero-slide__offer-list ol { margin: 0; padding-left: 24px; }
+  #chero-slider-{{ section.id }} .chero-slide__offer-list p { margin: 0; }
+  #chero-slider-{{ section.id }} .chero-slide__offer-list strong { font-weight: 700; }
+  #chero-slider-{{ section.id }} .chero-slide__closing { color: var(--chero-text, var(--Black,#000)); font-family: var(--Body,Raleway); font-weight: 700; line-height: 120%; font-size: 16px; margin: 0 0 16px; }
+
+  /* ============ PROMO (Tipo 1 + estilo compacto, September Offer) ============ */
+  #chero-slider-{{ section.id }} .chero-slide--promo .chero-slide__box { padding: 32px 24px; }
+  #chero-slider-{{ section.id }} .chero-slide--promo .chero-slide__tagline { height: 28px; padding: 0 24px; border-width: 1px; background: transparent !important; margin-bottom: 24px; }
+  #chero-slider-{{ section.id }} .chero-slide--promo .chero-slide__tagline-text { letter-spacing: 0; }
+  #chero-slider-{{ section.id }} .chero-slide--promo .chero-slide__title { margin-bottom: 6px; }
+  #chero-slider-{{ section.id }} .chero-slide--promo .chero-slide__description { line-height: 120%; margin-bottom: 12px; }
+  #chero-slider-{{ section.id }} .chero-slide--promo .chero-slide__offer-list,
+  #chero-slider-{{ section.id }} .chero-slide--promo .chero-slide__closing { margin-bottom: 24px; }
+  #chero-slider-{{ section.id }} .chero-slide--promo .chero-slide__btn { padding: 12px 24px; letter-spacing: 0; }
+
+  @media (max-width: 767px) {
+    #chero-slider-{{ section.id }} .chero-slide--promo .chero-slide__tagline-text { font-size: 12px; }
+    #chero-slider-{{ section.id }} .chero-slide--promo .chero-slide__title { font-size: 20px; }
+    #chero-slider-{{ section.id }} .chero-slide--promo .chero-slide__description { font-size: 14px; }
+    #chero-slider-{{ section.id }} .chero-slide--promo .chero-slide__btn { font-size: 12px; }
+  }
+
+  /* STACKED — mobile/tablet: imagen arriba, contenido abajo sin superponer */
+  @media (max-width: 1023px) {
+    #chero-slider-{{ section.id }} .chero-slide--promo .chero-slide__description br { display: none; }
+    #chero-slider-{{ section.id }} .chero-slide--stacked { flex-direction: column; align-items: stretch; justify-content: flex-start; background: var(--White,#FFF); }
+    #chero-slider-{{ section.id }} .chero-slide--stacked .chero-slide__bg--mobile { position: relative; inset: auto; flex-shrink: 0; aspect-ratio: 412 / 335; }
+    #chero-slider-{{ section.id }} .chero-slide--stacked .chero-slide__inner { padding: 0; }
+    {%- if section.settings.show_arrows %}
+    #chero-slider-{{ section.id }} .chero-slide--stacked .chero-slide__tagline { margin-left: 26px; }
+    {%- endif %}
+    #chero-slider-{{ section.id }} .chero-slide--stacked .chero-slide__box { background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border-radius: 0 !important; }
+  }
 
   /* ============ TIPO 2 (tarjeta centrada, estilo Cleaner Floss) ============ */
   #chero-slider-{{ section.id }} .chero-slide--t2 { align-items: flex-end; justify-content: center; }
@@ -400,6 +457,15 @@
     #chero-slider-{{ section.id }} .chero-slide__btn          { font-size: {{ section.settings.btn_size_desktop }}px; padding: 16px 24px; }
     #chero-slider-{{ section.id }} .chero-slide__bullets      { gap: 14px; margin-bottom: 24px; }
     #chero-slider-{{ section.id }} .chero-slide--html { min-height: 0 !important; align-items: unset !important; justify-content: unset !important; }
+    #chero-slider-{{ section.id }} .chero-slide__offer-list { font-size: 18px; }
+    #chero-slider-{{ section.id }} .chero-slide__offer-list ul,
+    #chero-slider-{{ section.id }} .chero-slide__offer-list ol { padding-left: 27px; }
+
+    #chero-slider-{{ section.id }} .chero-slide--promo .chero-slide__bg--desktop .chero-slide__bg-img { object-position: left center; }
+    #chero-slider-{{ section.id }} .chero-slide--promo .chero-slide__box { width: 648px; padding: 24px 32px; }
+    #chero-slider-{{ section.id }} .chero-slide--promo .chero-slide__description,
+    #chero-slider-{{ section.id }} .chero-slide--promo .chero-slide__closing { max-width: 522px; }
+    #chero-slider-{{ section.id }} .chero-slide--promo .chero-slide__btn { width: 222px; }
 
     #chero-slider-{{ section.id }} .chero-t2-desktop-only { display: block; }
     #chero-slider-{{ section.id }} .chero-t2-mobile-only  { display: none; }
@@ -643,6 +709,12 @@
         { "type": "header", "content": "✅ Bullet 3" },
         { "type": "text", "id": "bullet_3_title", "label": "Título bullet 3",      "default": "Dentist-Developed" },
         { "type": "text", "id": "bullet_3_desc",  "label": "Descripción bullet 3", "default": "Cleaner ingredients you can trust" },
+        { "type": "header", "content": "🎯 Promo (opcional)" },
+        { "type": "richtext", "id": "offer_list", "label": "Lista de la oferta", "info": "Se muestra debajo de los bullets. Usa lista con viñetas; negrita para el código." },
+        { "type": "text", "id": "closing_note", "label": "Frase de cierre (negrita)" },
+        { "type": "checkbox", "id": "promo_style", "label": "Estilo promo compacto", "default": false, "info": "Caja 648px, padding 24/32, blur 2px, pill fino y espaciados del diseño September Offer." },
+        { "type": "checkbox", "id": "mobile_stacked", "label": "Mobile: imagen arriba, contenido abajo", "default": false },
+        { "type": "color", "id": "text_color", "label": "Color de texto", "info": "Vacío = negro" },
         { "type": "header", "content": "🔵 Botón" },
         { "type": "text", "id": "btn_label", "label": "Texto del botón", "default": "SHOP NOW" },
         { "type": "url",  "id": "btn_url",   "label": "URL del botón" },
