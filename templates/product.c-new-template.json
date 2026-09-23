@@ -141,8 +141,8 @@
           "settings": {
             "tagline": "SEPTEMBER OFFER",
             "heading": "Buy 2 Cases, Get a Free Half Case",
-            "text": "Your pick: a half case of any toothpaste flavor or Dry Mouth Gel. Use code FREECASE at checkout. Valid through September 30.",
-            "code": "FREECASE",
+            "text": "Your pick: a half case of any toothpaste flavor or Dry Mouth Gel. Use code FREEHALFCASE at checkout. Valid through September 30.",
+            "code": "FREEHALFCASE",
             "exclude_products": [
               "dr-jens-nano-hydroxyapatite-mouth-gel"
             ],
