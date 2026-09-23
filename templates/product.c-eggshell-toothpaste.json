@@ -147,8 +147,8 @@
           "settings": {
             "tagline": "SEPTEMBER OFFER",
             "heading": "Buy 2 Cases, Get a Free Half Case",
-            "text": "Your pick: a half case of any toothpaste flavor or Dry Mouth Gel. Use code FREECASE at checkout. Valid through September 30.",
-            "code": "FREECASE",
+            "text": "Your pick: a half case of any toothpaste flavor or Dry Mouth Gel. Use code FREEHALFCASE at checkout. Valid through September 30.",
+            "code": "FREEHALFCASE",
             "end_date": "2026-09-30",
             "image": "shopify://shop_images/widget-_1.webp"
           }
