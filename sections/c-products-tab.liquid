@@ -378,19 +378,18 @@
 /* --- TOP BADGES --- */
 #Cproduct-tabs-{{ section.id }} .Cproduct-tabs__badges-top {
   position: absolute;
-  top: 8px;
+  top: 0;
+  left: 50%;
   display: flex;
   gap: 4px;
+  width: calc(100% - 24px);
   max-width: calc(100% - 24px);
   overflow: hidden;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  justify-content: center;
+  transform: translate(-50%, -50%);
   z-index: 2;
 }
-
-/* Alignment modifiers controlled by schema */
-#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__badges-top--left { left: 12px; }
-#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__badges-top--center { left: 50%; transform: translateX(-50%); }
-#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__badges-top--right { right: 12px; left: auto; }
 
 #Cproduct-tabs-{{ section.id }} .Cproduct-tabs__badges-top span {
   background: #F7F7F7;
@@ -402,8 +401,10 @@
   padding: 4px 8px;
   border-radius: 20px;
   line-height: 1;
-  max-width: 100%;
-  overflow-wrap: anywhere;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 #Cproduct-tabs-{{ section.id }} .Cproduct-tabs__badges-top span.special {
