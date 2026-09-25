@@ -378,28 +378,32 @@
 /* --- TOP BADGES --- */
 #Cproduct-tabs-{{ section.id }} .Cproduct-tabs__badges-top {
   position: absolute;
-  top: 0;
+  top: 8px;
   display: flex;
-  gap: 8px;
-  white-space: nowrap;
+  gap: 4px;
+  max-width: calc(100% - 24px);
+  overflow: hidden;
+  flex-wrap: wrap;
   z-index: 2;
 }
 
 /* Alignment modifiers controlled by schema */
-#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__badges-top--left { left: 20px; transform: translateY(-50%); }
-#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__badges-top--center { left: 50%; transform: translate(-50%, -50%); }
-#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__badges-top--right { right: 20px; left: auto; transform: translateY(-50%); }
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__badges-top--left { left: 12px; }
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__badges-top--center { left: 50%; transform: translateX(-50%); }
+#Cproduct-tabs-{{ section.id }} .Cproduct-tabs__badges-top--right { right: 12px; left: auto; }
 
 #Cproduct-tabs-{{ section.id }} .Cproduct-tabs__badges-top span {
   background: #F7F7F7;
   border: 1.5px solid #002C41;
   color: #002C41;
   font-family: 'Raleway', sans-serif;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 700;
-  padding: 6px 14px;
+  padding: 4px 8px;
   border-radius: 20px;
   line-height: 1;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 #Cproduct-tabs-{{ section.id }} .Cproduct-tabs__badges-top span.special {
@@ -495,6 +499,7 @@
   align-items: center;
   gap: 16px;
   width: 100%;
+  margin-top: auto;
 }
 
 #Cproduct-tabs-{{ section.id }} .Cproduct-tabs__add-btn {
