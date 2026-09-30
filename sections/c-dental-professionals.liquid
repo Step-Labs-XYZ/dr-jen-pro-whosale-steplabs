@@ -611,6 +611,7 @@
       >
 
         {%- for block in section.blocks -%}
+          {%- assign cdp_photo_alt = 'Portrait of ' | append: block.settings.name -%}
 
           {%- comment -%} ━━ TIPO 1: FOTO CIRCULAR + TEXTO ━━ {%- endcomment -%}
           {%- if block.type == 'photo_text' -%}
@@ -643,7 +644,7 @@
                     | image_url: width: 400
                     | image_tag:
                       class: 'c-dental-pros__photo c-dental-pros__photo--mob',
-                      alt: block.settings.name,
+                      alt: cdp_photo_alt,
                       loading: 'lazy',
                       widths: '200, 300, 400'
                   }}
@@ -659,7 +660,7 @@
                     | image_url: width: 400
                     | image_tag:
                       class: pt_desk_img_class,
-                      alt: block.settings.name,
+                      alt: cdp_photo_alt,
                       loading: 'lazy',
                       widths: '200, 300, 400'
                   }}
@@ -680,7 +681,7 @@
                 {%- endif -%}
 
                 {%- if pt_has_shopify_video -%}
-                  <video class="c-dental-pros__native-video" playsinline preload="none" controls>
+                  <video class="c-dental-pros__native-video" playsinline preload="none" controls aria-label="Video testimonial from {{ block.settings.name | escape }}">
                     {%- for source in block.settings.shopify_video.sources -%}
                       <source src="{{ source.url }}" type="{{ source.mime_type }}">
                     {%- endfor -%}
@@ -739,7 +740,7 @@
                     | image_url: width: 600
                     | image_tag:
                       class: 'c-dental-pros__poster c-dental-pros__poster--mob',
-                      alt: block.settings.name,
+                      alt: cdp_photo_alt,
                       loading: 'lazy',
                       widths: '300, 450, 600'
                   }}
@@ -757,7 +758,7 @@
                     | image_url: width: 800
                     | image_tag:
                       class: vi_desk_poster_class,
-                      alt: block.settings.name,
+                      alt: cdp_photo_alt,
                       loading: 'lazy',
                       widths: '400, 600, 800'
                   }}
@@ -767,7 +768,7 @@
                     | image_url: width: 800
                     | image_tag:
                       class: vi_desk_poster_class,
-                      alt: block.settings.name,
+                      alt: cdp_photo_alt,
                       loading: 'lazy',
                       widths: '400, 600, 800'
                   }}
@@ -787,7 +788,7 @@
                 {%- endif -%}
 
                 {%- if has_shopify_video -%}
-                  <video class="c-dental-pros__native-video" playsinline preload="none" controls>
+                  <video class="c-dental-pros__native-video" playsinline preload="none" controls aria-label="Video testimonial from {{ block.settings.name | escape }}">
                     {%- for source in block.settings.shopify_video.sources -%}
                       <source src="{{ source.url }}" type="{{ source.mime_type }}">
                     {%- endfor -%}
@@ -848,7 +849,7 @@
                       | image_url: width: 600
                       | image_tag:
                         class: 'c-dental-pros__poster c-dental-pros__poster--mob',
-                        alt: block.settings.name,
+                        alt: cdp_photo_alt,
                         loading: 'lazy',
                         widths: '300, 450, 600'
                     }}
@@ -866,7 +867,7 @@
                       | image_url: width: 800
                       | image_tag:
                         class: qt_desk_poster_class,
-                        alt: block.settings.name,
+                        alt: cdp_photo_alt,
                         loading: 'lazy',
                         widths: '400, 600, 800'
                     }}
@@ -876,7 +877,7 @@
                       | image_url: width: 800
                       | image_tag:
                         class: qt_desk_poster_class,
-                        alt: block.settings.name,
+                        alt: cdp_photo_alt,
                         loading: 'lazy',
                         widths: '400, 600, 800'
                     }}
@@ -896,7 +897,7 @@
                   {%- endif -%}
 
                   {%- if qt_has_shopify_video -%}
-                    <video class="c-dental-pros__native-video" playsinline preload="none" controls>
+                    <video class="c-dental-pros__native-video" playsinline preload="none" controls aria-label="Video testimonial from {{ block.settings.name | escape }}">
                       {%- for source in block.settings.shopify_video.sources -%}
                         <source src="{{ source.url }}" type="{{ source.mime_type }}">
                       {%- endfor -%}

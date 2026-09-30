@@ -1001,7 +1001,8 @@
             "image_desk": "shopify://shop_images/Group_1000007170_1.png",
             "width_desk": 80,
             "image_mob": "shopify://shop_images/Frame_1618873396.png",
-            "width_mob": 100
+            "width_mob": 100,
+            "image_alt": "September 2025 bitewing radiographs with red arrows marking interproximal carious lesions"
           }
         },
         "image_group_GU88nB": {
@@ -1012,7 +1013,8 @@
             "image_desk": "shopify://shop_images/Frame_2085665977_1.png",
             "width_desk": 100,
             "image_mob": "shopify://shop_images/Frame_2085665977.png",
-            "width_mob": 100
+            "width_mob": 100,
+            "image_alt": "December 2025 bitewing radiographs of the same teeth with green arrows showing the lesions stable or improving"
           }
         }
       },

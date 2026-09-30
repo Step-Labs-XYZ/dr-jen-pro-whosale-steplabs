@@ -551,7 +551,7 @@
             "type": "nav_link",
             "settings": {
               "label": "Privacy Policy",
-              "url": "shopify://pages/privacy-policy"
+              "url": "/policies/privacy-policy"
             }
           },
           "nav_link_CiwnYC": {

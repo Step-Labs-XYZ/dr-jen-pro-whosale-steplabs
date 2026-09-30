@@ -180,6 +180,7 @@
           {% endif %}
 
           {% if b.image_desk != blank or b.image_mob != blank %}
+            {% assign cs_alt = b.image_alt | default: b.label | default: b.image_desk.alt %}
             <div class="c-cs__img-group">
 
               {% if b.label != blank %}
@@ -188,13 +189,13 @@
 
               {% if b.image_desk != blank %}
                 <div class="c-cs__img-cell c-cs__img-desk" style="width: {{ b.width_desk }}%;">
-                  {{ b.image_desk | image_url: width: 1600 | image_tag: loading: 'lazy', alt: b.label }}
+                  {{ b.image_desk | image_url: width: 1600 | image_tag: loading: 'lazy', alt: cs_alt }}
                 </div>
               {% endif %}
 
               {% if b.image_mob != blank %}
                 <div class="c-cs__img-cell c-cs__img-mob" style="width: {{ b.width_mob }}%;">
-                  {{ b.image_mob | image_url: width: 800 | image_tag: loading: 'lazy', alt: b.label }}
+                  {{ b.image_mob | image_url: width: 800 | image_tag: loading: 'lazy', alt: cs_alt }}
                 </div>
               {% endif %}
 
@@ -251,7 +252,8 @@
         { "type": "image_picker", "id": "image_desk", "label": "Imagen desktop" },
         { "type": "range", "id": "width_desk", "label": "Ancho desktop (%)", "min": 10, "max": 100, "step": 1, "default": 100 },
         { "type": "image_picker", "id": "image_mob", "label": "Imagen mobile" },
-        { "type": "range", "id": "width_mob", "label": "Ancho mobile (%)", "min": 10, "max": 100, "step": 1, "default": 100 }
+        { "type": "range", "id": "width_mob", "label": "Ancho mobile (%)", "min": 10, "max": 100, "step": 1, "default": 100 },
+        { "type": "text", "id": "image_alt", "label": "Texto alternativo (alt)", "info": "Describe las imágenes para lectores de pantalla. Si está vacío se usa la etiqueta." }
       ]
     }
   ],
