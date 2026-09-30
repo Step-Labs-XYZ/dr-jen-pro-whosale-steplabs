@@ -3544,6 +3544,7 @@ span.c-prod__card-per-unit{
               <div class="c-subwidget" {{ block.shopify_attributes }}
                 data-gift-trigger-mode="{{ block.settings.gift_trigger_mode | default: 'fixed' }}"
                 data-gift-trigger-qtys="{{ block.settings.gift_trigger_quantities | default: '3,4' | escape }}"
+                data-interval-suffix="{% if block.settings.show_interval_suffix %}true{% else %}false{% endif %}"
                 style="
                   --csw-badge-bg: {{ block.settings.badge_bg_color | default: '#0b63ce' }};
                   --csw-badge-text: {{ block.settings.badge_text_color | default: '#ffffff' }};
@@ -4416,6 +4417,7 @@ overrideShopifyPadding();
       "settings": [
         { "type": "header", "content": "Badge de ahorro" },
         { "type": "text", "id": "badge_text", "label": "Texto badge (usa {PERCENT})", "default": "Save up to {PERCENT}%" },
+        { "type": "checkbox", "id": "show_interval_suffix", "label": "Frecuencia junto al precio", "info": "Ej: $190.00/mo o $190.00/2 mo, según el plan elegido.", "default": false },
         { "type": "color", "id": "badge_bg_color", "label": "Color fondo badge", "default": "#0b63ce" },
         { "type": "color", "id": "badge_text_color", "label": "Color texto badge", "default": "#ffffff" },
         { "type": "text", "id": "per_day_label", "label": "Texto precio por día (opcional)", "info": "Vacío = oculto." },

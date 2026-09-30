@@ -229,7 +229,8 @@
             "benefit_2": "Swap or cancel anytime",
             "benefit_3": "Delivered on time every month",
             "delivery_label": "Deliver every:",
-            "onetime_label": "Buy one time"
+            "onetime_label": "Buy one time",
+            "show_interval_suffix": true
           }
         },
         "terms_text_D4JHqM": {

@@ -542,6 +542,16 @@
       const benefit1El = cswWidget.querySelector('.js-csw-benefit-1');
       const benefit1NumEl = cswWidget.querySelector('.js-csw-benefit-1-num');
       const cardEls = cswWidget.querySelectorAll('.js-csw-card');
+      const showIntervalSuffix = cswWidget.dataset.intervalSuffix === 'true';
+
+      // "Delivery every 2 months - 5% off" -> "/2 mo"; sin numero cuenta como 1 -> "/mo"
+      const intervalSuffix = (plan) => {
+        const match = /every\s+(\d+)?\s*(day|week|month|year)/i.exec((plan && plan.name) || '');
+        if (!match) return '';
+        const unit = { day: 'day', week: 'wk', month: 'mo', year: 'yr' }[match[2].toLowerCase()];
+        const count = parseInt(match[1], 10);
+        return count > 1 ? `/${count} ${unit}` : `/${unit}`;
+      };
       const triggerMode = cswWidget.dataset.giftTriggerMode || 'fixed';
       const triggerQtys = (cswWidget.dataset.giftTriggerQtys || '3,4')
         .split(',').map((s) => parseInt(s.trim(), 10)).filter((n) => !Number.isNaN(n));
@@ -593,7 +603,9 @@
         const plan = plans.find((p) => String(p.id) === String(selectedId)) || plans[0];
         if (plan) {
           if (freqSelect) freqSelect.value = plan.id;
-          if (subPriceEl) subPriceEl.textContent = plan.price || '';
+          if (subPriceEl) {
+            subPriceEl.textContent = plan.price ? plan.price + (showIntervalSuffix ? intervalSuffix(plan) : '') : '';
+          }
           if (subCompareEl) subCompareEl.textContent = plan.compare_at_price || '';
         }
         updatePurchaseTypeUI(plan);
