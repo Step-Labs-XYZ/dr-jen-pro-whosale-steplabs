@@ -657,7 +657,7 @@
           "type": "expandable_group",
           "settings": {
             "title": "All Extracts",
-            "items": "Stevia Rebaudiana Leaf Extract\nAnise Extract\nPapaya Extract\nBlack Cherry Extract\nGlycyhizein (Chinese Licorice Root Extract)",
+            "items": "Stevia Rebaudiana Leaf Extract\nAnise Extract\nPapaya Extract\nBlack Cherry Extract\nGlycyrrhizin (Chinese Licorice Root Extract)",
             "open_by_default": false
           }
         },

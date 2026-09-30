@@ -297,15 +297,15 @@
           "type": "feature",
           "settings": {
             "title": "Fluoride-Free Formula",
-            "body": "<p>Advanced oral health without fluoride, naturally derived Nanohydroxyapatite at 10% premium concentration.</p>",
+            "body": "<p>Advanced oral health without fluoride, premium-grade nano-hydroxyapatite at 10% concentration.</p>",
             "open_by_default": false
           }
         },
         "feature_mUUTap": {
           "type": "feature",
           "settings": {
-            "title": "Naturally Derived",
-            "body": "<p>No synthetic compromises and no SLS.</p>",
+            "title": "Clean Formula",
+            "body": "<p>No SLS, no artificial sweeteners and no synthetic flavoring.</p>",
             "open_by_default": false
           }
         },
@@ -542,7 +542,7 @@
           "type": "expandable_group",
           "settings": {
             "title": "All Extracts",
-            "items": "Stevia Rebaudiana Leaf Extract\nAnise Extract\nPapaya Extract\nBlack Cherry Extract\nGlycyhizein (Chinese Licorice Root Extract)",
+            "items": "Stevia Rebaudiana Leaf Extract\nAnise Extract\nPapaya Extract\nBlack Cherry Extract\nGlycyrrhizin (Chinese Licorice Root Extract)",
             "open_by_default": false
           }
         },

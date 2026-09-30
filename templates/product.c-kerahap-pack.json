@@ -758,7 +758,7 @@
           "type": "expandable_group",
           "settings": {
             "title": "All Extracts",
-            "items": "Anise Extract\nAloe Vera (Aloe Barbadensis)\nGlycyhizein (Chinese Licorice Root Extract)",
+            "items": "Anise Extract\nAloe Vera (Aloe Barbadensis)\nGlycyrrhizin (Chinese Licorice Root Extract)",
             "open_by_default": false
           }
         },
