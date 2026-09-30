@@ -1,0 +1,1507 @@
+{{ 'https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap' | stylesheet_tag }}
+
+<div class="silk-comparison-section-{{ section.id }}{% if section.settings.design_v2 %} silk--v2{% endif %}">
+  <div class="silk-comparison-container">
+    
+    <!-- COLUMNA IZQUIERDA: Textos fijos e Ingredientes -->
+    <div class="silk-left-column">
+      {%- if section.settings.main_title != blank -%}
+        <h2 class="silk-main-title">{{ section.settings.main_title }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.main_description != blank -%}
+        <div class="silk-main-description">
+          {{ section.settings.main_description }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.ingredients_text != blank -%}
+        <button type="button" class="silk-ingredients-link js-open-ingredients-modal">
+          {{ section.settings.ingredients_text }} <span>→</span>
+        </button>
+      {%- endif -%}
+
+      <!-- Caja de Ingredientes / Características Izquierda -->
+      <div class="silk-ingredients-box">
+        {%- if section.settings.box_tag != blank -%}
+          <div class="silk-box-tag">{{ section.settings.box_tag }}</div>
+        {%- endif -%}
+
+        <div class="silk-ingredient-items">
+          <div class="silk-ingredient-row">
+            <div class="silk-ing-number">{{ section.settings.item_1_num }}</div>
+            <div class="silk-ing-content">
+              <h4>{{ section.settings.item_1_title }}</h4>
+              <p>{{ section.settings.item_1_desc }}</p>
+            </div>
+          </div>
+          <div class="silk-ingredient-row">
+            <div class="silk-ing-number">{{ section.settings.item_2_num }}</div>
+            <div class="silk-ing-content">
+              <h4>{{ section.settings.item_2_title }}</h4>
+              <p>{{ section.settings.item_2_desc }}</p>
+            </div>
+          </div>
+          <div class="silk-ingredient-row">
+            <div class="silk-ing-number">{{ section.settings.item_3_num }}</div>
+            <div class="silk-ing-content">
+              <h4>{{ section.settings.item_3_title }}</h4>
+              <p>{{ section.settings.item_3_desc }}</p>
+            </div>
+          </div>
+          <div class="silk-ingredient-row">
+            <div class="silk-ing-number">{{ section.settings.item_4_num }}</div>
+            <div class="silk-ing-content">
+              <h4>{{ section.settings.item_4_title }}</h4>
+              <p>{{ section.settings.item_4_desc }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLUMNA DERECHA: Pestañas + Imagen con Hotspots -->
+    <div class="silk-right-column">
+      {%- if section.blocks.size > 0 -%}
+        
+        <!-- Paso 1: Recopilar todos los bloques de tipo tab_item para numerarlos -->
+        {%- assign tabs_array = '' -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'tab_item' -%}
+            {%- assign tabs_array = tabs_array | append: block.id | append: ',' -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- assign tabs_list = tabs_array | split: ',' -%}
+
+        <!-- Botones de Pestañas Principales -->
+        <div class="silk-tabs-nav">
+          {%- for tab_id in tabs_list -%}
+            {%- if tab_id != '' -%}
+              {%- assign current_tab_index = forloop.index0 -%}
+              {%- for block in section.blocks -%}
+                {%- if block.id == tab_id -%}
+                  <button class="silk-tab-btn {% if current_tab_index == 0 %}active{% endif %}" data-tab="tab-{{ section.id }}-{{ tab_id }}" {{ block.shopify_attributes }}>
+                    {{ block.settings.tab_title }}
+                  </button>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        <!-- Contenedor de las Pestañas -->
+        <div class="silk-tabs-content-wrapper">
+          {%- for tab_id in tabs_list -%}
+            {%- if tab_id != '' -%}
+              {%- assign current_tab_index = forloop.index0 -%}
+              {%- assign tab_block = nil -%}
+              {%- for block in section.blocks -%}
+                {%- if block.id == tab_id -%}
+                  {%- assign tab_block = block -%}
+                {%- endif -%}
+              {%- endfor -%}
+
+              {%- if tab_block != nil -%}
+                <div class="silk-tab-pane {% if current_tab_index == 0 %}active{% endif %}" id="tab-{{ section.id }}-{{ tab_id }}">
+                  
+                  <!-- Contenedor de Imagen con sus Hotspots -->
+                  <div class="silk-hotspot-image-container">
+                    {%- if tab_block.settings.tab_image != blank -%}
+                      <img src="{{ tab_block.settings.tab_image | image_url: width: 1000 }}" alt="{{ tab_block.settings.tab_title | escape }}" loading="lazy" class="silk-tab-image">
+                    {%- else -%}
+                      {{ 'image' | placeholder_svg_tag: 'silk-tab-image placeholder-svg' }}
+                    {%- endif -%}
+
+                    {%- if tab_block.settings.image_caption != blank -%}
+                      <span class="silk-image-caption" style="left: {{ tab_block.settings.caption_x | default: 33 }}%; top: {{ tab_block.settings.caption_y | default: 73 }}%;">{{ tab_block.settings.image_caption }}</span>
+                    {%- endif -%}
+
+                    <!-- Renderizar Hotspots que pertenecen a este Tab -->
+                    {%- assign target_tab_value = current_tab_index | plus: 1 | append: '' -%}
+                    {%- assign hotspot_counter = 0 -%}
+                    {%- for hotspot_block in section.blocks -%}
+                      {%- if hotspot_block.type == 'hotspot_point' and hotspot_block.settings.parent_tab_num == target_tab_value -%}
+                        <div class="silk-hotspot-point {% if hotspot_counter == 0 %}active{% endif %}" 
+                             style="--desktop-x: {{ hotspot_block.settings.pos_x_desktop }}%; --desktop-y: {{ hotspot_block.settings.pos_y_desktop }}%; --mobile-x: {{ hotspot_block.settings.pos_x_mobile }}%; --mobile-y: {{ hotspot_block.settings.pos_y_mobile }}%;"
+                             data-target="info-{{ section.id }}-{{ hotspot_block.id }}"
+                             {{ hotspot_block.shopify_attributes }}>
+                          <span class="silk-hotspot-dot" style="background-color: {{ hotspot_block.settings.dot_color }};"></span>
+                        </div>
+                        {%- assign hotspot_counter = hotspot_counter | plus: 1 -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </div>
+
+                  <!-- Contenedores de Información que cambian al hacer clic en los Hotspots -->
+                  {%- assign info_counter = 0 -%}
+                  {%- for hotspot_block in section.blocks -%}
+                    {%- if hotspot_block.type == 'hotspot_point' and hotspot_block.settings.parent_tab_num == target_tab_value -%}
+                      <div class="silk-hotspot-content-box {% if info_counter == 0 %}active{% endif %}" id="info-{{ section.id }}-{{ hotspot_block.id }}">
+                        <!-- Tarjeta de Texto -->
+                        <div class="silk-tab-text-card">
+                          <div class="silk-card-header">
+                            <span class="silk-bullet-dot" style="background-color: {{ hotspot_block.settings.dot_color }};"></span>
+                            <h3>{{ hotspot_block.settings.card_title }}</h3>
+                          </div>
+                          <p>{{ hotspot_block.settings.card_desc }}</p>
+                        </div>
+
+                        <!-- Lista de Checks / Cruces -->
+                        <div class="silk-checklist">
+                          {{ hotspot_block.settings.checklist_html }}
+                        </div>
+                      </div>
+                      {%- assign info_counter = info_counter | plus: 1 -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+
+                </div>
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+  </div>
+
+  <!-- POPUP DE INGREDIENTES (Estructura idéntica a la solicitada) -->
+  <div class="c-prod__ingredients-modal" data-ingredients-modal="" aria-hidden="true" style="display: none;">
+    <div class="c-prod__ingredients-modal-backdrop" data-ingredients-close=""></div>
+    <div class="c-prod__ingredients-modal-card" role="dialog" aria-modal="true" aria-label="Ingredient facts">
+      <button type="button" class="c-prod__ingredients-modal-close" data-ingredients-close="" aria-label="Close">×</button>
+      <p class="c-prod__ingredients-modal-subtitle">INGREDIENT FACTS</p>
+      <h3 class="c-prod__ingredients-modal-title">100% Italian Silk Floss</h3>
+
+      <div class="c-prod__ingredients-modal-content">
+        <div class="c-prod__ingredients-flavors">
+          <button type="button" class="c-prod__ing-tab-btn is-active js-ing-tab-btn-template" data-target="flavor-1" style="--flavor-border-color: #002c41; --flavor-bg-color: #f4f8fb;">
+            <span class="c-prod__ing-tab-dot" style="background-color: #002c41"></span>
+            Cool Mint
+          </button>
+          <button type="button" class="c-prod__ing-tab-btn js-ing-tab-btn-template" data-target="flavor-2" style="--flavor-border-color: #ffb783; --flavor-bg-color: #f5d9c5;">
+            <span class="c-prod__ing-tab-dot" style="background-color: #ffb783"></span>
+            Papaya
+          </button>
+          <button type="button" class="c-prod__ing-tab-btn js-ing-tab-btn-template" data-target="flavor-3" style="--flavor-border-color: #b50859; --flavor-bg-color: #c689a5;">
+            <span class="c-prod__ing-tab-dot" style="background-color: #b50859"></span>
+            Black Cherry
+          </button>
+        </div>
+
+        <div class="c-prod__ingredients-table">
+          <div class="c-prod__ing-tab-content is-active js-ing-tab-content-template" id="flavor-1">
+            <div class="c-prod__ingredients-section-title">BASE &amp; TEXTURE</div>
+            <div class="c-prod__ing-item-wrap"><div class="c-prod__ing-item-header"><span class="c-prod__ingredients-name"><span class="c-prod__ingredients-bullet"></span>Premium Italian Silk</span><span class="c-prod__ingredients-tag">Fiber Base</span></div></div>
+            <div class="c-prod__ing-item-wrap"><div class="c-prod__ing-item-header"><span class="c-prod__ingredients-name"><span class="c-prod__ingredients-bullet"></span>Avocado Oil</span><span class="c-prod__ingredients-tag">Coating</span></div></div>
+            <div class="c-prod__ingredients-section-title">FLAVOR &amp; FRESHNESS</div>
+            <div class="c-prod__ing-item-wrap"><div class="c-prod__ing-item-header"><span class="c-prod__ingredients-name"><span class="c-prod__ingredients-bullet"></span>Mint</span><span class="c-prod__ingredients-tag">Flavor</span></div></div>
+          </div>
+
+          <div class="c-prod__ing-tab-content js-ing-tab-content-template" id="flavor-2">
+            <div class="c-prod__ingredients-section-title">BASE &amp; TEXTURE</div>
+            <div class="c-prod__ing-item-wrap"><div class="c-prod__ing-item-header"><span class="c-prod__ingredients-name"><span class="c-prod__ingredients-bullet"></span>Premium Italian Silk</span><span class="c-prod__ingredients-tag">Fiber Base</span></div></div>
+            <div class="c-prod__ing-item-wrap"><div class="c-prod__ing-item-header"><span class="c-prod__ingredients-name"><span class="c-prod__ingredients-bullet"></span>Avocado Oil</span><span class="c-prod__ingredients-tag">Coating</span></div></div>
+            <div class="c-prod__ingredients-section-title">FLAVOR &amp; FRESHNESS</div>
+            <div class="c-prod__ing-item-wrap"><div class="c-prod__ing-item-header"><span class="c-prod__ingredients-name"><span class="c-prod__ingredients-bullet"></span>Papaya</span><span class="c-prod__ingredients-tag">Flavor</span></div></div>
+          </div>
+
+          <div class="c-prod__ing-tab-content js-ing-tab-content-template" id="flavor-3">
+            <div class="c-prod__ingredients-section-title">BASE &amp; TEXTURE</div>
+            <div class="c-prod__ing-item-wrap"><div class="c-prod__ing-item-header"><span class="c-prod__ingredients-name"><span class="c-prod__ingredients-bullet"></span>Premium Italian Silk</span><span class="c-prod__ingredients-tag">Fiber Base</span></div></div>
+            <div class="c-prod__ing-item-wrap"><div class="c-prod__ing-item-header"><span class="c-prod__ingredients-name"><span class="c-prod__ingredients-bullet"></span>Avocado Oil</span><span class="c-prod__ingredients-tag">Coating</span></div></div>
+            <div class="c-prod__ingredients-section-title">FLAVOR &amp; FRESHNESS</div>
+            <div class="c-prod__ing-item-wrap"><div class="c-prod__ing-item-header"><span class="c-prod__ingredients-name"><span class="c-prod__ingredients-bullet"></span>Black Cherry</span><span class="c-prod__ingredients-tag">Flavor</span></div></div>
+          </div>
+
+          <div class="c-prod__ingredients-negative">
+            <p class="c-prod__ingredients-negative-title">WHAT'S NOT IN IT</p>
+            <div class="c-prod__ingredients-negative-grid">
+              <span class="c-prod__ingredients-negative-item">No Plastic</span>
+              <span class="c-prod__ingredients-negative-item">No Fillers</span>
+              <span class="c-prod__ingredients-negative-item">No Synthetic Coatings</span>
+              <span class="c-prod__ingredients-negative-item">No Artificial Dyes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const sectionContainer = document.querySelector(".silk-comparison-section-{{ section.id }}");
+    if (!sectionContainer) return;
+
+    // Control de Pestañas Principales
+    const tabButtons = sectionContainer.querySelectorAll(".silk-tab-btn");
+    const tabPanes = sectionContainer.querySelectorAll(".silk-tab-pane");
+
+    tabButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const targetId = button.getAttribute("data-tab");
+        tabButtons.forEach(btn => btn.classList.remove("active"));
+        tabPanes.forEach(pane => pane.classList.remove("active"));
+        button.classList.add("active");
+        const targetPane = sectionContainer.querySelector("#" + targetId);
+        if (targetPane) targetPane.classList.add("active");
+      });
+    });
+
+    // Control de Hotspots
+    tabPanes.forEach(pane => {
+      const hotspots = pane.querySelectorAll(".silk-hotspot-point");
+      const contentBoxes = pane.querySelectorAll(".silk-hotspot-content-box");
+
+      hotspots.forEach(hotspot => {
+        hotspot.addEventListener("click", () => {
+          const targetInfoId = hotspot.getAttribute("data-target");
+          hotspots.forEach(h => h.classList.remove("active"));
+          contentBoxes.forEach(box => box.classList.remove("active"));
+          hotspot.classList.add("active");
+          const targetBox = pane.querySelector("#" + targetInfoId);
+          if (targetBox) targetBox.classList.add("active");
+        });
+      });
+    });
+
+    // Control del Modal de Ingredientes
+    const modal = sectionContainer.querySelector("[data-ingredients-modal]");
+    const openBtn = sectionContainer.querySelector(".js-open-ingredients-modal");
+    const closeElements = sectionContainer.querySelectorAll("[data-ingredients-close]");
+
+    if (openBtn && modal) {
+      openBtn.addEventListener("click", () => {
+        modal.style.display = "flex";
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      });
+    }
+
+    closeElements.forEach(el => {
+      el.addEventListener("click", () => {
+        if (modal) {
+          modal.style.display = "none";
+          modal.setAttribute("aria-hidden", "true");
+          document.body.style.overflow = "";
+        }
+      });
+    });
+
+    // Pestañas de Sabores dentro del Modal
+    const flavorBtns = sectionContainer.querySelectorAll(".c-prod__ing-tab-btn");
+    const flavorContents = sectionContainer.querySelectorAll(".c-prod__ing-tab-content");
+
+    flavorBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const targetFlavor = btn.getAttribute("data-target");
+        flavorBtns.forEach(b => b.classList.remove("is-active"));
+        flavorContents.forEach(c => c.classList.remove("is-active"));
+
+        btn.classList.add("is-active");
+        const targetContent = sectionContainer.querySelector("#" + targetFlavor);
+        if (targetContent) targetContent.classList.add("is-active");
+      });
+    });
+  });
+</script>
+
+<style>
+  .silk-comparison-section-{{ section.id }} {
+    width: 100%;
+    padding: {{ section.settings.section_padding_desktop }}px 20px;
+    background-color: {{ section.settings.background_color }};
+    font-family: 'Raleway', sans-serif;
+  }
+
+  .silk-comparison-container {
+    max-width: {{ section.settings.container_max_width }}px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  /* Columna Izquierda */
+  .silk-left-column {
+    flex: 1;
+    max-width: 520px;
+    text-align: left;
+  }
+
+  .silk-main-title {
+    color: {{ section.settings.title_color }};
+    font-size: {{ section.settings.title_size_desktop }}px;
+    font-weight: 400;
+    line-height: 120%;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
+  .silk-main-title strong, .silk-main-title b {
+    font-weight: 700;
+  }
+
+  .silk-main-description {
+    color: {{ section.settings.text_color }};
+    font-size: {{ section.settings.desc_size_desktop }}px;
+    font-weight: 400;
+    line-height: 140%;
+    margin-bottom: 16px;
+    text-align: left;
+  }
+
+  .silk-ingredients-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: {{ section.settings.title_color }};
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-bottom: 30px;
+    letter-spacing: 0.5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  /* Caja Blanca de Ingredientes con Etiqueta Centrada */
+  .silk-ingredients-box {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    text-align: left;
+    margin-top: 20px;
+  }
+
+  .silk-box-tag {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #002C41;
+    color: #FFF;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  .silk-ingredient-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid #EBF0F3;
+    text-align: left;
+  }
+
+  .silk-ingredient-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .silk-ingredient-row:first-child {
+    padding-top: 10px;
+  }
+
+  .silk-ing-number {
+    font-size: {{ section.settings.box_num_size_desktop }}px;
+    font-weight: 700;
+    color: {{ section.settings.title_color }};
+    min-width: 80px;
+    line-height: 110%;
+  }
+
+  .silk-ing-content h4 {
+    font-size: {{ section.settings.box_title_size_desktop }}px;
+    font-weight: 700;
+    color: {{ section.settings.title_color }};
+    margin: 0 0 4px 0;
+    text-align: left;
+  }
+
+  .silk-ing-content p {
+    font-size: {{ section.settings.box_desc_size_desktop }}px;
+    font-weight: 400;
+    color: {{ section.settings.text_color }};
+    margin: 0;
+    line-height: 130%;
+    text-align: left;
+  }
+
+  /* Columna Derecha (Tabs y Hotspots) */
+  .silk-right-column {
+    flex: 1;
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    max-width: 580px;
+  }
+
+  .silk-tabs-nav {
+    display: flex;
+    background: #F4F6F8;
+    padding: 6px;
+    border-radius: 40px;
+    margin-bottom: 30px;
+    gap: 6px;
+  }
+
+  .silk-tab-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 14px 20px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 13px;
+    text-transform:uppercase;
+    font-weight: 700;
+    color: #555;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+
+  .silk-tab-btn.active {
+    background: #002C41;
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(0,44,65,0.2);
+  }
+
+  .silk-tab-pane {
+    display: none;
+  }
+
+  .silk-tab-pane.active {
+    display: block;
+    animation: fadeInSilk 0.4s ease;
+  }
+
+  @keyframes fadeInSilk {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .silk-hotspot-image-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 24px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .silk-tab-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+  }
+
+  .silk-hotspot-point {
+    position: absolute;
+    left: var(--desktop-x);
+    top: var(--desktop-y);
+    transform: translate(-50%, -50%);
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.2s ease;
+  }
+
+  .silk-hotspot-point:hover {
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+
+  .silk-hotspot-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 3px solid #FFFFFF;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    display: block;
+    transition: all 0.3s ease;
+  }
+
+  .silk-hotspot-point.active .silk-hotspot-dot {
+    width: 18px;
+    height: 18px;
+    box-shadow: 0 0 0 4px rgba(255,255,255,0.4), 0 4px 12px rgba(0,0,0,0.4);
+  }
+
+  .silk-hotspot-content-box {
+    display: none;
+  }
+
+  .silk-hotspot-content-box.active {
+    display: block;
+    animation: fadeInSilk 0.3s ease;
+  }
+
+  .silk-tab-text-card {
+    background: #F0F5F7;
+    border-radius: 12px;
+    padding: 22px;
+    margin-bottom: 24px;
+    text-align: left;
+  }
+
+  .silk-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .silk-bullet-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .silk-tab-text-card h3 {
+    font-size: {{ section.settings.card_title_size_desktop }}px;
+    font-weight: 700;
+    color: {{ section.settings.title_color }};
+    margin: 0;
+    text-align: left;
+  }
+
+  .silk-tab-text-card p {
+    font-size: {{ section.settings.card_desc_size_desktop }}px;
+    font-weight: 400;
+    color: {{ section.settings.text_color }};
+    margin: 0;
+    line-height: 140%;
+    text-align: left;
+  }
+
+  .silk-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+  }
+
+  .silk-checklist p, .silk-checklist ul {
+    margin: 0;
+    font-size: {{ section.settings.checklist_size_desktop }}px;
+    color: {{ section.settings.text_color }};
+    line-height: 140%;
+    text-align: left;
+  }
+
+  .silk-checklist ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .silk-checklist li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    text-align: left;
+  }
+
+  /* ESTILOS EXACTOS DEL POPUP DE INGREDIENTES */
+  .c-prod__ingredients-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .c-prod__ingredients-modal[aria-hidden="true"] {
+    display: none !important;
+  }
+
+  .c-prod__ingredients-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+  }
+
+  .c-prod__ingredients-modal-card {
+    position: relative;
+    background: #FFFFFF;
+    width: 90%;
+    max-width: 520px;
+    max-height: 85vh;
+    overflow-y: auto;
+    border-radius: 16px;
+    padding: 32px;
+    z-index: 2;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.25);
+    text-align: left;
+    box-sizing: border-box;
+  }
+
+  .c-prod__ingredients-modal-close {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 26px;
+    cursor: pointer;
+    color: #333;
+    line-height: 1;
+    padding: 0;
+  }
+
+  .c-prod__ingredients-modal-subtitle {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #777;
+    margin: 0 0 6px 0;
+    letter-spacing: 0.5px;
+    text-align: left;
+  }
+
+  .c-prod__ingredients-modal-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #002C41;
+    margin: 0 0 20px 0;
+    text-align: left;
+  }
+
+  .c-prod__ingredients-flavors {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .c-prod__ing-tab-btn {
+    flex: 1;
+    padding: 10px 8px;
+    border-radius: 10px;
+    border: 1px solid var(--flavor-border-color);
+    background: transparent;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    color: #333;
+  }
+
+  .c-prod__ing-tab-btn.is-active {
+    background: var(--flavor-bg-color);
+  }
+
+  .c-prod__ing-tab-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .c-prod__ing-tab-content {
+    display: none;
+  }
+
+  .c-prod__ing-tab-content.is-active {
+    display: block;
+  }
+
+  .c-prod__ingredients-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #888;
+    margin: 16px 0 10px 0;
+    letter-spacing: 0.5px;
+    text-align: left;
+  }
+
+  .c-prod__ing-item-wrap {
+    padding: 10px 0;
+    border-bottom: 1px solid #f2f2f2;
+  }
+
+  .c-prod__ing-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #222;
+    text-align: left;
+  }
+
+  .c-prod__ingredients-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+  }
+
+  .c-prod__ingredients-bullet {
+    width: 6px;
+    height: 6px;
+    background: #002C41;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .c-prod__ingredients-tag {
+    font-size: 12px;
+    color: #666;
+    font-weight: 400;
+  }
+
+  .c-prod__ingredients-negative {
+    margin-top: 24px;
+    background: #F8F9FA;
+    padding: 16px;
+    border-radius: 12px;
+    text-align: left;
+  }
+
+  .c-prod__ingredients-negative-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #666;
+    margin: 0 0 10px 0;
+    letter-spacing: 0.5px;
+    text-align: left;
+  }
+
+  .c-prod__ingredients-negative-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .c-prod__ingredients-negative-item {
+    background: #FFFFFF;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #444;
+    border: 1px solid #E5E9EC;
+  }
+
+  /* Responsive Mobile: Forzar alineación a la izquierda */
+  @media screen and (max-width: 992px) {
+    .silk-comparison-container {
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .silk-left-column, .silk-right-column {
+      max-width: 100%;
+      width: 100%;
+      text-align: left !important;
+    }
+
+    .silk-right-column {
+      padding: 20px;
+    }
+
+    .silk-main-title {
+      font-size: {{ section.settings.title_size_mobile }}px;
+      text-align: left !important;
+    }
+
+    .silk-main-description {
+      font-size: {{ section.settings.desc_size_mobile }}px;
+      text-align: left !important;
+    }
+
+    .silk-ing-number {
+      font-size: {{ section.settings.box_num_size_mobile }}px;
+      text-align: left !important;
+    }
+
+    .silk-ing-content h4 {
+      font-size: {{ section.settings.box_title_size_mobile }}px;
+      text-align: left !important;
+    }
+
+    .silk-ing-content p {
+      font-size: {{ section.settings.box_desc_size_mobile }}px;
+      text-align: left !important;
+    }
+
+    .silk-tab-text-card h3 {
+      font-size: {{ section.settings.card_title_size_mobile }}px;
+      text-align: left !important;
+    }
+
+    .silk-tab-text-card p {
+      font-size: {{ section.settings.card_desc_size_mobile }}px;
+      text-align: left !important;
+    }
+
+    .silk-checklist p, .silk-checklist ul, .silk-checklist li {
+      font-size: {{ section.settings.checklist_size_mobile }}px;
+      text-align: left !important;
+    }
+
+    .silk-ingredients-link {
+      display: inline-flex;
+      justify-content: flex-start;
+      text-align: left !important;
+    }
+
+    .silk-hotspot-point {
+      left: var(--mobile-x);
+      top: var(--mobile-y);
+    }
+
+    .c-prod__ingredients-modal-card {
+      width: 95%;
+      padding: 24px 20px;
+    }
+  }
+
+/* =========================================
+   DISEÑO V2 — valores del nodo de Figma
+   ========================================= */
+{%- if section.settings.design_v2 -%}
+.silk-comparison-section-{{ section.id }}.silk--v2 { padding: 64px 0; background: #F7F7F7; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-comparison-container { max-width: 1440px; padding: 0 64px; gap: 0; justify-content: space-between; align-items: center; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-left-column { width: auto; max-width: none; flex: 0 1 47.6372%; display: flex; flex-direction: column; gap: 16px; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-right-column { box-shadow: none; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-main-title { font-size: 32px; font-weight: 600; line-height: 1.2; color: #002C41; margin: 0; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-main-description { font-size: 16px; font-weight: 400; line-height: 1.2; color: #231F20; margin: 0; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-main-description p { margin: 0; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-ingredients-link {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 12px 0; border: 0; border-radius: 0;
+  font-size: 12px; font-weight: 700; text-transform: uppercase; text-decoration: underline; color: #002C41;
+  align-self: flex-start;
+}
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-ingredients-box { padding: 24px; border-radius: 8px; background: #FFFFFF; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-ingredient-items { display: flex; flex-direction: column; gap: 16px; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-ingredient-row { gap: 10px; padding: 0; align-items: center; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-ingredient-row + .silk-ingredient-row { border-top: 1px solid #D6ECE6; padding-top: 16px; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-ing-number { font-size: 32px; font-weight: 600; line-height: 1.2; color: #002C41; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-ing-content h4 { font-size: 16px; font-weight: 700; line-height: 1.2; color: #002C41; margin: 0; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-ing-content p { font-size: 16px; font-weight: 400; line-height: 1.2; color: #002C41; margin: 0; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-box-tag {
+  padding: 4px 24px; border-radius: 99px; background: #002C41; color: #FFFFFF;
+  font-size: 14px; font-weight: 700; text-transform: uppercase;
+}
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-right-column { width: auto; max-width: none; flex: 0 1 45.2744%; padding: 24px; border-radius: 12px; background: #FFFFFF; display: flex; flex-direction: column; gap: 12px; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-tabs-nav { background: #F7F7F7; border-radius: 54px; padding: 0; gap: 0; justify-content: space-between; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-tab-btn {
+  flex: 1 1 0; height: 52px; padding: 16px 24px; border-radius: 54px;
+  font-size: 14px; font-weight: 700; text-transform: uppercase; background: #F7F7F7; color: #002C41;
+}
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-tab-btn.active { background: #002C41; color: #D6ECE6; box-shadow: none; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-hotspot-image-container,
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-tab-image { height: 167px; border-radius: 12px; }
+.silk-comparison-section-{{ section.id }} .silk-image-caption {
+  position: absolute; transform: translate(-50%, -50%); max-width: 174px;
+  font-size: 14px; line-height: 1.2; color: #002C41; text-align: center; pointer-events: none; z-index: 2;
+}
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-image-caption { font-size: 14px; }
+@media (max-width: 899px) {
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-image-caption { font-size: 12px; max-width: 174px; }
+}
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-hotspot-dot { width: 12px; height: 12px; border-width: 6px; border-color: rgba(255,255,255,0.66); }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-tab-text-card { padding: 12px 24px; border-radius: 8px; background: rgba(214, 236, 230, 0.44); }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-card-header { gap: 8px; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-bullet-dot { width: 12px; height: 12px; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-card-header h3 { font-size: 18px; font-weight: 400; line-height: 1.2; color: #000000; margin: 0; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-tab-text-card p { font-size: 14px; font-weight: 400; line-height: 1.2; color: #000000; margin: 8px 0 0; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-checklist { gap: 8px; font-size: 16px; line-height: 1.2; color: #000000; }
+
+/* el CSS base apila las columnas a <=992; el v2 mantiene el layout del nodo desde 900
+   para que las 7 secciones de la PDP cambien a mobile en el mismo ancho */
+@media (min-width: 900px) {
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-comparison-container { flex-direction: row; gap: 0; }
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-left-column { width: auto; max-width: none; flex: 0 1 47.6372%; }
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-right-column { width: auto; max-width: none; flex: 0 1 45.2744%; padding: 24px; }
+}
+
+@media (max-width: 899px) {
+  .silk-comparison-section-{{ section.id }}.silk--v2 { padding: 32px 0; }
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-comparison-container { padding: 0 32px; gap: 44px; }
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-left-column { width: auto; flex: 1 1 auto; gap: 12px; }
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-main-title { font-size: 20px; }
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-main-description { font-size: 14px; }
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-right-column { width: auto; flex: 1 1 auto; }
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-tab-btn { height: auto; padding: 8px 24px; }
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-card-header h3 { font-size: 16px; }
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-tab-text-card p { font-size: 12px; }
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-checklist { font-size: 12px; }
+
+  /* valores del nodo mobile 4454:16753 */
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-main-description p + p { margin-top: 12px; }
+  /* en mobile el link es texto subrayado, sin pill */
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-ingredients-link {
+    border: 0; border-radius: 0; padding: 12px 0; justify-content: flex-start; margin-bottom: 0;
+  }
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-ingredients-box { margin-top: 0; }
+  /* el tab del nodo es una sola linea de 28px de alto */
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-tab-btn {
+    display: flex; align-items: center; justify-content: center; height: 28px; padding: 0 8px;
+  }
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-tabs-nav { margin-bottom: 0; }
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-right-column { min-width: 0; }
+  /* en el nodo la caja del checklist mide 310 y desborda los 300 de la tarjeta,
+     que es lo que la deja en 4 lineas en vez de 5 */
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-checklist { gap: 0; width: 310px; max-width: none; }
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-box-tag { display: none; }
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-ing-number { font-size: 20px; min-width: 0; }
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-ing-content h4 { font-size: 14px; }
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-ing-content p { font-size: 14px; }
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-tab-btn { font-size: 10px; line-height: 1.2; }
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-bullet-dot { flex-shrink: 0; }
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-checklist p,
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-checklist li { font-size: 12px; line-height: 1.2; color: #000000; }
+  /* el caption se ancla arriba a la izquierda de la imagen, no centrado */
+  .silk-comparison-section-{{ section.id }}.silk--v2 .silk-image-caption {
+    left: 15px !important; top: 2px !important; transform: none !important; text-align: left;
+  }
+}
+{%- endif -%}
+</style>
+
+{% schema %}
+{
+  "name": "C - Silk Comparison Tabs",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "design_v2",
+      "label": "Diseño v2 (Figma 2026)",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de Fondo de la Sección",
+      "default": "#F9FBFB"
+    },
+    {
+      "type": "range",
+      "id": "container_max_width",
+      "min": 800,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "label": "Ancho Máximo (Max Width) de la Sección",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "section_padding_desktop",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding superior e inferior",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Tamaños de Textos Principales"
+    },
+    {
+      "type": "range",
+      "id": "title_size_desktop",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Tamaño Título Principal (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "min": 18,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Tamaño Título Principal (Mobile)",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "desc_size_desktop",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Descripción Principal (Desktop)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "desc_size_mobile",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Descripción Principal (Mobile)",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Tamaños Caja de Ingredientes (Izquierda)"
+    },
+    {
+      "type": "range",
+      "id": "box_num_size_desktop",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Tamaño Número/Porcentaje (Desktop)",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "box_num_size_mobile",
+      "min": 14,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Tamaño Número/Porcentaje (Mobile)",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "box_title_size_desktop",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Título Ítem (Desktop)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "box_title_size_mobile",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Título Ítem (Mobile)",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "box_desc_size_desktop",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Descripción Ítem (Desktop)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "box_desc_size_mobile",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Descripción Ítem (Mobile)",
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Tamaños Tarjetas de Hotspots (Derecha)"
+    },
+    {
+      "type": "range",
+      "id": "card_title_size_desktop",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Título Tarjeta (Desktop)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_title_size_mobile",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Título Tarjeta (Mobile)",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "card_desc_size_desktop",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Descripción Tarjeta (Desktop)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "card_desc_size_mobile",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Descripción Tarjeta (Mobile)",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "checklist_size_desktop",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Checklist / Checks (Desktop)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "checklist_size_mobile",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño Checklist / Checks (Mobile)",
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Columna Izquierda (Textos principales)"
+    },
+    {
+      "type": "richtext",
+      "id": "main_title",
+      "label": "Título Principal",
+      "default": "<p>Do Something Drastic. <strong>Ditch the Plastic.</strong></p>"
+    },
+    {
+      "type": "richtext",
+      "id": "main_description",
+      "label": "Descripción Principal",
+      "default": "<p>Here's what most floss won't tell you: it's plastic. Every time you floss, friction against your teeth sheds microscopic particles, and you swallow them.<br><br>Dr. Jen's floss is made from Italian silk instead, lightly coated in avocado oil. Not coated in plastic. Made without it</p>"
+    },
+    {
+      "type": "text",
+      "id": "ingredients_text",
+      "label": "Texto Enlace Ingredientes",
+      "default": "INGREDIENTS"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color de Títulos",
+      "default": "#002C41"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color de Textos Generales",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Caja de Ingredientes (Izquierda)"
+    },
+    {
+      "type": "text",
+      "id": "box_tag",
+      "label": "Etiqueta superior de la caja",
+      "default": "DR. JEN'S FLOSS"
+    },
+    {
+      "type": "text",
+      "id": "item_1_num",
+      "label": "Ítem 1 - Número/Porcentaje",
+      "default": "100%"
+    },
+    {
+      "type": "text",
+      "id": "item_1_title",
+      "label": "Ítem 1 - Título",
+      "default": "Italian Silk Fiber"
+    },
+    {
+      "type": "text",
+      "id": "item_1_desc",
+      "label": "Ítem 1 - Descripción",
+      "default": "Woven in Italy, the way floss was made for sixty years."
+    },
+    {
+      "type": "text",
+      "id": "item_2_num",
+      "label": "Ítem 2 - Número/Porcentaje",
+      "default": "0%"
+    },
+    {
+      "type": "text",
+      "id": "item_2_title",
+      "label": "Ítem 2 - Título",
+      "default": "Plastic in the Strand"
+    },
+    {
+      "type": "text",
+      "id": "item_2_desc",
+      "label": "Ítem 2 - Descripción",
+      "default": "No nylon. No polyester. No recycled bottles."
+    },
+    {
+      "type": "text",
+      "id": "item_3_num",
+      "label": "Ítem 3 - Número/Porcentaje",
+      "default": "100%"
+    },
+    {
+      "type": "text",
+      "id": "item_3_title",
+      "label": "Ítem 3 - Título",
+      "default": "Biodegradable Floss"
+    },
+    {
+      "type": "text",
+      "id": "item_3_desc",
+      "label": "Ítem 3 - Descripción",
+      "default": "Breaks down naturally, unlike synthetic fibers."
+    },
+    {
+      "type": "text",
+      "id": "item_4_num",
+      "label": "Ítem 4 - Número/Texto",
+      "default": "Wax"
+    },
+    {
+      "type": "text",
+      "id": "item_4_title",
+      "label": "Ítem 4 - Título",
+      "default": "Avocado Oil"
+    },
+    {
+      "type": "text",
+      "id": "item_4_desc",
+      "label": "Ítem 4 - Descripción",
+      "default": "Coating A gentle coating, not a synthetic polymer."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab_item",
+      "name": "Pestaña (Tab Principal)",
+      "settings": [
+        { "type": "text", "id": "image_caption", "label": "Texto sobre la imagen" },
+        { "type": "range", "id": "caption_x", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Posición X del texto", "default": 33 },
+        { "type": "range", "id": "caption_y", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Posición Y del texto", "default": 73 },
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Título de la Pestaña",
+          "default": "100% ITALIAN SILK FLOSS"
+        },
+        {
+          "type": "image_picker",
+          "id": "tab_image",
+          "label": "Imagen de esta Pestaña"
+        }
+      ]
+    },
+    {
+      "type": "hotspot_point",
+      "name": "Hotspot",
+      "settings": [
+        {
+          "type": "select",
+          "id": "parent_tab_num",
+          "label": "¿A qué Tab pertenece este Hotspot?",
+          "default": "1",
+          "options": [
+            {
+              "value": "1",
+              "label": "Tab 1 (Primera pestaña)"
+            },
+            {
+              "value": "2",
+              "label": "Tab 2 (Segunda pestaña)"
+            },
+            {
+              "value": "3",
+              "label": "Tab 3 (Tercera pestaña)"
+            }
+          ]
+        },
+        {
+          "type": "color",
+          "id": "dot_color",
+          "label": "Color del Punto Hotspot",
+          "default": "#002C41"
+        },
+        {
+          "type": "header",
+          "content": "Posición en Desktop (%)"
+        },
+        {
+          "type": "range",
+          "id": "pos_x_desktop",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Posición Horizontal (X - Desktop)",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "pos_y_desktop",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Posición Vertical (Y - Desktop)",
+          "default": 35
+        },
+        {
+          "type": "header",
+          "content": "Posición en Mobile (%)"
+        },
+        {
+          "type": "range",
+          "id": "pos_x_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Posición Horizontal (X - Mobile)",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "pos_y_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Posición Vertical (Y - Mobile)",
+          "default": 35
+        },
+        {
+          "type": "header",
+          "content": "Contenido que muestra al hacer clic"
+        },
+        {
+          "type": "text",
+          "id": "card_title",
+          "label": "Título de la Tarjeta",
+          "default": "Made With What Belongs on Your Gums"
+        },
+        {
+          "type": "textarea",
+          "id": "card_desc",
+          "label": "Descripción de la Tarjeta",
+          "default": "No synthetic waxes, no microplastics, just avocado oil coating a strong, fine silk fiber. Built for daily contact with your gums."
+        },
+        {
+          "type": "richtext",
+          "id": "checklist_html",
+          "label": "Lista de Checks / Cruces",
+          "default": "<p>✓ Smooth glide, even through tight contacts<br>✓ Gentle on gums, even with daily use<br>✓ No synthetic coatings, no microplastics shed with use<br>✓ Zero plastic, by design</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "C - Silk Comparison Tabs",
+      "blocks": [
+        {
+          "type": "tab_item",
+          "settings": {
+            "tab_title": "100% ITALIAN SILK FLOSS"
+          }
+        },
+        {
+          "type": "hotspot_point",
+          "settings": {
+            "parent_tab_num": "1",
+            "card_title": "Nothing synthetic between the silk and you",
+            "pos_x_desktop": 30,
+            "pos_y_desktop": 35,
+            "pos_x_mobile": 35,
+            "pos_y_mobile": 40
+          }
+        },
+        {
+          "type": "hotspot_point",
+          "settings": {
+            "parent_tab_num": "1",
+            "card_title": "Made With What Belongs on Your Gums",
+            "pos_x_desktop": 65,
+            "pos_y_desktop": 32,
+            "pos_x_mobile": 60,
+            "pos_y_mobile": 35
+          }
+        },
+        {
+          "type": "tab_item",
+          "settings": {
+            "tab_title": "90% PLASTIC DENTAL FLOSS"
+          }
+        },
+        {
+          "type": "hotspot_point",
+          "settings": {
+            "parent_tab_num": "2",
+            "card_title": "Sheds Microplastics With Every Use",
+            "pos_x_desktop": 50,
+            "pos_y_desktop": 35,
+            "pos_x_mobile": 50,
+            "pos_y_mobile": 35
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

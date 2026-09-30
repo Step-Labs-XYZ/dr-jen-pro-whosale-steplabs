@@ -1,0 +1,88 @@
+{%- style -%}
+#c-prod-{{ section.id }} .c-prod__cross-sell {
+  position: relative; overflow: hidden; width: 100%; box-sizing: border-box;
+  border-radius: 8px; background: var(--cross-sell-bg, #F7F7F7); padding: 34px 44px;
+  font-family: var(--Body, Raleway); color: #002C41;
+}
+#c-prod-{{ section.id }} .c-prod__cross-sell-media {
+  position: absolute; top: 0; right: 0; width: var(--cross-sell-media-w, 45%); height: 100%; pointer-events: none;
+}
+#c-prod-{{ section.id }} .c-prod__cross-sell-media img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center var(--cross-sell-media-y, 50%); }
+#c-prod-{{ section.id }} .c-prod__cross-sell-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+#c-prod-{{ section.id }} .c-prod__cross-sell-heading { max-width: 284px; margin: 0; font-size: 18px; font-weight: 700; line-height: 1.2; color: #002C41; }
+#c-prod-{{ section.id }} .c-prod__cross-sell-benefits { display: flex; flex-direction: column; gap: 8px; }
+#c-prod-{{ section.id }} .c-prod__cross-sell-tagline { margin: 0; font-size: 14px; font-weight: 700; line-height: 1.2; text-transform: uppercase; color: #002C41; }
+#c-prod-{{ section.id }} .c-prod__cross-sell-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+#c-prod-{{ section.id }} .c-prod__cross-sell-list li { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 400; line-height: 1.2; color: #002C41; }
+#c-prod-{{ section.id }} .c-prod__cross-sell-list svg { flex-shrink: 0; }
+#c-prod-{{ section.id }} .c-prod__cross-sell-cta {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 12px 24px; border: 1px solid #002C41; border-radius: 44px; background: #FFFFFF;
+  font-size: 14px; font-weight: 700; line-height: 1.2; text-transform: uppercase; text-decoration: none; color: #002C41;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+#c-prod-{{ section.id }} .c-prod__cross-sell-cta svg { width: 16px; height: 12px; flex-shrink: 0; transition: transform 0.2s ease; }
+#c-prod-{{ section.id }} .c-prod__cross-sell-cta svg path { stroke: currentColor; }
+#c-prod-{{ section.id }} .c-prod__cross-sell-cta:focus-visible { outline: 2px solid #002C41; outline-offset: 3px; }
+@media (hover: hover) {
+  #c-prod-{{ section.id }} .c-prod__cross-sell-cta:hover { background: #002C41; color: #FFFFFF; }
+  #c-prod-{{ section.id }} .c-prod__cross-sell-cta:hover svg { transform: translateX(4px); }
+}
+@media (max-width: 899px) {
+  #c-prod-{{ section.id }} .c-prod__cross-sell { padding: 18px 20px; }
+  #c-prod-{{ section.id }} .c-prod__cross-sell-media { right: -12%; width: var(--cross-sell-media-w-mob, 61%); }
+  #c-prod-{{ section.id }} .c-prod__cross-sell-heading { max-width: 240px; }
+  #c-prod-{{ section.id }} .c-prod__cross-sell-tagline { font-size: 12px; }
+  #c-prod-{{ section.id }} .c-prod__cross-sell-list li { font-size: 10px; }
+  #c-prod-{{ section.id }} .c-prod__cross-sell-cta { font-size: 12px; }
+}
+{%- endstyle -%}
+{%- assign cross_sell_url = block.settings.cta_url | default: block.settings.product.url -%}
+{%- assign cross_sell_benefits = block.settings.benefits | newline_to_br | split: '<br />' -%}
+<div
+  class="c-prod__cross-sell"
+  style="
+    {% if block.settings.bg_color != blank %}--cross-sell-bg: {{ block.settings.bg_color }};{% endif %}
+    --cross-sell-media-w: {{ block.settings.image_width | default: 45 }}%;
+    --cross-sell-media-w-mob: {{ block.settings.image_width_mobile | default: 61 }}%;
+    --cross-sell-media-y: {{ block.settings.image_position_y | default: 50 }}%;
+  "
+  {{ block.shopify_attributes }}
+>
+  {%- if block.settings.image != blank -%}
+    <div class="c-prod__cross-sell-media">
+      {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '300, 450, 600, 900', sizes: '(max-width: 899px) 60vw, 320px', alt: '' }}
+    </div>
+  {%- endif -%}
+  <div class="c-prod__cross-sell-content">
+    {%- if block.settings.heading != blank -%}
+      <p class="c-prod__cross-sell-heading">{{ block.settings.heading }}</p>
+    {%- endif -%}
+    {%- if block.settings.tagline != blank or block.settings.benefits != blank -%}
+      <div class="c-prod__cross-sell-benefits">
+        {%- if block.settings.tagline != blank -%}
+          <p class="c-prod__cross-sell-tagline">{{ block.settings.tagline }}</p>
+        {%- endif -%}
+        {%- if block.settings.benefits != blank -%}
+          <ul class="c-prod__cross-sell-list">
+            {%- for benefit in cross_sell_benefits -%}
+              {%- assign benefit_text = benefit | strip -%}
+              {%- if benefit_text != blank -%}
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M6.41915 9.51436L10.246 5.70461L9.61386 5.07248L6.41915 8.25016L4.973 6.82099L4.34088 7.45309L6.41915 9.51436ZM7.30115 13.493C6.4523 13.493 5.65146 13.3319 4.89868 13.0094C4.14589 12.6871 3.48699 12.2436 2.92198 11.6789C2.35696 11.114 1.9132 10.4555 1.59069 9.70301C1.26818 8.95062 1.10693 8.14996 1.10693 7.30111C1.10693 6.44092 1.26811 5.63729 1.59047 4.89017C1.91282 4.14305 2.35638 3.48699 2.92113 2.92198C3.48588 2.35696 4.14448 1.91319 4.89693 1.59069C5.64936 1.26818 6.45002 1.10693 7.29886 1.10693C8.15897 1.10693 8.96265 1.26811 9.70974 1.59047C10.4569 1.91282 11.1129 2.35638 11.678 2.92113C12.243 3.48588 12.6867 4.14165 13.0092 4.88842C13.3317 5.63519 13.493 6.43863 13.493 7.29883C13.493 8.14767 13.3318 8.94849 13.0095 9.7013C12.6871 10.454 12.2435 11.113 11.6788 11.678C11.1141 12.243 10.4583 12.6868 9.71154 13.0093C8.96478 13.3318 8.16126 13.493 7.30115 13.493ZM7.3 12.6083C8.77449 12.6083 10.0278 12.0923 11.06 11.0601C12.0922 10.0279 12.6083 8.77454 12.6083 7.29997C12.6083 5.8254 12.0922 4.57207 11.06 3.5399C10.0278 2.50772 8.77449 1.99164 7.3 1.99164C5.82543 1.99164 4.57207 2.50772 3.5399 3.5399C2.50772 4.57207 1.99164 5.8254 1.99164 7.29997C1.99164 8.77454 2.50772 10.0279 3.5399 11.0601C4.57207 12.0923 5.82543 12.6083 7.3 12.6083Z" fill="#002C41"/></svg>
+                  <span>{{ benefit_text }}</span>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+    {%- if cross_sell_url != blank and block.settings.btn_text != blank -%}
+      <a href="{{ cross_sell_url }}" class="c-prod__cross-sell-cta">
+        <span>{{ block.settings.btn_text }}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true"><path d="M0.771429 6.94286H17.2286M11.0572 13.1143L17.2286 6.94286L11.0572 0.771429" stroke="#002C41" stroke-width="1.54286" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    {%- endif -%}
+  </div>
+</div>
