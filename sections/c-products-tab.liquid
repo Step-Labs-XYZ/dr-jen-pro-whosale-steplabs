@@ -122,7 +122,7 @@
 
                       {%- if section.settings.show_subscribe_save -%}
                         <div class="Cproduct-tabs__subscribe-pill">
-                          Subscribe & Save up to 5% OFF
+                          {{ section.settings.subscribe_save_text }}
                         </div>
                       {%- endif -%}
                     </div>
@@ -681,6 +681,7 @@ if (typeof CproductTabsInit === 'undefined') {
     { "type": "text", "id": "view_all_text", "label": "View All Text", "default": "SHOP ALL", "info": "Text for the shop all link next to tabs" },
     { "type": "url", "id": "view_all_url", "label": "View All URL" },
     { "type": "checkbox", "id": "show_subscribe_save", "label": "Show Subscribe & Save pill", "default": true, "info": "Display subscribe floating message on image" },
+    { "type": "text", "id": "subscribe_save_text", "label": "Subscribe & Save pill text", "default": "Subscribe & Save up to 5% OFF" },
     { 
       "type": "select", 
       "id": "badge_alignment", 
