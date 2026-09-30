@@ -7,8 +7,10 @@
   <div class="swiper chero-swiper-{{ section.id }}">
     <div class="swiper-wrapper">
 
+      {%- assign chero_h1_used = false -%}
       {%- for block in section.blocks -%}
         {%- if block.type == 'slide' -%}
+          {%- assign slide_alt = block.settings.image_alt | default: block.settings.bg_desktop.alt | default: block.settings.t2_bg_desktop.alt -%}
 
           {%- if block.settings.html_code != blank -%}
 
@@ -23,7 +25,7 @@
 
               <div class="chero-slide__bg chero-slide__bg--desktop">
                 {%- if block.settings.t2_bg_desktop != blank -%}
-                  {{ block.settings.t2_bg_desktop | image_url: width: 1800 | image_tag: loading: 'eager', class: 'chero-slide__bg-img', alt: '' }}
+                  {{ block.settings.t2_bg_desktop | image_url: width: 1800 | image_tag: loading: 'eager', class: 'chero-slide__bg-img', alt: slide_alt }}
                 {%- else -%}
                   <div style="width:100%;height:100%;background:{{ section.settings.t2_bg_fallback }};"></div>
                 {%- endif -%}
@@ -31,7 +33,7 @@
 
               <div class="chero-slide__bg chero-slide__bg--mobile">
                 {%- if block.settings.t2_bg_mobile != blank -%}
-                  {{ block.settings.t2_bg_mobile | image_url: width: 800 | image_tag: loading: 'eager', class: 'chero-slide__bg-img', alt: '' }}
+                  {{ block.settings.t2_bg_mobile | image_url: width: 800 | image_tag: loading: 'eager', class: 'chero-slide__bg-img', alt: slide_alt }}
                 {%- else -%}
                   <div style="width:100%;height:100%;background:{{ section.settings.t2_bg_fallback }};"></div>
                 {%- endif -%}
@@ -44,7 +46,7 @@
 
                   {%- if block.settings.t2_floating_badge_desktop != blank -%}
                     <div class="chero-t2-floating-badge chero-t2-desktop-only">
-                      {{ block.settings.t2_floating_badge_desktop | image_url: width: 400 | image_tag: loading: 'lazy', alt: '' }}
+                      {{ block.settings.t2_floating_badge_desktop | image_url: width: 400 | image_tag: loading: 'lazy', alt: block.settings.t2_floating_badge_desktop.alt }}
                     </div>
                   {%- endif -%}
 
@@ -70,15 +72,15 @@
 
                   <div class="chero-t2-products-wrap">
                     {%- if block.settings.t2_products_image_desktop != blank -%}
-                      {{ block.settings.t2_products_image_desktop | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'chero-t2-prod-img chero-t2-desktop-only', alt: '' }}
+                      {{ block.settings.t2_products_image_desktop | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'chero-t2-prod-img chero-t2-desktop-only', alt: block.settings.t2_products_image_desktop.alt }}
                     {%- endif -%}
                     {%- if block.settings.t2_products_image_mobile != blank -%}
-                      {{ block.settings.t2_products_image_mobile | image_url: width: 800 | image_tag: loading: 'lazy', class: 'chero-t2-prod-img chero-t2-mobile-only', alt: '' }}
+                      {{ block.settings.t2_products_image_mobile | image_url: width: 800 | image_tag: loading: 'lazy', class: 'chero-t2-prod-img chero-t2-mobile-only', alt: block.settings.t2_products_image_mobile.alt }}
                     {%- endif -%}
 
                     {%- if block.settings.t2_floating_badge_mobile != blank -%}
                       <div class="chero-t2-floating-badge chero-t2-mobile-only">
-                        {{ block.settings.t2_floating_badge_mobile | image_url: width: 400 | image_tag: loading: 'lazy', alt: '' }}
+                        {{ block.settings.t2_floating_badge_mobile | image_url: width: 400 | image_tag: loading: 'lazy', alt: block.settings.t2_floating_badge_mobile.alt }}
                       </div>
                     {%- endif -%}
                   </div>
@@ -123,7 +125,7 @@
               {%- if block.settings.video_desktop != blank -%}
                 {{ block.settings.video_desktop | video_tag: autoplay: true, loop: true, muted: false, controls: false, playsinline: true, class: 'chero-slide__bg-video', image_size: '1800x' }}
               {%- elsif block.settings.bg_desktop != blank -%}
-                {{ block.settings.bg_desktop | image_url: width: 1800 | image_tag: loading: 'eager', class: 'chero-slide__bg-img', alt: '' }}
+                {{ block.settings.bg_desktop | image_url: width: 1800 | image_tag: loading: 'eager', class: 'chero-slide__bg-img', alt: slide_alt }}
               {%- else -%}
                 <div style="width:100%;height:100%;background:{{ block.settings.bg_fallback }};"></div>
               {%- endif -%}
@@ -133,7 +135,7 @@
               {%- if block.settings.video_mobile != blank -%}
                 {{ block.settings.video_mobile | video_tag: autoplay: true, loop: true, muted: false, controls: false, playsinline: true, class: 'chero-slide__bg-video', image_size: '800x' }}
               {%- elsif block.settings.bg_mobile != blank -%}
-                {{ block.settings.bg_mobile | image_url: width: 800 | image_tag: loading: 'eager', class: 'chero-slide__bg-img', alt: '' }}
+                {{ block.settings.bg_mobile | image_url: width: 800 | image_tag: loading: 'eager', class: 'chero-slide__bg-img', alt: slide_alt }}
               {%- else -%}
                 <div style="width:100%;height:100%;background:{{ block.settings.bg_fallback }};"></div>
               {%- endif -%}
@@ -143,7 +145,7 @@
 
               {%- if block.settings.badge_image != blank -%}
                 <div class="chero-slide__badge">
-                  {{ block.settings.badge_image | image_url: width: 180 | image_tag: loading: 'lazy', alt: '' }}
+                  {{ block.settings.badge_image | image_url: width: 180 | image_tag: loading: 'lazy', alt: block.settings.badge_image.alt }}
                 </div>
               {%- endif -%}
 
@@ -162,7 +164,12 @@
                 {%- endif -%}
 
                 {%- if block.settings.title != blank -%}
-                  <h1 class="chero-slide__title">{{ block.settings.title }}</h1>
+                  {%- if chero_h1_used -%}
+                    <h2 class="chero-slide__title">{{ block.settings.title }}</h2>
+                  {%- else -%}
+                    <h1 class="chero-slide__title">{{ block.settings.title }}</h1>
+                    {%- assign chero_h1_used = true -%}
+                  {%- endif -%}
                 {%- endif -%}
 
                 {%- if block.settings.top_description != blank -%}
@@ -669,6 +676,7 @@
         { "type": "header", "content": "🖼️ Fondos (imagen)" },
         { "type": "image_picker", "id": "bg_desktop", "label": "Imagen fondo Desktop" },
         { "type": "image_picker", "id": "bg_mobile",  "label": "Imagen fondo Mobile" },
+        { "type": "text", "id": "image_alt", "label": "Texto alternativo (alt) del fondo", "info": "Describe la imagen para lectores de pantalla. Si está vacío se usa el alt de la imagen en Shopify Files. Aplica también a los fondos Tipo 2." },
         { "type": "color", "id": "bg_fallback", "label": "Color fondo (sin imagen/video)", "default": "#e8f4f8" },
         { "type": "header", "content": "🎥 Fondos (video, opcional)" },
         { "type": "video", "id": "video_desktop", "label": "Video fondo Desktop" },
@@ -682,7 +690,7 @@
         { "type": "text", "id": "tagline_icon_right", "label": "Ícono derecho (opcional)" },
         { "type": "header", "content": "🔖 Pretítulo H2 (antes del H1)" },
         { "type": "text", "id": "pretitle", "label": "Pretítulo opcional", "info": "Raleway italic 400, sin uppercase" },
-        { "type": "header", "content": "📝 Título H1" },
+        { "type": "header", "content": "📝 Título (H1 en el primer slide, H2 en los demás)" },
         { "type": "textarea", "id": "title", "label": "Título principal", "default": "The #1 Dentist Recommended Nano-hydroxyapatite Toothpaste" },
         { "type": "header", "content": "📝 Descripción superior (italic bold)" },
         { "type": "paragraph", "content": "Se muestra debajo del título." },

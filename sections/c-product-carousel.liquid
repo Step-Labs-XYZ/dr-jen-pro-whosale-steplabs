@@ -66,7 +66,7 @@
 
             {%- if section.settings.show_subscribe_save -%}
               <div class="c-prod-carousel__subscribe-pill">
-                Subscribe & Save up to 15% OFF
+                {{ section.settings.subscribe_save_text }}
               </div>
             {%- endif -%}
           </div>
@@ -662,6 +662,12 @@ document.addEventListener('DOMContentLoaded', function() {
       "id": "show_subscribe_save",
       "label": "Show Subscribe & Save pill",
       "default": true
+    },
+    {
+      "type": "text",
+      "id": "subscribe_save_text",
+      "label": "Subscribe & Save pill text",
+      "default": "Subscribe & Save up to 15% OFF"
     },
     {
       "type": "select",
