@@ -133,7 +133,8 @@
             "t2_btn_label": "SHOP NOW",
             "t2_btn_url": "",
             "html_code": ""
-          }
+          },
+          "disabled": true
         }
       },
       "block_order": [
