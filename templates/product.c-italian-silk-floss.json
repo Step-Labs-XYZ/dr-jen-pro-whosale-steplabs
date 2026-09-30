@@ -476,7 +476,10 @@
       ],
       "settings": {
         "include_margins": true
-      }
+      },
+      "custom_css": [
+        "@media (min-width: 900px) {tolstoy-widget {display: block; padding-top: 60px;}}"
+      ]
     },
     "c_comparison_table_custom_fN9Cd3": {
       "type": "c-comparison-table-custom",
