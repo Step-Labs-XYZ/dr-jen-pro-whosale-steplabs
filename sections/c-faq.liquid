@@ -223,9 +223,9 @@
     <div class="c-faq__accordion js-faq-accordion-{{ section.id }}">
       
       {% for block in section.blocks %}
-        <div class="c-faq__item js-faq-item-{{ section.id }}{% if section.settings.design_v2 %} is-open{% endif %}" {{ block.shopify_attributes }}>
+        <div class="c-faq__item js-faq-item-{{ section.id }}{% if section.settings.design_v2 and section.settings.v2_start_open %} is-open{% endif %}" {{ block.shopify_attributes }}>
           
-          <button class="c-faq__question js-faq-btn-{{ section.id }}" aria-expanded="{% if section.settings.design_v2 %}true{% else %}false{% endif %}">
+          <button class="c-faq__question js-faq-btn-{{ section.id }}" aria-expanded="{% if section.settings.design_v2 and section.settings.v2_start_open %}true{% else %}false{% endif %}">
             <span>{{ block.settings.question }}</span>
             <svg class="c-faq__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="6 9 12 15 18 9"></polyline>
@@ -300,6 +300,7 @@
   "name": "C - FAQ Section",
   "settings": [
     { "type": "checkbox", "id": "design_v2", "label": "Diseño v2 (Figma 2026)", "default": false },
+    { "type": "checkbox", "id": "v2_start_open", "label": "Diseño v2: preguntas abiertas al cargar", "default": true },
     {
       "type": "color",
       "id": "bg_color",

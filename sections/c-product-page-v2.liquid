@@ -387,6 +387,7 @@ span.c-prod__card-per-unit{
   font-size: 16px; line-height: 1.2; color: #3E5565; text-align: center;
 }
 #c-prod-{{ section.id }} .c-prod__img-caption-text { white-space: nowrap; }
+@media (max-width: 899px) { #c-prod-{{ section.id }} .c-prod__img-caption--hide-mobile { display: none; } }
 #c-prod-{{ section.id }} .c-prod__thumbs { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; scroll-left: 0; }
 #c-prod-{{ section.id }} .c-prod__thumbs::-webkit-scrollbar { display: none; }
 #c-prod-{{ section.id }} .c-prod__thumb-item {
@@ -1755,7 +1756,9 @@ span.c-prod__card-per-unit{
 /* el nodo usa un circulo navy de 14 con el check en blanco, no una palomita de texto */
 #c-prod-{{ section.id }}.c-prod--v2 .c-subwidget__benefits li::before {
   content: ''; width: 14px; height: 14px; top: 50%; transform: translateY(-50%);
-  background: #002C41 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10' fill='none'%3E%3Cpath d='M2 5.2L4 7.2L8 3' stroke='%23FFFFFF' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 10px 10px no-repeat;
+  /* wholesale: el nodo dibuja el check en un circulo de contorno, no relleno */
+  box-sizing: border-box; border: 1px solid #002C41;
+  background: #FFFFFF url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10' fill='none'%3E%3Cpath d='M2 5.2L4 7.2L8 3' stroke='%23002C41' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 9px 9px no-repeat;
   border-radius: 50%;
 }
 #c-prod-{{ section.id }}.c-prod--v2 .c-subwidget__frequency label { font-size: 14px; line-height: 1.2; }
@@ -1875,6 +1878,8 @@ span.c-prod__card-per-unit{
   #c-prod-{{ section.id }}.c-prod--v2 .c-subwidget__price,
   #c-prod-{{ section.id }}.c-prod--v2 .c-subwidget__radio-label { font-size: 14px; }
   #c-prod-{{ section.id }}.c-prod--v2 .c-subwidget__compare { font-size: 12px; }
+  /* wholesale: en el nodo "Buy one time" va al mismo tamano que "Subscribe & Save" */
+  #c-prod-{{ section.id }}.c-prod--v2 .c-subwidget__card--onetime .c-subwidget__radio-label { font-size: 16px; }
   #c-prod-{{ section.id }}.c-prod--v2 .c-subwidget__benefits li { font-size: 10px; }
   #c-prod-{{ section.id }}.c-prod--v2 .c-subwidget__frequency label { font-size: 12px; }
   #c-prod-{{ section.id }}.c-prod--v2 .c-subwidget__frequency select { font-size: 10px; height: 36px; }
@@ -2082,7 +2087,7 @@ span.c-prod__card-per-unit{
 
         {% if section.settings.image_caption != blank %}
           {%- assign caption_parts = section.settings.image_caption | split: '|' -%}
-          <div class="c-prod__img-caption">
+          <div class="c-prod__img-caption{% if section.settings.image_caption_hide_mobile %} c-prod__img-caption--hide-mobile{% endif %}">
             {%- for part in caption_parts -%}
               <span class="c-prod__img-caption-text">{{ part | strip }}</span>
               {%- unless forloop.last -%}
@@ -3846,6 +3851,7 @@ overrideShopifyPadding();
     {
       "type": "text", "id": "image_caption", "label": "Caption sobre la imagen", "info": "Usa | para separar. En mobile cada parte va en su propia línea.", "placeholder": "Ej: Avocado Oil Coating | Microplastic-Free Glide"
     },
+    { "type": "checkbox", "id": "image_caption_hide_mobile", "label": "Ocultar caption en mobile", "default": false },
     {
       "type": "image_picker", "id": "badge_left_svg", "label": "Badge Izquierdo (SVG/Imagen)"
     },

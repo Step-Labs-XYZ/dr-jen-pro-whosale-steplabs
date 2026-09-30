@@ -286,7 +286,8 @@
         "pad_top_desk": 60,
         "pad_bot_desk": 60,
         "pad_top_mob": 30,
-        "pad_bot_mob": 30
+        "pad_bot_mob": 30,
+        "image_caption_hide_mobile": true
       }
     },
     "c_feature_cards_NWW46z": {
@@ -622,7 +623,8 @@
         "pad_top_mob": 50,
         "pad_bot_mob": 50,
         "pad_left_mob": 30,
-        "pad_right_mob": 30
+        "pad_right_mob": 30,
+        "v2_start_open": false
       }
     }
   },

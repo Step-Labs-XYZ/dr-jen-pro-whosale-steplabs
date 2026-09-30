@@ -17,7 +17,11 @@
 
       {%- if section.settings.ingredients_text != blank -%}
         <button type="button" class="silk-ingredients-link js-open-ingredients-modal">
-          {{ section.settings.ingredients_text }} <span>→</span>
+          {%- if section.settings.design_v2 -%}
+            {{ section.settings.ingredients_text }} <svg class="silk-ingredients-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 18 14" fill="none" aria-hidden="true"><path d="M0.75 6.75H16.75M10.75 12.75L16.75 6.75L10.75 0.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          {%- else -%}
+            {{ section.settings.ingredients_text }} <span>→</span>
+          {%- endif -%}
         </button>
       {%- endif -%}
 
@@ -916,7 +920,11 @@
 }
 .silk-comparison-section-{{ section.id }}.silk--v2 .silk-ingredients-box { padding: 24px; border-radius: 8px; background: #FFFFFF; }
 .silk-comparison-section-{{ section.id }}.silk--v2 .silk-ingredient-items { display: flex; flex-direction: column; gap: 16px; }
-.silk-comparison-section-{{ section.id }}.silk--v2 .silk-ingredient-row { gap: 10px; padding: 0; align-items: center; }
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-ingredient-row { gap: 10px; padding: 0; align-items: center; border-bottom: 0; }
+/* la flecha del link es la misma del bloque de producto, no el glifo */
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-ingredients-arrow { flex-shrink: 0; }
+/* el numero no se encoge: si no, la descripcion larga se le monta encima */
+.silk-comparison-section-{{ section.id }}.silk--v2 .silk-ing-number { flex-shrink: 0; }
 .silk-comparison-section-{{ section.id }}.silk--v2 .silk-ingredient-row + .silk-ingredient-row { border-top: 1px solid #D6ECE6; padding-top: 16px; }
 .silk-comparison-section-{{ section.id }}.silk--v2 .silk-ing-number { font-size: 32px; font-weight: 600; line-height: 1.2; color: #002C41; }
 .silk-comparison-section-{{ section.id }}.silk--v2 .silk-ing-content h4 { font-size: 16px; font-weight: 700; line-height: 1.2; color: #002C41; margin: 0; }
