@@ -25,7 +25,7 @@
             "tagline_icon_right": "",
             "pretitle": "",
             "title": "A Mother's Love, Turned<br> Into a Mission",
-            "top_description": "When her daughter fell ill, Dr. Jen couldn’t find a clean nHAp toothpaste following the science, so she took matters into her own hands to create Dr. Jen Oral Care.",
+            "top_description": "When her daughter fell ill, Dr. Jen couldn’t find a clean nHAp toothpaste following the science, so she took matters into her own hands to create Dr. Jen-Dental Pro.",
             "heading_subtitle": "Powered by Nature, Rooted in Science",
             "bottom_description": "The #1 Nano Hydroxyapatite Oral Care Brand Trusted by Dental Professionals",
             "subtitle_a": "",
@@ -60,7 +60,7 @@
             "layout_type": "type_1",
             "bg_desktop": "shopify://shop_images/Frame_1484580993_3.png",
             "bg_mobile": "shopify://shop_images/Banner-PDP2-mob3_1.png",
-            "image_alt": "Dr. Jen, founder of Dr. Jen Oral Care, smiling by the water",
+            "image_alt": "Dr. Jen, founder of Dr. Jen-Dental Pro, smiling by the water",
             "bg_fallback": "#e8f4f8",
             "tagline_text": "MADE BY A MOTHER AND A DENTIST",
             "tagline_icon_left": "",
@@ -289,7 +289,7 @@
             "tab_label": "BEST SELLERS",
             "products_to_show": 4,
             "product_1_image": "shopify://shop_images/1-1-desk2.png",
-            "product_1_title": "Original Super Paste - Triple Protection toothpaste",
+            "product_1_title": "Original Super Paste™ - Triple Protection toothpaste",
             "product_1_price": "$360 / 24-pack",
             "product_1_description": "",
             "product_1_features": "For high cavity risk or cavity history|For dry mouth support (xerostomia)|Replaces 5000 ppm fluoride",
@@ -372,7 +372,7 @@
             "tab_label": "Fluoride",
             "products_to_show": 4,
             "product_1_image": "shopify://shop_images/540-4.png",
-            "product_1_title": "Super Paste Perio",
+            "product_1_title": "Super Paste Perio™",
             "product_1_price": "$208 / 12-pack",
             "product_1_description": "",
             "product_1_features": "Gentle no-foam, low-abrasion formula | Helps support exposed root surfaces | Enriched with aloe vera + calendula",
@@ -385,7 +385,7 @@
             "product_1_learn_more_url": "/products/perio-super-paste?variant=51794413289748",
             "product_1_variant_id": "",
             "product_2_image": "shopify://shop_images/540.png",
-            "product_2_title": "Super Paste - Triple Protection",
+            "product_2_title": "Super Paste™ - Triple Protection",
             "product_2_price": "$186 / 12-pack",
             "product_2_description": "",
             "product_2_features": "Fluoride + 10% premium nHAp + Xylitol | Proven enamel remineralization | Low abrasion, safe for daily use",
@@ -398,7 +398,7 @@
             "product_2_learn_more_url": "/products/wholesale-24-pack-super-paste-with-10-nano-hydroxyapatite-fluoride-toothpaste?variant=47538004197652",
             "product_2_variant_id": "",
             "product_3_image": "shopify://shop_images/600x600-2.png",
-            "product_3_title": "Super Paste ORTHO",
+            "product_3_title": "Super Paste Ortho™",
             "product_3_price": "$208 / 12-pack",
             "product_3_description": "",
             "product_3_features": "Supports healthier gums with braces or aligners | Helps reduce braces and aligner breath",
@@ -996,7 +996,7 @@
         "image_group_7PhJXC": {
           "type": "image_group",
           "settings": {
-            "text_above": "In Sept 2025, while she was away at college, a dental office took a full mouth series of radiographs. The dentist diagnosed 12 cavities. \nThe patient wanted to try remineralization therapy first and began to use Dr. Jen's Super Paste twice a day. ",
+            "text_above": "In Sept 2025, while she was away at college, a dental office took a full mouth series of radiographs. The dentist diagnosed 12 cavities. \nThe patient wanted to try remineralization therapy first and began to use Dr. Jen's Super Paste™ twice a day. ",
             "label": "",
             "image_desk": "shopify://shop_images/Group_1000007170_1.png",
             "width_desk": 80,
@@ -1070,7 +1070,7 @@
             "shopify_video": "shopify://files/videos/NaomiTetrault.mov",
             "poster": "shopify://shop_images/Column.png",
             "poster_mob": "shopify://shop_images/image_1318.png",
-            "name": "DR. Naomi, Dental Hygienist",
+            "name": "Dr. Naomi, Dental Hygienist",
             "quote": "“I am a hygienist here in Denver, Colorado, and about a year ago, I started using the Dr. Jen Super Paste, and I love it. I have noticed my teeth are less sensitive. They are whiter, they are brighter, they are just slicker, if that's a word. And so I do recommend this to my patients, and especially if they're having sensitivity and they're using another sensitive toothpaste and it's just plateauing.”",
             "name_align": "left",
             "quote_align": "left",
@@ -1221,7 +1221,7 @@
           "type": "product_card",
           "settings": {
             "image": "shopify://shop_images/540.png",
-            "title": "Super Paste - Triple Protection",
+            "title": "Super Paste™ - Triple Protection",
             "price": "$186 / 12-pack",
             "description": "",
             "features": "Fluoride + Premium nHAp + Xylitol| Proven enamel remineralization | Low abrasion, safe for daily use",
@@ -1275,7 +1275,7 @@
           "type": "product_card",
           "settings": {
             "image": "shopify://shop_images/540-4.png",
-            "title": "Super Paste Perio",
+            "title": "Super Paste Perio™",
             "price": "$208 / 12-pack",
             "description": "",
             "features": "Gentle no-foam, low-abrasion formula | Helps support exposed root surfaces | Enriched with aloe vera + calendula",
@@ -1309,6 +1309,7 @@
         "view_all_text": "SHOP ALL",
         "view_all_url": "shopify://collections/all",
         "show_subscribe_save": true,
+        "subscribe_save_text": "Subscribe & Save up to 5% OFF",
         "badge_alignment": "left",
         "add_to_cart_text": "ADD TO CART",
         "heading_size_desktop": 32,
@@ -1329,8 +1330,8 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/8df6a54a344b86648406b7bbff852510b6143ee8.png",
-            "title": "Introducing Dr. Jen's Nano-hydroxyapatite Toothpaste",
-            "link_url": "shopify://blogs/learn-more",
+            "title": "Whitening Shouldn’t Compromise Enamel Health",
+            "link_url": "/blogs/learn-more/whitening-shouldn-t-compromise-enamel-health",
             "btn_label": ""
           }
         },
@@ -1338,8 +1339,8 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/329819844655a26cd386c061ef11ffac9dd2c0f9.png",
-            "title": "The Dr. Jen Difference",
-            "link_url": "shopify://blogs/learn-more",
+            "title": "Is Nano-Hydroxyapatite Safe in Toothpaste?",
+            "link_url": "/blogs/learn-more/is-nano-hydroxyapatite-safe-in-toothpaste",
             "btn_label": "LEARN MORE"
           }
         },
@@ -1347,8 +1348,8 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/271b323308b75f5223e8f19eb9d189f3a08d540b_2.png",
-            "title": "Nano-hydroxyapatite + Fluoride",
-            "link_url": "shopify://blogs/learn-more",
+            "title": "Can Nano Hydroxyapatite Replace Fluoride? What Dental Professionals Need to Know",
+            "link_url": "/blogs/learn-more/can-nano-hydroxyapatite-replace-fluoride-what-dental-professionals-need-to-know",
             "btn_label": ""
           }
         }
