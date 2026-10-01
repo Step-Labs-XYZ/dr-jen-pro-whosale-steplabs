@@ -129,7 +129,7 @@
             "ingredients_s1_item_2_tag": "Humectant",
             "ingredients_s1_item_3_name": "Xylitol",
             "ingredients_s1_item_3_tag": "Abrasive",
-            "ingredients_s1_item_4_name": "Nanohydroxyapatite (nHAp)",
+            "ingredients_s1_item_4_name": "Nano-hydroxyapatite (nHAp)",
             "ingredients_s1_item_4_tag": "10%",
             "ingredients_s1_item_5_name": "Citric acid",
             "ingredients_s1_item_5_tag": "Polisher",
@@ -396,8 +396,8 @@
       "name": "C Dr. Jen Difference",
       "settings": {
         "heading": "<p>Premium-Grade nHAp</p>",
-        "description": "<p>Premium-grade Nanohydroxyapatite is proven to deliver optimal levels of protection, reduction in acid-causing bacteria, and hypersensitivity management when used at concentrations of 10%</p>",
-        "bold_text": "<p><strong>While cheaper formulations source lower grade Nanohydroxyapatite, Dr. Jen's sources premium grade Nanohydroxyapatite for higher performance.</strong></p>",
+        "description": "<p>Premium-grade Nano-hydroxyapatite is proven to deliver optimal levels of protection, reduction in acid-causing bacteria, and hypersensitivity management when used at concentrations of 10%</p>",
+        "bold_text": "<p><strong>While cheaper formulations source lower grade Nano-hydroxyapatite, Dr. Jen's sources premium grade Nano-hydroxyapatite for higher performance.</strong></p>",
         "secondary_text": "<p>That's the exact specification the Scientific Committee on Consumer Safety (SCCS) has officially recognized as safe:</p>",
         "scientific_image": "shopify://shop_images/logo-2.png",
         "scientific_quote": "<p><em>\"Based on the data provided, the SCCS considers hydroxyapatite (nano) safe when used at concentrations up to 10% in toothpaste — composed of rod-shaped particles.\"</em></p>",
@@ -421,7 +421,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Advanced Enamel Support",
-            "answer": "<p>Premium Nanohydroxyapatite helps support healthy enamel with daily use.</p>"
+            "answer": "<p>Premium Nano-hydroxyapatite helps support healthy enamel with daily use.</p>"
           }
         },
         "faq_item_C3fetb": {
@@ -456,7 +456,7 @@
       "settings": {
         "sl_anchor_id": "",
         "title": "Why Your Patients  Deserve a Better Rinse",
-        "body_text": "<p>The cleaner rinse alternative for patients who deserve more from their daily routine, built on premium Nanohydroxyapatite with soothing botanicals and essential oils. Unlike conventional mouthwashes that rely on alcohol and harsh additives, Wellness Pre-Rinse delivers advanced enamel and gum support with cleaner ingredients you can trust.</p>",
+        "body_text": "<p>The cleaner rinse alternative for patients who deserve more from their daily routine, built on premium Nano-hydroxyapatite with soothing botanicals and essential oils. Unlike conventional mouthwashes that rely on alcohol and harsh additives, Wellness Pre-Rinse delivers advanced enamel and gum support with cleaner ingredients you can trust.</p>",
         "comparison_label": "See the Difference at the Microscopic Level:",
         "comparison_image": "shopify://shop_images/Frame_1618873395_1.png",
         "comparison_image_mobile": "shopify://shop_images/Frame_1618873401.png",
@@ -657,14 +657,14 @@
           "type": "expandable_group",
           "settings": {
             "title": "All Extracts",
-            "items": "Stevia Rebaudiana Leaf Extract\nAnise Extract\nPapaya Extract\nBlack Cherry Extract\nGlycyhizein (Chinese Licorice Root Extract)",
+            "items": "Stevia Rebaudiana Leaf Extract\nAnise Extract\nPapaya Extract\nBlack Cherry Extract\nGlycyrrhizin (Chinese Licorice Root Extract)",
             "open_by_default": false
           }
         },
         "ingredient_VY8pEc": {
           "type": "ingredient",
           "settings": {
-            "name": "Nanohydroxyapatite",
+            "name": "Nano-hydroxyapatite",
             "note": "strengthens enamel"
           }
         }
@@ -830,7 +830,7 @@
         "question": "Does quality of the crystal matter?",
         "sub_body": "Crystals have to be 'Nano' in size to be able to penetrate the enamel surface pores and dentin tubules.",
         "title": "Premium-Grade NHAp",
-        "body_text": "<p>Premium-grade Nanohydroxyapatite is proven to deliver optimal levels of protection, reduction in acid-causing bacteria, and hypersensitivity management when used at concentrations of 10%.</p><p><strong>While cheaper formulations source lower grade Nanohydroxyapatite, Dr. Jen's sources premium grade Nanohydroxyapatite for higher performance.</strong></p><p>That's the exact specification the Scientific Committee on Consumer Safety (SCCS) has officially recognized as safe.</p>",
+        "body_text": "<p>Premium-grade Nano-hydroxyapatite is proven to deliver optimal levels of protection, reduction in acid-causing bacteria, and hypersensitivity management when used at concentrations of 10%.</p><p><strong>While cheaper formulations source lower grade Nano-hydroxyapatite, Dr. Jen's sources premium grade Nano-hydroxyapatite for higher performance.</strong></p><p>That's the exact specification the Scientific Committee on Consumer Safety (SCCS) has officially recognized as safe.</p>",
         "cert_logo": "shopify://shop_images/logo-2.png",
         "cert_quote": "\"Based on the data provided, the SCCS considers hydroxyapatite (nano) safe when used at concentrations up to 10% in toothpaste — composed of rod-shaped particles\"",
         "bg_color": "#ffffff",
@@ -871,7 +871,7 @@
         "faq_item_HQ84kE": {
           "type": "faq_item",
           "settings": {
-            "question": "What exactly is Nanohydroxyapatite?",
+            "question": "What exactly is Nano-hydroxyapatite?",
             "answer": "<p>Nano-hydroxyapatite (nHAp) is composed of calcium and phosphate minerals, the same minerals that make up 97% of your tooth enamel and the mineral portion of your bones. The \"nano\" means the particles are extremely small, measured in nanometers, allowing them to behave like your natural enamel crystals.  </p><p><strong>How it works:</strong></p><ul><li>Absorbs and removes dental plaque</li><li>Replenishes lost calcium and phosphate minerals</li><li>Fills in micro-fissures on tooth surfaces</li><li>Reduces sensitivity by sealing exposed dentinal tubules</li></ul><p>Think of it as giving your teeth the building blocks they need to stay strong.<br/><br/><br/></p>"
           }
         },
@@ -879,7 +879,7 @@
           "type": "faq_item",
           "settings": {
             "question": "How does this rinse support enamel health?",
-            "answer": "<p>The formula contains nanohydroxyapatite, a biomimetic mineral naturally found in teeth, designed to help support healthy enamel and provide daily protection from everyday acids.</p>"
+            "answer": "<p>The formula contains nano-hydroxyapatite, a biomimetic mineral naturally found in teeth, designed to help support healthy enamel and provide daily protection from everyday acids.</p>"
           }
         },
         "faq_item_MEG9f3": {

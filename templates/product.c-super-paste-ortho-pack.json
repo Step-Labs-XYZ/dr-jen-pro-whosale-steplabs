@@ -117,7 +117,7 @@
           "settings": {
             "ingredients_trigger_label": "ingredients",
             "ingredients_modal_subtitle": "INGREDIENT FACTS",
-            "ingredients_modal_title": "Super Paste ORTHO with Fluoride + <br>10% Premium Nanohydroxyapatite",
+            "ingredients_modal_title": "Super Paste ORTHO with Fluoride + <br>10% Premium Nano-hydroxyapatite",
             "ingredients_flavor_1_label": "Cool Mint",
             "ingredients_flavor_2_label": "",
             "ingredients_flavor_3_label": "Watermelon",
@@ -155,7 +155,7 @@
             "ingredients_s2_item_3_tag": "Abrasive",
             "ingredients_s2_item_4_name": "Xylitol",
             "ingredients_s2_item_4_tag": "Abrasive",
-            "ingredients_s2_item_5_name": "Nanohydroxyapatite (nHAp)",
+            "ingredients_s2_item_5_name": "Nano-hydroxyapatite (nHAp)",
             "ingredients_s2_item_5_tag": "10%",
             "ingredients_s2_item_6_name": "Calcium Carbonate",
             "ingredients_s2_item_6_tag": "Polisher",
@@ -348,8 +348,8 @@
       "name": "C Dr. Jen Difference",
       "settings": {
         "heading": "<p>The Dr. Jen Difference: Premium Grade nHAp</p>",
-        "description": "<p>Premium-grade Nanohydroxyapatite is proven to deliver optimal levels of protection, reduction in acid-causing bacteria, and hypersensitivity management when used at concentrations of 10%</p>",
-        "bold_text": "<p><strong>While cheaper formulations source lower grade Nanohydroxyapatite, Dr. Jen's sources premium grade Nanohydroxyapatite for higher performance.</strong></p>",
+        "description": "<p>Premium-grade Nano-hydroxyapatite is proven to deliver optimal levels of protection, reduction in acid-causing bacteria, and hypersensitivity management when used at concentrations of 10%</p>",
+        "bold_text": "<p><strong>While cheaper formulations source lower grade Nano-hydroxyapatite, Dr. Jen's sources premium grade Nano-hydroxyapatite for higher performance.</strong></p>",
         "secondary_text": "<p>That's the exact specification the Scientific Committee on Consumer Safety (SCCS) has officially recognized as safe:</p>",
         "scientific_image": "shopify://shop_images/logo-2.png",
         "scientific_quote": "<p><em>\"Based on the data provided, the SCCS considers hydroxyapatite (nano) safe when used at concentrations up to 10% in toothpaste — composed of rod-shaped particles.\"</em></p>",
@@ -418,7 +418,7 @@
         "heading": "What Does Your Patients Enamel Really Need in Your Fluoride Toothpaste?",
         "subheading": "The answer is easy: Optimal cavity protection and remineralization",
         "subtitle": "The 10% Premium Difference",
-        "body_text": "<p>In a Pilot Study conducted in December 2023, Dr. Jen's Super Paste (10% Nanohydroxyapatite, 0.22% fluoride, and xylitol) was tested against a high-prescription fluoride toothpaste containing 5000 ppm. Dr. Jen's Super Paste delivered six times higher levels of remineralization.</p>",
+        "body_text": "<p>In a Pilot Study conducted in December 2023, Dr. Jen's Super Paste (10% Nano-hydroxyapatite, 0.22% fluoride, and xylitol) was tested against a high-prescription fluoride toothpaste containing 5000 ppm. Dr. Jen's Super Paste delivered six times higher levels of remineralization.</p>",
         "chart_image": "shopify://shop_images/Frame_1484580887.png",
         "bg_color": "#f7f7f7",
         "color_heading": "#002c41",
@@ -563,7 +563,7 @@
         "question": "Does quality of the crystal matter?",
         "sub_body": "Crystals have to be 'Nano' in size to be able to penetrate the enamel surface pores and dentin tubules.",
         "title": "Premium-Grade NHAp",
-        "body_text": "<p>Premium-grade Nanohydroxyapatite is proven to deliver optimal levels of protection, reduction in acid-causing bacteria, and hypersensitivity management when used at concentrations of 10%.</p><p><strong>While cheaper formulations source lower grade Nanohydroxyapatite, Dr. Jen's sources premium grade Nanohydroxyapatite for higher performance.</strong></p><p>That's the exact specification the Scientific Committee on Consumer Safety (SCCS) has officially recognized as safe.</p>",
+        "body_text": "<p>Premium-grade Nano-hydroxyapatite is proven to deliver optimal levels of protection, reduction in acid-causing bacteria, and hypersensitivity management when used at concentrations of 10%.</p><p><strong>While cheaper formulations source lower grade Nano-hydroxyapatite, Dr. Jen's sources premium grade Nano-hydroxyapatite for higher performance.</strong></p><p>That's the exact specification the Scientific Committee on Consumer Safety (SCCS) has officially recognized as safe.</p>",
         "cert_logo": "shopify://shop_images/logo-2.png",
         "cert_quote": "\"Based on the data provided, the SCCS considers hydroxyapatite (nano) safe when used at concentrations up to 10% in toothpaste — composed of rod-shaped particles\"",
         "bg_color": "#ffffff",
@@ -635,7 +635,7 @@
       "settings": {
         "sl_anchor_id": "",
         "title": "Why Ortho Patients Need More",
-        "body_text": "<p>The natural toothpaste alternative for ortho patients, built on a triple-protection formula of fluoride, 10% premium Nanohydroxyapatite, and xylitol. Unlike prescription toothpastes that rely on excessively high fluoride levels and petroleum-based ingredients, Dr. Jen's Super Paste ORTHO combines clinically proven 10% premium Nanohydroxyapatite with botanicals chosen specifically for the demands of orthodontic treatment.</p>",
+        "body_text": "<p>The natural toothpaste alternative for ortho patients, built on a triple-protection formula of fluoride, 10% premium Nano-hydroxyapatite, and xylitol. Unlike prescription toothpastes that rely on excessively high fluoride levels and petroleum-based ingredients, Dr. Jen's Super Paste ORTHO combines clinically proven 10% premium Nano-hydroxyapatite with botanicals chosen specifically for the demands of orthodontic treatment.</p>",
         "comparison_label": "See the Difference at the Microscopic Level:",
         "comparison_image": "shopify://shop_images/Frame_1618873395_1.png",
         "comparison_image_mobile": "shopify://shop_images/Frame_1618873401.png",
@@ -736,7 +736,7 @@
         "bg_color": "#ffffff",
         "pre_title": "formulated with sensitive smiles in mind",
         "title": "Everything Your Smile Needs, & Nothing It Doesn't",
-        "subtitle": "Dr. Jen's vs. other nanohydroxyapatite toothpastes",
+        "subtitle": "Dr. Jen's vs. other nano-hydroxyapatite toothpastes",
         "our_title": "Super Paste Ortho Toothpaste",
         "other_title": "Other Toothpaste",
         "pad_top_desk": 80,
@@ -751,7 +751,7 @@
         "bullet_CRfE6P": {
           "type": "bullet",
           "settings": {
-            "text": "Triple the proven remineralizing ingredients using 10% nano Hydroxyapatite, xylitol and fluoride.\n\nProprietary formulation for balancing pH and managing halitoses.\n10% Nanohydroxyapatite proven enamel remineralization."
+            "text": "Triple the proven remineralizing ingredients using 10% nano Hydroxyapatite, xylitol and fluoride.\n\nProprietary formulation for balancing pH and managing halitoses.\n10% Nano-hydroxyapatite proven enamel remineralization."
           }
         },
         "ingredient_nQQQby": {
@@ -827,7 +827,7 @@
         "ingredient_VY8pEc": {
           "type": "ingredient",
           "settings": {
-            "name": "Nanohydroxyapatite",
+            "name": "Nano-hydroxyapatite",
             "note": "strengthens enamel"
           }
         },
@@ -849,7 +849,7 @@
           "type": "expandable_group",
           "settings": {
             "title": "All Extracts",
-            "items": "Stevia Rebaudiana Leaf Extract\nAnise Extract\nPapaya Extract\nBlack Cherry Extract\nGlycyhizein (Chinese Licorice Root Extract)",
+            "items": "Stevia Rebaudiana Leaf Extract\nAnise Extract\nPapaya Extract\nBlack Cherry Extract\nGlycyrrhizin (Chinese Licorice Root Extract)",
             "open_by_default": false
           }
         },
