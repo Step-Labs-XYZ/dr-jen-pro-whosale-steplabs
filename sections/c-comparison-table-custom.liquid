@@ -355,9 +355,118 @@
       border-right: 1px solid #f0f0f0;
     }
   }
+
+  /* =========================================
+     DISEÑO V2 — valores del nodo de Figma
+     ========================================= */
+  {%- if section.settings.design_v2 -%}
+  .comp-section-{{ section.id }}.comp--v2 { padding: 80px 0; background: #FFFFFF; }
+  .comp-section-{{ section.id }}.comp--v2 .comp-container-{{ section.id }} { max-width: 1440px; padding: 0 96px 0 64px; gap: 0; justify-content: space-between; align-items: center; }
+  .comp-section-{{ section.id }}.comp--v2 .comp-text-side { width: auto; max-width: none; flex: 0 1 38.2813%; display: flex; flex-direction: column; gap: 20px; }
+  .comp-section-{{ section.id }}.comp--v2 .comp-title-desktop { font-size: 32px; font-weight: 600; line-height: 1.2; color: #002C41; margin: 0; }
+  .comp-section-{{ section.id }}.comp--v2 .comp-subtitle { font-size: 24px; font-weight: 400; line-height: 1.2; color: #231F20; margin: 0; }
+  .comp-section-{{ section.id }}.comp--v2 .comp-link-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    width: 133px; padding: 12px 24px; border: 1px solid #002C41; border-radius: 44px;
+    font-size: 12px; font-weight: 700; text-transform: uppercase; text-decoration: underline; color: #002C41;
+    white-space: nowrap;
+  }
+  .comp-section-{{ section.id }}.comp--v2 .comp-badge-text {
+    font-family: 'EightiesComeback_It VAR', 'Raleway', sans-serif;
+    font-size: 24px; font-style: italic; color: #002C41; max-width: 391px;
+  }
+  .comp-section-{{ section.id }}.comp--v2 .comp-table-side { width: auto; max-width: none; flex: 0 1 57.9688%; }
+
+  @media (min-width: 900px) {
+    /* nodo 4460:8038 */
+    .comp-section-{{ section.id }}.comp--v2 .comp-title-desktop { margin-bottom: -8px; }
+    /* en desktop tampoco hay pill: es texto subrayado con flecha */
+    .comp-section-{{ section.id }}.comp--v2 .comp-link-btn {
+      width: auto; border: 0; border-radius: 0; margin: 0 auto 0 0;
+      padding: 12px 24px 12px 0; font-size: 14px; line-height: 1.2;
+    }
+    .comp-section-{{ section.id }}.comp--v2 .comp-link-btn svg { flex-shrink: 0; width: 16px; height: 12px; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-badge-text { line-height: 1.2; max-width: none; }
+
+    /* las fotos flotan sobre la cabecera en una banda de 120 */
+    .comp-section-{{ section.id }}.comp--v2 .comp-table-side { margin-top: 0; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-table-wrapper { padding-top: 120px; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-img-container:nth-child(1) .comp-img-box { width: 125px; height: 114px; top: 23px; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-img-container:nth-child(2) .comp-img-box { width: 171px; height: 128px; top: 16px; }
+
+    .comp-section-{{ section.id }}.comp--v2 .comp-table-header {
+      min-height: 80px; padding: 0 16px; gap: 0; align-items: center;
+      border-radius: 12px 12px 0 0; margin-bottom: 0;
+    }
+    .comp-section-{{ section.id }}.comp--v2 .comp-header-title { font-size: 16px; line-height: 1.2; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-table-body { gap: 0; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-table-row {
+      min-height: 80px; padding: 0; border-radius: 0; align-items: center;
+      border-left: 1px solid #002C41; border-right: 1px solid #002C41;
+    }
+    .comp-section-{{ section.id }}.comp--v2 .comp-table-row:nth-child(odd) { background-color: #FFFFFF; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-table-row:nth-child(even) { background-color: #F7F7F7; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-table-row:last-child {
+      border-bottom: 1px solid #002C41; border-radius: 0 0 12px 12px;
+    }
+    /* el borde va en los extremos de la fila; entre columnas el nodo no lleva linea */
+    .comp-section-{{ section.id }}.comp--v2 .comp-cell { padding: 0 15px; gap: 12px; align-items: center; border: 0; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-icon-wrapper { width: 32px; height: 32px; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-icon-wrapper svg { width: 100%; height: 100%; }
+    /* la cruz va en una caja de 32 al 50% con el glifo a 24, no a tamano completo */
+    .comp-section-{{ section.id }}.comp--v2 .comp-cell-generic .comp-icon-wrapper { opacity: 0.5; background: transparent; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-cell-generic .comp-icon-wrapper svg { width: 24px; height: 24px; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-row-text { font-size: 18px; line-height: 1.2; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-cell-generic .comp-row-text { font-weight: 400; color: #002C41; }
+  }
+
+  @media (max-width: 899px) {
+    .comp-section-{{ section.id }}.comp--v2 { padding: 24px 0; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-container-{{ section.id }} { padding: 0 24px; gap: 0; }
+    /* en el nodo mobile no hay columna de texto: titulo y descripcion arriba, tabla,
+       y debajo el link y el titular serif. Se reordena sin tocar el markup. */
+    .comp-section-{{ section.id }}.comp--v2 .comp-text-side { display: contents; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-title-mobile,
+    .comp-section-{{ section.id }}.comp--v2 .comp-title-desktop { order: 1; font-size: 20px; line-height: 1.2; margin: 0 0 10px; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-subtitle { order: 2; font-size: 12px; line-height: 1.2; color: #707170; margin: 0; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-table-side { order: 3; width: auto; flex: 1 1 auto; margin-top: 0; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-link-btn {
+      order: 4; width: auto; align-self: flex-start; border: 0; border-radius: 0;
+      margin: 0 auto 0 0;
+      padding: 12px 24px 12px 0; font-size: 12px; line-height: 1.2;
+    }
+    .comp-section-{{ section.id }}.comp--v2 .comp-badge-text {
+      order: 5; display: block; font-size: 16px; line-height: 1.425; margin: 6px auto 0 0; max-width: none; text-align: left;
+    }
+
+    /* las fotos de producto flotan sobre la cabecera */
+    .comp-section-{{ section.id }}.comp--v2 .comp-table-wrapper { padding-top: 64px; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-img-box { top: 17px; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-img-container:nth-child(1) .comp-img-box { width: 65px; height: 60px; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-img-container:nth-child(2) .comp-img-box { width: 92px; height: 69px; }
+
+    .comp-section-{{ section.id }}.comp--v2 .comp-table-header {
+      border-radius: 12px 12px 0 0; padding: 14px 16px; gap: 0; min-height: 84px; align-items: center; margin-bottom: 0;
+    }
+    .comp-section-{{ section.id }}.comp--v2 .comp-table-header * { font-size: 14px; line-height: 1.2; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-header-brand { font-weight: 400; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-table-body { gap: 0; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-table-row {
+      border-radius: 0; padding: 14px; align-items: center;
+      border-left: 1px solid #002C41; border-right: 1px solid #002C41;
+    }
+    .comp-section-{{ section.id }}.comp--v2 .comp-table-row:nth-child(odd) { background-color: #FFFFFF; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-table-row:nth-child(even) { background-color: #F7F7F7; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-table-row:last-child {
+      border-bottom: 1px solid #002C41; border-radius: 0 0 12px 12px;
+    }
+    .comp-section-{{ section.id }}.comp--v2 .comp-cell { padding: 0; gap: 4px; align-items: center; }
+    .comp-section-{{ section.id }}.comp--v2 .comp-row-text { font-size: 10px; line-height: 1.2; color: #000000; }
+  }
+  {%- endif -%}
 {% endstyle %}
 
-<section class="comp-section-{{ section.id }}">
+<section class="comp-section-{{ section.id }}{% if section.settings.design_v2 %} comp--v2{% endif %}">
   <div class="comp-container-{{ section.id }}">
     
     <div class="comp-text-side">
@@ -463,6 +572,7 @@
 {
   "name": "C - Comparison Table v2",
   "settings": [
+    { "type": "checkbox", "id": "design_v2", "label": "Diseño v2 (Figma 2026)", "default": false },
     {
       "type": "header",
       "content": "Ajustes Generales de Sección"
@@ -858,4 +968,4 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %}

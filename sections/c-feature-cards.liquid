@@ -131,9 +131,45 @@
       color:#000;
     }
   }
+
+  /* =========================================
+     DISEÑO V2 — valores del nodo de Figma
+     Solo aplica en las plantillas que lo encienden.
+     ========================================= */
+  {%- if section.settings.design_v2 -%}
+  #c-features-{{ section.id }}.c-features--v2 { padding-top: 22px; padding-bottom: 22px; }
+  #c-features-{{ section.id }}.c-features--v2 .c-features__container { max-width: 1440px; padding: 0 22px; }
+  #c-features-{{ section.id }}.c-features--v2 .c-features__track { gap: 44px; }
+  #c-features-{{ section.id }}.c-features--v2 .c-features__card {
+    border: 2px solid var(--cf-border-color);
+    border-radius: 22px;
+    padding: 20px 24px;
+    gap: 10px;
+    justify-content: center;
+    min-height: 195px;
+  }
+  #c-features-{{ section.id }}.c-features--v2 .c-features__icon {
+    height: 54px; width: 54px; margin-bottom: 0;
+  }
+  #c-features-{{ section.id }}.c-features--v2 .c-features__icon svg { width: 54px; height: 54px; max-height: none; }
+  #c-features-{{ section.id }}.c-features--v2 .c-features__title {
+    font-size: 20px; font-weight: 700; line-height: 1.2; color: #000000; margin: 0;
+  }
+  #c-features-{{ section.id }}.c-features--v2 .c-features__desc {
+    font-size: 16px; font-weight: 400; line-height: 1.2; color: #000000; margin: 0;
+  }
+  @media (max-width: 899px) {
+    #c-features-{{ section.id }}.c-features--v2 .c-features__title { font-size: 18px; }
+    #c-features-{{ section.id }}.c-features--v2 .c-features__desc { font-size: 14px; }
+  }
+  @media (min-width: 900px) {
+    #c-features-{{ section.id }}.c-features--v2 .c-features__container { padding: 0 64px; }
+    #c-features-{{ section.id }}.c-features--v2 .c-features__track { gap: 50px; }
+  }
+  {%- endif -%}
 {%- endstyle -%}
 
-<section id="c-features-{{ section.id }}" class="c-features">
+<section id="c-features-{{ section.id }}" class="c-features{% if section.settings.design_v2 %} c-features--v2{% endif %}">
   <div class="c-features__container">
     
     <div class="c-features__track">
@@ -167,6 +203,13 @@
 {
   "name": "C - Feature Cards",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "design_v2",
+      "label": "Diseño v2 (Figma 2026)",
+      "info": "Aplica los valores del rediseño. Apagado en las plantillas que siguen con el diseño anterior.",
+      "default": false
+    },
     {
       "type": "color",
       "id": "bg_color",
@@ -221,7 +264,7 @@
           "type": "textarea",
           "id": "description",
           "label": "Descripción",
-          "default": "Powered by ingredients like Nanohydroxyapatite and xylitol—clinically shown to protect enamel and reduce sensitivity."
+          "default": "Powered by ingredients like Nano-hydroxyapatite and xylitol—clinically shown to protect enamel and reduce sensitivity."
         }
       ]
     }
@@ -234,7 +277,7 @@
           "type": "feature",
           "settings": {
             "title": "Proven to Support Healthy Smiles",
-            "description": "Powered by ingredients like Nanohydroxyapatite and xylitol—clinically shown to protect enamel and reduce sensitivity.",
+            "description": "Powered by ingredients like Nano-hydroxyapatite and xylitol—clinically shown to protect enamel and reduce sensitivity.",
             "svg_code": "<svg width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z\"/></svg>"
           }
         },

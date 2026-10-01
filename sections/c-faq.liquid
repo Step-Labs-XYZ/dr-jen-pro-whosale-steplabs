@@ -177,9 +177,41 @@
       padding-bottom: 28px;
     }
   }
+
+  /* =========================================
+     DISEÑO V2 — valores del nodo de Figma
+     ========================================= */
+  {%- if section.settings.design_v2 -%}
+  #c-faq-{{ section.id }}.c-faq--v2 { padding: 64px 0; }
+  #c-faq-{{ section.id }}.c-faq--v2 .c-faq__container { max-width: 1440px; padding: 0 80px 0 64px; gap: 0; justify-content: space-between; }
+  #c-faq-{{ section.id }}.c-faq--v2 .c-faq__header { width: auto; max-width: none; flex: 0 1 40.7407%; }
+  #c-faq-{{ section.id }}.c-faq--v2 .c-faq__title { font-family: 'Raleway', sans-serif; font-size: 48px; font-weight: 600; line-height: 1.2; color: #002C41; }
+  #c-faq-{{ section.id }}.c-faq--v2 .c-faq__accordion { width: auto; max-width: none; flex: 0 1 44.4444%; }
+  #c-faq-{{ section.id }}.c-faq--v2 .c-faq__item { border-bottom: 1px solid rgba(61, 68, 30, 0.2); }
+  #c-faq-{{ section.id }}.c-faq--v2 .c-faq__question {
+    padding: 16px 0; gap: 12px; font-size: 18px; font-weight: 700; line-height: 1.2; color: #002C41;
+  }
+  #c-faq-{{ section.id }}.c-faq--v2 .c-faq__icon { width: 24px; height: 24px; }
+  #c-faq-{{ section.id }}.c-faq--v2 .c-faq__answer { padding: 0 0 16px; font-size: 14px; line-height: 1.2; color: #000000; }
+  #c-faq-{{ section.id }}.c-faq--v2 .c-faq__answer p + p { margin-top: 24px; }
+  #c-faq-{{ section.id }}.c-faq--v2 .c-faq__item.is-open .c-faq__answer-wrapper { max-height: none; }
+
+  @media (max-width: 899px) {
+    #c-faq-{{ section.id }}.c-faq--v2 { padding: 22px 0; }
+    #c-faq-{{ section.id }}.c-faq--v2 .c-faq__container { padding: 0 22px; flex-direction: column; gap: 32px; }
+    #c-faq-{{ section.id }}.c-faq--v2 .c-faq__header, #c-faq-{{ section.id }}.c-faq--v2 .c-faq__accordion { width: auto; flex: 1 1 auto; }
+    #c-faq-{{ section.id }}.c-faq--v2 .c-faq__title { font-family: 'Raleway', sans-serif; font-size: 32px; }
+    #c-faq-{{ section.id }}.c-faq--v2 .c-faq__question { font-size: 16px; }
+    #c-faq-{{ section.id }}.c-faq--v2 .c-faq__answer { font-size: 12px; }
+    /* el nodo lista los bullets con indent 20 y sin separacion extra entre items */
+    #c-faq-{{ section.id }}.c-faq--v2 .c-faq__answer ul,
+    #c-faq-{{ section.id }}.c-faq--v2 .c-faq__answer ol { padding-left: 20px; margin: 0; }
+    #c-faq-{{ section.id }}.c-faq--v2 .c-faq__answer li { margin-bottom: 0; padding-left: 0; }
+  }
+  {%- endif -%}
 {%- endstyle -%}
 
-<section id="c-faq-{{ section.id }}" class="c-faq">
+<section id="c-faq-{{ section.id }}" class="c-faq{% if section.settings.design_v2 %} c-faq--v2{% endif %}">
   <div class="c-faq__container">
     
     <div class="c-faq__header">
@@ -191,9 +223,9 @@
     <div class="c-faq__accordion js-faq-accordion-{{ section.id }}">
       
       {% for block in section.blocks %}
-        <div class="c-faq__item js-faq-item-{{ section.id }}" {{ block.shopify_attributes }}>
+        <div class="c-faq__item js-faq-item-{{ section.id }}{% if section.settings.design_v2 and section.settings.v2_start_open %} is-open{% endif %}" {{ block.shopify_attributes }}>
           
-          <button class="c-faq__question js-faq-btn-{{ section.id }}" aria-expanded="false">
+          <button class="c-faq__question js-faq-btn-{{ section.id }}" aria-expanded="{% if section.settings.design_v2 and section.settings.v2_start_open %}true{% else %}false{% endif %}">
             <span>{{ block.settings.question }}</span>
             <svg class="c-faq__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="6 9 12 15 18 9"></polyline>
@@ -267,6 +299,8 @@
 {
   "name": "C - FAQ Section",
   "settings": [
+    { "type": "checkbox", "id": "design_v2", "label": "Diseño v2 (Figma 2026)", "default": false },
+    { "type": "checkbox", "id": "v2_start_open", "label": "Diseño v2: preguntas abiertas al cargar", "default": true },
     {
       "type": "color",
       "id": "bg_color",

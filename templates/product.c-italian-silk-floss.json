@@ -1,0 +1,641 @@
+{
+  "sections": {
+    "c_product_topbar_zrebdC": {
+      "type": "c-product-topbar",
+      "name": "C - Product Top Bar",
+      "settings": {
+        "custom_text": "100% Biodegradable Floss | Avocado Oil Coating",
+        "bg_color": "#f8f6f6",
+        "text_color": "#002c41",
+        "font_weight": 700,
+        "font_size_desktop": 14,
+        "font_size_mobile": 11,
+        "pad_y_desktop": 10,
+        "pad_y_mobile": 8
+      }
+    },
+    "c_product_page_QCgTQb": {
+      "type": "c-product-page-v2",
+      "blocks": {
+        "title_cXihkp": {
+          "type": "title",
+          "settings": {
+            "title_source": "secondary",
+            "secondary_title": "100% Italian Silk Floss",
+            "secondary_title_line2": "",
+            "title_tag": "",
+            "eyebrow": ""
+          }
+        },
+        "product_pills_desktop": {
+          "type": "product_pills",
+          "settings": {
+            "visibility": "desktop",
+            "product_1": "wholesale-30-pack-flavors-natural-plastic-free-floss-with-nano-hydroxyapatite-mint",
+            "label_1": "Cool Mint",
+            "color_1": "#CDFFF1",
+            "selected_bg_1": "#CDFFF1",
+            "product_2": "30-pack-flavors-natural-plastic-free-floss-with-nano-hydroxyapatite-papaya",
+            "label_2": "Papaya",
+            "color_2": "#FFC183",
+            "selected_bg_2": "#FFC183",
+            "product_3": "wholesale-30-pack-flavors-natural-plastic-free-floss-with-nano-hydroxyapatite-black-cherry",
+            "label_3": "Black Cherry",
+            "color_3": "#B50859",
+            "selected_bg_3": "#F7D3E3"
+          }
+        },
+        "description_block_DXpJze": {
+          "type": "description_block",
+          "settings": {
+            "description": "<p><strong>Do something Drastic and Skip the Plastic.</strong><br/>Over 97% of floss currently being used is plastic which causes micro plastic ingestion. Flossing with Dr. Jen's Natural Silk Floss is safe for your body and our Planet. Even our floss dispenser is biodegradable.</p>"
+          }
+        },
+        "price_stock_93GetG": {
+          "type": "price_stock",
+          "settings": {
+            "unit_label": "unit",
+            "show_payment_terms": false,
+            "retail_text": "",
+            "count_label": "50 count"
+          }
+        },
+        "product_pills_mobile": {
+          "type": "product_pills",
+          "settings": {
+            "visibility": "mobile",
+            "product_1": "wholesale-30-pack-flavors-natural-plastic-free-floss-with-nano-hydroxyapatite-mint",
+            "label_1": "Cool Mint",
+            "color_1": "#CDFFF1",
+            "selected_bg_1": "#CDFFF1",
+            "product_2": "30-pack-flavors-natural-plastic-free-floss-with-nano-hydroxyapatite-papaya",
+            "label_2": "Papaya",
+            "color_2": "#FFC183",
+            "selected_bg_2": "#FFC183",
+            "product_3": "wholesale-30-pack-flavors-natural-plastic-free-floss-with-nano-hydroxyapatite-black-cherry",
+            "label_3": "Black Cherry",
+            "color_3": "#B50859",
+            "selected_bg_3": "#F7D3E3"
+          }
+        },
+        "ingredients_tab_adicional_WKFajR": {
+          "type": "ingredients_tab_adicional",
+          "settings": {
+            "ingredients_trigger_label": "Ingredients",
+            "ingredients_modal_subtitle": "INGREDIENT FACTS",
+            "ingredients_modal_title": "100% Italian Silk Floss",
+            "f1_name": "Cool Mint",
+            "f1_color": "#002c41",
+            "f1_bg_color": "#cdfff1",
+            "f1_s1_title": "BASE & TEXTURE",
+            "f1_s1_i1_name": "Premium Italian Silk",
+            "f1_s1_i1_tag": "Fiber Base",
+            "f1_s1_i2_name": "Vegetable Wax",
+            "f1_s1_i2_tag": "Coating",
+            "f1_s1_i3_name": "Cocoa Butter",
+            "f1_s1_i3_tag": "Coating",
+            "f1_s1_i4_name": "Avocado Oil",
+            "f1_s1_i4_tag": "Coating",
+            "f1_s1_i5_name": "",
+            "f1_s1_i5_tag": "",
+            "f1_s2_title": "FLAVOR & FRESHNESS",
+            "f1_s2_i1_name": "Mint",
+            "f1_s2_i1_desc": "",
+            "f1_s2_i1_tag": "Flavor",
+            "f1_s2_i2_name": "",
+            "f1_s2_i2_desc": "",
+            "f1_s2_i2_tag": "",
+            "f1_s2_i3_name": "",
+            "f1_s2_i3_tag": "",
+            "f1_s2_i4_name": "",
+            "f1_s2_i4_tag": "",
+            "f1_s2_i5_name": "",
+            "f1_s2_i5_tag": "",
+            "f1_s3_title": "",
+            "f1_s3_i1_name": "",
+            "f1_s3_i1_desc": "",
+            "f1_s3_i1_tag": "",
+            "f1_s3_i2_name": "",
+            "f1_s3_i2_desc": "",
+            "f1_s3_i2_tag": "",
+            "f1_s3_i3_name": "",
+            "f1_s3_i3_desc": "",
+            "f1_s3_i3_tag": "",
+            "f1_s3_i4_name": "",
+            "f1_s3_i4_tag": "",
+            "f1_s3_i5_name": "",
+            "f1_s3_i5_tag": "",
+            "f1_s4_title": "",
+            "f1_s4_i1_name": "",
+            "f1_s4_i1_tag": "",
+            "f1_s4_i2_name": "",
+            "f1_s4_i2_tag": "",
+            "f1_s4_i3_name": "",
+            "f1_s4_i3_tag": "",
+            "f1_s4_i4_name": "",
+            "f1_s4_i4_tag": "",
+            "f1_s4_i5_name": "",
+            "f1_s4_i5_tag": "",
+            "f2_name": "Papaya",
+            "f2_color": "#ffb783",
+            "f2_bg_color": "#f5d9c5",
+            "f2_s1_title": "BASE & TEXTURE",
+            "f2_s1_i1_name": "Premium Italian Silk",
+            "f2_s1_i1_tag": "Fiber Base",
+            "f2_s1_i2_name": "Vegetable Wax",
+            "f2_s1_i2_tag": "Coating",
+            "f2_s2_title": "FLAVOR & FRESHNESS",
+            "f2_s2_i1_name": "Papaya",
+            "f2_s2_i1_tag": "Flavor",
+            "f2_s2_i2_name": "",
+            "f2_s2_i2_tag": "",
+            "f2_s2_i3_name": "",
+            "f2_s2_i3_tag": "",
+            "f2_s2_i4_name": "",
+            "f2_s2_i4_tag": "",
+            "f2_s2_i5_name": "",
+            "f2_s2_i5_tag": "",
+            "f2_s3_title": "",
+            "f2_s3_i1_name": "",
+            "f2_s3_i1_tag": "",
+            "f2_s3_i2_name": "",
+            "f2_s3_i2_tag": "",
+            "f2_s3_i3_name": "",
+            "f2_s3_i3_tag": "",
+            "f2_s4_title": "",
+            "f2_s4_i1_name": "",
+            "f2_s4_i1_desc": "",
+            "f2_s4_i1_tag": "",
+            "f2_s4_i2_name": "",
+            "f2_s4_i2_tag": "",
+            "f2_s4_i3_name": "",
+            "f2_s4_i3_tag": "",
+            "f2_s4_i4_name": "",
+            "f2_s4_i4_tag": "",
+            "f2_s4_i5_name": "",
+            "f2_s4_i5_tag": "",
+            "f3_name": "Black Cherry",
+            "f3_color": "#b50859",
+            "f3_bg_color": "#c689a5",
+            "f3_s1_title": "BASE & TEXTURE",
+            "f3_s1_i1_name": "Premium Italian Silk",
+            "f3_s1_i1_tag": "Fiber Base",
+            "f3_s1_i2_name": "Vegetable Wax",
+            "f3_s1_i2_tag": "Coating",
+            "f3_s2_title": "FLAVOR & FRESHNESS",
+            "f3_s2_i1_name": "Black Cherry",
+            "f3_s2_i1_tag": "Flavor",
+            "f3_s2_i2_name": "",
+            "f3_s2_i2_tag": "",
+            "f3_s3_title": "",
+            "f3_s3_i1_name": "",
+            "f3_s3_i1_tag": "",
+            "f3_s3_i2_name": "",
+            "f3_s3_i2_tag": "",
+            "f3_s4_title": "",
+            "f3_s4_i1_name": "",
+            "f3_s4_i1_tag": "",
+            "f3_s4_i2_name": "",
+            "f3_s4_i2_tag": "",
+            "f3_s4_i3_name": "",
+            "f3_s4_i3_tag": "",
+            "f3_s4_i4_name": "",
+            "ingredients_negative_title": "WHAT'S NOT IN IT",
+            "ingredients_negative_item_1": "No Plastic",
+            "ingredients_negative_item_2": "No Fillers",
+            "ingredients_negative_item_3": "No Synthetic Coatings",
+            "ingredients_negative_item_4": "No Artificial Dyes",
+            "ingredients_negative_item_5": "",
+            "ingredients_negative_item_6": "",
+            "ingredients_negative_item_7": "",
+            "ingredients_negative_item_8": "",
+            "ingredients_footer_text_show": false,
+            "ingredients_footer_text": "<p>Cleaner ingredients. Made in an FDA-registered facility in the USA.Brush twice daily with a pea-sized amount. Spit — do not rinse. Wait 30 min before eating for max nHAp uptake.</p>"
+          }
+        },
+        "subscribe_selector_floss": {
+          "type": "subscribe_selector",
+          "settings": {
+            "badge_text": "Save up to {PERCENT}%",
+            "badge_bg_color": "#ffffff",
+            "badge_text_color": "#002c41",
+            "accent_color": "#0862df",
+            "card_border_color": "#002c41",
+            "card_bg_color": "#ffffff",
+            "price_color": "#002c41",
+            "compare_price_color": "#9aa5ab",
+            "subscribe_title": "Subscribe & Save",
+            "benefit_1": "Save {PERCENT}% on subscription deliveries",
+            "benefit_2": "Swap or cancel anytime",
+            "benefit_3": "Delivered on time every month",
+            "delivery_label": "Deliver every:",
+            "onetime_label": "Buy one time",
+            "show_interval_suffix": true
+          }
+        },
+        "terms_text_D4JHqM": {
+          "type": "terms_text",
+          "settings": {
+            "text": "<p><em>Value of one-time purchase</em></p>"
+          }
+        },
+        "buy_buttons_aD6Ny9": {
+          "type": "buy_buttons",
+          "settings": {
+            "btn_text": "ADD TO CART",
+            "sold_out_text": "COMING SOON",
+            "show_add_to_cart": true,
+            "show_dynamic_checkout": true,
+            "show_subscription_terms": false
+          }
+        }
+      },
+      "block_order": [
+        "title_cXihkp",
+        "product_pills_desktop",
+        "description_block_DXpJze",
+        "price_stock_93GetG",
+        "product_pills_mobile",
+        "ingredients_tab_adicional_WKFajR",
+        "subscribe_selector_floss",
+        "terms_text_D4JHqM",
+        "buy_buttons_aD6Ny9"
+      ],
+      "custom_css": [
+        "@media (max-width: 899px) {#c-prod-template--20492130353320__c_product_page_QCgTQb .c-prod__variant-group--pills {align-items: baseline; }}",
+        "#c-prod-template--20566021374120__c_product_page_QCgTQb .c-prod__badge-right {top: 20px !important; right: 20px !important;}",
+        "#c-prod-template--20566021374120__c_product_page_QCgTQb .c-prod__badge-right--image {max-width: 140px !important;}"
+      ],
+      "settings": {
+        "bg_color": "#ffffff",
+        "gallery_bg": "#f8f6f6",
+        "gallery_max_media": 7,
+        "design_v2": true,
+        "enable_main_image_navigation_arrows": false,
+        "enable_infinite_gallery": true,
+        "enable_mobile_zoom": false,
+        "hide_thumbs_mobile": true,
+        "hide_dots_desktop": true,
+        "image_caption": "Avocado Oil Coating | Microplastic-Free Glide",
+        "badge_left": "",
+        "badge_right_svg": "",
+        "badge_right_1": "",
+        "badge_right_2": "",
+        "badge_right_img_width": 23,
+        "badge_right_img_top": 4,
+        "badge_right_img_right": 4,
+        "pad_top_desk": 60,
+        "pad_bot_desk": 60,
+        "pad_top_mob": 30,
+        "pad_bot_mob": 30,
+        "image_caption_hide_mobile": true
+      }
+    },
+    "c_feature_cards_NWW46z": {
+      "type": "c-feature-cards",
+      "blocks": {
+        "feature_fAfWwX": {
+          "type": "feature",
+          "settings": {
+            "svg_code": "<svg width=\"54\" height=\"54\" viewBox=\"0 0 54 54\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path d=\"M43.7541 6.41385C44.7891 6.41385 45.6865 6.79391 46.4462 7.55404C47.2064 8.31379 47.5864 9.21116 47.5864 10.2462V43.7543C47.5864 44.793 47.2064 45.6936 46.4462 46.456C45.6865 47.2187 44.7891 47.6001 43.7541 47.6001H10.246C9.20724 47.6001 8.30668 47.2187 7.5443 46.456C6.78155 45.6936 6.40018 44.793 6.40018 43.7543V10.2462C6.40018 9.21116 6.78155 8.31379 7.5443 7.55404C8.30668 6.79391 9.20724 6.41385 10.246 6.41385H43.7541ZM43.7541 10.2462H10.246V17.8427H18.3376C19.3126 16.3427 20.5782 15.1896 22.1344 14.3834C23.6907 13.5771 25.3126 13.174 27.0001 13.174C28.6876 13.174 30.3094 13.5771 31.8657 14.3834C33.4219 15.1896 34.6876 16.3427 35.6626 17.8427H43.7541V10.2462ZM26.9989 16.549C25.7086 16.549 24.5123 16.866 23.4102 17.5002C22.3084 18.1343 21.4463 19.0277 20.8238 20.1805C20.5501 20.5697 20.1871 20.8399 19.7348 20.991C19.2826 21.1422 18.8119 21.2177 18.3229 21.2177H10.246V43.7543H43.7541V21.2177H35.6603C35.1837 21.2177 34.7189 21.1422 34.2659 20.991C33.8132 20.8399 33.45 20.5697 33.1763 20.1805C32.5538 19.0277 31.6913 18.1343 30.5888 17.5002C29.4863 16.866 28.2897 16.549 26.9989 16.549Z\" fill=\"black\"/> </svg>",
+            "title": "Proven to Protect and Perform",
+            "description": "Lead with 100% biodegradable floss, container included. Coated in avocado oil for a smooth, gentle glide"
+          }
+        },
+        "feature_UQznwm": {
+          "type": "feature",
+          "settings": {
+            "svg_code": "<svg width=\"54\" height=\"54\" viewBox=\"0 0 54 54\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path d=\"M19.6334 37.1248C19.1197 37.1248 18.6897 36.9478 18.3436 36.5938C17.9979 36.2398 17.825 35.8053 17.825 35.2905C17.825 34.7752 17.9979 34.3447 18.3436 33.999C18.6897 33.6536 19.1197 33.4809 19.6334 33.4809H23.9585C24.4704 33.4809 24.902 33.6579 25.2534 34.0119C25.6051 34.3659 25.781 34.8003 25.781 35.3152C25.781 35.8305 25.6051 36.2608 25.2534 36.6062C24.902 36.9519 24.4704 37.1248 23.9585 37.1248H19.6334ZM17.9594 49.8362C14.7573 49.8362 12.0325 48.7082 9.78517 46.4522C7.53742 44.1962 6.41355 41.462 6.41355 38.2498V18.3362C5.15805 18.2732 4.08742 17.7945 3.20167 16.9001C2.31592 16.0053 1.87305 14.9302 1.87305 13.6747V8.86646C1.87305 7.56521 2.34011 6.4539 3.27423 5.53252C4.20798 4.61077 5.33073 4.1499 6.64248 4.1499H29.2904C30.5969 4.1499 31.7184 4.61077 32.6547 5.53252C33.5911 6.4539 34.0593 7.56521 34.0593 8.86646V13.6747C34.0593 14.9302 33.6142 16.0053 32.7239 16.9001C31.8337 17.7945 30.7653 18.2732 29.5188 18.3362V24.3195C29.5188 25.3863 29.1445 26.294 28.396 27.0425C27.6475 27.791 26.7399 28.1653 25.673 28.1653H19.6334C19.1197 28.1653 18.6897 27.9883 18.3436 27.6343C17.9979 27.2803 17.825 26.8457 17.825 26.3304C17.825 25.8155 17.9979 25.3852 18.3436 25.0395C18.6897 24.6937 19.1197 24.5208 19.6334 24.5208H25.781V18.3767H10.1519V38.2453C10.1519 40.4267 10.9096 42.2808 12.425 43.8078C13.9407 45.3345 15.7855 46.0978 17.9594 46.0978C18.9652 46.0978 19.8978 45.9215 20.7573 45.569C21.6164 45.2165 22.3844 44.7393 23.0613 44.1375C23.4329 43.8375 23.8636 43.7411 24.3534 43.8483C24.8427 43.9556 25.2277 44.2237 25.5082 44.6527C25.8262 45.1098 25.9128 45.6182 25.768 46.1777C25.6233 46.7368 25.3267 47.1866 24.8782 47.5271C23.9032 48.2685 22.8337 48.8386 21.6697 49.2377C20.506 49.6367 19.2693 49.8362 17.9594 49.8362ZM5.61142 14.6383H30.3209V7.88828H5.61142V14.6383ZM37.7836 43.6458C39.4535 43.6458 40.8659 43.071 42.0209 41.9212C43.1763 40.7715 43.754 39.3639 43.754 37.6985C43.754 36.0332 43.1789 34.6218 42.0288 33.4646C40.879 32.3073 39.4715 31.7287 37.8061 31.7287C36.1366 31.7287 34.7264 32.3036 33.5755 33.4533C32.425 34.6031 31.8498 36.0107 31.8498 37.676C31.8498 39.3414 32.4213 40.7527 33.5643 41.91C34.7077 43.0672 36.1141 43.6458 37.7836 43.6458ZM37.7949 47.4787C35.0754 47.4787 32.7637 46.526 30.8598 44.6207C28.9559 42.7157 28.004 40.4023 28.004 37.6805C28.004 34.9592 28.957 32.648 30.8632 30.7472C32.7689 28.8463 35.0834 27.8958 37.8067 27.8958C40.5295 27.8958 42.8424 28.8478 44.7451 30.7517C46.6482 32.6555 47.5998 34.9674 47.5998 37.6873C47.5998 38.6664 47.4543 39.6077 47.1633 40.511C46.8723 41.414 46.4544 42.278 45.9095 43.103L50.626 47.8196C51.0175 48.2111 51.2133 48.6587 51.2133 49.1623C51.2133 49.6659 51.0175 50.1135 50.626 50.505C50.2349 50.8961 49.7851 51.0917 49.2766 51.0917C48.7685 51.0917 48.3187 50.8961 47.9272 50.505L43.2112 45.8019C42.3862 46.3464 41.5242 46.7619 40.6254 47.0484C39.7265 47.3353 38.783 47.4787 37.7949 47.4787Z\" fill=\"black\"/> </svg>",
+            "title": "Made Without Plastic",
+            "description": "Inspired by Nature: Italian Silk Coated in Avocado Oil"
+          }
+        },
+        "feature_jYGQ6b": {
+          "type": "feature",
+          "settings": {
+            "svg_code": "<svg width=\"54\" height=\"54\" viewBox=\"0 0 54 54\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path d=\"M26.9999 28.1625L31.6648 31.0093C32.0098 31.2238 32.3525 31.2028 32.693 30.9463C33.0331 30.6902 33.1612 30.3476 33.0772 29.9186L31.8375 24.675L35.9533 21.0947C36.2893 20.8052 36.3849 20.4648 36.2401 20.0737C36.0954 19.6822 35.8132 19.4677 35.3936 19.4302L29.9823 19.0016L27.8949 14.0184C27.7295 13.6359 27.4318 13.4447 27.0016 13.4447C26.5719 13.4447 26.273 13.6359 26.105 14.0184L24.0176 19.0016L18.6063 19.4302C18.1867 19.4677 17.9045 19.6822 17.7598 20.0737C17.615 20.4648 17.7106 20.8052 18.0466 21.0947L22.1624 24.675L20.9362 29.9186C20.8432 30.3476 20.9668 30.6902 21.3069 30.9463C21.6474 31.2028 21.9901 31.2238 22.3351 31.0093L26.9999 28.1625ZM13.1636 40.8362L7.4362 46.5635C6.8302 47.1695 6.13326 47.3092 5.34539 46.9826C4.55751 46.6563 4.16357 46.0736 4.16357 45.2343V7.99571C4.16357 6.95696 4.54364 6.0564 5.30376 5.29403C6.06351 4.53128 6.96089 4.1499 7.99589 4.1499H46.004C47.0428 4.1499 47.9433 4.53128 48.7057 5.29403C49.4684 6.0564 49.8498 6.95696 49.8498 7.99571V37.0038C49.8498 38.0388 49.4684 38.9362 48.7057 39.696C47.9433 40.4561 47.0428 40.8362 46.004 40.8362H13.1636ZM11.7011 37.0038H46.004V7.99571H7.99589V41.0465L11.7011 37.0038Z\" fill=\"black\"/> </svg>",
+            "title": "Over 360,000 Cleaner Smiles",
+            "description": "Join the growing community who've made the switch to safer, science-backed oral care."
+          }
+        }
+      },
+      "block_order": [
+        "feature_fAfWwX",
+        "feature_UQznwm",
+        "feature_jYGQ6b"
+      ],
+      "name": "C - Feature Cards",
+      "settings": {
+        "design_v2": true,
+        "bg_color": "#ffffff",
+        "card_bg": "#ffffff",
+        "border_color": "#0862df",
+        "pad_top_desk": 20,
+        "pad_bot_desk": 20,
+        "pad_top_mob": 20,
+        "pad_bot_mob": 20
+      }
+    },
+    "c_comparison_tabs_48ejw9": {
+      "type": "c-comparison-tabs",
+      "blocks": {
+        "hotspot_point_RWKQ7j": {
+          "type": "hotspot_point",
+          "settings": {
+            "parent_tab_num": "1",
+            "dot_color": "#002c41",
+            "pos_x_desktop": 21,
+            "pos_y_desktop": 35,
+            "pos_x_mobile": 30,
+            "pos_y_mobile": 35,
+            "card_title": "Made With What Belongs on Your Gums",
+            "card_desc": "No synthetic waxes, no microplastics, just avocado oil coating a strong, fine silk fiber, built for daily contact with your gums.",
+            "checklist_html": "<p>✓ Smooth glide, even through tight contacts<br/>✓ Gentle on gums, even with daily use<br/>✓ No synthetic coatings, no microplastics shed with use<br/>✓ Zero plastic, by design</p>"
+          }
+        },
+        "hotspot_point_cCr3MA": {
+          "type": "hotspot_point",
+          "settings": {
+            "parent_tab_num": "1",
+            "dot_color": "#002c41",
+            "pos_x_desktop": 68,
+            "pos_y_desktop": 23,
+            "pos_x_mobile": 77,
+            "pos_y_mobile": 20,
+            "card_title": "Cleaner Ingredients. Nothing to Hide.",
+            "card_desc": "Silk and avocado oil. That's the whole formula, no synthetic fillers, no fine print.",
+            "checklist_html": "<p>✓ Smooth glide, even through tight contacts<br/>✓ Gentle on gums, even with daily use<br/>✓ No synthetic coatings, no microplastics shed with use<br/>✓ Zero plastic, by design</p>"
+          }
+        },
+        "tab_item_yLtPHH": {
+          "type": "tab_item",
+          "settings": {
+            "image_caption": "Nothing synthetic between the silk and you",
+            "caption_x": 33,
+            "caption_y": 73,
+            "tab_title": "100% ITALIAN SILK FLOSS",
+            "tab_image": "shopify://shop_images/Rectangle_34624346.png"
+          }
+        },
+        "tab_item_jpTgV6": {
+          "type": "tab_item",
+          "settings": {
+            "tab_title": "90% Plastic dental floss",
+            "tab_image": "shopify://shop_images/Rectangle_34624346_1.png"
+          }
+        },
+        "hotspot_point_crmG6Y": {
+          "type": "hotspot_point",
+          "settings": {
+            "parent_tab_num": "2",
+            "dot_color": "#002c41",
+            "pos_x_desktop": 30,
+            "pos_y_desktop": 35,
+            "pos_x_mobile": 30,
+            "pos_y_mobile": 35,
+            "card_title": "Sheds Microplastics With Every Use",
+            "card_desc": "Most conventional floss is made of synthetic plastic that breaks down and sheds tiny particles, particles that end up in your mouth, your body, and the environment.",
+            "checklist_html": "<p>✗ Made of synthetic plastic<br/>✗ Sheds microplastics with every strand</p>"
+          }
+        },
+        "hotspot_point_yYKgWx": {
+          "type": "hotspot_point",
+          "settings": {
+            "parent_tab_num": "2",
+            "dot_color": "#002c41",
+            "pos_x_desktop": 78,
+            "pos_y_desktop": 35,
+            "pos_x_mobile": 30,
+            "pos_y_mobile": 35,
+            "card_title": "Non-biodegradable",
+            "card_desc": "Floss and packaging accumulate in landfills indefinitely",
+            "checklist_html": "<p>✗ Made of synthetic plastic<br/>✗ Sheds microplastics with every strand</p>"
+          }
+        }
+      },
+      "block_order": [
+        "hotspot_point_RWKQ7j",
+        "hotspot_point_cCr3MA",
+        "tab_item_yLtPHH",
+        "tab_item_jpTgV6",
+        "hotspot_point_crmG6Y",
+        "hotspot_point_yYKgWx"
+      ],
+      "name": "C - Silk Comparison Tabs",
+      "settings": {
+        "design_v2": true,
+        "background_color": "#f7f7f7",
+        "container_max_width": 1300,
+        "section_padding_desktop": 50,
+        "title_size_desktop": 32,
+        "title_size_mobile": 28,
+        "desc_size_desktop": 16,
+        "desc_size_mobile": 14,
+        "box_num_size_desktop": 26,
+        "box_num_size_mobile": 22,
+        "box_title_size_desktop": 16,
+        "box_title_size_mobile": 15,
+        "box_desc_size_desktop": 14,
+        "box_desc_size_mobile": 13,
+        "card_title_size_desktop": 16,
+        "card_title_size_mobile": 15,
+        "card_desc_size_desktop": 14,
+        "card_desc_size_mobile": 13,
+        "checklist_size_desktop": 14,
+        "checklist_size_mobile": 13,
+        "main_title": "<p>Do Something Drastic. Ditch the Plastic.</p>",
+        "main_description": "<p>Here's what most brands won't tell you: it's plastic. Every time you floss, friction against your teeth sheds microscopic particles that are swallowed.</p><p>Dr. Jen's floss is made from Italian silk instead, lightly coated in avocado oil. Not coated in plastic. Made without it.</p>",
+        "ingredients_text": "INGREDIENTS",
+        "title_color": "#002c41",
+        "text_color": "#333333",
+        "box_tag": "DR. JEN'S FLOSS",
+        "item_1_num": "100%",
+        "item_1_title": "Italian Silk Fiber",
+        "item_1_desc": "Woven in Italy, the way floss was made for sixty years.",
+        "item_2_num": "0%",
+        "item_2_title": "Plastic in the Strand",
+        "item_2_desc": "No nylon. No polyester. No recycled bottles.",
+        "item_3_num": "100%",
+        "item_3_title": "Biodegradable Floss",
+        "item_3_desc": "Breaks down naturally, unlike synthetic fibers.",
+        "item_4_num": "Wax",
+        "item_4_title": "Avocado Oil Coating",
+        "item_4_desc": "A gentle coating, not a synthetic polymer."
+      }
+    },
+    "178421544307c332d9": {
+      "type": "apps",
+      "blocks": {
+        "tolstoy_ads_image_video_tolstoy_builder_wHgh3F": {
+          "type": "shopify://apps/tolstoy-ads-image-video/blocks/tolstoy-builder/06fa8282-42ff-403e-b67c-1936776aed11",
+          "settings": {
+            "custom_code": "<tolstoy-widget data-tolstoy-widget-id=\"01KXNEVPXBBS39FMNWHZJ7S40R\" data-product-id=\"{{ product.id }}\" data-tags=\"{%- for tag in product.tags -%}{{ tag | escape }},{%- endfor -%}\"></tolstoy-widget>\n<script src=\"https://ai-widgets.gotolstoy.com/8507f226-1a78-4bae-ab97-4b9fbe7d2eee/01KXNEVPXBBS39FMNWHZJ7S40R/latest/dist/widget.iife.js\" defer></script>"
+          }
+        }
+      },
+      "block_order": [
+        "tolstoy_ads_image_video_tolstoy_builder_wHgh3F"
+      ],
+      "settings": {
+        "include_margins": true
+      },
+      "custom_css": [
+        "@media (min-width: 900px) {tolstoy-widget {display: block; padding-top: 60px;}}"
+      ]
+    },
+    "c_comparison_table_custom_fN9Cd3": {
+      "type": "c-comparison-table-custom",
+      "blocks": {
+        "row_xaEXkM": {
+          "type": "row",
+          "settings": {
+            "brand_text": "Made with premium Italian Silk",
+            "generic_text": "Made with harmful plastics"
+          }
+        },
+        "row_4WVrkP": {
+          "type": "row",
+          "settings": {
+            "brand_text": "Gentle on the gums and effective at removing plaque",
+            "generic_text": "Aggressive on gums and can cause bleeding and irritation"
+          }
+        },
+        "row_e9tbg9": {
+          "type": "row",
+          "settings": {
+            "brand_text": "Coated in avocado oil",
+            "generic_text": "Mass produced, private label formulations."
+          }
+        },
+        "row_HFwxTB": {
+          "type": "row",
+          "settings": {
+            "brand_text": "Environmentally friendly and made with all recyclable materials",
+            "generic_text": "Poor tasting and  non-biodegradable"
+          }
+        }
+      },
+      "block_order": [
+        "row_xaEXkM",
+        "row_4WVrkP",
+        "row_e9tbg9",
+        "row_HFwxTB"
+      ],
+      "name": "C - Comparison Table v2",
+      "settings": {
+        "design_v2": true,
+        "bg_color": "#ffffff",
+        "padding_top_dt": 60,
+        "padding_bottom_dt": 60,
+        "padding_top_mb": 40,
+        "padding_bottom_mb": 40,
+        "hide_subtitle_mobile": false,
+        "hide_btn_mobile": true,
+        "hide_badge_mobile": true,
+        "title_color": "#002c41",
+        "subtitle_color": "#231f20",
+        "btn_color": "#002c41",
+        "badge_color": "#002c41",
+        "title_desktop": "Why dentists trust Dr. Jen oral care for their patients and their own family",
+        "title_mobile": "Why dentists trust Dr. Jen oral care for their patients and their own family",
+        "title_max_width_mb": 490,
+        "title_weight": "600",
+        "title_size_dt": 32,
+        "title_size_mb": 28,
+        "subtitle": "Dr. Jen's floss solves for real problems in your routine, unlike one-size-fits-all, \nmass-produced floss.",
+        "sub_weight": "400",
+        "sub_size_dt": 24,
+        "sub_size_mb": 14,
+        "btn_label": "LEARN MORE",
+        "btn_link": "shopify://pages/about-us",
+        "badge_text": "Powered by Nature, Rooted in Science",
+        "badge_size_dt": 24,
+        "badge_size_mb": 18,
+        "badge_weight": "400",
+        "text_align_dt": "left",
+        "text_align_mb": "left",
+        "brand_image": "shopify://shop_images/c-floss-floss-box.webp",
+        "generic_image": "shopify://shop_images/c-floss-generic.webp",
+        "brand_header_text": "<span class=\"comp-header-brand\">Dr. Jen's</span><br>100% Italian  <br>Silk Floss",
+        "generic_header_text": "Generic <br> Dental Floss",
+        "header_size_dt": 15,
+        "header_size_mb": 10,
+        "header_weight": "700",
+        "row_text_size_dt": 18,
+        "row_text_size_mb": 13
+      }
+    },
+    "c_faq_tKzPEm": {
+      "type": "c-faq",
+      "blocks": {
+        "faq_item_QJXAEL": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is Dr. Jen's floss safe to use?",
+            "answer": "<p>Dr. Jen's floss is made from 100% Italian silk, coated in avocado oil. Unlike conventional floss, which is made of synthetic plastic, ours contains no synthetic plastic and sheds no microplastics with use.</p>"
+          }
+        },
+        "faq_item_fzMwL6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are the ingredients natural?",
+            "answer": "<p>Dr. Jen's floss is made with just two ingredients: Italian silk and avocado oil. No synthetic waxes, no synthetic coatings, no fillers.</p>"
+          }
+        },
+        "faq_item_kjUmbB": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What exactly is in the coating?",
+            "answer": "<p>The floss is coated in avocado oil instead of synthetic waxes or plastic-based coatings. This supports a smooth glide without introducing microplastics into your routine.</p><p><strong>How it works:</strong></p><ul><li>Silk fiber cleans between teeth through gentle friction</li><li>Avocado oil coating supports smooth glide</li><li>No synthetic material sheds into your mouth with use</li></ul>"
+          }
+        },
+        "faq_item_DtKWNM": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Why does Dr. Jen's cost more than other floss?",
+            "answer": "<p>Dr. Jen replaced synthetic plastic with 100% Italian silk, coated in avocado oil instead of synthetic waxes.</p><ul><li>No plastic in the strand.</li><li>No microplastics shed with use.</li><li>No shortcuts. Just a formula built with the same care she wanted for her own child.</li></ul><p>That's why our floss costs more. Because it was never created to be the cheapest. It was created to be the cleanest, born from a mother's refusal to settle for what was already on the shelf.<br/><br/></p>"
+          }
+        },
+        "faq_item_JF47ti": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I use Dr. Jen's floss?",
+            "answer": "<p>Break off about 18 inches, guide it gently between teeth using a sawing motion, then curve it around each tooth in a C-shape and slide up and down, just below the gumline.<br/><br/>As always, discuss any specific questions or concerns with your dental team, who knows your personal oral health best.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_QJXAEL",
+        "faq_item_fzMwL6",
+        "faq_item_kjUmbB",
+        "faq_item_DtKWNM",
+        "faq_item_JF47ti"
+      ],
+      "name": "C - FAQ Section",
+      "settings": {
+        "design_v2": true,
+        "bg_color": "#ffffff",
+        "title": "Frequently Asked Questions",
+        "mobile_alignment": "left",
+        "pad_top_desk": 80,
+        "pad_bot_desk": 40,
+        "pad_left_desk": 60,
+        "pad_right_desk": 60,
+        "pad_top_mob": 50,
+        "pad_bot_mob": 50,
+        "pad_left_mob": 30,
+        "pad_right_mob": 30,
+        "v2_start_open": false
+      }
+    }
+  },
+  "order": [
+    "c_product_topbar_zrebdC",
+    "c_product_page_QCgTQb",
+    "c_feature_cards_NWW46z",
+    "c_comparison_tabs_48ejw9",
+    "178421544307c332d9",
+    "c_comparison_table_custom_fN9Cd3",
+    "c_faq_tKzPEm"
+  ]
+}
