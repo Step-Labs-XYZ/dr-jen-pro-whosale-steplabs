@@ -477,7 +477,7 @@
           "bg_color": "#002c41",
           "text1": "<p><a href=\"mailto:DentalPro@DrJenOralCare.com\" title=\"mailto:DentalPro@DrJenOralCare.com\">DentalPro@DrJenOralCare.com</a></p>",
           "text2": "<p><strong>Professionals</strong>  <a href=\"tel:+16512021270\">(651) 202-1270</a>.</p>",
-          "mobile_text": "<p>We have inventory at a dentist's office near you! <a href=\"tel:+16516002152\">(651) 600-2152</a>.</p>"
+          "mobile_text": "<p>We have inventory at a dentist's office near you! <a href=\"tel:+16512021270\">(651) 202-1270</a>.</p>"
         }
       },
       "c-header": {
@@ -591,7 +591,7 @@
           "logo_width_desktop": 170,
           "logo_width_mobile": 130,
           "about_heading": "About",
-          "about_text": "Backed by over 25 years of Dental Experience <br><br>\nContact Us <br><br>Professionals (651) 600-2152<br>info@drjennatural.com",
+          "about_text": "Backed by over 25 years of Dental Experience <br><br>\nContact Us <br><br>Professionals (651) 202-1270<br>dentalpro@drjenoralcare.com",
           "nav_heading": "Navigate",
           "subscribe_heading": "Subscribe",
           "subscribe_description": "Subscribe to our newsletter to access exclusive drops & discounts",
@@ -599,7 +599,7 @@
           "subscribe_btn_text": "SUBSCRIBE",
           "subscribe_disclaimer": "By subscribing, you agree to our Privacy Policy and consent to receive updates from our company.",
           "subscribe_success_msg": "Thanks for subscribing!",
-          "copyright_text": "© 2026, Dr Jen Oral Care.",
+          "copyright_text": "© 2026, Dr. Jen-Dental Pro.",
           "show_privacy_policy": true,
           "show_terms_of_service": true,
           "show_cookies_settings": true,
