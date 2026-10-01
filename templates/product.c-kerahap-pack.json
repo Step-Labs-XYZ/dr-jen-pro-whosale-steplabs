@@ -268,6 +268,19 @@
             "badge_3_orange_mango": ""
           }
         },
+        "promo_widget_SEPT26": {
+          "type": "promo_widget",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/widget-_1.webp",
+            "tagline": "SEPTEMBER OFFER",
+            "heading": "Buy 2 Cases, Get a Free Half Case",
+            "text": "Your pick: a half case of any toothpaste flavor or Dry Mouth Gel. Use code FREEHALFCASE at checkout. Valid through September 30.",
+            "code": "FREEHALFCASE",
+            "exclude_products": [],
+            "end_date": "2026-09-30"
+          }
+        },
         "recharge_subscriptions_subscription_widget_v2_9hkAJG": {
           "type": "shopify://apps/recharge-subscriptions/blocks/subscription-widget-v2/371eed76-0b44-4869-9813-730372ea378e",
           "settings": {}
@@ -294,18 +307,6 @@
             "show_add_to_cart": true,
             "show_dynamic_checkout": true
           }
-        },
-        "promo_widget_SEPT26": {
-          "type": "promo_widget",
-          "settings": {
-            "tagline": "SEPTEMBER OFFER",
-            "heading": "Buy 2 Cases, Get a Free Half Case",
-            "text": "Your pick: a half case of any toothpaste flavor or Dry Mouth Gel. Use code FREEHALFCASE at checkout. Valid through September 30.",
-            "code": "FREEHALFCASE",
-            "end_date": "2026-09-30",
-            "image": "shopify://shop_images/widget-_1.webp"
-          },
-          "disabled": true
         }
       },
       "block_order": [
@@ -627,6 +628,7 @@
       ],
       "name": "C - Comparison Table v2",
       "settings": {
+        "design_v2": false,
         "bg_color": "#ffffff",
         "padding_top_dt": 60,
         "padding_bottom_dt": 60,
@@ -863,7 +865,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Which formula is right for me?",
-            "answer": "<p>Dr. Jen's KeraHAp™ combines 10% premium Nano-hydroxyapatite with advanced enamel-inspired peptides for biomimetic enamel support. It is the most advanced fluoride-free formula in the Dr. Jen's lineup, designed for patients who want the highest level of enamel support available.<br/><br/>Dr. Jen's Super Paste combines 10% premium Nano-hydroxyapatite with fluoride and xylitol, clinically proven to outperform fluoride-only toothpastes. Available in Mint and Strawberry.<br/><br/>Dr. Jen's Fluoride-Free delivers proven enamel support without fluoride, powered by 10% premium Nano-hydroxyapatite and a proprietary essential oil complex. Available in Cool Mint, Strawberry and Watermelon.<br/><br/>Dr. Jen's Eggshell is the first and only eggshell-derived nHAp toothpaste, formulated with 10% premium eggshell Nano-hydroxyapatite. Eggshells contain magnesium and zinc, which promote higher mineral uptake for enhanced enamel protection. Available in Cool Mint and Orange Mango.</p>"
+            "answer": "<p><strong>Dr. Jen's KeraHAp™ </strong>combines 10% premium Nano-hydroxyapatite with advanced enamel-inspired peptides for biomimetic enamel support. It is the most advanced fluoride-free formula in the Dr. Jen's lineup, designed for patients who want the highest level of enamel support available.<br/><strong><br/>Dr. Jen Fluoride-Free </strong>is backed by independent remineralizing studies showing our 10% Premium Nano-hydroxyapatite toothpaste can outperform fluoride toothpaste. Blended with our proprietary essential oils to support a healthy oral microbiome. Available in Mint and Strawberry.<br/><br/><strong>Dr. Jen's Eggshell</strong> is the first and only eggshell-derived nHAp toothpaste, formulated with 10% premium eggshell Nano-hydroxyapatite. Eggshells contain magnesium and zinc, which promote higher mineral uptake for enhanced enamel protection. Available in Cool Mint and Orange Mango.</p>"
           }
         },
         "faq_item_HQ84kE": {
@@ -897,6 +899,8 @@
       ],
       "name": "C - FAQ Section",
       "settings": {
+        "design_v2": false,
+        "v2_start_open": true,
         "bg_color": "#ffffff",
         "title": "Frequently Asked\nQuestions",
         "mobile_alignment": "left",
