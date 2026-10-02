@@ -1,0 +1,163 @@
+{%- doc -%}
+  Product card for c-products-tab-v2.
+
+  @param {object} block - The "card" block
+  @param {string} layout - Parent tab layout: "grid" or "columns"
+  @param {number} col - Grid column (columns layout)
+  @param {number} row - Grid row (columns layout)
+{%- enddoc -%}
+
+{%- liquid
+  assign s = block.settings
+  assign card_product = s.product
+
+  assign title = s.title
+  if title == blank and card_product != blank
+    assign title = card_product.title
+  endif
+
+  assign url = s.cta_url
+  if url == blank and card_product != blank
+    assign url = card_product.url
+  endif
+
+  assign image = s.image
+  if image == blank and card_product != blank
+    assign image = card_product.featured_image
+  endif
+
+  comment
+    Full case = highest-priced variant
+  endcomment
+  assign price = nil
+  if card_product != blank
+    assign full_case = card_product.variants | sort: 'price' | last
+    assign price = full_case.price
+  endif
+
+  assign units = s.pack_units | default: 0
+  assign unit_price = nil
+  if price and units > 0
+    assign unit_price = price | divided_by: units
+  endif
+
+  assign retail_unit = nil
+  assign save_amount = nil
+  assign save_pct = nil
+  if s.retail_unit_price != blank
+    assign retail_unit = s.retail_unit_price | strip | remove: '$' | times: 100 | round
+    if price and units > 0 and retail_unit > 0
+      assign retail_total = retail_unit | times: units
+      assign save_amount = retail_total | minus: price
+      if save_amount > 0
+        assign save_pct = save_amount | times: 100.0 | divided_by: retail_total | round
+      else
+        assign save_amount = nil
+      endif
+    endif
+  endif
+
+  assign pills = s.pills | split: '|'
+-%}
+
+<article
+  class="Cptabs2__card{% if layout == 'columns' %} Cptabs2__card--col-{{ col }}{% endif %}"
+  {% if layout == 'columns' %}style="--cptabs2-col: {{ col }}; --cptabs2-row: {{ row }};"{% endif %}
+  {{ block.shopify_attributes }}
+>
+  {%- if image != blank -%}
+    <a href="{{ url | default: '#' }}" class="Cptabs2__media" tabindex="-1" aria-hidden="true">
+      <span class="Cptabs2__media-inner">
+        {{ image | image_url: width: 600 | image_tag: loading: 'lazy', alt: title, widths: '200, 300, 400, 600', sizes: '(min-width: 1100px) 200px, 120px' }}
+        {%- if s.seal != blank -%}
+          {{ s.seal | image_url: width: 200 | image_tag: loading: 'lazy', alt: '', class: 'Cptabs2__seal' }}
+        {%- endif -%}
+      </span>
+    </a>
+  {%- endif -%}
+
+  <div class="Cptabs2__info">
+    {%- if s.pills != blank or s.new_pill != blank -%}
+      <div class="Cptabs2__pills">
+        {%- for pill in pills -%}
+          {%- assign pill_text = pill | strip -%}
+          {%- if pill_text != blank -%}
+            <span class="Cptabs2__pill">{{ pill_text }}</span>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if s.new_pill != blank -%}
+          <span class="Cptabs2__pill Cptabs2__pill--new">{{ s.new_pill }}</span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if title != blank -%}
+      <h3 class="Cptabs2__title">
+        {%- if url != blank -%}<a href="{{ url }}">{{ title }}</a>{%- else -%}{{ title }}{%- endif -%}
+      </h3>
+    {%- endif -%}
+
+    {%- assign bullet_lines = s.bullets | newline_to_br | split: '<br />' -%}
+    {%- if s.bullets != blank -%}
+      <ul class="Cptabs2__bullets">
+        {%- for line in bullet_lines -%}
+          {%- assign line_text = line | strip -%}
+          {%- if line_text != blank -%}<li>{{ line_text }}</li>{%- endif -%}
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if s.flavors != blank -%}
+      {%- assign flavors = s.flavors | split: '|' -%}
+      <div class="Cptabs2__flavors">
+        <span class="Cptabs2__flavors-label">{% if flavors.size > 1 %}Flavors:{% else %}Flavor:{% endif %}</span>
+        {%- for flavor in flavors -%}
+          {%- assign flavor_name = flavor | strip -%}
+          {%- assign flavor_key = flavor_name | downcase -%}
+          {%- case flavor_key -%}
+            {%- when 'cool mint', 'mint' -%}{%- assign swatch = '#CDFFF1' -%}
+            {%- when 'strawberry' -%}{%- assign swatch = '#FF83BD' -%}
+            {%- when 'watermelon' -%}{%- assign swatch = '#FF8385' -%}
+            {%- when 'orange mango' -%}{%- assign swatch = '#FFC183' -%}
+            {%- when 'papaya' -%}{%- assign swatch = '#FFB783' -%}
+            {%- when 'black cherry' -%}{%- assign swatch = '#B50859' -%}
+            {%- else -%}{%- assign swatch = '#FFFFFF' -%}
+          {%- endcase -%}
+          <span class="Cptabs2__flavor">
+            <span class="Cptabs2__swatch" style="background: {{ swatch }};" aria-hidden="true"></span>
+            {{ flavor_name }}
+          </span>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if price -%}
+      <div class="Cptabs2__pricing">
+        <div class="Cptabs2__price-row">
+          <span class="Cptabs2__price">
+            {{- price | money -}}
+            {%- if s.pack_label != blank -%}
+              <span class="Cptabs2__price-slash">/</span><span class="Cptabs2__price-pack">{{ s.pack_label }}</span>
+            {%- endif -%}
+          </span>
+          {%- if save_amount -%}
+            <span class="Cptabs2__save">Save {{ save_amount | money_without_trailing_zeros }} · {{ save_pct }}% off retail</span>
+          {%- endif -%}
+        </div>
+
+        {%- if unit_price -%}
+          <div class="Cptabs2__unit">
+            <span>{{ unit_price | money }}/unit</span>
+            {%- if retail_unit -%}
+              <span class="Cptabs2__unit-retail">{{ retail_unit | money }}/unit retail</span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if url != blank and s.cta_label != blank -%}
+      <a href="{{ url }}" class="Cptabs2__cta">{{ s.cta_label }}</a>
+    {%- endif -%}
+  </div>
+</article>
