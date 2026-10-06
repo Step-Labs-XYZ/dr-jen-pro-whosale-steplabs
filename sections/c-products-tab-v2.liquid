@@ -1,0 +1,715 @@
+{%- comment -%}
+  C Product Tabs v2
+  Blocks are a flat list: each "card" belongs to the closest "tab" above it.
+  Tabs with layout "columns" split their cards into two side-by-side panels
+  (desktop) / a paired comparison table (mobile).
+  Price, per-unit and savings are computed from the product's highest-priced
+  variant (full case), pack units and retail unit price.
+{%- endcomment -%}
+
+{%- liquid
+  assign tab_count = 0
+  for block in section.blocks
+    if block.type == 'tab'
+      assign tab_count = tab_count | plus: 1
+    endif
+  endfor
+-%}
+
+<div
+  id="Cptabs2-{{ section.id }}"
+  class="Cptabs2"
+  data-section-id="{{ section.id }}"
+>
+  <div class="Cptabs2__container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="Cptabs2__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if tab_count > 0 -%}
+      <div class="Cptabs2__nav" role="tablist">
+        {%- assign tab_index = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'tab' -%}
+            <button
+              class="Cptabs2__tab{% if tab_index == 0 %} Cptabs2__tab--active{% endif %}"
+              type="button"
+              role="tab"
+              id="Cptabs2-tab-{{ block.id }}"
+              aria-controls="Cptabs2-panel-{{ block.id }}"
+              aria-selected="{% if tab_index == 0 %}true{% else %}false{% endif %}"
+              data-cptabs2-tab="{{ block.id }}"
+              {{ block.shopify_attributes }}
+            >
+              {{ block.settings.label }}
+            </button>
+            {%- assign tab_index = tab_index | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      {%- assign tab_index = 0 -%}
+      {%- for tab in section.blocks -%}
+        {%- if tab.type != 'tab' -%}{%- continue -%}{%- endif -%}
+
+        {%- comment -%} Collect the cards that follow this tab {%- endcomment -%}
+        {%- assign left_count = 0 -%}
+        {%- assign right_count = 0 -%}
+        {%- assign left_html = '' -%}
+        {%- assign right_html = '' -%}
+        {%- for block in section.blocks offset: forloop.index -%}
+          {%- if block.type == 'tab' -%}{%- break -%}{%- endif -%}
+          {%- if block.type == 'card' -%}
+            {%- liquid
+              assign col = 1
+              assign row = 0
+              if tab.settings.layout == 'columns'
+                if block.settings.column == 'right'
+                  assign right_count = right_count | plus: 1
+                  assign col = 2
+                  assign row = right_count | plus: 1
+                else
+                  assign left_count = left_count | plus: 1
+                  assign row = left_count | plus: 1
+                endif
+              endif
+            -%}
+            {%- capture card_html -%}
+              {%- render 'c-products-tab-v2-card', block: block, layout: tab.settings.layout, col: col, row: row -%}
+            {%- endcapture -%}
+            {%- if col == 2 -%}
+              {%- assign right_html = right_html | append: card_html -%}
+            {%- else -%}
+              {%- assign left_html = left_html | append: card_html -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        <div
+          class="Cptabs2__panel Cptabs2__panel--{{ tab.settings.layout }}{% if tab_index == 0 %} Cptabs2__panel--active{% endif %}"
+          id="Cptabs2-panel-{{ tab.id }}"
+          role="tabpanel"
+          aria-labelledby="Cptabs2-tab-{{ tab.id }}"
+          data-cptabs2-panel="{{ tab.id }}"
+          {% if tab_index != 0 %}hidden{% endif %}
+        >
+          {%- if tab.settings.layout == 'columns' -%}
+            {%- assign rows = left_count -%}
+            {%- if right_count > rows -%}{%- assign rows = right_count -%}{%- endif -%}
+            <div class="Cptabs2__columns" style="--cptabs2-rows: {{ rows }};">
+              <div class="Cptabs2__col-bg Cptabs2__col-bg--left" aria-hidden="true"></div>
+              <div class="Cptabs2__col-bg Cptabs2__col-bg--right" aria-hidden="true"></div>
+              <div class="Cptabs2__col Cptabs2__col--left">
+                <h3 class="Cptabs2__col-title Cptabs2__col-title--left">{{ tab.settings.left_title }}</h3>
+                {{ left_html }}
+              </div>
+              <div class="Cptabs2__col Cptabs2__col--right">
+                <h3 class="Cptabs2__col-title Cptabs2__col-title--right">{{ tab.settings.right_title }}</h3>
+                {{ right_html }}
+              </div>
+            </div>
+          {%- else -%}
+            <div class="Cptabs2__grid">
+              {{ left_html }}
+            </div>
+          {%- endif -%}
+        </div>
+        {%- assign tab_index = tab_index | plus: 1 -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  #Cptabs2-{{ section.id }} {
+    --cptabs2-navy: #002c41;
+    --cptabs2-mint: #d6ece6;
+    --cptabs2-grey: #f7f7f7;
+    --cptabs2-blue-panel: #d4eef4;
+    --cptabs2-cta: #0862df;
+    --cptabs2-cta-hover: #0650b8;
+    --cptabs2-text: #1f2023;
+    --cptabs2-muted: #707170;
+    --cptabs2-pad-x: {{ section.settings.mobile_padding }}px;
+    background: #fff;
+    padding: {{ section.settings.padding_top_mobile }}px 0 {{ section.settings.padding_bottom_mobile }}px;
+    font-family: 'Raleway', sans-serif;
+    color: var(--cptabs2-navy);
+  }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 var(--cptabs2-pad-x);
+  }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__heading {
+    margin: 0 0 12px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+    color: var(--cptabs2-navy);
+  }
+
+  /* Tabs */
+  #Cptabs2-{{ section.id }} .Cptabs2__nav {
+    display: flex;
+    justify-content: space-between;
+    max-width: 989px;
+    margin: 0 auto 22px;
+    background: var(--cptabs2-grey);
+    border-radius: 54px;
+  }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__tab {
+    flex: 1 1 0;
+    min-height: 40px;
+    padding: 8px 6px;
+    border: 0;
+    border-radius: 54px;
+    background: transparent;
+    color: var(--cptabs2-navy);
+    font-family: 'Raleway', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__tab--active {
+    background: var(--cptabs2-navy);
+    color: var(--cptabs2-mint);
+  }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__tab:focus-visible {
+    outline: 2px solid var(--cptabs2-cta);
+    outline-offset: 2px;
+  }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__panel { display: none; }
+  #Cptabs2-{{ section.id }} .Cptabs2__panel--active { display: block; }
+
+  /* Grid layout (single row of cards) */
+  #Cptabs2-{{ section.id }} .Cptabs2__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Columns layout: two panels on desktop, paired table on mobile */
+  #Cptabs2-{{ section.id }} .Cptabs2__columns {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto repeat(var(--cptabs2-rows), auto);
+    border: 1px solid var(--cptabs2-navy);
+    border-radius: 8px;
+    overflow: clip;
+  }
+
+  /* Mobile: wrappers vanish so cards pair up row by row across both columns */
+  #Cptabs2-{{ section.id }} .Cptabs2__col { display: contents; }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__col-bg {
+    grid-row: 1 / -1;
+    z-index: 0;
+  }
+  #Cptabs2-{{ section.id }} .Cptabs2__col-bg--left { grid-column: 1; background: #fff; }
+  #Cptabs2-{{ section.id }} .Cptabs2__col-bg--right { grid-column: 2; background: rgba(212, 238, 244, 0.72); }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__col-title {
+    position: relative;
+    z-index: 1;
+    grid-row: 1;
+    margin: 0;
+    padding: 12px 8px;
+    border-bottom: 1px solid var(--cptabs2-navy);
+    font-family: 'EightiesComeback VAR', 'Raleway', sans-serif !important; /* beats the global h3 rule in homepage.css */
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: center;
+    color: var(--cptabs2-navy);
+  }
+  #Cptabs2-{{ section.id }} .Cptabs2__col-title--left { grid-column: 1; background: #fff; }
+  #Cptabs2-{{ section.id }} .Cptabs2__col-title--right { grid-column: 2; background: #e0f3f7; }
+
+  /* Card */
+  #Cptabs2-{{ section.id }} .Cptabs2__card {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 32px;
+    background: var(--cptabs2-grey);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__card {
+    grid-column: var(--cptabs2-col);
+    grid-row: var(--cptabs2-row);
+    padding: 16px 8px;
+    background: transparent;
+    border-radius: 0;
+    gap: 8px;
+  }
+  #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__card--col-1 { border-right: 1px solid var(--cptabs2-navy); }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__media {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__media-inner {
+    position: relative;
+    display: inline-block;
+  }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__media img:not(.Cptabs2__seal) {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: calc(92px * var(--cptabs2-img-scale, 1)); max-height: calc(168px * var(--cptabs2-img-scale, 1));
+  }
+  /* Sizes match the visible product in Figma (its image frames include transparent padding) */
+  #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__media img:not(.Cptabs2__seal) { max-width: calc(72px * var(--cptabs2-img-scale, 1)); max-height: calc(128px * var(--cptabs2-img-scale, 1)); }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__seal {
+    position: absolute;
+    top: 2%;
+    left: -24%;
+    width: 52%;
+    max-width: 64px;
+    height: auto;
+  }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+  #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__info { gap: 8px; }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border: 1px solid var(--cptabs2-navy);
+    border-radius: 99px;
+    background: var(--cptabs2-grey);
+    color: var(--cptabs2-navy);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  #Cptabs2-{{ section.id }} .Cptabs2__pill--new {
+    background: var(--cptabs2-navy);
+    color: #fff;
+  }
+  #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__pill { font-size: 8px; padding: 4px 8px; }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__title {
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #000;
+  }
+  #Cptabs2-{{ section.id }} .Cptabs2__title a { color: inherit; text-decoration: none; }
+  #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__title { font-size: 12px; font-weight: 600; color: var(--cptabs2-navy); }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__bullets {
+    margin: 0;
+    padding: 0 0 0 16px;
+    list-style: disc;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.56;
+    color: var(--cptabs2-text);
+    text-align: left;
+  }
+  #Cptabs2-{{ section.id }} .Cptabs2__bullets li { margin: 0; padding: 0; }
+  #Cptabs2-{{ section.id }} .Cptabs2__bullets li::marker { font-size: 0.8em; }
+  #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__bullets { font-size: 9px; line-height: 1.3; padding-left: 12px; }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__flavors {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 4px 10px;
+    font-size: 12px;
+    line-height: 1.2;
+    color: var(--cptabs2-navy);
+  }
+  #Cptabs2-{{ section.id }} .Cptabs2__flavors-label { flex-basis: 100%; }
+  #Cptabs2-{{ section.id }} .Cptabs2__flavor { display: inline-flex; align-items: center; gap: 4px; }
+  #Cptabs2-{{ section.id }} .Cptabs2__swatch {
+    width: 10px;
+    height: 10px;
+    border: 1px solid var(--cptabs2-navy);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__flavors { font-size: 9px; }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__pricing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__price-row {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__price {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #000;
+    white-space: nowrap;
+  }
+  #Cptabs2-{{ section.id }} .Cptabs2__price-slash { font-size: 14px; font-weight: 700; }
+  #Cptabs2-{{ section.id }} .Cptabs2__price-pack { font-size: 14px; font-weight: 400; }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__save {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 24px;
+    background: #fff;
+    color: #000;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__save { font-size: 8px; padding: 4px 8px; }
+  #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__card--col-1 .Cptabs2__save { background: var(--cptabs2-mint); }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__unit {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px 8px;
+    font-size: 12px;
+    line-height: 1.2;
+    color: #000;
+  }
+  #Cptabs2-{{ section.id }} .Cptabs2__unit-retail { color: var(--cptabs2-muted); }
+  #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__unit { font-size: 8px; }
+  #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__price { font-size: 12px; }
+  #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__price-slash,
+  #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__price-pack { font-size: 10px; }
+
+  #Cptabs2-{{ section.id }} .Cptabs2__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px 24px;
+    border-radius: 44px;
+    background: var(--cptabs2-cta);
+    color: #f7f7f7;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  #Cptabs2-{{ section.id }} .Cptabs2__cta:hover { background: var(--cptabs2-cta-hover); }
+  #Cptabs2-{{ section.id }} .Cptabs2__cta:focus-visible { outline: 2px solid var(--cptabs2-navy); outline-offset: 2px; }
+  #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__cta { font-size: 8px; padding: 8px 10px; }
+
+  /* Vertical cards (mobile + tablet): pills sit above the image, as in Figma */
+  @media (max-width: 1099px) {
+    #Cptabs2-{{ section.id }} .Cptabs2__info { display: contents; }
+    #Cptabs2-{{ section.id }} .Cptabs2__pills { order: -1; }
+
+    /* Column titles stay visible while scrolling the comparison, below the sticky header */
+    #Cptabs2-{{ section.id }} .Cptabs2__col-title {
+      position: sticky;
+      top: var(--cptabs2-sticky-top, 0px);
+      z-index: 2;
+    }
+    /* Paired cards: pricing and button line up at the bottom of each row */
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__pricing { margin-top: auto; }
+  }
+
+  @media (max-width: 767px) {
+    #Cptabs2-{{ section.id }} .Cptabs2__heading { font-size: 24px; max-width: 280px; margin-left: auto; margin-right: auto; }
+    #Cptabs2-{{ section.id }} .Cptabs2__tab { font-size: 8px; min-height: 36px; }
+
+    #Cptabs2-{{ section.id }} .Cptabs2__grid .Cptabs2__bullets { line-height: 1.2; }
+    #Cptabs2-{{ section.id }} .Cptabs2__grid .Cptabs2__cta { width: auto; font-size: 12px; padding: 12px 24px; }
+
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__title { font-size: 15px; font-weight: 500; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__bullets { font-size: 8px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__price { font-size: 16px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__price-slash,
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__price-pack { font-size: 12px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__unit { font-size: 10px; }
+  }
+
+  @media (min-width: 768px) {
+    #Cptabs2-{{ section.id }} .Cptabs2__tab { font-size: 12px; padding: 12px 12px; min-height: 52px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__grid { grid-template-columns: repeat(3, 1fr); }
+    #Cptabs2-{{ section.id }} .Cptabs2__grid .Cptabs2__card { padding: 24px 16px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__grid .Cptabs2__cta { font-size: 11px; padding: 12px 8px; white-space: nowrap; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__media img:not(.Cptabs2__seal) { max-width: calc(92px * var(--cptabs2-img-scale, 1)); max-height: calc(168px * var(--cptabs2-img-scale, 1)); }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__bullets { font-size: 11px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__cta { font-size: 11px; padding: 10px 14px; }
+  }
+
+  @media (min-width: 1100px) {
+    #Cptabs2-{{ section.id }} {
+      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    }
+
+    #Cptabs2-{{ section.id }} .Cptabs2__container { padding: 0 64px; }
+
+    #Cptabs2-{{ section.id }} .Cptabs2__heading { font-size: 40px; margin-bottom: 16px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__nav { margin-bottom: 44px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__tab { font-size: 14px; padding: 16px 12px; white-space: nowrap; }
+
+    #Cptabs2-{{ section.id }} .Cptabs2__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    /* Horizontal card: image left, info right */
+    #Cptabs2-{{ section.id }} .Cptabs2__card {
+      flex-direction: row;
+      align-items: center;
+      gap: 16px;
+      padding: 24px 20px;
+      text-align: left;
+    }
+    #Cptabs2-{{ section.id }} .Cptabs2__media { width: calc(100px * var(--cptabs2-img-scale, 1)); }
+    #Cptabs2-{{ section.id }} .Cptabs2__media img:not(.Cptabs2__seal) { max-width: calc(92px * var(--cptabs2-img-scale, 1)); max-height: calc(220px * var(--cptabs2-img-scale, 1)); }
+    #Cptabs2-{{ section.id }} .Cptabs2__info,
+    #Cptabs2-{{ section.id }} .Cptabs2__pricing { align-items: flex-start; }
+    #Cptabs2-{{ section.id }} .Cptabs2__pills,
+    #Cptabs2-{{ section.id }} .Cptabs2__flavors,
+    #Cptabs2-{{ section.id }} .Cptabs2__unit { justify-content: flex-start; }
+    #Cptabs2-{{ section.id }} .Cptabs2__price-row { align-items: flex-start; }
+    #Cptabs2-{{ section.id }} .Cptabs2__cta,
+    #Cptabs2-{{ section.id }} .Cptabs2__grid .Cptabs2__cta { width: auto; font-size: 14px; padding: 12px 20px; white-space: nowrap; }
+    #Cptabs2-{{ section.id }} .Cptabs2__grid .Cptabs2__card { padding: 24px 20px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__grid .Cptabs2__pricing { gap: 20px; margin-bottom: 8px; }
+
+    /* Columns: two separate bordered panels */
+    #Cptabs2-{{ section.id }} .Cptabs2__columns {
+      column-gap: 24px;
+      border: 0;
+      border-radius: 0;
+      overflow: visible;
+    }
+    /* Desktop: both columns share rows so paired cards start at the same height */
+    #Cptabs2-{{ section.id }} .Cptabs2__col-bg {
+      border: 1px solid var(--cptabs2-navy);
+      border-radius: 8px;
+    }
+    #Cptabs2-{{ section.id }} .Cptabs2__col-bg--left { background: var(--cptabs2-grey); }
+    #Cptabs2-{{ section.id }} .Cptabs2__col-bg--right { background: var(--cptabs2-blue-panel); }
+    #Cptabs2-{{ section.id }} .Cptabs2__col-title { font-size: 24px; padding: 24px 32px; background: transparent; border-radius: 8px 8px 0 0; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__card { align-items: flex-start; }
+
+    #Cptabs2-{{ section.id }} .Cptabs2__columns { max-width: 1264px; margin: 0 auto; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__card { padding: 32px; gap: 24px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__card--col-1 { border-right: 0; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__media { width: 193px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__media img:not(.Cptabs2__seal) { max-width: calc(120px * var(--cptabs2-img-scale, 1)); max-height: calc(314px * var(--cptabs2-img-scale, 1)); }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__seal { max-width: 76px; left: -20%; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__media { align-self: center; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__info { gap: 12px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__pill { font-size: 12px; padding: 10px 12px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__pill--new { padding: 10px 24px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__title { font-size: 20px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__bullets { font-size: 14px; line-height: 1.2; padding-left: 20px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__flavors { font-size: 12px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__flavors-label { flex-basis: auto; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__swatch { width: 18px; height: 18px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__price-row { flex-direction: row; align-items: center; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__price { font-size: 20px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__price-slash,
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__price-pack { font-size: 14px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__save { font-size: 12px; padding: 6px 12px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__card--col-2 .Cptabs2__save { background: #fff; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__unit { font-size: 12px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__cta { font-size: 14px; padding: 12px 24px; }
+  }
+</style>
+
+<script>
+  (function () {
+    var root = document.getElementById('Cptabs2-{{ section.id }}');
+    if (!root || root.dataset.cptabs2Ready) return;
+    root.dataset.cptabs2Ready = 'true';
+
+    var tabs = Array.prototype.slice.call(root.querySelectorAll('[data-cptabs2-tab]'));
+
+    // Sticky column titles sit below the header while it is on screen
+    var header = document.querySelector('.c-header');
+    var ticking = false;
+    function setStickyTop() {
+      ticking = false;
+      var bottom = header ? Math.max(0, Math.round(header.getBoundingClientRect().bottom)) : 0;
+      root.style.setProperty('--cptabs2-sticky-top', bottom + 'px');
+    }
+    setStickyTop();
+    if (header) {
+      window.addEventListener('scroll', function () {
+        if (!ticking) { ticking = true; requestAnimationFrame(setStickyTop); }
+      }, { passive: true });
+      window.addEventListener('resize', setStickyTop);
+    }
+
+    function activate(tab) {
+      var id = tab.getAttribute('data-cptabs2-tab');
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.classList.toggle('Cptabs2__tab--active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+      });
+      root.querySelectorAll('[data-cptabs2-panel]').forEach(function (panel) {
+        var on = panel.getAttribute('data-cptabs2-panel') === id;
+        panel.classList.toggle('Cptabs2__panel--active', on);
+        panel.hidden = !on;
+      });
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.tabIndex = i === 0 ? 0 : -1;
+      tab.addEventListener('click', function () { activate(tab); });
+      tab.addEventListener('keydown', function (e) {
+        var next = null;
+        if (e.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
+        if (e.key === 'ArrowLeft') next = tabs[(i - 1 + tabs.length) % tabs.length];
+        if (next) { e.preventDefault(); next.focus(); activate(next); }
+      });
+    });
+
+    // Theme editor: show the tab of the selected block
+    document.addEventListener('shopify:block:select', function (e) {
+      if (!root.contains(e.target)) return;
+      var tab = e.target.closest('[data-cptabs2-tab]');
+      if (!tab) {
+        var panel = e.target.closest('[data-cptabs2-panel]');
+        if (panel) tab = root.querySelector('[data-cptabs2-tab="' + panel.getAttribute('data-cptabs2-panel') + '"]');
+      }
+      if (tab) activate(tab);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "C Product Tabs v2",
+  "class": "section-Cptabs2",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A Product for Every Patient Need" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top (desktop)", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom (desktop)", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top (mobile)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom (mobile)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "mobile_padding", "label": "Side padding (mobile)", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 32 }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        { "type": "paragraph", "content": "Cards placed below this tab (until the next tab) belong to it." },
+        { "type": "text", "id": "label", "label": "Label", "default": "Best Sellers" },
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "Layout",
+          "options": [
+            { "value": "grid", "label": "Row of cards" },
+            { "value": "columns", "label": "Two columns (comparison)" }
+          ],
+          "default": "grid"
+        },
+        { "type": "text", "id": "left_title", "label": "Left column title", "default": "Fluoride Toothpaste", "visible_if": "{{ block.settings.layout == 'columns' }}" },
+        { "type": "text", "id": "right_title", "label": "Right column title", "default": "Fluoride-Free Toothpaste", "visible_if": "{{ block.settings.layout == 'columns' }}" }
+      ]
+    },
+    {
+      "type": "card",
+      "name": "Product card",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        {
+          "type": "select",
+          "id": "column",
+          "label": "Column",
+          "info": "Only used when the tab layout is Two columns.",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        },
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Transparent pack shot. Falls back to the product image." },
+        { "type": "image_picker", "id": "seal", "label": "Seal image", "info": "Optional badge over the image (e.g. Best Seller)." },
+        { "type": "range", "id": "image_scale", "label": "Image size", "min": 50, "max": 200, "step": 5, "unit": "%", "default": 100 },
+        { "type": "text", "id": "pills", "label": "Pills", "info": "Separate with |" },
+        { "type": "text", "id": "new_pill", "label": "Highlighted pill", "info": "Filled navy pill, e.g. NEW!" },
+        { "type": "text", "id": "title", "label": "Title", "info": "Falls back to the product title." },
+        { "type": "textarea", "id": "bullets", "label": "Bullets", "info": "One per line." },
+        { "type": "text", "id": "flavors", "label": "Flavors", "info": "Separate with |. Known: Cool Mint, Strawberry, Watermelon, Orange Mango, Papaya, Black Cherry." },
+        { "type": "header", "content": "Pricing" },
+        { "type": "paragraph", "content": "Price comes from the product's highest-priced variant (full case)." },
+        { "type": "text", "id": "pack_label", "label": "Pack label", "default": "24 pack" },
+        { "type": "number", "id": "pack_units", "label": "Units per pack", "default": 24 },
+        { "type": "text", "id": "retail_unit_price", "label": "Retail price per unit", "info": "Number, e.g. 26 or 18.50. Shows the savings chip and retail line." },
+        { "type": "header", "content": "Button" },
+        { "type": "text", "id": "cta_label", "label": "Button label", "default": "Subscribe & save up to 5%" },
+        { "type": "url", "id": "cta_url", "label": "Button link", "info": "Falls back to the product page." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "C Product Tabs v2",
+      "blocks": [
+        { "type": "tab", "settings": { "label": "Best Sellers", "layout": "columns" } },
+        { "type": "card", "settings": { "column": "left" } },
+        { "type": "card", "settings": { "column": "right" } },
+        { "type": "tab", "settings": { "label": "Fluoride Toothpastes" } },
+        { "type": "card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -547,6 +547,350 @@
         "heading_max_width": 600,
         "heading_max_width_mobile": 280,
         "mobile_padding": 30
+      },
+      "disabled": true
+    },
+    "c_products_tab_v2_Pn7Q2x": {
+      "type": "c-products-tab-v2",
+      "blocks": {
+        "t_best": {
+          "type": "tab",
+          "settings": {
+            "label": "Best Sellers",
+            "layout": "columns",
+            "left_title": "Fluoride Toothpaste",
+            "right_title": "Fluoride-Free Toothpaste"
+          }
+        },
+        "c_best_sp": {
+          "type": "card",
+          "settings": {
+            "product": "wholesale-24-pack-super-paste-with-10-nano-hydroxyapatite-fluoride-toothpaste",
+            "column": "left",
+            "pills": "Fluoride Toothpaste|Fluoride Best Seller",
+            "new_pill": "",
+            "title": "Super Paste™ - Triple Protection",
+            "bullets": "For high cavity risk or cavity history\nFor dry mouth support (xerostomia)\nReplaces 5000 ppm fluoride",
+            "flavors": "Cool Mint|Strawberry",
+            "pack_label": "24 pack",
+            "pack_units": 24,
+            "retail_unit_price": "26",
+            "cta_label": "Subscribe & save up to 5%",
+            "cta_url": "",
+            "image": "shopify://shop_images/c-ptabs-super-paste.webp"
+          }
+        },
+        "c_best_perio": {
+          "type": "card",
+          "settings": {
+            "product": "perio-super-paste",
+            "column": "left",
+            "pills": "Fluoride Toothpaste",
+            "new_pill": "",
+            "title": "Super Paste Perio™",
+            "bullets": "Low RDA\nSensitive roots\nPeriodontal patients",
+            "flavors": "Cool Mint",
+            "pack_label": "24 pack",
+            "pack_units": 24,
+            "retail_unit_price": "28",
+            "cta_label": "Subscribe & save up to 5%",
+            "cta_url": "",
+            "image": "shopify://shop_images/c-ptabs-perio.webp"
+          }
+        },
+        "c_best_ortho": {
+          "type": "card",
+          "settings": {
+            "product": "new-dr-jens-super-paste-ortho-12-24-pack",
+            "column": "left",
+            "pills": "Fluoride Toothpaste",
+            "new_pill": "",
+            "title": "Super Paste Ortho™",
+            "bullets": "Orthodontic patients\nWhite spot lesion prevention\nAligner and braces patients",
+            "flavors": "Cool Mint",
+            "pack_label": "24 pack",
+            "pack_units": 24,
+            "retail_unit_price": "28",
+            "cta_label": "Subscribe & save up to 5%",
+            "cta_url": "",
+            "image": "shopify://shop_images/c-ptabs-ortho.webp"
+          }
+        },
+        "c_best_kera": {
+          "type": "card",
+          "settings": {
+            "product": "dr-jens-kerahap",
+            "column": "right",
+            "pills": "Professional Elite",
+            "new_pill": "NEW!",
+            "title": "Dr. Jen's KeraHAp™",
+            "bullets": "The most advanced fluoride-free toothpaste\nHighest level of fluoride-free protection\n1st and Only Peptide-Enhanced + Premium nHAp\nSupports Replenishment of Enamel\nGuided Crystal Formation",
+            "flavors": "Cool Mint",
+            "pack_label": "24 pack",
+            "pack_units": 24,
+            "retail_unit_price": "28",
+            "cta_label": "Subscribe & save up to 5%",
+            "cta_url": "",
+            "image": "shopify://shop_images/c-ptabs-kerahap.webp"
+          }
+        },
+        "c_best_egg": {
+          "type": "card",
+          "settings": {
+            "product": "new-dr-jens-eggshell-10-nano-hydroxyapatite-toothpaste-12-24-pack",
+            "column": "right",
+            "pills": "Premium Plus",
+            "new_pill": "",
+            "title": "Naturally Derived Eggshell nHAp",
+            "bullets": "Naturally Eggshell-Derived nHAp\nHypersensitivity Management\nLow-abrasion & PH Balanced\nSupports Oral Microbiome Balance",
+            "flavors": "Cool Mint|Orange Mango",
+            "pack_label": "24 pack",
+            "pack_units": 24,
+            "retail_unit_price": "22",
+            "cta_label": "Subscribe & save up to 5%",
+            "cta_url": "",
+            "image": "shopify://shop_images/c-ptabs-eggshell.webp",
+            "seal": "shopify://shop_images/c-ptabs-best-seller-seal.webp"
+          }
+        },
+        "c_best_ff": {
+          "type": "card",
+          "settings": {
+            "product": "dr-jens-cool-mint-fluoride-free-toothpaste-with-10-nano-hydroxyapatite-12-24-pack",
+            "column": "right",
+            "pills": "Premium",
+            "new_pill": "",
+            "title": "Premium 10% Fluoride-Free Toothpaste",
+            "bullets": "Clinical-level Enamel Remineralization\nHighest-grade Premium nHAp\nOral Microbiome Support",
+            "flavors": "Cool Mint|Strawberry|Watermelon",
+            "pack_label": "24 pack",
+            "pack_units": 24,
+            "retail_unit_price": "18.50",
+            "cta_label": "Subscribe & save up to 5%",
+            "cta_url": "",
+            "image": "shopify://shop_images/c-ptabs-fluoride-free.webp"
+          }
+        },
+        "t_fluoride": {
+          "type": "tab",
+          "settings": {
+            "label": "Fluoride Toothpastes",
+            "layout": "grid",
+            "left_title": "Fluoride Toothpaste",
+            "right_title": "Fluoride-Free Toothpaste"
+          }
+        },
+        "c_fl_sp": {
+          "type": "card",
+          "settings": {
+            "product": "wholesale-24-pack-super-paste-with-10-nano-hydroxyapatite-fluoride-toothpaste",
+            "column": "left",
+            "pills": "Fluoride Toothpaste|Fluoride Best Seller",
+            "new_pill": "",
+            "title": "Super Paste™ - Triple Protection",
+            "bullets": "For high cavity risk or cavity history\nFor dry mouth support (xerostomia)\nReplaces 5000 ppm fluoride",
+            "flavors": "Cool Mint|Strawberry",
+            "pack_label": "24 pack",
+            "pack_units": 24,
+            "retail_unit_price": "26",
+            "cta_label": "Subscribe & save up to 5%",
+            "cta_url": "",
+            "image": "shopify://shop_images/c-ptabs-super-paste.webp"
+          }
+        },
+        "c_fl_perio": {
+          "type": "card",
+          "settings": {
+            "product": "perio-super-paste",
+            "column": "left",
+            "pills": "Fluoride Toothpaste",
+            "new_pill": "",
+            "title": "Super Paste Perio™",
+            "bullets": "Low RDA\nSensitive roots\nPeriodontal patients",
+            "flavors": "Cool Mint",
+            "pack_label": "24 pack",
+            "pack_units": 24,
+            "retail_unit_price": "28",
+            "cta_label": "Subscribe & save up to 5%",
+            "cta_url": "",
+            "image": "shopify://shop_images/c-ptabs-perio.webp"
+          }
+        },
+        "c_fl_ortho": {
+          "type": "card",
+          "settings": {
+            "product": "new-dr-jens-super-paste-ortho-12-24-pack",
+            "column": "left",
+            "pills": "Fluoride Toothpaste",
+            "new_pill": "",
+            "title": "Super Paste Ortho™",
+            "bullets": "Orthodontic patients\nWhite spot lesion prevention\nAligner and braces patients",
+            "flavors": "Cool Mint",
+            "pack_label": "24 pack",
+            "pack_units": 24,
+            "retail_unit_price": "28",
+            "cta_label": "Subscribe & save up to 5%",
+            "cta_url": "",
+            "image": "shopify://shop_images/c-ptabs-ortho.webp"
+          }
+        },
+        "t_ff": {
+          "type": "tab",
+          "settings": {
+            "label": "Fluoride-Free Toothpastes",
+            "layout": "grid",
+            "left_title": "Fluoride Toothpaste",
+            "right_title": "Fluoride-Free Toothpaste"
+          }
+        },
+        "c_ff_kera": {
+          "type": "card",
+          "settings": {
+            "product": "dr-jens-kerahap",
+            "column": "left",
+            "pills": "Professional Elite",
+            "new_pill": "NEW!",
+            "title": "Dr. Jen's KeraHAp™",
+            "bullets": "The most advanced fluoride-free toothpaste\nHighest level of fluoride-free protection\n1st and Only Peptide-Enhanced + Premium nHAp\nSupports Replenishment of Enamel",
+            "flavors": "Cool Mint",
+            "pack_label": "24 pack",
+            "pack_units": 24,
+            "retail_unit_price": "28",
+            "cta_label": "Subscribe & save up to 5%",
+            "cta_url": "",
+            "image": "shopify://shop_images/c-ptabs-kerahap.webp"
+          }
+        },
+        "c_ff_egg": {
+          "type": "card",
+          "settings": {
+            "product": "new-dr-jens-eggshell-10-nano-hydroxyapatite-toothpaste-12-24-pack",
+            "column": "left",
+            "pills": "Premium Plus",
+            "new_pill": "",
+            "title": "1st and Only Naturally Derived Eggshell nHAp",
+            "bullets": "Naturally Eggshell-Derived nHAp\nHypersensitivity Management\nLow-abrasion & PH Balanced\nSupports Oral Microbiome Balance",
+            "flavors": "Cool Mint|Orange Mango",
+            "pack_label": "24 pack",
+            "pack_units": 24,
+            "retail_unit_price": "22",
+            "cta_label": "Subscribe & save up to 5%",
+            "cta_url": "",
+            "image": "shopify://shop_images/c-ptabs-eggshell.webp",
+            "seal": "shopify://shop_images/c-ptabs-best-seller-seal.webp"
+          }
+        },
+        "c_ff_ff": {
+          "type": "card",
+          "settings": {
+            "product": "dr-jens-cool-mint-fluoride-free-toothpaste-with-10-nano-hydroxyapatite-12-24-pack",
+            "column": "left",
+            "pills": "Premium",
+            "new_pill": "",
+            "title": "Premium 10% Fluoride-Free Toothpaste",
+            "bullets": "Clinical-level Enamel Remineralization\nHighest-grade Premium nHAp\nOral Microbiome Support",
+            "flavors": "Cool Mint|Strawberry|Watermelon",
+            "pack_label": "24 pack",
+            "pack_units": 24,
+            "retail_unit_price": "18.50",
+            "cta_label": "Subscribe & save up to 5%",
+            "cta_url": "",
+            "image": "shopify://shop_images/c-ptabs-fluoride-free.webp"
+          }
+        },
+        "t_other": {
+          "type": "tab",
+          "settings": {
+            "label": "Other Oral Care Products",
+            "layout": "grid",
+            "left_title": "Fluoride Toothpaste",
+            "right_title": "Fluoride-Free Toothpaste"
+          }
+        },
+        "c_ot_rinse": {
+          "type": "card",
+          "settings": {
+            "product": "dr-jens-mouth-rinse",
+            "column": "left",
+            "pills": "Alcohol-Free",
+            "new_pill": "NEW!",
+            "title": "Dr. Jen's Mouth Rinse Wellness Pre-Rinse",
+            "bullets": "Prepares your mouth before brushing\nAloe vera and calendula for gum support\nAlcohol-free, cleaner ingredients",
+            "flavors": "Cool Mint",
+            "pack_label": "12 pack",
+            "pack_units": 12,
+            "retail_unit_price": "28",
+            "cta_label": "Subscribe & save up to 5%",
+            "cta_url": "",
+            "image": "shopify://shop_images/c-ptabs-mouth-rinse.webp"
+          }
+        },
+        "c_ot_floss": {
+          "type": "card",
+          "settings": {
+            "product": "wholesale-30-pack-flavors-natural-plastic-free-floss-with-nano-hydroxyapatite-mint",
+            "column": "left",
+            "image_scale": 140,
+            "pills": "Micro-Plastic Free",
+            "new_pill": "NEW!",
+            "title": "100% Italian Silk Floss",
+            "bullets": "Made with premium 100% Italian Silk\nGentle on the gums\nEffective at removing plaque",
+            "flavors": "Cool Mint|Papaya|Black Cherry",
+            "pack_label": "50 count",
+            "pack_units": 50,
+            "retail_unit_price": "8",
+            "cta_label": "Subscribe & save up to 5%",
+            "cta_url": "",
+            "image": "shopify://shop_images/c-ptabs-silk-floss.webp"
+          }
+        },
+        "c_ot_gel": {
+          "type": "card",
+          "settings": {
+            "product": "dr-jens-nano-hydroxyapatite-mouth-gel",
+            "column": "left",
+            "pills": "Fluoride-Free",
+            "new_pill": "",
+            "title": "Dry Mouth Gel",
+            "bullets": "10% premium Nanohydroxyapatite\nSoothing relief for dry mouth\nCleaner ingredients",
+            "flavors": "Cool Mint",
+            "pack_label": "36 pack",
+            "pack_units": 36,
+            "retail_unit_price": "8",
+            "cta_label": "Subscribe & save up to 5%",
+            "cta_url": "",
+            "image": "shopify://shop_images/c-ptabs-dry-mouth-gel.webp"
+          }
+        }
+      },
+      "block_order": [
+        "t_best",
+        "c_best_sp",
+        "c_best_perio",
+        "c_best_ortho",
+        "c_best_kera",
+        "c_best_egg",
+        "c_best_ff",
+        "t_fluoride",
+        "c_fl_sp",
+        "c_fl_perio",
+        "c_fl_ortho",
+        "t_ff",
+        "c_ff_kera",
+        "c_ff_egg",
+        "c_ff_ff",
+        "t_other",
+        "c_ot_rinse",
+        "c_ot_floss",
+        "c_ot_gel"
+      ],
+      "settings": {
+        "heading": "A Product for Every Patient Need",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "mobile_padding": 32
       }
     },
     "1784205230037621d1": {
@@ -1397,6 +1741,7 @@
     "c_hero_section_v2_pQytR8",
     "c_badges_bar_fBPXjp",
     "c_products_tab_a6KGHU",
+    "c_products_tab_v2_Pn7Q2x",
     "1784205230037621d1",
     "c_story_comparison_cqffLT",
     "c_difference_DTXTAV",
