@@ -66,7 +66,7 @@
   {{ block.shopify_attributes }}
 >
   {%- if image != blank -%}
-    <a href="{{ url | default: '#' }}" class="Cptabs2__media" tabindex="-1" aria-hidden="true">
+    <a href="{{ url | default: '#' }}" class="Cptabs2__media" tabindex="-1" aria-hidden="true"{% if s.image_scale and s.image_scale != 100 %} style="--cptabs2-img-scale: {{ s.image_scale | divided_by: 100.0 }};"{% endif %}>
       <span class="Cptabs2__media-inner">
         {{ image | image_url: width: 600 | image_tag: loading: 'lazy', alt: title, widths: '200, 300, 400, 600', sizes: '(min-width: 1100px) 200px, 120px' }}
         {%- if s.seal != blank -%}

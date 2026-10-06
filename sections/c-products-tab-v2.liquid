@@ -209,7 +209,7 @@
     grid-template-rows: auto repeat(var(--cptabs2-rows), auto);
     border: 1px solid var(--cptabs2-navy);
     border-radius: 8px;
-    overflow: hidden;
+    overflow: clip;
   }
 
   /* Mobile: wrappers vanish so cards pair up row by row across both columns */
@@ -236,8 +236,8 @@
     text-align: center;
     color: var(--cptabs2-navy);
   }
-  #Cptabs2-{{ section.id }} .Cptabs2__col-title--left { grid-column: 1; }
-  #Cptabs2-{{ section.id }} .Cptabs2__col-title--right { grid-column: 2; }
+  #Cptabs2-{{ section.id }} .Cptabs2__col-title--left { grid-column: 1; background: #fff; }
+  #Cptabs2-{{ section.id }} .Cptabs2__col-title--right { grid-column: 2; background: #e0f3f7; }
 
   /* Card */
   #Cptabs2-{{ section.id }} .Cptabs2__card {
@@ -280,11 +280,10 @@
     display: block;
     width: auto;
     height: auto;
-    max-width: 92px;
-    max-height: 168px;
+    max-width: calc(92px * var(--cptabs2-img-scale, 1)); max-height: calc(168px * var(--cptabs2-img-scale, 1));
   }
   /* Sizes match the visible product in Figma (its image frames include transparent padding) */
-  #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__media img:not(.Cptabs2__seal) { max-width: 72px; max-height: 128px; }
+  #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__media img:not(.Cptabs2__seal) { max-width: calc(72px * var(--cptabs2-img-scale, 1)); max-height: calc(128px * var(--cptabs2-img-scale, 1)); }
 
   #Cptabs2-{{ section.id }} .Cptabs2__seal {
     position: absolute;
@@ -452,6 +451,15 @@
   @media (max-width: 1099px) {
     #Cptabs2-{{ section.id }} .Cptabs2__info { display: contents; }
     #Cptabs2-{{ section.id }} .Cptabs2__pills { order: -1; }
+
+    /* Column titles stay visible while scrolling the comparison, below the sticky header */
+    #Cptabs2-{{ section.id }} .Cptabs2__col-title {
+      position: sticky;
+      top: var(--cptabs2-sticky-top, 0px);
+      z-index: 2;
+    }
+    /* Paired cards: pricing and button line up at the bottom of each row */
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__pricing { margin-top: auto; }
   }
 
   @media (max-width: 767px) {
@@ -474,7 +482,7 @@
     #Cptabs2-{{ section.id }} .Cptabs2__grid { grid-template-columns: repeat(3, 1fr); }
     #Cptabs2-{{ section.id }} .Cptabs2__grid .Cptabs2__card { padding: 24px 16px; }
     #Cptabs2-{{ section.id }} .Cptabs2__grid .Cptabs2__cta { font-size: 11px; padding: 12px 8px; white-space: nowrap; }
-    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__media img:not(.Cptabs2__seal) { max-width: 92px; max-height: 168px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__media img:not(.Cptabs2__seal) { max-width: calc(92px * var(--cptabs2-img-scale, 1)); max-height: calc(168px * var(--cptabs2-img-scale, 1)); }
     #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__bullets { font-size: 11px; }
     #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__cta { font-size: 11px; padding: 10px 14px; }
   }
@@ -503,8 +511,8 @@
       padding: 24px 20px;
       text-align: left;
     }
-    #Cptabs2-{{ section.id }} .Cptabs2__media { width: 100px; }
-    #Cptabs2-{{ section.id }} .Cptabs2__media img:not(.Cptabs2__seal) { max-width: 92px; max-height: 220px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__media { width: calc(100px * var(--cptabs2-img-scale, 1)); }
+    #Cptabs2-{{ section.id }} .Cptabs2__media img:not(.Cptabs2__seal) { max-width: calc(92px * var(--cptabs2-img-scale, 1)); max-height: calc(220px * var(--cptabs2-img-scale, 1)); }
     #Cptabs2-{{ section.id }} .Cptabs2__info,
     #Cptabs2-{{ section.id }} .Cptabs2__pricing { align-items: flex-start; }
     #Cptabs2-{{ section.id }} .Cptabs2__pills,
@@ -523,27 +531,23 @@
       border-radius: 0;
       overflow: visible;
     }
-    /* Desktop: each column stacks its own cards, independent heights */
-    #Cptabs2-{{ section.id }} .Cptabs2__columns { grid-template-rows: auto; align-items: start; }
-    #Cptabs2-{{ section.id }} .Cptabs2__col-bg { display: none; }
-    #Cptabs2-{{ section.id }} .Cptabs2__col {
-      display: flex;
-      flex-direction: column;
-      align-self: stretch;
+    /* Desktop: both columns share rows so paired cards start at the same height */
+    #Cptabs2-{{ section.id }} .Cptabs2__col-bg {
       border: 1px solid var(--cptabs2-navy);
       border-radius: 8px;
-      overflow: hidden;
     }
-    #Cptabs2-{{ section.id }} .Cptabs2__col--left { background: var(--cptabs2-grey); }
-    #Cptabs2-{{ section.id }} .Cptabs2__col--right { background: var(--cptabs2-blue-panel); }
-    #Cptabs2-{{ section.id }} .Cptabs2__col-title { font-size: 24px; padding: 24px 32px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__col-bg--left { background: var(--cptabs2-grey); }
+    #Cptabs2-{{ section.id }} .Cptabs2__col-bg--right { background: var(--cptabs2-blue-panel); }
+    #Cptabs2-{{ section.id }} .Cptabs2__col-title { font-size: 24px; padding: 24px 32px; background: transparent; border-radius: 8px 8px 0 0; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__card { align-items: flex-start; }
 
     #Cptabs2-{{ section.id }} .Cptabs2__columns { max-width: 1264px; margin: 0 auto; }
     #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__card { padding: 32px; gap: 24px; }
     #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__card--col-1 { border-right: 0; }
     #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__media { width: 193px; }
-    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__media img:not(.Cptabs2__seal) { max-width: 120px; max-height: 314px; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__media img:not(.Cptabs2__seal) { max-width: calc(120px * var(--cptabs2-img-scale, 1)); max-height: calc(314px * var(--cptabs2-img-scale, 1)); }
     #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__seal { max-width: 76px; left: -20%; }
+    #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__media { align-self: center; }
     #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__info { gap: 12px; }
     #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__pill { font-size: 12px; padding: 10px 12px; }
     #Cptabs2-{{ section.id }} .Cptabs2__columns .Cptabs2__pill--new { padding: 10px 24px; }
@@ -570,6 +574,22 @@
     root.dataset.cptabs2Ready = 'true';
 
     var tabs = Array.prototype.slice.call(root.querySelectorAll('[data-cptabs2-tab]'));
+
+    // Sticky column titles sit below the header while it is on screen
+    var header = document.querySelector('.c-header');
+    var ticking = false;
+    function setStickyTop() {
+      ticking = false;
+      var bottom = header ? Math.max(0, Math.round(header.getBoundingClientRect().bottom)) : 0;
+      root.style.setProperty('--cptabs2-sticky-top', bottom + 'px');
+    }
+    setStickyTop();
+    if (header) {
+      window.addEventListener('scroll', function () {
+        if (!ticking) { ticking = true; requestAnimationFrame(setStickyTop); }
+      }, { passive: true });
+      window.addEventListener('resize', setStickyTop);
+    }
 
     function activate(tab) {
       var id = tab.getAttribute('data-cptabs2-tab');
@@ -662,6 +682,7 @@
         },
         { "type": "image_picker", "id": "image", "label": "Image", "info": "Transparent pack shot. Falls back to the product image." },
         { "type": "image_picker", "id": "seal", "label": "Seal image", "info": "Optional badge over the image (e.g. Best Seller)." },
+        { "type": "range", "id": "image_scale", "label": "Image size", "min": 50, "max": 200, "step": 5, "unit": "%", "default": 100 },
         { "type": "text", "id": "pills", "label": "Pills", "info": "Separate with |" },
         { "type": "text", "id": "new_pill", "label": "Highlighted pill", "info": "Filled navy pill, e.g. NEW!" },
         { "type": "text", "id": "title", "label": "Title", "info": "Falls back to the product title." },
