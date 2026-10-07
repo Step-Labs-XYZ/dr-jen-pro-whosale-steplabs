@@ -51,7 +51,7 @@
       {%- comment -%} Descripción de la variante seleccionada (desde metafields) {%- endcomment -%}
       {% if product.metafields.custom["variant_description_{{ option.name | handle }}"] != blank %}
         <p class="c-variants__description" data-variant-description>
-          {{ product.metafields.custom["variant_description_{{ option.name | handle }}"] }}
+          {{ product.metafields.custom | handle }}"] }}
         </p>
       {% endif %}
     </div>
@@ -63,3 +63,14 @@
     {{ product | json }}
   </script>
 </div>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: '{{ product.metafields.custom["variant_description_{{ option.name | handle
+    }}'
+  to: "{{ product.metafields.custom | handle }}"
+  position: 2706..2746
+{% endcomment %}

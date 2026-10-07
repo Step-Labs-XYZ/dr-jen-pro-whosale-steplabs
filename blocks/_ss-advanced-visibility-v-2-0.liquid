@@ -28,7 +28,7 @@
     {%- liquid
       # Work with products, pages, collections, etc.
       assign page_type = request.page_type
-      assign tags = [page_type].tags
+      assign tags = self[page_type].tags
 
       case match_condition
         when 'equals'
@@ -60,7 +60,7 @@
     {%- liquid
       # Work with products, pages, collections, etc.
       assign page_type = request.page_type
-      assign title = [page_type].title
+      assign title = self[page_type].title
       if match_rule == 'template'
         assign title = template.suffix
       endif
@@ -293,3 +293,16 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "      assign tags = [page_type].tags"
+  to: "      assign tags = self[page_type].tags"
+  position: 786..826
+- from: "      assign title = [page_type].title"
+  to: "      assign title = self[page_type].title"
+  position: 1670..1712
+{% endcomment %}

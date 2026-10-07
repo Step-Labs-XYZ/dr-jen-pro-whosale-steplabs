@@ -260,7 +260,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   {% render 'shogun-head' %}
 {% include 'dexter' %}
-{% render ‘GTM-product-datalayer.liquid’ %}
+{% render GTM-product-datalayer %}
 {% include 'abconvert-price-test' %}
 {% include 'abconvert-content-test' %}
 
@@ -320,3 +320,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </body>
 
 </html>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render ‘GTM-product-datalayer.liquid’ %}"
+  to: "{% render GTM-product-datalayer %}"
+  position: 9282..9316
+{% endcomment %}

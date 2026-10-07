@@ -265,7 +265,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   {% render 'shogun-head' %}
 {% include 'dexter' %}
-{% render ‘GTM-product-datalayer.liquid’ %}
+{% render GTM-product-datalayer %}
 {% include 'abconvert-price-test' %}
 {% include 'abconvert-content-test' %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -676,4 +676,13 @@ $('#review-carousel .swiper-container .swiper-wrapper').slick({
 </script>
           
   </body>
-</html>
+</html>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render ‘GTM-product-datalayer.liquid’ %}"
+  to: "{% render GTM-product-datalayer %}"
+  position: 9460..9494
+{%- endcomment -%}

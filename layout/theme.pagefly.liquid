@@ -257,7 +257,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   {% render 'shogun-head' %}
 {% include 'dexter' %}
-{% render ‘GTM-product-datalayer.liquid’ %}
+{% render GTM-product-datalayer %}
 {% include 'abconvert-price-test' %}
 {% include 'abconvert-content-test' %}
 </head>
@@ -274,4 +274,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <body class="no-focus-outline {{ feature_classes }} template-{{ template.name }} template-{{ template.suffix }}" data-instant-allow-query-string><div class="pagefly-container">{{ content_for_layout }}</div></body>
-</html>
+</html>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render ‘GTM-product-datalayer.liquid’ %}"
+  to: "{% render GTM-product-datalayer %}"
+  position: 9455..9489
+{%- endcomment -%}
