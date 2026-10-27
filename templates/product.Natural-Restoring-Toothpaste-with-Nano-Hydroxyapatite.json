@@ -332,6 +332,44 @@
         "include_horizontal_margins": true,
         "include_vertical_margins": true
       }
+    },
+    "c_customer_words": {
+      "type": "c-customer-words",
+      "blocks": {
+        "review_jerry": {
+          "type": "review",
+          "settings": {
+            "text": "I love this toothpaste. My teeth are doing so much better at the gum line. I just bought an extra one for my son",
+            "name": "Jerry",
+            "time": "3 week ago",
+            "show_verified": true
+          }
+        },
+        "review_sherry": {
+          "type": "review",
+          "settings": {
+            "text": "Good taste. \nVery good cleaning.",
+            "name": "Sherry",
+            "time": "1 week ago",
+            "show_verified": true
+          }
+        },
+        "review_matt": {
+          "type": "review",
+          "settings": {
+            "text": "3rd time I have gotten this! Love tem",
+            "name": "Matt",
+            "time": "1 week ago",
+            "show_verified": true
+          }
+        }
+      },
+      "block_order": [
+        "review_jerry",
+        "review_sherry",
+        "review_matt"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -341,6 +379,7 @@
     "1659370024416725b4",
     "1659370104ce9cf776",
     "16593702156f5b18cc",
+    "c_customer_words",
     "16593703577835f0d9",
     "1659370425125ddd93",
     "1659370572e861914d",
