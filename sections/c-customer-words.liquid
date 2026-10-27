@@ -1,0 +1,331 @@
+{% comment %}
+  Section: C - Customer Words
+  Description: "In our customers' words" — tarjetas de reseña con foto, estrellas,
+  texto, reviewer y badge "Verified buyer". 3 columnas en desktop, slider con
+  paginación en tablet/mobile.
+  Figma: Dr. Jen — Review desktop 3596:27936 / mobile 3596:28325.
+  Las 3 primeras tarjetas usan las fotos del diseño (assets c-customer-words-*)
+  cuando el bloque no tiene imagen.
+{% endcomment %}
+
+{%- liquid
+  assign sid = 'c-customer-words-' | append: section.id
+-%}
+
+{% style %}
+  #{{ sid }} {
+    --ccw-dark: {{ section.settings.accent_color }};
+    --ccw-text: {{ section.settings.text_color }};
+    --ccw-badge-bg: rgba(214, 236, 230, 0.32);
+    --ccw-dot: #D6ECE6;
+    background-color: {{ section.settings.bg_color }};
+    padding: {{ section.settings.padding_top_mobile }}px 32px {{ section.settings.padding_bottom_mobile }}px;
+    font-family: Raleway, var(--font-body-family, sans-serif);
+    overflow: hidden;
+  }
+  #{{ sid }} .ccw__container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 1312px;
+    margin: 0 auto;
+  }
+  #{{ sid }} .ccw__tagline {
+    margin: 0;
+    font-family: Raleway, var(--font-heading-family, sans-serif);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--ccw-dark);
+  }
+  #{{ sid }} .ccw__track {
+    display: flex;
+    gap: 42px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  #{{ sid }} .ccw__track::-webkit-scrollbar { display: none; }
+  #{{ sid }} .ccw__card {
+    flex: 0 0 min(348px, 100%);
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 24px;
+    border: 1px solid var(--ccw-dark);
+    border-radius: 12px;
+    box-sizing: border-box;
+    color: var(--ccw-text);
+  }
+  #{{ sid }} .ccw__image {
+    display: block;
+    width: 100%;
+    height: 204px;
+    border-radius: 8px;
+    background-color: var(--ccw-dark);
+    object-fit: cover;
+  }
+  #{{ sid }} .ccw__details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  #{{ sid }} .ccw__stars { display: block; width: 116px; height: 18.8889px; }
+  #{{ sid }} .ccw__text {
+    margin: 0;
+    max-width: 308px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ccw-text);
+  }
+  #{{ sid }} .ccw__footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  #{{ sid }} .ccw__reviewer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+  #{{ sid }} .ccw__avatar {
+    flex-shrink: 0;
+    width: 47px;
+    height: 47px;
+    border-radius: 99px;
+    object-fit: cover;
+  }
+  #{{ sid }} .ccw__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  #{{ sid }} .ccw__name {
+    margin: 0;
+    font-family: Raleway, var(--font-heading-family, sans-serif);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ccw-text);
+  }
+  #{{ sid }} .ccw__time { margin: 0; font-size: 14px; font-weight: 400; color: var(--ccw-text); }
+  #{{ sid }} .ccw__badge {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border: 0.4px solid var(--ccw-dark);
+    border-radius: 99px;
+    background-color: var(--ccw-badge-bg);
+    font-size: 10px;
+    line-height: 1.2;
+    white-space: nowrap;
+    color: var(--ccw-text);
+  }
+  #{{ sid }} .ccw__badge img { display: block; width: 18px; height: 18px; }
+  #{{ sid }} .ccw__dots {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
+  }
+  #{{ sid }} .ccw__dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 4px;
+    background-color: var(--ccw-dot);
+    cursor: pointer;
+    transition: width .25s ease, background-color .25s ease;
+  }
+  #{{ sid }} .ccw__dot[aria-current="true"] { width: 45px; background-color: var(--ccw-dark); }
+
+  @media (min-width: 990px) {
+    #{{ sid }} {
+      padding: {{ section.settings.padding_top_desktop }}px 64px {{ section.settings.padding_bottom_desktop }}px;
+    }
+    #{{ sid }} .ccw__tagline { font-size: 14px; }
+    #{{ sid }} .ccw__track {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 418px));
+      justify-content: space-between;
+      gap: 24px;
+      overflow: visible;
+    }
+    #{{ sid }} .ccw__text { font-size: 16px; }
+    #{{ sid }} .ccw__name { font-size: 20px; }
+    #{{ sid }} .ccw__time { font-size: 16px; }
+    #{{ sid }} .ccw__badge { font-size: 12px; }
+    #{{ sid }} .ccw__dots { display: none; }
+  }
+{% endstyle %}
+
+<section id="{{ sid }}" class="ccw" data-sl-id="c-customer-words" aria-label="{{ section.settings.tagline | escape }}">
+  <div class="ccw__container">
+    {%- if section.settings.tagline != blank -%}
+      <h2 class="ccw__tagline">{{ section.settings.tagline }}</h2>
+    {%- endif -%}
+
+    <ul class="ccw__track" data-ccw-track>
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign fallback_index = forloop.index
+          if fallback_index > 3
+            assign fallback_index = 3
+          endif
+          assign image_alt = block.settings.image.alt | default: block.settings.name
+        -%}
+        <li class="ccw__card" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 800 | image_tag: class: 'ccw__image', loading: 'lazy', widths: '400, 600, 800', sizes: '(min-width: 990px) 370px, calc(100vw - 112px)', alt: image_alt }}
+          {%- else -%}
+            <img class="ccw__image" src="{{ 'c-customer-words-review-' | append: fallback_index | append: '.webp' | asset_url }}" alt="{{ block.settings.name | escape }}" width="800" height="441" loading="lazy">
+          {%- endif -%}
+
+          <div class="ccw__details">
+            <img class="ccw__stars" src="{{ 'c-customer-words-stars.svg' | asset_url }}" alt="5 out of 5 stars" width="116" height="18.8889" loading="lazy">
+            {%- if block.settings.text != blank -%}
+              <p class="ccw__text">{{ block.settings.text | escape | newline_to_br }}</p>
+            {%- endif -%}
+          </div>
+
+          <div class="ccw__footer">
+            <div class="ccw__reviewer">
+              {%- if block.settings.avatar != blank -%}
+                {{ block.settings.avatar | image_url: width: 120 | image_tag: class: 'ccw__avatar', loading: 'lazy', alt: '' }}
+              {%- else -%}
+                <img class="ccw__avatar" src="{{ 'c-customer-words-avatar-' | append: fallback_index | append: '.webp' | asset_url }}" alt="" width="47" height="47" loading="lazy">
+              {%- endif -%}
+              <div class="ccw__meta">
+                <p class="ccw__name">{{ block.settings.name }}</p>
+                {%- if block.settings.time != blank -%}
+                  <p class="ccw__time">{{ block.settings.time }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+            {%- if block.settings.show_verified -%}
+              <span class="ccw__badge">
+                <img src="{{ 'c-customer-words-seal-check.svg' | asset_url }}" alt="" width="18" height="18" loading="lazy">
+                {{ section.settings.verified_label }}
+              </span>
+            {%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    {%- if section.blocks.size > 1 -%}
+      <div class="ccw__dots" data-ccw-dots>
+        {%- for block in section.blocks -%}
+          <button type="button" class="ccw__dot" data-ccw-dot="{{ forloop.index0 }}" aria-label="Review {{ forloop.index }}"{% if forloop.first %} aria-current="true"{% endif %}></button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('{{ sid }}');
+    if (!root) return;
+    var track = root.querySelector('[data-ccw-track]');
+    var dots = root.querySelectorAll('[data-ccw-dot]');
+    if (!track || !dots.length) return;
+    var cards = track.children;
+
+    function setActive(index) {
+      Array.prototype.forEach.call(dots, function (dot, i) {
+        if (i === index) dot.setAttribute('aria-current', 'true');
+        else dot.removeAttribute('aria-current');
+      });
+    }
+
+    var ticking = false;
+    track.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        ticking = false;
+        var maxScroll = track.scrollWidth - track.clientWidth;
+        var index = 0;
+        if (track.scrollLeft >= maxScroll - 2) {
+          index = cards.length - 1;
+        } else {
+          var closest = Infinity;
+          Array.prototype.forEach.call(cards, function (card, i) {
+            var distance = Math.abs(card.offsetLeft - track.offsetLeft - track.scrollLeft);
+            if (distance < closest) { closest = distance; index = i; }
+          });
+        }
+        setActive(index);
+      });
+    }, { passive: true });
+
+    Array.prototype.forEach.call(dots, function (dot, i) {
+      dot.addEventListener('click', function () {
+        var card = cards[i];
+        if (card) track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: 'smooth' });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "C - Customer Words",
+  "tag": "div",
+  "class": "section-c-customer-words",
+  "settings": [
+    { "type": "text", "id": "tagline", "label": "Tagline", "default": "In our customers’ words" },
+    { "type": "text", "id": "verified_label", "label": "Texto del badge", "default": "Verified buyer" },
+    { "type": "header", "content": "Colores" },
+    { "type": "color", "id": "bg_color", "label": "Fondo", "default": "#F7F7F7" },
+    { "type": "color", "id": "accent_color", "label": "Bordes, tagline y paginación", "default": "#002C41" },
+    { "type": "color", "id": "text_color", "label": "Texto", "default": "#000000" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top_desktop", "label": "Padding superior (desktop)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 44 },
+    { "type": "range", "id": "padding_bottom_desktop", "label": "Padding inferior (desktop)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 44 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding superior (mobile)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 22 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding inferior (mobile)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 22 }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Reseña",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Foto", "info": "Vacío = las 3 primeras reseñas usan las fotos del diseño." },
+        { "type": "textarea", "id": "text", "label": "Texto", "default": "I love this toothpaste." },
+        { "type": "image_picker", "id": "avatar", "label": "Foto de perfil" },
+        { "type": "text", "id": "name", "label": "Nombre", "default": "Customer" },
+        { "type": "text", "id": "time", "label": "Fecha", "default": "1 week ago" },
+        { "type": "checkbox", "id": "show_verified", "label": "Mostrar \"Verified buyer\"", "default": true }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "C - Customer Words",
+      "blocks": [
+        { "type": "review", "settings": { "text": "I love this toothpaste. My teeth are doing so much better at the gum line. I just bought an extra one for my son", "name": "Jerry", "time": "3 week ago" } },
+        { "type": "review", "settings": { "text": "Good taste. \nVery good cleaning.", "name": "Sherry", "time": "1 week ago" } },
+        { "type": "review", "settings": { "text": "3rd time I have gotten this! Love tem", "name": "Matt", "time": "1 week ago" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
