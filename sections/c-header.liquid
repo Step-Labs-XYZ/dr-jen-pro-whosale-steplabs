@@ -1,4 +1,10 @@
 {%- liquid
+  assign reorder_url = settings.reorder_page_url | default: '/pages/reorder'
+  if customer
+    assign reorder_href = reorder_url
+  else
+    assign reorder_href = routes.account_login_url | append: '?return_url=' | append: reorder_url
+  endif
   assign sticky_class = ''
   if section.settings.sticky_header
     assign sticky_class = 'c-header--sticky'
@@ -52,6 +58,14 @@
             class="c-header__nav-link"
             {{ block.shopify_attributes }}
           >{{ block.settings.label }}</a>
+        {%- elsif block.type == 'reorder_link' -%}
+          <a
+            href="{{ reorder_href }}"
+            class="c-header__nav-link c-header__nav-link--reorder"
+            style="color: {{ block.settings.color }}"
+            data-reorder-start="header"
+            {{ block.shopify_attributes }}
+          >{% render 'c-reorder-icon' %}{{ block.settings.label }}</a>
         {%- endif -%}
       {%- endfor -%}
       {%- if section.settings.cta_text != blank -%}
@@ -150,6 +164,10 @@
         {%- if block.type == 'nav_link' -%}
           <a href="{{ block.settings.url }}" class="c-header__mobile-link">
             {{ block.settings.label }}
+          </a>
+        {%- elsif block.type == 'reorder_link' -%}
+          <a href="{{ reorder_href }}" class="c-header__mobile-link c-header__nav-link--reorder" style="color: {{ block.settings.color }}" data-reorder-start="header">
+            {% render 'c-reorder-icon' %}{{ block.settings.label }}
           </a>
         {%- endif -%}
       {%- endfor -%}
@@ -261,6 +279,14 @@
 #c-header-{{ section.id }} .c-header__nav-link:hover {
   opacity: 0.7;
 }
+
+/* Reorder link: blue with the circular arrow, as in the design */
+.c-header__nav-link--reorder {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.c-header__nav-link--reorder .c-reorder-icon { flex: 0 0 auto; }
 
 /* ── CTA Button ── */
 #c-header-{{ section.id }} .c-header__cta-btn {
@@ -802,6 +828,16 @@ SEARCH DRAWER - Renderiza el componente de búsqueda predictiva del Focal theme
           "id": "url",
           "label": "URL"
         }
+      ]
+    },
+    {
+      "type": "reorder_link",
+      "name": "Reorder link",
+      "limit": 1,
+      "settings": [
+        { "type": "paragraph", "content": "Signed-in customers go to the reorder page (Theme settings > Wholesale reorder); everyone else goes to the sign-in, then back to the reorder page." },
+        { "type": "text", "id": "label", "label": "Label", "default": "Reorder" },
+        { "type": "color", "id": "color", "label": "Color", "default": "#0862df" }
       ]
     }
   ],

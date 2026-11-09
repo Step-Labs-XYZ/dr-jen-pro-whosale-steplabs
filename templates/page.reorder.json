@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "c-reorder",
+      "settings": {
+        "anchor_id": "reorder"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

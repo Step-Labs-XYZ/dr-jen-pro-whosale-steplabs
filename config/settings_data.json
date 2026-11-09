@@ -68,18 +68,7 @@
           "fc6597a1-a667-4c28-93f4-ef471aac45f8": {
             "type": "message",
             "settings": {
-              "text": "Announce something here",
-              "learn_more_text": "Learn more",
-              "title": "",
-              "content": "",
-              "button_text": "",
-              "button_link": ""
-            }
-          },
-          "8537b0e8-4fff-43f8-8e93-427727bd4f35": {
-            "type": "message",
-            "settings": {
-              "text": "Announce something here",
+              "text": "<b>Dental professionals:</b> sign in to reorder in a couple of taps, no more digging for your rep's email.",
               "learn_more_text": "",
               "title": "",
               "content": "",
@@ -101,7 +90,6 @@
         },
         "block_order": [
           "fc6597a1-a667-4c28-93f4-ef471aac45f8",
-          "8537b0e8-4fff-43f8-8e93-427727bd4f35",
           "ed243faf-9eb0-4c0c-abde-b37b8ed94a91"
         ],
         "settings": {
@@ -109,8 +97,8 @@
           "announcement_text_size": "normal",
           "autoplay": true,
           "cycle_speed": 5,
-          "background": "#002c41",
-          "text_color": "#ffffff",
+          "background": "#f8f6f6",
+          "text_color": "#002c41",
           "button_background": "#1d2433",
           "button_text_color": "#ffffff",
           "professional_text": ""
@@ -496,10 +484,18 @@
               "label": "Learn",
               "url": "shopify://blogs/learn-more"
             }
+          },
+          "reorder_link_main": {
+            "type": "reorder_link",
+            "settings": {
+              "label": "Reorder",
+              "color": "#0862df"
+            }
           }
         },
         "block_order": [
           "nav_link_4dgy9n",
+          "reorder_link_main",
           "nav_link_rnhBR4"
         ],
         "settings": {

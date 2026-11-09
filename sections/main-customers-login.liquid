@@ -8,6 +8,82 @@
   {%- endform -%}
 {%- endcapture -%}
 
+{%- comment -%}
+  Reorder sign-in (Figma node 6396-6026): when the URL carries a return_url to the
+  reorder page, the page switches to the reorder copy and look before it paints, and
+  the login form sends the customer back there. Any other sign-in is unchanged.
+{%- endcomment -%}
+<script>
+  (function () {
+    var ret = new URLSearchParams(window.location.search).get('return_url') || '';
+    if (ret.charAt(0) === '/' && ret.indexOf('reorder') !== -1) {
+      document.documentElement.classList.add('c-login-reorder');
+      window.cLoginReturnUrl = ret;
+    }
+  })();
+</script>
+<style>
+  .c-login__reorder-head,
+  .c-login__apply { display: none; }
+  .c-login-reorder #login-form-container > .page-header:not(.c-login__reorder-head),
+  .c-login-reorder .c-login__new-customer { display: none; }
+  .c-login-reorder .c-login__reorder-head { display: block; }
+  .c-login-reorder .c-login__apply { display: inline-block; }
+  .c-login-reorder .shopify-section--main-customers-login .container { max-width: 552px; }
+  .c-login-reorder .c-login__reorder-head .page-header__text-wrapper { margin: 0; text-align: left; }
+  .c-login__eyebrow { margin: 0 0 4px; color: #002c41; font: italic 400 16px/1.2 Raleway, sans-serif; }
+  .c-login-reorder .c-login__reorder-head h1 { margin: 0 0 4px; color: #002c41; font: 600 32px/1.2 Raleway, sans-serif; }
+  .c-login-reorder .c-login__reorder-head p { margin: 0; color: #000; font: 400 18px/1.2 Raleway, sans-serif; }
+  .c-login-reorder .page-content--small { max-width: 504px; margin-left: 0; }
+  /* label above a pill field, "Forgot password?" on the label row */
+  .c-login-reorder .shopify-section--main-customers-login .input { position: relative; display: flex; flex-direction: column-reverse; gap: 4px; margin-bottom: 12px; }
+  .c-login-reorder .shopify-section--main-customers-login .input__label {
+    position: static;
+    padding: 0;
+    background: none;
+    color: #000;
+    font: 400 14px/1.2 Raleway, sans-serif;
+    transform: none;
+    pointer-events: auto;
+  }
+  .c-login-reorder .shopify-section--main-customers-login .input__field {
+    height: 39px;
+    padding: 0 24px;
+    border: 1px solid #707170;
+    border-radius: 44px;
+    background: #fff;
+    font: 400 14px Raleway, sans-serif;
+  }
+  .c-login-reorder .shopify-section--main-customers-login .input__field-link {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #0862df;
+    font: 400 14px/1.2 Raleway, sans-serif;
+    transform: none;
+  }
+  .c-login-reorder .shopify-section--main-customers-login .form__submit {
+    min-height: 39px;
+    border-radius: 44px;
+    background: #0862df;
+    color: #f7f7f7;
+    font: 700 14px/1.2 Raleway, sans-serif;
+    text-transform: uppercase;
+    box-shadow: 0 2px 6px rgba(0, 44, 65, .12);
+  }
+  .c-login-reorder .c-login__apply {
+    margin-top: 12px;
+    color: #0862df;
+    font: 700 12px/1.2 Raleway, sans-serif;
+    text-decoration: underline;
+    text-transform: uppercase;
+  }
+  @media (min-width: 990px) {
+    .c-login-reorder .c-login__reorder-head h1 { font-size: 40px; }
+    .c-login-reorder .c-login__reorder-head p { font-size: 20px; }
+  }
+</style>
+
 <section>
   <div class="container">
     {%- comment -%}
@@ -17,6 +93,13 @@
     {%- endcomment -%}
 
     <div id="login-form-container">
+      <div class="page-header c-login__reorder-head">
+        <div class="page-header__text-wrapper text-container">
+          {%- if section.settings.reorder_eyebrow != blank -%}<p class="c-login__eyebrow">{{ section.settings.reorder_eyebrow }}</p>{%- endif -%}
+          <h1>{{ section.settings.reorder_title }}</h1>
+          <p>{{ section.settings.reorder_text }}</p>
+        </div>
+      </div>
       <div class="page-header">
         <div class="page-header__text-wrapper text-container">
           <h1 class="heading h2">{{ 'customer.login.title' | t }}</h1>
@@ -56,9 +139,22 @@
                       <button type="button" class="input__field-link link text--xsmall text--subdued" data-action="switch-login-form">{{ 'customer.login.forgot_password' | t }}</button>
                     </div>
 
+                    <input type="hidden" name="return_url" value="" data-c-login-return>
+                    <script>
+                      (function () {
+                        var input = document.currentScript.previousElementSibling;
+                        if (window.cLoginReturnUrl) input.value = window.cLoginReturnUrl;
+                        else input.remove();
+                      })();
+                    </script>
+
                     <button type="submit" class="form__submit button button--primary button--full">{{ 'customer.login.submit' | t }}</button>
 
-                    <span class="form__secondary-action text--subdued">
+                    {%- if section.settings.apply_label != blank -%}
+                      <a class="c-login__apply" href="{{ section.settings.apply_url | default: '/pages/wholesale-registration' }}">{{ section.settings.apply_label }}</a>
+                    {%- endif -%}
+
+                    <span class="form__secondary-action text--subdued c-login__new-customer">
                       {{- 'customer.login.new_customer' | t -}}
                       <a href="{{ routes.account_register_url }}" class="link">{{ 'customer.login.create_account' | t }}</a>
                     </span>
@@ -187,6 +283,17 @@
 {
   "name": "Customer login",
   "class": "shopify-section--main-customers-login",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Reorder sign-in: used when the URL has a return_url to the reorder page (Reorder links, C Reorder section)."
+    },
+    { "type": "text", "id": "reorder_eyebrow", "label": "Reorder eyebrow", "default": "Dr. Jen · Dental professionals" },
+    { "type": "text", "id": "reorder_title", "label": "Reorder title", "default": "Sign in to reorder" },
+    { "type": "text", "id": "reorder_text", "label": "Reorder text", "default": "Access your practice's previous orders." },
+    { "type": "text", "id": "apply_label", "label": "Apply link label", "default": "New practice? Apply for wholesale access" },
+    { "type": "url", "id": "apply_url", "label": "Apply link" }
+  ],
   "blocks": [
     {
       "type": "@app"

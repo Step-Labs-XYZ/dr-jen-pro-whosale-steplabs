@@ -1,0 +1,537 @@
+{%- comment -%}
+  Section: C Reorder
+  Wholesale reorder module (homepage + /pages/reorder). One section, four states:
+    guest   - not signed in: "Reorder for my practice" goes to the reorder login with
+              return_url = the reorder page.
+    pending - signed in without the wholesale tag: approval message, never prices.
+    empty   - approved, no orders yet.
+    reorder - approved: the last order prefilled with editable pack steppers, live totals,
+              then a review step (price changes, unavailable items, address) and checkout.
+  Prices and stock always come from the current Shopify variant, never from the old order.
+  Reorders are always one-time: no selling plan is ever sent.
+  Checkout goes through /cart so the WPD wholesale app keeps handling it.
+  Approval = customer tag from the theme setting (default "wholesale-customer"); this
+  section only reads it, it never changes pricing, tags or approval.
+  sl-id: sl-section-reorder-v1
+  Figma: https://www.figma.com/design/KKzN3aGPr2Uzohtt77IFDj/Dr.-Jen?node-id=6380-17321
+{%- endcomment -%}
+
+{%- liquid
+  assign s = section.settings
+  assign sid = section.id
+  assign pro_tag = settings.reorder_pro_tag | default: 'wholesale-customer' | strip
+  assign reorder_url = settings.reorder_page_url | default: '/pages/reorder'
+  assign login_url = routes.account_login_url | append: '?return_url=' | append: reorder_url
+
+  assign state = 'guest'
+  if customer
+    if customer.tags contains pro_tag
+      assign last_order = customer.orders.first
+      if last_order
+        assign state = 'reorder'
+      else
+        assign state = 'empty'
+      endif
+    else
+      assign state = 'pending'
+    endif
+  endif
+-%}
+
+{% style %}
+  #c-reorder-{{ sid }} {
+    --ro-dark: #002c41;
+    --ro-blue: #0862df;
+    --ro-green: #d6ece6;
+    --ro-grey: #f7f7f7;
+    --ro-dark-grey: #707170;
+    --ro-line: #d8d8d8;
+    --ro-red: #b3261e;
+    padding: {{ s.pad_top_m }}px 16px {{ s.pad_bottom_m }}px;
+    background: {{ s.bg_color }};
+    color: #000;
+    font-family: Raleway, sans-serif;
+  }
+  #c-reorder-{{ sid }} * { box-sizing: border-box; }
+  #c-reorder-{{ sid }} .c-reorder__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  #c-reorder-{{ sid }} .c-reorder__head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+  }
+  #c-reorder-{{ sid }} .c-reorder__eyebrow { margin: 0; color: var(--ro-dark); font-size: 16px; font-style: italic; line-height: 1.2; }
+  #c-reorder-{{ sid }} .c-reorder__title {
+    margin: 0;
+    color: var(--ro-dark);
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  #c-reorder-{{ sid }} .c-reorder__title span { display: block; color: var(--ro-blue); }
+  #c-reorder-{{ sid }} .c-reorder__text { margin: 0; font-size: 18px; line-height: 1.2; }
+  #c-reorder-{{ sid }} .c-reorder__note { margin: 0; font-size: 14px; line-height: 1.2; text-align: center; }
+
+  /* Buttons */
+  #c-reorder-{{ sid }} .c-reorder__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 39px;
+    padding: 8px 24px;
+    border: 1px solid var(--ro-dark);
+    border-radius: 44px;
+    background: #fff;
+    color: var(--ro-dark);
+    font: 700 14px/1.2 Raleway, sans-serif;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow: 0 2px 12px rgba(0, 44, 65, .12);
+    cursor: pointer;
+  }
+  #c-reorder-{{ sid }} .c-reorder__btn--primary {
+    width: 100%;
+    border-color: var(--ro-blue);
+    background: var(--ro-blue);
+    color: var(--ro-grey);
+    box-shadow: 0 2px 6px rgba(0, 44, 65, .12);
+  }
+  #c-reorder-{{ sid }} .c-reorder__btn[disabled] { opacity: .5; cursor: not-allowed; }
+  #c-reorder-{{ sid }} .c-reorder__btn:focus-visible,
+  #c-reorder-{{ sid }} .c-reorder__qty button:focus-visible { outline: 2px solid var(--ro-dark); outline-offset: 2px; }
+  #c-reorder-{{ sid }} .c-reorder__cta { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 100%; max-width: 504px; }
+  #c-reorder-{{ sid }} .c-reorder__secondary { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+  #c-reorder-{{ sid }} .c-reorder__apply {
+    color: var(--ro-blue);
+    font: 700 12px/1.2 Raleway, sans-serif;
+    text-transform: uppercase;
+    text-decoration: underline;
+  }
+
+  /* Card */
+  #c-reorder-{{ sid }} .c-reorder__card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    padding: 24px;
+    border-radius: 12px;
+    background: var(--ro-grey);
+  }
+  #c-reorder-{{ sid }} .c-reorder__card-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+  #c-reorder-{{ sid }} .c-reorder__card-title { margin: 0; font-size: 20px; font-weight: 400; line-height: 1.2; }
+  #c-reorder-{{ sid }} .c-reorder__pill {
+    padding: 4px 12px;
+    border-radius: 99px;
+    background: var(--ro-green);
+    font-size: 14px;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  #c-reorder-{{ sid }} .c-reorder__meta { margin: 0; color: var(--ro-dark-grey); font-size: 12px; line-height: 1.2; }
+  #c-reorder-{{ sid }} .c-reorder__lines { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  #c-reorder-{{ sid }} .c-reorder__line {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--ro-dark-grey);
+    border-radius: 12px;
+    background: #fff;
+  }
+  #c-reorder-{{ sid }} .c-reorder__line-name {
+    margin: 0;
+    padding: 8px 12px;
+    background: var(--ro-green);
+    color: var(--ro-dark);
+    font-size: 16px;
+    line-height: 1.2;
+  }
+  #c-reorder-{{ sid }} .c-reorder__line-name strong { font-weight: 700; }
+  #c-reorder-{{ sid }} .c-reorder__line-body { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px; }
+  #c-reorder-{{ sid }} .c-reorder__line-info { margin: 0; font-size: 14px; line-height: 1.2; }
+  #c-reorder-{{ sid }} .c-reorder__line-alert { margin: 0; padding: 0 12px 12px; color: var(--ro-red); font-size: 12px; line-height: 1.3; }
+  #c-reorder-{{ sid }} .c-reorder__line.is-unavailable { opacity: .75; }
+  #c-reorder-{{ sid }} .c-reorder__line.is-unavailable .c-reorder__qty { display: none; }
+
+  /* Pack stepper */
+  #c-reorder-{{ sid }} .c-reorder__qty {
+    display: flex;
+    flex: 0 0 auto;
+    overflow: hidden;
+    border: 1px solid var(--ro-line);
+    border-radius: 4px;
+  }
+  #c-reorder-{{ sid }} .c-reorder__qty button,
+  #c-reorder-{{ sid }} .c-reorder__qty input {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 0;
+    background: #fff;
+    color: #000;
+    font: 400 14px Raleway, sans-serif;
+    text-align: center;
+  }
+  #c-reorder-{{ sid }} .c-reorder__qty button { cursor: pointer; font-size: 18px; line-height: 1; }
+  #c-reorder-{{ sid }} .c-reorder__qty button:first-child { border-right: 1px solid var(--ro-line); }
+  #c-reorder-{{ sid }} .c-reorder__qty button:last-child { border-left: 1px solid var(--ro-line); }
+  #c-reorder-{{ sid }} .c-reorder__qty input { -moz-appearance: textfield; }
+  #c-reorder-{{ sid }} .c-reorder__qty input::-webkit-outer-spin-button,
+  #c-reorder-{{ sid }} .c-reorder__qty input::-webkit-inner-spin-button { margin: 0; -webkit-appearance: none; }
+
+  #c-reorder-{{ sid }} .c-reorder__total {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 0;
+    border-top: 1px dashed rgba(0, 44, 65, .44);
+    font-size: 14px;
+    line-height: 1.2;
+  }
+  #c-reorder-{{ sid }} .c-reorder__total strong { font-weight: 700; }
+  #c-reorder-{{ sid }} .c-reorder__device { margin: 0; font-size: 12px; line-height: 1.2; text-align: center; }
+  #c-reorder-{{ sid }} .c-reorder__device a { color: inherit; }
+
+  /* Review step */
+  #c-reorder-{{ sid }} .c-reorder__review { display: flex; flex-direction: column; gap: 12px; }
+  #c-reorder-{{ sid }} .c-reorder__review[hidden],
+  #c-reorder-{{ sid }} [data-reorder-step][hidden] { display: none; }
+  #c-reorder-{{ sid }} .c-reorder__rows { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  #c-reorder-{{ sid }} .c-reorder__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 12px;
+    background: #fff;
+    font-size: 14px;
+    line-height: 1.3;
+  }
+  #c-reorder-{{ sid }} .c-reorder__row small { display: block; color: var(--ro-dark-grey); font-size: 12px; }
+  #c-reorder-{{ sid }} .c-reorder__row s { color: var(--ro-dark-grey); }
+  #c-reorder-{{ sid }} .c-reorder__box {
+    padding: 12px;
+    border-radius: 12px;
+    background: #fff;
+    font-size: 14px;
+    line-height: 1.3;
+  }
+  #c-reorder-{{ sid }} .c-reorder__box--warn { border: 1px solid #f0b429; background: #fff8e6; }
+  #c-reorder-{{ sid }} .c-reorder__box h3 { margin: 0 0 6px; font-size: 14px; font-weight: 700; }
+  #c-reorder-{{ sid }} .c-reorder__box p { margin: 0 0 6px; }
+  #c-reorder-{{ sid }} .c-reorder__box p:last-child { margin: 0; }
+  #c-reorder-{{ sid }} .c-reorder__box a,
+  #c-reorder-{{ sid }} .c-reorder__link { color: var(--ro-blue); }
+  #c-reorder-{{ sid }} .c-reorder__link { padding: 0; border: 0; background: none; font: inherit; text-decoration: underline; cursor: pointer; }
+  #c-reorder-{{ sid }} .c-reorder__confirm { display: flex; align-items: flex-start; gap: 8px; margin-top: 6px; }
+  #c-reorder-{{ sid }} .c-reorder__error { margin: 0; color: var(--ro-red); font-size: 14px; }
+  #c-reorder-{{ sid }} .c-reorder__error:empty { display: none; }
+
+  @media (min-width: 990px) {
+    #c-reorder-{{ sid }} { padding: {{ s.pad_top_d }}px 24px {{ s.pad_bottom_d }}px; }
+    #c-reorder-{{ sid }} .c-reorder__title { font-size: 48px; }
+    #c-reorder-{{ sid }} .c-reorder__text { font-size: 20px; }
+    #c-reorder-{{ sid }} .c-reorder__card-title { font-size: 24px; }
+    #c-reorder-{{ sid }} .c-reorder__lines { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #c-reorder-{{ sid }} .c-reorder__btn--primary { min-height: 33px; }
+  }
+{% endstyle %}
+
+<section
+  id="c-reorder-{{ sid }}"
+  class="c-reorder"
+  data-sl-id="sl-section-reorder-v1"
+  data-section-id="{{ sid }}"
+  data-reorder
+  data-state="{{ state }}"
+>
+  {%- if s.anchor_id != blank -%}<span id="{{ s.anchor_id | escape }}"></span>{%- endif -%}
+  <div class="c-reorder__inner">
+    <div class="c-reorder__head">
+      {%- if s.eyebrow != blank -%}<p class="c-reorder__eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
+      <h2 class="c-reorder__title">{{ s.title }}<span>{{ s.title_accent }}</span></h2>
+      <p class="c-reorder__text">
+        {%- case state -%}
+          {%- when 'reorder' -%}{{ s.text_reorder }}
+          {%- when 'empty' -%}{{ s.text_empty }}
+          {%- when 'pending' -%}{{ s.text_pending }}
+          {%- else -%}{{ s.text_guest }}
+        {%- endcase -%}
+      </p>
+    </div>
+
+    {%- case state -%}
+      {%- when 'guest' -%}
+        <div class="c-reorder__cta">
+          <a class="c-reorder__btn c-reorder__btn--primary" href="{{ login_url }}" data-reorder-start="module">{{ s.guest_button }}</a>
+          {%- if s.guest_note != blank -%}<p class="c-reorder__note">{{ s.guest_note }}</p>{%- endif -%}
+        </div>
+
+      {%- when 'pending' -%}
+        <div class="c-reorder__card">
+          <h3 class="c-reorder__card-title">{{ s.pending_title }}</h3>
+          <div class="c-reorder__note" style="text-align:left">{{ s.pending_body }}</div>
+          <p class="c-reorder__device">{{ s.signed_in_as | replace: '[email]', customer.email }} <a href="{{ routes.account_logout_url }}">{{ s.sign_out_label }}</a></p>
+        </div>
+
+      {%- when 'empty' -%}
+        <div class="c-reorder__card">
+          <h3 class="c-reorder__card-title">{{ s.empty_title }}</h3>
+          <div class="c-reorder__note" style="text-align:left">{{ s.empty_body }}</div>
+          <a class="c-reorder__btn c-reorder__btn--primary" href="{{ s.empty_button_url | default: '/collections/wholesale' }}">{{ s.empty_button }}</a>
+        </div>
+
+      {%- when 'reorder' -%}
+        {%- liquid
+          assign order_date = last_order.created_at | date: '%b %-d'
+          assign ship = last_order.shipping_address | default: customer.default_address
+          assign practice = ship.company | default: customer.default_address.company
+        -%}
+        <div class="c-reorder__card" data-reorder-card>
+          {%- comment -%} Step 1: the last order, editable {%- endcomment -%}
+          <div data-reorder-step="edit">
+            <div class="c-reorder__card-head">
+              <h3 class="c-reorder__card-title">{{ s.reorder_title }}</h3>
+              <span class="c-reorder__pill">{{ s.last_order_label }} · {{ order_date }}</span>
+            </div>
+            <p class="c-reorder__meta">
+              {{ s.order_label }} {{ last_order.name }}
+              {%- if practice != blank %} · {{ practice }}{% endif -%}
+              {%- if ship.city != blank %} · {{ ship.city }}{% if ship.province_code != blank %}, {{ ship.province_code }}{% endif %}{% endif -%}
+            </p>
+
+            <div class="c-reorder__lines" data-reorder-lines>
+              {%- for item in last_order.line_items -%}
+                {%- liquid
+                  if item.original_price == 0
+                    continue
+                  endif
+                  assign v = item.variant
+                  assign units = ''
+                  assign flavor = ''
+                  if v
+                    for value in v.options
+                      if value contains 'pack' or value contains 'Case'
+                        assign units = value | split: '(' | last | remove: ')' | remove: 'pack' | strip
+                      else
+                        unless value == 'Default Title'
+                          assign flavor = value
+                        endunless
+                      endif
+                    endfor
+                  endif
+                  assign name = item.product.metafields.custom.short_title.value | default: item.product.title | default: item.title
+                  assign current_price = v.price | default: 0
+                  assign available = false
+                  if v and v.available and item.product.available
+                    assign available = true
+                  endif
+                -%}
+                <div
+                  class="c-reorder__line{% unless available %} is-unavailable{% endunless %}"
+                  data-reorder-line
+                  data-variant="{{ v.id }}"
+                  data-name="{{ name | escape }}"
+                  data-flavor="{{ flavor | escape }}"
+                  data-units="{{ units }}"
+                  data-price="{{ current_price }}"
+                  data-old-price="{{ item.original_price }}"
+                  data-available="{{ available }}"
+                  data-url="{{ item.product.url | default: item.url }}"
+                  data-was-sub="{% if item.selling_plan_allocation %}true{% else %}false{% endif %}"
+                >
+                  <p class="c-reorder__line-name"><strong>{{ name }}</strong>{% if flavor != blank %} · {{ flavor }}{% endif %}</p>
+                  <div class="c-reorder__line-body">
+                    <p class="c-reorder__line-info">
+                      <span data-reorder-packs>{{ item.quantity }}</span>x {% if units != blank %}{{ units }} {{ s.units_per_pack }}{% else %}{{ v.title | default: item.variant_title }}{% endif %}
+                      · {{ s.one_time_label }}
+                    </p>
+                    <div class="c-reorder__qty">
+                      <button type="button" data-reorder-minus aria-label="{{ s.decrease_label | escape }} {{ name | escape }}">−</button>
+                      <input type="number" min="0" max="999" inputmode="numeric" value="{{ item.quantity }}" data-reorder-input aria-label="{{ s.packs_label | escape }} {{ name | escape }}">
+                      <button type="button" data-reorder-plus aria-label="{{ s.increase_label | escape }} {{ name | escape }}">+</button>
+                    </div>
+                  </div>
+                  {%- unless available -%}
+                    <p class="c-reorder__line-alert">{{ s.unavailable_text }}</p>
+                  {%- endunless -%}
+                </div>
+              {%- endfor -%}
+            </div>
+
+            <div class="c-reorder__total">
+              <strong>{{ s.subtotal_label }}</strong>
+              <span data-reorder-subtotal></span>
+            </div>
+            <button type="button" class="c-reorder__btn c-reorder__btn--primary" data-reorder-review>
+              {{ s.buy_again_label }} · <span data-reorder-subtotal></span>
+            </button>
+            <p class="c-reorder__device">{{ s.signed_in_as | replace: '[email]', customer.email }} <a href="{{ routes.account_logout_url }}">{{ s.sign_out_label }}</a></p>
+          </div>
+
+          {%- comment -%} Step 2: review {%- endcomment -%}
+          <div class="c-reorder__review" data-reorder-step="review" hidden>
+            <div class="c-reorder__card-head">
+              <h3 class="c-reorder__card-title">{{ s.review_title }}</h3>
+              <button type="button" class="c-reorder__link" data-reorder-back>{{ s.edit_label }}</button>
+            </div>
+            <ul class="c-reorder__rows" data-reorder-rows></ul>
+            <div class="c-reorder__box c-reorder__box--warn" data-reorder-prices hidden>
+              <h3>{{ s.price_change_title }}</h3>
+              <p>{{ s.price_change_text }}</p>
+              <label class="c-reorder__confirm">
+                <input type="checkbox" data-reorder-price-ok>
+                <span>{{ s.price_change_confirm }}</span>
+              </label>
+            </div>
+            <div class="c-reorder__box c-reorder__box--warn" data-reorder-missing hidden>
+              <h3>{{ s.unavailable_title }}</h3>
+              <div data-reorder-missing-list></div>
+            </div>
+            <div class="c-reorder__box">
+              <h3>{{ s.purchase_type_title }}</h3>
+              <p>{{ s.purchase_type_text }}</p>
+            </div>
+            <div class="c-reorder__box">
+              <h3>{{ s.ship_to_title }}</h3>
+              {%- assign address = customer.default_address -%}
+              {%- if address -%}
+                <p>
+                  {%- if address.company != blank -%}{{ address.company }}<br>{%- endif -%}
+                  {{ address.address1 }}{% if address.address2 != blank %}, {{ address.address2 }}{% endif %}<br>
+                  {{ address.city }}{% if address.province_code != blank %}, {{ address.province_code }}{% endif %} {{ address.zip }}
+                </p>
+              {%- else -%}
+                <p>{{ s.no_address_text }}</p>
+              {%- endif -%}
+              <p><a href="{{ routes.account_addresses_url }}" data-reorder-keep>{{ s.change_address_label }}</a></p>
+            </div>
+            <p class="c-reorder__note" data-reorder-cart-note hidden></p>
+            <div class="c-reorder__total">
+              <strong>{{ s.subtotal_label }}</strong>
+              <span data-reorder-subtotal></span>
+            </div>
+            <p class="c-reorder__error" data-reorder-error role="alert"></p>
+            <button type="button" class="c-reorder__btn c-reorder__btn--primary" data-reorder-checkout>{{ s.checkout_label }}</button>
+          </div>
+        </div>
+
+        <script type="application/json" data-reorder-config>
+          {
+            "orderId": {{ last_order.id | json }},
+            "currency": {{ cart.currency.iso_code | json }},
+            "unitsLabel": {{ s.units_per_pack | json }},
+            "oneTime": {{ s.one_time_label | json }},
+            "removed": {{ s.removed_label | json }},
+            "viewAlternatives": {{ s.view_alternatives_label | json }},
+            "alternativesUrl": {{ s.alternatives_url | default: '/collections/wholesale' | json }},
+            "wasNow": {{ s.was_now_label | json }},
+            "cartNote": {{ s.cart_note | json }},
+            "error": {{ s.error_text | json }},
+            "emptyError": {{ s.empty_error_text | json }}
+          }
+        </script>
+    {%- endcase -%}
+
+    {%- if s.show_secondary -%}
+      <div class="c-reorder__secondary">
+        {%- if s.myself_label != blank -%}<a class="c-reorder__btn" href="{{ s.myself_url | default: 'https://drjennatural.com' }}">{{ s.myself_label }}</a>{%- endif -%}
+        {%- if s.samples_label != blank and s.samples_url != blank -%}<a class="c-reorder__btn" href="{{ s.samples_url }}">{{ s.samples_label }}</a>{%- endif -%}
+      </div>
+    {%- endif -%}
+    {%- if state == 'guest' and s.apply_label != blank -%}
+      <a class="c-reorder__apply" href="{{ s.apply_url | default: '/pages/wholesale-registration' }}">{{ s.apply_label }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+<script src="{{ 'c-reorder.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "C Reorder",
+  "tag": "div",
+  "class": "c-reorder-wrapper",
+  "settings": [
+    { "type": "paragraph", "content": "Shows the guest, pending, empty or reorder state depending on who is signed in. Prices and stock come from Shopify at page load." },
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "default": "reorder" },
+    { "type": "header", "content": "Heading" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Dr. Jen · Dental professionals" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Welcome Back." },
+    { "type": "text", "id": "title_accent", "label": "Title, second line (blue)", "default": "Restock Your Practice." },
+    { "type": "text", "id": "text_guest", "label": "Text, signed out", "default": "Sign in to see your previous orders, or get started as a new practice." },
+    { "type": "text", "id": "text_reorder", "label": "Text, approved with orders", "default": "Same as last time? One tap and it’s on its way" },
+    { "type": "text", "id": "text_empty", "label": "Text, approved without orders", "default": "Your account is ready. Place your first order." },
+    { "type": "text", "id": "text_pending", "label": "Text, pending approval", "default": "Thanks for signing up. Your practice is being reviewed." },
+    { "type": "header", "content": "Signed out" },
+    { "type": "text", "id": "guest_button", "label": "Button", "default": "Reorder for my practice" },
+    { "type": "text", "id": "guest_note", "label": "Note under the button", "default": "Sign in to see your previous orders." },
+    { "type": "text", "id": "apply_label", "label": "Apply link label", "default": "New practice? Apply for wholesale access" },
+    { "type": "url", "id": "apply_url", "label": "Apply link" },
+    { "type": "header", "content": "Pending approval" },
+    { "type": "text", "id": "pending_title", "label": "Title", "default": "Your wholesale access is pending" },
+    { "type": "richtext", "id": "pending_body", "label": "Text", "default": "<p>Our team approves new practices within 1 business day. Wholesale prices and reordering unlock as soon as your account is approved. Questions? Email <a href=\"mailto:DentalPro@DrJenOralCare.com\">DentalPro@DrJenOralCare.com</a> or call (651) 202-1270.</p>" },
+    { "type": "header", "content": "Approved, no orders yet" },
+    { "type": "text", "id": "empty_title", "label": "Title", "default": "No orders yet" },
+    { "type": "richtext", "id": "empty_body", "label": "Text", "default": "<p>Once you place your first order, it shows up here so you can reorder it in one tap.</p>" },
+    { "type": "text", "id": "empty_button", "label": "Button", "default": "Shop wholesale" },
+    { "type": "url", "id": "empty_button_url", "label": "Button link" },
+    { "type": "header", "content": "Reorder card" },
+    { "type": "text", "id": "reorder_title", "label": "Title", "default": "Reorder in one tap" },
+    { "type": "text", "id": "last_order_label", "label": "Last order pill", "default": "Your last order" },
+    { "type": "text", "id": "order_label", "label": "Order label", "default": "Order" },
+    { "type": "text", "id": "units_per_pack", "label": "Units per pack", "default": "units per pack" },
+    { "type": "text", "id": "one_time_label", "label": "One-time label", "default": "One-time" },
+    { "type": "text", "id": "subtotal_label", "label": "Subtotal label", "default": "Item subtotal" },
+    { "type": "text", "id": "buy_again_label", "label": "Buy again button", "default": "Buy it again" },
+    { "type": "text", "id": "signed_in_as", "label": "Signed-in line", "info": "[email] = the customer's email.", "default": "Signed in as [email]. Not you?" },
+    { "type": "text", "id": "sign_out_label", "label": "Sign out link", "default": "Sign out" },
+    { "type": "text", "id": "unavailable_text", "label": "Unavailable item", "default": "Not available right now. It won't be added to this reorder." },
+    { "type": "text", "id": "packs_label", "label": "Packs (screen readers)", "default": "Packs of" },
+    { "type": "text", "id": "decrease_label", "label": "Decrease (screen readers)", "default": "Remove one pack of" },
+    { "type": "text", "id": "increase_label", "label": "Increase (screen readers)", "default": "Add one pack of" },
+    { "type": "header", "content": "Review step" },
+    { "type": "text", "id": "review_title", "label": "Title", "default": "Review your reorder" },
+    { "type": "text", "id": "edit_label", "label": "Edit link", "default": "Edit" },
+    { "type": "text", "id": "price_change_title", "label": "Price change title", "default": "Some prices changed since your last order" },
+    { "type": "text", "id": "price_change_text", "label": "Price change text", "default": "You'll pay today's price, shown next to the previous one." },
+    { "type": "text", "id": "price_change_confirm", "label": "Price change checkbox", "default": "I've checked the new prices" },
+    { "type": "text", "id": "was_now_label", "label": "Previous price label", "default": "was" },
+    { "type": "text", "id": "unavailable_title", "label": "Unavailable title", "default": "Not included in this reorder" },
+    { "type": "text", "id": "removed_label", "label": "Unavailable line", "default": "is out of stock and was left out." },
+    { "type": "text", "id": "view_alternatives_label", "label": "Alternatives link", "default": "See alternatives" },
+    { "type": "url", "id": "alternatives_url", "label": "Alternatives link" },
+    { "type": "text", "id": "purchase_type_title", "label": "Purchase type title", "default": "Purchase type" },
+    { "type": "text", "id": "purchase_type_text", "label": "Purchase type text", "default": "One-time order. No subscription is created." },
+    { "type": "text", "id": "ship_to_title", "label": "Ship to title", "default": "Ship to" },
+    { "type": "text", "id": "no_address_text", "label": "No saved address", "default": "Add your practice address at checkout." },
+    { "type": "text", "id": "change_address_label", "label": "Change address link", "default": "Change" },
+    { "type": "text", "id": "cart_note", "label": "Items already in cart", "info": "[count] = items already in the cart.", "default": "Your cart already has [count] other item(s). They'll be included at checkout." },
+    { "type": "text", "id": "checkout_label", "label": "Checkout button", "default": "Continue to checkout" },
+    { "type": "text", "id": "error_text", "label": "Error message", "default": "We couldn't add these items. Please try again or contact your rep." },
+    { "type": "text", "id": "empty_error_text", "label": "Nothing to reorder", "default": "Add at least one pack to continue." },
+    { "type": "header", "content": "Secondary buttons" },
+    { "type": "checkbox", "id": "show_secondary", "label": "Show", "default": true },
+    { "type": "text", "id": "myself_label", "label": "Buy for myself label", "default": "Buy for myself" },
+    { "type": "url", "id": "myself_url", "label": "Buy for myself link", "info": "The consumer store." },
+    { "type": "text", "id": "samples_label", "label": "Request samples label", "default": "Request samples" },
+    { "type": "url", "id": "samples_url", "label": "Request samples link", "info": "The button only shows once this is set." },
+    { "type": "header", "content": "Layout" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#ffffff" },
+    { "type": "range", "id": "pad_top_m", "label": "Top padding (mobile)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "pad_bottom_m", "label": "Bottom padding (mobile)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "pad_top_d", "label": "Top padding (desktop)", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "pad_bottom_d", "label": "Bottom padding (desktop)", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "presets": [{ "name": "C Reorder" }]
+}
+{% endschema %}

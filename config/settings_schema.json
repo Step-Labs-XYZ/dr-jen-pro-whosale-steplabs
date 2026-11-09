@@ -698,5 +698,28 @@
         "info": "96 x 96px .png recommended"
       }
     ]
+  },
+  {
+    "name": "Wholesale reorder",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Reorder flow for approved practices: header Reorder link, reorder module (C Reorder section) and the reorder sign-in. Read-only: it never changes pricing, tags or approval."
+      },
+      {
+        "type": "text",
+        "id": "reorder_page_url",
+        "label": "Reorder page",
+        "info": "Where Reorder links and the reorder sign-in send approved practices. A page using the page.reorder template.",
+        "default": "/pages/reorder"
+      },
+      {
+        "type": "text",
+        "id": "reorder_pro_tag",
+        "label": "Approved practice tag",
+        "info": "Customers with this tag see the reorder card; signed-in customers without it see the pending state.",
+        "default": "wholesale-customer"
+      }
+    ]
   }
 ]
