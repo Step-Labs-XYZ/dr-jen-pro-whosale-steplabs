@@ -9,12 +9,6 @@
  */
 {
   "sections": {
-    "c_reorder_home": {
-      "type": "c-reorder",
-      "settings": {
-        "anchor_id": "reorder"
-      }
-    },
     "c_hero_section_v2_pQytR8": {
       "type": "c-hero-section-v2",
       "blocks": {
@@ -1744,7 +1738,6 @@
     }
   },
   "order": [
-    "c_reorder_home",
     "c_hero_section_v2_pQytR8",
     "c_badges_bar_fBPXjp",
     "c_products_tab_a6KGHU",
