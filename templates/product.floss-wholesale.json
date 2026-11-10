@@ -26,18 +26,15 @@
             "selector_mode": "block",
             "color_mode": "dropdown",
             "size_chart_page": ""
-          },
-          "disabled": true
+          }
         },
         "quantity_selector": {
           "type": "quantity_selector",
-          "settings": {},
-          "disabled": true
+          "settings": {}
         },
         "recharge_subscriptions_subscription_widget_v2_cAQFwP": {
           "type": "shopify://apps/recharge-subscriptions/blocks/subscription-widget-v2/371eed76-0b44-4869-9813-730372ea378e",
-          "settings": {},
-          "disabled": true
+          "settings": {}
         },
         "buy_buttons": {
           "type": "buy_buttons",
@@ -47,23 +44,17 @@
             "atc_button_text_color": "rgba(0,0,0,0)",
             "buy_now_button_background": "rgba(0,0,0,0)",
             "buy_now_button_text_color": "rgba(0,0,0,0)"
-          },
-          "disabled": true
+          }
         },
         "bdca51c9-fba6-4839-9aa1-4202fd3afff8": {
           "type": "text",
           "settings": {
             "text": "<p>Click <a href=\"/pages/science\" title=\"Science Behind Dr. Jen's Toothpaste\">here</a> to learn more about Nano-Hydroxyapatite.</p>"
           }
-        },
-        "wholesale_buy_box": {
-          "type": "wholesale_buy_box",
-          "settings": {}
         }
       },
       "block_order": [
         "text_7rPXJe",
-        "wholesale_buy_box",
         "variant_picker",
         "quantity_selector",
         "recharge_subscriptions_subscription_widget_v2_cAQFwP",
