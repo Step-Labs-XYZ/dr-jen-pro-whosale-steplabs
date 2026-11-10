@@ -148,6 +148,10 @@
             "show_add_to_cart": true,
             "show_dynamic_checkout": true
           }
+        },
+        "wholesale_packs": {
+          "type": "wholesale_packs",
+          "settings": {}
         }
       },
       "block_order": [
@@ -158,6 +162,7 @@
         "recharge_subscriptions_subscription_widget_v2_9hkAJG",
         "custom_liquid_RnzabW",
         "terms_text_aHf4k3",
+        "wholesale_packs",
         "buy_buttons_UaBk3f"
       ],
       "custom_css": [

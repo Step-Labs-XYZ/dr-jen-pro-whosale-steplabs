@@ -1,0 +1,67 @@
+{%- comment -%}
+  Wholesale PDP "Number of packs" (c-product-page block wholesale_packs).
+  Lives inside the product form: its input name="quantity" is what the form adds.
+  assets/c-wholesale-packs.js keeps "N × 12 = 24 units" and the add-to-cart text
+  ("ADD 2 PACKS · $720.00") in sync with the selected variant and purchase option,
+  and selects one-time in the Recharge widget on load (it defaults to subscribe).
+  Units per pack come from the variant option ("Half Case (12 pack)"), prices from
+  the variant and its selling plan allocations.
+
+  @param {object} product
+  @param {object} block
+  @param {string} section_id
+{%- endcomment -%}
+{%- liquid
+  assign bs = block.settings
+  assign bid = block.id
+-%}
+<div class="c-wspacks" id="c-wspacks-{{ bid }}" data-wspacks data-section="{{ section_id }}" data-default-once="{{ bs.default_one_time }}" {{ block.shopify_attributes }}>
+  <style>
+    #c-wspacks-{{ bid }} { margin: 16px 0; font-family: Raleway, sans-serif; }
+    #c-wspacks-{{ bid }} .c-wspacks__label { margin: 0 0 8px; color: #002c41; font-size: 14px; font-weight: 700; }
+    #c-wspacks-{{ bid }} .c-wspacks__row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+    #c-wspacks-{{ bid }} .c-wspacks__qty { display: flex; overflow: hidden; border: 1px solid #d8d8d8; border-radius: 4px; background: #fff; }
+    #c-wspacks-{{ bid }} .c-wspacks__qty button,
+    #c-wspacks-{{ bid }} .c-wspacks__qty input {
+      width: 40px; height: 40px; padding: 0; border: 0; background: #fff; color: #000;
+      font: 400 16px Raleway, sans-serif; text-align: center;
+    }
+    #c-wspacks-{{ bid }} .c-wspacks__qty button { cursor: pointer; font-size: 18px; }
+    #c-wspacks-{{ bid }} .c-wspacks__qty button:first-child { border-right: 1px solid #d8d8d8; }
+    #c-wspacks-{{ bid }} .c-wspacks__qty button:last-child { border-left: 1px solid #d8d8d8; }
+    #c-wspacks-{{ bid }} .c-wspacks__qty input { -moz-appearance: textfield; }
+    #c-wspacks-{{ bid }} .c-wspacks__qty input::-webkit-inner-spin-button { -webkit-appearance: none; }
+    #c-wspacks-{{ bid }} .c-wspacks__qty button:focus-visible,
+    #c-wspacks-{{ bid }} .c-wspacks__qty input:focus-visible { outline: 2px solid #002c41; outline-offset: -2px; }
+    #c-wspacks-{{ bid }} .c-wspacks__units { padding: 4px 12px; border-radius: 99px; background: #d6ece6; color: #000; font-size: 14px; }
+    #c-wspacks-{{ bid }} .c-wspacks__units:empty { display: none; }
+  </style>
+  <p class="c-wspacks__label" id="c-wspacks-{{ bid }}-label">{{ bs.packs_label }}</p>
+  <div class="c-wspacks__row">
+    <div class="c-wspacks__qty">
+      <button type="button" data-wspacks-minus aria-label="Remove one pack">−</button>
+      <input type="number" name="quantity" min="1" max="999" value="1" inputmode="numeric" data-wspacks-qty aria-labelledby="c-wspacks-{{ bid }}-label">
+      <button type="button" data-wspacks-plus aria-label="Add one pack">+</button>
+    </div>
+    <span class="c-wspacks__units" data-wspacks-units aria-live="polite"></span>
+  </div>
+  <script type="application/json" data-wspacks-data>
+    {
+      "currency": {{ cart.currency.iso_code | json }},
+      "cta": {{ bs.cta_label | json }},
+      "units": {{ bs.units_label | json }},
+      "variants": [
+        {%- for v in product.variants -%}
+          {
+            "id": {{ v.id }},
+            "title": {{ v.title | json }},
+            "price": {{ v.price }},
+            "available": {{ v.available | json }},
+            "plans": { {%- for a in v.selling_plan_allocations -%}"{{ a.selling_plan.id }}": {{ a.price }}{% unless forloop.last %},{% endunless %}{%- endfor -%} }
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+</div>
+<script src="{{ 'c-wholesale-packs.js' | asset_url }}" defer></script>
