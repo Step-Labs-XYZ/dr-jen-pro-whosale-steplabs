@@ -1,0 +1,263 @@
+{%- comment -%}
+  Section: C Sample Request
+  "Request Practice Samples and Free CE" in three steps (Figma section "Request",
+  node 6396-6959):
+    1 Request          - contact name, work email, practice name
+    2 Delivery details - street, city, state, ZIP, licensed-practice confirmation;
+                         Continue sends everything with Shopify's contact form, so the
+                         request reaches the store's email (no app, no tags).
+    3 Account setup    - optional: a password creates the customer account with the
+                         same name and email (Shopify's create_customer form).
+  Steps 1-2 run client-side; Shopify reloads the page after the contact form posts and
+  the section opens on step 3 (form.posted_successfully?).
+  sl-id: sl-section-sample-request-v1
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign sid = section.id
+-%}
+
+{% style %}
+  #c-sreq-{{ sid }} {
+    padding: 24px 16px 40px;
+    color: #000;
+    font-family: Raleway, sans-serif;
+  }
+  #c-sreq-{{ sid }} * { box-sizing: border-box; }
+  #c-sreq-{{ sid }} .c-sreq__inner { display: flex; flex-direction: column; gap: 12px; max-width: 504px; margin: 0 auto; }
+  #c-sreq-{{ sid }} .c-sreq__eyebrow { margin: 0; color: #002c41; font-size: 16px; font-style: italic; line-height: 1.2; }
+
+  /* stepper */
+  #c-sreq-{{ sid }} .c-sreq__steps { display: flex; align-items: center; gap: 4px; margin: 0; padding: 0; list-style: none; }
+  #c-sreq-{{ sid }} .c-sreq__step { display: flex; align-items: center; gap: 4px; color: #707170; font-size: 12px; line-height: 1.2; white-space: nowrap; }
+  #c-sreq-{{ sid }} .c-sreq__step b {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: #707170; color: #fff; font-size: 10px; font-weight: 400;
+  }
+  #c-sreq-{{ sid }} .c-sreq__step.is-done,
+  #c-sreq-{{ sid }} .c-sreq__step.is-active { color: #002c41; }
+  #c-sreq-{{ sid }} .c-sreq__step.is-done b,
+  #c-sreq-{{ sid }} .c-sreq__step.is-active b { background: #002c41; }
+  #c-sreq-{{ sid }} .c-sreq__line { flex: 1 1 24px; max-width: 44px; height: 1px; background: #002c41; }
+
+  #c-sreq-{{ sid }} .c-sreq__title { margin: 0; color: #002c41; font-size: 24px; font-weight: 600; line-height: 1.2; }
+  #c-sreq-{{ sid }} .c-sreq__title--big { font-size: 32px; }
+  #c-sreq-{{ sid }} .c-sreq__text { margin: 0; font-size: 16px; line-height: 1.3; }
+  #c-sreq-{{ sid }} .c-sreq__panel { display: flex; flex-direction: column; gap: 12px; }
+  #c-sreq-{{ sid }} .c-sreq__panel[hidden] { display: none; }
+  #c-sreq-{{ sid }} .c-sreq__grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+
+  /* fields */
+  #c-sreq-{{ sid }} .c-sreq__field { display: flex; flex-direction: column; gap: 4px; }
+  #c-sreq-{{ sid }} .c-sreq__field label { font-size: 14px; line-height: 1.2; }
+  #c-sreq-{{ sid }} .c-sreq__field input {
+    width: 100%; height: 39px; padding: 0 24px;
+    border: 1px solid #707170; border-radius: 44px; background: #fff;
+    color: #000; font: 400 14px Raleway, sans-serif;
+  }
+  #c-sreq-{{ sid }} .c-sreq__field input::placeholder { color: #707170; }
+  #c-sreq-{{ sid }} .c-sreq__field input:focus-visible { outline: 2px solid #0862df; outline-offset: 1px; }
+  #c-sreq-{{ sid }} .c-sreq__field input[aria-invalid="true"] { border-color: #b3261e; }
+  #c-sreq-{{ sid }} .c-sreq__check { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; line-height: 1.3; }
+  #c-sreq-{{ sid }} .c-sreq__check input { width: 16px; height: 16px; margin: 1px 0 0; accent-color: #0862df; }
+
+  /* actions */
+  #c-sreq-{{ sid }} .c-sreq__actions { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 4px; }
+  #c-sreq-{{ sid }} .c-sreq__btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 39px; padding: 8px 24px; border: 0; border-radius: 44px;
+    background: #0862df; color: #f7f7f7;
+    font: 700 14px/1.2 Raleway, sans-serif; text-transform: uppercase;
+    box-shadow: 0 2px 6px rgba(0, 44, 65, .12); cursor: pointer;
+  }
+  #c-sreq-{{ sid }} .c-sreq__btn[disabled] { opacity: .6; cursor: progress; }
+  #c-sreq-{{ sid }} .c-sreq__back {
+    padding: 0 24px; border: 0; background: none; color: #002c41;
+    font: 700 12px/1.2 Raleway, sans-serif; text-decoration: underline; text-transform: uppercase; cursor: pointer;
+  }
+  #c-sreq-{{ sid }} .c-sreq__error { margin: 0; color: #b3261e; font-size: 14px; }
+  #c-sreq-{{ sid }} .c-sreq__error:empty { display: none; }
+  #c-sreq-{{ sid }} .c-sreq__success { padding: 12px; border-radius: 12px; background: #d6ece6; color: #002c41; font-size: 14px; line-height: 1.3; }
+
+  @media (min-width: 750px) {
+    #c-sreq-{{ sid }} .c-sreq__grid--2 { grid-template-columns: 1fr 1fr; }
+    #c-sreq-{{ sid }} .c-sreq__step { font-size: 14px; }
+  }
+  @media (min-width: 990px) {
+    #c-sreq-{{ sid }} { padding: 64px 24px; }
+    #c-sreq-{{ sid }} .c-sreq__title--big { font-size: 40px; }
+    #c-sreq-{{ sid }} .c-sreq__text--lead { font-size: 20px; }
+  }
+{% endstyle %}
+
+<section id="c-sreq-{{ sid }}" class="c-sreq" data-sl-id="sl-section-sample-request-v1" data-sreq>
+  <div class="c-sreq__inner">
+    {%- if s.eyebrow != blank -%}<p class="c-sreq__eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
+
+    <ol class="c-sreq__steps" aria-label="{{ s.steps_label | escape }}">
+      <li class="c-sreq__step" data-sreq-step-dot="1"><b>1</b>{{ s.step1_label }}</li>
+      <li class="c-sreq__line" aria-hidden="true"></li>
+      <li class="c-sreq__step" data-sreq-step-dot="2"><b>2</b>{{ s.step2_label }}</li>
+      <li class="c-sreq__line" aria-hidden="true"></li>
+      <li class="c-sreq__step" data-sreq-step-dot="3"><b>3</b>{{ s.step3_label }}</li>
+    </ol>
+
+    {%- form 'contact', id: 'c-sreq-form', class: 'c-sreq__form' -%}
+      {%- if form.posted_successfully? -%}
+        <span data-sreq-sent hidden></span>
+      {%- endif -%}
+      {%- if form.errors -%}
+        <p class="c-sreq__error" role="alert">{{ form.errors | default_errors }}</p>
+      {%- endif -%}
+      <input type="hidden" name="contact[subject]" value="{{ s.email_subject | escape }}">
+      <input type="hidden" name="contact[body]" value="" data-sreq-body>
+
+      {%- comment -%} Step 1 {%- endcomment -%}
+      <div class="c-sreq__panel" data-sreq-panel="1">
+        <h1 class="c-sreq__title">{{ s.step1_title }}</h1>
+        {%- if s.step1_text != blank -%}<p class="c-sreq__text c-sreq__text--lead">{{ s.step1_text }}</p>{%- endif -%}
+        <div class="c-sreq__grid c-sreq__grid--2">
+          <div class="c-sreq__field">
+            <label for="c-sreq-{{ sid }}-name">{{ s.name_label }}</label>
+            <input id="c-sreq-{{ sid }}-name" type="text" name="contact[name]" autocomplete="name" placeholder="{{ s.name_placeholder | escape }}" required>
+          </div>
+          <div class="c-sreq__field">
+            <label for="c-sreq-{{ sid }}-email">{{ s.email_label }}</label>
+            <input id="c-sreq-{{ sid }}-email" type="email" name="contact[email]" autocomplete="email" placeholder="you@email.com" required>
+          </div>
+        </div>
+        <div class="c-sreq__field">
+          <label for="c-sreq-{{ sid }}-practice">{{ s.practice_label }}</label>
+          <input id="c-sreq-{{ sid }}-practice" type="text" name="contact[Practice name]" autocomplete="organization" placeholder="{{ s.practice_placeholder | escape }}" required>
+        </div>
+        <div class="c-sreq__actions">
+          <button type="button" class="c-sreq__btn" data-sreq-next="2">{{ s.step1_button }}</button>
+        </div>
+      </div>
+
+      {%- comment -%} Step 2 {%- endcomment -%}
+      <div class="c-sreq__panel" data-sreq-panel="2" hidden>
+        <h2 class="c-sreq__title c-sreq__title--big">{{ s.step2_title }}</h2>
+        {%- if s.step2_text != blank -%}<p class="c-sreq__text">{{ s.step2_text }}</p>{%- endif -%}
+        <div class="c-sreq__field">
+          <label for="c-sreq-{{ sid }}-street">{{ s.street_label }}</label>
+          <input id="c-sreq-{{ sid }}-street" type="text" name="contact[Street address]" autocomplete="street-address" placeholder="{{ s.street_label | escape }}" required>
+        </div>
+        <div class="c-sreq__grid c-sreq__grid--2">
+          <div class="c-sreq__field">
+            <label for="c-sreq-{{ sid }}-city">{{ s.city_label }}</label>
+            <input id="c-sreq-{{ sid }}-city" type="text" name="contact[City]" autocomplete="address-level2" placeholder="{{ s.city_label | escape }}" required>
+          </div>
+          <div class="c-sreq__field">
+            <label for="c-sreq-{{ sid }}-state">{{ s.state_label }}</label>
+            <input id="c-sreq-{{ sid }}-state" type="text" name="contact[State]" autocomplete="address-level1" placeholder="{{ s.state_label | escape }}" required>
+          </div>
+        </div>
+        <div class="c-sreq__field">
+          <label for="c-sreq-{{ sid }}-zip">{{ s.zip_label }}</label>
+          <input id="c-sreq-{{ sid }}-zip" type="text" name="contact[ZIP]" autocomplete="postal-code" inputmode="numeric" placeholder="{{ s.zip_placeholder | escape }}" required>
+        </div>
+        <label class="c-sreq__check">
+          <input type="checkbox" name="contact[Licensed dental practice]" value="Yes" required>
+          <span>{{ s.license_label }}</span>
+        </label>
+        <p class="c-sreq__error" data-sreq-error role="alert"></p>
+        <div class="c-sreq__actions">
+          <button type="submit" class="c-sreq__btn" data-sreq-submit>{{ s.step2_button }}</button>
+          <button type="button" class="c-sreq__back" data-sreq-next="1">{{ s.back_label }}</button>
+        </div>
+      </div>
+    {%- endform -%}
+
+    {%- comment -%} Step 3: optional account, shown after the request is sent {%- endcomment -%}
+    <div class="c-sreq__panel" data-sreq-panel="3" hidden>
+      <h2 class="c-sreq__title c-sreq__title--big">{{ s.step3_title }}</h2>
+      {%- if s.step3_text != blank -%}<div class="c-sreq__text">{{ s.step3_text }}</div>{%- endif -%}
+      {%- if customer -%}
+        <p class="c-sreq__success">{{ s.signed_in_text }}</p>
+      {%- else -%}
+        {%- form 'create_customer', class: 'c-sreq__panel', data-sreq-account: '' -%}
+          {%- if form.errors -%}<p class="c-sreq__error" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+          <input type="hidden" name="customer[first_name]" data-sreq-first>
+          <input type="hidden" name="customer[last_name]" data-sreq-last>
+          <input type="hidden" name="customer[email]" data-sreq-account-email>
+          <div class="c-sreq__field">
+            <label for="c-sreq-{{ sid }}-pass">{{ s.password_label }}</label>
+            <input id="c-sreq-{{ sid }}-pass" type="password" name="customer[password]" autocomplete="new-password" minlength="5" required>
+          </div>
+          <div class="c-sreq__field">
+            <label for="c-sreq-{{ sid }}-pass2">{{ s.confirm_label }}</label>
+            <input id="c-sreq-{{ sid }}-pass2" type="password" autocomplete="new-password" data-sreq-confirm required>
+          </div>
+          <p class="c-sreq__error" data-sreq-pass-error role="alert"></p>
+          <div class="c-sreq__actions">
+            <button type="submit" class="c-sreq__btn">{{ s.step3_button }}</button>
+            <a class="c-sreq__back" href="{{ s.done_url | default: routes.root_url }}">{{ s.skip_label }}</a>
+          </div>
+        {%- endform -%}
+      {%- endif -%}
+    </div>
+  </div>
+
+  <script type="application/json" data-sreq-config>
+    {
+      "missing": {{ s.missing_text | json }},
+      "mismatch": {{ s.mismatch_text | json }},
+      "intro": {{ s.email_intro | json }}
+    }
+  </script>
+</section>
+
+<script src="{{ 'c-sample-request.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "C Sample Request",
+  "tag": "div",
+  "class": "c-sample-request-wrapper",
+  "settings": [
+    { "type": "paragraph", "content": "Sends the request with Shopify's contact form (to the store's customer email). Step 3 optionally creates the customer account." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Dr. Jen · Dental professionals" },
+    { "type": "text", "id": "steps_label", "label": "Steps (screen readers)", "default": "Request steps" },
+    { "type": "text", "id": "step1_label", "label": "Step 1 name", "default": "Request" },
+    { "type": "text", "id": "step2_label", "label": "Step 2 name", "default": "Delivery details" },
+    { "type": "text", "id": "step3_label", "label": "Step 3 name", "default": "Account setup" },
+    { "type": "header", "content": "Step 1" },
+    { "type": "text", "id": "step1_title", "label": "Title", "default": "Request Practice Samples and Free CE" },
+    { "type": "text", "id": "step1_text", "label": "Text", "default": "For dental offices · eligibility checked" },
+    { "type": "text", "id": "name_label", "label": "Name label", "default": "Contact name" },
+    { "type": "text", "id": "name_placeholder", "label": "Name placeholder", "default": "Name" },
+    { "type": "text", "id": "email_label", "label": "Email label", "default": "Work email" },
+    { "type": "text", "id": "practice_label", "label": "Practice label", "default": "Practice name" },
+    { "type": "text", "id": "practice_placeholder", "label": "Practice placeholder", "default": "Name" },
+    { "type": "text", "id": "step1_button", "label": "Button", "default": "Continue to delivery details" },
+    { "type": "header", "content": "Step 2" },
+    { "type": "text", "id": "step2_title", "label": "Title", "default": "Delivery details" },
+    { "type": "text", "id": "step2_text", "label": "Text", "default": "Where should samples ship, and a quick eligibility check." },
+    { "type": "text", "id": "street_label", "label": "Street label", "default": "Street address" },
+    { "type": "text", "id": "city_label", "label": "City label", "default": "City" },
+    { "type": "text", "id": "state_label", "label": "State label", "default": "State" },
+    { "type": "text", "id": "zip_label", "label": "ZIP label", "default": "ZIP" },
+    { "type": "text", "id": "zip_placeholder", "label": "ZIP placeholder", "default": "Zipcode" },
+    { "type": "text", "id": "license_label", "label": "Confirmation", "default": "I confirm this is a licensed dental practice." },
+    { "type": "text", "id": "step2_button", "label": "Button", "default": "Continue to account setup" },
+    { "type": "text", "id": "back_label", "label": "Back link", "default": "Back" },
+    { "type": "header", "content": "Step 3" },
+    { "type": "text", "id": "step3_title", "label": "Title", "default": "Set up your account" },
+    { "type": "richtext", "id": "step3_text", "label": "Text", "default": "<p>Optional for now, your sample request is already in. Create a password to track it and reorder later.</p>" },
+    { "type": "text", "id": "password_label", "label": "Password label", "default": "Password" },
+    { "type": "text", "id": "confirm_label", "label": "Confirm label", "default": "Confirm password" },
+    { "type": "text", "id": "step3_button", "label": "Button", "default": "Create account" },
+    { "type": "text", "id": "skip_label", "label": "Skip link", "default": "Back to the store" },
+    { "type": "url", "id": "done_url", "label": "Skip link URL" },
+    { "type": "text", "id": "signed_in_text", "label": "Already signed in", "default": "Your request is in. You're already signed in, so it's linked to your account." },
+    { "type": "header", "content": "Email and messages" },
+    { "type": "text", "id": "email_subject", "label": "Email subject", "default": "Practice sample request" },
+    { "type": "text", "id": "email_intro", "label": "Email intro", "default": "New practice sample request:" },
+    { "type": "text", "id": "missing_text", "label": "Missing fields", "default": "Please fill in the highlighted fields." },
+    { "type": "text", "id": "mismatch_text", "label": "Passwords don't match", "default": "The passwords don't match." }
+  ],
+  "presets": [{ "name": "C Sample Request" }]
+}
+{% endschema %}
