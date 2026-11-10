@@ -82,6 +82,22 @@
     .c-login-reorder .c-login__reorder-head h1 { font-size: 40px; }
     .c-login-reorder .c-login__reorder-head p { font-size: 20px; }
   }
+  /* theme.css styles #login-form-container with ids and !important (white card,
+     grey fields, orange button): same weight here, reorder mode only */
+  html.c-login-reorder #login-form-container .account__block-list { padding: 0; border-radius: 0; background: none; box-shadow: none; }
+  html.c-login-reorder #login-form-container .page-header__text-wrapper.text-container { margin-bottom: 12px !important; }
+  html.c-login-reorder #login-form-container .c-login__reorder-head .c-login__eyebrow { margin: 0 0 4px; font-size: 16px; font-style: italic; }
+  html.c-login-reorder #login-form-container .c-login__reorder-head p:not(.c-login__eyebrow) { margin: 4px 0 0; font-size: 18px; }
+  html.c-login-reorder #login-form-container .input input { border: 1px solid #707170; background: #fff; }
+  html.c-login-reorder #login-form-container .input .input__label { color: #000; background: transparent !important; background-color: transparent !important; }
+  html.c-login-reorder #login-form-container .form__submit { background-color: #0862df !important; color: #f7f7f7; letter-spacing: 0; text-transform: uppercase; }
+  html.c-login-reorder .shopify-section--main-customers-login > section { padding-top: 24px; padding-bottom: 40px; }
+  @media (min-width: 990px) {
+    html.c-login-reorder .shopify-section--main-customers-login > section { padding-top: 64px; padding-bottom: 64px; }
+  }
+  @media (min-width: 990px) {
+    html.c-login-reorder #login-form-container .c-login__reorder-head p:not(.c-login__eyebrow) { font-size: 20px; }
+  }
 </style>
 
 <section>

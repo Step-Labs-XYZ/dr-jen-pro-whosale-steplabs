@@ -125,6 +125,12 @@
   </div>
 </header>
 
+{%- if section.settings.notice_text != blank -%}
+  <div class="c-header__notice" style="background: {{ section.settings.notice_bg }}; color: {{ section.settings.notice_color }};">
+    {{ section.settings.notice_text }}
+  </div>
+{%- endif -%}
+
 <!-- Mobile Menu (slide from left) -->
 <div
   class="c-header__mobile-menu"
@@ -279,6 +285,17 @@
 #c-header-{{ section.id }} .c-header__nav-link:hover {
   opacity: 0.7;
 }
+
+/* Notice bar under the header (e.g. "Dental professionals: sign in to reorder...") */
+.c-header__notice {
+  padding: 10px 16px;
+  font-family: Raleway, sans-serif;
+  font-size: 14px;
+  line-height: 1.2;
+  text-align: center;
+}
+.c-header__notice p { margin: 0; }
+.c-header__notice a { color: inherit; }
 
 /* Reorder link: blue with the circular arrow, as in the design */
 .c-header__nav-link--reorder {
@@ -619,6 +636,28 @@ SEARCH DRAWER - Renderiza el componente de búsqueda predictiva del Focal theme
       "id": "badge_text_color",
       "label": "Cart Badge Text",
       "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Notice bar",
+      "info": "Thin strip under the header (e.g. the reorder message). Empty hides it."
+    },
+    {
+      "type": "richtext",
+      "id": "notice_text",
+      "label": "Text"
+    },
+    {
+      "type": "color",
+      "id": "notice_bg",
+      "label": "Background",
+      "default": "#f8f6f6"
+    },
+    {
+      "type": "color",
+      "id": "notice_color",
+      "label": "Text color",
+      "default": "#002c41"
     },
     {
       "type": "header",
