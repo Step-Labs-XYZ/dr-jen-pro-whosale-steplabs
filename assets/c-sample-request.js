@@ -60,7 +60,8 @@
     }
 
     // after Shopify's reload: the request is in, offer the account
-    if (root.querySelector('[data-sreq-sent]')) {
+    const posted = new URLSearchParams(window.location.search).get('contact_posted') === 'true';
+    if (root.querySelector('[data-sreq-sent]') || posted) {
       let saved = {};
       try { saved = JSON.parse(sessionStorage.getItem(KEY) || '{}'); } catch (err) { /* storage blocked */ }
       const account = root.querySelector('[data-sreq-account]');

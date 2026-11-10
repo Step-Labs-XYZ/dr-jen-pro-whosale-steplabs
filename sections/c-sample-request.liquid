@@ -110,6 +110,11 @@
       {%- if form.errors -%}
         <p class="c-sreq__error" role="alert">{{ form.errors | default_errors }}</p>
       {%- endif -%}
+      {%- comment -%}
+        After posting, Shopify returns to the page without ?view=, i.e. the default page
+        template. return_to keeps this template so the request lands on step 3.
+      {%- endcomment -%}
+      <input type="hidden" name="return_to" value="{{ request.path }}?view=request-samples&contact_posted=true#c-sreq-form">
       <input type="hidden" name="contact[subject]" value="{{ s.email_subject | escape }}">
       <input type="hidden" name="contact[body]" value="" data-sreq-body>
 
