@@ -126,7 +126,24 @@
   </div>
 </header>
 
-{%- if section.settings.notice_text != blank -%}
+{%- liquid
+  comment
+    Notice bar only on the reorder flow: reorder + request samples pages (also via
+    ?view=), sign-in, activate account and reset password.
+  endcomment
+  assign show_notice = false
+  if section.settings.notice_text != blank
+    case request.page_type
+      when 'customers/login', 'customers/activate_account', 'customers/reset_password'
+        assign show_notice = true
+      when 'page'
+        if template.suffix == 'reorder' or template.suffix == 'request-samples'
+          assign show_notice = true
+        endif
+    endcase
+  endif
+-%}
+{%- if show_notice -%}
   <div class="c-header__notice" style="background: {{ section.settings.notice_bg }}; color: {{ section.settings.notice_color }};">
     {{ section.settings.notice_text }}
   </div>
@@ -641,7 +658,7 @@ SEARCH DRAWER - Renderiza el componente de búsqueda predictiva del Focal theme
     {
       "type": "header",
       "content": "Notice bar",
-      "info": "Thin strip under the header (e.g. the reorder message). Empty hides it."
+      "info": "Thin strip under the header, shown only on the reorder flow (reorder, request samples, sign-in, activate account, reset password). Empty hides it."
     },
     {
       "type": "richtext",
