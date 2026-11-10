@@ -201,8 +201,10 @@
   #c-reorder-{{ sid }} .c-reorder__device { margin: 0; font-size: 12px; line-height: 1.2; text-align: center; }
   #c-reorder-{{ sid }} .c-reorder__device a { color: inherit; }
 
-  /* Review step */
+  /* Edit + review steps: 12px between blocks, as in the design */
+  #c-reorder-{{ sid }} [data-reorder-step="edit"],
   #c-reorder-{{ sid }} .c-reorder__review { display: flex; flex-direction: column; gap: 12px; }
+  #c-reorder-{{ sid }} .c-reorder__meta { margin-top: -8px; }
   #c-reorder-{{ sid }} .c-reorder__review[hidden],
   #c-reorder-{{ sid }} [data-reorder-step][hidden] { display: none; }
   #c-reorder-{{ sid }} .c-reorder__rows { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none; }
@@ -235,6 +237,12 @@
   #c-reorder-{{ sid }} .c-reorder__confirm { display: flex; align-items: flex-start; gap: 8px; margin-top: 6px; }
   #c-reorder-{{ sid }} .c-reorder__error { margin: 0; color: var(--ro-red); font-size: 14px; }
   #c-reorder-{{ sid }} .c-reorder__error:empty { display: none; }
+
+  /* mobile: the last-order pill sits on the card's top edge, as in the design */
+  @media (max-width: 989px) {
+    #c-reorder-{{ sid }} .c-reorder__card { position: relative; }
+    #c-reorder-{{ sid }} [data-reorder-step="edit"] .c-reorder__pill { position: absolute; top: -12px; right: 16px; }
+  }
 
   @media (min-width: 990px) {
     #c-reorder-{{ sid }} { padding: {{ s.pad_top_d }}px 24px {{ s.pad_bottom_d }}px; }
@@ -284,7 +292,7 @@
         <div class="c-reorder__card">
           <h3 class="c-reorder__card-title">{{ s.pending_title }}</h3>
           <div class="c-reorder__note" style="text-align:left">{{ s.pending_body }}</div>
-          <p class="c-reorder__device">{{ s.signed_in_as | replace: '[email]', customer.email }} <a href="{{ routes.account_logout_url }}">{{ s.sign_out_label }}</a></p>
+          <p class="c-reorder__device">{{ s.signed_in_as | replace: '[email]', customer.email }} <a href="{{ routes.account_logout_url }}?return_url={{ login_url | url_encode }}">{{ s.sign_out_label }}</a></p>
         </div>
 
       {%- when 'empty' -%}
@@ -333,7 +341,15 @@
                       endif
                     endfor
                   endif
-                  assign name = item.product.metafields.custom.short_title.value | default: item.product.title | default: item.title
+                  comment
+                    Short name as in the design ("Super Paste"): the product's custom.short_title
+                    metafield, else the title without the brand prefix, the ™ and the "with ..." / "- 12/24" tail.
+                  endcomment
+                  assign name = item.product.metafields.custom.short_title.value
+                  if name == blank
+                    assign full_title = item.product.title | default: item.title
+                    assign name = full_title | remove: 'NEW ' | remove: "Dr. Jen's " | remove: 'Dr. Jen’s ' | remove: "Dr Jen's " | remove: '™' | split: ' with ' | first | split: ' - ' | first | split: ' 12/24' | first | strip
+                  endif
                   assign current_price = v.price | default: 0
                   assign available = false
                   if v and v.available and item.product.available
@@ -377,9 +393,9 @@
               <span data-reorder-subtotal></span>
             </div>
             <button type="button" class="c-reorder__btn c-reorder__btn--primary" data-reorder-review>
-              {{ s.buy_again_label }} · <span data-reorder-subtotal></span>
+              <span>{{ s.buy_again_label }} ·&nbsp;<span data-reorder-subtotal></span></span>
             </button>
-            <p class="c-reorder__device">{{ s.signed_in_as | replace: '[email]', customer.email }} <a href="{{ routes.account_logout_url }}">{{ s.sign_out_label }}</a></p>
+            <p class="c-reorder__device">{{ s.signed_in_as | replace: '[email]', customer.email }} <a href="{{ routes.account_logout_url }}?return_url={{ login_url | url_encode }}">{{ s.sign_out_label }}</a></p>
           </div>
 
           {%- comment -%} Step 2: review {%- endcomment -%}
@@ -498,8 +514,8 @@
     { "type": "text", "id": "one_time_label", "label": "One-time label", "default": "One-time" },
     { "type": "text", "id": "subtotal_label", "label": "Subtotal label", "default": "Item subtotal" },
     { "type": "text", "id": "buy_again_label", "label": "Buy again button", "default": "Buy it again" },
-    { "type": "text", "id": "signed_in_as", "label": "Signed-in line", "info": "[email] = the customer's email.", "default": "Signed in as [email]. Not you?" },
-    { "type": "text", "id": "sign_out_label", "label": "Sign out link", "default": "Sign out" },
+    { "type": "text", "id": "signed_in_as", "label": "Signed-in line", "info": "[email] = the customer's email.", "default": "Recognized this device. Not you?" },
+    { "type": "text", "id": "sign_out_label", "label": "Switch account link", "info": "Signs out, then opens the reorder sign-in.", "default": "Sign in" },
     { "type": "text", "id": "unavailable_text", "label": "Unavailable item", "default": "Not available right now. It won't be added to this reorder." },
     { "type": "text", "id": "packs_label", "label": "Packs (screen readers)", "default": "Packs of" },
     { "type": "text", "id": "decrease_label", "label": "Decrease (screen readers)", "default": "Remove one pack of" },
