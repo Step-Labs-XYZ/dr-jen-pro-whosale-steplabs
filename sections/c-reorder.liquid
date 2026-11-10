@@ -465,7 +465,7 @@
 
     {%- if s.show_secondary -%}
       <div class="c-reorder__secondary">
-        {%- if s.myself_label != blank -%}<a class="c-reorder__btn" href="{{ s.myself_url | default: 'https://drjennatural.com' }}">{{ s.myself_label }}</a>{%- endif -%}
+        {%- if s.myself_label != blank -%}<a class="c-reorder__btn" href="{{ s.myself_url | default: routes.all_products_collection_url }}">{{ s.myself_label }}</a>{%- endif -%}
         {%- if s.samples_label != blank -%}<a class="c-reorder__btn" href="{{ s.samples_url | default: '/pages/request-samples?view=request-samples' }}" data-reorder-samples>{{ s.samples_label }}</a>{%- endif -%}
       </div>
     {%- endif -%}
@@ -544,7 +544,7 @@
     { "type": "header", "content": "Secondary buttons" },
     { "type": "checkbox", "id": "show_secondary", "label": "Show", "default": true },
     { "type": "text", "id": "myself_label", "label": "Buy for myself label", "default": "Buy for myself" },
-    { "type": "url", "id": "myself_url", "label": "Buy for myself link", "info": "The consumer store." },
+    { "type": "url", "id": "myself_url", "label": "Buy for myself link", "info": "Defaults to the Shop page (/collections/all)." },
     { "type": "text", "id": "samples_label", "label": "Request samples label", "default": "Request samples" },
     { "type": "url", "id": "samples_url", "label": "Request samples link", "info": "Defaults to /pages/request-samples?view=request-samples (works even before the page gets the request-samples template)." },
     { "type": "header", "content": "Layout" },
