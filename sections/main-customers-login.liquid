@@ -9,9 +9,12 @@
 {%- endcapture -%}
 
 {%- comment -%}
-  Reorder sign-in (Figma node 6396-6026): when the URL carries a return_url to the
-  reorder page, the page switches to the reorder copy and look before it paints, and
-  the login form sends the customer back there. Any other sign-in is unchanged.
+  Sign-in (Figma: "Log in" node 6746-1730, reorder sign-in node 6396-6026). One look for
+  every sign-in: eyebrow + title, pill fields with the label above, "Forgot password?" on
+  the label row, blue SIGN IN. When the URL carries a return_url to the reorder page the
+  copy switches to "Sign in to reorder" (set before paint) and the form sends the
+  customer back there; the normal sign-in shows "Create an account" and
+  "Manage your subscriptions" instead.
 {%- endcomment -%}
 <script>
   (function () {
@@ -23,21 +26,27 @@
   })();
 </script>
 <style>
-  .c-login__reorder-head,
-  .c-login__apply { display: none; }
-  .c-login-reorder #login-form-container > .page-header:not(.c-login__reorder-head),
-  .c-login-reorder .c-login__new-customer { display: none; }
-  .c-login-reorder .c-login__reorder-head { display: block; }
-  .c-login-reorder .c-login__apply { display: inline-block; }
-  .c-login-reorder .shopify-section--main-customers-login .container { max-width: 552px; }
-  .c-login-reorder .c-login__reorder-head .page-header__text-wrapper { margin: 0; text-align: left; }
+  /* which copy shows */
+  .c-login__head--reorder,
+  .c-login__apply { display: none !important; }
+  html.c-login-reorder .c-login__head--default,
+  html.c-login-reorder .c-login__new-customer,
+  html.c-login-reorder .c-login__manage { display: none !important; }
+  html.c-login-reorder .c-login__head--reorder { display: block !important; }
+  html.c-login-reorder .c-login__apply { display: inline-block !important; }
+
+  /* layout: one 504px column, left aligned like the design */
+  .shopify-section--main-customers-login > section { padding-top: 24px; padding-bottom: 40px; }
+  .shopify-section--main-customers-login .container { max-width: 552px; }
+  .shopify-section--main-customers-login .page-content--small { max-width: 504px; margin-left: 0; }
+  .shopify-section--main-customers-login .page-header { margin: 0; padding: 0; }
   .c-login__eyebrow { margin: 0 0 4px; color: #002c41; font: italic 400 16px/1.2 Raleway, sans-serif; }
-  .c-login-reorder .c-login__reorder-head h1 { margin: 0 0 4px; color: #002c41; font: 600 32px/1.2 Raleway, sans-serif; }
-  .c-login-reorder .c-login__reorder-head p { margin: 0; color: #000; font: 400 18px/1.2 Raleway, sans-serif; }
-  .c-login-reorder .page-content--small { max-width: 504px; margin-left: 0; }
+  .c-login__title { margin: 0; color: #002c41; font: 600 32px/1.2 Raleway, sans-serif; }
+  .c-login__text { margin: 4px 0 0; color: #000; font: 400 18px/1.2 Raleway, sans-serif; }
+
   /* label above a pill field, "Forgot password?" on the label row */
-  .c-login-reorder .shopify-section--main-customers-login .input { position: relative; display: flex; flex-direction: column-reverse; gap: 4px; margin-bottom: 12px; }
-  .c-login-reorder .shopify-section--main-customers-login .input__label {
+  .shopify-section--main-customers-login .input { position: relative; display: flex; flex-direction: column-reverse; gap: 4px; margin-bottom: 12px; }
+  .shopify-section--main-customers-login .input__label {
     position: static;
     padding: 0;
     background: none;
@@ -46,7 +55,7 @@
     transform: none;
     pointer-events: auto;
   }
-  .c-login-reorder .shopify-section--main-customers-login .input__field {
+  .shopify-section--main-customers-login .input__field {
     height: 39px;
     padding: 0 24px;
     border: 1px solid #707170;
@@ -54,49 +63,83 @@
     background: #fff;
     font: 400 14px Raleway, sans-serif;
   }
-  .c-login-reorder .shopify-section--main-customers-login .input__field-link {
+  .shopify-section--main-customers-login .input__field-link {
     position: absolute;
     top: 0;
     right: 0;
     color: #0862df;
     font: 400 14px/1.2 Raleway, sans-serif;
+    text-decoration: none;
     transform: none;
   }
-  .c-login-reorder .shopify-section--main-customers-login .form__submit {
+  .shopify-section--main-customers-login .form__submit {
     min-height: 39px;
     border-radius: 44px;
     background: #0862df;
     color: #f7f7f7;
     font: 700 14px/1.2 Raleway, sans-serif;
+    letter-spacing: 0;
     text-transform: uppercase;
     box-shadow: 0 2px 6px rgba(0, 44, 65, .12);
   }
-  .c-login-reorder .c-login__apply {
+
+  /* links under the button */
+  .shopify-section--main-customers-login .c-login__new-customer {
+    display: block;
+    margin-top: 12px;
+    color: #0862df;
+    font: 700 12px/1.2 Raleway, sans-serif;
+    text-align: center;
+  }
+  .shopify-section--main-customers-login .c-login__new-customer a { color: inherit; text-decoration: underline; }
+  .c-login__apply {
     margin-top: 12px;
     color: #0862df;
     font: 700 12px/1.2 Raleway, sans-serif;
     text-decoration: underline;
     text-transform: uppercase;
   }
-  @media (min-width: 990px) {
-    .c-login-reorder .c-login__reorder-head h1 { font-size: 40px; }
-    .c-login-reorder .c-login__reorder-head p { font-size: 20px; }
+  .c-login__manage-wrap { margin-top: 12px; text-align: center; }
+  /* the old custom-liquid "Manage your subscriptions" button: replaced by .c-login__manage */
+  #prive-subs-account-link { display: none !important; }
+  .c-login__manage {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 39px;
+    padding: 8px 24px;
+    border: 1px solid #002c41;
+    border-radius: 44px;
+    color: #002c41;
+    font: 700 14px/1.2 Raleway, sans-serif;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow: 0 2px 12px rgba(0, 44, 65, .12);
   }
+
   /* theme.css styles #login-form-container with ids and !important (white card,
-     grey fields, orange button): same weight here, reorder mode only */
-  html.c-login-reorder #login-form-container .account__block-list { padding: 0; border-radius: 0; background: none; box-shadow: none; }
-  html.c-login-reorder #login-form-container .page-header__text-wrapper.text-container { margin-bottom: 12px !important; }
-  html.c-login-reorder #login-form-container .c-login__reorder-head .c-login__eyebrow { margin: 0 0 4px; font-size: 16px; font-style: italic; }
-  html.c-login-reorder #login-form-container .c-login__reorder-head p:not(.c-login__eyebrow) { margin: 4px 0 0; font-size: 18px; }
-  html.c-login-reorder #login-form-container .input input { border: 1px solid #707170; background: #fff; }
-  html.c-login-reorder #login-form-container .input .input__label { color: #000; background: transparent !important; background-color: transparent !important; }
-  html.c-login-reorder #login-form-container .form__submit { background-color: #0862df !important; color: #f7f7f7; letter-spacing: 0; text-transform: uppercase; }
-  html.c-login-reorder .shopify-section--main-customers-login > section { padding-top: 24px; padding-bottom: 40px; }
+     grey fields, orange button, big header margins): same weight here */
+  #login-form-container .account__block-list { padding: 0; border-radius: 0; background: none; box-shadow: none; }
+  #login-form-container .page-header__text-wrapper.text-container { margin: 0 0 12px !important; text-align: left; }
+  #login-form-container .page-header__text-wrapper .c-login__title { margin: 0; font-size: 32px !important; }
+  #login-form-container .page-header__text-wrapper .c-login__eyebrow { margin: 0 0 4px; font-size: 16px; }
+  #login-form-container .page-header__text-wrapper .c-login__text { margin: 4px 0 0; font-size: 18px; }
+  #login-form-container .input input { border: 1px solid #707170; background: #fff; }
+  #login-form-container .input .input__label { color: #000; background: transparent !important; background-color: transparent !important; }
+  #login-form-container .form__submit,
+  #recover-form-container .form__submit { background-color: #0862df !important; text-transform: uppercase !important; letter-spacing: 0 !important; }
+  /* "Forgot password?" view: same look as the sign-in */
+  #recover-form-container .page-header__text-wrapper { margin: 0 0 12px !important; text-align: left; }
+  #recover-form-container .page-header__text-wrapper h1 { margin: 0; color: #002c41; font: 600 32px/1.2 Raleway, sans-serif !important; }
+  #recover-form-container .page-header__text-wrapper p { margin: 4px 0 0; color: #000; font: 400 16px/1.3 Raleway, sans-serif; }
+  #recover-form-container .form__secondary-action { display: block; margin-top: 12px; color: #000; font: 400 14px/1.2 Raleway, sans-serif; text-align: center; }
+  #recover-form-container .form__secondary-action .link { color: #0862df; }
+
   @media (min-width: 990px) {
-    html.c-login-reorder .shopify-section--main-customers-login > section { padding-top: 64px; padding-bottom: 64px; }
-  }
-  @media (min-width: 990px) {
-    html.c-login-reorder #login-form-container .c-login__reorder-head p:not(.c-login__eyebrow) { font-size: 20px; }
+    .shopify-section--main-customers-login > section { padding-top: 64px; padding-bottom: 64px; }
+    #login-form-container .page-header__text-wrapper .c-login__title,
+    #recover-form-container .page-header__text-wrapper h1 { font-size: 40px !important; }
+    #login-form-container .page-header__text-wrapper .c-login__text { font-size: 20px; }
   }
 </style>
 
@@ -109,17 +152,18 @@
     {%- endcomment -%}
 
     <div id="login-form-container">
-      <div class="page-header c-login__reorder-head">
+      <div class="page-header c-login__head--default">
         <div class="page-header__text-wrapper text-container">
           {%- if section.settings.reorder_eyebrow != blank -%}<p class="c-login__eyebrow">{{ section.settings.reorder_eyebrow }}</p>{%- endif -%}
-          <h1>{{ section.settings.reorder_title }}</h1>
-          <p>{{ section.settings.reorder_text }}</p>
+          <h1 class="c-login__title">{{ section.settings.login_title | default: 'Log in' }}</h1>
+          {%- if section.settings.login_text != blank -%}<p class="c-login__text">{{ section.settings.login_text }}</p>{%- endif -%}
         </div>
       </div>
-      <div class="page-header">
+      <div class="page-header c-login__head--reorder">
         <div class="page-header__text-wrapper text-container">
-          <h1 class="heading h2">{{ 'customer.login.title' | t }}</h1>
-          <p>{{ 'customer.login.instructions' | t }}</p>
+          {%- if section.settings.reorder_eyebrow != blank -%}<p class="c-login__eyebrow">{{ section.settings.reorder_eyebrow }}</p>{%- endif -%}
+          <h1 class="c-login__title">{{ section.settings.reorder_title }}</h1>
+          {%- if section.settings.reorder_text != blank -%}<p class="c-login__text">{{ section.settings.reorder_text }}</p>{%- endif -%}
         </div>
       </div>
 
@@ -164,17 +208,23 @@
                       })();
                     </script>
 
-                    <button type="submit" class="form__submit button button--primary button--full">{{ 'customer.login.submit' | t }}</button>
+                    <button type="submit" class="form__submit button button--primary button--full">{{ section.settings.submit_label | default: 'Sign in' }}</button>
 
                     {%- if section.settings.apply_label != blank -%}
                       <a class="c-login__apply" href="{{ section.settings.apply_url | default: '/pages/wholesale-registration' }}">{{ section.settings.apply_label }}</a>
                     {%- endif -%}
 
-                    <span class="form__secondary-action text--subdued c-login__new-customer">
-                      {{- 'customer.login.new_customer' | t -}}
-                      <a href="{{ routes.account_register_url }}" class="link">{{ 'customer.login.create_account' | t }}</a>
+                    <span class="c-login__new-customer">
+                      {{- section.settings.new_customer_text | default: 'New customer?' }}
+                      <a href="{{ routes.account_register_url }}">{{ section.settings.create_account_label | default: 'Create an account' }}</a>
                     </span>
                   {%- endform -%}
+
+                  {%- if section.settings.manage_label != blank -%}
+                    <div class="c-login__manage-wrap">
+                      <a class="c-login__manage" href="{{ section.settings.manage_url | default: '/apps/customers/portal' }}">{{ section.settings.manage_label }}</a>
+                    </div>
+                  {%- endif -%}
               {%- endcase -%}
             </div>
           {%- endfor -%}
@@ -300,9 +350,18 @@
   "name": "Customer login",
   "class": "shopify-section--main-customers-login",
   "settings": [
+    { "type": "header", "content": "Sign in" },
+    { "type": "text", "id": "login_title", "label": "Title", "default": "Log in" },
+    { "type": "text", "id": "login_text", "label": "Text", "info": "Optional, under the title." },
+    { "type": "text", "id": "submit_label", "label": "Button", "default": "Sign in" },
+    { "type": "text", "id": "new_customer_text", "label": "New customer text", "default": "New customer?" },
+    { "type": "text", "id": "create_account_label", "label": "Create account link", "default": "Create an account" },
+    { "type": "text", "id": "manage_label", "label": "Subscriptions button", "info": "Empty hides it.", "default": "Manage your subscriptions" },
+    { "type": "url", "id": "manage_url", "label": "Subscriptions link", "info": "Defaults to /apps/customers/portal." },
+    { "type": "header", "content": "Reorder sign-in" },
     {
       "type": "paragraph",
-      "content": "Reorder sign-in: used when the URL has a return_url to the reorder page (Reorder links, C Reorder section)."
+      "content": "Used when the URL has a return_url to the reorder page (Reorder links, C Reorder section)."
     },
     { "type": "text", "id": "reorder_eyebrow", "label": "Reorder eyebrow", "default": "Dr. Jen · Dental professionals" },
     { "type": "text", "id": "reorder_title", "label": "Reorder title", "default": "Sign in to reorder" },
