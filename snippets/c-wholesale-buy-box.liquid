@@ -1,0 +1,192 @@
+{%- comment -%}
+  Wholesale PDP buy box (main-product block "Wholesale buy box").
+  Pack size (the variant option whose values read "(12 pack)" / "(24 pack)"), other
+  options (flavor), number of packs, live total units, one-time by default with an
+  optional subscription, and a CTA with pack count + total. Prices and selling plans
+  come from the variant; nothing is hardcoded. Posts a normal product form to
+  /cart/add, so cart, WPD and Recharge behave as with the default buttons.
+
+  @param {object} product
+  @param {object} block - settings: pack_label, packs_label, units_label, one_time_label,
+    subscribe_label, allow_subscription, cta_label, sold_out_label
+{%- endcomment -%}
+{%- liquid
+  assign bs = block.settings
+  assign bid = block.id
+  assign current = product.selected_or_first_available_variant
+  assign pack_pos = -1
+  for option in product.options_with_values
+    for value in option.values
+      if value contains 'pack' or value contains 'Case'
+        assign pack_pos = forloop.parentloop.index0
+        break
+      endif
+    endfor
+  endfor
+  assign has_plans = false
+  if bs.allow_subscription and product.selling_plan_groups.size > 0
+    assign has_plans = true
+  endif
+  comment
+    Signed in without the approved tag = pending approval: never show wholesale prices.
+  endcomment
+  assign pro_tag = settings.reorder_pro_tag | default: 'wholesale-customer' | strip
+  assign pending = false
+  if customer
+    unless customer.tags contains pro_tag
+      assign pending = true
+    endunless
+  endif
+-%}
+
+{%- if pending -%}
+  <div class="c-wsbb-pending" {{ block.shopify_attributes }} style="margin:16px 0;padding:16px;border-radius:12px;background:#f7f7f7;font:400 14px/1.4 Raleway,sans-serif">
+    <p style="margin:0 0 6px;color:#002c41;font-weight:700">{{ bs.pending_title }}</p>
+    <p style="margin:0">{{ bs.pending_text }}</p>
+  </div>
+{%- else -%}
+<div class="c-wsbb" id="c-wsbb-{{ bid }}" data-wsbb {{ block.shopify_attributes }}>
+  <style>
+    #c-wsbb-{{ bid }} { display: flex; flex-direction: column; gap: 16px; margin: 16px 0; font-family: Raleway, sans-serif; color: #000; }
+    #c-wsbb-{{ bid }} * { box-sizing: border-box; }
+    #c-wsbb-{{ bid }} fieldset { margin: 0; padding: 0; border: 0; }
+    #c-wsbb-{{ bid }} legend,
+    #c-wsbb-{{ bid }} .c-wsbb__label { margin-bottom: 8px; padding: 0; color: #002c41; font-size: 14px; font-weight: 700; }
+    #c-wsbb-{{ bid }} .c-wsbb__pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    #c-wsbb-{{ bid }} .c-wsbb__pill { position: relative; }
+    #c-wsbb-{{ bid }} .c-wsbb__pill input { position: absolute; opacity: 0; pointer-events: none; }
+    #c-wsbb-{{ bid }} .c-wsbb__pill span {
+      display: flex;
+      flex-direction: column;
+      min-width: 120px;
+      padding: 10px 16px;
+      border: 1px solid #707170;
+      border-radius: 12px;
+      background: #fff;
+      font-size: 14px;
+      line-height: 1.3;
+      cursor: pointer;
+    }
+    #c-wsbb-{{ bid }} .c-wsbb__pill small { color: #707170; font-size: 12px; }
+    #c-wsbb-{{ bid }} .c-wsbb__pill input:checked + span { border: 2px solid #0862df; padding: 9px 15px; background: #f3f8ff; }
+    #c-wsbb-{{ bid }} .c-wsbb__pill input:focus-visible + span { outline: 2px solid #002c41; outline-offset: 2px; }
+    #c-wsbb-{{ bid }} .c-wsbb__pill input:disabled + span { opacity: .45; cursor: not-allowed; }
+    #c-wsbb-{{ bid }} .c-wsbb__row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+    #c-wsbb-{{ bid }} .c-wsbb__qty { display: flex; overflow: hidden; border: 1px solid #d8d8d8; border-radius: 4px; }
+    #c-wsbb-{{ bid }} .c-wsbb__qty button,
+    #c-wsbb-{{ bid }} .c-wsbb__qty input {
+      width: 40px; height: 40px; padding: 0; border: 0; background: #fff; color: #000;
+      font: 400 16px Raleway, sans-serif; text-align: center;
+    }
+    #c-wsbb-{{ bid }} .c-wsbb__qty button { cursor: pointer; font-size: 18px; }
+    #c-wsbb-{{ bid }} .c-wsbb__qty button:first-child { border-right: 1px solid #d8d8d8; }
+    #c-wsbb-{{ bid }} .c-wsbb__qty button:last-child { border-left: 1px solid #d8d8d8; }
+    #c-wsbb-{{ bid }} .c-wsbb__qty input { -moz-appearance: textfield; }
+    #c-wsbb-{{ bid }} .c-wsbb__qty input::-webkit-inner-spin-button { -webkit-appearance: none; }
+    #c-wsbb-{{ bid }} .c-wsbb__units { padding: 4px 12px; border-radius: 99px; background: #d6ece6; font-size: 14px; }
+    #c-wsbb-{{ bid }} .c-wsbb__plan { display: block; width: 100%; height: 40px; margin-top: 8px; padding: 0 12px; border: 1px solid #d8d8d8; border-radius: 4px; background: #fff; font: 400 14px Raleway, sans-serif; }
+    #c-wsbb-{{ bid }} .c-wsbb__plan[hidden] { display: none; }
+    #c-wsbb-{{ bid }} .c-wsbb__cta {
+      width: 100%; min-height: 48px; padding: 12px 24px; border: 0; border-radius: 44px;
+      background: #0862df; color: #f7f7f7; font: 700 14px/1.2 Raleway, sans-serif; text-transform: uppercase;
+      box-shadow: 0 2px 6px rgba(0, 44, 65, .12); cursor: pointer;
+    }
+    #c-wsbb-{{ bid }} .c-wsbb__cta[disabled] { opacity: .5; cursor: not-allowed; }
+  </style>
+
+  {%- form 'product', product, class: 'c-wsbb__form', data-wsbb-form: '' -%}
+    <input type="hidden" name="id" value="{{ current.id }}" data-wsbb-id>
+
+    {%- for option in product.options_with_values -%}
+      {%- unless product.has_only_default_variant -%}
+        <fieldset>
+          <legend>{% if forloop.index0 == pack_pos %}{{ bs.pack_label }}{% else %}{{ option.name }}{% endif %}</legend>
+          <div class="c-wsbb__pills">
+            {%- for value in option.values -%}
+              {%- liquid
+                assign checked = false
+                if current.options[forloop.parentloop.index0] == value
+                  assign checked = true
+                endif
+                assign units = value | split: '(' | last | remove: ')' | remove: 'pack' | strip
+              -%}
+              <label class="c-wsbb__pill">
+                <input type="radio" name="c-wsbb-{{ bid }}-option-{{ forloop.parentloop.index0 }}" value="{{ value | escape }}" data-wsbb-option="{{ forloop.parentloop.index0 }}" {% if checked %}checked{% endif %}>
+                <span>
+                  {%- if forloop.parentloop.index0 == pack_pos -%}
+                    <strong>{{ units }} {{ bs.units_label }}</strong>
+                    <small>{{ value }}</small>
+                  {%- else -%}
+                    {{ value }}
+                  {%- endif -%}
+                </span>
+              </label>
+            {%- endfor -%}
+          </div>
+        </fieldset>
+      {%- endunless -%}
+    {%- endfor -%}
+
+    <div>
+      <p class="c-wsbb__label" id="c-wsbb-{{ bid }}-packs">{{ bs.packs_label }}</p>
+      <div class="c-wsbb__row">
+        <div class="c-wsbb__qty">
+          <button type="button" data-wsbb-minus aria-label="−1">−</button>
+          <input type="number" name="quantity" min="1" max="999" value="1" inputmode="numeric" data-wsbb-qty aria-labelledby="c-wsbb-{{ bid }}-packs">
+          <button type="button" data-wsbb-plus aria-label="+1">+</button>
+        </div>
+        <span class="c-wsbb__units" data-wsbb-units aria-live="polite"></span>
+      </div>
+    </div>
+
+    <fieldset>
+      <legend>{{ bs.purchase_label }}</legend>
+      <div class="c-wsbb__pills">
+        <label class="c-wsbb__pill">
+          <input type="radio" name="c-wsbb-{{ bid }}-mode" value="once" data-wsbb-mode checked>
+          <span><strong>{{ bs.one_time_label }}</strong><small data-wsbb-once-price></small></span>
+        </label>
+        {%- if has_plans -%}
+          <label class="c-wsbb__pill">
+            <input type="radio" name="c-wsbb-{{ bid }}-mode" value="sub" data-wsbb-mode>
+            <span><strong>{{ bs.subscribe_label }}</strong><small data-wsbb-sub-price></small></span>
+          </label>
+        {%- endif -%}
+      </div>
+      {%- if has_plans -%}
+        <select class="c-wsbb__plan" name="selling_plan" data-wsbb-plan hidden disabled aria-label="{{ bs.subscribe_label | escape }}">
+          {%- for group in product.selling_plan_groups -%}
+            {%- for plan in group.selling_plans -%}
+              <option value="{{ plan.id }}">{{ plan.name }}</option>
+            {%- endfor -%}
+          {%- endfor -%}
+        </select>
+      {%- endif -%}
+    </fieldset>
+
+    <button type="submit" class="c-wsbb__cta" data-wsbb-cta>{{ bs.cta_label }}</button>
+  {%- endform -%}
+
+  <script type="application/json" data-wsbb-data>
+    {
+      "currency": {{ cart.currency.iso_code | json }},
+      "packPos": {{ pack_pos }},
+      "cta": {{ bs.cta_label | json }},
+      "soldOut": {{ bs.sold_out_label | json }},
+      "units": {{ bs.units_label | json }},
+      "variants": [
+        {%- for v in product.variants -%}
+          {
+            "id": {{ v.id }},
+            "options": {{ v.options | json }},
+            "price": {{ v.price }},
+            "available": {{ v.available | json }},
+            "plans": { {%- for a in v.selling_plan_allocations -%}"{{ a.selling_plan.id }}": {{ a.price }}{% unless forloop.last %},{% endunless %}{%- endfor -%} }
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+</div>
+<script src="{{ 'c-wholesale-buy-box.js' | asset_url }}" defer></script>
+{%- endif -%}

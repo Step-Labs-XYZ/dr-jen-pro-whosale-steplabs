@@ -675,6 +675,9 @@ window.onclick = function(event) {
       BUY BUTTONS
       ----------------------------------------------------------------------------------------------------------------
       {%- endcomment -%}
+      {%- when 'wholesale_buy_box' -%}
+        {%- render 'c-wholesale-buy-box', product: product, block: block -%}
+
       {%- when 'buy_buttons' -%}
       {%- unless product.tags contains 'upsell-only' -%}
         {%- if request.page_type != 'password' -%}
