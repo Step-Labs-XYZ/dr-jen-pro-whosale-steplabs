@@ -20,8 +20,9 @@
   assign s = section.settings
   assign sid = section.id
   assign pro_tag = settings.reorder_pro_tag | default: 'wholesale-customer' | strip
-  assign reorder_url = settings.reorder_page_url | default: '/pages/reorder'
-  assign login_url = routes.account_login_url | append: '?return_url=' | append: reorder_url
+  assign reorder_url = settings.reorder_page_url | default: '/pages/reorder?view=reorder'
+  assign reorder_url_encoded = reorder_url | url_encode
+  assign login_url = routes.account_login_url | append: '?return_url=' | append: reorder_url_encoded
 
   assign state = 'guest'
   if customer
@@ -465,7 +466,7 @@
     {%- if s.show_secondary -%}
       <div class="c-reorder__secondary">
         {%- if s.myself_label != blank -%}<a class="c-reorder__btn" href="{{ s.myself_url | default: 'https://drjennatural.com' }}">{{ s.myself_label }}</a>{%- endif -%}
-        {%- if s.samples_label != blank -%}<a class="c-reorder__btn" href="{{ s.samples_url | default: '/pages/request-samples' }}" data-reorder-samples>{{ s.samples_label }}</a>{%- endif -%}
+        {%- if s.samples_label != blank -%}<a class="c-reorder__btn" href="{{ s.samples_url | default: '/pages/request-samples?view=request-samples' }}" data-reorder-samples>{{ s.samples_label }}</a>{%- endif -%}
       </div>
     {%- endif -%}
     {%- if state == 'guest' and s.apply_label != blank -%}
@@ -545,7 +546,7 @@
     { "type": "text", "id": "myself_label", "label": "Buy for myself label", "default": "Buy for myself" },
     { "type": "url", "id": "myself_url", "label": "Buy for myself link", "info": "The consumer store." },
     { "type": "text", "id": "samples_label", "label": "Request samples label", "default": "Request samples" },
-    { "type": "url", "id": "samples_url", "label": "Request samples link", "info": "Defaults to /pages/request-samples (page using the page.request-samples template)." },
+    { "type": "url", "id": "samples_url", "label": "Request samples link", "info": "Defaults to /pages/request-samples?view=request-samples (works even before the page gets the request-samples template)." },
     { "type": "header", "content": "Layout" },
     { "type": "color", "id": "bg_color", "label": "Background", "default": "#ffffff" },
     { "type": "range", "id": "pad_top_m", "label": "Top padding (mobile)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 24 },

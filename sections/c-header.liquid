@@ -1,9 +1,10 @@
 {%- liquid
-  assign reorder_url = settings.reorder_page_url | default: '/pages/reorder'
+  assign reorder_url = settings.reorder_page_url | default: '/pages/reorder?view=reorder'
+  assign reorder_url_encoded = reorder_url | url_encode
   if customer
     assign reorder_href = reorder_url
   else
-    assign reorder_href = routes.account_login_url | append: '?return_url=' | append: reorder_url
+    assign reorder_href = routes.account_login_url | append: '?return_url=' | append: reorder_url_encoded
   endif
   assign sticky_class = ''
   if section.settings.sticky_header

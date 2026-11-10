@@ -710,8 +710,8 @@
         "type": "text",
         "id": "reorder_page_url",
         "label": "Reorder page",
-        "info": "Where Reorder links and the reorder sign-in send approved practices. A page using the page.reorder template.",
-        "default": "/pages/reorder"
+        "info": "Where Reorder links and the reorder sign-in send approved practices. ?view=reorder loads the reorder template even if the page has no template assigned.",
+        "default": "/pages/reorder?view=reorder"
       },
       {
         "type": "text",
