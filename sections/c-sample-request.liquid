@@ -1,11 +1,18 @@
 {%- comment -%}
   Section: C Sample Request
   "Request Practice Samples and Free CE" (Figma section "Request", node 6396-6959).
-  The form itself is Powerful Form Builder's "Dr Jen Form Free Samples" (form 68619):
-  the app keeps the submissions, sends its emails, runs its own steps and redirects
-  after submit. This section only adds the page heading and restyles the app's
-  markup to the design (pill fields, blue buttons, navy headings).
-  sl-id: sl-section-sample-request-v2
+  Three steps, built to the design:
+    1 Request          - first/last name, work email, practice website, practice name
+    2 Delivery details - street, city, state, ZIP, the app's other required questions
+                         (choices as dropdowns), licensed-practice confirmation
+    3 Account setup    - optional: a password creates the customer account with the
+                         same name and email (Shopify's create_customer form)
+  The request is sent through Powerful Form Builder's "Dr Jen Form Free Samples"
+  (form 68619): the app's form is rendered hidden in this section and
+  c-sample-request.js copies the visitor's answers into its fields and presses its
+  submit, so the app still stores the submission and sends its emails. The field
+  mapping lives in the section settings ("App field names").
+  sl-id: sl-section-sample-request-v4
 {%- endcomment -%}
 {%- liquid
   assign s = section.settings
@@ -15,118 +22,304 @@
 
 {% style %}
   #c-sreq-{{ sid }} {
-    padding: 24px 16px 40px;
+    padding: 24px 32px;
     color: #000;
     font-family: Raleway, sans-serif;
+    line-height: 1.2;
   }
-  #c-sreq-{{ sid }} .c-sreq__inner { display: flex; flex-direction: column; gap: 12px; max-width: 640px; margin: 0 auto; }
-  #c-sreq-{{ sid }} .c-sreq__eyebrow { margin: 0; color: #002c41; font-size: 16px; font-style: italic; line-height: 1.2; }
-  #c-sreq-{{ sid }} .c-sreq__title { margin: 0; color: #002c41; font-size: 32px; font-weight: 600; line-height: 1.2; }
-  #c-sreq-{{ sid }} .c-sreq__text { margin: 0; font-size: 16px; line-height: 1.3; }
-  #c-sreq-{{ sid }} .c-sreq__form { margin-top: 8px; min-height: 200px; }
+  #c-sreq-{{ sid }} [hidden] { display: none !important; }
+  #c-sreq-{{ sid }} .c-sreq__inner { position: relative; display: flex; flex-direction: column; gap: 24px; max-width: 504px; margin: 0 auto; }
+  #c-sreq-{{ sid }} .c-sreq__head { display: flex; flex-direction: column; gap: 4px; }
+  #c-sreq-{{ sid }} .c-sreq__eyebrow { margin: 0; color: #002c41; font-size: 16px; font-style: italic; }
 
-  /* Powerful Form Builder markup, scoped to this section */
-  #c-sreq-{{ sid }} .globo-form-app {
-    max-width: none !important; margin: 0 !important; padding: 0 !important;
-    background: transparent !important; box-shadow: none !important; border: 0 !important;
-    font-family: Raleway, sans-serif !important;
-    /* the app's colour tokens: orange accents -> design blue / navy */
-    --gfb-color-solidButton: 8,98,223 !important;
-    --gfb-color-solidButtonColor: rgb(8,98,223) !important;
-    --gfb-color-solidButtonLabel: 247,247,247 !important;
-    --gfb-color-solidButtonLabelColor: rgb(247,247,247) !important;
-    --gfb-color-outlineButton: 8,98,223 !important;
-    --gfb-color-outlineButtonColor: rgb(8,98,223) !important;
-    --gfb-primary-color: rgb(8,98,223) !important;
-    --gfb-primary-text-color: rgb(247,247,247) !important;
-    --gfb-color-text: 0,0,0 !important;
-    --gfb-color-textColor: rgb(0,0,0) !important;
-    --gfb-main-color: #002c41 !important;
+  /* stepper */
+  #c-sreq-{{ sid }} .c-sreq__steps { display: flex; gap: 4px; margin: 0; padding: 0; list-style: none; }
+  #c-sreq-{{ sid }} .c-sreq__step { display: flex; flex: 1 1 auto; align-items: center; gap: 4px; color: #707170; font-size: 12px; white-space: nowrap; }
+  #c-sreq-{{ sid }} .c-sreq__step:first-child { flex: 0 1 93px; }
+  #c-sreq-{{ sid }} .c-sreq__dot {
+    display: inline-flex; flex: 0 0 24px; align-items: center; justify-content: center;
+    width: 24px; height: 24px; border-radius: 64px;
+    background: #707170; color: #f7f7f7; font-size: 10px;
   }
-  /* fields keep a 5px side padding for the column gap; pull the rows back in line with the title */
-  #c-sreq-{{ sid }} .globo-form-app .panels { margin-left: -5px !important; margin-right: -5px !important; }
-  #c-sreq-{{ sid }} .globo-form-app .globo-form-icon { display: none !important; }
-  #c-sreq-{{ sid }} .globo-form-app .g-container,
-  #c-sreq-{{ sid }} .globo-form-app .content { padding-left: 0 !important; padding-right: 0 !important; }
-  {%- if s.hide_app_title -%}
-  #c-sreq-{{ sid }} .globo-form-app .header .title { display: none !important; }
-  {%- endif -%}
-  #c-sreq-{{ sid }} .globo-form-app .header { padding: 0 !important; text-align: left !important; }
-  #c-sreq-{{ sid }} .globo-form-app .header .description,
-  #c-sreq-{{ sid }} .globo-form-app .header .description * { color: #002c41 !important; font-size: 14px !important; }
-  #c-sreq-{{ sid }} .globo-form-app .globo-heading,
-  #c-sreq-{{ sid }} .globo-form-app h3 { color: #002c41 !important; font: 600 20px/1.2 Raleway, sans-serif !important; }
-  #c-sreq-{{ sid }} .globo-form-app .globo-label,
-  #c-sreq-{{ sid }} .globo-form-app label { color: #000 !important; font-family: Raleway, sans-serif !important; font-size: 14px !important; }
-  #c-sreq-{{ sid }} .globo-form-app input[type="text"],
-  #c-sreq-{{ sid }} .globo-form-app input[type="email"],
-  #c-sreq-{{ sid }} .globo-form-app input[type="tel"],
-  #c-sreq-{{ sid }} .globo-form-app input[type="url"],
-  #c-sreq-{{ sid }} .globo-form-app input[type="number"],
-  #c-sreq-{{ sid }} .globo-form-app select {
-    height: 39px !important; padding: 0 24px !important;
-    border: 1px solid #707170 !important; border-radius: 44px !important; background: #fff !important;
-    color: #000 !important; font: 400 14px Raleway, sans-serif !important; box-shadow: none !important;
-  }
-  #c-sreq-{{ sid }} .globo-form-app textarea {
-    padding: 12px 24px !important; border: 1px solid #707170 !important; border-radius: 20px !important;
-    font: 400 14px Raleway, sans-serif !important;
-  }
-  #c-sreq-{{ sid }} .globo-form-app input::placeholder,
-  #c-sreq-{{ sid }} .globo-form-app textarea::placeholder { color: #707170 !important; }
-  #c-sreq-{{ sid }} .globo-form-app input:focus-visible,
-  #c-sreq-{{ sid }} .globo-form-app select:focus-visible,
-  #c-sreq-{{ sid }} .globo-form-app textarea:focus-visible { outline: 2px solid #0862df !important; outline-offset: 1px; }
-  #c-sreq-{{ sid }} .globo-form-app input[type="radio"],
-  #c-sreq-{{ sid }} .globo-form-app input[type="checkbox"] { accent-color: #0862df; }
+  #c-sreq-{{ sid }} .c-sreq__line { display: none; flex: 0 0 57px; height: 1px; background: #707170; }
+  #c-sreq-{{ sid }} .c-sreq__step.is-done,
+  #c-sreq-{{ sid }} .c-sreq__step.is-active { color: #002c41; }
+  #c-sreq-{{ sid }} .c-sreq__step.is-done .c-sreq__dot,
+  #c-sreq-{{ sid }} .c-sreq__step.is-active .c-sreq__dot,
+  #c-sreq-{{ sid }} .c-sreq__step.is-done .c-sreq__line,
+  #c-sreq-{{ sid }} .c-sreq__step.is-active .c-sreq__line { background: #002c41; }
 
-  /* step tabs */
-  #c-sreq-{{ sid }} .globo-form-app .gf-step,
-  #c-sreq-{{ sid }} .globo-form-app .gf-step * { color: #707170 !important; font-family: Raleway, sans-serif !important; }
-  #c-sreq-{{ sid }} .globo-form-app .gf-step.active,
-  #c-sreq-{{ sid }} .globo-form-app .gf-step.active *,
-  #c-sreq-{{ sid }} .globo-form-app .gf-step.finished,
-  #c-sreq-{{ sid }} .globo-form-app .gf-step.finished * { color: #002c41 !important; }
-  #c-sreq-{{ sid }} .globo-form-app .gf-step::before,
-  #c-sreq-{{ sid }} .globo-form-app .gf-step .step-number { background: #707170 !important; border-color: #707170 !important; color: #fff !important; }
-  #c-sreq-{{ sid }} .globo-form-app .gf-step.active::before,
-  #c-sreq-{{ sid }} .globo-form-app .gf-step.active .step-number,
-  #c-sreq-{{ sid }} .globo-form-app .gf-step.finished::before,
-  #c-sreq-{{ sid }} .globo-form-app .gf-step.finished .step-number { background: #002c41 !important; border-color: #002c41 !important; }
+  /* titles */
+  #c-sreq-{{ sid }} .c-sreq__intro { display: flex; flex-direction: column; gap: 6px; }
+  #c-sreq-{{ sid }} .c-sreq__title { margin: 0; color: #002c41; font-size: 24px; font-weight: 600; line-height: 1.2; }
+  #c-sreq-{{ sid }} .c-sreq__text { margin: 0; font-size: 18px; line-height: 1.2; }
+  #c-sreq-{{ sid }} .c-sreq__text p { margin: 0; }
+  #c-sreq-{{ sid }} [data-sreq-panel="2"] .c-sreq__intro { gap: 12px; }
+  #c-sreq-{{ sid }} [data-sreq-panel="2"] .c-sreq__text { font-size: 16px; }
+  #c-sreq-{{ sid }} [data-sreq-panel="3"] .c-sreq__intro { gap: 12px; }
+  #c-sreq-{{ sid }} [data-sreq-panel="3"] .c-sreq__text { font-size: 14px; }
+
+  /* fields */
+  #c-sreq-{{ sid }} .c-sreq__panel,
+  #c-sreq-{{ sid }} .c-sreq__account { display: flex; flex-direction: column; gap: 24px; }
+  #c-sreq-{{ sid }} .c-sreq__row { display: flex; gap: 12px; }
+  #c-sreq-{{ sid }} .c-sreq__row > .c-sreq__field { flex: 1 0 0; min-width: 0; }
+  #c-sreq-{{ sid }} .c-sreq__stack { display: flex; flex-direction: column; gap: 12px; }
+  #c-sreq-{{ sid }} .c-sreq__field { display: flex; flex-direction: column; gap: 4px; }
+  #c-sreq-{{ sid }} .c-sreq__field label { font-size: 12px; line-height: 1.2; }
+  #c-sreq-{{ sid }} .c-sreq__field input {
+    width: 100%; height: 39px; margin: 0; padding: 0 24px;
+    border: 1px solid #707170; border-radius: 44px; background: #fff; box-shadow: none;
+    color: #000; font: 400 12px/1.2 Raleway, sans-serif;
+  }
+  #c-sreq-{{ sid }} .c-sreq__field select {
+    width: 100%; height: 39px; margin: 0; padding: 0 48px 0 24px;
+    border: 1px solid #707170; border-radius: 44px; box-shadow: none;
+    background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23002c41' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 24px center / 12px 8px;
+    color: #000; font: 400 12px/1.2 Raleway, sans-serif;
+    appearance: none; -webkit-appearance: none; cursor: pointer;
+  }
+  #c-sreq-{{ sid }} .c-sreq__field select:invalid { color: #707170; }
+  #c-sreq-{{ sid }} .c-sreq__field select option { color: #000; }
+  #c-sreq-{{ sid }} .c-sreq__field select:focus-visible { outline: 2px solid #0862df; outline-offset: 1px; }
+  #c-sreq-{{ sid }} .c-sreq__field select[aria-invalid="true"] { border-color: #b3261e; }
+  #c-sreq-{{ sid }} .c-sreq__field input::placeholder { color: #707170; opacity: 1; }
+  #c-sreq-{{ sid }} .c-sreq__field input:focus-visible { outline: 2px solid #0862df; outline-offset: 1px; }
+  #c-sreq-{{ sid }} .c-sreq__field input[aria-invalid="true"] { border-color: #b3261e; }
+
+  /* licensed-practice checkbox */
+  #c-sreq-{{ sid }} .c-sreq__check { display: flex; align-items: center; gap: 4px; font-size: 12px; cursor: pointer; }
+  #c-sreq-{{ sid }} .c-sreq__check input {
+    appearance: none; -webkit-appearance: none; flex: 0 0 20px;
+    width: 20px; height: 20px; margin: 0; padding: 0;
+    border: .4px solid #707170; border-radius: 2px; background: #f7f7f7 no-repeat center / 12px 12px; cursor: pointer;
+  }
+  #c-sreq-{{ sid }} .c-sreq__check input:checked { background-image: linear-gradient(#0862df, #0862df); }
+  #c-sreq-{{ sid }} .c-sreq__check input:focus-visible { outline: 2px solid #0862df; outline-offset: 2px; }
+  #c-sreq-{{ sid }} .c-sreq__check input[aria-invalid="true"] { border-color: #b3261e; border-width: 1px; }
 
   /* buttons */
-  #c-sreq-{{ sid }} .globo-form-app .gfb__footer { padding-left: 0 !important; padding-right: 0 !important; text-align: left !important; }
-  #c-sreq-{{ sid }} .globo-form-app .gfb__footer button,
-  #c-sreq-{{ sid }} .globo-form-app button.action {
-    min-height: 39px !important; padding: 8px 24px !important; border: 0 !important; border-radius: 44px !important;
-    background: #0862df !important; color: #f7f7f7 !important;
-    font: 700 14px/1.2 Raleway, sans-serif !important; text-transform: uppercase;
-    box-shadow: 0 2px 6px rgba(0, 44, 65, .12) !important;
+  #c-sreq-{{ sid }} .c-sreq__actions { display: flex; flex-direction: column; align-items: center; }
+  #c-sreq-{{ sid }} [data-sreq-panel="3"] .c-sreq__actions { align-items: flex-start; }
+  #c-sreq-{{ sid }} .c-sreq__btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 100%; height: 39px; margin: 0; padding: 12px 24px; border: 0; border-radius: 44px;
+    background: #0862df; color: #f7f7f7;
+    font: 700 12px/1.2 Raleway, sans-serif; text-transform: uppercase; white-space: nowrap;
+    filter: drop-shadow(0 2px 6px rgba(0, 44, 65, .12)); cursor: pointer;
   }
-  #c-sreq-{{ sid }} .globo-form-app .gfb__footer button.previous {
-    background: none !important; box-shadow: none !important; color: #002c41 !important;
-    font-size: 12px !important; text-decoration: underline;
+  #c-sreq-{{ sid }} [data-sreq-panel="3"] .c-sreq__btn { width: auto; }
+  #c-sreq-{{ sid }} .c-sreq__btn:disabled { opacity: .6; cursor: progress; }
+  #c-sreq-{{ sid }} .c-sreq__btn:focus-visible,
+  #c-sreq-{{ sid }} .c-sreq__back:focus-visible { outline: 2px solid #002c41; outline-offset: 2px; }
+  #c-sreq-{{ sid }} .c-sreq__back {
+    display: inline-flex; align-items: center; height: 38px; margin: 0; padding: 12px 24px;
+    border: 0; background: none; color: #002c41;
+    font: 700 12px/1.2 Raleway, sans-serif; text-decoration: underline; text-transform: uppercase; cursor: pointer;
   }
-  #c-sreq-{{ sid }} .globo-form-app .messages,
-  #c-sreq-{{ sid }} .globo-form-app .message.success { border-radius: 12px; font-family: Raleway, sans-serif !important; }
+  #c-sreq-{{ sid }} .c-sreq__error { margin: 0; color: #b3261e; font-size: 14px; }
+  #c-sreq-{{ sid }} .c-sreq__error:empty { display: none; }
+  #c-sreq-{{ sid }} .c-sreq__success { margin: 0; padding: 12px; border-radius: 12px; background: #d6ece6; color: #002c41; font-size: 14px; line-height: 1.3; }
+
+  /* Powerful Form Builder's form: rendered and submitted, never shown */
+  #c-sreq-{{ sid }} .c-sreq__app {
+    position: absolute; top: 0; left: 0; width: 1px; height: 1px;
+    overflow: hidden; clip-path: inset(50%); white-space: nowrap; pointer-events: none;
+  }
 
   @media (min-width: 990px) {
     #c-sreq-{{ sid }} { padding: 64px 24px; }
-    #c-sreq-{{ sid }} .c-sreq__title { font-size: 40px; }
+    #c-sreq-{{ sid }} .c-sreq__steps { gap: 4px; }
+    #c-sreq-{{ sid }} .c-sreq__step,
+    #c-sreq-{{ sid }} .c-sreq__step:first-child { flex: 0 0 auto; font-size: 14px; }
+    #c-sreq-{{ sid }} .c-sreq__dot { font-size: 12px; }
+    #c-sreq-{{ sid }} .c-sreq__line { display: block; }
+    #c-sreq-{{ sid }} .c-sreq__intro { gap: 12px; }
     #c-sreq-{{ sid }} .c-sreq__text { font-size: 20px; }
+    #c-sreq-{{ sid }} [data-sreq-panel="2"] .c-sreq__title,
+    #c-sreq-{{ sid }} [data-sreq-panel="3"] .c-sreq__title { font-size: 40px; }
+    #c-sreq-{{ sid }} [data-sreq-panel="2"] .c-sreq__text { font-size: 18px; }
+    #c-sreq-{{ sid }} [data-sreq-panel="3"] .c-sreq__text { max-width: 399px; font-size: 16px; }
+    #c-sreq-{{ sid }} .c-sreq__field label,
+    #c-sreq-{{ sid }} .c-sreq__field input,
+    #c-sreq-{{ sid }} .c-sreq__field select,
+    #c-sreq-{{ sid }} .c-sreq__check { font-size: 14px; }
+    #c-sreq-{{ sid }} .c-sreq__actions { align-items: flex-start; }
+    #c-sreq-{{ sid }} .c-sreq__btn { width: auto; font-size: 14px; }
   }
 {% endstyle %}
 
-<section id="c-sreq-{{ sid }}" class="c-sreq" data-sl-id="sl-section-sample-request-v2">
+<section id="c-sreq-{{ sid }}" class="c-sreq" data-sl-id="sl-section-sample-request-v4" data-sreq data-sreq-step="1">
   <div class="c-sreq__inner">
-    {%- if s.eyebrow != blank -%}<p class="c-sreq__eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
-    {%- if s.title != blank -%}<h1 class="c-sreq__title">{{ s.title }}</h1>{%- endif -%}
-    {%- if s.text != blank -%}<p class="c-sreq__text">{{ s.text }}</p>{%- endif -%}
-    <div class="c-sreq__form">
+    <div class="c-sreq__head">
+      {%- if s.eyebrow != blank -%}<p class="c-sreq__eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
+      <ol class="c-sreq__steps" aria-label="{{ s.steps_label | escape }}">
+        <li class="c-sreq__step is-active" data-sreq-dot="1" aria-current="step"><span class="c-sreq__dot">1</span>{{ s.step1_label }}<span class="c-sreq__line" aria-hidden="true"></span></li>
+        <li class="c-sreq__step" data-sreq-dot="2"><span class="c-sreq__dot">2</span>{{ s.step2_label }}<span class="c-sreq__line" aria-hidden="true"></span></li>
+        <li class="c-sreq__step" data-sreq-dot="3"><span class="c-sreq__dot">3</span>{{ s.step3_label }}</li>
+      </ol>
+    </div>
+
+    <form class="c-sreq__panel" data-sreq-request novalidate>
+      {%- comment -%} Step 1 {%- endcomment -%}
+      <div class="c-sreq__panel" data-sreq-panel="1">
+        <div class="c-sreq__intro">
+          <h1 class="c-sreq__title">{{ s.title }}</h1>
+          {%- if s.text != blank -%}<p class="c-sreq__text">{{ s.text }}</p>{%- endif -%}
+        </div>
+        <div class="c-sreq__row">
+          <div class="c-sreq__field">
+            <label for="c-sreq-{{ sid }}-first">{{ s.first_label }}</label>
+            <input id="c-sreq-{{ sid }}-first" type="text" name="first_name" autocomplete="given-name" placeholder="{{ s.first_placeholder | escape }}" required>
+          </div>
+          <div class="c-sreq__field">
+            <label for="c-sreq-{{ sid }}-last">{{ s.last_label }}</label>
+            <input id="c-sreq-{{ sid }}-last" type="text" name="last_name" autocomplete="family-name" placeholder="{{ s.last_placeholder | escape }}" required>
+          </div>
+        </div>
+        <div class="c-sreq__row">
+          <div class="c-sreq__field">
+            <label for="c-sreq-{{ sid }}-email">{{ s.email_label }}</label>
+            <input id="c-sreq-{{ sid }}-email" type="email" name="email" autocomplete="email" placeholder="{{ s.email_placeholder | escape }}" required>
+          </div>
+          <div class="c-sreq__field">
+            <label for="c-sreq-{{ sid }}-website">{{ s.website_label }}</label>
+            <input id="c-sreq-{{ sid }}-website" type="text" name="website" autocomplete="url" inputmode="url" placeholder="{{ s.website_placeholder | escape }}" required data-sreq-app-field="{{ s.app_website | default: 'text-4' }}">
+          </div>
+        </div>
+        <div class="c-sreq__field">
+          <label for="c-sreq-{{ sid }}-practice">{{ s.practice_label }}</label>
+          <input id="c-sreq-{{ sid }}-practice" type="text" name="practice" autocomplete="organization" placeholder="{{ s.practice_placeholder | escape }}" required>
+        </div>
+        <p class="c-sreq__error" data-sreq-error role="alert"></p>
+        <div class="c-sreq__actions">
+          <button type="button" class="c-sreq__btn" data-sreq-next>{{ s.step1_button }}</button>
+        </div>
+      </div>
+
+      {%- comment -%} Step 2: sends the request {%- endcomment -%}
+      <div class="c-sreq__panel" data-sreq-panel="2" hidden>
+        <div class="c-sreq__intro">
+          <h2 class="c-sreq__title">{{ s.step2_title }}</h2>
+          {%- if s.step2_text != blank -%}<p class="c-sreq__text">{{ s.step2_text }}</p>{%- endif -%}
+        </div>
+        <div class="c-sreq__field">
+          <label for="c-sreq-{{ sid }}-street">{{ s.street_label }}</label>
+          <input id="c-sreq-{{ sid }}-street" type="text" name="street" autocomplete="address-line1" placeholder="{{ s.street_placeholder | escape }}" required>
+        </div>
+        <div class="c-sreq__row">
+          <div class="c-sreq__field">
+            <label for="c-sreq-{{ sid }}-city">{{ s.city_label }}</label>
+            <input id="c-sreq-{{ sid }}-city" type="text" name="city" autocomplete="address-level2" placeholder="{{ s.city_placeholder | escape }}" required>
+          </div>
+          <div class="c-sreq__field">
+            <label for="c-sreq-{{ sid }}-state">{{ s.state_label }}</label>
+            <input id="c-sreq-{{ sid }}-state" type="text" name="state" autocomplete="address-level1" placeholder="{{ s.state_placeholder | escape }}" required>
+          </div>
+        </div>
+        <div class="c-sreq__field">
+          <label for="c-sreq-{{ sid }}-zip">{{ s.zip_label }}</label>
+          <input id="c-sreq-{{ sid }}-zip" type="text" name="zip" autocomplete="postal-code" inputmode="numeric" placeholder="{{ s.zip_placeholder | escape }}" required>
+        </div>
+        {%- comment -%} The app's choice questions, as dropdowns; options are read from the app's form {%- endcomment -%}
+        <div class="c-sreq__field">
+          <label for="c-sreq-{{ sid }}-attendees">{{ s.attendees_label }}</label>
+          <select id="c-sreq-{{ sid }}-attendees" name="attendees" required data-sreq-app-field="{{ s.app_attendees | default: 'radio-2' }}">
+            <option value="">{{ s.select_placeholder }}</option>
+          </select>
+        </div>
+        <div class="c-sreq__row">
+          <div class="c-sreq__field">
+            <label for="c-sreq-{{ sid }}-patients">{{ s.patients_label }}</label>
+            <select id="c-sreq-{{ sid }}-patients" name="patients" required data-sreq-app-field="{{ s.app_patients | default: 'radio-1' }}">
+              <option value="">{{ s.select_placeholder }}</option>
+            </select>
+          </div>
+          <div class="c-sreq__field">
+            <label for="c-sreq-{{ sid }}-day">{{ s.day_label }}</label>
+            <select id="c-sreq-{{ sid }}-day" name="day" required data-sreq-app-field="{{ s.app_day | default: 'checkbox-1[]' }}">
+              <option value="">{{ s.select_placeholder }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="c-sreq__field">
+          <label for="c-sreq-{{ sid }}-source">{{ s.source_label }}</label>
+          <input id="c-sreq-{{ sid }}-source" type="text" name="source" placeholder="{{ s.source_placeholder | escape }}" required data-sreq-app-field="{{ s.app_source | default: 'text-5' }}">
+        </div>
+        <label class="c-sreq__check">
+          <input type="checkbox" name="licensed" required>
+          <span>{{ s.confirm_text }}</span>
+        </label>
+        <p class="c-sreq__error" data-sreq-error role="alert"></p>
+        <div class="c-sreq__actions">
+          <button type="submit" class="c-sreq__btn" data-sreq-send>{{ s.step2_button }}</button>
+          <button type="button" class="c-sreq__back" data-sreq-back="1">{{ s.back_label }}</button>
+        </div>
+      </div>
+    </form>
+
+    {%- comment -%} Step 3: optional account, opened once the app confirms the request {%- endcomment -%}
+    <div class="c-sreq__panel" data-sreq-panel="3" hidden>
+      <div class="c-sreq__intro">
+        <h2 class="c-sreq__title">{{ s.step3_title }}</h2>
+        {%- if s.step3_text != blank -%}<div class="c-sreq__text">{{ s.step3_text }}</div>{%- endif -%}
+      </div>
+      {%- if customer -%}
+        <p class="c-sreq__success">{{ s.signed_in_text }}</p>
+        <div class="c-sreq__actions">
+          <a class="c-sreq__btn" href="{{ s.done_url | default: routes.account_url }}">{{ s.signed_in_button }}</a>
+        </div>
+      {%- else -%}
+        {%- form 'create_customer', class: 'c-sreq__account', data-sreq-account: '' -%}
+          {%- if form.errors -%}<p class="c-sreq__error" role="alert" data-sreq-account-errors>{{ form.errors | default_errors }}</p>{%- endif -%}
+          <input type="hidden" name="return_to" value="{{ s.done_url | default: routes.account_url }}">
+          <input type="hidden" name="customer[first_name]" value="{{ form.first_name }}" data-sreq-first>
+          <input type="hidden" name="customer[last_name]" value="{{ form.last_name }}" data-sreq-last>
+          <input type="hidden" name="customer[email]" value="{{ form.email }}" data-sreq-account-email>
+          <div class="c-sreq__stack">
+            <div class="c-sreq__field">
+              <label for="c-sreq-{{ sid }}-pass">{{ s.password_label }}</label>
+              <input id="c-sreq-{{ sid }}-pass" type="password" name="customer[password]" autocomplete="new-password" minlength="5" required>
+            </div>
+            <div class="c-sreq__field">
+              <label for="c-sreq-{{ sid }}-pass2">{{ s.confirm_label }}</label>
+              <input id="c-sreq-{{ sid }}-pass2" type="password" autocomplete="new-password" data-sreq-confirm required>
+            </div>
+          </div>
+          <p class="c-sreq__error" data-sreq-pass-error role="alert"></p>
+          <div class="c-sreq__actions">
+            <button type="submit" class="c-sreq__btn">{{ s.step3_button }}</button>
+            <button type="button" class="c-sreq__back" data-sreq-back="2">{{ s.back_label }}</button>
+          </div>
+        {%- endform -%}
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Powerful Form Builder renders its form here; it is filled and submitted by c-sample-request.js {%- endcomment -%}
+    <div class="c-sreq__app" data-sreq-app aria-hidden="true">
       <div class="globo-formbuilder" data-id="{{ form_id | base64_encode }}"></div>
     </div>
   </div>
+
+  <script type="application/json" data-sreq-config>
+    {
+      "formId": {{ form_id | json }},
+      "fields": {
+        "first": {{ s.app_first | default: 'text-1' | json }},
+        "last": {{ s.app_last | default: 'text' | json }},
+        "email": {{ s.app_email | default: 'email' | json }},
+        "contact": {{ s.app_contact | default: 'text-2' | json }},
+        "address": {{ s.app_address | default: 'text-3' | json }},
+        "licensed": {{ s.app_licensed | default: 'acceptTerms-1[]' | json }}
+      },
+      "missing": {{ s.missing_text | json }},
+      "sendError": {{ s.send_error_text | json }},
+      "mismatch": {{ s.mismatch_text | json }}
+    }
+  </script>
 </section>
+
+<script src="{{ 'c-sample-request.js' | asset_url }}" defer></script>
 
 {% schema %}
 {
@@ -134,12 +327,73 @@
   "tag": "div",
   "class": "c-sample-request-wrapper",
   "settings": [
-    { "type": "paragraph", "content": "The form is Powerful Form Builder's: fields, steps, emails, submissions and the after-submit redirect are edited in the app." },
-    { "type": "text", "id": "form_id", "label": "Powerful Form Builder form ID", "default": "68619", "info": "Number in the app's form URL. 68619 = Dr Jen Form Free Samples." },
-    { "type": "checkbox", "id": "hide_app_title", "label": "Hide the form's own title", "default": true, "info": "The page title below replaces it." },
+    { "type": "paragraph", "content": "Requests are sent to Powerful Form Builder: the app stores them (Submissions) and sends its emails. The app's form is not shown; the fields below are the design's." },
+    { "type": "text", "id": "form_id", "label": "Powerful Form Builder form ID", "default": "68619", "info": "68619 = Dr Jen Form Free Samples." },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Dr. Jen · Dental professionals" },
+    { "type": "text", "id": "steps_label", "label": "Steps (screen readers)", "default": "Request steps" },
+    { "type": "text", "id": "step1_label", "label": "Step 1 name", "default": "Request" },
+    { "type": "text", "id": "step2_label", "label": "Step 2 name", "default": "Delivery details" },
+    { "type": "text", "id": "step3_label", "label": "Step 3 name", "default": "Account setup" },
+    { "type": "text", "id": "back_label", "label": "Back link", "default": "Back" },
+    { "type": "header", "content": "Step 1" },
     { "type": "text", "id": "title", "label": "Title", "default": "Request Practice Samples and Free CE" },
-    { "type": "text", "id": "text", "label": "Text", "default": "For dental offices · eligibility checked" }
+    { "type": "text", "id": "text", "label": "Text", "default": "For dental offices · eligibility checked" },
+    { "type": "text", "id": "first_label", "label": "First name label", "default": "First name" },
+    { "type": "text", "id": "first_placeholder", "label": "First name placeholder", "default": "First name" },
+    { "type": "text", "id": "last_label", "label": "Last name label", "default": "Last name" },
+    { "type": "text", "id": "last_placeholder", "label": "Last name placeholder", "default": "Last name" },
+    { "type": "text", "id": "email_label", "label": "Email label", "default": "Work email" },
+    { "type": "text", "id": "email_placeholder", "label": "Email placeholder", "default": "you@email.com" },
+    { "type": "text", "id": "website_label", "label": "Website label", "default": "Practice website" },
+    { "type": "text", "id": "website_placeholder", "label": "Website placeholder", "default": "yourpractice.com" },
+    { "type": "text", "id": "practice_label", "label": "Practice label", "default": "Practice name" },
+    { "type": "text", "id": "practice_placeholder", "label": "Practice placeholder", "default": "Name" },
+    { "type": "text", "id": "step1_button", "label": "Button", "default": "Continue to delivery details" },
+    { "type": "header", "content": "Step 2" },
+    { "type": "text", "id": "step2_title", "label": "Title", "default": "Delivery details" },
+    { "type": "text", "id": "step2_text", "label": "Text", "default": "Where should samples ship, and a quick eligibility check." },
+    { "type": "text", "id": "street_label", "label": "Street label", "default": "Street address" },
+    { "type": "text", "id": "street_placeholder", "label": "Street placeholder", "default": "Street address" },
+    { "type": "text", "id": "city_label", "label": "City label", "default": "City" },
+    { "type": "text", "id": "city_placeholder", "label": "City placeholder", "default": "City" },
+    { "type": "text", "id": "state_label", "label": "State label", "default": "State" },
+    { "type": "text", "id": "state_placeholder", "label": "State placeholder", "default": "State" },
+    { "type": "text", "id": "zip_label", "label": "ZIP label", "default": "ZIP" },
+    { "type": "text", "id": "zip_placeholder", "label": "ZIP placeholder", "default": "Zipcode" },
+    { "type": "text", "id": "patients_label", "label": "Patients question", "default": "Patients you see most" },
+    { "type": "text", "id": "attendees_label", "label": "Attendees question", "default": "Free CE attendees" },
+    { "type": "text", "id": "day_label", "label": "Day question", "default": "Best day for your CE" },
+    { "type": "text", "id": "source_label", "label": "Source question", "default": "How did you learn about Dr. Jen's?" },
+    { "type": "text", "id": "source_placeholder", "label": "Source placeholder", "default": "Instagram, a colleague, a rep..." },
+    { "type": "text", "id": "select_placeholder", "label": "Dropdown placeholder", "default": "Select" },
+    { "type": "paragraph", "content": "Dropdown options come from the app's form; edit them in Powerful Form Builder." },
+    { "type": "text", "id": "confirm_text", "label": "Confirmation checkbox", "default": "I confirm this is a licensed dental practice." },
+    { "type": "text", "id": "step2_button", "label": "Button (sends the request)", "default": "Continue to account setup" },
+    { "type": "header", "content": "Step 3" },
+    { "type": "text", "id": "step3_title", "label": "Title", "default": "Set up your account" },
+    { "type": "richtext", "id": "step3_text", "label": "Text", "default": "<p>Optional for now, your sample request is already in. Create a password to track it and reorder later.</p>" },
+    { "type": "text", "id": "password_label", "label": "Password label", "default": "Password" },
+    { "type": "text", "id": "confirm_label", "label": "Confirm label", "default": "Confirm password" },
+    { "type": "text", "id": "step3_button", "label": "Button", "default": "Create account" },
+    { "type": "url", "id": "done_url", "label": "After creating the account" },
+    { "type": "text", "id": "signed_in_text", "label": "Already signed in", "default": "Your request is in. You're already signed in, so it's linked to your account." },
+    { "type": "text", "id": "signed_in_button", "label": "Already signed in button", "default": "Go to my account" },
+    { "type": "header", "content": "App field names", "info": "Where each answer goes in the app's form. Change only if the form is edited in the app." },
+    { "type": "text", "id": "app_first", "label": "First name", "default": "text-1" },
+    { "type": "text", "id": "app_last", "label": "Last name", "default": "text" },
+    { "type": "text", "id": "app_email", "label": "Email", "default": "email" },
+    { "type": "text", "id": "app_contact", "label": "Contact for scheduling (first + last name)", "default": "text-2" },
+    { "type": "text", "id": "app_website", "label": "Website", "default": "text-4" },
+    { "type": "text", "id": "app_patients", "label": "Patients (choice)", "default": "radio-1" },
+    { "type": "text", "id": "app_attendees", "label": "Attendees (choice)", "default": "radio-2" },
+    { "type": "text", "id": "app_day", "label": "Day (choice)", "default": "checkbox-1[]" },
+    { "type": "text", "id": "app_source", "label": "How did you learn", "default": "text-5" },
+    { "type": "text", "id": "app_address", "label": "Practice name + address", "default": "text-3" },
+    { "type": "text", "id": "app_licensed", "label": "Licensed-practice confirmation", "default": "acceptTerms-1[]" },
+    { "type": "header", "content": "Messages" },
+    { "type": "text", "id": "missing_text", "label": "Missing fields", "default": "Please fill in the highlighted fields." },
+    { "type": "text", "id": "send_error_text", "label": "Send failed", "default": "We couldn't send your request. Please try again." },
+    { "type": "text", "id": "mismatch_text", "label": "Passwords don't match", "default": "The passwords don't match." }
   ],
   "presets": [{ "name": "C Sample Request" }]
 }
