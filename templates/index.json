@@ -98,10 +98,12 @@
         },
         "slide_sept_offer": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "layout_type": "type_1",
             "bg_desktop": "shopify://shop_images/c-hp-hero-sept-offer-desktop.webp",
             "bg_mobile": "shopify://shop_images/c-hp-hero-sept-offer-mobile.webp",
+            "image_alt": "",
             "bg_fallback": "#e8f4f8",
             "tagline_text": "SEPTEMBER OFFER",
             "tagline_icon_left": "",
@@ -135,8 +137,7 @@
             "t2_btn_label": "SHOP NOW",
             "t2_btn_url": "",
             "html_code": ""
-          },
-          "disabled": true
+          }
         }
       },
       "block_order": [
@@ -535,6 +536,7 @@
         "tab_aFQM3e",
         "tab_BHVUcF"
       ],
+      "disabled": true,
       "name": "C Product Tabs",
       "settings": {
         "heading": "A Product for Every Patient Need",
@@ -542,13 +544,13 @@
         "view_all_text": "SHOP ALL",
         "view_all_url": "shopify://collections/all",
         "show_subscribe_save": true,
+        "subscribe_save_text": "Subscribe & Save up to 5% OFF",
         "badge_alignment": "left",
         "add_to_cart_text": "ADD TO CART",
         "heading_max_width": 600,
         "heading_max_width_mobile": 280,
         "mobile_padding": 30
-      },
-      "disabled": true
+      }
     },
     "c_products_tab_v2_Pn7Q2x": {
       "type": "c-products-tab-v2",
@@ -567,6 +569,8 @@
           "settings": {
             "product": "wholesale-24-pack-super-paste-with-10-nano-hydroxyapatite-fluoride-toothpaste",
             "column": "left",
+            "image": "shopify://shop_images/c-ptabs-super-paste.webp",
+            "image_scale": 100,
             "pills": "Fluoride Toothpaste|Fluoride Best Seller",
             "new_pill": "",
             "title": "Super Paste™ - Triple Protection",
@@ -576,8 +580,7 @@
             "pack_units": 24,
             "retail_unit_price": "26",
             "cta_label": "Subscribe & save up to 5%",
-            "cta_url": "",
-            "image": "shopify://shop_images/c-ptabs-super-paste.webp"
+            "cta_url": ""
           }
         },
         "c_best_perio": {
@@ -585,6 +588,8 @@
           "settings": {
             "product": "perio-super-paste",
             "column": "left",
+            "image": "shopify://shop_images/c-ptabs-perio.webp",
+            "image_scale": 100,
             "pills": "Fluoride Toothpaste",
             "new_pill": "",
             "title": "Super Paste Perio™",
@@ -594,8 +599,7 @@
             "pack_units": 24,
             "retail_unit_price": "28",
             "cta_label": "Subscribe & save up to 5%",
-            "cta_url": "",
-            "image": "shopify://shop_images/c-ptabs-perio.webp"
+            "cta_url": ""
           }
         },
         "c_best_ortho": {
@@ -603,6 +607,8 @@
           "settings": {
             "product": "new-dr-jens-super-paste-ortho-12-24-pack",
             "column": "left",
+            "image": "shopify://shop_images/c-ptabs-ortho.webp",
+            "image_scale": 100,
             "pills": "Fluoride Toothpaste",
             "new_pill": "",
             "title": "Super Paste Ortho™",
@@ -612,8 +618,7 @@
             "pack_units": 24,
             "retail_unit_price": "28",
             "cta_label": "Subscribe & save up to 5%",
-            "cta_url": "",
-            "image": "shopify://shop_images/c-ptabs-ortho.webp"
+            "cta_url": ""
           }
         },
         "c_best_kera": {
@@ -621,6 +626,8 @@
           "settings": {
             "product": "dr-jens-kerahap",
             "column": "right",
+            "image": "shopify://shop_images/c-ptabs-kerahap.webp",
+            "image_scale": 100,
             "pills": "Professional Elite",
             "new_pill": "NEW!",
             "title": "Dr. Jen's KeraHAp™",
@@ -630,8 +637,7 @@
             "pack_units": 24,
             "retail_unit_price": "28",
             "cta_label": "Subscribe & save up to 5%",
-            "cta_url": "",
-            "image": "shopify://shop_images/c-ptabs-kerahap.webp"
+            "cta_url": ""
           }
         },
         "c_best_egg": {
@@ -639,6 +645,9 @@
           "settings": {
             "product": "new-dr-jens-eggshell-10-nano-hydroxyapatite-toothpaste-12-24-pack",
             "column": "right",
+            "image": "shopify://shop_images/c-ptabs-eggshell.webp",
+            "seal": "shopify://shop_images/c-ptabs-best-seller-seal.webp",
+            "image_scale": 100,
             "pills": "Premium Plus",
             "new_pill": "",
             "title": "Naturally Derived Eggshell nHAp",
@@ -648,9 +657,7 @@
             "pack_units": 24,
             "retail_unit_price": "22",
             "cta_label": "Subscribe & save up to 5%",
-            "cta_url": "",
-            "image": "shopify://shop_images/c-ptabs-eggshell.webp",
-            "seal": "shopify://shop_images/c-ptabs-best-seller-seal.webp"
+            "cta_url": ""
           }
         },
         "c_best_ff": {
@@ -658,6 +665,8 @@
           "settings": {
             "product": "dr-jens-cool-mint-fluoride-free-toothpaste-with-10-nano-hydroxyapatite-12-24-pack",
             "column": "right",
+            "image": "shopify://shop_images/c-ptabs-fluoride-free.webp",
+            "image_scale": 100,
             "pills": "Premium",
             "new_pill": "",
             "title": "Premium 10% Fluoride-Free Toothpaste",
@@ -667,8 +676,7 @@
             "pack_units": 24,
             "retail_unit_price": "18.50",
             "cta_label": "Subscribe & save up to 5%",
-            "cta_url": "",
-            "image": "shopify://shop_images/c-ptabs-fluoride-free.webp"
+            "cta_url": ""
           }
         },
         "t_fluoride": {
@@ -685,6 +693,8 @@
           "settings": {
             "product": "wholesale-24-pack-super-paste-with-10-nano-hydroxyapatite-fluoride-toothpaste",
             "column": "left",
+            "image": "shopify://shop_images/c-ptabs-super-paste.webp",
+            "image_scale": 100,
             "pills": "Fluoride Toothpaste|Fluoride Best Seller",
             "new_pill": "",
             "title": "Super Paste™ - Triple Protection",
@@ -694,8 +704,7 @@
             "pack_units": 24,
             "retail_unit_price": "26",
             "cta_label": "Subscribe & save up to 5%",
-            "cta_url": "",
-            "image": "shopify://shop_images/c-ptabs-super-paste.webp"
+            "cta_url": ""
           }
         },
         "c_fl_perio": {
@@ -703,6 +712,8 @@
           "settings": {
             "product": "perio-super-paste",
             "column": "left",
+            "image": "shopify://shop_images/c-ptabs-perio.webp",
+            "image_scale": 100,
             "pills": "Fluoride Toothpaste",
             "new_pill": "",
             "title": "Super Paste Perio™",
@@ -712,8 +723,7 @@
             "pack_units": 24,
             "retail_unit_price": "28",
             "cta_label": "Subscribe & save up to 5%",
-            "cta_url": "",
-            "image": "shopify://shop_images/c-ptabs-perio.webp"
+            "cta_url": ""
           }
         },
         "c_fl_ortho": {
@@ -721,6 +731,8 @@
           "settings": {
             "product": "new-dr-jens-super-paste-ortho-12-24-pack",
             "column": "left",
+            "image": "shopify://shop_images/c-ptabs-ortho.webp",
+            "image_scale": 100,
             "pills": "Fluoride Toothpaste",
             "new_pill": "",
             "title": "Super Paste Ortho™",
@@ -730,8 +742,7 @@
             "pack_units": 24,
             "retail_unit_price": "28",
             "cta_label": "Subscribe & save up to 5%",
-            "cta_url": "",
-            "image": "shopify://shop_images/c-ptabs-ortho.webp"
+            "cta_url": ""
           }
         },
         "t_ff": {
@@ -748,6 +759,8 @@
           "settings": {
             "product": "dr-jens-kerahap",
             "column": "left",
+            "image": "shopify://shop_images/c-ptabs-kerahap.webp",
+            "image_scale": 100,
             "pills": "Professional Elite",
             "new_pill": "NEW!",
             "title": "Dr. Jen's KeraHAp™",
@@ -757,8 +770,7 @@
             "pack_units": 24,
             "retail_unit_price": "28",
             "cta_label": "Subscribe & save up to 5%",
-            "cta_url": "",
-            "image": "shopify://shop_images/c-ptabs-kerahap.webp"
+            "cta_url": ""
           }
         },
         "c_ff_egg": {
@@ -766,6 +778,9 @@
           "settings": {
             "product": "new-dr-jens-eggshell-10-nano-hydroxyapatite-toothpaste-12-24-pack",
             "column": "left",
+            "image": "shopify://shop_images/c-ptabs-eggshell.webp",
+            "seal": "shopify://shop_images/c-ptabs-best-seller-seal.webp",
+            "image_scale": 100,
             "pills": "Premium Plus",
             "new_pill": "",
             "title": "1st and Only Naturally Derived Eggshell nHAp",
@@ -775,9 +790,7 @@
             "pack_units": 24,
             "retail_unit_price": "22",
             "cta_label": "Subscribe & save up to 5%",
-            "cta_url": "",
-            "image": "shopify://shop_images/c-ptabs-eggshell.webp",
-            "seal": "shopify://shop_images/c-ptabs-best-seller-seal.webp"
+            "cta_url": ""
           }
         },
         "c_ff_ff": {
@@ -785,6 +798,8 @@
           "settings": {
             "product": "dr-jens-cool-mint-fluoride-free-toothpaste-with-10-nano-hydroxyapatite-12-24-pack",
             "column": "left",
+            "image": "shopify://shop_images/c-ptabs-fluoride-free.webp",
+            "image_scale": 100,
             "pills": "Premium",
             "new_pill": "",
             "title": "Premium 10% Fluoride-Free Toothpaste",
@@ -794,8 +809,7 @@
             "pack_units": 24,
             "retail_unit_price": "18.50",
             "cta_label": "Subscribe & save up to 5%",
-            "cta_url": "",
-            "image": "shopify://shop_images/c-ptabs-fluoride-free.webp"
+            "cta_url": ""
           }
         },
         "t_other": {
@@ -812,6 +826,8 @@
           "settings": {
             "product": "dr-jens-mouth-rinse",
             "column": "left",
+            "image": "shopify://shop_images/c-ptabs-mouth-rinse.webp",
+            "image_scale": 100,
             "pills": "Alcohol-Free",
             "new_pill": "NEW!",
             "title": "Dr. Jen's Mouth Rinse Wellness Pre-Rinse",
@@ -821,8 +837,7 @@
             "pack_units": 12,
             "retail_unit_price": "28",
             "cta_label": "Subscribe & save up to 5%",
-            "cta_url": "",
-            "image": "shopify://shop_images/c-ptabs-mouth-rinse.webp"
+            "cta_url": ""
           }
         },
         "c_ot_floss": {
@@ -830,6 +845,7 @@
           "settings": {
             "product": "wholesale-30-pack-flavors-natural-plastic-free-floss-with-nano-hydroxyapatite-mint",
             "column": "left",
+            "image": "shopify://shop_images/c-ptabs-silk-floss.webp",
             "image_scale": 140,
             "pills": "Micro-Plastic Free",
             "new_pill": "NEW!",
@@ -840,8 +856,7 @@
             "pack_units": 50,
             "retail_unit_price": "8",
             "cta_label": "Subscribe & save up to 5%",
-            "cta_url": "",
-            "image": "shopify://shop_images/c-ptabs-silk-floss.webp"
+            "cta_url": ""
           }
         },
         "c_ot_gel": {
@@ -849,6 +864,8 @@
           "settings": {
             "product": "dr-jens-nano-hydroxyapatite-mouth-gel",
             "column": "left",
+            "image": "shopify://shop_images/c-ptabs-dry-mouth-gel.webp",
+            "image_scale": 100,
             "pills": "Fluoride-Free",
             "new_pill": "",
             "title": "Dry Mouth Gel",
@@ -858,8 +875,7 @@
             "pack_units": 36,
             "retail_unit_price": "8",
             "cta_label": "Subscribe & save up to 5%",
-            "cta_url": "",
-            "image": "shopify://shop_images/c-ptabs-dry-mouth-gel.webp"
+            "cta_url": ""
           }
         }
       },
@@ -885,7 +901,7 @@
         "c_ot_gel"
       ],
       "settings": {
-        "heading": "A Product for Every Patient Need",
+        "heading": "A Formula for Every Patient’s Needs",
         "padding_top": 64,
         "padding_bottom": 64,
         "padding_top_mobile": 40,
@@ -897,7 +913,7 @@
       "type": "apps",
       "blocks": {
         "tolstoy_ads_image_video_tolstoy_builder_aDJHxL": {
-          "type": "shopify://apps/tolstoy-ads-image-video/blocks/tolstoy-builder/06fa8282-42ff-403e-b67c-1936776aed11",
+          "type": "shopify://apps/tolstoy/blocks/tolstoy-builder/06fa8282-42ff-403e-b67c-1936776aed11",
           "settings": {
             "custom_code": "<tolstoy-widget data-tolstoy-widget-id=\"01KXNEVPXBBS39FMNWHZJ7S40R\" data-product-id=\"{{ product.id }}\" data-tags=\"{%- for tag in product.tags -%}{{ tag | escape }},{%- endfor -%}\"></tolstoy-widget>\n<script src=\"https://ai-widgets.gotolstoy.com/8507f226-1a78-4bae-ab97-4b9fbe7d2eee/01KXNEVPXBBS39FMNWHZJ7S40R/latest/dist/widget.iife.js\" defer></script>"
           }
@@ -1321,6 +1337,7 @@
         "view_all_text": "SHOP ALL",
         "view_all_url": "",
         "show_subscribe_save": true,
+        "subscribe_save_text": "Subscribe & Save up to 5% OFF",
         "badge_alignment": "left",
         "add_to_cart_text": "ADD TO CART",
         "heading_size_desktop": 32,
