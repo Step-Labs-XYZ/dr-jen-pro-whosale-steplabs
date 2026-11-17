@@ -1,4 +1,11 @@
 {%- liquid
+  assign reorder_url = settings.reorder_page_url | default: '/pages/reorder?view=reorder'
+  assign reorder_url_encoded = reorder_url | url_encode
+  if customer
+    assign reorder_href = reorder_url
+  else
+    assign reorder_href = routes.account_login_url | append: '?return_url=' | append: reorder_url_encoded
+  endif
   assign sticky_class = ''
   if section.settings.sticky_header
     assign sticky_class = 'c-header--sticky'
@@ -52,6 +59,14 @@
             class="c-header__nav-link"
             {{ block.shopify_attributes }}
           >{{ block.settings.label }}</a>
+        {%- elsif block.type == 'reorder_link' -%}
+          <a
+            href="{{ reorder_href }}"
+            class="c-header__nav-link c-header__nav-link--reorder"
+            style="color: {{ block.settings.color }}"
+            data-reorder-start="header"
+            {{ block.shopify_attributes }}
+          >{% render 'c-reorder-icon' %}{{ block.settings.label }}</a>
         {%- endif -%}
       {%- endfor -%}
       {%- if section.settings.cta_text != blank -%}
@@ -111,6 +126,29 @@
   </div>
 </header>
 
+{%- liquid
+  comment
+    Notice bar only on the reorder flow: reorder + request samples pages (also via
+    ?view=), sign-in, activate account and reset password.
+  endcomment
+  assign show_notice = false
+  if section.settings.notice_text != blank
+    case request.page_type
+      when 'customers/login', 'customers/activate_account', 'customers/reset_password'
+        assign show_notice = true
+      when 'page'
+        if template.suffix == 'reorder' or template.suffix == 'request-samples'
+          assign show_notice = true
+        endif
+    endcase
+  endif
+-%}
+{%- if show_notice -%}
+  <div class="c-header__notice" style="background: {{ section.settings.notice_bg }}; color: {{ section.settings.notice_color }};">
+    {{ section.settings.notice_text }}
+  </div>
+{%- endif -%}
+
 <!-- Mobile Menu (slide from left) -->
 <div
   class="c-header__mobile-menu"
@@ -150,6 +188,10 @@
         {%- if block.type == 'nav_link' -%}
           <a href="{{ block.settings.url }}" class="c-header__mobile-link">
             {{ block.settings.label }}
+          </a>
+        {%- elsif block.type == 'reorder_link' -%}
+          <a href="{{ reorder_href }}" class="c-header__mobile-link c-header__nav-link--reorder" style="color: {{ block.settings.color }}" data-reorder-start="header">
+            {% render 'c-reorder-icon' %}{{ block.settings.label }}
           </a>
         {%- endif -%}
       {%- endfor -%}
@@ -261,6 +303,25 @@
 #c-header-{{ section.id }} .c-header__nav-link:hover {
   opacity: 0.7;
 }
+
+/* Notice bar under the header (e.g. "Dental professionals: sign in to reorder...") */
+.c-header__notice {
+  padding: 10px 16px;
+  font-family: Raleway, sans-serif;
+  font-size: 14px;
+  line-height: 1.2;
+  text-align: center;
+}
+.c-header__notice p { margin: 0; }
+.c-header__notice a { color: inherit; }
+
+/* Reorder link: blue with the circular arrow, as in the design */
+.c-header__nav-link--reorder {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.c-header__nav-link--reorder .c-reorder-icon { flex: 0 0 auto; }
 
 /* ── CTA Button ── */
 #c-header-{{ section.id }} .c-header__cta-btn {
@@ -596,6 +657,28 @@ SEARCH DRAWER - Renderiza el componente de búsqueda predictiva del Focal theme
     },
     {
       "type": "header",
+      "content": "Notice bar",
+      "info": "Thin strip under the header, shown only on the reorder flow (reorder, request samples, sign-in, activate account, reset password). Empty hides it."
+    },
+    {
+      "type": "richtext",
+      "id": "notice_text",
+      "label": "Text"
+    },
+    {
+      "type": "color",
+      "id": "notice_bg",
+      "label": "Background",
+      "default": "#f8f6f6"
+    },
+    {
+      "type": "color",
+      "id": "notice_color",
+      "label": "Text color",
+      "default": "#002c41"
+    },
+    {
+      "type": "header",
       "content": "Border Bottom"
     },
     {
@@ -802,6 +885,16 @@ SEARCH DRAWER - Renderiza el componente de búsqueda predictiva del Focal theme
           "id": "url",
           "label": "URL"
         }
+      ]
+    },
+    {
+      "type": "reorder_link",
+      "name": "Reorder link",
+      "limit": 1,
+      "settings": [
+        { "type": "paragraph", "content": "Signed-in customers go to the reorder page (Theme settings > Wholesale reorder); everyone else goes to the sign-in, then back to the reorder page." },
+        { "type": "text", "id": "label", "label": "Label", "default": "Reorder" },
+        { "type": "color", "id": "color", "label": "Color", "default": "#0862df" }
       ]
     }
   ],

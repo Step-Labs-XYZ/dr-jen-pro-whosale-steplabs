@@ -1,0 +1,68 @@
+{%- comment -%}
+  Wholesale reorder: site-wide glue, rendered once in layout/theme.liquid.
+  - window.cReorderTrack(event, data): pushes to window.dataLayer and publishes a
+    Shopify customer event (Shopify.analytics.publish), for the funnel
+    reorder_started -> reorder_account_reached -> reorder_basket_reviewed ->
+    reorder_checkout (order completed = Shopify's own checkout_completed).
+  - Any link with data-reorder-start counts as "Reorder started".
+  - Login with a reorder return_url remembers it, so password recovery (which ends
+    on /account) brings the customer back to the reorder page.
+  - /cart?reorder=checkout presses the cart's checkout button, so the WPD wholesale
+    app handles checkout exactly as for a manual order.
+{%- endcomment -%}
+<script>
+  (function () {
+    window.dataLayer = window.dataLayer || [];
+    window.cReorderTrack = function (event, data) {
+      var payload = Object.assign({ event: event }, data || {});
+      window.dataLayer.push(payload);
+      try {
+        if (window.Shopify && Shopify.analytics && typeof Shopify.analytics.publish === 'function') {
+          Shopify.analytics.publish(event, data || {});
+        }
+      } catch (e) { /* analytics unavailable */ }
+    };
+
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('[data-reorder-start]');
+      if (a) window.cReorderTrack('reorder_started', { source: a.getAttribute('data-reorder-start') });
+    });
+
+    var KEY = 'c-reorder-return';
+    var DAY = 24 * 60 * 60 * 1000;
+    var params = new URLSearchParams(window.location.search);
+    var path = window.location.pathname;
+
+    {%- if request.page_type == 'customers/login' %}
+      // remember where a reorder sign-in should land, in case it detours through recovery
+      var ret = params.get('return_url');
+      if (ret && ret.charAt(0) === '/' && ret.indexOf('reorder') !== -1) {
+        try { localStorage.setItem(KEY, JSON.stringify({ url: ret, t: Date.now() })); } catch (e) {}
+      }
+    {%- endif %}
+
+    {%- if customer and request.page_type == 'customers/account' %}
+      // back from password recovery / activation: resume the reorder
+      try {
+        var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+        if (saved && saved.url && Date.now() - saved.t < DAY) {
+          localStorage.removeItem(KEY);
+          window.location.replace(saved.url);
+        }
+      } catch (e) {}
+    {%- endif %}
+
+    {%- if request.page_type == 'cart' %}
+      if (params.get('reorder') === 'checkout') {
+        // let the WPD app bind its checkout handler first, then press checkout
+        window.addEventListener('load', function () {
+          setTimeout(function () {
+            var btn = document.querySelector('.wcp_checkout_btn, button[name="checkout"], input[name="checkout"], form[action$="/cart"] [type="submit"][name="checkout"]');
+            if (btn) btn.click();
+            else window.location.href = {{ routes.root_url | append: '/checkout' | replace: '//', '/' | json }};
+          }, 600);
+        });
+      }
+    {%- endif %}
+  })();
+</script>

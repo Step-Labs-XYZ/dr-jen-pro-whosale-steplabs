@@ -496,10 +496,18 @@
               "label": "Learn",
               "url": "shopify://blogs/learn-more"
             }
+          },
+          "reorder_link_main": {
+            "type": "reorder_link",
+            "settings": {
+              "label": "Reorder",
+              "color": "#0862df"
+            }
           }
         },
         "block_order": [
           "nav_link_4dgy9n",
+          "reorder_link_main",
           "nav_link_rnhBR4"
         ],
         "settings": {
@@ -534,7 +542,8 @@
           "icon_gap_mobile": 12,
           "mobile_menu_bg": "#d4ebe9",
           "mobile_menu_width": 300,
-          "mobile_nav_font_size": 18
+          "mobile_nav_font_size": 18,
+          "notice_text": "<p><strong>Dental professionals:</strong> sign in to reorder in a couple of taps, no more digging for your rep's email.</p>"
         }
       },
       "c-footer": {

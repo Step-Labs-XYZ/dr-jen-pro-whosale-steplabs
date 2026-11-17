@@ -2631,6 +2631,9 @@ shopify-accelerated-checkout {
                 {% endif %}
               </div>
 
+            {% when 'wholesale_packs' %}
+              {%- render 'c-wholesale-packs', product: product, block: block, section_id: section.id -%}
+
             {% when 'buy_button' %}
               <div {{ block.shopify_attributes }}>
                 <button type="submit" name="add" class="c-prod__btn-submit js-btn-{{ section.id }}" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
@@ -3041,9 +3044,12 @@ const refreshCartUI = (response) => {
         }
 
         try {
+          // "Number of packs" block (wholesale_packs) sets the quantity; otherwise 1
+          const quantityInput = productForm.querySelector('[name="quantity"]');
+          const quantity = Math.max(1, parseInt(quantityInput ? quantityInput.value : '1', 10) || 1);
           const item = {
             id: variantId,
-            quantity: 1,
+            quantity,
           };
 
           if (sellingPlanValue !== '' && sellingPlanValue !== 'null' && Number.isFinite(sellingPlanId)) {
@@ -4096,7 +4102,17 @@ const refreshCartUI = (response) => {
       "type": "custom_liquid", "name": "App / Custom Liquid",
       "settings": [ { "type": "liquid", "id": "custom_liquid", "label": "Código Liquid", "info": "Úsalo para apps de suscripción" } ]
     },
-    { 
+    {
+      "type": "wholesale_packs", "name": "Wholesale packs", "limit": 1,
+      "settings": [
+        { "type": "paragraph", "content": "Number of packs stepper + total units. Selects one-time by default in the subscription widget and shows pack count + total on the add-to-cart button." },
+        { "type": "text", "id": "packs_label", "label": "Label", "default": "Number of packs" },
+        { "type": "text", "id": "units_label", "label": "Units label", "default": "units" },
+        { "type": "text", "id": "cta_label", "label": "Button text", "info": "Followed by the pack count and total, e.g. ADD 2 PACKS · $720.00", "default": "Add" },
+        { "type": "checkbox", "id": "default_one_time", "label": "Select one-time by default", "default": true }
+      ]
+    },
+    {
       "type": "buy_button", "name": "Botón de Compra", "limit": 1,
       "settings": [ { "type": "text", "id": "btn_text", "label": "Texto del botón", "default": "ADD TO CART" } ]
     },
